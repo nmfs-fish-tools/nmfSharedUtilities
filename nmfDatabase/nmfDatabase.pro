@@ -25,13 +25,12 @@ unix {
     INSTALLS += target
 }
 
+DISTFILES += \
+    README.md
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../build-nmfUtilities-Qt_5_12_3_gcc64-Release/release/ -lnmfUtilities
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../build-nmfUtilities-Qt_5_12_3_gcc64-Release/debug/ -lnmfUtilities
-else:unix: LIBS += -L$$PWD/../build-nmfUtilities-Qt_5_12_3_gcc64-Release/ -lnmfUtilities
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../build-nmfUtilities-Qt_5_12_3_gcc64-Release/release/ -lnmfUtilities
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../build-nmfUtilities-Qt_5_12_3_gcc64-Release/debug/ -lnmfUtilities
+else:unix: LIBS += -L$$PWD/../../build-nmfUtilities-Qt_5_12_3_gcc64-Release/ -lnmfUtilities
 
 INCLUDEPATH += $$PWD/../nmfUtilities
 DEPENDPATH += $$PWD/../nmfUtilities
-
-DISTFILES += \
-    README.md

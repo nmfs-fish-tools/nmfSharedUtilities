@@ -1,0 +1,12 @@
+#ifndef NMFCHARTS_GLOBAL_H
+#define NMFCHARTS_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(NMFCHARTS_LIBRARY)
+#  define NMFCHARTSSHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define NMFCHARTSSHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // NMFCHARTS_GLOBAL_H
