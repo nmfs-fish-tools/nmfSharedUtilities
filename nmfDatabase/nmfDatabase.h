@@ -119,6 +119,18 @@ public:
     void nmfSaveDatabase();
 
     std::vector<std::string> nmfGetDatabaseNames();
+
+    bool getAllSpecies(nmfLogger*  logger,
+                       std::vector<std::string>& species);
+    bool getSpeciesData(nmfLogger*   logger,
+                        std::string  species,
+                        int&         MinAge,
+                        int&         MaxAge,
+                        int&         FirstYear,
+                        int&         LastYear,
+                        float&       MinLength,
+                        float&       MaxLength,
+                        int&         NumLengthBins);
     std::vector<std::string> nmfGetTableNames();
 
     void nmfSetDatabase(std::string newDatabaseName);

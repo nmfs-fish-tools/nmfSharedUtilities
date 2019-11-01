@@ -1162,5 +1162,70 @@ nmfDatabase::exportDatabase(QWidget*     widget,
 
 }
 
+bool
+nmfDatabase::getSpeciesData(
+        nmfLogger*   logger,
+        std::string  species,
+        int&         MinAge,
+        int&         MaxAge,
+        int&         FirstYear,
+        int&         LastYear,
+        float&       MinLength,
+        float&       MaxLength,
+        int&         NumLengthBins)
+{
+    std::string msg;
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
 
+    // Get species data
+    fields     = {"SpeName","MinAge","MaxAge","FirstYear","LastYear","MinLength","MaxLength","NumLengthBins"};
+    queryStr   = "SELECT SpeName,MinAge,MaxAge,FirstYear,LastYear,MinLength,MaxLength,NumLengthBins FROM Species ";
+    queryStr  += "WHERE SpeName = '" + species + "'";
+    dataMap    = nmfQueryDatabase(queryStr, fields);
+    if (dataMap["SpeName"].size() == 0) {
+        msg = "nmfMSCAAUtils::getSpeciesData No records found in Species for: " +species;
+        logger->logMsg(nmfConstants::Error,msg);
+        return false;
+    }
+
+    MinAge        = std::stoi(dataMap["MinAge"][0]);
+    MaxAge        = std::stoi(dataMap["MaxAge"][0]);
+    FirstYear     = std::stoi(dataMap["FirstYear"][0]);
+    LastYear      = std::stoi(dataMap["LastYear"][0]);
+    MinLength     = std::stof(dataMap["MinLength"][0]);
+    MaxLength     = std::stof(dataMap["MaxLength"][0]);
+    NumLengthBins = std::stoi(dataMap["NumLengthBins"][0]);
+
+    return true;
+}
+
+bool nmfDatabase::getAllSpecies(
+        nmfLogger*  logger,
+        std::vector<std::string>& species)
+{
+    int NumRecords;
+    std::string msg;
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+
+    species.clear();
+
+    // Get species data
+    fields     = {"SpeName"};
+    queryStr   = "SELECT SpeName FROM Species ";
+    dataMap    = nmfQueryDatabase(queryStr, fields);
+    NumRecords = dataMap["SpeName"].size();
+    if (NumRecords == 0) {
+        msg = "nmfDatabase::getAllSpecies No records found";
+        logger->logMsg(nmfConstants::Error,msg);
+        return false;
+    }
+    for (int i=0; i<NumRecords; ++i) {
+        species.push_back(dataMap["SpeName"][i]);
+    }
+    return true;
+}
 
