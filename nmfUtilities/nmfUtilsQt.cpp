@@ -827,15 +827,17 @@ addTreeItem(QTreeWidgetItem *parent,
 
 void
 menu_about(const QString& name,
+           const QString& operatingSystem,
            const QString& version,
            const QString& specialAcknowledgement,
            const QString& appMsg)
 {
-    QString msg = "<strong><br>"+version+"</strong>";
+    QString msg = "<strong><br>"+version+" (" + operatingSystem + ")</strong>";
     msg += "<strong><br>"+name+"</strong>";
     QString date = QDate::currentDate().toString();
 
     msg += QString("<br><br>Built on: ") + date; //QDate::fromString(date,"dddYYYYMMdd").toString();
+
     msg += QString("<br><br>Produced by the NOAA National Marine Fisheries Service.");
     msg += specialAcknowledgement;
     msg += QString("<br><br>The author gratefully acknowledges the use of the following packages:");

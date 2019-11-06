@@ -196,6 +196,7 @@ void addTreeItem(QTreeWidgetItem *parent,
 
 
 void menu_about(const QString& name,
+                const QString& operatingSystem,
                 const QString& version,
                 const QString& specialAcknowledgement,
                 const QString& appMsg);

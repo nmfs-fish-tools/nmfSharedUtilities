@@ -308,6 +308,6 @@ double WeightUnitsStringToValue(std::string val);
 double SizeUnitsStringToValue(std::string val);
 void   readTableNames(std::map<std::string,std::vector<std::string> > *TableNames);
 void   readTableDescriptions(std::string TableName, std::map<std::string,std::string> &TableDescription);
-
+std::string getOS();
 }
 
