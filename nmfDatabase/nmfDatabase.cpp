@@ -1229,16 +1229,37 @@ bool nmfDatabase::getAllSpecies(
     return true;
 }
 
+bool
+nmfDatabase::authenticateDatabase(const std::string& databaseName)
+{
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+
+    nmfSetDatabase(databaseName);
+
+    fields   = {"Name"};
+    queryStr = "SELECT Name FROM Application";
+    dataMap  = nmfQueryDatabase(queryStr, fields);
+    if (dataMap["Name"].size() != 1) {
+        return false;
+    }
+
+    return (QApplication::applicationName().toStdString() == dataMap["Name"][0]);
+}
+
+
+
 void
 nmfDatabase::saveApplicationTable(
         QWidget*       widget,
         nmfLogger*     logger,
-        std::string&   tableName,
-        const QString& appName)
+        std::string&   tableName)
 {
     std::string saveCmd;
     std::string deleteCmd;
     std::string errorMsg;
+    std::string appName = QApplication::applicationName().toStdString();
     QString msg;
 
     // Delete the current entry here
@@ -1254,7 +1275,7 @@ nmfDatabase::saveApplicationTable(
     }
 
     // Save the new data
-    saveCmd = "INSERT INTO " + tableName +" (Name) VALUES ('" + appName.toStdString() + "')";
+    saveCmd = "INSERT INTO " + tableName +" (Name) VALUES ('" + appName + "')";
     errorMsg = nmfUpdateDatabase(saveCmd);
     if (errorMsg != " ") {
         logger->logMsg(nmfConstants::Error,"nmfDatabase::saveApplicationTable: Write table error: " + errorMsg);

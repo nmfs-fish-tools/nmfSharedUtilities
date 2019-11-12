@@ -328,16 +328,21 @@ public:
                         std::string& ProjectDatabase);
 
     /**
+     * @brief authenticateDatabase - checks to see if database to be loaded is compatible with the application
+     * @param databaseName - database name to be loaded
+     * @return true or false signifying if database to be loaded is compatible with the application
+     */
+    bool authenticateDatabase(const std::string& databaseName);
+
+    /**
      * @brief saveApplicationTable - Saves a table that identifies the type of database (i.e., MSVPA, MSSPM, MSCAA)
      * @param widget - the calling widget, needed to know where to show popup error dialogs
      * @param logger - logger widget for logging errors and messages
-     * @param appName - name of application currently running
      */
     void saveApplicationTable(
             QWidget*       widget,
             nmfLogger*     logger,
-            std::string&   tableName,
-            const QString& appName);
+            std::string&   tableName);
 
     /**
      * @brief Restores the appropriate CSV from from the given table
