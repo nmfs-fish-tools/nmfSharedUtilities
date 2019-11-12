@@ -1229,3 +1229,39 @@ bool nmfDatabase::getAllSpecies(
     return true;
 }
 
+void
+nmfDatabase::saveApplicationTable(
+        QWidget*       widget,
+        nmfLogger*     logger,
+        std::string&   tableName,
+        const QString& appName)
+{
+    std::string saveCmd;
+    std::string deleteCmd;
+    std::string errorMsg;
+    QString msg;
+
+    // Delete the current entry here
+    deleteCmd = "DELETE FROM " + tableName; // delete all rows
+    errorMsg = nmfUpdateDatabase(deleteCmd);
+    if (errorMsg != " ") {
+        msg = "\nError in saveApplicationTable command. Couldn't delete all records from " +
+                QString::fromStdString(tableName) + " table";
+        logger->logMsg(nmfConstants::Error,"nmfDatabase::saveApplicationTable: DELETE error: " + errorMsg);
+        logger->logMsg(nmfConstants::Error,"cmd: " + deleteCmd);
+        QMessageBox::warning(widget, "Error", msg, QMessageBox::Ok);
+        return;
+    }
+
+    // Save the new data
+    saveCmd = "INSERT INTO " + tableName +" (Name) VALUES ('" + appName.toStdString() + "')";
+    errorMsg = nmfUpdateDatabase(saveCmd);
+    if (errorMsg != " ") {
+        logger->logMsg(nmfConstants::Error,"nmfDatabase::saveApplicationTable: Write table error: " + errorMsg);
+        logger->logMsg(nmfConstants::Error,"cmd: " + saveCmd);
+        QMessageBox::warning(widget, "Error",
+                             "\nError in saveApplicationTable command\n",
+                             QMessageBox::Ok);
+    }
+
+}

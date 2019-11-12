@@ -84,6 +84,7 @@ namespace nmfConstantsMSSPM
      const std::string  MSSPMProgressChartLabelFile    = ".MSSPM/MSSPMProgressChartLabel.dat";
      const std::string  MSSPMStopRunFile               = ".MSSPM/MSSPMStopRun.dat";
      const std::string  MSSPMCurrentLoopFile           = ".MSSPM/MSSPMCurrentLoop.dat";
+     const QString      SettingsDirWindows             = "C:\\.QtSettings";
      const std::string  LogDir                         = ".MSSPM/logs";
      const std::string  LogFilter                      = ".MSSPM/logs/*.log";
      const std::string  InputDataDir                   = "inputData";

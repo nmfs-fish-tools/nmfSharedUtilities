@@ -13,6 +13,9 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 
+#include "nmfUtilsQt.h"
+#include "nmfConstantsMSCAA.h"
+
 class nmfDatabaseConnectDialog: public QDialog
 {
     Q_OBJECT
@@ -31,6 +34,7 @@ public:
 public slots:
     void callback_connectToDatabase();
     void callback_resetGUI();
+    void callback_resetSettings();
 
 };
 

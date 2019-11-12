@@ -40,6 +40,7 @@ namespace nmfConstantsMSCAA
     const std::string  MSCAACurrentLoopFile           = ".MSCAA/MSCAACurrentLoop.dat";
     const std::string  LogDir                         = ".MSCAA/logs";
     const std::string  LogFilter                      = ".MSCAA/logs/*.log";
+    const QString      SettingsDirWindows             = "C:\\.QtSettings";
     const std::string  InputDataDir                   = "inputData";
     const std::string  OutputDataDir                  = "outputData";
     const std::string  OutputImagesDir                = "outputImages";

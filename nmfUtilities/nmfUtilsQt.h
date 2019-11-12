@@ -53,6 +53,12 @@ public:
 #include <QPushButton>
 #include <QMainWindow>
 #include <QDebug>
+#include <QSettings>
+
+#include "nmfUtils.h"
+#include "nmfConstantsMSCAA.h"
+#include "nmfConstantsMSSPM.h"
+#include "nmfConstantsMSVPA.h"
 
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/io.hpp>
@@ -193,7 +199,7 @@ void addTreeItem(QTreeWidgetItem *parent,
                  QString name,
                  QString label);
 
-
+bool removeSettingsFile();
 
 void menu_about(const QString& name,
                 const QString& operatingSystem,
@@ -214,6 +220,8 @@ void convertVectorToStrList(const std::vector<std::string>& labels,
                             QStringList& slist);
 
 void checkForAndReplaceInvalidCharacters(QString &stringValue);
+QSettings* createSettings(QString windowsDir,
+                          QString name);
 
 } // end namespace
 

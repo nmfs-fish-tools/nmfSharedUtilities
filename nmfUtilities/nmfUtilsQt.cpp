@@ -920,6 +920,56 @@ void convertVectorToStrList(const std::vector<std::string>& labels,
     }
 }
 
+QSettings*
+createSettings(QString windowsDir, QString name)
+{
+    QString arg1 = "NOAA";
+    QString arg2 = name;
+
+    if (nmfUtils::osIsWindows()) {
+        // Make .QtSettings dir first if not there
+        QDir().mkdir(windowsDir);
+        arg1 = QDir(windowsDir).filePath(name+"_Settings.ini");
+        arg2 = QSettings::IniFormat;
+    }
+    QSettings* settings = new QSettings(arg1,arg2);
+    return settings;
+}
+
+bool
+removeSettingsFile()
+{
+    QString fileToRemove;
+    QString appName = QApplication::applicationName();
+    QDir dir;
+    if (nmfUtils::osIsWindows()) {
+        if (appName == "MSCAA") {
+            fileToRemove = QDir(nmfConstantsMSCAA::SettingsDirWindows).filePath(appName+"_Settings.ini");
+std::cout << "Removing: " << fileToRemove.toStdString() << std::endl;
+            dir.remove(fileToRemove);
+        } else if (appName == "MSSPM") {
+            fileToRemove = QDir(nmfConstantsMSSPM::SettingsDirWindows).filePath(appName+"_Settings.ini");
+std::cout << "Removing: " << fileToRemove.toStdString() << std::endl;
+            dir.remove(fileToRemove);
+        } else if (appName == "MSVPA_X2") {
+            fileToRemove = QDir(nmfConstantsMSVPA::SettingsDirWindows).filePath(appName+"_Settings.ini");
+std::cout << "Removing: " << fileToRemove.toStdString() << std::endl;
+            dir.remove(fileToRemove);
+        } else {
+          return false;
+        }
+
+    } else {
+        fileToRemove = QDir("~/.config/NOAA").filePath(appName+".conf");
+std::cout << "Removing: " << fileToRemove.toStdString() << std::endl;
+//      bool removed = dir.remove(fileToRemove);
+        std::string cmd = "rm " + fileToRemove.toStdString();
+        system(cmd.c_str());
+//std::cout << "File removed: " << removed << std::endl;
+    }
+    return true;
+}
+
 void checkForAndReplaceInvalidCharacters(QString &stringValue)
 {
     stringValue.remove(QRegExp("[^a-zA-Z\\d\\s]"));

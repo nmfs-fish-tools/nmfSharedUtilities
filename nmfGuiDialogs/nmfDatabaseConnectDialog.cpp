@@ -26,15 +26,19 @@ nmfDatabaseConnectDialog::nmfDatabaseConnectDialog(QMainWindow *parent,
     QPushButton *okDatabasePB     = new QPushButton("OK");
     QPushButton *cancelDatabasePB = new QPushButton("Cancel");
     QPushButton *resetGUIPB       = new QPushButton("Reset GUI");
+    QPushButton *resetSettingsPB  = new QPushButton("Reset Settings");
     hostNameLE->setObjectName("hostNameLE");
     userNameLE->setObjectName("userNameLE");
     passwordLE->setObjectName("passwordLE");
     sessionLE->setObjectName("sessionLE");
     okDatabasePB->setObjectName("okDatabasePB");
     resetGUIPB->setObjectName("resetGUIPB");
+    resetSettingsPB->setObjectName("resetSettingsPB");
     okDatabasePB->setDefault(true);
-    resetGUIPB->setToolTip("Move main GUI back to (0,0). (Useful if it gets lost.)");
-    resetGUIPB->setStatusTip("Move main GUI back to (0,0). (Useful if it gets lost.)");
+    resetGUIPB->setToolTip("Move main GUI back to (0,0). (Useful if GUI gets lost.)");
+    resetGUIPB->setStatusTip("Move main GUI back to (0,0). (Useful if GUI gets lost.)");
+    resetSettingsPB->setToolTip("Remove Settings file. (Useful if App won't start.)");
+    resetSettingsPB->setStatusTip("Remove Settings file. (Useful if App won't start.)");
     sessionLE->setToolTip("This (optional) comment appears at the beginning of this session's log file.");
     sessionLE->setStatusTip("This (optional) comment appears at the beginning of this session's log file.");
     hostNameLE->setClearButtonEnabled(true);
@@ -44,6 +48,7 @@ nmfDatabaseConnectDialog::nmfDatabaseConnectDialog(QMainWindow *parent,
 
     hLayout->addWidget(cancelDatabasePB);
     hLayout->addWidget(resetGUIPB);
+    hLayout->addWidget(resetSettingsPB);
     hLayout->addWidget(okDatabasePB);
     vLayout->addWidget(hostNameLBL);
     vLayout->addWidget(hostNameLE);
@@ -69,11 +74,13 @@ std::cout << "\n*** *** Remove hardcoded password for debugging! *** *** \n" << 
     passwordLE->setText("rklasky$$");
 
     connect(okDatabasePB,     SIGNAL(clicked()),
-                     this,             SLOT(callback_connectToDatabase()));
+            this,             SLOT(callback_connectToDatabase()));
     connect(cancelDatabasePB, SIGNAL(clicked(bool)),
-                     this,              SLOT(close()));
+            this,              SLOT(close()));
     connect(resetGUIPB,       SIGNAL(clicked()),
-                     this,             SLOT(callback_resetGUI()));
+            this,             SLOT(callback_resetGUI()));
+    connect(resetSettingsPB,  SIGNAL(clicked()),
+            this,             SLOT(callback_resetSettings()));
 
     passwordLE->setFocus();
 }
@@ -126,7 +133,13 @@ nmfDatabaseConnectDialog::callback_resetGUI()
 {
     std::cout << "callback_resetGUI" << std::endl;
     mainWin->move(QPoint(0,0));
+}
 
+void
+nmfDatabaseConnectDialog::callback_resetSettings()
+{
+    std::cout << "callback_resetSettings" << std::endl;
+    nmfUtilsQt::removeSettingsFile();
 }
 
 

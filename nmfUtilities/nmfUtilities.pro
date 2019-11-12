@@ -29,6 +29,7 @@ SOURCES += \
     nmfRandom.cpp
 
 HEADERS +=\
+    nmfConstantsMSVPA.h \
     nmfUtils.h \
     nmfConstants.h \
     nmfLogger.h \

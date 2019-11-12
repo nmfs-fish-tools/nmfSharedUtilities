@@ -328,6 +328,18 @@ public:
                         std::string& ProjectDatabase);
 
     /**
+     * @brief saveApplicationTable - Saves a table that identifies the type of database (i.e., MSVPA, MSSPM, MSCAA)
+     * @param widget - the calling widget, needed to know where to show popup error dialogs
+     * @param logger - logger widget for logging errors and messages
+     * @param appName - name of application currently running
+     */
+    void saveApplicationTable(
+            QWidget*       widget,
+            nmfLogger*     logger,
+            std::string&   tableName,
+            const QString& appName);
+
+    /**
      * @brief Restores the appropriate CSV from from the given table
      * @param TableName - the MySQL table whose CSV file is to be restored
      * @param ProjectDir - the project directory for the current session

@@ -495,6 +495,15 @@ to_string_scientificNotation(double val)
     return streamDouble.str();
 }
 
+bool
+osIsWindows()
+{
+    std::string osName = getOS();
+
+    return ((osName == "Windows 32-bit") ||
+            (osName == "Windows 64-bit"));
+}
+
 std::string
 getOS()
 {
