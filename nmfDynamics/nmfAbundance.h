@@ -14,6 +14,7 @@
 #include "nmfLogger.h"
 //#include "nmfMSCAATableIO.h"
 #include "nmfUtils.h"
+#include "nmfUtilsQt.h"
 
 struct AbundanceSystemStruct {
     double      TotalBiomass;

@@ -275,11 +275,13 @@ nmfAbundance::getYearAgeData(const std::string& species,
 void
 nmfAbundance::ReadSettings()
 {
-    QSettings settings("NOAA", "MSCAA");
+    QSettings* settings = nmfUtilsQt::createSettings(nmfConstantsMSCAA::SettingsDirWindows,"MSCAA");
 
-    settings.beginGroup("Settings");
-    m_ProjectSettingsConfig = settings.value("Name","").toString().toStdString();
-    settings.endGroup();
+    settings->beginGroup("Settings");
+    m_ProjectSettingsConfig = settings->value("Name","").toString().toStdString();
+    settings->endGroup();
+
+    delete settings;
 }
 
 /*
