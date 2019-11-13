@@ -329,6 +329,14 @@ public:
                         std::string& ProjectDatabase);
 
     /**
+     * @brief getListOfAuthenticatedDatabaseNames - returns list of databases that are appropriate for this application
+     * @param authenticatedDatabases - the list of authenticated databases
+     * @return true if found at least one database else false
+     */
+    bool getListOfAuthenticatedDatabaseNames(
+            QList<QString>& authenticatedDatabases);
+
+    /**
      * @brief authenticateDatabase - checks to see if database to be loaded is compatible with the application
      * @param databaseName - database name to be loaded
      * @return true or false signifying if database to be loaded is compatible with the application

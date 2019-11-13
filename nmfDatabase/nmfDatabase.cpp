@@ -1248,6 +1248,39 @@ bool nmfDatabase::getAllSpecies(
 }
 
 bool
+nmfDatabase::getListOfAuthenticatedDatabaseNames(
+        QList<QString>& authenticatedDatabases)
+{
+    int numDatabases;
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+    std::string name;
+    std::string currentDatabase = nmfGetCurrentDatabase();
+
+    fields   = { "Database" };
+    queryStr = "SHOW databases";
+    dataMap  = nmfQueryDatabase(queryStr,fields);
+    numDatabases = dataMap["Database"].size();
+    if (numDatabases <= 0) {
+        return false;
+    }
+
+    for (unsigned int i = 0; i < numDatabases; ++i) {
+        name = dataMap["Database"][i];
+        if (authenticateDatabase(name)) {
+            authenticatedDatabases.push_back(QString::fromStdString(name));
+        }
+    }
+
+    // Must reset database as authenticateDatabase has to set to each database
+    // to query one of its tables
+    nmfSetDatabase(currentDatabase);
+
+    return true;
+}
+
+bool
 nmfDatabase::authenticateDatabase(const std::string& databaseName)
 {
     std::vector<std::string> fields;
