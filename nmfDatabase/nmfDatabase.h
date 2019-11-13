@@ -117,6 +117,7 @@ public:
     void nmfStartTransaction();
 
     void nmfSaveDatabase();
+    std::string nmfGetCurrentDatabase();
 
     std::vector<std::string> nmfGetDatabaseNames();
 
@@ -360,6 +361,7 @@ public:
     void checkForTableAndCreate(QString table);
 
     // Made the following static for use in a function map
+    static void createApplication(QString &table, QString &qcmd);
     static void createForeEnergyDens(QString &table, QString &qcmd);
     static void createForeOutput(QString &table, QString &qcmd);
     static void createForePredGrowth(QString &table, QString &qcmd);

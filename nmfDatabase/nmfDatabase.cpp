@@ -59,6 +59,7 @@ nmfDatabase::nmfDatabase() {
 
     db = QSqlDatabase::addDatabase("QMYSQL");
 
+    FunctionMap["Application"]          = createApplication;          //  0 of 39
     FunctionMap["ForeEnergyDens"]       = createForeEnergyDens;       //  1 of 39
     FunctionMap["ForeOutput"]           = createForeOutput;           //  2 of 39
     FunctionMap["ForePredGrowth"]       = createForePredGrowth;       //  3 of 39
@@ -138,6 +139,23 @@ nmfDatabase::nmfOpenDatabase(
     }
     return true;
     //nmfStartTransaction();
+}
+
+std::string
+nmfDatabase::nmfGetCurrentDatabase()
+{
+    std::string qry = "SELECT database();";
+    std::string databaseName;
+    QSqlQuery query;
+    if (query.exec(qry.c_str())) {
+        while (query.next()) {
+            databaseName = query.value(0).toString().toStdString();
+        }
+    } else {
+        qDebug() << "Error: " << db.lastError().text();
+    }
+
+    return databaseName;
 }
 
 std::vector<std::string>

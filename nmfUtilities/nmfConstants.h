@@ -130,6 +130,7 @@ namespace nmfConstants
     EXTERN const std::string  OutputImagesDir                = "outputImages";
 
     EXTERN const std::vector<std::string> AllTables = {
+        "Application",
         "ForeEnergyDens",
         "ForeOutput",
         "ForePredGrowth",
@@ -172,6 +173,7 @@ namespace nmfConstants
     };
 
     EXTERN const std::vector<std::string> AllNonSpeciesTables = {
+        "Application",
         "ForeEnergyDens",
         "ForeOutput",
         "ForePredGrowth",

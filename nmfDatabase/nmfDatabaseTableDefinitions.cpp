@@ -55,6 +55,14 @@ void nmfDatabase::checkForTableAndCreate(QString table)
     }
 } // checkForTableAndCreate
 
+void
+nmfDatabase::createApplication(QString &table, QString &qcmd)
+{
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd += "(Name  VARCHAR(255) NOT NULL,";
+    qcmd += " PRIMARY KEY (Name))";
+
+} // end createApplication
 
 void
 nmfDatabase::createForeEnergyDens(QString &table, QString &qcmd)
