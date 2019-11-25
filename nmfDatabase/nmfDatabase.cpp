@@ -1123,7 +1123,7 @@ nmfDatabase::exportDatabase(QWidget*     widget,
     QString msg;
     QStringList args;
     QMessageBox::StandardButton reply;
-    QProcess *myProcess;
+//    QProcess *myProcess;
     bool okToWrite = false;
 
     // Get the databases full path. Create it if it doesn't yet exist.
@@ -1168,13 +1168,25 @@ nmfDatabase::exportDatabase(QWidget*     widget,
         args << "-u" + QString::fromStdString(Username)
              << "-p" + QString::fromStdString(Password)
              << QString::fromStdString(ProjectDatabase);
-        myProcess = new QProcess(0);
-        myProcess->setStandardOutputFile(OutputFileName);
-        myProcess->start("mysqldump", args);
-        if (! myProcess->waitForFinished(-1)) { // -1 so it won't timeout
-            myProcess->kill();
-            delete myProcess;
+//        myProcess = new QProcess(0);
+//        myProcess->setStandardOutputFile(OutputFileName);
+//        myProcess->start("mysqldump", args);
+//        if (! myProcess->waitForFinished(-1)) { // -1 so it won't timeout
+//            myProcess->kill();
+//            delete myProcess;
+//        }
+        QProcess dumpProcess(0);
+        QStringList args;
+        args << "-u" + QString::fromStdString(Username)
+             << "-p" + QString::fromStdString(Password)
+             << QString::fromStdString(ProjectDatabase);
+        dumpProcess.setStandardOutputFile(OutputFileName);
+        dumpProcess.start("mysqldump", args);
+        if (! dumpProcess.waitForFinished(-1)) { // -1 so it won't timeout
+            dumpProcess.kill();
         }
+
+
         widget->setCursor(Qt::ArrowCursor);
     }
 
