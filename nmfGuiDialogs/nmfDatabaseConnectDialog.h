@@ -28,13 +28,15 @@ public:
                                       nmfDatabase*       databasePtr = 0);
     bool         m_openOKBool;
     std::string  m_settingsDir;
+    std::string  m_username;
+    std::string  m_password;
     QMainWindow* m_mainWin;
     nmfDatabase* m_databasePtr;
-    //QCheckBox*   m_passwordCB;
 
     bool openOK();
     void SaveSettings();
-//    bool rememberPassword();
+    std::string getUsername();
+    std::string getPassword();
 
     virtual ~nmfDatabaseConnectDialog() {}
 
@@ -43,13 +45,16 @@ public slots:
     void callback_resetGUI();
     void callback_resetSettings();
 
+
 };
 
 namespace nmfDatabaseUtils {
 
     bool menu_connectToDatabase(QMainWindow* mainWin,
                                 std::string settingsDir,
-                                nmfDatabase* databasePtr);
+                                nmfDatabase* databasePtr,
+                                std::string& username,
+                                std::string& password);
 
 }
 

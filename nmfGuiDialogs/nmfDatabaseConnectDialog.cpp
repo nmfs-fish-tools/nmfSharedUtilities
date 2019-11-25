@@ -14,6 +14,8 @@ nmfDatabaseConnectDialog::nmfDatabaseConnectDialog(QMainWindow*       parent,
     m_databasePtr = databasePtr;
     m_settingsDir = settingsDir;
     m_openOKBool  = false;
+    m_username.clear();
+    m_password.clear();
 
     QVBoxLayout *vLayout          = new QVBoxLayout();
     QHBoxLayout *hLayout          = new QHBoxLayout();
@@ -114,6 +116,8 @@ nmfDatabaseConnectDialog::callback_connectToDatabase()
   std::string Username = userNameLE->text().toStdString();
   std::string Password = passwordLE->text().toStdString();
   std::string Session  = sessionLE->text().toStdString();
+  m_username = Username;
+  m_password = Password;
 
   m_openOKBool = m_databasePtr->nmfOpenDatabase(Hostname,Username,Password,errorMsg);
   if (! m_openOKBool) {
@@ -130,6 +134,18 @@ nmfDatabaseConnectDialog::callback_connectToDatabase()
       close();
   }
 
+}
+
+std::string
+nmfDatabaseConnectDialog::getUsername()
+{
+    return m_username;
+}
+
+std::string
+nmfDatabaseConnectDialog::getPassword()
+{
+    return m_password;
 }
 
 bool
@@ -189,11 +205,15 @@ namespace nmfDatabaseUtils {
 
 bool menu_connectToDatabase(QMainWindow* mainWin,
                             std::string settingsDir,
-                            nmfDatabase* databasePtr)
+                            nmfDatabase* databasePtr,
+                            std::string& username,
+                            std::string& password)
 {
     nmfDatabaseConnectDialog* dlg = new nmfDatabaseConnectDialog(
                 mainWin,settingsDir,databasePtr);
     dlg->exec();
+    username = dlg->getUsername();
+    password = dlg->getPassword();
 
     return dlg->openOK();
 }
