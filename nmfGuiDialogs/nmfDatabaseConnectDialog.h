@@ -2,7 +2,7 @@
 
 #include "nmfDatabase.h"
 
-
+#include <QCheckBox>
 #include <QComboBox>
 #include <QMainWindow>
 #include <QTableWidget>
@@ -21,13 +21,20 @@ class nmfDatabaseConnectDialog: public QDialog
     Q_OBJECT
 
 public:
-    bool openOKBool;
 
-    explicit nmfDatabaseConnectDialog(QMainWindow *mainWindow = 0,
-                                   nmfDatabase* databasePtr = 0);
-    QMainWindow* mainWin;
-    nmfDatabase* databasePtr;
+
+    explicit nmfDatabaseConnectDialog(QMainWindow*       mainWindow  = 0,
+                                      const std::string& settingsDir = "",
+                                      nmfDatabase*       databasePtr = 0);
+    bool         m_openOKBool;
+    std::string  m_settingsDir;
+    QMainWindow* m_mainWin;
+    nmfDatabase* m_databasePtr;
+    //QCheckBox*   m_passwordCB;
+
     bool openOK();
+    void SaveSettings();
+//    bool rememberPassword();
 
     virtual ~nmfDatabaseConnectDialog() {}
 
@@ -41,6 +48,7 @@ public slots:
 namespace nmfDatabaseUtils {
 
     bool menu_connectToDatabase(QMainWindow* mainWin,
+                                std::string settingsDir,
                                 nmfDatabase* databasePtr);
 
 }

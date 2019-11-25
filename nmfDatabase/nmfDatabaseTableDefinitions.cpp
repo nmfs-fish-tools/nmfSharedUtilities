@@ -52,6 +52,7 @@ void nmfDatabase::checkForTableAndCreate(QString table)
         if (errorMsg != " ") {
             nmfUtils::printError("Create table error: ", errorMsg);
         }
+
     }
 } // checkForTableAndCreate
 

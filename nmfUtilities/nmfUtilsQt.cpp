@@ -921,19 +921,24 @@ void convertVectorToStrList(const std::vector<std::string>& labels,
 }
 
 QSettings*
-createSettings(QString windowsDir, QString name)
+createSettings(const std::string& winDir,
+               const QString& name)
 {
     QString arg1 = "NOAA";
     QString arg2 = name;
+    QString windowsDir = QString::fromStdString(winDir);
 
     if (nmfUtils::osIsWindows()) {
         // Make .QtSettings dir first if not there
         QDir().mkdir(windowsDir);
         arg1 = QDir(windowsDir).filePath(name+"_Settings.ini");
-        arg2 = QSettings::IniFormat;
+        QSettings* settings = new QSettings(arg1,QSettings::IniFormat);
+        return settings;
+    } else {
+        QSettings* settings = new QSettings(arg1,arg2);
+        return settings;
     }
-    QSettings* settings = new QSettings(arg1,arg2);
-    return settings;
+    return nullptr;
 }
 
 bool
@@ -944,15 +949,15 @@ removeSettingsFile()
     QDir dir;
     if (nmfUtils::osIsWindows()) {
         if (appName == "MSCAA") {
-            fileToRemove = QDir(nmfConstantsMSCAA::SettingsDirWindows).filePath(appName+"_Settings.ini");
+            fileToRemove = QDir(QString::fromStdString(nmfConstantsMSCAA::SettingsDirWindows)).filePath(appName+"_Settings.ini");
 std::cout << "Removing: " << fileToRemove.toStdString() << std::endl;
             dir.remove(fileToRemove);
         } else if (appName == "MSSPM") {
-            fileToRemove = QDir(nmfConstantsMSSPM::SettingsDirWindows).filePath(appName+"_Settings.ini");
+            fileToRemove = QDir(QString::fromStdString(nmfConstantsMSSPM::SettingsDirWindows)).filePath(appName+"_Settings.ini");
 std::cout << "Removing: " << fileToRemove.toStdString() << std::endl;
             dir.remove(fileToRemove);
         } else if (appName == "MSVPA_X2") {
-            fileToRemove = QDir(nmfConstantsMSVPA::SettingsDirWindows).filePath(appName+"_Settings.ini");
+            fileToRemove = QDir(QString::fromStdString(nmfConstantsMSVPA::SettingsDirWindows)).filePath(appName+"_Settings.ini");
 std::cout << "Removing: " << fileToRemove.toStdString() << std::endl;
             dir.remove(fileToRemove);
         } else {
@@ -974,6 +979,18 @@ void checkForAndReplaceInvalidCharacters(QString &stringValue)
 {
     stringValue.remove(QRegExp("[^a-zA-Z\\d\\s]"));
     stringValue.replace(" ","_");
+}
+
+void clearTableView(const QList<QTableView*>& tables)
+{
+    QStandardItemModel *smodel;
+
+    for (QTableView* table : tables) {
+        smodel = qobject_cast<QStandardItemModel*>(table->model());
+        if (smodel) {
+            smodel->clear();
+        }
+    }
 }
 
 

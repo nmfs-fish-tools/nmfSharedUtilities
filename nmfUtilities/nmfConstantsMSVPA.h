@@ -16,7 +16,7 @@
 namespace nmfConstantsMSVPA
 {
 
-     const QString      SettingsDirWindows             = "C:\\.QtSettings";
+     const std::string      SettingsDirWindows             = "C:\\.QtSettings";
 
 }
 

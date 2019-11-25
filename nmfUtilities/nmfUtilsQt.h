@@ -220,8 +220,11 @@ void convertVectorToStrList(const std::vector<std::string>& labels,
                             QStringList& slist);
 
 void checkForAndReplaceInvalidCharacters(QString &stringValue);
-QSettings* createSettings(QString windowsDir,
-                          QString name);
+
+void clearTableView(const QList<QTableView*>& tables);
+
+QSettings* createSettings(const std::string& windowsDir,
+                          const QString& name);
 
 } // end namespace
 
