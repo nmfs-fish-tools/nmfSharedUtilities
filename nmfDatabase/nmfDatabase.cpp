@@ -1022,6 +1022,45 @@ nmfDatabase::createScenarioMap(std::map<QString,QStringList>& ScenarioForecastMa
     }
 }
 
+void
+nmfDatabase::getAlgorithmIdentifiers(
+        QWidget*     widget,
+        nmfLogger*   logger,
+        const std::string& ProjectSettingsConfig,
+        std::string& Algorithm,
+        std::string& Minimizer,
+        std::string& ObjectiveCriterion,
+        std::string& Scaling,
+        std::string& CompetitionForm,
+        const bool&  showMsg)
+{
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+
+    // Get current algorithm and run its estimation routine
+    fields     = {"Algorithm","Minimizer","ObjectiveCriterion","WithinGuildCompetitionForm","Scaling"};
+    queryStr   = "SELECT Algorithm,Minimizer,ObjectiveCriterion,WithinGuildCompetitionForm,Scaling FROM Systems WHERE SystemName='" + ProjectSettingsConfig + "'";
+    dataMap    = nmfQueryDatabase(queryStr, fields);
+    if (dataMap["Algorithm"].size() == 0) {
+        logger->logMsg(nmfConstants::Warning,"[Warning] nmfDatabase::AlgorithmIdentifiers: No Systems found. Please create a System and click Save on Setup Tab 3.");
+        logger->logMsg(nmfConstants::Warning,queryStr);
+        if (showMsg) {
+            QString msg = "\nNo Systems set. Please confirm the following:\n\n";
+            msg += "1. In Setup Page 2: Create/Load a Project\n\n";
+            msg += "2. In Setup Page 3: Create Guilds/Species\n\n";
+            msg += "3. In Setup Page 4: Save a Model\n";
+            QMessageBox::warning(widget, "Warning", msg, QMessageBox::Ok);
+        }
+        return;
+    }
+    Algorithm          = dataMap["Algorithm"][0];
+    Minimizer          = dataMap["Minimizer"][0];
+    ObjectiveCriterion = dataMap["ObjectiveCriterion"][0];
+    Scaling            = dataMap["Scaling"][0];
+    CompetitionForm    = dataMap["WithinGuildCompetitionForm"][0];
+}
+
 // -------------------------- General -----------------------
 
 

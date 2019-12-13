@@ -66,6 +66,8 @@ namespace nmfConstantsMSSPM
      const bool   DontUseDimmedColor   = false;
      const bool   VerboseOn            = true;
      const bool   VerboseOff           = false;
+     const bool   ShowPopupError       = true;
+     const bool   DontShowPopupError   = false;
 
      const int    Normal    = 0;
      const int    Bold      = 1;

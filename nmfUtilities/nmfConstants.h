@@ -52,6 +52,7 @@ namespace nmfConstants
     EXTERN const int    NumFeedingDataRows      =  7;
     EXTERN const int    MinNumForecastYears     =  3;
     EXTERN const int    MaxNumForecastYears     = 20;
+    EXTERN const int    MaxPathLength           = 1000;
     EXTERN const bool   RearrangeTitle          = true;
     EXTERN const bool   DontRearrangeTitle      = false;
     EXTERN const bool   Clear                   = true;
@@ -66,6 +67,7 @@ namespace nmfConstants
     EXTERN const bool   dontAutoFillSegments    = true;
     EXTERN const bool   FirstYearOnly           = true;
     EXTERN const bool   AllYears                = false;
+
 
     EXTERN const double KgToLbs       = 2.20462;
     EXTERN const double MortalityMax  = 5.0;

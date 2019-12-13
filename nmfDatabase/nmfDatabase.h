@@ -316,6 +316,17 @@ public:
 
     void createScenarioMap(std::map<QString,QStringList>& ScenarioForecastMap);
 
+    void getAlgorithmIdentifiers(
+            QWidget*     widget,
+            nmfLogger*   logger,
+            const std::string& ProjectSettingsConfig,
+            std::string& Algorithm,
+            std::string& Minimizer,
+            std::string& ObjectiveCriterion,
+            std::string& Scaling,
+            std::string& CompetitionForm,
+            const bool&  showPopupError);
+
     bool importDatabase(QWidget*     widget,
                         nmfLogger*   logger,
                         std::string& ProjectDir,
