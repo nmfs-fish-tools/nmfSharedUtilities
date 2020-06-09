@@ -73,7 +73,7 @@ nmfFileViewer::callback_FontSizePB(QString fontSize)
 
 
 
-
+/*
 nmfTableView::nmfTableView(QWidget *parent)
     : QTableView(parent)
 {
@@ -230,10 +230,15 @@ nmfTableView2::deselectAllItems()
 {
     nmfUtilsQt::deselectAll(this);
 }
-
+*/
 
 namespace nmfUtilsQt {
 
+bool fileExists(QString filenameWithPath)
+{
+    QFileInfo fileCheck(filenameWithPath);
+    return (fileCheck.exists() && fileCheck.isFile());
+}
 
 void sendToOutputWindow(
         QTextEdit *te,
@@ -245,7 +250,7 @@ void sendToOutputWindow(
 }
 
 void sendToOutputWindow(
-        QTextEdit *te,
+        QTextEdit*  te,
         std::string label,
         std::string content)
 {
@@ -261,13 +266,13 @@ void sendToOutputWindow(
 }
 
 void sendToOutputWindow(
-        QTextEdit *te,
-        std::string title,
+        QTextEdit*               te,
+        std::string              title,
         std::vector<std::string> rowTitles,
         std::vector<std::string> colTitles,
         boost::numeric::ublas::matrix<double> &outMatrix,
-        int numDigits,
-        int numDecimals)
+        int                      numDigits,
+        int                      numDecimals)
 {
     char buf[1000];
     size_t numRows = outMatrix.size1();
@@ -316,6 +321,20 @@ void sendToOutputWindow(
 
 } // end sendToOutputTextEdit
 
+int getTabIndex(QTabWidget* tabWidget, QString tabName)
+{
+    for (unsigned index=0; index<tabWidget->count(); ++index) {
+        if (tabName == tabWidget->tabText(index)) {
+            return index;
+        }
+    }
+    return -1;
+}
+
+QString getCurrentTabName(QTabWidget* tabWidget)
+{
+    return tabWidget->tabText(tabWidget->currentIndex());
+}
 
 void equalizeQStringLengths(QString &s1, QString &s2)
 {
@@ -331,7 +350,9 @@ void equalizeQStringLengths(QString &s1, QString &s2)
     }
 } // end equalizeQStringLengths
 
-bool allCellsArePopulated(QTabWidget *tabW, QTableView *tv, bool showError)
+bool allCellsArePopulated(QTabWidget *tabW,
+                          QTableView *tv,
+                          bool showError)
 {
     QModelIndex index;
     QString value;
@@ -365,26 +386,26 @@ bool allCellsArePopulated(QTabWidget *tabW, QTableView *tv, bool showError)
     } // end for i
 
     return true;
-} // end allCellsArePopulated
+}
 
 
-bool allCellsArePopulated(QTabWidget *tabW,
-                          QTableWidget *tw,
+bool allCellsArePopulated(QTabWidget *tabWidget,
+                          QTableWidget *tableWidget,
                           bool showError,
-                          bool skipRow1)
+                          bool skipFirstRow)
 {
-    int numRows = tw->rowCount();
-    int numCols = tw->columnCount();
-    int firstRow = (skipRow1) ? 1 : 0;
+    int numRows  = tableWidget->rowCount();
+    int numCols  = tableWidget->columnCount();
+    int firstRow = (skipFirstRow) ? 1 : 0;
     QString value;
     QString msg;
 
     for (int i=firstRow; i<numRows; ++i) {
         for (int j=0; j<numCols; ++j) {
-            value = tw->item(i,j)->text();
+            value = tableWidget->item(i,j)->text();
             if (value.isEmpty()) { // Check if cell is blank
                 if (showError) {
-                    QMessageBox::question(tabW, QT_TR_NOOP("Missing Data"),
+                    QMessageBox::question(tabWidget, QT_TR_NOOP("Missing Data"),
                                           QT_TR_NOOP("\nPlease complete missing table fields.\n"),
                                           QMessageBox::Ok);
                 }
@@ -393,7 +414,7 @@ bool allCellsArePopulated(QTabWidget *tabW,
                 if (showError) {
                     msg = "Found an invalid numeric value of: " + value;
                     msg += ". No commas or special characters allowed.";
-                    QMessageBox::warning(tabW, QT_TR_NOOP("Warning"),
+                    QMessageBox::warning(tabWidget, QT_TR_NOOP("Warning"),
                                          QT_TR_NOOP("\n"+msg+"\n"),
                                          QMessageBox::Ok);
                 }
@@ -403,7 +424,7 @@ bool allCellsArePopulated(QTabWidget *tabW,
     } // end for i
 
     return true;
-} // end allCellsArePopulated
+}
 
 bool allMaxCellsGreaterThanMinCells(
         QStandardItemModel* smodelMin,
@@ -429,7 +450,7 @@ bool allMaxCellsGreaterThanMinCells(
     }
 
     return true;
-} // end allMaxCellsGreaterThanMinCells
+}
 
 /*
  * This doesn't actually rename a file.  It copies the first
@@ -473,10 +494,9 @@ int rename(QString fileIn, QString fileOut)
 } // end rename
 
 
-
-bool clearCSVFile(std::string tableToClear,
-                  std::string ProjectDir,
-                  std::string &errorMsg)
+bool clearCSVFile(std::string  tableToClear,
+                  std::string  projectDir,
+                  std::string& errorMsg)
 {
     int retv;
     QString line;
@@ -484,14 +504,14 @@ bool clearCSVFile(std::string tableToClear,
     QString filePath;
     QString fileNameWithPath;
     QString tmpFileNameWithPath;
+    errorMsg.clear();
 
     csvFile = QString::fromStdString(tableToClear) + ".csv";
-    filePath = QDir(QString::fromStdString(ProjectDir)).filePath(QString::fromStdString(nmfConstants::InputDataDir));
+    filePath = QDir(QString::fromStdString(projectDir)).filePath(QString::fromStdString(nmfConstantsMSVPA::InputDataDir));
     fileNameWithPath    = QDir(filePath).filePath(csvFile);
     tmpFileNameWithPath = QDir(filePath).filePath("."+csvFile);
     QFileInfo fi(fileNameWithPath);
     if (! fi.exists()) {
-        errorMsg.clear();
         std::cout << "Note: " + csvFile.toStdString() << " does not exist." << std::endl;
         return false;
     }
@@ -549,6 +569,9 @@ copy(QApplication* qtApp, QTableView* tableView)
     QModelIndex current;
     QModelIndex previous;
     QItemSelectionModel *selection = tableView->selectionModel();
+    if (! selection->hasSelection()) {
+        return "\nNo valid selection found. Cells must have data prior to making a selection.";
+    }
     QModelIndexList      indexes   = selection->selectedIndexes();
 
     // Sort the indexes in case the user selects from bottom right to top left.
@@ -658,16 +681,32 @@ paste(QApplication* qtApp, QTableView* tableView)
     // If copy selection is different size then just use the first cell of the paste selection
     // to anchor the paste.
     } else {
-        startIndex = pasteIndexes[0];
-        startRow = startIndex.row();
-        startCol = startIndex.column();
-        for (int i=0; i<nrows; ++i) {
-            for (int j=0; j<ncols; ++j) {
-                currentIndex = tableView->model()->index(startRow+i,startCol+j);
-                tableView->model()->setData(currentIndex,QVariant(copiedCells[m].trimmed()));
-                ++m;
+        int numCopiedCells   = copiedCells.size();
+        int numSelectedCells = pasteIndexes.size();
+        QMessageBox::StandardButton reply = QMessageBox::Yes;
+        if (numSelectedCells != 1) {
+            QString msg = "\nThe number of copied cells (" + QString::number(numCopiedCells) +
+                    ") is different from number of selected cells (" + QString::number(numSelectedCells) +
+                    ") in which to paste.\n\nOK to continue?";
+            reply = QMessageBox::warning(tableView,
+                                         "Paste Warning",
+                                         msg.toLatin1(),
+                                         QMessageBox::No|QMessageBox::Yes,
+                                         QMessageBox::Yes);
+        }
+        if (reply == QMessageBox::Yes) {
+            startIndex = pasteIndexes[0];
+            startRow = startIndex.row();
+            startCol = startIndex.column();
+            for (int i=0; i<nrows; ++i) {
+                for (int j=0; j<ncols; ++j) {
+                    currentIndex = tableView->model()->index(startRow+i,startCol+j);
+                    tableView->model()->setData(currentIndex,QVariant(copiedCells[m].trimmed()));
+                    ++m;
+                }
             }
         }
+
     }
 
     // Ensure tableview is updated after the paste.
@@ -731,7 +770,8 @@ clearSelection(QTableView* tableView, QModelIndexList indexes)
 }
 
 QString
-clear(QApplication* qtApp, QTableView* tableView)
+clear(QApplication* qtApp,
+      QTableView*   tableView)
 {
     if (! tableView) {
         return "\nNo table found.";
@@ -799,38 +839,36 @@ deselectAll(QTableView* tableView)
 }
 
 QTreeWidgetItem*
-addTreeRoot(QTreeWidget* NavigatorTree,
-            QString name,
+addTreeRoot(QTreeWidget* parent,
             QString label)
 {
-    QTreeWidgetItem *item = new QTreeWidgetItem(NavigatorTree);
+    QTreeWidgetItem *item = new QTreeWidgetItem(parent);
 
-    item->setText(0, name);
-    item->setText(1, label);
+    item->setText(0, label);
 
     return item;
 }
 
 void
 addTreeItem(QTreeWidgetItem *parent,
-            QString name,
             QString label)
 {
     QTreeWidgetItem *item = new QTreeWidgetItem();
 
-    item->setText(0, name);
-    item->setText(1, label);
+    item->setText(0, label);
 
     parent->addChild(item);
 }
 
 
 void
-menu_about(const QString& name,
-           const QString& operatingSystem,
-           const QString& version,
-           const QString& specialAcknowledgement,
-           const QString& appMsg)
+showAboutWidget(
+        QWidget* parent,
+        const QString& name,
+        const QString& operatingSystem,
+        const QString& version,
+        const QString& specialAcknowledgement,
+        const QString& appMsg)
 {
     QString msg = "<strong><br>"+version+" (" + operatingSystem + ")</strong>";
     msg += "<strong><br>"+name+"</strong>";
@@ -846,7 +884,7 @@ menu_about(const QString& name,
     // Show the message
     QPixmap pixmap(":/icons/NOAA.png");
     QPixmap scaled = pixmap.scaled(110,110,Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    QMessageBox msgBox;
+    QMessageBox msgBox(parent);
     QSpacerItem* horSP = new QSpacerItem(550, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
     msgBox.setText(msg+appMsg);
     msgBox.setIconPixmap(scaled);
@@ -857,13 +895,13 @@ menu_about(const QString& name,
 
 void
 checkForAndDeleteLogFiles(QString name,
-                          std::string theLogDir,
-                          std::string theLogFilter)
+                          std::string logDirName,
+                          std::string logFilter)
 {
     QString title = name + " Log Files";
     QMessageBox::StandardButton reply;
     size_t NumLogFiles = 0;
-    boost::filesystem::path logDir(theLogDir);
+    boost::filesystem::path logDir(logDirName);
     boost::filesystem::recursive_directory_iterator endIter;
 
     for (boost::filesystem::recursive_directory_iterator it(logDir); it != endIter; ++it) {
@@ -883,7 +921,7 @@ checkForAndDeleteLogFiles(QString name,
                              QMessageBox::No|QMessageBox::Yes,
                              QMessageBox::Yes);
         if (reply == QMessageBox::Yes) {
-            std::string cmd = "rm " + theLogFilter;
+            std::string cmd = "rm " + logFilter;
             int retv = system(cmd.c_str());
             if (retv >= 0) {
                 QMessageBox::information(0,
@@ -909,13 +947,13 @@ void checkForAndCreateDirectories(std::string dir,
             QDir().mkdir(dir);
         }
     }
-} // end checkForAndCreateDirectories
+}
 
 
 void convertVectorToStrList(const std::vector<std::string>& labels,
                             QStringList& slist)
 {
-    for (int i=0; i<labels.size(); ++i) {
+    for (unsigned i=0; i<labels.size(); ++i) {
         slist << QString::fromStdString(labels[i]);
     }
 }
@@ -928,7 +966,7 @@ createSettings(const std::string& winDir,
     QString arg2 = name;
     QString windowsDir = QString::fromStdString(winDir);
 
-    if (nmfUtils::osIsWindows()) {
+    if (nmfUtils::isOSWindows()) {
         // Make .QtSettings dir first if not there
         QDir().mkdir(windowsDir);
         arg1 = QDir(windowsDir).filePath(name+"_Settings.ini");
@@ -947,19 +985,25 @@ removeSettingsFile()
     QString fileToRemove;
     QString appName = QApplication::applicationName();
     QDir dir;
-    if (nmfUtils::osIsWindows()) {
+    if (nmfUtils::isOSWindows()) {
         if (appName == "MSCAA") {
             fileToRemove = QDir(QString::fromStdString(nmfConstantsMSCAA::SettingsDirWindows)).filePath(appName+"_Settings.ini");
 std::cout << "Removing: " << fileToRemove.toStdString() << std::endl;
-            dir.remove(fileToRemove);
+            if (! dir.remove(fileToRemove)) {
+                std::cout << "Error: failed to remove settings file" << std::endl;
+            }
         } else if (appName == "MSSPM") {
             fileToRemove = QDir(QString::fromStdString(nmfConstantsMSSPM::SettingsDirWindows)).filePath(appName+"_Settings.ini");
 std::cout << "Removing: " << fileToRemove.toStdString() << std::endl;
-            dir.remove(fileToRemove);
+            if (! dir.remove(fileToRemove)) {
+                std::cout << "Error: failed to remove settings file" << std::endl;
+            }
         } else if (appName == "MSVPA_X2") {
             fileToRemove = QDir(QString::fromStdString(nmfConstantsMSVPA::SettingsDirWindows)).filePath(appName+"_Settings.ini");
 std::cout << "Removing: " << fileToRemove.toStdString() << std::endl;
-            dir.remove(fileToRemove);
+            if (! dir.remove(fileToRemove)) {
+                std::cout << "Error: failed to remove settings file" << std::endl;
+            }
         } else {
           return false;
         }
@@ -967,13 +1011,103 @@ std::cout << "Removing: " << fileToRemove.toStdString() << std::endl;
     } else {
         fileToRemove = QDir("~/.config/NOAA").filePath(appName+".conf");
 std::cout << "Removing: " << fileToRemove.toStdString() << std::endl;
-//      bool removed = dir.remove(fileToRemove);
         std::string cmd = "rm " + fileToRemove.toStdString();
         system(cmd.c_str());
-//std::cout << "File removed: " << removed << std::endl;
     }
     return true;
 }
+
+void saveModelToCSVFile(std::string projectDir,
+                        std::string tabName,
+                        QTableView* table)
+{
+    bool ok;
+    QString val;
+    QString msg;
+    std::string vHeaderTitle;
+    QMessageBox::StandardButton reply;
+    QString dataPath = QDir(QString::fromStdString(projectDir)).filePath("outputData");
+    QString filename = QInputDialog::getText(table, QObject::tr("CSV Filename"),
+                                         QObject::tr("Enter desired CSV filename:"), QLineEdit::Normal,
+                                         QObject::tr(""), &ok);
+    QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(table->model());
+    int numColumns = smodel->columnCount();
+    int numRows    = smodel->rowCount();
+
+    if (ok && !filename.isEmpty())
+    {
+        QString fullPath = QDir(dataPath).filePath(filename);
+
+        // if file exists, query user if they wan't to overwrite
+        if (QFileInfo(fullPath).exists()) {
+            msg = "\nFile exists: " + fullPath + "\n\nOK to overwrite?\n";
+            reply = QMessageBox::warning(table, QObject::tr("File Exists"),
+                 msg, QMessageBox::Yes|QMessageBox::No);
+            if (reply == QMessageBox::No) {
+                return;
+            }
+        }
+
+        // open output file
+        std::ofstream outputFile;
+        outputFile.open(fullPath.toLatin1());
+
+        // get data from model and write to output file in csv fashion
+        if (smodel->verticalHeaderItem(0) == nullptr) {
+            vHeaderTitle.clear();
+        } else {
+            if (tabName == "Data") {
+                vHeaderTitle = "Year";
+            } else if (tabName == "Model Fit Summary") {
+                vHeaderTitle = "Num";
+            } else if (tabName == "Output Biomass:") {
+                vHeaderTitle = "Year";
+            } else {
+                vHeaderTitle = "Species";
+            }
+        }
+
+
+        if (! vHeaderTitle.empty()) {
+            outputFile << vHeaderTitle << ", ";
+        }
+        for (unsigned j=0; j<numColumns; ++j) {
+            outputFile << smodel->horizontalHeaderItem(j)->text().toStdString();
+            if (j < numColumns-1) {
+                outputFile << ", ";
+            } else {
+                outputFile << "\n";
+            }
+        }
+        for (unsigned i=0; i<numRows; ++i) {
+            for (unsigned j=0; j<numColumns; ++j) {
+                if (j == 0) {
+                    if (smodel->verticalHeaderItem(i) != nullptr) {
+                        outputFile << smodel->verticalHeaderItem(i)->text().toStdString() << ", ";
+                    }
+                }
+                val = smodel->item(i,j)->text();
+                outputFile << val.toStdString();
+                if (j < numColumns-1) {
+                    outputFile << ", ";
+                } else {
+                    outputFile << "\n";
+                }
+            }
+
+        }
+
+        // close output file
+        outputFile.close();
+
+        msg = "\nFile saved successfully:\n\n" + fullPath + "\n";
+        QMessageBox::information(table, QObject::tr("Project"),
+                                 msg,
+                                 QMessageBox::Ok);
+    }
+}
+
+
 
 void checkForAndReplaceInvalidCharacters(QString &stringValue)
 {
@@ -993,5 +1127,28 @@ void clearTableView(const QList<QTableView*>& tables)
     }
 }
 
+bool emptyField(QStringList fields)
+{
+    for (unsigned int i=0; i<fields.size(); ++i) {
+        if (fields[i].isEmpty()) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool outOfRange(QStringList fields, QString& badParam)
+{
+    double value;
+    for (unsigned int i=0; i<fields.size(); i+=4) {
+        value = fields[i+1].toDouble();
+        if ((value < fields[i+2].toDouble()) ||
+            (value > fields[i+3].toDouble())) {
+            badParam = fields[i];
+            return true;
+        }
+    }
+    return false;
+}
 
 } // end namespace

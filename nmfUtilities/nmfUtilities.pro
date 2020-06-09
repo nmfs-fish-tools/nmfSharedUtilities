@@ -25,10 +25,10 @@ SOURCES += \
     nmfUtilsStatistics.cpp \
     nmfUtilsQt.cpp \
     nmfUtilsComplex.cpp \
-    nmfUtilsSolvers.cpp \
-    nmfRandom.cpp
+    nmfUtilsSolvers.cpp
 
 HEADERS +=\
+    mainpage.h \
     nmfConstantsMSVPA.h \
     nmfUtils.h \
     nmfConstants.h \
@@ -39,8 +39,6 @@ HEADERS +=\
     nmfUtilsSolvers.h \
     nmfStructsQt.h \
     nmfConstantsMSSPM.h \
-    nmfRandom.h \
-    nmfStructsBees.h \
     nmfConstantsMSCAA.h
 
 unix {

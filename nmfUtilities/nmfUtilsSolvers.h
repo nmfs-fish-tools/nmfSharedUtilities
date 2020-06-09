@@ -1,26 +1,8 @@
-/*
-#ifndef NMFUTILITIES_H
-#define NMFUTILITIES_H
-
-#include "nmfutilities_global.h"
-
-class NMFUTILITIESSHARED_EXPORT nmfUtilities
-{
-
-public:
-    nmfUtilities();
-};
-
-#endif // NMFUTILITIES_H
-*/
-
 /**
- @file nmfUtils.h
- @author rklasky
- @copyright 2017 NOAA - National Marine Fisheries Service
- @brief This header file defines MSVPA_X2 utility functions.
- @date Nov 29, 2016
-*/
+ * @file nmfUtilsSolvers.h
+ * @brief This header file defines MSVPA_X2 utility functions.
+ * @date Nov 29, 2016
+ */
 
 #pragma once
 
@@ -28,7 +10,6 @@ public:
 #include <string>
 #include <vector>
 #include <map>
-
 
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/io.hpp>
@@ -39,15 +20,22 @@ typedef boost::multi_array<double, 4> Boost4DArrayDouble;
 typedef boost::multi_array<double, 5> Boost5DArrayDouble;
 
 
+/**
+ * @brief Namespace for MSVPA_X2 solver functions
+ */
 namespace nmfUtilsSolvers {
 
-/*
- * An iterative solution for a mortality rate (F) given the initial population
- * size N, the total number removed (catch) during the time period, and the
- * total "other mortality", M.
+/**
+ * @brief An iterative solution for a mortality rate (F) given the initial parameters
+ * @param Catch : the total number (of fish) removed during the time period
+ * @param N : the initial population size
+ * @param M : the total "other mortality"
+ * @param F : the solved mortality rate
  */
-void SolveF(const double Catch, const double N, const double M, double &F);
-
+void SolveF(const double Catch,
+            const double N,
+            const double M,
+            double &F);
 
 }
 

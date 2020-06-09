@@ -1,35 +1,27 @@
-
 /**
- @file nmfConstantsMSCAA.h
- @author rklasky
- @copyright 2017 NOAA - National Marine Fisheries Service
- @brief
- @date Dec 8, 2016
-*/
+ * @file nmfConstantsMSCAA.h
+ * @brief Definition for constants used in MSCAA tool
+ * @date Jan 14, 2020
+ *
+ * This file defines constants used in the MSCAA application program.
+ */
 
 #pragma once
-
-//#define
-//#else
-//#define  extern
-//#endif
 
 #include <iostream>
 #include <vector>
 
 namespace nmfConstantsMSCAA
 {
-    const double Kg2Mt             = 0.001;
-    const int    MaxNumYears       = 100;
-    const int    MaxNumSpecies     =  12;
-    const int    MaxNumAges        =  30;
-    const bool   ClearSummary      = true;
-    const bool   DontClearSummary  = false;
-    const bool   ShowFirstPoint    = true;
-    const bool   HideFirstPoint    = false;
+    const double       Kg2Mt             = 0.001;
+    const int          MaxNumYears       = 100;
+    const int          MaxNumSpecies     =  12;
+    const int          MaxNumAges        =  30;
+    const bool         ClearSummary      = true;
+    const bool         DontClearSummary  = false;
+    const bool         ShowFirstPoint    = true;
+    const bool         HideFirstPoint    = false;
 
-    const std::string  ClearWindow = "";
-    const std::string  BlankLine = " ";
     const std::string  HiddenDir                      = ".MSCAA";
     const std::string  HiddenDataDir                  = ".MSCAA/data";
     const std::string  HiddenLogDir                   = ".MSCAA/logs";
@@ -67,16 +59,6 @@ namespace nmfConstantsMSCAA
          "Rthres"   // Threshold for the coefficient of variation of recruitment
      };
 
-     const std::vector<std::string> SurfaceThemes = {
-            "Qt",
-            "Primary Colors",
-            "Digia",
-            "Stone Moss",
-            "Army Blue",
-            "Retro",
-            "Ebony",
-            "Isabelle"
-    };
 }
 
 

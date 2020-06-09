@@ -1,15 +1,17 @@
 #ifndef NMFCHARTLINE_H
 #define NMFCHARTLINE_H
 
-
 #include <QChart>
+#include <QLabel>
+#include <QLegend>
+#include <QLegendMarker>
 #include <QLine>
 #include <QLineSeries>
 #include <QScatterSeries>
 #include <QString>
 #include <QStringList>
+#include <QToolTip>
 #include <QValueAxis>
-#include <QLabel>
 
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/io.hpp>
@@ -27,6 +29,8 @@ class nmfChartLine : public QObject
 
     Q_OBJECT
 
+private:
+    std::map<QString,QString> m_tooltips;
 
 
 public:
@@ -49,12 +53,15 @@ public:
             std::string  &YTitle,
             const std::vector<bool> &GridLines,
             const int    &Theme,
-            const QColor &DashedLineColor,
-            const QList<QColor>& LineColors,
+//          const QColor &DashedLineColor,
+            const QColor& LineColor,
+//          const QList<QColor>& LineColors,
+            const std::string &LineColorName,
             const double  XInc);
 signals:
 
 public slots:
+    void callback_hoveredLine(const QPointF& point,bool hovered);
 
 };
 

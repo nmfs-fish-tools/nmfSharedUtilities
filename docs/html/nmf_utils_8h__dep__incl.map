@@ -1,0 +1,22 @@
+<map id="nmfUtilities/nmfUtils.h" name="nmfUtilities/nmfUtils.h">
+<area shape="rect" id="node2" href="$_bee_8h_source.html" title="BeesAlgorithm/Bee.h" alt="" coords="5,177,151,203"/>
+<area shape="rect" id="node3" href="$_bees_algorithm_8h_source.html" title="BeesAlgorithm/BeesAlgorithm.h" alt="" coords="597,259,804,285"/>
+<area shape="rect" id="node4" href="$nmf_progress_widget_8h.html" title="This file contains the definition for the Progress Chart dock widget. " alt="" coords="1251,87,1465,114"/>
+<area shape="rect" id="node5" href="$nmf_database_8cpp.html" title="This file contains the NMFS DatabaseAPI implementation. " alt="" coords="1399,177,1605,203"/>
+<area shape="rect" id="node6" href="$nmf_abundance_8h_source.html" title="nmfDynamics/nmfAbundance.h" alt="" coords="1630,177,1835,203"/>
+<area shape="rect" id="node7" href="$nmf_log_widget_8h_source.html" title="nmfGuiComponentsMain\l/nmfLogWidget.h" alt="" coords="1781,80,1948,121"/>
+<area shape="rect" id="node8" href="$nmf_output_chart3_d_8h_source.html" title="nmfGuiComponentsMain\l/nmfOutputChart3D.h" alt="" coords="1972,80,2139,121"/>
+<area shape="rect" id="node9" href="$nmf_output_chart_bar_8h_source.html" title="nmfGuiComponentsMain\l/nmfOutputChartBar.h" alt="" coords="2163,80,2329,121"/>
+<area shape="rect" id="node10" href="$nmf_output_chart_line_8h_source.html" title="nmfGuiComponentsMain\l/nmfOutputChartLine.h" alt="" coords="2353,80,2520,121"/>
+<area shape="rect" id="node11" href="$nmf_output_chart_stacked_bar_8h_source.html" title="nmfGuiComponentsMain\l/nmfOutputChartStackedBar.h" alt="" coords="2544,80,2743,121"/>
+<area shape="rect" id="node12" href="$nmf_competition_form_8h_source.html" title="nmfModels/nmfCompetition\lForm.h" alt="" coords="175,169,357,211"/>
+<area shape="rect" id="node13" href="$nmf_growth_form_8h_source.html" title="nmfModels/nmfGrowthForm.h" alt="" coords="382,177,577,203"/>
+<area shape="rect" id="node14" href="$nmf_harvest_form_8h_source.html" title="nmfModels/nmfHarvestForm.h" alt="" coords="601,177,800,203"/>
+<area shape="rect" id="node15" href="$nmf_predation_form_8h_source.html" title="nmfModels/nmfPredationForm.h" alt="" coords="689,87,897,114"/>
+<area shape="rect" id="node16" href="$nmf_utils_complex_8h.html" title="These routines were originally from Complex2.bas. " alt="" coords="972,87,1176,114"/>
+<area shape="rect" id="node18" href="$nmf_utils_statistics_8h.html" title="This header file defines multi&#45;species statistical utility functions. " alt="" coords="1168,177,1375,203"/>
+<area shape="rect" id="node19" href="$nmf_utils_qt_8h.html" title="Definition for Qt widgets and functions that operate on widgets. " alt="" coords="1591,87,1757,114"/>
+<area shape="rect" id="node17" href="$nmf_utils_complex_8cpp.html" title="These routines were originally from Complex2.bas. " alt="" coords="925,177,1143,203"/>
+<area shape="rect" id="node20" href="$nmf_viewer_widget_8h.html" title="This file contains the definition for the screenshot image viewer widget. " alt="" coords="1860,177,2061,203"/>
+<area shape="rect" id="node21" href="$nmf_database_connect_dialog_8h_source.html" title="nmfGuiDialogs/nmfDatabase\lConnectDialog.h" alt="" coords="2085,169,2276,211"/>
+</map>

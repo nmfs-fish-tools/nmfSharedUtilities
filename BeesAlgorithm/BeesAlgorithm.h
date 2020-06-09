@@ -2,6 +2,7 @@
 
 #include "Bee.h"
 #include "nmfUtils.h"
+#include "nmfUtilsStatistics.h"
 #include "nmfConstantsMSSPM.h"
 #include "nmfGrowthForm.h"
 #include "nmfHarvestForm.h"
@@ -54,9 +55,11 @@ private:
     std::map<int,std::vector<int> >        m_GuildSpecies;
     std::vector<int>                       m_GuildNum;
 
-    std::unique_ptr<Bee> createRandomBee(bool doWhileLoop);
+    std::unique_ptr<Bee> createRandomBee(bool doWhileLoop,
+                                         std::string& errorMsg);
     std::unique_ptr<Bee> searchParameterSpaceForBestBee(int& RunNum,
-                                                        int& subRunNum);
+                                                        int& subRunNum,
+                                                        std::string& errorMsg);
     void rescaleMinMax(const boost::numeric::ublas::matrix<double> &matrix,
                              boost::numeric::ublas::matrix<double> &rescaledMatrix);
     void rescaleMean(const boost::numeric::ublas::matrix<double> &matrix,
@@ -78,10 +81,6 @@ private:
                               const std::string& competitionForm,
                               const std::string& predationForm);
     bool StoppedByUser();
-    double calculateSumOfSquares(const boost::numeric::ublas::matrix<double>& estBiomass,
-                                 const boost::numeric::ublas::matrix<double>& obsBiomass);
-    double calculateModelEfficiency(const boost::numeric::ublas::matrix<double>& estBiomass,
-                                    const boost::numeric::ublas::matrix<double>& obsBiomass);
     bool isABetterFitness(double& bestFitnessInPopulation,
                           double& bestBeesFitness);
 
@@ -94,7 +93,9 @@ public:
     int calculateActualNumEstParameters();
     bool estimateParameters(double &bestFitness,
                             std::vector<double> &bestParameters,
-                            int &RunNum, int &subRunNum);
+                            int &RunNum,
+                            int &subRunNum,
+                            std::string& errorMsg);
     void extractGrowthParameters(const std::vector<double>& parameters,
                                        int&                 startPos,
                                        std::vector<double>& growthRate,

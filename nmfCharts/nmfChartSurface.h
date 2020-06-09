@@ -1,28 +1,15 @@
 #ifndef NMFCHARTSURFACE_H
 #define NMFCHARTSURFACE_H
 
-#include <QtDataVisualization>
-
-//#include "nmfOutputChart3D.h"
-#include "nmfProgressWidget.h"
-#include "nmfLogger.h"
-#include "nmfUtils.h"
-#include "nmfUtilsQt.h"
-
 #include <Q3DSurface>
+#include <QtDataVisualization>
 #include <QString>
 #include <QStringList>
 
-//#include <boost/numeric/ublas/matrix.hpp>
-//#include <boost/numeric/ublas/io.hpp>
-//#include <boost/algorithm/string/trim.hpp>
-//#include <boost/algorithm/string.hpp>
-//#include <boost/range/algorithm_ext/erase.hpp>
+#include <boost/numeric/ublas/matrix.hpp>
+#include <boost/numeric/ublas/matrix_proxy.hpp>
 
 #include <vector>
-#include <QtDataVisualization>
-
-QT_CHARTS_USE_NAMESPACE
 
 using namespace QtDataVisualization;
 
@@ -31,34 +18,38 @@ class nmfChartSurface : public QObject
 
     Q_OBJECT
 
+    QSurfaceDataProxy* m_surfaceProxy;
+    QSurface3DSeries*  m_surfaceSeries;
+    std::pair<int,int> m_minCoord;
+    boost::numeric::ublas::matrix<double> m_heightValues;
+    void m_swapYandZPointsInLabel(QPoint pt);
+
 public:
+
     nmfChartSurface(
             Q3DSurface* graph3D,
-            const int&  FirstRow,
-            const int&  FirstColumn,
-            const QString& XTitle,
-            const QString& YTitle,
-            const QString& ZTitle,
-            const boost::numeric::ublas::matrix<double> &Data);
+            const QString& xTitle,
+            const QString& yTitle,
+            const QString& zTitle,
+            const QString& xLabelFormat,
+            const QString& zLabelFormat,
+            const boost::numeric::ublas::matrix<double> &rowValues,
+            const boost::numeric::ublas::matrix<double> &columnValues,
+            const boost::numeric::ublas::matrix<double> &zValues,
+            const bool& showShadow);
+
     virtual ~nmfChartSurface() {}
 
-    void showTest();
-
-//    void populateChart(
-//            QChart  *chart,
-//            std::string &type,
-//            const boost::numeric::ublas::matrix<double> &ChartData,
-//            const QStringList &RowLabels,
-//            const QStringList &ColumnLabels,
-//            std::string &MainTitle,
-//            std::string &XTitle,
-//            std::string &YTitle,
-//            const std::vector<bool> &GridLines,
-//            const int Theme);
-signals:
-
-public slots:
+    /**
+     * @brief Selects the center point on the 3d surface with Qt's blue marker ball
+     */
+    void selectCenterPoint();
+    /**
+     * @brief Selects the minimum point on the 3d surface with Qt's blue marker ball
+     */
+    void selectMinimumPoint();
 
 };
+
 
 #endif

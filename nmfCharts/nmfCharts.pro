@@ -34,19 +34,23 @@ LIBS += -lboost_system -lboost_filesystem
 
 SOURCES += \
     nmfChartBar.cpp \
+    nmfChartLegend.cpp \
     nmfChartLine.cpp \
     nmfChartScatter.cpp \
     nmfChartSurface.cpp \
     nmfProgressWidget.cpp \
-    nmfChartLineWithScatter.cpp
+    nmfChartLineWithScatter.cpp \
+    nmfViewerWidget.cpp
 
 HEADERS += \
     nmfChartBar.h \
+    nmfChartLegend.h \
     nmfChartLine.h \
     nmfChartScatter.h \
     nmfChartSurface.h \
     nmfProgressWidget.h \
-    nmfChartLineWithScatter.h
+    nmfChartLineWithScatter.h \
+    nmfViewerWidget.h
 
 unix {
     target.path = /usr/lib

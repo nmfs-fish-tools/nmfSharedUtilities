@@ -1,58 +1,46 @@
-/*
-#ifndef NMFUTILITIES_H
-#define NMFUTILITIES_H
-
-#include "nmfutilities_global.h"
-
-class NMFUTILITIESSHARED_EXPORT nmfUtilities
-{
-
-public:
-    nmfUtilities();
-};
-
-#endif // NMFUTILITIES_H
-*/
-
 /**
- @file nmfUtils.h
- @author rklasky
- @copyright 2017 NOAA - National Marine Fisheries Service
- @brief This header file defines MSVPA_X2 Qt utility functions.
- @date Jul 26, 2017
-*/
+ * @file nmfStructsQt.h
+ * @brief Definition for common qt gui widgets
+ * @date Jan 14, 2020
+ *
+ * This file contains Qt widget definitions that are common across applications.
+ *
+ */
 
 #pragma once
-
 
 #include <iostream>
 #include <string>
 #include <vector>
 
-#include <QString>
-#include <QDialog>
-#include <QLineEdit>
 #include <QComboBox>
+#include <QDialog>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QLineEdit>
 #include <QPushButton>
+#include <QString>
 
-
-
+/**
+ * @brief These are common Qt structures and classes
+ */
 namespace nmfStructsQt {
 
-
-// Create a dialog class that allows user to enter a filename
-// and select either jpg or png for the file type.
-class FileDialogWithType : public QDialog
+/**
+ * @brief This class displays a QDialog and allows the user to do a screen
+ * grab of the displayed chart. The user may save the file to either a jpg
+ * or png file format.
+ */
+class ChartSaveDlg : public QDialog
 {
+    QLineEdit *m_filenameLE;
+    QComboBox *m_fileTypeCMB;
 
 public:
-
-    QLineEdit *le;
-    QComboBox *cmb;
-
-    FileDialogWithType()
+    /**
+     * @brief Class  constructor, builds the dialog allowing the user to save the current chart image
+     */
+    ChartSaveDlg(QWidget* parent) : QDialog(parent)
     {
         QVBoxLayout *vlayout       = new QVBoxLayout();
         QHBoxLayout *hlayout       = new QHBoxLayout();
@@ -60,18 +48,18 @@ public:
         QLabel *label              = new QLabel("Chart image file name:");
         QPushButton *cancelPB      = new QPushButton("Cancel");
         QPushButton *okPB          = new QPushButton("OK");
-        le                         = new QLineEdit();
-        cmb                        = new QComboBox();
+        m_filenameLE               = new QLineEdit();
+        m_fileTypeCMB              = new QComboBox();
 
-        le->setToolTip(   "Enter filename for screen grab of chart.");
-        le->setStatusTip( "Enter filename for screen grab of chart.");
-        cmb->setToolTip(  "Select type of image file.");
-        cmb->setStatusTip("Select type of image file.");
-        cmb->addItems({"jpg","png"});
+        m_filenameLE->setToolTip(   "Enter filename for screen grab of chart.");
+        m_filenameLE->setStatusTip( "Enter filename for screen grab of chart.");
+        m_fileTypeCMB->setToolTip(  "Select type of image file.");
+        m_fileTypeCMB->setStatusTip("Select type of image file.");
+        m_fileTypeCMB->addItems({"jpg","png"});
         okPB->setDefault(true);
 
-        hlayout->addWidget(le);
-        hlayout->addWidget(cmb);
+        hlayout->addWidget(m_filenameLE);
+        hlayout->addWidget(m_fileTypeCMB);
         hButtonLayout->addWidget(cancelPB);
         hButtonLayout->addWidget(okPB);
         vlayout->addWidget(label);
@@ -82,18 +70,33 @@ public:
         connect(cancelPB, SIGNAL(pressed()), this, SLOT(close()));
         connect(okPB,     SIGNAL(pressed()), this, SLOT(accept()));
     };
-    ~FileDialogWithType() {}
+    ~ChartSaveDlg() {}
 
-    //QString filename() {return le->text()+"."+cmb->currentText();};
-    QString filename() {
-        QFileInfo fileInfo(le->text());
-        return fileInfo.completeBaseName()+"."+cmb->currentText();
+    /**
+     * @brief Gets the filename for the chart image
+     * @return The filename entered by the user
+     */
+    QString getFilename() {
+        QString retv = "";
+        QFileInfo fileInfo(m_filenameLE->text());
+        QString basename = fileInfo.completeBaseName();
+        if (basename.isEmpty()) {
+            return retv;
+        }
+
+        QString suffix = fileInfo.completeSuffix();
+        if ((suffix != "jpg") && (suffix != "png") && (!suffix.isEmpty())) {
+            basename += "." + suffix;
+        }
+        return basename + "." + m_fileTypeCMB->currentText();
     }
 
 };
 
 
-
+/**
+ * @brief The MSVPA data struct
+ */
 struct UpdateDataStruct {
     nmfDatabase* databasePtr;
     nmfLogger*   logger;
@@ -101,26 +104,26 @@ struct UpdateDataStruct {
     std::string  ForecastName;
     std::string  ScenarioName;
     std::string  ModelName;
-    int  Theme;
-    int  NumAgeSizeClasses;
-    bool HorizontalGridLines;
-    bool VerticalGridLines;
-    std::string DataTypeLabel;
-    std::string XLabel;
-    std::string YLabel;
-    std::string TitlePrefix;
-    std::string TitleSuffix;
-    QString SelectDataType;
-    QString SelectPredator;
-    QString SelectVariable;
-    QString SelectByVariables;
-    QString SelectSeason;
-    QString SelectPredatorAgeSizeClass;
-    QString SelectPreyName;
-    QString SelectYPRAnalysisType;
-    QString SelectFullyRecruitedAge;
-    QString MaxScaleY;
-    QString SelectMode;
+    int          Theme;
+    int          NumAgeSizeClasses;
+    bool         HorizontalGridLines;
+    bool         VerticalGridLines;
+    std::string  DataTypeLabel;
+    std::string  XLabel;
+    std::string  YLabel;
+    std::string  TitlePrefix;
+    std::string  TitleSuffix;
+    QString      SelectDataType;
+    QString      SelectPredator;
+    QString      SelectVariable;
+    QString      SelectByVariables;
+    QString      SelectSeason;
+    QString      SelectPredatorAgeSizeClass;
+    QString      SelectPreyName;
+    QString      SelectYPRAnalysisType;
+    QString      SelectFullyRecruitedAge;
+    QString      MaxScaleY;
+    QString      SelectMode;
     std::vector<std::string> SelectedYears;
 };
 

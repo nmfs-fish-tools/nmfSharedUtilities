@@ -10,7 +10,6 @@
 #ifndef NMFMODELDELEGATES_H
 #define NMFMODELDELEGATES_H
 
-#include "nmfmodeldelegates_global.h"
 
 #include <QStyledItemDelegate>
 #include <QStyleOptionViewItem>

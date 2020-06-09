@@ -1,10 +1,12 @@
 
 #include "nmfChartLine.h"
 #include <nmfConstants.h>
+#include <nmfConstantsMSSPM.h>
 
 
 nmfChartLine::nmfChartLine()
 {
+    m_tooltips.clear();
 }
 
 
@@ -25,17 +27,25 @@ nmfChartLine::populateChart(
         std::string &YTitle,
         const std::vector<bool> &GridLines,
         const int    &Theme,
-        const QColor &DashedLineColor,
-        const QList<QColor>& LineColors,
+        const QColor& LineColor,
+        const std::string &LineColorName,
         const double XInc)
 {
-    QLineSeries *series = NULL;
+    bool showLegend = (ColumnLabels.size() > 0);
+    QLineSeries *series = nullptr;
     QPen pen;
     int XStartVal = (ShowFirstPoint) ? 0 : 1;
     XStartVal += XOffset;
-    int NumColors = LineColors.size();
     double yVal;
     bool skipRest = false;
+    QString lineColorName = QString::fromStdString(LineColorName);
+
+    // Set main title
+    QFont mainTitleFont = chart->titleFont();
+    mainTitleFont.setPointSize(14);
+    mainTitleFont.setWeight(QFont::Bold);
+    chart->setTitleFont(mainTitleFont);
+    chart->setTitle(QString::fromStdString(MainTitle));
 
     chart->legend()->hide();
 
@@ -48,7 +58,7 @@ nmfChartLine::populateChart(
           // For now...just use allow line
           pen = series->pen();
           pen.setStyle(Qt::SolidLine);
-          pen.setColor(LineColors[0]);
+          pen.setColor(LineColor); //LineColors[0]);
           pen.setWidth(2);
           series->setPen(pen);
 
@@ -71,27 +81,22 @@ nmfChartLine::populateChart(
             if (style == "DottedLine") {
                 pen = series->pen();
                 pen.setStyle(Qt::DotLine);
-                if (DashedLineColor == QColor(0,0,1)) {
-                    pen.setColor(LineColors[line%NumColors]);
-                } else {
-                    pen.setColor(DashedLineColor);
-                }
+                pen.setColor(LineColor); //LineColors[line%NumColors]);
+                pen.setColor(QColor(QString::fromStdString(nmfConstants::LineColors[line%nmfConstants::LineColors.size()])));
                 pen.setWidth(2);
                 series->setPen(pen);
             } else if (style == "DashedLine") {
                 pen = series->pen();
                 pen.setStyle(Qt::DashLine);
-                if (DashedLineColor == QColor(0,0,1)) {
-                    pen.setColor(LineColors[line%NumColors]);
-                } else {
-                    pen.setColor(DashedLineColor);
-                }
+                pen.setColor(LineColor); //(LineColors[line%NumColors]);
+                pen.setColor(QColor(QString::fromStdString(nmfConstants::LineColors[line%nmfConstants::LineColors.size()])));
                 pen.setWidth(2);
                 series->setPen(pen);
             } else {
                 pen = series->pen();
                 pen.setStyle(Qt::SolidLine);
-                pen.setColor(LineColors[line%NumColors]);
+                pen.setColor(LineColor); //(LineColors[line%NumColors]);
+                pen.setColor(QColor(QString::fromStdString(nmfConstants::LineColors[line%nmfConstants::LineColors.size()])));
                 pen.setWidth(2);
                 series->setPen(pen);
             }
@@ -105,15 +110,14 @@ nmfChartLine::populateChart(
             if (line < ColumnLabels.size()) {
                 series->setName(ColumnLabels[line]);
             }
+            if (ColumnLabels.size() > 0) {
+                m_tooltips[ColumnLabels[0]] = lineColorName;
+            }
+            disconnect(series,0,0,0);
+            connect(series, SIGNAL(hovered(const QPointF&,bool)),
+                    this,   SLOT(callback_hoveredLine(const QPointF&,bool)));
         }
     }
-
-    // Set main title
-    QFont mainTitleFont = chart->titleFont();
-    mainTitleFont.setPointSize(14);
-    mainTitleFont.setWeight(QFont::Bold);
-    chart->setTitleFont(mainTitleFont);
-    chart->setTitle(QString::fromStdString(MainTitle));
 
     // Setup X and Y axes
     chart->createDefaultAxes();
@@ -121,8 +125,6 @@ nmfChartLine::populateChart(
     QFont titleFont = axisX->titleFont();
     titleFont.setPointSize(12);
     titleFont.setWeight(QFont::Bold);
-//    axisX->setTitleFont(titleFont);
-//    axisX->setTitleText(QString::fromStdString(XTitle));
 
     QValueAxis *currentAxisY = qobject_cast<QValueAxis*>(chart->axisY());
     currentAxisY->setTitleFont(titleFont);
@@ -147,10 +149,27 @@ nmfChartLine::populateChart(
     chart->axisY()->setGridLineVisible(GridLines[1]);
 
     // Show legend
-    chart->legend()->setVisible(true);
+    chart->legend()->setVisible(showLegend);
     chart->legend()->setAlignment(Qt::AlignRight);
-    if (ColumnLabels.size() != chart->series().size()) {
-        chart->legend()->setVisible(false);
+    chart->legend()->setShowToolTips(true);
+    chart->legend()->setMarkerShape(QLegend::MarkerShapeFromSeries);
+
+}
+
+void
+nmfChartLine::callback_hoveredLine(const QPointF& point, bool hovered)
+{
+    QString tooltip="";
+    QPoint pos = QCursor::pos();
+
+    if (hovered) {
+        if (m_tooltips.size() > 0) {
+            tooltip = m_tooltips[qobject_cast<QLineSeries* >(QObject::sender())->name()];
+        }
+        QToolTip::showText(pos, tooltip);
+    } else {
+        QToolTip::hideText();
     }
 }
+
 

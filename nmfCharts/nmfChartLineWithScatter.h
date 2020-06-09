@@ -9,6 +9,9 @@
 #include <QStringList>
 #include <QValueAxis>
 #include <QLabel>
+#include <QLegend>
+#include <QLegendMarker>
+#include <QToolTip>
 
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/io.hpp>
@@ -26,7 +29,8 @@ class nmfChartLineWithScatter : public QObject
 
     Q_OBJECT
 
-
+private:
+    std::map<QString,QString> m_tooltips;
 
 public:
     nmfChartLineWithScatter();
@@ -52,10 +56,15 @@ public:
             const int &Theme,
             const QColor &DashedLineColor,
             const QColor &ScatterColor,
-            const QColor &LineColor);
+            const std::string &LineColor,
+            const std::string &lineColorName);
 signals:
 
 public slots:
+    void callback_hoveredLegend(bool hovered);
+    void callback_hoveredLine(const QPointF& point, bool hovered);
+    void callback_hoveredScatter(const QPointF& point, bool hovered);
+
 
 };
 

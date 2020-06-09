@@ -87,7 +87,7 @@ nmfLogWidget::callback_browsePB(bool unused)
 void
 nmfLogWidget::callback_refreshPB(bool unused)
 {
-    QString filename = QString::fromStdString(m_logger->logFile());
+    QString filename = QString::fromStdString(m_logger->getLogFile());
     QFile file(filename);
     QFileInfo fileInfo(file.fileName());
 

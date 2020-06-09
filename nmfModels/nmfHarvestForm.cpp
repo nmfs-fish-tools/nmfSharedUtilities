@@ -7,9 +7,9 @@ nmfHarvestForm::nmfHarvestForm(std::string harvestType)
     m_type = harvestType;
     m_parameterRanges.clear();
 
-    m_FunctionMap["F"]     = ExploitationHarvest;
-    m_FunctionMap["QE"]    = EffortHarvest;
-    m_FunctionMap["Catch"] = CatchHarvest;
+    m_FunctionMap["Exploitation (F)"] = ExploitationHarvest;
+    m_FunctionMap["Effort (qE)"]      = EffortHarvest;
+    m_FunctionMap["Catch"]            = CatchHarvest;
 }
 
 
@@ -30,14 +30,14 @@ nmfHarvestForm::extractParameters(
     catchabilityRate.clear();
 
 //    exploitationRate.clear();
-//    if (m_type == "F") {
+//    if (m_type == "Exploitation (F)") {
 //        for (int i=startPos; i<startPos+numParameters; ++i) {
 //            exploitationRate.emplace_back(parameters[i]);
 //        }
 //        startPos += numParameters;
 //    } else
 
-    if (m_type == "QE") {
+    if (m_type == "Effort (qE)") {
         for (int i=startPos; i<startPos+numParameters; ++i) {
             catchabilityRate.emplace_back(parameters[i]);
         }
@@ -54,7 +54,7 @@ nmfHarvestForm::loadParameterRanges(
 {
     std::pair<double,double> aPair;
 
-//    if (m_type == "F") {
+//    if (m_type == "Exploitation (F)") {
 //        for (unsigned i=0; i<beeStruct.ExploitationRateMin.size(); ++i) {
 //            aPair = std::make_pair(beeStruct.ExploitationRateMin[i],
 //                                   beeStruct.ExploitationRateMax[i]);
@@ -63,7 +63,7 @@ nmfHarvestForm::loadParameterRanges(
 //        }
 //        m_numParameters = beeStruct.ExploitationRateMin.size();
 //    } else
-    if (m_type == "QE") {
+    if (m_type == "Effort (qE)") {
         for (unsigned i=0; i<beeStruct.CatchabilityMin.size(); ++i) {
             aPair = std::make_pair(beeStruct.CatchabilityMin[i],
                                    beeStruct.CatchabilityMax[i]);

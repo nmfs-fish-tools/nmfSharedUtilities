@@ -43,8 +43,6 @@
 #include <exception>
 #include <tuple>
 
-#include "nmfdatabase_global.h"
-
 /*
 #include "fileIO.h"
 #include "mySqlIO.h"
@@ -76,7 +74,7 @@
  * user must assure that MySQL is installed and properly working on the host machine.
  *
  */
-class NMFDATABASESHARED_EXPORT nmfDatabase {
+class nmfDatabase {
 
     std::map<QString, void(*)(
 
@@ -123,6 +121,8 @@ public:
 
     bool getAllSpecies(nmfLogger*  logger,
                        std::vector<std::string>& species);
+    bool getAllGuilds(nmfLogger*  logger,
+                      std::vector<std::string>& guilds);
     bool getSpeciesData(nmfLogger*   logger,
                         std::string  species,
                         int&         MinAge,
@@ -133,6 +133,7 @@ public:
                         float&       MaxLength,
                         int&         NumLengthBins);
     std::vector<std::string> nmfGetTableNames();
+    int getSpeciesIndex(std::string SpeciesName);
 
     void nmfSetDatabase(std::string newDatabaseName);
 
@@ -233,7 +234,7 @@ public:
             const int &i,
             boost::numeric::ublas::matrix<double> &WtAtAge);
 
-    void nmfQueryWeightAtAgeData(
+    bool nmfQueryWeightAtAgeData(
             const int &index,
             const int &Year,
             const int &Nage,
@@ -316,7 +317,7 @@ public:
 
     void createScenarioMap(std::map<QString,QStringList>& ScenarioForecastMap);
 
-    void getAlgorithmIdentifiers(
+    bool getAlgorithmIdentifiers(
             QWidget*     widget,
             nmfLogger*   logger,
             const std::string& ProjectSettingsConfig,
@@ -326,6 +327,12 @@ public:
             std::string& Scaling,
             std::string& CompetitionForm,
             const bool&  showPopupError);
+
+    bool getRunLengthAndStartYear(
+            nmfLogger* logger,
+            const std::string& ProjectSettingsConfig,
+            int &RunLength,
+            int &StartYear);
 
     bool importDatabase(QWidget*     widget,
                         nmfLogger*   logger,
@@ -346,6 +353,13 @@ public:
      */
     bool getListOfAuthenticatedDatabaseNames(
             QList<QString>& authenticatedDatabases);
+
+    /**
+     * @brief getAllTables - finds all of the table names in the current database
+     * @param databaseTables - the list of table names in current database
+     * @return true if found at least one table was found
+     */
+    bool getAllTables(std::vector<std::string>& databaseTables);
 
     /**
      * @brief authenticateDatabase - checks to see if database to be loaded is compatible with the application

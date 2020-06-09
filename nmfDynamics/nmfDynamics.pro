@@ -51,10 +51,3 @@ else:unix: LIBS += -L$$PWD/../../build-nmfUtilities-Qt_5_12_3_gcc64-Release/ -ln
 INCLUDEPATH += $$PWD/../../nmfSharedUtilities/nmfUtilities
 DEPENDPATH += $$PWD/../../nmfSharedUtilities/nmfUtilities
 
-
-#win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../build-MSCAA_GuiUtilities-Qt_5_12_3_gcc64-Release/release/ -lMSCAA_GuiUtilities
-#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../build-MSCAA_GuiUtilities-Qt_5_12_3_gcc64-Release/debug/ -lMSCAA_GuiUtilities
-#else:unix: LIBS += -L$$PWD/../build-MSCAA_GuiUtilities-Qt_5_12_3_gcc64-Release/ -lMSCAA_GuiUtilities
-
-#INCLUDEPATH += $$PWD/../MSCAA_GuiUtilities
-#DEPENDPATH += $$PWD/../MSCAA_GuiUtilities

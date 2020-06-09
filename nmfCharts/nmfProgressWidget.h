@@ -33,15 +33,11 @@
 
 #include "nmfUtils.h"
 #include "nmfLogger.h"
-//#include "nmfConstantsMSSPM.h"
 
-
-#include <set>
 
 QT_CHARTS_USE_NAMESPACE
 
 class nmfProgressWidget : public QObject
-
 {
 
     Q_OBJECT
@@ -74,31 +70,32 @@ public:
     QLabel      *runStatusLBL;
     QCheckBox   *markersCB;
     QCheckBox   *labelsCB;
+    QCheckBox   *validPointsCB;
     QDoubleSpinBox *yMinSB;
     QDoubleSpinBox *yMaxSB;
     QSpinBox    *minSB;
     QSpinBox    *maxSB;
     QPushButton *clearPB;
     QPushButton *stopPB;
+    QPushButton *rangeSetPB;
     QTimer      *timer;
     QLineEdit   *runLE;
     QLineEdit   *subRunLE;
 
-    std::chrono::_V2::system_clock::time_point startTime;
-
-    int     m_maxNumGenerations;
-    QString m_mainTitle;
-    QString m_xTitle;
-    QString m_yTitle;
-    double  m_xMin;
-    double  m_xMax;
-    double  m_yMin;
-    double  m_yMax;
-    double  m_xInc;
-    double  m_yInc;
-    bool    m_yAxisAdjusted;
-    int lastX;
-    std::string RunType;
+    std::chrono::_V2::system_clock::time_point m_startTime;
+    int         m_maxNumGenerations;
+    QString     m_mainTitle;
+    QString     m_xTitle;
+    QString     m_yTitle;
+    double      m_xMin;
+    double      m_xMax;
+    double      m_yMin;
+    double      m_yMax;
+    double      m_xInc;
+    double      m_yInc;
+    bool        m_yAxisAdjusted;
+    int         m_lastX;
+    std::string m_RunType;
 
     nmfProgressWidget(QTimer *theTimer,
                       nmfLogger *logger,
@@ -119,7 +116,8 @@ public:
     void updateChart();
     void readChartDataFile(std::string type,
                            std::string inputFileName,
-                           std::string inputLabelFileName);
+                           std::string inputLabelFileName,
+                           bool validPointsOnly);
     void updateChartDataLabel(std::string inputLabelFileName,
                               std::string overrideMsg);
     void setMaxNumGenerations(const int& newMaxNumGenerations);
@@ -152,11 +150,16 @@ public:
     double getYInc();
     void setWhatsThis(QString whatsThis);
     void clearChart();
+    void clearChartOnly();
     void shouldYRangeEditsStick(bool state);
     bool ifYRangeEditsShouldStick();
+    bool readValidPointsOnly();
+    void hideLegend();
+    void showLegend();
 
 signals:
     void StopTheRun();
+    void RedrawValidPointsOnly(bool checked, bool clear);
 
 public Q_SLOTS:
     void callback_stopPB(bool unused);
@@ -169,6 +172,8 @@ public Q_SLOTS:
     void callback_scatterSeriesHovered(QPointF point, bool state);
     void callback_yMinSB(double value);
     void callback_yMaxSB(double value);
+    void callback_rangeSetPB();
+    void callback_validPointsCB(bool checked);
 };
 
 

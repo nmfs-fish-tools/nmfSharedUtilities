@@ -1,10 +1,4 @@
 
-/**
- @file nmfUtilsSolvers.cpp
- @author rklasky
- @copyright 2017 NOAA - National Marine Fisheries Service
- @date April 18, 2017
-*/
 
 #include "nmfUtilsSolvers.h"
 

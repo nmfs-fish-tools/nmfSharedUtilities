@@ -4,6 +4,7 @@
 
 nmfChartLineWithScatter::nmfChartLineWithScatter()
 {
+    m_tooltips.clear();
 }
 
 
@@ -28,13 +29,25 @@ nmfChartLineWithScatter::populateChart(
         const int &Theme,
         const QColor &DashedLineColor,
         const QColor &ScatterColor,
-        const QColor &LineColor)
+        const std::string &LineColorValue,
+        const std::string &lineColorName)
 {
-    QLineSeries    *lineSeries    = NULL;
-    QScatterSeries *scatterSeries = NULL;
+    QLineSeries    *lineSeries    = nullptr;
+    QScatterSeries *scatterSeries = nullptr;
+    QString scatterSeriesName = "Biomass Obs";
     QPen pen;
+    QColor  LineColor(QString::fromStdString(LineColorValue));
+    QString LineColorName = QString::fromStdString(lineColorName);
+
     int XStartVal = (ShowFirstPoint) ? 0 : 1;
     XStartVal += XOffset;
+
+    // Set main title
+    QFont mainTitleFont = chart->titleFont();
+    mainTitleFont.setPointSize(14);
+    mainTitleFont.setWeight(QFont::Bold);
+    chart->setTitleFont(mainTitleFont);
+    chart->setTitle(QString::fromStdString(MainTitle));
 
     chart->legend()->hide();
     // Set current theme
@@ -63,6 +76,11 @@ nmfChartLineWithScatter::populateChart(
         }
         chart->addSeries(lineSeries);
         lineSeries->setName(ColumnLabels[0]);
+        m_tooltips[ColumnLabels[0]] = LineColorName;
+
+        disconnect(lineSeries,0,0,0);
+        connect(lineSeries, SIGNAL(hovered(const QPointF&,bool)),
+                this,       SLOT(callback_hoveredLine(const QPointF&,bool)));
     }
 
     if ((ScatterData.size1() != 0) && AddScatter) {
@@ -73,15 +91,20 @@ nmfChartLineWithScatter::populateChart(
             scatterSeries->append(j+XOffset,ScatterData(j,0)); // Change 0 if more than one type of scatter points
         }
         chart->addSeries(scatterSeries);
-        scatterSeries->setName("Biomass Obs");
+        scatterSeries->setName(scatterSeriesName);
+        m_tooltips[scatterSeriesName] = "Deep Sky Blue";
+
+        disconnect(scatterSeries,0,0,0);
+        connect(scatterSeries, SIGNAL(hovered(const QPointF&,bool)),
+                this,          SLOT(callback_hoveredScatter(const QPointF&,bool)));
     }
 
-    // Set main title
-    QFont mainTitleFont = chart->titleFont();
-    mainTitleFont.setPointSize(14);
-    mainTitleFont.setWeight(QFont::Bold);
-    chart->setTitleFont(mainTitleFont);
-    chart->setTitle(QString::fromStdString(MainTitle));
+//    // Set main title
+//    QFont mainTitleFont = chart->titleFont();
+//    mainTitleFont.setPointSize(14);
+//    mainTitleFont.setWeight(QFont::Bold);
+//    chart->setTitleFont(mainTitleFont);
+//    chart->setTitle(QString::fromStdString(MainTitle));
 
     // Setup X and Y axes
     chart->createDefaultAxes();
@@ -107,13 +130,65 @@ nmfChartLineWithScatter::populateChart(
         currentAxisX->setLabelFormat("%d");
     }
 
-    // Set grid line visibility
+    //   Set grid line visibility
     chart->axisX()->setGridLineVisible(GridLines[0]);
     chart->axisY()->setGridLineVisible(GridLines[1]);
 
     // Show legend
     chart->legend()->setVisible(true);
     chart->legend()->setAlignment(Qt::AlignRight);
+    chart->legend()->setShowToolTips(true);
+    chart->legend()->setMarkerShape(QLegend::MarkerShapeFromSeries);
 
+    // Add hovered callbacks to set tooltips
+    QList<QLegendMarker* > legendMarkers = chart->legend()->markers();
+    for (QLegendMarker* legendMarker : legendMarkers) {
+        disconnect(legendMarker,0,0,0);
+        connect(legendMarker, SIGNAL(hovered(bool)),
+                this,         SLOT(callback_hoveredLegend(bool)));
+    }
+
+}
+
+void
+nmfChartLineWithScatter::callback_hoveredLine(const QPointF& point, bool hovered)
+{
+    QString tooltip;
+    QPoint pos = QCursor::pos();
+
+    if (hovered) {
+        tooltip = m_tooltips[qobject_cast<QLineSeries* >(QObject::sender())->name()];
+        QToolTip::showText(pos, tooltip);
+    } else {
+        QToolTip::hideText();
+    }
+}
+
+void
+nmfChartLineWithScatter::callback_hoveredScatter(const QPointF& point, bool hovered)
+{
+    QString tooltip;
+    QPoint pos = QCursor::pos();
+
+    if (hovered) {
+        tooltip = m_tooltips[qobject_cast<QScatterSeries* >(QObject::sender())->name()];
+        QToolTip::showText(pos, tooltip);
+    } else {
+        QToolTip::hideText();
+    }
+}
+
+void
+nmfChartLineWithScatter::callback_hoveredLegend(bool hovered)
+{
+    QString tooltip;
+    QPoint pos = QCursor::pos();
+
+    if (hovered) {
+        tooltip = m_tooltips[qobject_cast<QLegendMarker* >(QObject::sender())->label()];
+        QToolTip::showText(pos, tooltip);
+    } else {
+        QToolTip::hideText();
+    }
 }
 

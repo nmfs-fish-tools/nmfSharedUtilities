@@ -1,11 +1,12 @@
 
-/**
- @file nmfUtils.cpp
- @author rklasky
- @copyright 2017 NOAA - National Marine Fisheries Service
- @brief
- @date Nov 29, 2016
-*/
+/** @file nmfUtils.h
+ * @brief Definition for common typedefs and structs (i.e., non-graphical)
+ * @date Dec 8, 2016
+ *
+ * This file contains typedefs, structs, and functions common to the MultiSpecies
+ * applications. The functions that print various structures are located in this
+ * file as well.
+ */
 
 #include <ctime>
 #include <fstream>
@@ -13,17 +14,12 @@
 #include "nmfConstants.h"
 #include "nmfLogger.h"
 
-
-
 namespace nmfUtils {
-
-
 
 std::chrono::time_point<std::chrono::high_resolution_clock>
 startTimer()
 {
     return std::chrono::high_resolution_clock::now();
-    //return val;
 }
 
 std::string
@@ -85,14 +81,12 @@ void printMatrix(const std::string &name,
     }
 }
 
-/*
- * returns sum of all items in the passed patrix
- */
-double matrixSum(const boost::numeric::ublas::matrix<double> &mat) {
+
+double getMatrixSum(const boost::numeric::ublas::matrix<double> &mat) {
     return sum(prod(boost::numeric::ublas::scalar_vector<double>(mat.size1()), mat));
 }
 
-double vectorSum(const boost::numeric::ublas::vector<double> &vec) {
+double getVectorSum(const boost::numeric::ublas::vector<double> &vec) {
     return sum(vec);
 }
 
@@ -229,7 +223,8 @@ void initialize(Boost5DArrayDouble &array5d)
                         array5d[i][j][k][l][m] = 0.0;
 }
 
-double maxMatrixValue(boost::numeric::ublas::matrix<double> &mat, bool roundOff=false)
+double getMatrixMax(boost::numeric::ublas::matrix<double> &mat,
+                         bool roundOff=false)
 {
     // find largest value in mat
     double maxVal = 0.0;
@@ -262,7 +257,7 @@ double maxMatrixValue(boost::numeric::ublas::matrix<double> &mat, bool roundOff=
  * If seed < 0, no seed is used and the algorithm is stochastic.
  * If seed >= 0, then that seed is used and the algorithm is deterministic.
  */
-double randomNumber(int seedValue, double lowerLimit, double upperLimit)
+double getRandomNumber(int seedValue, double lowerLimit, double upperLimit)
 {
 //    std::random_device rd;
 //    int RandomSeed = (seed < 0) ? rd() : seed;
@@ -292,56 +287,61 @@ double round(double number, int decimalPlaces)
 
 void split(std::string main, std::string delim, std::string &str1, std::string &str2)
 {
+    if (main.empty()) {
+        return;
+    }
     std::string main2 = main;
     size_t sep = main2.find(delim);
+    if (sep == 0) {
+        return;
+    }
 
     str1 = main2.erase(sep,main2.size());
     main2 = main;
     str2 = main2.erase(0,sep+1);
 }
 
-double CatchUnitsStringToValue(std::string val)
+double convertCatchUnitsToValue(std::string catchUnits)
 {
     double CatchUnitsVal = 0.0;
 
-    if (val == "Hundreds of Fish")
+    if (catchUnits == "Hundreds of Fish")
         CatchUnitsVal =    0.1;
-    else if (val == "Thousands of Fish")
+    else if (catchUnits == "Thousands of Fish")
         CatchUnitsVal =    1.0;
-    else if (val == "Millions of Fish")
+    else if (catchUnits == "Millions of Fish")
         CatchUnitsVal = 1000.0;
 
     return CatchUnitsVal;
-} // end CatchUnitsStringToValue
+}
 
-double WeightUnitsStringToValue(std::string val)
+double convertWeightUnitsToValue(std::string weightUnits)
 {
     double WeightUnitsVal = 0.0;
 
-    if (val == "Gram")
-        WeightUnitsVal =    0.001;
-    else if (val == "Kilograms")
-        WeightUnitsVal =    1.0;
-    else if (val == "Pounds")
+    if (weightUnits == "Gram")
+        WeightUnitsVal = 0.001;
+    else if (weightUnits == "Kilograms")
+        WeightUnitsVal = 1.0;
+    else if (weightUnits == "Pounds")
         WeightUnitsVal = (1.0/2.2);
 
     return WeightUnitsVal;
-} // end WeightUnitsStringToValue
+}
 
-double SizeUnitsStringToValue(std::string val)
+double convertSizeUnitsToValue(std::string sizeUnits)
 {
     double SizeUnitsVal = 0.0;
 
-    if (val == "Millimeters")
-        SizeUnitsVal =    0.1;
-    else if (val == "Centimeters")
-        SizeUnitsVal =    1.0;
-    else if (val == "Inches")
+    if (sizeUnits == "Millimeters")
+        SizeUnitsVal = 0.1;
+    else if (sizeUnits == "Centimeters")
+        SizeUnitsVal = 1.0;
+    else if (sizeUnits == "Inches")
         SizeUnitsVal = 2.54;
 
     return SizeUnitsVal;
-} // end SizeUnitsStringToValue
-
+}
 
 void readTableDescriptions(std::string TableName,
                           std::map<std::string,std::string> &TableDescription)
@@ -378,14 +378,14 @@ void readTableDescriptions(std::string TableName,
 void readTableNames(std::map<std::string,std::vector<std::string> > *TableNames)
 {
     int modelType;
-    std::string file = nmfConstants::TableNamesFile;
+    std::string file = nmfConstantsMSVPA::TableNamesFile;
     std::string line;
     std::string msg;
     std::vector<std::string> parts;
     std::ifstream fptr(file);
     std::vector<std::string> fields;
 
-    for (auto i=0;i<nmfConstants::NumModelTypes; ++i) {
+    for (auto i=0;i<nmfConstantsMSVPA::NumModelTypes; ++i) {
         TableNames[i].clear();
     }
     if (fptr) {
@@ -417,11 +417,11 @@ void readTableNames(std::map<std::string,std::vector<std::string> > *TableNames)
 
 
 
-bool errorCheck(nmfLogger *logger,
-                std::string table,
-                std::string field,
-                std::map<std::string, std::vector<std::string> > &dataMap,
-                std::string queryStr)
+bool checkForError(nmfLogger *logger,
+                   std::string table,
+                   std::string field,
+                   std::map<std::string, std::vector<std::string> > &dataMap,
+                   std::string queryStr)
 {
     if (dataMap[field].size() == 0) {
         logger->logMsg(nmfConstants::Error,"Error - Check " + table + " table. ");
@@ -485,7 +485,7 @@ rescaleMatrixMinMax(boost::numeric::ublas::matrix<double> &Matrix)
 }
 
 std::string
-to_string_scientificNotation(double val)
+convertToScientificNotation(double val)
 {
     std::ostringstream streamDouble; // Needed to stuff a double into a string with scientific notation
 
@@ -496,7 +496,7 @@ to_string_scientificNotation(double val)
 }
 
 bool
-osIsWindows()
+isOSWindows()
 {
     std::string osName = getOS();
 
@@ -523,5 +523,8 @@ getOS()
         return "Other";
     #endif
 }
+
+
+
 
 }

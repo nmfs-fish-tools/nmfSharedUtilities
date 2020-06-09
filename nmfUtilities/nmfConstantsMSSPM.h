@@ -1,19 +1,14 @@
 
 /**
- @file nmfConstantsMSSPM.h
- @author rklasky
- @copyright 2017 NOAA - National Marine Fisheries Service
- @brief
- @date Dec 8, 2016
-*/
+ * @file nmfConstantsMSSPM.h
+ * @brief Definition for constants used in MSSPM tool
+ * @date Jan 14, 2020
+ *
+ * This file defines constants used in the MSSPM application program.
+ */
 
 #ifndef NMFCONSTANTSMSSPM_H
 #define NMFCONSTANTSMSSPM_H
-
-//#define
-//#else
-//#define  extern
-//#endif
 
 #include <iostream>
 #include <vector>
@@ -68,16 +63,14 @@ namespace nmfConstantsMSSPM
      const bool   VerboseOff           = false;
      const bool   ShowPopupError       = true;
      const bool   DontShowPopupError   = false;
+     const bool   ShowDiagnosticsChart = true;
+     const bool   DontShowDiagnosticsChart = false;
+     const bool   ShowBlankFields      = true;
+     const bool   LoadFirstRowOnly         = true;
+     const bool   LoadAllRows          = false;
+     const bool   ReadValidPointsOnly  = true;
+     const bool   ReadAllPoints        = false;
 
-     const int    Normal    = 0;
-     const int    Bold      = 1;
-     const int    Warning   = 2;
-     const int    Error     = 3;
-     const int    Highlight = 4;
-     const int    Section   = 5;
-
-     const std::string  ClearWindow = "";
-     const std::string  BlankLine = " ";
      const std::string  HiddenDir                      = ".MSSPM";
      const std::string  HiddenDataDir                  = ".MSSPM/data";
      const std::string  HiddenLogDir                   = ".MSSPM/logs";
@@ -93,17 +86,7 @@ namespace nmfConstantsMSSPM
      const std::string  OutputDataDir                  = "outputData";
      const std::string  OutputImagesDir                = "outputImages";
 
-     const std::vector<std::string> SurfaceThemes = {
-            "Qt",
-            "Primary Colors",
-            "Digia",
-            "Stone Moss",
-            "Army Blue",
-            "Retro",
-            "Ebony",
-            "Isabelle"
-    };
 }
 
 
-#endif // NMFCONSTANTSMSSPM_H
+#endif

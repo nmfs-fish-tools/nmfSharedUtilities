@@ -17,8 +17,7 @@ QMAKE_CXXFLAGS += -std=c++0x
 SOURCES += nmfDatabase.cpp \
     nmfDatabaseTableDefinitions.cpp
 
-HEADERS += nmfDatabase.h \
-    nmfdatabase_global.h
+HEADERS += nmfDatabase.h
 
 unix {
     target.path = /usr/lib

@@ -1,221 +1,105 @@
 
 #include "nmfChartSurface.h"
 
+#include <QEvent>
+#include <QWidget>
 
 nmfChartSurface::nmfChartSurface(Q3DSurface* graph3D,
-                                 const int&  FirstRow,
-                                 const int&  FirstColumn,
-                                 const QString& XTitle,
-                                 const QString& YTitle,
-                                 const QString& ZTitle,
-                                 const boost::numeric::ublas::matrix<double> &Data)
+                                 const QString& xTitle,
+                                 const QString& yTitle,
+                                 const QString& zTitle,
+                                 const QString& xLabelFormat,
+                                 const QString& zLabelFormat,
+                                 const boost::numeric::ublas::matrix<double> &rowValues,
+                                 const boost::numeric::ublas::matrix<double> &columnValues,
+                                 const boost::numeric::ublas::matrix<double> &heightValues,
+                                 const bool& showShadow)
 {
-    float x,y,z;
-
-//    Q3DSurface *graph3D = new Q3DSurface();
-//    QWidget *ChartView3d = QWidget::createWindowContainer(graph3D);
-//    if (!graph3D->hasContext()) {
-//        QMessageBox msgBox;
-//        msgBox.setText("Couldn't initialize the OpenGL context.");
-//        msgBox.exec();
-//        return;
-//    }
-    QSurfaceDataProxy* surfaceProxy;
-    QSurface3DSeries*  surfaceSeries;
-
-    surfaceProxy  = new QSurfaceDataProxy();
-    surfaceSeries = new QSurface3DSeries(surfaceProxy);
-
-    int nrows = Data.size1(); // 31 = Years
-    int ncols = Data.size2(); // 13 = Age Groups
-
-    QSurfaceDataArray *dataArray = new QSurfaceDataArray;
-    dataArray->reserve(nrows);
+    double x,y,z;
     double maxY=0;
-    for (int row = 0; row < nrows; row++) {
-        QSurfaceDataRow *newRow = new QSurfaceDataRow(ncols);
-        int index = 0;
-        for (int col = 0; col < ncols; ++col) {
-            x = row+FirstRow;
-            y = Data(row,col);
+    int nrows = heightValues.size1();
+    int ncols = heightValues.size2();
+    double minY = 10000000.0;
+    QSurfaceDataArray *dataArray = new QSurfaceDataArray;
+    m_minCoord = std::make_pair(0,0);
+    m_heightValues = heightValues;
+
+
+    dataArray->reserve(nrows);
+    m_surfaceProxy  = new QSurfaceDataProxy();
+    m_surfaceSeries = new QSurface3DSeries(m_surfaceProxy);
+
+    for (int col = 0; col < ncols; ++col) {
+        QSurfaceDataRow *newCol = new QSurfaceDataRow(nrows);
+        for (int row = 0; row < nrows; ++row) {
+            x = rowValues(row,col);
+            y = heightValues(row,col);
+            z = columnValues(row,col);
+            if (y < minY) {
+                m_minCoord = std::make_pair(col,row); //,col); // Needed to swap row and col here to match the data ordering
+                minY = y;
+            }
             maxY = (y > maxY) ? y : maxY;
-            z = col+FirstColumn;
-            (*newRow)[index++].setPosition(QVector3D(z, y, x)); // If z and x are flipped, only a quarter of surface will be rendered. Qt Bug.
+            (*newCol)[row].setPosition(QVector3D(x, y, z));
         }
-        *dataArray << newRow;
+        *dataArray << newCol;
+    }
+
+    if (showShadow) {
+        graph3D->setShadowQuality(QAbstract3DGraph::ShadowQualitySoftHigh);
+    } else {
+        graph3D->setShadowQuality(QAbstract3DGraph::ShadowQualityNone);
     }
 
     // Set up surface titles
-    graph3D->axisX()->setTitle(XTitle);
+    graph3D->axisX()->setTitle(xTitle);
     graph3D->axisX()->setTitleVisible(true);
-//  graph3D->axisX()->setTitleFixed(false);
-    graph3D->axisY()->setTitle(YTitle);
+    graph3D->axisY()->setTitle(yTitle);
     graph3D->axisY()->setTitleVisible(true);
-//  graph3D->axisY()->setTitleFixed(false);
-    graph3D->axisZ()->setTitle(ZTitle);
+    graph3D->axisZ()->setTitle(zTitle);
     graph3D->axisZ()->setTitleVisible(true);
-//  graph3D->axisZ()->setTitleFixed(false);
-    graph3D->axisX()->setLabelFormat("Age %d");
-    graph3D->axisZ()->setLabelFormat("%d");
+    graph3D->axisX()->setLabelFormat(xLabelFormat);
+    graph3D->axisZ()->setLabelFormat(zLabelFormat);
     graph3D->axisX()->setLabelAutoRotation(45.00);
     graph3D->axisY()->setLabelAutoRotation(45.00);
     graph3D->axisZ()->setLabelAutoRotation(45.00);
 
-
-    // Remove any existing series
+    // Remove any existing series and add new series
     for (QSurface3DSeries* series : graph3D->seriesList()) {
         graph3D->removeSeries(series);
     }
-    surfaceProxy->resetArray(dataArray);
-//  surfaceSeries->setSelectedPoint(QPoint(nrows,ncols));
-    graph3D->addSeries(surfaceSeries);
+    m_surfaceProxy->resetArray(dataArray);
+    graph3D->addSeries(m_surfaceSeries);
 
     // Some logic here to get "nicer" numbers along the vertical scale.
     int power = int(std::log10(maxY));             // Ex. let maxY = 304 -> power = 2
     power = std::pow(10,power);                    // Ex. power = 100
     double upperLim = power*(int(maxY/power + 1)); // Ex. 100*int(304/100+1) => upperLim = 400
-    graph3D->axisY()->setRange(0,upperLim);
+    if (upperLim > 0) {
+        graph3D->axisY()->setRange(0,upperLim);
+    } else {
+        graph3D->axisY()->setRange(0,1);
+    }
 
-//    QLayoutItem *child;
-//    while ((child=ChartLayt->takeAt(0)) != 0) {
-//        delete child;
-//    }
-//    ChartLayt->insertWidget(0,ChartView3d);
+    // Customize the surface label
+    m_surfaceSeries->setItemLabelFormat(QStringLiteral("(@xLabel, @zLabel): @yLabel"));
 
 }
 
 void
-nmfChartSurface::showTest()
+nmfChartSurface::selectCenterPoint()
 {
-
-
-
+    int centerCol = m_surfaceSeries->dataProxy()->columnCount()/2;
+    int centerRow = m_surfaceSeries->dataProxy()->rowCount()/2;
+    m_surfaceSeries->setSelectedPoint(QPoint(centerRow,centerCol));
 }
 
-/*
 void
-nmfChartBar::populateChart(
-        QChart *chart,
-        std::string &type,
-        const boost::numeric::ublas::matrix<double> &ChartData,
-        const QStringList &RowLabels,
-        const QStringList &ColumnLabels,
-        std::string &MainTitle,
-        std::string &XTitle,
-        std::string &YTitle,
-        const std::vector<bool> &GridLines,
-        const int Theme)
+nmfChartSurface::selectMinimumPoint()
 {
-    QBarSet    *newSet = NULL;
-    QBarSeries *series = NULL;
-
-    // Set current theme
-    chart->setTheme(static_cast<QChart::ChartTheme>(Theme));
-    //chart->removeAllSeries();
-
-    if (type == "StackedBar") {
-        QStackedBarSeries *series = new QStackedBarSeries();
-
-        // Load data into series and then add series to the chart
-        for (unsigned int i=0; i<ChartData.size2(); ++i) {
-            if (ColumnLabels.size() == ChartData.size2())
-                newSet = new QBarSet((ColumnLabels[i]));
-            else
-                newSet = new QBarSet("");
-            for (unsigned int val=0; val<ChartData.size1(); ++val) {
-                *newSet << ChartData(val,i);
-            }
-            series->append(newSet);
-        }
-        chart->addSeries(series);
-
-    } else if (type == "Line") {
-
-        // Load data into series and then add series to the chart
-        QLineSeries *series;
-        for (unsigned int line=0; line<ChartData.size2(); ++line) {
-            series = new QLineSeries();
-            for (unsigned int j=0; j<ChartData.size1(); ++j) {
-                series->append(j+1,ChartData(j,line));
-            }
-            chart->addSeries(series);
-            if (line < ColumnLabels.size())
-                series->setName(ColumnLabels[line]);
-        }
-
-    } else if (type == "Scatter") {
-        // Load data into series and then add series to the chart
-        QScatterSeries *series;
-        for (unsigned int line=0; line<ChartData.size2(); ++line) {
-            series = new QScatterSeries();
-            series->setMarkerSize(10);
-            for (unsigned int j=0; j<ChartData.size1(); ++j) {
-                series->append(j+1,ChartData(j,line));
-            }
-            chart->addSeries(series);
-            if (line < ColumnLabels.size())
-                series->setName(ColumnLabels[line]);
-        }
-
-    } else if (type == "Bar") {
-        QBarSeries *series = new QBarSeries();
-
-        // Load data into series and then add series to the chart
-        for (unsigned int i=0; i<ChartData.size2(); ++i) {
-            if (ColumnLabels.size() == ChartData.size2())
-                newSet = new QBarSet((ColumnLabels[i]));
-            else
-                newSet = new QBarSet("");
-            for (unsigned int j=0; j<ChartData.size1(); ++j) {
-                *newSet << ChartData(j,i);
-            }
-            series->append(newSet);
-        }
-        chart->addSeries(series);
-    }
-    // Set main title
-    QFont mainTitleFont = chart->titleFont();
-    mainTitleFont.setPointSize(14);
-    mainTitleFont.setWeight(QFont::Bold);
-    chart->setTitleFont(mainTitleFont);
-    chart->setTitle(QString::fromStdString(MainTitle));
-
-    // Setup X and Y axes
-    QBarCategoryAxis *axis = new QBarCategoryAxis();
-    if (RowLabels.size() > 0)
-        axis->append(RowLabels);
-    chart->createDefaultAxes();
-    chart->setAxisX(axis, NULL);
-    chart->legend()->setVisible(true);
-    chart->legend()->setAlignment(Qt::AlignRight);
-
-    QAbstractAxis *axisX = chart->axisX();
-    QFont titleFont = axisX->titleFont();
-    titleFont.setPointSize(12);
-    titleFont.setWeight(QFont::Bold);
-    axisX->setTitleFont(titleFont);
-    axisX->setTitleText(QString::fromStdString(XTitle));
-    if (RowLabels.count() > NumCategoriesForVerticalNotation)
-        axis->setLabelsAngle(-90);
-    else
-        axis->setLabelsAngle(0);
-
-    // Rescale vertical axis....0 to 1 in increments of 0.2
-    if (type == "StackedBar") {
-        QValueAxis *newAxisY = new QValueAxis();
-        newAxisY->setRange(0,1.0);
-        newAxisY->setTickCount(6);
-        chart->setAxisY(newAxisY,series);
-    }
-
-    QValueAxis *currentAxisY = qobject_cast<QValueAxis*>(chart->axisY());
-    currentAxisY->setTitleFont(titleFont);
-    currentAxisY->setTitleText(QString::fromStdString(YTitle));
-    currentAxisY->applyNiceNumbers();
-
-    // Set grid line visibility
-    chart->axisX()->setGridLineVisible(GridLines[0]);
-    chart->axisY()->setGridLineVisible(GridLines[1]);
+    m_surfaceSeries->setSelectedPoint(QPoint(m_minCoord.first,
+                                             m_minCoord.second));
 }
 
-*/
+
+

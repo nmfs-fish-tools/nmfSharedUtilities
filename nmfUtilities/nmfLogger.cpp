@@ -40,7 +40,7 @@ void nmfLogger::initLogger(std::string appName)
 
 
 std::string
-nmfLogger::logFile()
+nmfLogger::getLogFile()
 {
     if (filename == "")
         return "";

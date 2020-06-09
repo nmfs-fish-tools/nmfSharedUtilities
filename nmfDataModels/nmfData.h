@@ -10,7 +10,6 @@
 #ifndef NMFDATA_H
 #define NMFDATA_H
 
-#include "nmfdata_global.h"
 
 #include <vector>
 #include <string>

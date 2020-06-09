@@ -119,7 +119,7 @@ BeesAlgorithm::printParameterRanges(const int& NumSpecies,
 {
     int m = 0;
     bool isLogistic    = (GrowthForm      == "Logistic");
-    bool isHarvest     = (HarvestForm     == "QE");
+    bool isHarvest     = (HarvestForm     == "Effort (qE)");
     bool isAlpha       = (CompetitionForm == "NO_K");
     bool isBetaGuilds  = (CompetitionForm == "AGG-PROD");
     bool isBetaSpecies = (CompetitionForm == "MS-PROD");
@@ -588,7 +588,7 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
         rescaleZScore(estBiomassSpecies, estBiomassRescaled);
         rescaleZScore(m_ObsBiomassBySpeciesOrGuilds, obsBiomassBySpeciesOrGuildsRescaled);
     } else {
-        std::cout << "Error: No Scaling Algorithm detected. Defaulting to Min Max." << std::endl;
+//        std::cout << "Error: No Scaling Algorithm detected. Defaulting to Min Max." << std::endl;
         rescaleMinMax(estBiomassSpecies, estBiomassRescaled);
         rescaleMinMax(m_ObsBiomassBySpeciesOrGuilds, obsBiomassBySpeciesOrGuildsRescaled);
     }
@@ -596,82 +596,31 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     // Calculate fitness using the appropriate objective criterion
     if (m_BeeStruct.ObjectiveCriterion == "Least Squares") {
 
-        fitness =  calculateSumOfSquares(estBiomassRescaled,
-                                         obsBiomassBySpeciesOrGuildsRescaled);
+        fitness =  nmfUtilsStatistics::calculateSumOfSquares(
+                    estBiomassRescaled,
+                    obsBiomassBySpeciesOrGuildsRescaled);
 
     } else if (m_BeeStruct.ObjectiveCriterion == "Model Efficiency") {
 
         // Negate the MEF here since the ranges is from -inf to 1, where 1 is best.  So we negate it,
         // then minimize that, and then negate and plot the resulting value.
-        fitness = -calculateModelEfficiency(estBiomassRescaled,
-                                            obsBiomassBySpeciesOrGuildsRescaled);
+        fitness = -nmfUtilsStatistics::calculateModelEfficiency(
+                    estBiomassRescaled,
+                    obsBiomassBySpeciesOrGuildsRescaled);
+    } else if (m_BeeStruct.ObjectiveCriterion == "Maximum Likelihood") {
+        // The maximum likelihood calculations must use the unscaled data or else the
+        // results will be incorrect.
+        fitness =  nmfUtilsStatistics::calculateMaximumLikelihoodNoRescale(
+                    estBiomassSpecies,
+                    m_ObsBiomassBySpeciesOrGuilds);
     }
 
     return fitness;
 }
 
 
-/*
- *
- * Fitness = ⵉ(Be - Bo)², where (e)stimated and (o)bserved (B)iomass
- *
- */
-double
-BeesAlgorithm::calculateSumOfSquares(const boost::numeric::ublas::matrix<double>& EstBiomass,
-                                     const boost::numeric::ublas::matrix<double>& ObsBiomass)
-{
-    double diff;
-    double sumSquares = 0;
-
-    for (unsigned time=0; time<EstBiomass.size1(); ++time) {
-        for (unsigned species=0; species<EstBiomass.size2(); ++species) {
-            diff = EstBiomass(time,species) - ObsBiomass(time,species);
-            sumSquares += (diff*diff);
-        }
-    }
-    return sumSquares;
-}
-
-
-/*
- *
- * Fitness = 1 - ⵉ(Be - Bo)² / ⵉ(Bo - Bm)²,
- * where (e)stimated, (o)bserved, and (m)ean (B)iomass
- *
- */
-double
-BeesAlgorithm::calculateModelEfficiency(const boost::numeric::ublas::matrix<double>& EstBiomass,
-                                        const boost::numeric::ublas::matrix<double>& ObsBiomass)
-{
-    int nrows = EstBiomass.size1();
-    int ncols = EstBiomass.size2();
-    double diff;
-    double meanObs    = 0;
-    double deviation  = 0;
-    double sumSquares = 0;
-
-    for (int time=0; time<nrows; ++time) {
-        for (int species=0; species<ncols; ++species) {
-            meanObs += ObsBiomass(time,species);
-        }
-    }
-    meanObs /= (nrows*ncols);
-
-    for (int time=0; time<nrows; ++time) {
-        for (int species=0; species<ncols; ++species) {
-            diff = EstBiomass(time,species) - ObsBiomass(time,species);
-            sumSquares += (diff*diff);
-            diff = ObsBiomass(time,species) - meanObs;
-            deviation  += (diff*diff);
-        }
-    }
-
-    return (deviation == 0) ? 0 : (1.0 - sumSquares/deviation); // Nash-Sutcliffe Model Efficiency Coefficient
-}
-
-
 std::unique_ptr<Bee>
-BeesAlgorithm::createRandomBee(bool doWhileLoop)
+BeesAlgorithm::createRandomBee(bool doWhileLoop, std::string& errorMsg)
 {
     bool foundAPotentialBee = false;
     bool timesUp = false;
@@ -691,7 +640,7 @@ BeesAlgorithm::createRandomBee(bool doWhileLoop)
             maxVal = m_ParameterRanges[i].second;
 //std::cout << "range: " << i << "  [" << minVal << "," << maxVal << "] ";
             parameters[i] = (maxVal == minVal) ? minVal :
-                             minVal+(maxVal-minVal)*(nmfUtils::randomNumber(m_Seed,0.0,1.0));
+                             minVal+(maxVal-minVal)*(nmfUtils::getRandomNumber(m_Seed,0.0,1.0));
 //std::cout << parameters[i] << std::endl;
         }
 //std::cout << std::endl;
@@ -707,7 +656,7 @@ BeesAlgorithm::createRandomBee(bool doWhileLoop)
     }
     if (timesUp) {
         std::cout << "Fitness found: " << fitness << std::endl;
-        std::cout << "Error: Parameter space too large. Please refine one or more parameter ranges or decrease a parameter." << std::endl;
+        errorMsg = "\nError: Parameter space too large. Please refine one or more parameter ranges or decrease a parameter.";
         return std::make_unique<Bee>(m_NullFitness,NullParameters);
     }
 
@@ -729,7 +678,7 @@ BeesAlgorithm::createNeighborhoodBee(std::vector<double> &bestSiteParameters)
         patchSize = m_PatchSizes[i];
 //std::cout << i << ", " << patchSize << std::endl;
         val = bestSiteParameters[i];
-        rval = nmfUtils::randomNumber(m_Seed,0.0,1.0);
+        rval = nmfUtils::getRandomNumber(m_Seed,0.0,1.0);
         if (patchSize > 0) {
             val = (rval < 0.5) ? (val+rval*patchSize) : (val-rval*patchSize);
             // In c++17, use...
@@ -765,7 +714,9 @@ BeesAlgorithm::searchNeighborhoodForBestBee(std::unique_ptr<Bee> bestSite,
 
 
 std::unique_ptr<Bee>
-BeesAlgorithm::searchParameterSpaceForBestBee(int &RunNum, int& subRunNum)
+BeesAlgorithm::searchParameterSpaceForBestBee(int &RunNum,
+                                              int& subRunNum,
+                                              std::string& errorMsg)
 {
     bool done = false;
     int currentGeneration=0;
@@ -793,7 +744,7 @@ BeesAlgorithm::searchParameterSpaceForBestBee(int &RunNum, int& subRunNum)
 
 std::cout << "Searching parameter space for initial bees..." << std::endl;
 
-    theBestBee = createRandomBee(false);
+    theBestBee = createRandomBee(false,errorMsg);
 std::cout << "Found a bee" << std::endl;
 
     if (theBestBee->getFitness() == m_NullFitness) {
@@ -801,7 +752,7 @@ std::cout << "Found a bee" << std::endl;
     }
     for (int i=0; i<numTotalBees; ++i) {
 //std::cout << "Creating bee: " << i << std::endl;
-        totalBeePopulation.emplace_back(createRandomBee(false));
+        totalBeePopulation.emplace_back(createRandomBee(false,errorMsg));
     }
 std::cout << "Found initial bees." << std::endl;
 
@@ -841,7 +792,7 @@ std::cout << "Found initial bees." << std::endl;
         numScoutBees = numTotalBees - numBestSites;
         scoutBees.clear();
         for (int i=0; i<numScoutBees; ++i) {
-            scoutBees.emplace_back(createRandomBee(false));
+            scoutBees.emplace_back(createRandomBee(false,errorMsg));
 //std::cout << "scout bee: " << i << ": " << scoutBees[i]->getFitness() << std::endl;
         }
 
@@ -972,7 +923,9 @@ BeesAlgorithm::calculateActualNumEstParameters()
 bool
 BeesAlgorithm::estimateParameters(double &bestFitness,
                                   std::vector<double> &bestParameters,
-                                  int &RunNum, int &subRunNum)
+                                  int &RunNum,
+                                  int &subRunNum,
+                                  std::string& errorMsg)
 {
     bool ok = false;
     std::unique_ptr<Bee> bestBee;
@@ -980,7 +933,7 @@ BeesAlgorithm::estimateParameters(double &bestFitness,
     m_DefaultFitness =  99999;
     m_NullFitness    = -999.9;
 
-    bestBee = searchParameterSpaceForBestBee(RunNum,subRunNum);
+    bestBee = searchParameterSpaceForBestBee(RunNum,subRunNum,errorMsg);
 
     if (bestBee->getFitness() != m_NullFitness) {
         bestFitness    = bestBee->getFitness();

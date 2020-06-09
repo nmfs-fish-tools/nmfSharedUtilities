@@ -9,6 +9,7 @@
 
 #include "nmfProgressWidget.h"
 #include "nmfConstants.h"
+#include "nmfConstantsMSSPM.h"
 
 #include <QtCharts/QChartView>
 #include <QtCharts/QChart>
@@ -39,8 +40,8 @@ nmfProgressWidget::nmfProgressWidget(QTimer *theTimer,
 
     logger  = theLogger;
     timer   = theTimer;
-    RunType = runType;
-    lastX   = 0;
+    m_RunType = runType;
+    m_lastX   = 0;
 
     // Create layouts and widgets
     hMainLayt   = new QHBoxLayout();
@@ -59,9 +60,11 @@ nmfProgressWidget::nmfProgressWidget(QTimer *theTimer,
     pointLBL    = new QLabel("Points:");
     markersCB   = new QCheckBox("Markers");
     labelsCB    = new QCheckBox("Labels");
+    validPointsCB = new QCheckBox("");
     yAxisLBL    = new QLabel("Y-Axis Range (Min, Max):");
     yMinSB      = new QDoubleSpinBox();
     yMaxSB      = new QDoubleSpinBox();
+    rangeSetPB  = new QPushButton("[↕]");
     runStatusLBL= new QLabel("Completed (Run, SubRun):");
     runLE       = new QLineEdit();
     subRunLE    = new QLineEdit();
@@ -86,7 +89,10 @@ nmfProgressWidget::nmfProgressWidget(QTimer *theTimer,
     yMinSB->setSingleStep(m_yInc);
     yMaxSB->setValue(m_yMax);
     yMaxSB->setSingleStep(m_yInc);
-    yMaxSB->setMaximum(200);
+    yMaxSB->setMaximum(100000);
+    yMinSB->setMaximum(100000);
+    rangeSetPB->setToolTip("Automatically set the min,max range");
+    rangeSetPB->setFixedSize(20,20);
     runLE->setReadOnly(true);
     subRunLE->setReadOnly(true);
     runLE->clear();
@@ -97,6 +103,8 @@ nmfProgressWidget::nmfProgressWidget(QTimer *theTimer,
     // Add widgets to layouts
     yRangeLayt->addWidget(yMinSB);
     yRangeLayt->addWidget(yMaxSB);
+    yRangeLayt->addWidget(rangeSetPB);
+    yRangeLayt->addWidget(validPointsCB);
     statusLayt->addWidget(runLE);
     statusLayt->addWidget(subRunLE);
     vChartLayt->addWidget(m_chartView);
@@ -130,7 +138,11 @@ nmfProgressWidget::nmfProgressWidget(QTimer *theTimer,
     maxSB->setSingleStep(10);
     minSB->setValue(0);
     maxSB->setValue(20);
-    m_chart->legend()->hide();
+
+//    m_chart->legend()->hide();
+//    m_chart->legend()->show();
+    m_chart->legend()->setAlignment(Qt::AlignRight);
+
     m_chartView->setRenderHint(QPainter::Antialiasing);
     m_chartView->setFrameShape(QFrame::Box);
     m_chart->setContentsMargins(-8,-8,-3,-3); // left, top, right, bottom
@@ -154,6 +166,8 @@ nmfProgressWidget::nmfProgressWidget(QTimer *theTimer,
     stopPB->setStatusTip("Stop the current model run.");
     clearPB->setToolTip("Clears the chart of all previous plots.");
     clearPB->setStatusTip("Clears the chart of all previous plots.");
+    validPointsCB->setToolTip("Show valid points only (i.e., omit 99999)");
+    validPointsCB->setStatusTip("Show valid points only (i.e., omit 99999)");
 
     // Show empty grid
     QValueAxis *newXAxis = new QValueAxis();
@@ -174,20 +188,20 @@ nmfProgressWidget::nmfProgressWidget(QTimer *theTimer,
 //        newYAxis->setLabelFormat("%0.2f");
     newXAxis->setTitleText(getXTitle());
     newYAxis->setTitleText(getYTitle());
-    if (RunType == "MSSPM") {
+    if (m_RunType == "MSSPM") {
         whatsThis = "<strong><center>Progress Chart</center></strong><p>This chart plots the Fitness Convergence Value ";
         whatsThis += "per Generation as calculated by the Genetic Algorithm. This value is equal to:</p> ";
         whatsThis += "<p>log [ (convergenceNumber - numGenerationsSinceBestFit) *<br>";
         whatsThis += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bestOverallFitness ]</p>";
         whatsThis += "Once the difference is 0 the model is said to converge. The model will also end if ";
         whatsThis += "maxGenerations is reached.</p>";
-    } else if (RunType == "MSVPA") {
+    } else if (m_RunType == "MSVPA") {
         whatsThis = "<strong><center>Progress Chart</center></strong><p>This chart plots the convergence value per loop ";
         whatsThis += "iteration. Once the convergence value is less than 3, ";
         whatsThis += "the model is said to converge. ";
         whatsThis += "The convergence value is the number of differences between ";
         whatsThis += "the M2 matrix at iteration (i) and (i+1).</p>";
-    } else if (RunType == "Forecast") {
+    } else if (m_RunType == "Forecast") {
         whatsThis = "<strong><center>Progress Chart</center></strong><p>This chart plots the Total Biomass per ";
         whatsThis += "Forecast year of the specified species.</p>";
     }
@@ -210,6 +224,18 @@ nmfProgressWidget::nmfProgressWidget(QTimer *theTimer,
 
 nmfProgressWidget::~nmfProgressWidget() {
 
+}
+
+void
+nmfProgressWidget::showLegend()
+{
+    m_chart->legend()->show();
+}
+
+void
+nmfProgressWidget::hideLegend()
+{
+    m_chart->legend()->hide();
 }
 
 void
@@ -438,15 +464,20 @@ nmfProgressWidget::setupConnections() {
     markersCB->disconnect();
     minSB->disconnect();
     maxSB->disconnect();
+    rangeSetPB->disconnect();
+    validPointsCB->disconnect();
 
-    connect(stopPB,   SIGNAL(clicked(bool)),        this, SLOT(callback_stopPB(bool)));
-    connect(clearPB,  SIGNAL(clicked()),            this, SLOT(callback_clearPB()));
-    connect(labelsCB, SIGNAL(stateChanged(int)),    this, SLOT(callback_labelsCB(int)));
-    connect(markersCB,SIGNAL(stateChanged(int)),    this, SLOT(callback_markersCB(int)));
-    connect(minSB,    SIGNAL(valueChanged(int)),    this, SLOT(callback_minSB(int)));
-    connect(maxSB,    SIGNAL(valueChanged(int)),    this, SLOT(callback_maxSB(int)));
-    connect(yMinSB,   SIGNAL(valueChanged(double)), this, SLOT(callback_yMinSB(double)));
-    connect(yMaxSB,   SIGNAL(valueChanged(double)), this, SLOT(callback_yMaxSB(double)));
+    connect(stopPB,     SIGNAL(clicked(bool)),        this, SLOT(callback_stopPB(bool)));
+    connect(clearPB,    SIGNAL(clicked()),            this, SLOT(callback_clearPB()));
+    connect(labelsCB,   SIGNAL(stateChanged(int)),    this, SLOT(callback_labelsCB(int)));
+    connect(markersCB,  SIGNAL(stateChanged(int)),    this, SLOT(callback_markersCB(int)));
+    connect(minSB,      SIGNAL(valueChanged(int)),    this, SLOT(callback_minSB(int)));
+    connect(maxSB,      SIGNAL(valueChanged(int)),    this, SLOT(callback_maxSB(int)));
+    connect(yMinSB,     SIGNAL(valueChanged(double)), this, SLOT(callback_yMinSB(double)));
+    connect(yMaxSB,     SIGNAL(valueChanged(double)), this, SLOT(callback_yMaxSB(double)));
+    connect(rangeSetPB, SIGNAL(clicked()),            this, SLOT(callback_rangeSetPB()));
+
+    connect(validPointsCB, SIGNAL(clicked(bool)),     this, SLOT(callback_validPointsCB(bool)));
 
 } // end SetupConnections
 
@@ -459,7 +490,7 @@ nmfProgressWidget::stopTimer()
 void
 nmfProgressWidget::startTimer(int delayMillisec)
 {
-    logger->logMsg(nmfConstants::Normal,"Start " + RunType + " Progress Chart Timer");
+    logger->logMsg(nmfConstants::Normal,"Start " + m_RunType + " Progress Chart Timer");
 
     // Start Progress Chart's timer here
     timer->start(delayMillisec);
@@ -470,20 +501,20 @@ nmfProgressWidget::startTimer(int delayMillisec)
 void
 nmfProgressWidget::callback_stopPB(bool unused)
 {
-    logger->logMsg(nmfConstants::Normal,"Stop " + RunType + " Progress Chart Timer");
+    logger->logMsg(nmfConstants::Normal,"Stop " + m_RunType + " Progress Chart Timer");
 
     emit StopTheRun();
 
     StopRun();
 
-    if (RunType == "MSSPM") {
-        updateChartDataLabel(nmfConstants::MSSPMProgressChartLabelFile,
+    if (m_RunType == "MSSPM") {
+        updateChartDataLabel(nmfConstantsMSSPM::MSSPMProgressChartLabelFile,
                              "<b>Status:&nbsp;&nbsp;</b>User halted MSSPM run. Output data incomplete.");
-    } else if (RunType == "MSVPA") {
-        updateChartDataLabel(nmfConstants::MSVPAProgressChartLabelFile,
+    } else if (m_RunType == "MSVPA") {
+        updateChartDataLabel(nmfConstantsMSVPA::MSVPAProgressChartLabelFile,
                              "<b>Status:&nbsp;&nbsp;</b>User halted MSVPA run. Output data incomplete.");
-    } else if (RunType == "Forecast") {
-        updateChartDataLabel(nmfConstants::ForecastProgressChartLabelFile,
+    } else if (m_RunType == "Forecast") {
+        updateChartDataLabel(nmfConstantsMSVPA::ForecastProgressChartLabelFile,
                              "<b>Status:&nbsp;&nbsp;</b>User halted Forecast run. Output data incomplete.");
     }
 
@@ -496,19 +527,25 @@ nmfProgressWidget::clearChart()
 }
 
 void
+nmfProgressWidget::clearChartOnly()
+{
+    m_chart->removeAllSeries();
+}
+
+void
 nmfProgressWidget::callback_clearPB() {
 
     m_chart->removeAllSeries();
 
     // Initialize progress output file
-    if (RunType == "MSSPM") {
-        std::ofstream outputFile(nmfConstants::MSSPMProgressChartFile);
+    if (m_RunType == "MSSPM") {
+        std::ofstream outputFile(nmfConstantsMSSPM::MSSPMProgressChartFile);
         outputFile.close();
-    } else if (RunType == "MSVPA") {
-        std::ofstream outputFile(nmfConstants::MSVPAProgressChartFile);
+    } else if (m_RunType == "MSVPA") {
+        std::ofstream outputFile(nmfConstantsMSVPA::MSVPAProgressChartFile);
         outputFile.close();
-    } else if (RunType == "Forecast") {
-        std::ofstream outputFile(nmfConstants::ForecastProgressChartFile);
+    } else if (m_RunType == "Forecast") {
+        std::ofstream outputFile(nmfConstantsMSVPA::ForecastProgressChartFile);
         outputFile.close();
     }
 
@@ -606,6 +643,44 @@ nmfProgressWidget::callback_lineHovered(QPointF point, bool state)
 } // end callback_lineHovered
 
 void
+nmfProgressWidget::callback_rangeSetPB()
+{
+    QList<QAbstractSeries *> allSeries = m_chart->series();
+    QLineSeries *lineSeries = nullptr;
+    double value;
+    double min =  99999;
+    double max = -99999;
+
+    for (unsigned i=0; i<allSeries.count(); ++i) {
+        lineSeries = qobject_cast<QLineSeries *>(allSeries[i]);
+        if (lineSeries) {
+            for (unsigned j=0; j<lineSeries->count(); ++j) {
+                value = lineSeries->at(j).y();
+                min = (value < min) ? value : min;
+                max = (value > max) ? value : max;
+            }
+        }
+    }
+
+    callback_yMaxSB(max);
+    callback_yMinSB(min);
+}
+
+void
+nmfProgressWidget::callback_validPointsCB(bool checked)
+{
+    callback_rangeSetPB();
+
+    emit RedrawValidPointsOnly(checked,true);
+}
+
+bool
+nmfProgressWidget::readValidPointsOnly()
+{
+    return validPointsCB->isChecked();
+}
+
+void
 nmfProgressWidget::callback_scatterSeriesHovered(QPointF point,bool state)
 {
     if (state) {
@@ -622,26 +697,26 @@ nmfProgressWidget::callback_scatterSeriesHovered(QPointF point,bool state)
 void
 nmfProgressWidget::StopRun()
 {
-    std::string elapsedTimeStr = nmfUtils::elapsedTime(startTime);
+    std::string elapsedTimeStr = nmfUtils::elapsedTime(m_startTime);
 
-    if (RunType == "MSSPM") {
-        std::ofstream outputFile(nmfConstants::MSSPMStopRunFile);
+    if (m_RunType == "MSSPM") {
+        std::ofstream outputFile(nmfConstantsMSSPM::MSSPMStopRunFile);
         outputFile << "StoppedByUser" << std::endl;
         outputFile << "unused" << std::endl;
         outputFile << elapsedTimeStr << std::endl;
-        outputFile << lastX << std::endl;
+        outputFile << m_lastX << std::endl;
         outputFile.close();
-   } else if (RunType == "MSVPA") {
-        std::ofstream outputFile(nmfConstants::MSVPAStopRunFile);
+   } else if (m_RunType == "MSVPA") {
+        std::ofstream outputFile(nmfConstantsMSVPA::MSVPAStopRunFile);
         outputFile << "Stop" << std::endl;
         outputFile.close();
-    } else if (RunType == "Forecast") {
-        std::ofstream outputFile(nmfConstants::ForecastStopRunFile);
+    } else if (m_RunType == "Forecast") {
+        std::ofstream outputFile(nmfConstantsMSVPA::ForecastStopRunFile);
         outputFile << "Stop" << std::endl;
         outputFile.close();
     }
 
-    logger->logMsg(nmfConstants::Bold,RunType + " Run - End");
+    logger->logMsg(nmfConstants::Bold,m_RunType + " Run - End");
     logger->logMsg(nmfConstants::Section,"================================================================================");
 
 
@@ -650,18 +725,18 @@ nmfProgressWidget::StopRun()
 void
 nmfProgressWidget::startRun()
 {
-    startTime = nmfUtils::startTimer();
+    m_startTime = nmfUtils::startTimer();
 
-    if (RunType == "MSSPM") {
-        std::ofstream outputFile(nmfConstants::MSSPMStopRunFile);
+    if (m_RunType == "MSSPM") {
+        std::ofstream outputFile(nmfConstantsMSSPM::MSSPMStopRunFile);
         outputFile << "Start" << std::endl;
         outputFile.close();
-    } else if (RunType == "MSVPA") {
-        std::ofstream outputFile(nmfConstants::MSVPAStopRunFile);
+    } else if (m_RunType == "MSVPA") {
+        std::ofstream outputFile(nmfConstantsMSVPA::MSVPAStopRunFile);
         outputFile << "Start" << std::endl;
         outputFile.close();
     } else {
-        std::ofstream outputFile(nmfConstants::ForecastStopRunFile);
+        std::ofstream outputFile(nmfConstantsMSVPA::ForecastStopRunFile);
         outputFile << "Start" << std::endl;
         outputFile.close();
     }
@@ -672,20 +747,20 @@ nmfProgressWidget::isStopped()
 {
     std::string cmd="";
 
-    if (RunType == "MSSPM") {
-        std::ifstream inputFile(nmfConstants::MSSPMStopRunFile);
+    if (m_RunType == "MSSPM") {
+        std::ifstream inputFile(nmfConstantsMSSPM::MSSPMStopRunFile);
         if (inputFile) {
             std::getline(inputFile,cmd);
         }
         inputFile.close();
-    } else if (RunType == "MSVPA") {
-        std::ifstream inputFile(nmfConstants::MSVPAStopRunFile);
+    } else if (m_RunType == "MSVPA") {
+        std::ifstream inputFile(nmfConstantsMSVPA::MSVPAStopRunFile);
         if (inputFile) {
             std::getline(inputFile,cmd);
         }
         inputFile.close();
-    } else if (RunType == "Forecast") {
-        std::ifstream inputFile(nmfConstants::ForecastStopRunFile);
+    } else if (m_RunType == "Forecast") {
+        std::ifstream inputFile(nmfConstantsMSVPA::ForecastStopRunFile);
         if (inputFile) {
             std::getline(inputFile,cmd);
         }
@@ -726,8 +801,10 @@ nmfProgressWidget::updateChartDataLabel(std::string inputLabelFileName,
 void
 nmfProgressWidget::readChartDataFile(std::string type,
                                      std::string inputFileName,
-                                     std::string inputLabelFileName)
+                                     std::string inputLabelFileName,
+                                     bool validPointsOnly)
 {
+//std::cout << "====> readChartDataFile: " << validPointsOnly << std::endl;
     // Read progress file that has all of the convergence values in
     // it and draw a line chart.
     int maxXRange;
@@ -740,105 +817,138 @@ nmfProgressWidget::readChartDataFile(std::string type,
     QValueAxis *newYAxis = NULL;
     std::string line;
     std::vector<std::string> parts;
-    //QScatterSeries *sseries = NULL;
     QLineSeries    *lseries = NULL;
     QList<QColor> colors = {QColor(100,100,255),
                             QColor(255,100,100),
                             QColor(0,0,0),
                             Qt::lightGray,
                             Qt::darkGray};
-    QList<double> sizes  = {10.0, 10.0, 8.0, 8.0, 6.0};
-    QList<QScatterSeries::MarkerShape> shapes = {
-        QScatterSeries::MarkerShapeRectangle,
-        QScatterSeries::MarkerShapeCircle,
-        QScatterSeries::MarkerShapeRectangle,
-        QScatterSeries::MarkerShapeCircle,
-        QScatterSeries::MarkerShapeRectangle
-    };
 
     updateChartDataLabel(inputLabelFileName,"");
 
     // try to hide QLineSeries from legend
     // RSK use QPen dash, dot variations with color for various line types
     // Show legend to the right.
-    m_chart->legend()->show();
-    m_chart->legend()->setAlignment(Qt::AlignRight);
+//    m_chart->legend()->show();
+//    m_chart->legend()->setAlignment(Qt::AlignRight);
 
     // This is so that if the user specifies the exact same plot again, it'll
     // draw as a new plot and not as a continuation of the original plot. Why?
     // This would be desirable if a person first runs a Forecast with 5 years and
     // then runs the exact same Forecast with 10 years.
-    lastX=0;
+    m_lastX=0;
 
     int x;
+    double y;
     std::string species="";
-    std::string theMSSPMName="";
-    std::string theMSVPAName="",lastMSVPAName="";
+    std::string theRunName="",theLastRunName="";
     std::string theForecastName="";
     std::string theScenarioName="";
     std::ifstream inputFile(inputFileName);
     std::vector<std::vector<std::string> > chartData;
-    std::vector<QPoint> readVector;
-    std::vector<QPoint> pointVector;
     std::vector<std::string> strVector;
+    std::vector<std::string> validLines;
     bool isFirstLine = true;
 
-    while (std::getline(inputFile,line)) {
+    if (type == "MSSPM") { // Means we're looking at MSSPM data
 
+        validLines.clear();
+        // Run through file and check and remove 99999 lines
+        while (std::getline(inputFile,line)) {
+            if (validPointsOnly) {
+                boost::split(parts,line,boost::is_any_of(","));
+                y = std::stod(parts[2]);
+                if (y < 90000) {
+                    validLines.push_back(line);
+                }
+            } else {
+                validLines.push_back(line);
+            }
+        }
+
+        // Load the validLine lines into chartData
+        if (validLines.size() > 0) {
+            strVector.clear();
+            boost::split(parts,validLines[0],boost::is_any_of(","));
+            theRunName = parts[0];
+            strVector.push_back(validLines[0]);
+            for (int i=1; i<validLines.size(); ++i) {
+                boost::split(parts,validLines[i],boost::is_any_of(","));
+                if (theRunName == parts[0]) {
+                    strVector.push_back(validLines[i]);
+                } else {
+                    chartData.push_back(strVector);
+                    strVector.clear();
+                    strVector.push_back(validLines[i]);
+                    theRunName = parts[0];
+                }
+            }
+            chartData.push_back(strVector);
+        }
+
+        m_chart->removeAllSeries();
+        for (int i=0; i<chartData.size(); ++i) {
+            lseries = new QLineSeries();
+            strVector = chartData[i];
+            for (int j=0; j<strVector.size(); ++j) {
+                boost::split(parts,strVector[j],boost::is_any_of(","));
+                lseries->setName(QString::fromStdString(parts[0]));
+                lseries->append(std::stoi(parts[1]),std::stod(parts[2]));
+            }
+            m_chart->addSeries(lseries);
+        }
+        m_chart->createDefaultAxes();
+
+        m_chart->update(); // necessary for labels to paint completely
+    }
+
+
+    while (std::getline(inputFile,line)) {
         boost::split(parts,line,boost::is_any_of(","));
 
-        if (type == "MSSPM") { // Means we're looking at MSSPM data
-            theMSVPAName = parts[0];
-            x = std::stoi(parts[1]);
-            //y = std::stoi(parts[2]);
-            if (isFirstLine || ((theMSVPAName == lastMSVPAName) && (lastX < x))) {
-                strVector.push_back(line);
-            } else {
-                chartData.push_back(strVector);
-                strVector.clear();
-                strVector.push_back(line);
-            }
-            lastMSVPAName = theMSVPAName;
-            lastX = x;
-            isFirstLine = false;
-        } else if (type == "MSVPA") { // Means we're looking at MSVPA data
-            theMSVPAName = parts[0];
-            x = std::stoi(parts[1]);
-            //y = std::stoi(parts[2]);
-            if (isFirstLine || ((theMSVPAName == lastMSVPAName) && (lastX < x))) {
-                //pointVector.push_back(QPoint(x,y));
-                strVector.push_back(line);
-            } else {
-                chartData.push_back(strVector);
-                strVector.clear();
-                strVector.push_back(line);
-            }
-            lastMSVPAName = theMSVPAName;
-            lastX = x;
-            isFirstLine = false;
-        }
-        else if (type == "Forecast") { // Means we're looking at Forecast data
-            theMSVPAName    = parts[0];
+//        if (type == "MSVPA") { // Means we're looking at MSVPA data
+//            theRunName = parts[0];
+//            x = std::stoi(parts[1]);
+//            //y = std::stoi(parts[2]);
+//            if (isFirstLine || ((theRunName == theLastRunName) && (m_lastX < x))) {
+//                //pointVector.push_back(QPoint(x,y));
+//                strVector.push_back(line);
+//            } else {
+//                chartData.push_back(strVector);
+//                strVector.clear();
+//                strVector.push_back(line);
+//            }
+//            theLastRunName = theRunName;
+//            m_lastX = x;
+//            isFirstLine = false;
+//        }
+//        else
+
+        if (type == "Forecast") { // Means we're looking at Forecast data
+            theRunName    = parts[0];
             theForecastName = parts[1];
             theScenarioName = parts[2];
             x = std::stoi(parts[3]);
             //y = std::stoi(parts[5]);
             species = parts[4];
-            if (isFirstLine || ((theMSVPAName == lastMSVPAName) && (lastX < x))) {
+            if (isFirstLine || ((theRunName == theLastRunName) && (m_lastX < x))) {
                 strVector.push_back(line);
             } else {
                 chartData.push_back(strVector);
                 strVector.clear();
                 strVector.push_back(line);
             }
-            lastMSVPAName = theMSVPAName;
-            lastX = x;
+            theLastRunName = theRunName;
+            m_lastX = x;
             isFirstLine = false;
         }
     }
 
-    if (strVector.size() > 0)
-        chartData.push_back(strVector);
+    if (type != "MSSPM") {
+        if (strVector.size() > 0) {
+            chartData.push_back(strVector);
+        }
+    }
     numPlots = chartData.size();
     if (numPlots == 0)
         return;
@@ -847,75 +957,76 @@ nmfProgressWidget::readChartDataFile(std::string type,
     int numExistingPoints;
     int numPointsRead;
     QList<QAbstractSeries *> allSeries = m_chart->series();
+//std::cout << "num allSeries: " << allSeries.size() << std::endl;
 
-    if (allSeries.count() == 0) {
-        lseries = new QLineSeries();
-        // Number aren't correct when they appear.  Could be a bug in 5.8, try
-        // it in 5.10
-//         connect(lseries, SIGNAL(hovered(QPointF,bool)),
-//                 this, SLOT(callback_lineHovered(QPointF,bool)));
-        strVector = chartData[0];
-        boost::split(parts,strVector[0],boost::is_any_of(","));
-        lseries->setName(QString::fromStdString(parts[0]));
-        if (type == "MSSPM")
-            lseries->append(std::stoi(parts[1]),std::stod(parts[2]));
-        else if (type == "MSVPA")
-            lseries->append(std::stoi(parts[1]),std::stoi(parts[2]));
-        else if (type == "Forecast") {
-            lseries->append(std::stoi(parts[3]),std::stoi(parts[5]));
-            species = parts[4];
-        }
-        m_chart->addSeries(lseries);
-        m_chart->createDefaultAxes();
-    } else if (allSeries.count() < numPlots) {
-        lseries = new QLineSeries();
-//        connect(lseries, SIGNAL(hovered(QPointF,bool)),
-//                this, SLOT(callback_lineHovered(QPointF,bool)));
-        strVector = chartData[allSeries.count()];
-        boost::split(parts,strVector[0],boost::is_any_of(","));
-        lseries->setName(QString::fromStdString(parts[0]));
-        if (type == "MSSPM") {
-            lseries->append(std::stoi(parts[1]),std::stod(parts[2]));
-        } else if (type == "MSVPA")
-            lseries->append(std::stoi(parts[1]),std::stoi(parts[2]));
-        else if (type == "Forecast") {
-            lseries->append(std::stoi(parts[3]),std::stoi(parts[5]));
-            species = parts[4];
-        }
-        m_chart->addSeries(lseries);
-        m_chart->createDefaultAxes();
+    if (type != "MSSPM") {
 
-    } else {
-       lseries = qobject_cast<QLineSeries *>(allSeries[chartData.size()-1]);
+        if (allSeries.count() == 0) {
+            lseries = new QLineSeries();
+            // RSK Number aren't correct when they appear.  Could be a bug in 5.8, try it in 5.10
+            //         connect(lseries, SIGNAL(hovered(QPointF,bool)),
+            //                 this, SLOT(callback_lineHovered(QPointF,bool)));
+            strVector = chartData[0];
+            boost::split(parts,strVector[0],boost::is_any_of(","));
+            lseries->setName(QString::fromStdString(parts[0]));
+            if (type == "MSSPM") {
+                lseries->append(std::stoi(parts[1]),std::stod(parts[2]));
+            } else if (type == "MSVPA") {
+                lseries->append(std::stoi(parts[1]),std::stoi(parts[2]));
+            } else if (type == "Forecast") {
+                lseries->append(std::stoi(parts[3]),std::stoi(parts[5]));
+                species = parts[4];
+            }
+            m_chart->addSeries(lseries);
+            m_chart->createDefaultAxes();
+        } else if (allSeries.count() < numPlots) {
+            lseries = new QLineSeries();
+            //        connect(lseries, SIGNAL(hovered(QPointF,bool)),
+            //                this, SLOT(callback_lineHovered(QPointF,bool)));
+            strVector = chartData[allSeries.count()];
+            boost::split(parts,strVector[0],boost::is_any_of(","));
+            lseries->setName(QString::fromStdString(parts[0]));
+            if (type == "MSSPM") {
+                lseries->append(std::stoi(parts[1]),std::stod(parts[2]));
+            } else if (type == "MSVPA")
+                lseries->append(std::stoi(parts[1]),std::stoi(parts[2]));
+            else if (type == "Forecast") {
+                lseries->append(std::stoi(parts[3]),std::stoi(parts[5]));
+                species = parts[4];
+            }
+            m_chart->addSeries(lseries);
+            m_chart->createDefaultAxes();
 
-       strVector = chartData[chartData.size()-1];
-       numExistingPoints = lseries->count();
-       numPointsRead     = strVector.size();
-       if (numExistingPoints < numPointsRead) {
-           for (int i=numExistingPoints; i<numPointsRead; ++i) {
-                boost::split(parts,strVector[i],boost::is_any_of(","));
-                lseries->setName(QString::fromStdString(parts[0]));
-                if (type == "MSSPM") {
-                    lseries->append(std::stoi(parts[1]),std::stod(parts[2]));
-                } else if (type == "MSVPA")
-                    lseries->append(std::stoi(parts[1]),std::stoi(parts[2]));
-                else if (type == "Forecast") {
-                    lseries->append(std::stoi(parts[3]),std::stoi(parts[5]));
-                    species = parts[4];
+        } else {
+            lseries = qobject_cast<QLineSeries *>(allSeries[chartData.size()-1]);
+            strVector = chartData[chartData.size()-1];
+            numExistingPoints = lseries->count();
+            numPointsRead     = strVector.size();
+            if (numExistingPoints < numPointsRead) {
+                for (int i=numExistingPoints; i<numPointsRead; ++i) {
+                    boost::split(parts,strVector[i],boost::is_any_of(","));
+                    lseries->setName(QString::fromStdString(parts[0]));
+                    if (type == "MSSPM") {
+                        lseries->append(std::stoi(parts[1]),std::stod(parts[2]));
+                    } else if (type == "MSVPA")
+                        lseries->append(std::stoi(parts[1]),std::stoi(parts[2]));
+                    else if (type == "Forecast") {
+                        lseries->append(std::stoi(parts[3]),std::stoi(parts[5]));
+                        species = parts[4];
+                    }
                 }
-           }
-       }
-       // Necessary for the chart to update
-       m_chart->update(); // necessary for labels to paint completely
+            }
+            // Necessary for the chart to update
+            m_chart->update(); // necessary for labels to paint completely
+        }
     }
 
-    QLineSeries *lineSeries=NULL;
+    QLineSeries *lineSeries = nullptr;
     QColor whichColor;
     newXAxis = new QValueAxis();
     newYAxis = new QValueAxis();
     allSeries = m_chart->series();
 
-    //for (int i=0; i<numPlots; ++i) {
     for (int i=0; i<allSeries.size(); ++i) {
         lineSeries = qobject_cast<QLineSeries *>(allSeries[i]);
         whichColor = colors[i % colors.count()];
@@ -923,11 +1034,7 @@ nmfProgressWidget::readChartDataFile(std::string type,
         lineSeries->setPointLabelsVisible(labelsCB->isChecked());
         lineSeries->setPen(QPen(whichColor,2));
         lineSeries->setColor(whichColor);
-
-        //scatterSeries = sseriesList[i];
-        //chart->setAxisX(newXAxis, scatterSeries);
         m_chart->setAxisX(newXAxis, lineSeries);
-        //chart->setAxisY(newYAxis, scatterSeries);
         m_chart->setAxisY(newYAxis, lineSeries);
     }
 
@@ -953,7 +1060,7 @@ nmfProgressWidget::readChartDataFile(std::string type,
     // Set axis to be last set of series...should be OK I think...since
     // all series should have approximately the same ranges.
     int maxValue = maxSB->value();
-//    newXAxis->setTickCount((m_xMax-m_xMin)/m_xInc);
+//  newXAxis->setTickCount((m_xMax-m_xMin)/m_xInc);
     maxXRange = int(int(lineSeries->count()/10.0))*10.0+10;
     maxXRange = (maxXRange <= maxValue) ? maxValue : maxXRange;
     maxSB->setValue(maxXRange);
@@ -970,9 +1077,7 @@ nmfProgressWidget::readChartDataFile(std::string type,
 
     m_chart->axisX()->setRange(xRange.first,maxX);
     m_chart->axisY()->setRange(yRange.first,yRange.second);
-
-//    newYAxis->applyNiceNumbers();
-//    newXAxis->applyNiceNumbers();
+//  newXAxis->applyNiceNumbers();
     newXAxis->setLabelFormat("%d");
     newYAxis->setLabelFormat("%0.2f");
     newXAxis->setTitleText(getXTitle());
@@ -982,8 +1087,9 @@ nmfProgressWidget::readChartDataFile(std::string type,
         mainTitle += QString::fromStdString(species);
     m_chart->setTitle(mainTitle);
 
-    //    newXAxis->setTickCount(getNumXTicks()+1);
-//    newYAxis->setTickCount(getNumYTicks());
+
+//  newXAxis->setTickCount(getNumXTicks()+1);
+//  newYAxis->setTickCount(getNumYTicks());
     return;
 
 } // end readChartDataFile

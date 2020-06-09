@@ -7,14 +7,9 @@
  @date Jan 24, 2017
 */
 
-
 #include "nmfUtilsStatistics.h"
 
-
-
 namespace nmfUtilsStatistics {
-
-
 
 void ShepSRR(boost::numeric::ublas::matrix<double> &Data,
              int &NYears,
@@ -222,8 +217,6 @@ void USERFUNC(boost::numeric::ublas::vector<double> &Parms,
 } // end USERUNC
 
 
-
-
 /*
   This is a public procedure to calculate linear regression coefficients and
   significance tests.  Results are output to a publicly declared variable type LinReg that holds the outputs.
@@ -299,9 +292,6 @@ void LinReg(boost::numeric::ublas::matrix<double> &Data, int &N, LinRegOut &OutV
 } // end LinReg
 
 
-/*
- * BetaI description here
- */
 double BetaI(double A, double B, double X)
 {
     double BT = 0;
@@ -330,7 +320,6 @@ double BetaI(double A, double B, double X)
     return retv;
 
 } // end BetaI
-
 
 
 double BetaCF(double A, double B, double X) {
@@ -396,6 +385,7 @@ double BetaCF(double A, double B, double X) {
     return retv;
 
 } // end BetaCF
+
 
 double GAMMLN(double XX) {
     double retv;
@@ -511,7 +501,6 @@ double ProbT(double T, int DF) {
 } // end ProbT
 
 
-
 void calculateSSResiduals(const int& NumSpeciesOrGuilds,
                           const int& RunLength,
                           const std::vector<double>& Observed,
@@ -533,7 +522,6 @@ void calculateSSResiduals(const int& NumSpeciesOrGuilds,
         SSResiduals.push_back(sum);
     }
 }
-
 
 bool calculateSSDeviations(const int& NumSpeciesOrGuilds,
                           const int& RunLength,
@@ -559,7 +547,6 @@ bool calculateSSDeviations(const int& NumSpeciesOrGuilds,
     }
     return true;
 }
-
 
 void calculateSSTotals(const int& NumSpeciesOrGuilds,
                        const std::vector<double>& SSDeviations,
@@ -720,7 +707,6 @@ bool calculateAAE(const int& NumSpeciesOrGuilds,
     return true;
 }
 
-
 bool calculateMEF(const int& NumSpeciesOrGuilds,
                   const int& RunLength,
                   const std::vector<double>& MeanObserved,
@@ -768,7 +754,7 @@ bool calculateMohnsRhoForParameter(
         return false;
     }
 
-    // Est Parameters are orgainzed from Max Num Peels to 0.
+    // Est Parameters are organized from Max Num Peels to 0.
     // Ex. If NumSpecies = 4, and NumPeels = 3, there should be
     // 16 est params listed as follows in the vector:
     // peel=3, peel=2, peel=1, peel=0
@@ -846,6 +832,124 @@ std::cout << "Species: " << species << ", value: " << value << ", num: " << num 
 
     return true;
 }
+
+
+double calculateMean(
+        const boost::numeric::ublas::matrix<double>& ObsBiomass,
+        const int speciesNum)
+{
+    int numYears   = ObsBiomass.size1();
+    double meanObs = 0.0;
+
+    for (int time=0; time<numYears; ++time) {
+        meanObs += ObsBiomass(time,speciesNum);
+    }
+
+    // meanObs /= (nrows*ncols);
+    meanObs /= numYears;
+    return meanObs;
+}
+
+
+double calculateMaximumLikelihoodNoRescale(
+        const boost::numeric::ublas::matrix<double>& EstBiomass,
+        const boost::numeric::ublas::matrix<double>& ObsBiomass)
+{
+    // First find sigma = sqrt(1/N sum[(x(i)-mu)^2] )
+    double mu;
+    double sigma = 0.0;
+    double diff;
+    double sumSq = 0;
+    double finalSum = 0;
+    double k3 = 0;
+    double value = 0;
+    double finalValue = 0;
+    int numYears   = ObsBiomass.size1();
+    int numSpecies = ObsBiomass.size2();
+    int NumPoints  = numYears;
+    std::vector<double> weights;
+
+    for (int j=0; j<numSpecies; ++j) {
+        weights.push_back(1.0);
+    }
+
+    k3 = log(sqrt(2*M_PI));
+    for (int j=0; j<numSpecies; ++j) {
+
+        mu = calculateMean(ObsBiomass,j);
+
+        // Calculate standard deviation of the sample sigma = sqrt(1/(N-1) * sum[(x(i)-x(m))^2])
+        sumSq = 0;
+        for (int i=0; i<numYears; ++i) {
+            diff = ObsBiomass(i,j) - mu;
+            sumSq += diff*diff;
+        }
+
+        sigma = sqrt((1.0/(NumPoints-1))*sumSq);
+        if (sigma == 0) {
+            std::cout << "Error: Found sigma=0 in NLopt_Estimator::calculateMLE" << std::endl;
+            return 0;
+        }
+
+        // Calculate MLE
+        finalValue = 0;
+        for (int i=0; i<numYears; ++i) {
+            value = (ObsBiomass(i,j) - EstBiomass(i,j)) / sigma;
+            value =  -(k3 + 0.5*value*value + log(sigma));
+            finalValue += value;
+        }
+
+        finalSum += finalValue;
+
+    } // end species
+
+    return -finalSum;
+}
+
+double calculateModelEfficiency(const boost::numeric::ublas::matrix<double>& EstBiomass,
+                                const boost::numeric::ublas::matrix<double>& ObsBiomass)
+{
+    int nrows = EstBiomass.size1();
+    int ncols = EstBiomass.size2();
+    double diff;
+    double meanObs    = 0;
+    double deviation  = 0;
+    double sumSquares = 0;
+
+    for (int time=0; time<nrows; ++time) {
+        for (int species=0; species<ncols; ++species) {
+            meanObs += ObsBiomass(time,species);
+        }
+    }
+    meanObs /= (nrows*ncols);
+
+    for (int time=0; time<nrows; ++time) {
+        for (int species=0; species<ncols; ++species) {
+            diff = EstBiomass(time,species) - ObsBiomass(time,species);
+            sumSquares += (diff*diff);
+            diff = ObsBiomass(time,species) - meanObs;
+            deviation  += (diff*diff);
+        }
+    }
+
+    return (deviation == 0) ? 0 : (1.0 - sumSquares/deviation); // Nash-Sutcliffe Model Efficiency Coefficient
+}
+
+double calculateSumOfSquares(const boost::numeric::ublas::matrix<double>& EstBiomass,
+                             const boost::numeric::ublas::matrix<double>& ObsBiomass)
+{
+    double diff;
+    double sumSquares = 0;
+
+    for (unsigned time=0; time<EstBiomass.size1(); ++time) {
+        for (unsigned species=0; species<EstBiomass.size2(); ++species) {
+            diff = EstBiomass(time,species) - ObsBiomass(time,species);
+            sumSquares += (diff*diff);
+        }
+    }
+    return log10(sumSquares+1);
+}
+
 
 } // end namespace nmfStatUtils
 

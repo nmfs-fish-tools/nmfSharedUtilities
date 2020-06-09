@@ -1,0 +1,6 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node2" href="$classnmf_database_connect_dialog.html" title="nmfDatabaseConnectDialog" alt="" coords="125,5,311,32"/>
+<area shape="rect" id="node3" href="$classnmf_file_viewer.html" title="This class creates a dialog that contains a text edit widget displaying the contents of the passed fi..." alt="" coords="165,56,271,83"/>
+<area shape="rect" id="node4" href="$classnmf_structs_qt_1_1_chart_save_dlg.html" title="This class displays a QDialog and allows the user to do a screen grab of the displayed chart..." alt="" coords="123,107,313,133"/>
+<area shape="rect" id="node5" href="$classnmf_test_dialog.html" title="nmfTestDialog" alt="" coords="165,157,271,184"/>
+</map>

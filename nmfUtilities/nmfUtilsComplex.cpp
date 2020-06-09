@@ -1,28 +1,14 @@
 
 /**
- @file nmfComplexUtils.cpp
- @author rklasky
- @copyright 2017 NOAA - National Marine Fisheries Service
- @brief These routines were originally from Complex2.bas
- @date June 9, 2017
-*/
-
+ * @file nmfUtilsComplex.cpp
+ * @brief These routines were originally from Complex2.bas
+ * @date Dec 8, 2016
+ */
 
 #include "nmfUtilsComplex.h"
 
-
-
 namespace nmfUtilsComplex {
 
-
-/*
-  This subroutine perfroms a maximization of the user defined function
-  USERFUNC with NDim Dimenstions under inequality constrants of the form:
-  G(i) < X(i) <= H(i) for M parameter values, Xi.
-  Matrix X has n+1,Ndim dimensions
-  The constraint vectors and number of dimensions are input by the calling routine
-  The parameter values for the maximum, X() and the function value MaxF() are returned
-*/
 void Complex(int NDim,
              int &NYears,
              boost::numeric::ublas::vector<double> &G,
@@ -33,7 +19,7 @@ void Complex(int NDim,
              boost::numeric::ublas::vector<double> &VarEst, // Parms, in calling routine
              int &ItFlag)
 {
-std::cout << "in Complex" << std::endl;
+//std::cout << "in Complex" << std::endl;
     int K = NDim + 1;
     boost::numeric::ublas::matrix<double> R;
 
@@ -41,20 +27,16 @@ std::cout << "in Complex" << std::endl;
     // Generate random numbers between 0 and 1 and fill into R matrix
     for (int i = 1; i <= K; ++i) {
         for (int j = 1; j <= NDim; ++j) {
-            R(i,j) = nmfUtils::randomNumber(-1,0.0,1.0);
-//            R(i,j) = nmfUtils::randomNumber();
+            R(i,j) = nmfUtils::getRandomNumber(-1,0.0,1.0);
         }
     }
 
-
-std::cout << "R(1,1): " << R(1,1) << std::endl;
+//std::cout << "R(1,1): " << R(1,1) << std::endl;
 
     // Do the maximization
     Cons(X, R, NDim, NYears, MaxF, SRData, G, H, VarEst, ItFlag);
-std::cout << "out Complex" << std::endl;
+//std::cout << "out Complex" << std::endl;
 } // end Complex
-
-
 
 
 void Cons(boost::numeric::ublas::matrix<double> &X,
@@ -140,7 +122,7 @@ void Cons(boost::numeric::ublas::matrix<double> &X,
         }
         */
         // Replace Point with Lowest function value - with the centroid of the other values
-        CENTR(IEV1, K, NDim, X, XC);
+        Centroid(IEV1, K, NDim, X, XC);
         for (int j = 1; j <= NDim; ++j) {
             X(IEV1,j) = (1 + AALPHA) * (XC(j)) - AALPHA * (X(IEV1,j));
         }
@@ -209,18 +191,12 @@ void Cons(boost::numeric::ublas::matrix<double> &X,
 } // end Cons
 
 
-
-
-void CENTR(int &IEV1,
+void Centroid(int &IEV1,
            int &K,
            int &NDim,
            boost::numeric::ublas::matrix<double> &X,
            boost::numeric::ublas::vector<double> &XC)
 {
-    // Calculates the centroid of the current set of points (X(i,j))
-    //double Sum;
-
-    // This calculates the average dimensions of all but the lowest point...
     for (int j = 1; j <= NDim; ++j) {
         XC(j) = 0.0;
         for (int i = 1; i <= K; ++i) {
@@ -240,33 +216,21 @@ void Check(int &NDim,
            boost::numeric::ublas::vector<double> &H,
            boost::numeric::ublas::matrix<double> &X)
 {
-
-    // Explicit constraint violation correction
-    // This checks independent variables against explicit and implicit constraints -- and
-    // throws the point back into the good region
     const double DELTA = 0.1;
 
     // Check against explicit constraints
     for (int i = 1; i <= K; ++i) {
-
         for (int j = 1; j <= NDim; ++j) {
-
             if (X(i,j) < G(j)) {
                 X(i,j) = G(j) + DELTA;
             }
-
             if (X(i,j) >= H(j)) {
                 X(i,j) = H(j) - DELTA;
             }
-
         } // end for j
-
     } // end i
 
 } // end Check
-
-
-
 
 } // end namespace nmfComplexUtils
 

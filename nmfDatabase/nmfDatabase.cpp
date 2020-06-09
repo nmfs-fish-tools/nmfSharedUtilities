@@ -420,6 +420,23 @@ nmfDatabase::nmfQueryCatchFields(
 }
 
 
+int
+nmfDatabase::getSpeciesIndex(std::string SpeciesName)
+{
+    int retv = -1;
+
+    std::vector<std::string> fields = {"SpeIndex", "SpeName"};
+    std::string queryStr = "SELECT SpeIndex,SpeName FROM Species WHERE SpeName = '" +
+                           SpeciesName + "'";
+    std::map< std::string, std::vector<std::string> > dataMap;
+    dataMap = nmfQueryDatabase(queryStr, fields, nmfConstants::nullAsZero);
+    if (dataMap.size() > 0) {
+        retv = std::stoi(dataMap[fields[0]][0]);
+    }
+    return retv;
+}
+
+
 std::tuple<int, int, int, int>
 nmfDatabase::nmfQueryAgeFields(const std::string &table, const int &speciesIndex)
 {
@@ -633,7 +650,7 @@ nmfDatabase::nmfQueryForecastWeightAtAgeData(
 
 
 
-void
+bool
 nmfDatabase::nmfQueryWeightAtAgeData(
         const int &index,
         const int &Year,
@@ -641,6 +658,7 @@ nmfDatabase::nmfQueryWeightAtAgeData(
         const std::string &species,
         boost::numeric::ublas::matrix<double> &WtAtAge)
 {
+    bool retv = false;
     std::string queryStr;
     std::map<std::string, std::vector<std::string> > dataMap;
     std::vector<std::string> fields;
@@ -652,9 +670,14 @@ nmfDatabase::nmfQueryWeightAtAgeData(
             " AND Variable = 'Weight' " +
             " ORDER BY Age";
     dataMap = nmfQueryDatabase(queryStr, fields);
-    for (int j=0; j<Nage; ++j) {
-        WtAtAge(index,j) = std::stod(dataMap["Value"][j]);
+    if (dataMap.size() > 0) {
+        retv = true;
+        for (int j=0; j<Nage; ++j) {
+            WtAtAge(index,j) = std::stod(dataMap["Value"][j]);
+        }
     }
+
+    return retv;
 
 } // end nmfQueryWeightAtAgeData
 
@@ -1022,7 +1045,37 @@ nmfDatabase::createScenarioMap(std::map<QString,QStringList>& ScenarioForecastMa
     }
 }
 
-void
+
+bool
+nmfDatabase::getRunLengthAndStartYear(
+        nmfLogger* logger,
+        const std::string& ProjectSettingsConfig,
+        int &RunLength,
+        int &StartYear)
+{
+    int NumRecords;
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+
+    // Find Systems data
+    fields    = {"RunLength","StartYear"};
+    queryStr  = "SELECT RunLength,StartYear FROM Systems WHERE ";
+    queryStr += "SystemName = '" + ProjectSettingsConfig + "'";
+    dataMap   = nmfQueryDatabase(queryStr, fields);
+    NumRecords = dataMap["RunLength"].size();
+    if (NumRecords == 0){
+        if (! ProjectSettingsConfig.empty()) {
+            logger->logMsg(nmfConstants::Error,"[Error 1] nmfDiagnostic_Tab2::getRunLengthAndStartYear: No records found in table Systems for Name = "+ProjectSettingsConfig);
+        }
+        return false;
+    }
+    RunLength = std::stoi(dataMap["RunLength"][0]);
+    StartYear = std::stoi(dataMap["StartYear"][0]);
+    return true;
+}
+
+bool
 nmfDatabase::getAlgorithmIdentifiers(
         QWidget*     widget,
         nmfLogger*   logger,
@@ -1052,13 +1105,15 @@ nmfDatabase::getAlgorithmIdentifiers(
             msg += "3. In Setup Page 4: Save a Model\n";
             QMessageBox::warning(widget, "Warning", msg, QMessageBox::Ok);
         }
-        return;
+        return false;
     }
     Algorithm          = dataMap["Algorithm"][0];
     Minimizer          = dataMap["Minimizer"][0];
     ObjectiveCriterion = dataMap["ObjectiveCriterion"][0];
     Scaling            = dataMap["Scaling"][0];
     CompetitionForm    = dataMap["WithinGuildCompetitionForm"][0];
+
+    return true;
 }
 
 // -------------------------- General -----------------------
@@ -1090,8 +1145,12 @@ nmfDatabase::importDatabase(QWidget*     widget,
         "Import Database",
         databaseDir.toLatin1(),
         "*.sql");
-    if (InputFileName.isEmpty())
+    if (InputFileName.isEmpty() || InputFileName.contains(" ")) {
+        msg  = "Error: Illegal filename found (" + InputFileName + "). ";
+        msg += "Filename may not contain spaces.";
+        logger->logMsg(nmfConstants::Error,msg.toStdString());
         return false;
+    }
     QString fileDatabaseName = QFileInfo(InputFileName).baseName();
 
     // Does database already exist?
@@ -1298,6 +1357,34 @@ bool nmfDatabase::getAllSpecies(
     return true;
 }
 
+bool nmfDatabase::getAllGuilds(
+        nmfLogger*  logger,
+        std::vector<std::string>& guilds)
+{
+    int NumRecords;
+    std::string msg;
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+
+    guilds.clear();
+
+    // Get species data
+    fields     = {"GuildName"};
+    queryStr   = "SELECT GuildName FROM Guilds ";
+    dataMap    = nmfQueryDatabase(queryStr, fields);
+    NumRecords = dataMap["GuildName"].size();
+    if (NumRecords == 0) {
+        msg = "nmfDatabase::getAllGuilds No records found";
+        logger->logMsg(nmfConstants::Error,msg);
+        return false;
+    }
+    for (int i=0; i<NumRecords; ++i) {
+        guilds.push_back(dataMap["GuildName"][i]);
+    }
+    return true;
+}
+
 bool
 nmfDatabase::getListOfAuthenticatedDatabaseNames(
         QList<QString>& authenticatedDatabases)
@@ -1317,7 +1404,7 @@ nmfDatabase::getListOfAuthenticatedDatabaseNames(
         return false;
     }
 
-    for (unsigned int i = 0; i < numDatabases; ++i) {
+    for (int i = 0; i < numDatabases; ++i) {
         name = dataMap["Database"][i];
         if (authenticateDatabase(name)) {
             authenticatedDatabases.push_back(QString::fromStdString(name));
@@ -1330,6 +1417,30 @@ nmfDatabase::getListOfAuthenticatedDatabaseNames(
 
     return true;
 }
+
+bool
+nmfDatabase::getAllTables(std::vector<std::string>& databaseTables)
+{
+    int numTables;
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+    std::string currentDatabase = nmfGetCurrentDatabase();
+    std::string columnName = "Tables_in_"+currentDatabase;
+
+    databaseTables.clear();
+    fields    = { columnName };
+    queryStr  = "SHOW tables";
+    dataMap   = nmfQueryDatabase(queryStr,fields);
+    numTables = dataMap[columnName].size();
+
+    for (int i = 0; i < numTables; ++i) {
+        databaseTables.push_back(dataMap[columnName][i]);
+    }
+
+    return (numTables > 0);
+}
+
 
 bool
 nmfDatabase::authenticateDatabase(const std::string& databaseName)
