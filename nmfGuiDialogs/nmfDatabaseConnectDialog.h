@@ -22,7 +22,6 @@ class nmfDatabaseConnectDialog: public QDialog
 
 public:
 
-
     explicit nmfDatabaseConnectDialog(QMainWindow*       mainWindow  = 0,
                                       const std::string& settingsDir = "",
                                       nmfDatabase*       databasePtr = 0);
@@ -44,7 +43,6 @@ public slots:
     void callback_connectToDatabase();
     void callback_resetGUI();
     void callback_resetSettings();
-
 
 };
 
