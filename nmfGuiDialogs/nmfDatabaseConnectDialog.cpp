@@ -125,9 +125,9 @@ nmfDatabaseConnectDialog::callback_connectToDatabase()
       msgBox.setWindowTitle("Error");
       msg  = "\nCouldn't open database.\n";
       msg += "\nError: "+errorMsg+"\n";
-      msg += "\nFor Windows: Check that libmysql.dll is present in the directory\n";
-      msg += "where the application executable is installed. If the dll is present,\n";
-      msg += "and this error persists, make sure there's a directory named sqldrivers\n";
+      msg += "\nFor Windows: Check that libmysql.dll is present in the directory ";
+      msg += "where the application executable is installed. If the dll is present, ";
+      msg += "and this error persists, make sure there's a directory named sqldrivers ";
       msg += "present as well with sql dll's present.\n";
       msgBox.setText(QString::fromStdString(msg));
       msgBox.setStandardButtons(QMessageBox::Ok);

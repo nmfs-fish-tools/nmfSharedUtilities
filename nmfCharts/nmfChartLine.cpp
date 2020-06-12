@@ -78,28 +78,22 @@ nmfChartLine::populateChart(
         for (unsigned line=0; line<YAxisData.size2(); ++line) {
             skipRest = false;
             series = new QLineSeries();
-            if (style == "DottedLine") {
-                pen = series->pen();
-                pen.setStyle(Qt::DotLine);
-                pen.setColor(LineColor); //LineColors[line%NumColors]);
-                pen.setColor(QColor(QString::fromStdString(nmfConstants::LineColors[line%nmfConstants::LineColors.size()])));
-                pen.setWidth(2);
-                series->setPen(pen);
-            } else if (style == "DashedLine") {
-                pen = series->pen();
-                pen.setStyle(Qt::DashLine);
-                pen.setColor(LineColor); //(LineColors[line%NumColors]);
-                pen.setColor(QColor(QString::fromStdString(nmfConstants::LineColors[line%nmfConstants::LineColors.size()])));
-                pen.setWidth(2);
-                series->setPen(pen);
+            pen = series->pen();
+            if (lineColorName == "MonteCarloSimulation") {
+                pen.setColor(LineColor);
             } else {
-                pen = series->pen();
-                pen.setStyle(Qt::SolidLine);
-                pen.setColor(LineColor); //(LineColors[line%NumColors]);
                 pen.setColor(QColor(QString::fromStdString(nmfConstants::LineColors[line%nmfConstants::LineColors.size()])));
-                pen.setWidth(2);
-                series->setPen(pen);
             }
+            pen.setWidth(2);
+            if (style == "DottedLine") {
+                pen.setStyle(Qt::DotLine);
+            } else if (style == "DashedLine") {
+                pen.setStyle(Qt::DashLine);
+            } else {
+                pen.setStyle(Qt::SolidLine);
+            }
+            series->setPen(pen);
+
             for (unsigned j=XStartVal-XOffset; j<YAxisData.size1(); ++j) {
                 yVal = YAxisData(j,line);
                 if (yVal != nmfConstants::NoValueDouble) {
@@ -149,6 +143,11 @@ nmfChartLine::populateChart(
     chart->axisY()->setGridLineVisible(GridLines[1]);
 
     // Show legend
+    if ((lineColorName == "MonteCarloSimulation") ||
+        (lineColorName.isEmpty()))
+    {
+        showLegend = false;
+    }
     chart->legend()->setVisible(showLegend);
     chart->legend()->setAlignment(Qt::AlignRight);
     chart->legend()->setShowToolTips(true);
