@@ -58,6 +58,7 @@
 nmfDatabase::nmfDatabase() {
 
     db = QSqlDatabase::addDatabase("QMYSQL");
+//    db = QSqlDatabase::addDatabase("QSQLITE");
 
     FunctionMap["Application"]          = createApplication;          //  0 of 39
     FunctionMap["ForeEnergyDens"]       = createForeEnergyDens;       //  1 of 39

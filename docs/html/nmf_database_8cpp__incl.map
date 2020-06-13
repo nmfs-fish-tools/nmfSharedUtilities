@@ -1,8 +1,8 @@
 <map id="nmfDatabase/nmfDatabase.cpp" name="nmfDatabase/nmfDatabase.cpp">
-<area shape="rect" id="node3" href="$nmf_database_8h.html" title="This file contains the database API implementation (currently implemented for MySQL). " alt="" coords="3202,155,3313,181"/>
-<area shape="rect" id="node26" href="$nmf_constants_8h.html" title="Definition for common constants used in MultiSpecies tools. " alt="" coords="1368,237,1483,263"/>
-<area shape="rect" id="node27" href="$nmf_utils_8h.html" title="Definition for common typedefs and structs (i.e., non&#45;graphical) " alt="" coords="1127,155,1209,181"/>
-<area shape="rect" id="node40" href="$nmf_utils_qt_8h.html" title="Definition for Qt widgets and functions that operate on widgets. " alt="" coords="2029,80,2125,107"/>
-<area shape="rect" id="node4" href="$nmf_logger_8h.html" title="Definition for the MultiSpecies Logger class. " alt="" coords="2330,237,2425,263"/>
-<area shape="rect" id="node33" href="$nmf_constants_m_s_v_p_a_8h.html" title="Definition for constants used in MSVPA_X2 tool. " alt="" coords="1779,237,1941,263"/>
+<area shape="rect" id="node3" href="$nmf_database_8h.html" title="This file contains the database API implementation (currently implemented for MySQL). " alt="" coords="2217,155,2328,181"/>
+<area shape="rect" id="node25" href="$nmf_constants_8h.html" title="Definition for common constants used in MultiSpecies tools. " alt="" coords="1892,237,2007,263"/>
+<area shape="rect" id="node26" href="$nmf_utils_8h.html" title="Definition for common typedefs and structs (i.e., non&#45;graphical) " alt="" coords="1103,155,1186,181"/>
+<area shape="rect" id="node39" href="$nmf_utils_qt_8h.html" title="Definition for Qt widgets and functions that operate on widgets. " alt="" coords="2783,80,2879,107"/>
+<area shape="rect" id="node4" href="$nmf_logger_8h.html" title="Definition for the MultiSpecies Logger class. " alt="" coords="2325,237,2420,263"/>
+<area shape="rect" id="node32" href="$nmf_constants_m_s_v_p_a_8h.html" title="Definition for constants used in MSVPA_X2 tool. " alt="" coords="1471,237,1634,263"/>
 </map>

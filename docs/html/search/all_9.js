@@ -1,6 +1,7 @@
 var searchData=
 [
   ['nmfsharedutilities',['nmfSharedUtilities',['../index.html',1,'']]],
+  ['nmfsharedutilities',['nmfSharedUtilities',['../md_README.html',1,'']]],
   ['nlregout',['NLRegOut',['../struct_n_l_reg_out.html',1,'']]],
   ['nmfabundance',['nmfAbundance',['../classnmf_abundance.html',1,'']]],
   ['nmfchartbar',['nmfChartBar',['../classnmf_chart_bar.html',1,'']]],
