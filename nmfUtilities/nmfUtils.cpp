@@ -507,10 +507,11 @@ isOSWindows()
 std::string
 getOS()
 {
-    #ifdef _WIN32
-        return "Windows 32-bit";
-    #elif _WIN64
+    // The _WIN64 check should be first, since _WIN32 is 1 for both 32-bit and 64-bit
+    #ifdef _WIN64
         return "Windows 64-bit";
+    #elif _WIN32
+        return "Windows 32-bit";
     #elif __APPLE__ || __MACH__
         return "Mac OSX";
     #elif __linux__
