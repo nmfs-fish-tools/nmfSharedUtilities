@@ -28,18 +28,6 @@
  */
 
 
-/**
- * @mainpage Overview
- *
- * @section intro Introduction
- *
- * This is the introduction.
- *
- * @section Background
- *
- * This is some background.
- *
- */
 //#define DEBUG 1
 #ifdef DEBUG
 #define DEBUG_MSG(str) do { std::cout << str << std::endl;} while (false)
@@ -57,54 +45,56 @@
 
 nmfDatabase::nmfDatabase() {
 
-    db = QSqlDatabase::addDatabase("QMYSQL");
-//    db = QSqlDatabase::addDatabase("QSQLITE");
+    m_dbName.clear();
+//  db = QSqlDatabase::addDatabase("QMYSQL");
+//  db = QSqlDatabase::addDatabase("QSQLITE");
 
-    FunctionMap["Application"]          = createApplication;          //  0 of 39
-    FunctionMap["ForeEnergyDens"]       = createForeEnergyDens;       //  1 of 39
-    FunctionMap["ForeOutput"]           = createForeOutput;           //  2 of 39
-    FunctionMap["ForePredGrowth"]       = createForePredGrowth;       //  3 of 39
-    FunctionMap["ForePredVonB"]         = createForePredVonB;         //  4 of 39
-    FunctionMap["ForeSRQ"]              = createForeSRQ;              //  5 of 39
-    FunctionMap["ForeSRR"]              = createForeSRR;              //  6 of 39
-    FunctionMap["ForeSuitPreyBiomass"]  = createForeSuitPreyBiomass;  //  7 of 39
-    FunctionMap["Forecasts"]            = createForecasts;            //  8 of 39
-    FunctionMap["MSVPAEnergyDens"]      = createMSVPAEnergyDens;      //  9 of 39
-    FunctionMap["MSVPAOthPrey"]         = createMSVPAOthPrey;         // 10 of 39
-    FunctionMap["MSVPAOthPreyAnn"]      = createMSVPAOthPreyAnn;      // 11 of 39
-    FunctionMap["MSVPASeasBiomass"]     = createMSVPASeasBiomass;     // 12 of 39
-    FunctionMap["MSVPASeasInfo"]        = createMSVPASeasInfo;        // 13 of 39
-    FunctionMap["MSVPASizePref"]        = createMSVPASizePref;        // 14 of 39
-    FunctionMap["MSVPASpaceO"]          = createMSVPASpaceO;          // 15 of 39
-    FunctionMap["MSVPAStomCont"]        = createMSVPAStomCont;        // 16 of 39
-    FunctionMap["MSVPASuitPreyBiomass"] = createMSVPASuitPreyBiomass; // 17 of 39
-    FunctionMap["MSVPAlist"]            = createMSVPAlist;            // 18 of 39
-    FunctionMap["MSVPAprefs"]           = createMSVPAprefs;           // 19 of 39
-    FunctionMap["MSVPAspecies"]         = createMSVPAspecies;         // 20 of 39
-    FunctionMap["OthPredSizeData"]      = createOthPredSizeData;      // 21 of 39
-    FunctionMap["OtherPredBM"]          = createOtherPredBM;          // 22 of 39
-    FunctionMap["OtherPredSpecies"]     = createOtherPredSpecies;     // 23 of 39
-    FunctionMap["SSVPAAgeM"]            = createSSVPAAgeM;            // 24 of 39
-    FunctionMap["ScenarioF"]            = createScenarioF;            // 25 of 39
-    FunctionMap["ScenarioOthPred"]      = createScenarioOthPred;      // 26 of 39
-    FunctionMap["ScenarioOthPrey"]      = createScenarioOthPrey;      // 27 of 39
-    FunctionMap["ScenarioRec"]          = createScenarioRec;          // 28 of 39
-    FunctionMap["Scenarios"]            = createScenarios;            // 29 of 39
-    FunctionMap["SpeCatch"]             = createSpeCatch;             // 30 of 39
-    FunctionMap["SpeMaturity"]          = createSpeMaturity;          // 31 of 39
-    FunctionMap["SpeSSVPA"]             = createSpeSSVPA;             // 32 of 39
-    FunctionMap["SpeSize"]              = createSpeSize;              // 33 of 39
-    FunctionMap["SpeTuneCatch"]         = createSpeTuneCatch;         // 34 of 39
-    FunctionMap["SpeTuneEffort"]        = createSpeTuneEffort;        // 35 of 39
-    FunctionMap["SpeWeight"]            = createSpeWeight;            // 36 of 39
-    FunctionMap["SpeXSAData"]           = createSpeXSAData;           // 37 of 39
-    FunctionMap["SpeXSAIndices"]        = createSpeXSAIndices;        // 38 of 39
-    FunctionMap["Species"]              = createSpecies;              // 39 of 39
+    m_FunctionMap["Application"]          = createApplication;          //  0 of 39
+    m_FunctionMap["ForeEnergyDens"]       = createForeEnergyDens;       //  1 of 39
+    m_FunctionMap["ForeOutput"]           = createForeOutput;           //  2 of 39
+    m_FunctionMap["ForePredGrowth"]       = createForePredGrowth;       //  3 of 39
+    m_FunctionMap["ForePredVonB"]         = createForePredVonB;         //  4 of 39
+    m_FunctionMap["ForeSRQ"]              = createForeSRQ;              //  5 of 39
+    m_FunctionMap["ForeSRR"]              = createForeSRR;              //  6 of 39
+    m_FunctionMap["ForeSuitPreyBiomass"]  = createForeSuitPreyBiomass;  //  7 of 39
+    m_FunctionMap["Forecasts"]            = createForecasts;            //  8 of 39
+    m_FunctionMap["MSVPAEnergyDens"]      = createMSVPAEnergyDens;      //  9 of 39
+    m_FunctionMap["MSVPAOthPrey"]         = createMSVPAOthPrey;         // 10 of 39
+    m_FunctionMap["MSVPAOthPreyAnn"]      = createMSVPAOthPreyAnn;      // 11 of 39
+    m_FunctionMap["MSVPASeasBiomass"]     = createMSVPASeasBiomass;     // 12 of 39
+    m_FunctionMap["MSVPASeasInfo"]        = createMSVPASeasInfo;        // 13 of 39
+    m_FunctionMap["MSVPASizePref"]        = createMSVPASizePref;        // 14 of 39
+    m_FunctionMap["MSVPASpaceO"]          = createMSVPASpaceO;          // 15 of 39
+    m_FunctionMap["MSVPAStomCont"]        = createMSVPAStomCont;        // 16 of 39
+    m_FunctionMap["MSVPASuitPreyBiomass"] = createMSVPASuitPreyBiomass; // 17 of 39
+    m_FunctionMap["MSVPAlist"]            = createMSVPAlist;            // 18 of 39
+    m_FunctionMap["MSVPAprefs"]           = createMSVPAprefs;           // 19 of 39
+    m_FunctionMap["MSVPAspecies"]         = createMSVPAspecies;         // 20 of 39
+    m_FunctionMap["OthPredSizeData"]      = createOthPredSizeData;      // 21 of 39
+    m_FunctionMap["OtherPredBM"]          = createOtherPredBM;          // 22 of 39
+    m_FunctionMap["OtherPredSpecies"]     = createOtherPredSpecies;     // 23 of 39
+    m_FunctionMap["SSVPAAgeM"]            = createSSVPAAgeM;            // 24 of 39
+    m_FunctionMap["ScenarioF"]            = createScenarioF;            // 25 of 39
+    m_FunctionMap["ScenarioOthPred"]      = createScenarioOthPred;      // 26 of 39
+    m_FunctionMap["ScenarioOthPrey"]      = createScenarioOthPrey;      // 27 of 39
+    m_FunctionMap["ScenarioRec"]          = createScenarioRec;          // 28 of 39
+    m_FunctionMap["Scenarios"]            = createScenarios;            // 29 of 39
+    m_FunctionMap["SpeCatch"]             = createSpeCatch;             // 30 of 39
+    m_FunctionMap["SpeMaturity"]          = createSpeMaturity;          // 31 of 39
+    m_FunctionMap["SpeSSVPA"]             = createSpeSSVPA;             // 32 of 39
+    m_FunctionMap["SpeSize"]              = createSpeSize;              // 33 of 39
+    m_FunctionMap["SpeTuneCatch"]         = createSpeTuneCatch;         // 34 of 39
+    m_FunctionMap["SpeTuneEffort"]        = createSpeTuneEffort;        // 35 of 39
+    m_FunctionMap["SpeWeight"]            = createSpeWeight;            // 36 of 39
+    m_FunctionMap["SpeXSAData"]           = createSpeXSAData;           // 37 of 39
+    m_FunctionMap["SpeXSAIndices"]        = createSpeXSAIndices;        // 38 of 39
+    m_FunctionMap["Species"]              = createSpecies;              // 39 of 39
 }
 
 void
 nmfDatabase::nmfSetDatabase(std::string newDatabaseName)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.setDatabaseName(newDatabaseName.c_str());
 
     bool dbOpenOK = db.open();
@@ -116,6 +106,7 @@ nmfDatabase::nmfSetDatabase(std::string newDatabaseName)
 std::string
 nmfDatabase::nmfLastError()
 {
+    QSqlDatabase db = QSqlDatabase::database();
     return db.lastError().text().toStdString();
 }
 
@@ -127,24 +118,26 @@ nmfDatabase::nmfOpenDatabase(
         const std::string& password,
         std::string&       errorMsg)
 {
+    QSqlDatabase db = QSqlDatabase::database();
+
     errorMsg.clear();
     db.setHostName(hostName.c_str());
     db.setUserName(userName.c_str());
     db.setPassword(password.c_str());
 
     bool dbOpenOK = db.open();
+
     if (! dbOpenOK) {
         errorMsg = db.lastError().text().toStdString();
-       //std::cout << "Error: Couldn't open database." << std::endl;
-       return false;
+        return false;
     }
     return true;
-    //nmfStartTransaction();
 }
 
 std::string
 nmfDatabase::nmfGetCurrentDatabase()
 {
+    QSqlDatabase db = QSqlDatabase::database();
     std::string qry = "SELECT database();";
     std::string databaseName;
     QSqlQuery query;
@@ -162,6 +155,7 @@ nmfDatabase::nmfGetCurrentDatabase()
 std::vector<std::string>
 nmfDatabase::nmfGetDatabaseNames()
 {
+    QSqlDatabase db = QSqlDatabase::database();
     std::vector<std::string> databaseNames;
     std::string qry = "SHOW databases";
     std::set<std::string> exclusionSet = { "information_schema", "mysql", "performance_schema", "sys" };
@@ -186,6 +180,7 @@ nmfDatabase::nmfGetDatabaseNames()
 std::vector<std::string>
 nmfDatabase::nmfGetTableNames()
 {
+    QSqlDatabase db = QSqlDatabase::database();
     std::vector<std::string> tableNames;
     std::string qry = "SHOW tables";
 
@@ -209,10 +204,12 @@ nmfDatabase::nmfGetTableNames()
 
 
 void
-nmfDatabase::nmfCloseDatabase() {
+nmfDatabase::nmfCloseDatabase()
+{
     //db.rollback();
     //db.commit();
 
+    QSqlDatabase db = QSqlDatabase::database();
     QString dbToClose = db.databaseName();
 std::cout << "Trying to close: " << dbToClose.toStdString() << std::endl;
     db.close();
@@ -220,12 +217,17 @@ std::cout << "Trying to close: " << dbToClose.toStdString() << std::endl;
 }
 
 void
-nmfDatabase::nmfSaveDatabase() {
+nmfDatabase::nmfSaveDatabase()
+{
+    QSqlDatabase db = QSqlDatabase::database();
     db.commit();
 }
 
 void
-nmfDatabase::nmfStartTransaction() {
+nmfDatabase::nmfStartTransaction()
+{
+    QSqlDatabase db = QSqlDatabase::database();
+
     bool supportsTransactions = db.transaction();
     if (!supportsTransactions) {
         std::cout <<
@@ -241,10 +243,9 @@ nmfDatabase::nmfStartTransaction() {
 std::string
 nmfDatabase::nmfUpdateDatabase(std::string qry)
 {
-//std::cout << "Updating database..." << std::endl;
-
+    //std::cout << "Updating database..." << std::endl;
     //nmfStartTransaction();
-
+    QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery retv = db.exec(QString::fromStdString(qry));
 
     //nmfSaveDatabase();
@@ -514,36 +515,44 @@ nmfDatabase::nmfQueryDatabase(
         const std::vector<std::string> &fields,
         const bool setNullToBlank)
 {
-  std::map< std::string, std::vector<std::string> > dataMap;
-  std::string errorMsg;
 
-  QSqlQuery query;
-  if (query.exec(qry.c_str()))
-  {
-      while (query.next())
-      {
-          int i=0;
-          for (std::string field : fields) {
-              if (setNullToBlank && query.value(i).isNull()) {
-                  dataMap[field].push_back("");
-              } else {
-                  // RSK
-                  //qDebug() << field.c_str() << "," << query.value(0).toString() << "," << query.value(1).toString();
-                  dataMap[field].push_back(query.value(i).toString().toStdString());
-              }
-              ++i;
-          }
-      }
-  } else {
-      errorMsg = db.lastError().text().toStdString();
-      if (errorMsg.empty())
-          std::cout << "Error: Check for loaded database." << std::endl;
-      else if (errorMsg != " ")
-          std::cout << "Error: " << errorMsg << std::endl;
-  }
-  //qDebug() << "Query complete.";
+    std::map< std::string, std::vector<std::string> > dataMap;
+    std::string errorMsg;
 
-  return dataMap;
+    QSqlQuery query;
+    if (query.exec(qry.c_str()))
+    {
+        while (query.next())
+        {
+            int i=0;
+            for (std::string field : fields) {
+                if (setNullToBlank && query.value(i).isNull()) {
+                    dataMap[field].push_back("");
+                } else {
+                    // RSK
+                    //qDebug() << field.c_str() << "," << query.value(0).toString() << "," << query.value(1).toString();
+                    dataMap[field].push_back(query.value(i).toString().toStdString());
+                }
+                ++i;
+            }
+        }
+    } else {
+        QSqlDatabase db = QSqlDatabase::database();
+        errorMsg = db.lastError().text().toStdString();
+        if (errorMsg.empty()) {
+            std::cout << "Error: Check for loaded database." << std::endl;
+        } else if (errorMsg != " ") {
+            // This prints an errorMsg on startup of:
+            // Error: Access denied for user ... (using password: NO) QMYSQL: Unable to connect
+            // which came from:
+            //  nmfSetup_Tab2::loadDatabaseNames ->
+            //    nmfDatabase::getListOfAuthenticatedDatabaseNames
+            // std::cout << "Error: " << errorMsg << std::endl;
+        }
+    }
+    //qDebug() << "Query complete.";
+
+    return dataMap;
 }
 
 void
@@ -1008,6 +1017,20 @@ nmfDatabase::nmfQueryMsvpaPreyList(
 } // end nmfQueryMsvpaPreyList
 
 
+void
+nmfDatabase::nmfDeleteConnection()
+{
+    QSqlDatabase db = QSqlDatabase::database();
+    db.removeDatabase(db.connectionName());
+}
+
+void
+nmfDatabase::nmfSetConnectionByName(QString name)
+{
+    m_dbName = name;
+}
+
+
 // -------------------------- MSSPM -----------------------
 
 /*
@@ -1197,7 +1220,7 @@ nmfDatabase::importDatabase(QWidget*     widget,
         args << "-u" + QString::fromStdString(Username)
              << "-p" + QString::fromStdString(Password)
              << fileDatabaseName;
-        widget->setCursor(Qt::WaitCursor);
+        QApplication::setOverrideCursor(Qt::WaitCursor);
         myProcess = new QProcess(0);
         myProcess->setStandardInputFile(InputFileName);
         myProcess->start("mysql", args);
@@ -1205,7 +1228,7 @@ nmfDatabase::importDatabase(QWidget*     widget,
             myProcess->kill();
             delete myProcess;
         }
-        widget->setCursor(Qt::ArrowCursor);
+        QApplication::restoreOverrideCursor();
     }
 
     return true;

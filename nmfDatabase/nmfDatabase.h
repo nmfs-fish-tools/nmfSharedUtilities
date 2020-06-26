@@ -55,6 +55,7 @@
 */
 #include <boost/numeric/ublas/matrix.hpp>
 
+#include <QApplication>
 #include <QSqlDatabase>
 #include <QSqlQueryModel>
 #include <QSqlQuery>
@@ -76,12 +77,12 @@
  */
 class nmfDatabase {
 
+private:
+    QString m_dbName;
     std::map<QString, void(*)(
-
             QString &table,
             QString &cmd
-
-            )> FunctionMap;
+            )> m_FunctionMap;
 
 public:
 
@@ -134,6 +135,18 @@ public:
                         int&         NumLengthBins);
     std::vector<std::string> nmfGetTableNames();
     int getSpeciesIndex(std::string SpeciesName);
+
+
+    /**
+     * @brief Closes the Qt SQL database connection
+     */
+    void nmfDeleteConnection();
+
+    /**
+     * @brief Sets the database connection by using the passed in connection name
+     * @param name - database connection name (i.e., something like: qt_sql_default_connection)
+     */
+    void nmfSetConnectionByName(QString name);
 
     void nmfSetDatabase(std::string newDatabaseName);
 
@@ -393,6 +406,7 @@ public:
     // The following are all of the create-if-table-doesn't-exist functions.
     void checkForTableAndCreate(QString table);
 
+
     // Made the following static for use in a function map
     static void createApplication(QString &table, QString &qcmd);
     static void createForeEnergyDens(QString &table, QString &qcmd);
@@ -436,9 +450,6 @@ public:
     static void createSpecies(QString &table, QString &qcmd);
 
 
-private:
-
-    QSqlDatabase db;
 
 };
 

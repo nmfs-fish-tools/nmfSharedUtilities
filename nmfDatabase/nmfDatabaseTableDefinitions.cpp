@@ -38,7 +38,7 @@
 
 void nmfDatabase::checkForTableAndCreate(QString table)
 {
-    if (FunctionMap.find(table) == FunctionMap.end()) {
+    if (m_FunctionMap.find(table) == m_FunctionMap.end()) {
 
         std::cout << "Warning: \"" << table.toStdString() << "\" not found in nmfDatabase::FunctionMap" << std::endl;
 
@@ -46,7 +46,7 @@ void nmfDatabase::checkForTableAndCreate(QString table)
         std::string errorMsg;
         QString qcmd;
 
-        FunctionMap[table](table,qcmd);
+        m_FunctionMap[table](table,qcmd);
 
         errorMsg = nmfUpdateDatabase(qcmd.toStdString());
         if (errorMsg != " ") {

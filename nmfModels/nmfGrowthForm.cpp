@@ -14,33 +14,33 @@ nmfGrowthForm::nmfGrowthForm(std::string growthType)
 void
 nmfGrowthForm::loadParameterRanges(
         std::vector<std::pair<double,double> >& parameterRanges,
-        Data_Struct& beeStruct)
+        Data_Struct& dataStruct)
 {
     std::pair<double,double> aPair;
 
     if (m_type == "Linear") {
-        for (unsigned i=0; i<beeStruct.GrowthRateMin.size(); ++i) {
-            aPair = std::make_pair(beeStruct.GrowthRateMin[i],
-                                   beeStruct.GrowthRateMax[i]);
+        for (unsigned i=0; i<dataStruct.GrowthRateMin.size(); ++i) {
+            aPair = std::make_pair(dataStruct.GrowthRateMin[i],
+                                   dataStruct.GrowthRateMax[i]);
             parameterRanges.emplace_back(aPair);
             m_parameterRanges.emplace_back(aPair);
         }
-        m_numberParameters = beeStruct.GrowthRateMin.size();
+        m_numberParameters = dataStruct.GrowthRateMin.size();
     } else if (m_type == "Logistic") {
-        for (unsigned i=0; i<beeStruct.GrowthRateMin.size(); ++i) {
-            aPair = std::make_pair(beeStruct.GrowthRateMin[i],
-                                   beeStruct.GrowthRateMax[i]);
+        for (unsigned i=0; i<dataStruct.GrowthRateMin.size(); ++i) {
+            aPair = std::make_pair(dataStruct.GrowthRateMin[i],
+                                   dataStruct.GrowthRateMax[i]);
             parameterRanges.emplace_back(aPair);
             m_parameterRanges.emplace_back(aPair);
         }
-        for (unsigned i=0; i<beeStruct.CarryingCapacityMin.size(); ++i) {
-            aPair = std::make_pair(beeStruct.CarryingCapacityMin[i],
-                                   beeStruct.CarryingCapacityMax[i]);
+        for (unsigned i=0; i<dataStruct.CarryingCapacityMin.size(); ++i) {
+            aPair = std::make_pair(dataStruct.CarryingCapacityMin[i],
+                                   dataStruct.CarryingCapacityMax[i]);
             parameterRanges.emplace_back(aPair);
             m_parameterRanges.emplace_back(aPair);
         }
-        m_numberParameters = beeStruct.GrowthRateMin.size() +
-                             beeStruct.CarryingCapacityMin.size();
+        m_numberParameters = dataStruct.GrowthRateMin.size() +
+                             dataStruct.CarryingCapacityMin.size();
 
     }
 }

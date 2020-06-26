@@ -120,6 +120,7 @@ nmfDatabaseConnectDialog::callback_connectToDatabase()
   m_password = Password;
 
   m_openOKBool = m_databasePtr->nmfOpenDatabase(Hostname,Username,Password,errorMsg);
+
   if (! m_openOKBool) {
       QMessageBox msgBox;
       msgBox.setWindowTitle("Error");
@@ -135,7 +136,6 @@ nmfDatabaseConnectDialog::callback_connectToDatabase()
   } else {
       close();
   }
-
 }
 
 std::string
