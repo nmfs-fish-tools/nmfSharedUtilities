@@ -140,6 +140,13 @@ std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bott
 <tr class="memitem:a4b7d96ea488150fd52fb59130d421bca"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4b7d96ea488150fd52fb59130d421bca"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>getSpeciesIndex</b> (std::string SpeciesName)</td></tr>
 <tr class="separator:a4b7d96ea488150fd52fb59130d421bca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f26341765fcad94330ae70af00edbbf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7f26341765fcad94330ae70af00edbbf"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a7f26341765fcad94330ae70af00edbbf">nmfDeleteConnection</a> ()</td></tr>
+<tr class="memdesc:a7f26341765fcad94330ae70af00edbbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes the Qt SQL database connection. <br /></td></tr>
+<tr class="separator:a7f26341765fcad94330ae70af00edbbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21018ee23526c437236b37d17073655a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a21018ee23526c437236b37d17073655a">nmfSetConnectionByName</a> (QString name)</td></tr>
+<tr class="memdesc:a21018ee23526c437236b37d17073655a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the database connection by using the passed in connection name.  <a href="#a21018ee23526c437236b37d17073655a">More...</a><br /></td></tr>
+<tr class="separator:a21018ee23526c437236b37d17073655a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ec2255e0dad04e7e419ede2ffe47693"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4ec2255e0dad04e7e419ede2ffe47693"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>nmfSetDatabase</b> (std::string newDatabaseName)</td></tr>
 <tr class="separator:a4ec2255e0dad04e7e419ede2ffe47693"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -221,9 +228,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>getAlgorithmIdentifie
 <tr class="memitem:a256ab68950c4ba80f9da31cfd780510a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a256ab68950c4ba80f9da31cfd780510a"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>getRunLengthAndStartYear</b> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;ProjectSettingsConfig, int &amp;RunLength, int &amp;StartYear)</td></tr>
 <tr class="separator:a256ab68950c4ba80f9da31cfd780510a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c406fedb319097c7d403242594d12dd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3c406fedb319097c7d403242594d12dd"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>importDatabase</b> (QWidget *widget, <a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, std::string &amp;ProjectDir, std::string &amp;Username, std::string &amp;Password)</td></tr>
-<tr class="separator:a3c406fedb319097c7d403242594d12dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa82f3cede3d12c690bbe700458ab520"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afa82f3cede3d12c690bbe700458ab520"></a>
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>importDatabase</b> (QWidget *widget, <a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, std::string &amp;ProjectDir, std::string &amp;Username, std::string &amp;Password)</td></tr>
+<tr class="separator:afa82f3cede3d12c690bbe700458ab520"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f416af659d65b0fc07262dc84ff0723"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3f416af659d65b0fc07262dc84ff0723"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>exportDatabase</b> (QWidget *widget, std::string &amp;ProjectDir, std::string &amp;Username, std::string &amp;Password, std::string &amp;ProjectDatabase)</td></tr>
 <tr class="separator:a3f416af659d65b0fc07262dc84ff0723"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -634,6 +641,30 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a21018ee23526c437236b37d17073655a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfDatabase::nmfSetConnectionByName </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the database connection by using the passed in connection name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>- database connection name (i.e., something like: qt_sql_default_connection) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

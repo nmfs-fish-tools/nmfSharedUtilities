@@ -347,11 +347,11 @@ public:
             int &RunLength,
             int &StartYear);
 
-    bool importDatabase(QWidget*     widget,
-                        nmfLogger*   logger,
-                        std::string& ProjectDir,
-                        std::string& Username,
-                        std::string& Password);
+    QString importDatabase(QWidget*     widget,
+                           nmfLogger*   logger,
+                           std::string& ProjectDir,
+                           std::string& Username,
+                           std::string& Password);
 
     void exportDatabase(QWidget*     widget,
                         std::string& ProjectDir,

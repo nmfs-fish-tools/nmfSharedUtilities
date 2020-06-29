@@ -1143,7 +1143,7 @@ nmfDatabase::getAlgorithmIdentifiers(
 // -------------------------- General -----------------------
 
 
-bool
+QString
 nmfDatabase::importDatabase(QWidget*     widget,
                             nmfLogger*   logger,
                             std::string& ProjectDir,
@@ -1169,13 +1169,14 @@ nmfDatabase::importDatabase(QWidget*     widget,
         "Import Database",
         databaseDir.toLatin1(),
         "*.sql");
-    if (InputFileName.isEmpty() || InputFileName.contains(" ")) {
-        msg  = "Error: Illegal filename found (" + InputFileName + "). ";
+    QString fileDatabaseName = QFileInfo(InputFileName).baseName();
+    if (fileDatabaseName.isEmpty() || fileDatabaseName.contains(" ")) {
+        msg  = "Error: Illegal filename found (" + fileDatabaseName + "). ";
         msg += "Filename may not contain spaces.";
         logger->logMsg(nmfConstants::Error,msg.toStdString());
-        return false;
+        return "";
     }
-    QString fileDatabaseName = QFileInfo(InputFileName).baseName();
+
 
     // Does database already exist?
     bool databaseAlreadyExists = false;
@@ -1204,14 +1205,14 @@ nmfDatabase::importDatabase(QWidget*     widget,
                                       QMessageBox::No|QMessageBox::Yes,
                                       QMessageBox::Yes);
         if (reply == QMessageBox::No)
-            return false;
+            return "";
     } else {
         // create the database
         cmd = "CREATE DATABASE " + fileDatabaseName;
         errorMsg = nmfUpdateDatabase(cmd.toStdString());
         if (errorMsg != " ") {
             logger->logMsg(nmfConstants::Error,"Error: nmfUtilsQt::importDatabase: "+errorMsg);
-            return false;
+            return "";
         }
     }
 
@@ -1231,7 +1232,7 @@ nmfDatabase::importDatabase(QWidget*     widget,
         QApplication::restoreOverrideCursor();
     }
 
-    return true;
+    return fileDatabaseName;
 }
 
 
