@@ -15,6 +15,7 @@
 #include <QAction>
 #include <QShortcut>
 #include <QComboBox>
+#include <stdio.h>
 
 nmfFileViewer::nmfFileViewer(QWidget* parent,
                             const char* fileName) : QDialog(parent)
@@ -455,7 +456,7 @@ bool allMaxCellsGreaterThanMinCells(
 /*
  * This doesn't actually rename a file.  It copies the first
  * to the second.  I did this as the std:rename function didn't
- * work on Windows...and a system() mv command caused a shell
+ * work on Windows...and a system mv command caused a shell
  * to pop up briefly over the UI.
  */
 int rename(QString fileIn, QString fileOut)
@@ -903,9 +904,11 @@ checkForAndDeleteLogFiles(QString name,
     size_t NumLogFiles = 0;
     boost::filesystem::path logDir(logDirName);
     boost::filesystem::recursive_directory_iterator endIter;
+    std::vector<std::string> filenames;
 
     for (boost::filesystem::recursive_directory_iterator it(logDir); it != endIter; ++it) {
         ++NumLogFiles;
+        filenames.push_back(it->path().string());
     }
 
     // Ask if user wants to remove log files if there are a multiple of
@@ -921,9 +924,15 @@ checkForAndDeleteLogFiles(QString name,
                              QMessageBox::No|QMessageBox::Yes,
                              QMessageBox::Yes);
         if (reply == QMessageBox::Yes) {
-            std::string cmd = "rm " + logFilter;
-            int retv = system(cmd.c_str());
-            if (retv >= 0) {
+            bool delOK = true;
+            bool allDeleted = true;
+            for (std::string filename : filenames) {
+                delOK = (std::remove(filename.c_str()) == 0);
+                if (!delOK) {
+                    allDeleted = false;
+                }
+            }
+            if (allDeleted) {
                 QMessageBox::information(0,
                              title,
                              "\nLog files deleted.\n",
@@ -1011,8 +1020,7 @@ std::cout << "Removing: " << fileToRemove.toStdString() << std::endl;
     } else {
         fileToRemove = QDir("~/.config/NOAA").filePath(appName+".conf");
 std::cout << "Removing: " << fileToRemove.toStdString() << std::endl;
-        std::string cmd = "rm " + fileToRemove.toStdString();
-        system(cmd.c_str());
+        std::remove(fileToRemove.toLatin1());
     }
     return true;
 }

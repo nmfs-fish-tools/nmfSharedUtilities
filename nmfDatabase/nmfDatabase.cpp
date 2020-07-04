@@ -41,7 +41,7 @@
 #include "nmfConstants.h"
 #include "nmfUtils.h"
 #include "nmfUtilsQt.h"
-
+#include <stdio.h>
 
 nmfDatabase::nmfDatabase() {
 
@@ -1155,8 +1155,7 @@ nmfDatabase::importDatabase(QWidget*     widget,
     QString msg;
     QString cmd;
     QString existingDatabase;
-    bool okToRead=true;
-    QProcess *myProcess;
+    QProcess process;
     QStringList args;
     std::string errorMsg="";
 
@@ -1216,22 +1215,54 @@ nmfDatabase::importDatabase(QWidget*     widget,
         }
     }
 
-    // Done with all checks so go ahead with the mysql import.
-    if (okToRead) {
-        args << "-u" + QString::fromStdString(Username)
-             << "-p" + QString::fromStdString(Password)
-             << fileDatabaseName;
-        QApplication::setOverrideCursor(Qt::WaitCursor);
-        myProcess = new QProcess(0);
-        myProcess->setStandardInputFile(InputFileName);
-        myProcess->start("mysql", args);
-        if (! myProcess->waitForFinished(-1)) { // -1 so it won't timeout
-            myProcess->kill();
-            delete myProcess;
-        }
-        QApplication::restoreOverrideCursor();
-    }
 
+    //
+    // Don't delete.
+    // Using QProcess was causing issues, here's an alternative approach.
+    //
+    // Create MySQL import command to be placed into a batch file
+    std::string mysqlCmd = "mysql -u" + Username + " -p" + Password + " " +
+            fileDatabaseName.toStdString() + " < " +
+            InputFileName.toStdString();
+    std::string importBatchFile = "mysql_import.bat";
+
+    // Delete any existing import batch file
+    std::remove(importBatchFile.c_str());
+
+    // Write import batch file
+    std::ofstream fout(importBatchFile);
+    fout << mysqlCmd;
+    fout.close();
+
+    QMessageBox::information(widget,"Import Database",
+                             "\nThis may take a minute or two. Please be patient.\n");
+
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+
+    // Execute import batch file
+    QProcess::execute(importBatchFile.c_str());
+
+    // Remove import batch file
+    std::remove(importBatchFile.c_str());
+
+    QApplication::restoreOverrideCursor();
+
+/*
+    //
+    // This doesn't always work on Windows.  Using the above logic instead
+    //
+    // Done with all checks so go ahead with the mysql import.
+    args << "-u" + QString::fromStdString(Username)
+         << "-p" + QString::fromStdString(Password)
+         << fileDatabaseName;
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    process.setStandardInputFile(InputFileName);
+    process.start("mysql", args);
+    if (! process.waitForFinished(-1)) { // -1 so it won't timeout
+        process.kill();
+    }
+    QApplication::restoreOverrideCursor();
+*/
     return fileDatabaseName;
 }
 
@@ -1246,7 +1277,6 @@ nmfDatabase::exportDatabase(QWidget*     widget,
     QString msg;
     QStringList args;
     QMessageBox::StandardButton reply;
-//    QProcess *myProcess;
     bool okToWrite = false;
 
     // Get the databases full path. Create it if it doesn't yet exist.
@@ -1287,18 +1317,10 @@ nmfDatabase::exportDatabase(QWidget*     widget,
 
     // Done with all checks so go ahead with the mysqldump.
     if (okToWrite) {
-        widget->setCursor(Qt::WaitCursor);
-        args << "-u" + QString::fromStdString(Username)
-             << "-p" + QString::fromStdString(Password)
-             << QString::fromStdString(ProjectDatabase);
-//        myProcess = new QProcess(0);
-//        myProcess->setStandardOutputFile(OutputFileName);
-//        myProcess->start("mysqldump", args);
-//        if (! myProcess->waitForFinished(-1)) { // -1 so it won't timeout
-//            myProcess->kill();
-//            delete myProcess;
-//        }
-        QProcess dumpProcess(0);
+
+        QApplication::setOverrideCursor(Qt::WaitCursor);
+
+        QProcess dumpProcess;
         QStringList args;
         args << "-u" + QString::fromStdString(Username)
              << "-p" + QString::fromStdString(Password)
@@ -1309,8 +1331,8 @@ nmfDatabase::exportDatabase(QWidget*     widget,
             dumpProcess.kill();
         }
 
+        QApplication::restoreOverrideCursor();
 
-        widget->setCursor(Qt::ArrowCursor);
     }
 
 }

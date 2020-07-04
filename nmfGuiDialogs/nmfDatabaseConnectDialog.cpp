@@ -118,9 +118,7 @@ nmfDatabaseConnectDialog::callback_connectToDatabase()
   std::string Session  = sessionLE->text().toStdString();
   m_username = Username;
   m_password = Password;
-
   m_openOKBool = m_databasePtr->nmfOpenDatabase(Hostname,Username,Password,errorMsg);
-
   if (! m_openOKBool) {
       QMessageBox msgBox;
       msgBox.setWindowTitle("Error");
@@ -134,7 +132,10 @@ nmfDatabaseConnectDialog::callback_connectToDatabase()
       msgBox.setStandardButtons(QMessageBox::Ok);
       msgBox.exec();
   } else {
+std::cout << 222 << std::endl;
       close();
+std::cout << 333 << std::endl;
+
   }
 }
 
