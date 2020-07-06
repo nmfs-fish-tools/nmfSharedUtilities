@@ -95,11 +95,13 @@ void
 nmfDatabase::nmfSetDatabase(std::string newDatabaseName)
 {
     QSqlDatabase db = QSqlDatabase::database();
-    db.setDatabaseName(newDatabaseName.c_str());
 
-    bool dbOpenOK = db.open();
-    if (! dbOpenOK) {
-       std::cout << "Error: Couldn't open database: " << newDatabaseName << std::endl;
+    if (databaseExists(newDatabaseName)) {
+        db.setDatabaseName(newDatabaseName.c_str());
+        bool dbOpenOK = db.open();
+        if (! dbOpenOK) {
+            std::cout << "Error: Couldn't open database: " << newDatabaseName << std::endl;
+        }
     }
 }
 
@@ -1142,6 +1144,25 @@ nmfDatabase::getAlgorithmIdentifiers(
 
 // -------------------------- General -----------------------
 
+bool
+nmfDatabase::databaseExists(std::string dbName)
+{
+    bool retv = false;
+    std::string existingDatabase;
+    std::vector<std::string> fields = { "Database" };
+    std::string queryStr = "SHOW databases";
+    std::map<std::string, std::vector<std::string> > dataMap;
+
+    dataMap = nmfQueryDatabase(queryStr, fields);
+    for (unsigned int i = 0; i < dataMap["Database"].size(); ++i) {
+        existingDatabase = dataMap["Database"][i];
+        if (dbName == existingDatabase) {
+            retv = true;
+            break;
+        }
+    }
+    return retv;
+}
 
 QString
 nmfDatabase::importDatabase(QWidget*     widget,
@@ -1176,20 +1197,8 @@ nmfDatabase::importDatabase(QWidget*     widget,
         return "";
     }
 
-
     // Does database already exist?
-    bool databaseAlreadyExists = false;
-    std::vector<std::string> fields = { "Database" };
-    std::string queryStr = "SHOW databases";
-    std::map<std::string, std::vector<std::string> > dataMap;
-    dataMap = nmfQueryDatabase(queryStr, fields);
-    for (unsigned int i = 0; i < dataMap["Database"].size(); ++i) {
-        existingDatabase = QString::fromStdString(dataMap["Database"][i]);
-        if (fileDatabaseName == existingDatabase) {
-            databaseAlreadyExists = true;
-            break;
-        }
-    }
+    bool databaseAlreadyExists = databaseExists(fileDatabaseName.toStdString());
     QApplication::flush();
 
     // If database exists, ask user if they want it overwritten.
@@ -1215,54 +1224,50 @@ nmfDatabase::importDatabase(QWidget*     widget,
         }
     }
 
+    if (nmfUtils::isOSWindows())
+    {
+        // This seems to work for Windows.
+        // Create MySQL import command to be placed into a batch file
+        boost::replace_all(Password,"!","\!");
+        std::string mysqlCmd = "mysql -u" + Username + " -p" + Password + " " +
+                fileDatabaseName.toStdString() + " < " +
+                InputFileName.toStdString();
+        std::string importBatchFile = "mysql_import.bat";
 
-    //
-    // Don't delete.
-    // Using QProcess was causing issues, here's an alternative approach.
-    //
-    // Create MySQL import command to be placed into a batch file
-    std::string mysqlCmd = "mysql -u" + Username + " -p" + Password + " " +
-            fileDatabaseName.toStdString() + " < " +
-            InputFileName.toStdString();
-    std::string importBatchFile = "mysql_import.bat";
+        // Delete any existing import batch file
+        std::remove(importBatchFile.c_str());
 
-    // Delete any existing import batch file
-    std::remove(importBatchFile.c_str());
+        // Write import batch file
+        std::ofstream fout(importBatchFile);
+        fout << mysqlCmd;
+        fout.close();
 
-    // Write import batch file
-    std::ofstream fout(importBatchFile);
-    fout << mysqlCmd;
-    fout.close();
+        QMessageBox::information(widget,"Import Database",
+                                 "\nThis may take a minute or two. Please be patient.\n");
 
-    QMessageBox::information(widget,"Import Database",
-                             "\nThis may take a minute or two. Please be patient.\n");
+        QApplication::setOverrideCursor(Qt::WaitCursor);
 
-    QApplication::setOverrideCursor(Qt::WaitCursor);
+        // Execute import batch file
+        QProcess::execute(importBatchFile.c_str());
 
-    // Execute import batch file
-    QProcess::execute(importBatchFile.c_str());
+        // Remove import batch file
+        std::remove(importBatchFile.c_str());
 
-    // Remove import batch file
-    std::remove(importBatchFile.c_str());
-
-    QApplication::restoreOverrideCursor();
-
-/*
-    //
-    // This doesn't always work on Windows.  Using the above logic instead
-    //
-    // Done with all checks so go ahead with the mysql import.
-    args << "-u" + QString::fromStdString(Username)
-         << "-p" + QString::fromStdString(Password)
-         << fileDatabaseName;
-    QApplication::setOverrideCursor(Qt::WaitCursor);
-    process.setStandardInputFile(InputFileName);
-    process.start("mysql", args);
-    if (! process.waitForFinished(-1)) { // -1 so it won't timeout
-        process.kill();
+        QApplication::restoreOverrideCursor();
+    } else {
+        // This seems to work for Linux.
+        // Done with all checks so go ahead with the mysql import.
+        args << "-u" + QString::fromStdString(Username)
+             << "-p" + QString::fromStdString(Password)
+             << fileDatabaseName;
+        QApplication::setOverrideCursor(Qt::WaitCursor);
+        process.setStandardInputFile(InputFileName);
+        process.start("mysql", args);
+        if (! process.waitForFinished(-1)) { // -1 so it won't timeout
+            process.kill();
+        }
+        QApplication::restoreOverrideCursor();
     }
-    QApplication::restoreOverrideCursor();
-*/
     return fileDatabaseName;
 }
 

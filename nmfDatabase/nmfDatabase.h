@@ -330,6 +330,8 @@ public:
 
     void createScenarioMap(std::map<QString,QStringList>& ScenarioForecastMap);
 
+    bool databaseExists(std::string dbName);
+
     bool getAlgorithmIdentifiers(
             QWidget*     widget,
             nmfLogger*   logger,
