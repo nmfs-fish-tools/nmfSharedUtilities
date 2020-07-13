@@ -132,9 +132,9 @@ nmfDatabaseConnectDialog::callback_connectToDatabase()
       msgBox.setStandardButtons(QMessageBox::Ok);
       msgBox.exec();
   } else {
-std::cout << 222 << std::endl;
+std::cout << "nmfDatabaseConnectDialog::callback_connectToDatabase: before close" << std::endl;
       close();
-std::cout << 333 << std::endl;
+std::cout << "nmfDatabaseConnectDialog::callback_connectToDatabase: after close" << std::endl;
 
   }
 }

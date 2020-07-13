@@ -495,6 +495,38 @@ convertToScientificNotation(double val)
     return streamDouble.str();
 }
 
+void
+getFilesWithExt(std::string path,
+                std::string ext,
+                std::vector<std::string>& filesToCopy)
+{
+    boost::filesystem::recursive_directory_iterator it(path);
+    boost::filesystem::recursive_directory_iterator endit;
+
+    filesToCopy.clear();
+
+    while (it != endit) {
+        if (boost::filesystem::is_regular_file(*it) &&
+            it->path().extension() == ext) {
+            filesToCopy.push_back(it->path().string());
+        }
+        ++it;
+    }
+}
+
+void
+copyFile(std::string fileA,
+         std::string fileB)
+{
+    std::ifstream fileIn( fileA, std::ios::in);
+    std::ofstream fileOut(fileB, std::ios::out);
+
+    fileOut << fileIn.rdbuf();
+
+    fileIn.close();
+    fileOut.close();
+}
+
 bool
 isOSWindows()
 {

@@ -15,6 +15,7 @@
 #include <cmath>
 #include <iomanip>
 #include <iostream>
+#include <fstream>
 #include <map>
 #include <random>
 #include <string>
@@ -31,6 +32,7 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/range/algorithm_ext/erase.hpp>
+#include <boost/filesystem.hpp>
 
 typedef boost::multi_array<double, 3> Boost3DArrayDouble;
 typedef boost::multi_array<double, 4> Boost4DArrayDouble;
@@ -248,11 +250,26 @@ namespace nmfUtils {
      */
     double convertWeightUnitsToValue(std::string weightUnits);
     /**
+     * @brief Copies the first file contents to the second file
+     * @param fileA : file to be copied from
+     * @param fileB : file to be copied to
+     */
+    void copyFile(std::string fileA, std::string fileB);
+    /**
      * @brief Calculates the time elapsed between the passed startTime and the currentTime
      * @param startTime : The start time with which to calculate the elapsed time
      * @return The number of hours, minutes, or seconds that have elapsed (in a string format)
      */
     std::string elapsedTime(std::chrono::time_point<std::chrono::high_resolution_clock> startTime);
+    /**
+     * @brief Returns the files in the passed directory having the given extension
+     * @param path : directory in which to search for files
+     * @param ext : extension of files to list
+     * @param filesToCopy : the list of files having the given extension in the given directory
+     */
+    void getFilesWithExt(std::string path,
+                         std::string ext,
+                         std::vector<std::string>& filesToCopy);
     /**
      * @brief Gets the maximum element value from the passed matrix
      * @param mat : matrix in which to find the maximum value
