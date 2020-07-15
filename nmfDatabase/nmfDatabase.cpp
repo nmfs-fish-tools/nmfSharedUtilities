@@ -1230,8 +1230,8 @@ nmfDatabase::importDatabase(QWidget*     widget,
         // Create MySQL import command to be placed into a batch file
         boost::replace_all(Password,"!","\!");
         std::string mysqlCmd = "mysql -u" + Username + " -p" + Password + " " +
-                fileDatabaseName.toStdString() + " < " +
-                InputFileName.toStdString();
+                fileDatabaseName.toStdString() + " < \"" +
+                InputFileName.toStdString() + "\"";
         std::string importBatchFile = "mysql_import.bat";
 
         // Delete any existing import batch file
