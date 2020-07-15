@@ -1156,7 +1156,7 @@ nmfDatabase::databaseExists(std::string dbName)
     dataMap = nmfQueryDatabase(queryStr, fields);
     for (unsigned int i = 0; i < dataMap["Database"].size(); ++i) {
         existingDatabase = dataMap["Database"][i];
-        if (dbName == existingDatabase) {
+        if (QString::fromStdString(dbName).toLower() == QString::fromStdString(existingDatabase).toLower()) {
             retv = true;
             break;
         }
