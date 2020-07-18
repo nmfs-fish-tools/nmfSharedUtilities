@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['nmfchartsurface',['nmfChartSurface',['../classnmf_chart_surface.html#a1e57b8bde4950b6a20a52aa7f0ff7a4c',1,'nmfChartSurface']]],
   ['nmfclosedatabase',['nmfCloseDatabase',['../classnmf_database.html#a7ce2984b0ef9ca78567febe737494e91',1,'nmfDatabase']]],
   ['nmfdatabase',['nmfDatabase',['../classnmf_database.html#a216c3bf6d2ede2b60aed4c9956d541c3',1,'nmfDatabase']]],
   ['nmfdeleteconnection',['nmfDeleteConnection',['../classnmf_database.html#a7f26341765fcad94330ae70af00edbbf',1,'nmfDatabase']]],

@@ -91,6 +91,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">nmfChartSurface Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>This class allows the user to display a 3d surface using the passed arguments for customization.  
+ <a href="classnmf_chart_surface.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="nmf_chart_surface_8h_source.html">nmfChartSurface.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for nmfChartSurface:</div>
 <div class="dyncontent">
@@ -104,9 +109,9 @@ Collaboration diagram for nmfChartSurface:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7528d3cde7bba3843b804d76e5347002"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7528d3cde7bba3843b804d76e5347002"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>nmfChartSurface</b> (Q3DSurface *graph3D, const QString &amp;xTitle, const QString &amp;yTitle, const QString &amp;zTitle, const QString &amp;xLabelFormat, const QString &amp;zLabelFormat, const boost::numeric::ublas::matrix&lt; double &gt; &amp;rowValues, const boost::numeric::ublas::matrix&lt; double &gt; &amp;columnValues, const boost::numeric::ublas::matrix&lt; double &gt; &amp;zValues, const bool &amp;showShadow)</td></tr>
-<tr class="separator:a7528d3cde7bba3843b804d76e5347002"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e57b8bde4950b6a20a52aa7f0ff7a4c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_chart_surface.html#a1e57b8bde4950b6a20a52aa7f0ff7a4c">nmfChartSurface</a> (Q3DSurface *graph3D, const QString &amp;xTitle, const QString &amp;yTitle, const QString &amp;zTitle, const QString &amp;xLabelFormat, const QString &amp;zLabelFormat, const bool &amp;reverseXAxis, const bool &amp;reverseZAxis, const boost::numeric::ublas::matrix&lt; double &gt; &amp;rowValues, const boost::numeric::ublas::matrix&lt; double &gt; &amp;columnValues, const boost::numeric::ublas::matrix&lt; double &gt; &amp;heightValues, const bool &amp;showShadow)</td></tr>
+<tr class="memdesc:a1e57b8bde4950b6a20a52aa7f0ff7a4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describes a 3d surface plot.  <a href="#a1e57b8bde4950b6a20a52aa7f0ff7a4c">More...</a><br /></td></tr>
+<tr class="separator:a1e57b8bde4950b6a20a52aa7f0ff7a4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49c31c105ab0b68fb02ac6fd6baeedd9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a49c31c105ab0b68fb02ac6fd6baeedd9"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_chart_surface.html#a49c31c105ab0b68fb02ac6fd6baeedd9">selectCenterPoint</a> ()</td></tr>
 <tr class="memdesc:a49c31c105ab0b68fb02ac6fd6baeedd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects the center point on the 3d surface with Qt's blue marker ball. <br /></td></tr>
@@ -116,6 +121,114 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:abac17654e54bc2b0387ff51e0cde7898"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects the minimum point on the 3d surface with Qt's blue marker ball. <br /></td></tr>
 <tr class="separator:abac17654e54bc2b0387ff51e0cde7898"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class allows the user to display a 3d surface using the passed arguments for customization. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a1e57b8bde4950b6a20a52aa7f0ff7a4c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nmfChartSurface::nmfChartSurface </td>
+          <td>(</td>
+          <td class="paramtype">Q3DSurface *&#160;</td>
+          <td class="paramname"><em>graph3D</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>xTitle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>yTitle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>zTitle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>xLabelFormat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>zLabelFormat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>reverseXAxis</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>reverseZAxis</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rowValues</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>columnValues</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>heightValues</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>showShadow</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Describes a 3d surface plot. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">graph3D</td><td>: the Qt 3D surface widget </td></tr>
+    <tr><td class="paramname">xTitle</td><td>: title for x-axis </td></tr>
+    <tr><td class="paramname">yTitle</td><td>: title for y-axis (the vertical axis) </td></tr>
+    <tr><td class="paramname">zTitle</td><td>: title for z_axis </td></tr>
+    <tr><td class="paramname">xLabelFormat</td><td>: format for the labels along the x-axis </td></tr>
+    <tr><td class="paramname">zLabelFormat</td><td>: format for the labels along the z-axis </td></tr>
+    <tr><td class="paramname">reverseXAxis</td><td>: boolean signifying if the user wants the x-axis reversed </td></tr>
+    <tr><td class="paramname">reverseZAxis</td><td>: boolean signifying if the user wants the z-axis reversed </td></tr>
+    <tr><td class="paramname">rowValues</td><td>: matrix containing the x values of the plot </td></tr>
+    <tr><td class="paramname">columnValues</td><td>: matrix containing the z values of the plot </td></tr>
+    <tr><td class="paramname">heightValues</td><td>: matrix containing the height values of plot (i.e. the y values) </td></tr>
+    <tr><td class="paramname">showShadow</td><td>: boolean signifying if the user wants to see the surface plot's shadow </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>nmfCharts/<a class="el" href="nmf_chart_surface_8h_source.html">nmfChartSurface.h</a></li>
 <li>nmfCharts/nmfChartSurface.cpp</li>

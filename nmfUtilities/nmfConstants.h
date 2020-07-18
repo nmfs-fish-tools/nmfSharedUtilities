@@ -67,6 +67,8 @@ namespace nmfConstants
     EXTERN const bool   NotChecked              = false;
     EXTERN const bool   ShowShadow              = true;
     EXTERN const bool   DontShowShadow          = false;
+    EXTERN const bool   ReverseAxis             = true;
+    EXTERN const bool   DontReverseAxis         = false;
 
     EXTERN const double KgToLbs       = 2.20462;
     EXTERN const double MortalityMax  = 5.0;

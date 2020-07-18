@@ -10,6 +10,8 @@ nmfChartSurface::nmfChartSurface(Q3DSurface* graph3D,
                                  const QString& zTitle,
                                  const QString& xLabelFormat,
                                  const QString& zLabelFormat,
+                                 const bool&    reverseXAxis,
+                                 const bool&    reverseZAxis,
                                  const boost::numeric::ublas::matrix<double> &rowValues,
                                  const boost::numeric::ublas::matrix<double> &columnValues,
                                  const boost::numeric::ublas::matrix<double> &heightValues,
@@ -80,6 +82,10 @@ nmfChartSurface::nmfChartSurface(Q3DSurface* graph3D,
     } else {
         graph3D->axisY()->setRange(0,1);
     }
+
+    // Reverse the points along the axis if desired
+    graph3D->axisX()->setReversed(reverseXAxis);
+    graph3D->axisZ()->setReversed(reverseZAxis);
 
     // Customize the surface label
     m_surfaceSeries->setItemLabelFormat(QStringLiteral("(@xLabel, @zLabel): @yLabel"));

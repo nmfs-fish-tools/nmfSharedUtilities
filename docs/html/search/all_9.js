@@ -9,7 +9,7 @@ var searchData=
   ['nmfchartline',['nmfChartLine',['../classnmf_chart_line.html',1,'']]],
   ['nmfchartlinewithscatter',['nmfChartLineWithScatter',['../classnmf_chart_line_with_scatter.html',1,'']]],
   ['nmfchartscatter',['nmfChartScatter',['../classnmf_chart_scatter.html',1,'']]],
-  ['nmfchartsurface',['nmfChartSurface',['../classnmf_chart_surface.html',1,'']]],
+  ['nmfchartsurface',['nmfChartSurface',['../classnmf_chart_surface.html',1,'nmfChartSurface'],['../classnmf_chart_surface.html#a1e57b8bde4950b6a20a52aa7f0ff7a4c',1,'nmfChartSurface::nmfChartSurface()']]],
   ['nmfclosedatabase',['nmfCloseDatabase',['../classnmf_database.html#a7ce2984b0ef9ca78567febe737494e91',1,'nmfDatabase']]],
   ['nmfcompetitionform',['nmfCompetitionForm',['../classnmf_competition_form.html',1,'']]],
   ['nmfconstants_2eh',['nmfConstants.h',['../nmf_constants_8h.html',1,'']]],
