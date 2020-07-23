@@ -1290,17 +1290,26 @@ nmfDatabase::exportDatabase(QWidget*     widget,
         QDir().mkpath(databaseDir);
     }
 
-    // Show file dialog and have user enter in the output .sql file name.
-    QString selFilter = "Database Files (*.sql)";
-    QString OutputFileName = QFileDialog::getSaveFileName(widget,
-        "Export Database",
-        databaseDir.toLatin1(),
-        "*.sql",
-        &selFilter,
-        QFileDialog::DontConfirmOverwrite);
-    if (OutputFileName.isEmpty())
-        return;
-    QApplication::flush();
+    QString OutputFileName;
+
+    if (ExportDatabaseWithFileName)
+    {
+         OutputFileName = QString::fromStdString(ProjectDatabase);
+    }
+    else
+    {
+        // Show file dialog and have user enter in the output .sql file name.
+        QString selFilter = "Database Files (*.sql)";
+        OutputFileName = QFileDialog::getSaveFileName(widget,
+            "Export Database",
+            databaseDir.toLatin1(),
+            "*.sql",
+            &selFilter,
+            QFileDialog::DontConfirmOverwrite);
+        if (OutputFileName.isEmpty())
+            return;
+        QApplication::flush();
+    }
 
     // Check for correct file extension and add one if it's not there or is incorrect.
     QFileInfo fi(OutputFileName);
