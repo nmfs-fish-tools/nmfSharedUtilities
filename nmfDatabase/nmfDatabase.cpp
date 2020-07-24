@@ -1274,6 +1274,7 @@ nmfDatabase::importDatabase(QWidget*     widget,
 
 void
 nmfDatabase::exportDatabase(QWidget*     widget,
+                            const bool   ExportDatabaseWithFileName,
                             std::string& ProjectDir,
                             std::string& Username,
                             std::string& Password,
