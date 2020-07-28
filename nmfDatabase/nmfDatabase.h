@@ -356,7 +356,6 @@ public:
                            std::string& Password);
 
     void exportDatabase(QWidget*     widget,
-						const bool   ExportDatabaseWithFileName,
                         std::string& ProjectDir,
                         std::string& Username,
                         std::string& Password,

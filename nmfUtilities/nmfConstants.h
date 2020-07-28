@@ -25,8 +25,6 @@ namespace nmfConstants
     EXTERN const bool   NoSignal = false;
     EXTERN const bool   RotateLabels = true;
     EXTERN const bool   DontRotateLabels = false;
-    EXTERN const bool   ExportDatabaseWithFileName = true;
-    EXTERN const bool   ExportDatabaseWithoutFileName = false;
 
     EXTERN const int    TYPE_PREDATOR       = 0;
     EXTERN const int    TYPE_PREY           = 1;

@@ -1274,7 +1274,6 @@ nmfDatabase::importDatabase(QWidget*     widget,
 
 void
 nmfDatabase::exportDatabase(QWidget*     widget,
-                            const bool   ExportDatabaseWithFileName,
                             std::string& ProjectDir,
                             std::string& Username,
                             std::string& Password,
@@ -1287,30 +1286,23 @@ nmfDatabase::exportDatabase(QWidget*     widget,
 
     // Get the databases full path. Create it if it doesn't yet exist.
     QString databaseDir = QDir(ProjectDir.c_str()).filePath("databases");
+
     if (! QDir(databaseDir).exists()) {
         QDir().mkpath(databaseDir);
     }
 
-    QString OutputFileName;
-
-    if (ExportDatabaseWithFileName)
-    {
-         OutputFileName = QString::fromStdString(ProjectDatabase);
-    }
-    else
-    {
-        // Show file dialog and have user enter in the output .sql file name.
-        QString selFilter = "Database Files (*.sql)";
-        OutputFileName = QFileDialog::getSaveFileName(widget,
-            "Export Database",
-            databaseDir.toLatin1(),
-            "*.sql",
-            &selFilter,
-            QFileDialog::DontConfirmOverwrite);
-        if (OutputFileName.isEmpty())
-            return;
-        QApplication::flush();
-    }
+    // Show file dialog and have user enter in the output .sql file name.
+    QString selFilter = "Database Files (*.sql)";
+    QString filePath = databaseDir.append(QString::fromStdString("/" + ProjectDatabase));
+    QString OutputFileName = QFileDialog::getSaveFileName(widget,
+        "Export Database",
+        filePath.toLatin1(),
+        "*.sql",
+        &selFilter,
+        QFileDialog::DontConfirmOverwrite);
+    if (OutputFileName.isEmpty())
+        return;
+    QApplication::flush();
 
     // Check for correct file extension and add one if it's not there or is incorrect.
     QFileInfo fi(OutputFileName);
@@ -1350,6 +1342,8 @@ nmfDatabase::exportDatabase(QWidget*     widget,
 
     }
 
+    QMessageBox::information(widget, "Export Database",
+                             QString::fromStdString("\nDatabase " + ProjectDatabase + " has been successfully exported.\n"));
 }
 
 bool
