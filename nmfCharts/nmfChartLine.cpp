@@ -147,7 +147,10 @@ nmfChartLine::populateChart(
         (lineColorName.isEmpty()))
     {
         showLegend = false;
+    } else {
+        showLegend = true;
     }
+
     chart->legend()->setVisible(showLegend);
     chart->legend()->setAlignment(Qt::AlignRight);
     chart->legend()->setShowToolTips(true);
