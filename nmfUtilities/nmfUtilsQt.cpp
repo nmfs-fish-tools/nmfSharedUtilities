@@ -1119,7 +1119,7 @@ void saveModelToCSVFile(std::string projectDir,
 
 void checkForAndReplaceInvalidCharacters(QString &stringValue)
 {
-    stringValue.remove(QRegExp("[^a-zA-Z\\d\\s]"));
+    stringValue.remove(QRegExp("[^a-zA-Z_\\d\\s]"));
     stringValue.replace(" ","_");
 }
 
