@@ -119,12 +119,30 @@ nmfChartMovableLine::calculateYearlyPoints()
 
     // This is just for the 2 point line...need to improve it for an n-point line
     // y = mx + b
+
+    double m;
+    double b;
+
     m_yearlyPoints.clear();
-    double m = (lastPoint.y()-firstPoint.y()) / (lastPoint.x()-firstPoint.x());
-    double b = firstPoint.y() - m * (firstPoint.x()-m_MinX);
-    for (int i=int(firstPoint.x())-m_MinX; i<=int(lastPoint.x())-m_MinX; ++i) {
-        m_yearlyPoints.push_back(QPointF(i,m*i+b));
+    for (int i = 1; i < numPoints; ++i)
+    {
+        m = (points[i-1].y() - points[i].y()) / (points[i-1].x() - points[i].x());
+        b = points[i-1].y() - m * (points[i-1].x() - m_MinX);
+
+        for(int j = int(points[i-1].x()) - m_MinX; j < int(points[i].x()) - m_MinX; ++j)
+        {
+            m_yearlyPoints.push_back(QPointF(j, m*j+b));
+        }
     }
+    m_yearlyPoints.push_back(lastPoint);
+
+//    m_yearlyPoints.clear();
+//    m = (lastPoint.y()-firstPoint.y()) / (lastPoint.x()-firstPoint.x());
+//    b = firstPoint.y() - m * (firstPoint.x()-m_MinX);
+//    for (int i=int(firstPoint.x())-m_MinX; i<=int(lastPoint.x())-m_MinX; ++i) {
+//        m_yearlyPoints.push_back(QPointF(i,m*i+b));
+//        std::cout << i << std::endl;
+//    }
 }
 
 double
