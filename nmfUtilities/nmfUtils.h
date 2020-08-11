@@ -161,6 +161,8 @@ struct Data_Struct {
     boost::numeric::ublas::matrix<double> Catch;
     boost::numeric::ublas::matrix<double> Effort;
     boost::numeric::ublas::matrix<double> Exploitation;
+//    boost::numeric::ublas::vector<double> InitialBiomassMin;
+//    boost::numeric::ublas::vector<double> InitialBiomassMax;
     boost::numeric::ublas::vector<double> GrowthRateMin;
     boost::numeric::ublas::vector<double> GrowthRateMax;
     boost::numeric::ublas::vector<double> CarryingCapacityInitial;

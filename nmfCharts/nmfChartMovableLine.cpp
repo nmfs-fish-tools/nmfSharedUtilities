@@ -4,9 +4,16 @@
 
 QT_CHARTS_USE_NAMESPACE
 
-nmfChartMovableLine::nmfChartMovableLine()
+nmfChartMovableLine::nmfChartMovableLine(
+        std::string mainTitle,
+        std::string xTitle,
+        std::string yTitle)
 {
     m_chart = new QChart();
+    m_chart->legend()->hide();
+    m_MainTitle = mainTitle;
+    m_XTitle    = xTitle;
+    m_YTitle    = yTitle;
 }
 
 nmfChartMovableLine::~nmfChartMovableLine()
@@ -16,18 +23,24 @@ nmfChartMovableLine::~nmfChartMovableLine()
 
 void
 nmfChartMovableLine::populateChart(
-        QWidget *parent,
-        QWidget *window)
+        QWidget* parent,
+        QWidget* window,
+        int&     startYear,
+        int&     endYear)
 {
     MovableLineEventFilter* movableLineEventFilter = new MovableLineEventFilter();
 
+    m_MinX = startYear,
+    m_MaxX = endYear;
+
     QVBoxLayout* vLayout = new QVBoxLayout();
-    m_chartView = new QChartView(m_chart);
+    m_chartView          = new QChartView(m_chart);
 
     vLayout->addWidget(m_chartView);
     parent->setLayout(vLayout);
 
     m_pointPressed = false;
+    m_yearlyPoints.clear();
 
     m_scatter = new QScatterSeries();
     m_scatter->setName("Data Plot");
@@ -40,10 +53,10 @@ nmfChartMovableLine::populateChart(
     m_line = new QLineSeries();
     m_line->setName("Slope Line");
 
-    for (int i = MinX; i <= MaxX; i = i + 8)
+    for (int i : {startYear,endYear})
     {
         *m_scatter << QPoint(i, 1);
-        *m_line << QPoint(i, 1);
+        *m_line    << QPoint(i, 1);
     }
 
     QValueAxis* chartVAxis = new QValueAxis();
@@ -54,9 +67,9 @@ nmfChartMovableLine::populateChart(
 
     QValueAxis* chartHAxis = new QValueAxis();
     QString xLabelFormat = "%i";
-    chartHAxis->setMin(MinX);
-    chartHAxis->setMax(MaxX);
-    chartHAxis->setRange(MinX, MaxX);
+    chartHAxis->setMin(m_MinX);
+    chartHAxis->setMax(m_MaxX);
+    chartHAxis->setRange(m_MinX, m_MaxX);
     chartHAxis->setLabelFormat(xLabelFormat);
     chartHAxis->setTickCount(5);
 
@@ -65,6 +78,9 @@ nmfChartMovableLine::populateChart(
     m_chart->addSeries(m_selectedScatter);
     m_chart->addAxis(chartHAxis, Qt::AlignBottom);
     m_chart->addAxis(chartVAxis, Qt::AlignLeft);
+    m_chart->setTitle(QString::fromStdString(m_MainTitle));
+    m_chart->axisX()->setTitleText(QString::fromStdString(m_XTitle));
+    m_chart->axisY()->setTitleText(QString::fromStdString(m_YTitle));
 
     m_line->attachAxis(chartHAxis);
     m_line->attachAxis(chartVAxis);
@@ -83,6 +99,42 @@ nmfChartMovableLine::populateChart(
             this,               &nmfChartMovableLine::callback_selectedPointsReleased);
     connect(m_line,             &QLineSeries::pressed,
             this,               &nmfChartMovableLine::callback_linePressed);
+}
+
+
+
+void
+nmfChartMovableLine::calculateYearlyPoints()
+{
+    std::vector<QPointF> points;
+    QPointF firstPoint = m_scatter->at(0);
+    QPointF lastPoint  = m_scatter->at(m_scatter->count()-1);
+
+    int numPoints = m_scatter->count();
+    for (int i=0; i<numPoints; ++i) {
+        points.push_back(m_scatter->at(i));
+    }
+
+    // Elliot....tbd
+
+    // This is just for the 2 point line...need to improve it for an n-point line
+    // y = mx + b
+    m_yearlyPoints.clear();
+    double m = (lastPoint.y()-firstPoint.y()) / (lastPoint.x()-firstPoint.x());
+    double b = firstPoint.y() - m * (firstPoint.x()-m_MinX);
+    for (int i=int(firstPoint.x())-m_MinX; i<=int(lastPoint.x())-m_MinX; ++i) {
+        m_yearlyPoints.push_back(QPointF(i,m*i+b));
+    }
+}
+
+double
+nmfChartMovableLine::getYValue(int xvalue)
+{
+    if (xvalue < m_yearlyPoints.size()) {
+        return m_yearlyPoints[xvalue].y();
+    } else {
+        return -1.0;
+    }
 }
 
 double
@@ -158,7 +210,7 @@ nmfChartMovableLine::keyPressEvent(QKeyEvent *event)
         m_selectedScatter->clear();
         m_chart->update();
 
-        for (int i = MinX; i <= MaxX; i = i + 8)
+        for (int i = m_MinX; i <= m_MaxX; i = i + 8)
         {
             *m_scatter << QPoint(i, 1);
             *m_line << QPoint(i, 1);
@@ -231,10 +283,10 @@ nmfChartMovableLine::callback_keyPressed(QKeyEvent *event)
         m_selectedScatter->clear();
         m_chart->update();
 
-        for (int i = MinX; i <= MaxX; i = i + 8)
+        for (int i : {m_MinX,m_MaxX})
         {
             *m_scatter << QPoint(i, 1);
-            *m_line << QPoint(i, 1);
+            *m_line    << QPoint(i, 1);
         }
     }
 }

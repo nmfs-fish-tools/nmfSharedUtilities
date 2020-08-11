@@ -15,12 +15,39 @@ class nmfChartMovableLine : public QObject
 {
     Q_OBJECT
 
+    std::vector<QPointF> m_yearlyPoints;
+
+private:
+    QChart*         m_chart;
+    QChartView*     m_chartView;
+    QPointF         m_currPoint;
+    QScatterSeries* m_scatter;
+    QScatterSeries* m_selectedScatter;
+    QLineSeries*    m_line;
+    bool            m_pointPressed;
+    int             m_MaxX;
+    int             m_MinX;
+    std::string     m_MainTitle;
+    std::string     m_XTitle;
+    std::string     m_YTitle;
+    const int       MaxY = 4;
+    const int       MinY = 0;
+
+
 public:
-    nmfChartMovableLine();
+    nmfChartMovableLine(
+            std::string mainTitle,
+            std::string xTitle,
+            std::string yTitle);
     ~nmfChartMovableLine();
 
-    void populateChart(QWidget *parent, QWidget* window);
+    void populateChart(QWidget *parent,
+                       QWidget* window,
+                       int& startYear,
+                       int& endYear);
     double roundToTenths(double value);
+    void calculateYearlyPoints();
+    double getYValue(int xvalue);
 
 protected:
     /*
@@ -37,18 +64,7 @@ private Q_SLOTS:
     void callback_keyPressed(QKeyEvent *event);
     void callback_mouseMoved(QMouseEvent *event);
 
-private:
-    QChart         *m_chart;
-    QChartView     *m_chartView;
-    QPointF         m_currPoint;
-    QScatterSeries *m_scatter;
-    QScatterSeries *m_selectedScatter;
-    QLineSeries    *m_line;
-    bool m_pointPressed;
-    const int MaxX = 1998;
-    const int MaxY = 4;
-    const int MinX = 1990;
-    const int MinY = 0;
+
 };
 
 class MovableLineEventFilter : public QObject

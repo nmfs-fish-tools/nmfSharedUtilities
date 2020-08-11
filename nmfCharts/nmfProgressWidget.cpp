@@ -1095,5 +1095,31 @@ nmfProgressWidget::readChartDataFile(std::string type,
 } // end readChartDataFile
 
 
+//bool nmfProgressWidget::event(QEvent *event)
+//{
+//    if (event->type() == QEvent::KeyPress) {
+//        QKeyEvent *ke = static_cast<QKeyEvent *>(event);
+//        if (ke->key() == Qt::Key_Tab) {
+//            std::cout << "----------" << std::endl;
+//            return true;
+//        }
+//    } else if (event->type() == QEvent::MouseButtonPress) {
+// //        MyCustomEvent *myEvent = static_cast<MyCustomEvent *>(event);
+//        std::cout << "============" << std::endl;
+//        return true;
+//    }
 
+//    return this->event(event);
+//}
 
+//bool nmfProgressWidget::eventFilter(QObject *obj, QEvent *evt)
+//{
+//std::cout << 111 << std::endl;
+//    if(evt->type() == QEvent::MouseButtonPress)
+//    {
+//        std::cout << 222 << std::endl;
+
+//    }
+
+//    return nmfProgressWidget::eventFilter(obj,evt);
+//}
