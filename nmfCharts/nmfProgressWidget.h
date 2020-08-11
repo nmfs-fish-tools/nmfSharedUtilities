@@ -157,6 +157,10 @@ public:
     void hideLegend();
     void showLegend();
 
+protected:
+//    bool event(QEvent *event);
+//    bool eventFilter(QObject *obj, QEvent *evt);
+
 signals:
     void StopTheRun();
     void RedrawValidPointsOnly(bool checked, bool clear);
