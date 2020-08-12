@@ -78,6 +78,9 @@ nmfChartMovableLine::populateChart(
     m_chart->addSeries(m_selectedScatter);
     m_chart->addAxis(chartHAxis, Qt::AlignBottom);
     m_chart->addAxis(chartVAxis, Qt::AlignLeft);
+    QFont boldFont = m_chart->titleFont();
+    boldFont.setWeight(QFont::Bold);
+    m_chart->setTitleFont(boldFont);
     m_chart->setTitle(QString::fromStdString(m_MainTitle));
     m_chart->axisX()->setTitleText(QString::fromStdString(m_XTitle));
     m_chart->axisY()->setTitleText(QString::fromStdString(m_YTitle));
@@ -238,6 +241,12 @@ nmfChartMovableLine::keyPressEvent(QKeyEvent *event)
     }
 }
 */
+
+void
+nmfChartMovableLine::callback_mouseReleased(QMouseEvent *event)
+{
+   m_pointPressed = false;
+}
 
 void
 nmfChartMovableLine::callback_mouseMoved(QMouseEvent *event)

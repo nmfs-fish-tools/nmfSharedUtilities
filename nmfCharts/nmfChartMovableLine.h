@@ -63,6 +63,7 @@ private Q_SLOTS:
     void callback_linePressed(const QPointF &point);
     void callback_keyPressed(QKeyEvent *event);
     void callback_mouseMoved(QMouseEvent *event);
+    void callback_mouseReleased(QMouseEvent *event);
 
 
 };
