@@ -53,6 +53,13 @@ nmfChartMovableLine::populateChart(
     m_line = new QLineSeries();
     m_line->setName("Slope Line");
 
+    QColor penColor(0, 0, 1);
+    QPen linePen;
+    linePen.setColor(penColor);
+
+    m_scatter->setPen(linePen);
+    m_line->setPen(linePen);
+
     for (int i : {startYear,endYear})
     {
         *m_scatter << QPoint(i, 1);
@@ -84,6 +91,8 @@ nmfChartMovableLine::populateChart(
     m_chart->setTitle(QString::fromStdString(m_MainTitle));
     m_chart->axisX()->setTitleText(QString::fromStdString(m_XTitle));
     m_chart->axisY()->setTitleText(QString::fromStdString(m_YTitle));
+    QMargins chartMargins(35, 10, 20, 10);
+    m_chart->setMargins(chartMargins);
 
     m_line->attachAxis(chartHAxis);
     m_line->attachAxis(chartVAxis);
@@ -109,25 +118,16 @@ nmfChartMovableLine::populateChart(
 void
 nmfChartMovableLine::calculateYearlyPoints()
 {
+    double m;
+    double b;
     std::vector<QPointF> points;
-    QPointF firstPoint = m_scatter->at(0);
     QPointF lastPoint  = m_scatter->at(m_scatter->count()-1);
 
     int numPoints = m_scatter->count();
     for (int i=0; i<numPoints; ++i) {
         points.push_back(m_scatter->at(i));
     }
-
-
-    // This is just for the 2 point line...need to improve it for an n-point line
-    // y = mx + b
-
-    double m;
-    double b;
-
-    // Elliot....tbd
-    // This is just for the 2 point line...need to improve it for an n-point line.
-    // Using y = mx + b to determine intermediate points.
+  
     m_yearlyPoints.clear();
     for (int i = 1; i < numPoints; ++i)
     {
@@ -140,14 +140,6 @@ nmfChartMovableLine::calculateYearlyPoints()
         }
     }
     m_yearlyPoints.push_back(lastPoint);
-
-//    m_yearlyPoints.clear();
-//    m = (lastPoint.y()-firstPoint.y()) / (lastPoint.x()-firstPoint.x());
-//    b = firstPoint.y() - m * (firstPoint.x()-m_MinX);
-//    for (int i=int(firstPoint.x())-m_MinX; i<=int(lastPoint.x())-m_MinX; ++i) {
-//        m_yearlyPoints.push_back(QPointF(i,m*i+b));
-//        std::cout << i << std::endl;
-//    }
 }
 
 double
@@ -273,6 +265,12 @@ nmfChartMovableLine::callback_mouseMoved(QMouseEvent *event)
 }
 
 void
+nmfChartMovableLine::callback_mouseReleased(QMouseEvent *event)
+{
+    m_pointPressed = false;
+}
+
+void
 nmfChartMovableLine::callback_keyPressed(QKeyEvent *event)
 {
     std::cout << "key press event activated" << std::endl;
@@ -328,6 +326,10 @@ nmfChartMovableLine::callback_pointPressed(const QPointF &point)
     m_currPoint = point;
     m_pointPressed = true;
 
+    QColor penColor(0, 1, 0);
+    QPen selectedScatterPen;
+    selectedScatterPen.setColor(penColor);
+    m_selectedScatter->setPen(selectedScatterPen);
     *m_selectedScatter << point;
 }
 
@@ -379,6 +381,13 @@ nmfChartMovableLine::callback_linePressed(const QPointF &point)
 
            m_scatter->clear();
            m_line->clear();
+
+           QColor penColor(0, 0, 1);
+           QPen linePen;
+           linePen.setColor(penColor);
+
+           m_scatter->setPen(linePen);
+           m_line->setPen(linePen);
 
            m_scatter->append(points);
            m_line->append(points);
