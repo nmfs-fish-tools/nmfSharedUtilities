@@ -1475,6 +1475,114 @@ nmfDatabase::getListOfAuthenticatedDatabaseNames(
 }
 
 bool
+nmfDatabase::getForecastInfo(
+        const std::string TableName,
+        const std::string ForecastName,
+        int&         RunLength,
+        int&         StartForecastYear,
+        std::string& Algorithm,
+        std::string& Minimizer,
+        std::string& ObjectiveCriterion,
+        std::string& Scaling,
+        int&         NumRuns)
+{
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+
+    // Find Forecast info
+    fields    = {"ForecastName","Algorithm","Minimizer","ObjectiveCriterion","Scaling","GrowthForm","HarvestForm","WithinGuildCompetitionForm","PredationForm","RunLength","StartYear","EndYear","NumRuns"};
+    queryStr  = "SELECT ForecastName,Algorithm,Minimizer,ObjectiveCriterion,Scaling,GrowthForm,HarvestForm,WithinGuildCompetitionForm,PredationForm,RunLength,StartYear,EndYear,NumRuns FROM " + TableName + " where ";
+    queryStr += "ForecastName = '" + ForecastName + "'";
+    dataMap   = nmfQueryDatabase(queryStr, fields);
+    if (dataMap["ForecastName"].size() != 0) {
+        RunLength          = std::stoi(dataMap["RunLength"][0]);
+        StartForecastYear  = std::stoi(dataMap["StartYear"][0]);
+        // EndYear         = std::stoi(dataMap["EndYear"][0]);
+        Algorithm          = dataMap["Algorithm"][0];
+        Minimizer          = dataMap["Minimizer"][0];
+        ObjectiveCriterion = dataMap["ObjectiveCriterion"][0];
+        Scaling            = dataMap["Scaling"][0];
+        NumRuns            = std::stoi(dataMap["NumRuns"][0]);
+        return true;
+    }
+    return false;
+}
+
+
+bool
+nmfDatabase::getForecastBiomassMonteCarlo(
+        QWidget*           Widget,
+        nmfLogger*         Logger,
+        const std::string& ForecastName,
+        const int&         NumSpecies,
+        const int&         RunLength,
+        const int&         NumRuns,
+        std::string&       Algorithm,
+        std::string&       Minimizer,
+        std::string&       ObjectiveCriterion,
+        std::string&       Scaling,
+        std::vector<boost::numeric::ublas::matrix<double> >& ForecastBiomassMonteCarlo)
+{
+    int m=0;
+    int NumRecords;
+    std::vector<std::string> fields;
+    std::string queryStr;
+    std::string errorMsg;
+    std::map<std::string, std::vector<std::string> > dataMapForecastBiomassMonteCarlo;
+    boost::numeric::ublas::matrix<double> TmpMatrix;
+    QString msg;
+
+    ForecastBiomassMonteCarlo.clear();
+
+    // Load Forecast Biomass data (ie, calculated from estimated parameters r and alpha)
+    fields    = {"ForecastName","RunNum","Algorithm","Minimizer","ObjectiveCriterion","Scaling","SpeName","Year","Value"};
+    queryStr  = "SELECT ForecastName,RunNum,Algorithm,Minimizer,ObjectiveCriterion,Scaling,SpeName,Year,Value FROM ForecastBiomassMonteCarlo";
+    queryStr += " WHERE ForecastName = '" + ForecastName +
+                "' AND Algorithm = '" + Algorithm +
+                "' AND Minimizer = '" + Minimizer +
+                "' AND ObjectiveCriterion = '" + ObjectiveCriterion +
+                "' AND Scaling = '" + Scaling + "'";
+    queryStr += " ORDER BY RunNum,SpeName,Year";
+    dataMapForecastBiomassMonteCarlo = nmfQueryDatabase(queryStr, fields);
+    NumRecords = dataMapForecastBiomassMonteCarlo["SpeName"].size();
+    if (NumRecords == 0) {
+        //m_ChartView2d->hide();
+        errorMsg  = "[Error 1] getForecastBiomassMonteCarlo: No records found in table ForecastBiomass";
+        Logger->logMsg(nmfConstants::Error,errorMsg);
+        msg = "\nNo ForecastBiomass records found.\n\nPlease make sure a Forecast has been run.\n";
+        QMessageBox::warning(Widget, "Warning", msg, QMessageBox::Ok);
+        return false;
+    }
+    if (NumRecords != NumRuns*NumSpecies*(RunLength+1)) {
+        errorMsg  = "[Error 2] getForecastBiomassMonteCarlo: Number of records found (" + std::to_string(NumRecords) + ") in ";
+        errorMsg += "table ForecastBiomass does not equal number of NumRuns*NumSpecies*(RunLength+1) (";
+        errorMsg += std::to_string(NumRuns) + "*";
+        errorMsg += std::to_string(NumSpecies) + "*" + std::to_string((RunLength+1)) + "=";
+        errorMsg += std::to_string(NumRuns*NumSpecies*(RunLength+1)) + ") records";
+        errorMsg += "\n" + queryStr;
+        Logger->logMsg(nmfConstants::Error,errorMsg);
+        return false;
+    }
+
+    // Load data into data structure
+    for (int runNum=0; runNum<NumRuns; ++runNum) {
+        nmfUtils::initialize(TmpMatrix,RunLength+1,NumSpecies);
+        for (int species=0; species<NumSpecies; ++species) {
+            for (int time=0; time<=RunLength; ++time) {
+                TmpMatrix(time,species) = std::stod(dataMapForecastBiomassMonteCarlo["Value"][m++]);
+            }
+        }
+        ForecastBiomassMonteCarlo.push_back(TmpMatrix);
+    }
+
+    return true;
+}
+
+
+
+
+bool
 nmfDatabase::getAllTables(std::vector<std::string>& databaseTables)
 {
     int numTables;
