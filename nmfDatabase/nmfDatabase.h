@@ -124,6 +124,28 @@ public:
                        std::vector<std::string>& species);
     bool getAllGuilds(nmfLogger*  logger,
                       std::vector<std::string>& guilds);
+    bool getForecastInfo(
+            const std::string TableName,
+            const std::string ForecastName,
+            int&         RunLength,
+            int&         StartForecastYear,
+            std::string& Algorithm,
+            std::string& Minimizer,
+            std::string& ObjectiveCriterion,
+            std::string& Scaling,
+            int&         NumRuns);
+    bool getForecastBiomassMonteCarlo(
+            QWidget*           Widget,
+            nmfLogger*         Logger,
+            const std::string& ForecastName,
+            const int&         NumSpecies,
+            const int&         RunLength,
+            const int&         NumRuns,
+            std::string&       Algorithm,
+            std::string&       Minimizer,
+            std::string&       ObjectiveCriterion,
+            std::string&       Scaling,
+            std::vector<boost::numeric::ublas::matrix<double> >& ForecastBiomassMonteCarlo);
     bool getSpeciesData(nmfLogger*   logger,
                         std::string  species,
                         int&         MinAge,

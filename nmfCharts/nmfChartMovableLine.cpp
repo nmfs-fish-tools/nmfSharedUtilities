@@ -115,7 +115,6 @@ nmfChartMovableLine::calculateYearlyPoints()
         points.push_back(m_scatter->at(i));
     }
 
-    // Elliot....tbd
 
     // This is just for the 2 point line...need to improve it for an n-point line
     // y = mx + b
@@ -123,6 +122,9 @@ nmfChartMovableLine::calculateYearlyPoints()
     double m;
     double b;
 
+    // Elliot....tbd
+    // This is just for the 2 point line...need to improve it for an n-point line.
+    // Using y = mx + b to determine intermediate points.
     m_yearlyPoints.clear();
     for (int i = 1; i < numPoints; ++i)
     {
