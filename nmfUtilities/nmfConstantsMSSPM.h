@@ -66,7 +66,7 @@ namespace nmfConstantsMSSPM
      const bool   ShowDiagnosticsChart = true;
      const bool   DontShowDiagnosticsChart = false;
      const bool   ShowBlankFields      = true;
-     const bool   LoadFirstRowOnly         = true;
+     const bool   LoadFirstRowOnly     = true;
      const bool   LoadAllRows          = false;
      const bool   ReadValidPointsOnly  = true;
      const bool   ReadAllPoints        = false;

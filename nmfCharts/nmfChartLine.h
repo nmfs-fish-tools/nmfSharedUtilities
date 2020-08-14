@@ -38,26 +38,25 @@ public:
     virtual ~nmfChartLine() {}
 
     void populateChart(
-            QChart       *chart,
-            std::string  &type,
-            const std::string &style,
-            const bool   &showFirstPoint,
-            const double& XOffset,
-            const bool& XAxisIsInteger,
-            const double& YMinSliderVal,
-            const boost::numeric::ublas::matrix<double> &ChartData,
-            const QStringList &RowLabels,
-            const QStringList &ColumnLabels,
-            std::string  &MainTitle,
-            std::string  &XTitle,
-            std::string  &YTitle,
-            const std::vector<bool> &GridLines,
-            const int    &Theme,
-//          const QColor &DashedLineColor,
-            const QColor& LineColor,
-//          const QList<QColor>& LineColors,
-            const std::string &LineColorName,
-            const double  XInc);
+            QChart*            chart,
+            std::string&       type,
+            const std::string& style,
+            const bool&        ShowFirstPoint,
+            const bool&        ShowLegend,
+            const double&      XOffset,
+            const bool&        XAxisIsInteger,
+            const double&      YMinSliderVal,
+            const boost::numeric::ublas::matrix<double> &YAxisData,
+            const QStringList& RowLabels,
+            const QStringList& ColumnLabels,
+            std::string&       MainTitle,
+            std::string&       XTitle,
+            std::string&       YTitle,
+            const std::vector<bool>& GridLines,
+            const int&         Theme,
+            const QColor&      LineColor,
+            const std::string& LineColorName,
+            const double&      XInc);
 signals:
 
 public slots:
