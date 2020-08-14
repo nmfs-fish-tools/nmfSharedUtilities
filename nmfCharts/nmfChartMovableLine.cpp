@@ -72,6 +72,7 @@ nmfChartMovableLine::populateChart(
     chartHAxis->setRange(m_MinX, m_MaxX);
     chartHAxis->setLabelFormat(xLabelFormat);
     chartHAxis->setTickCount(5);
+    chartHAxis->setMinorTickCount(4);
 
     m_chart->addSeries(m_line);
     m_chart->addSeries(m_scatter);
@@ -84,6 +85,8 @@ nmfChartMovableLine::populateChart(
     m_chart->setTitle(QString::fromStdString(m_MainTitle));
     m_chart->axisX()->setTitleText(QString::fromStdString(m_XTitle));
     m_chart->axisY()->setTitleText(QString::fromStdString(m_YTitle));
+    QMargins chartMargins(35, 10, 20, 10);
+    m_chart->setMargins(chartMargins);
 
     m_line->attachAxis(chartHAxis);
     m_line->attachAxis(chartVAxis);
@@ -109,25 +112,16 @@ nmfChartMovableLine::populateChart(
 void
 nmfChartMovableLine::calculateYearlyPoints()
 {
+    double m;
+    double b;
     std::vector<QPointF> points;
-    QPointF firstPoint = m_scatter->at(0);
     QPointF lastPoint  = m_scatter->at(m_scatter->count()-1);
 
     int numPoints = m_scatter->count();
     for (int i=0; i<numPoints; ++i) {
         points.push_back(m_scatter->at(i));
     }
-
-
-    // This is just for the 2 point line...need to improve it for an n-point line
-    // y = mx + b
-
-    double m;
-    double b;
-
-    // Elliot....tbd
-    // This is just for the 2 point line...need to improve it for an n-point line.
-    // Using y = mx + b to determine intermediate points.
+  
     m_yearlyPoints.clear();
     for (int i = 1; i < numPoints; ++i)
     {
@@ -140,14 +134,6 @@ nmfChartMovableLine::calculateYearlyPoints()
         }
     }
     m_yearlyPoints.push_back(lastPoint);
-
-//    m_yearlyPoints.clear();
-//    m = (lastPoint.y()-firstPoint.y()) / (lastPoint.x()-firstPoint.x());
-//    b = firstPoint.y() - m * (firstPoint.x()-m_MinX);
-//    for (int i=int(firstPoint.x())-m_MinX; i<=int(lastPoint.x())-m_MinX; ++i) {
-//        m_yearlyPoints.push_back(QPointF(i,m*i+b));
-//        std::cout << i << std::endl;
-//    }
 }
 
 double
@@ -164,6 +150,13 @@ double
 nmfChartMovableLine::roundToTenths(double value)
 {
     return double(int (value * 10 + 0.5)) / 10;
+}
+
+void
+nmfChartMovableLine::checkChartBoundaries(QPointF *point)
+{
+    if (point->y() > MaxY) point->setY(MaxY);
+    if (point->y() < MinY) point->setY(MinY);
 }
 
 //void
@@ -245,7 +238,10 @@ nmfChartMovableLine::keyPressEvent(QKeyEvent *event)
 void
 nmfChartMovableLine::callback_mouseReleased(QMouseEvent *event)
 {
-   m_pointPressed = false;
+    m_pointPressed = false;
+
+    m_selectedScatter->clear();
+    m_chart->update();
 }
 
 void
@@ -263,13 +259,13 @@ nmfChartMovableLine::callback_mouseMoved(QMouseEvent *event)
         newCoords.setY((plotTopLeftCoords.y() - pt.y() + plot.height()) / (plot.height() / MaxY));
 
         newCoords.setY(roundToTenths(newCoords.y()));
+        checkChartBoundaries(&newCoords);
 
         m_scatter->replace(m_currPoint, newCoords);
         m_line->replace(m_currPoint, newCoords);
         m_selectedScatter->replace(m_currPoint, newCoords);
         m_currPoint = newCoords;
     }
-
 }
 
 void
@@ -328,6 +324,7 @@ nmfChartMovableLine::callback_pointPressed(const QPointF &point)
     m_currPoint = point;
     m_pointPressed = true;
 
+    m_selectedScatter->clear();
     *m_selectedScatter << point;
 }
 
@@ -337,6 +334,9 @@ nmfChartMovableLine::callback_pointReleased(const QPointF &point)
     std::cout << "point released" << std::endl;
 
     m_pointPressed = false;
+
+    m_selectedScatter->clear();
+    m_chart->update();
 }
 
 void
@@ -379,9 +379,15 @@ nmfChartMovableLine::callback_linePressed(const QPointF &point)
 
            m_scatter->clear();
            m_line->clear();
+           m_selectedScatter->clear();
 
            m_scatter->append(points);
            m_line->append(points);
+           *m_selectedScatter << currPoint;
+
+           m_currPoint = point;
+           m_pointPressed = true;
+
            break;
        }
     }
