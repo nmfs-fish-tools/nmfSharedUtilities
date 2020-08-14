@@ -53,13 +53,6 @@ nmfChartMovableLine::populateChart(
     m_line = new QLineSeries();
     m_line->setName("Slope Line");
 
-    QColor penColor(0, 0, 1);
-    QPen linePen;
-    linePen.setColor(penColor);
-
-    m_scatter->setPen(linePen);
-    m_line->setPen(linePen);
-
     for (int i : {startYear,endYear})
     {
         *m_scatter << QPoint(i, 1);
@@ -79,6 +72,7 @@ nmfChartMovableLine::populateChart(
     chartHAxis->setRange(m_MinX, m_MaxX);
     chartHAxis->setLabelFormat(xLabelFormat);
     chartHAxis->setTickCount(5);
+    chartHAxis->setMinorTickCount(4);
 
     m_chart->addSeries(m_line);
     m_chart->addSeries(m_scatter);
@@ -156,6 +150,13 @@ double
 nmfChartMovableLine::roundToTenths(double value)
 {
     return double(int (value * 10 + 0.5)) / 10;
+}
+
+void
+nmfChartMovableLine::checkChartBoundaries(QPointF *point)
+{
+    if (point->y() > MaxY) point->setY(MaxY);
+    if (point->y() < MinY) point->setY(MinY);
 }
 
 //void
@@ -237,7 +238,10 @@ nmfChartMovableLine::keyPressEvent(QKeyEvent *event)
 void
 nmfChartMovableLine::callback_mouseReleased(QMouseEvent *event)
 {
-   m_pointPressed = false;
+    m_pointPressed = false;
+
+    m_selectedScatter->clear();
+    m_chart->update();
 }
 
 void
@@ -255,19 +259,13 @@ nmfChartMovableLine::callback_mouseMoved(QMouseEvent *event)
         newCoords.setY((plotTopLeftCoords.y() - pt.y() + plot.height()) / (plot.height() / MaxY));
 
         newCoords.setY(roundToTenths(newCoords.y()));
+        checkChartBoundaries(&newCoords);
 
         m_scatter->replace(m_currPoint, newCoords);
         m_line->replace(m_currPoint, newCoords);
         m_selectedScatter->replace(m_currPoint, newCoords);
         m_currPoint = newCoords;
     }
-
-}
-
-void
-nmfChartMovableLine::callback_mouseReleased(QMouseEvent *event)
-{
-    m_pointPressed = false;
 }
 
 void
@@ -326,10 +324,7 @@ nmfChartMovableLine::callback_pointPressed(const QPointF &point)
     m_currPoint = point;
     m_pointPressed = true;
 
-    QColor penColor(0, 1, 0);
-    QPen selectedScatterPen;
-    selectedScatterPen.setColor(penColor);
-    m_selectedScatter->setPen(selectedScatterPen);
+    m_selectedScatter->clear();
     *m_selectedScatter << point;
 }
 
@@ -339,6 +334,9 @@ nmfChartMovableLine::callback_pointReleased(const QPointF &point)
     std::cout << "point released" << std::endl;
 
     m_pointPressed = false;
+
+    m_selectedScatter->clear();
+    m_chart->update();
 }
 
 void
@@ -381,16 +379,15 @@ nmfChartMovableLine::callback_linePressed(const QPointF &point)
 
            m_scatter->clear();
            m_line->clear();
-
-           QColor penColor(0, 0, 1);
-           QPen linePen;
-           linePen.setColor(penColor);
-
-           m_scatter->setPen(linePen);
-           m_line->setPen(linePen);
+           m_selectedScatter->clear();
 
            m_scatter->append(points);
            m_line->append(points);
+           *m_selectedScatter << currPoint;
+
+           m_currPoint = point;
+           m_pointPressed = true;
+
            break;
        }
     }
