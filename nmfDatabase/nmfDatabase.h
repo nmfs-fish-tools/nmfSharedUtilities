@@ -134,6 +134,17 @@ public:
             std::string& ObjectiveCriterion,
             std::string& Scaling,
             int&         NumRuns);
+    bool getForecastBiomass(
+            QWidget*           Widget,
+            nmfLogger*         Logger,
+            const std::string& ForecastName,
+            const int&         NumSpecies,
+            const int&         RunLength,
+            std::string&       Algorithm,
+            std::string&       Minimizer,
+            std::string&       ObjectiveCriterion,
+            std::string&       Scaling,
+            std::vector<boost::numeric::ublas::matrix<double> >& ForecastBiomass);
     bool getForecastBiomassMonteCarlo(
             QWidget*           Widget,
             nmfLogger*         Logger,

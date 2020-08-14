@@ -12,24 +12,25 @@ nmfChartLine::nmfChartLine()
 
 void
 nmfChartLine::populateChart(
-        QChart *chart,
-        std::string &type,
-        const std::string &style,
-        const bool &ShowFirstPoint,
-        const double& XOffset,
-        const bool& XAxisIsInteger,
-        const double& YMinSliderVal,
+        QChart*            chart,
+        std::string&       type,
+        const std::string& style,
+        const bool&        ShowFirstPoint,
+        const bool&        ShowLegend,
+        const double&      XOffset,
+        const bool&        XAxisIsInteger,
+        const double&      YMinSliderVal,
         const boost::numeric::ublas::matrix<double> &YAxisData,
-        const QStringList &RowLabels,
-        const QStringList &ColumnLabels,
-        std::string &MainTitle,
-        std::string &XTitle,
-        std::string &YTitle,
-        const std::vector<bool> &GridLines,
-        const int    &Theme,
-        const QColor& LineColor,
-        const std::string &LineColorName,
-        const double XInc)
+        const QStringList& RowLabels,
+        const QStringList& ColumnLabels,
+        std::string&       MainTitle,
+        std::string&       XTitle,
+        std::string&       YTitle,
+        const std::vector<bool>& GridLines,
+        const int&         Theme,
+        const QColor&      LineColor,
+        const std::string& LineColorName,
+        const double&      XInc)
 {
     bool showLegend = (ColumnLabels.size() > 0);
     QLineSeries *series = nullptr;
@@ -81,6 +82,8 @@ nmfChartLine::populateChart(
             pen = series->pen();
             if (lineColorName == "MonteCarloSimulation") {
                 pen.setColor(LineColor);
+            } else if (lineColorName == "No Uncertainty Variations") {
+                 pen.setColor(Qt::black);
             } else {
                 pen.setColor(QColor(QString::fromStdString(nmfConstants::LineColors[line%nmfConstants::LineColors.size()])));
             }
@@ -101,6 +104,7 @@ nmfChartLine::populateChart(
                 }
             }
             chart->addSeries(series);
+
             if (line < ColumnLabels.size()) {
                 series->setName(ColumnLabels[line]);
             }
@@ -110,6 +114,8 @@ nmfChartLine::populateChart(
             disconnect(series,0,0,0);
             connect(series, SIGNAL(hovered(const QPointF&,bool)),
                     this,   SLOT(callback_hoveredLine(const QPointF&,bool)));
+
+
         }
     }
 
@@ -142,19 +148,20 @@ nmfChartLine::populateChart(
     chart->axisX()->setGridLineVisible(GridLines[0]);
     chart->axisY()->setGridLineVisible(GridLines[1]);
 
-    // Show legend
-    if ((lineColorName == "MonteCarloSimulation") ||
-        (lineColorName.isEmpty()))
-    {
-        showLegend = false;
-    } else {
-        showLegend = true;
-    }
+//    // Show legend
+//    if ((lineColorName == "MonteCarloSimulation") ||
+//        (lineColorName.isEmpty()))
+//    {
+//        showLegend = false;
+//    } else {
+//        showLegend = true;
+//    }
 
-    chart->legend()->setVisible(showLegend);
+    chart->legend()->setVisible(ShowLegend);
     chart->legend()->setAlignment(Qt::AlignRight);
     chart->legend()->setShowToolTips(true);
     chart->legend()->setMarkerShape(QLegend::MarkerShapeFromSeries);
+
 
 }
 

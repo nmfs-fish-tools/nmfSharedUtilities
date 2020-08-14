@@ -1511,6 +1511,72 @@ nmfDatabase::getForecastInfo(
 
 
 bool
+nmfDatabase::getForecastBiomass(
+        QWidget*           Widget,
+        nmfLogger*         Logger,
+        const std::string& ForecastName,
+        const int&         NumSpecies,
+        const int&         RunLength,
+        std::string&       Algorithm,
+        std::string&       Minimizer,
+        std::string&       ObjectiveCriterion,
+        std::string&       Scaling,
+        std::vector<boost::numeric::ublas::matrix<double> >& ForecastBiomass)
+{
+    int m=0;
+    int NumRecords;
+    std::vector<std::string> fields;
+    std::string queryStr;
+    std::string errorMsg;
+    QString msg;
+    std::map<std::string, std::vector<std::string> > dataMapForecastBiomass;
+
+    ForecastBiomass.clear();
+
+    // Load Forecast Biomass data (ie, calculated from estimated parameters r and alpha)
+    fields    = {"ForecastName","Algorithm","Minimizer","ObjectiveCriterion","Scaling","SpeName","Year","Value"};
+    queryStr  = "SELECT ForecastName,Algorithm,Minimizer,ObjectiveCriterion,Scaling,SpeName,Year,Value FROM ForecastBiomass";
+    queryStr += " WHERE ForecastName = '" + ForecastName +
+                "' AND Algorithm = '" + Algorithm +
+                "' AND Minimizer = '" + Minimizer +
+                "' AND ObjectiveCriterion = '" + ObjectiveCriterion +
+                "' AND Scaling = '" + Scaling +
+                "' ORDER BY SpeName,Year";
+    dataMapForecastBiomass = nmfQueryDatabase(queryStr, fields);
+    NumRecords = dataMapForecastBiomass["SpeName"].size();
+    if (NumRecords == 0) {
+//        m_ChartView2d->hide();
+        errorMsg  = "[Warning] getForecastBiomass: No records found in table ForecastBiomass";
+        //errorMsg += "\n" + queryStr;
+        Logger->logMsg(nmfConstants::Warning,errorMsg);
+        msg = "\nNo ForecastBiomass records found.\n\nPlease make sure a Forecast has been run.\n";
+        QMessageBox::warning(Widget, "Warning", msg, QMessageBox::Ok);
+        return false;
+    }
+    if (NumRecords != NumSpecies*(RunLength+1)) {
+        errorMsg  = "[Error 2] getForecastBiomass: Number of records found (" + std::to_string(NumRecords) + ") in ";
+        errorMsg += "table ForecastBiomass does not equal number of NumSpecies*(RunLength+1) (";
+        errorMsg += std::to_string(NumSpecies) + "*" + std::to_string((RunLength+1)) + "=";
+        errorMsg += std::to_string(NumSpecies*(RunLength+1)) + ") records";
+        errorMsg += "\n" + queryStr;
+        Logger->logMsg(nmfConstants::Error,errorMsg);
+        return false;
+    }
+
+    boost::numeric::ublas::matrix<double> TmpMatrix;
+    nmfUtils::initialize(TmpMatrix,RunLength+1,NumSpecies);
+
+    for (int species=0; species<NumSpecies; ++species) {
+        for (int time=0; time<=RunLength; ++time) {
+            TmpMatrix(time,species) = std::stod(dataMapForecastBiomass["Value"][m++]);
+        }
+    }
+    ForecastBiomass.push_back(TmpMatrix);
+
+    return true;
+}
+
+bool
 nmfDatabase::getForecastBiomassMonteCarlo(
         QWidget*           Widget,
         nmfLogger*         Logger,
