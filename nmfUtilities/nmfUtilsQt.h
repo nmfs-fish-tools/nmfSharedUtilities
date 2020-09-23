@@ -427,7 +427,14 @@ namespace nmfUtilsQt {
             const QString& version,
             const QString& specialAcknowledgement,
             const QString& appMsg);
-
-
+    /*
+     * @brief Useful for changing .jpg,.png to .csv
+     * @param filename : file name on which to modify the extension
+     * @param newExt : the new file name extension
+     * @param oldExts : list of old file name extensions to check for and change if found
+     */
+    void switchFileExtensions(QString& filename,
+                              const QString& newExt,
+                              const QStringList& oldExts);
 } // end namespace
 

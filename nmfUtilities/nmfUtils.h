@@ -311,6 +311,12 @@ namespace nmfUtils {
      */
     double getVectorSum(const boost::numeric::ublas::vector<double> &vec);
     /**
+     * @brief Initializes an STL vector of doubles
+     * @param vec : vector to initialize
+     * @param numValues : number of doubles in vector
+     */
+    void initialize(std::vector<double>& vec, const int& numValues);
+    /**
      * @brief Initializes a vector of std::string types
      * @param vec : vector to initialize
      * @param nrows : number of rows in vector

@@ -108,7 +108,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <map name="nmf_utilities_2nmf_constants_m_s_s_p_m_8hdep" id="nmf_utilities_2nmf_constants_m_s_s_p_m_8hdep">
 <area shape="rect" id="node2" href="_bees_algorithm_8h_source.html" title="BeesAlgorithm/BeesAlgorithm.h" alt="" coords="135,95,341,121"/>
 <area shape="rect" id="node3" href="nmf_utils_qt_8h.html" title="Definition for Qt widgets and functions that operate on widgets. " alt="" coords="365,95,532,121"/>
-<area shape="rect" id="node4" href="nmf_viewer_widget_8h.html" title="This file contains the definition for the screenshot image viewer widget. " alt="" coords="5,177,207,203"/>
+<area shape="rect" id="node4" href="nmf_viewer_widget_8h.html" title="GUI definition for the Image Viewer set of widgets. " alt="" coords="5,177,207,203"/>
 <area shape="rect" id="node5" href="nmf_database_8cpp.html" title="This file contains the NMFS DatabaseAPI implementation. " alt="" coords="231,177,437,203"/>
 <area shape="rect" id="node6" href="nmf_abundance_8h_source.html" title="nmfDynamics/nmfAbundance.h" alt="" coords="462,177,667,203"/>
 <area shape="rect" id="node7" href="nmf_database_connect_dialog_8h_source.html" title="nmfGuiDialogs/nmfDatabase\lConnectDialog.h" alt="" coords="692,169,883,211"/>
@@ -176,6 +176,12 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSP
 <tr class="memitem:ae4ac4547304a16a864e42b2274b5bcd1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae4ac4547304a16a864e42b2274b5bcd1"></a>
 const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::Column_SpeciesKMax</b> = 17</td></tr>
 <tr class="separator:ae4ac4547304a16a864e42b2274b5bcd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c5096dbe8281784dec0707ad38389fc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3c5096dbe8281784dec0707ad38389fc"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::NoFishingMortality</b> = -1.0</td></tr>
+<tr class="separator:a3c5096dbe8281784dec0707ad38389fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd7c9a6bbae521855b559c506cdc3e06"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acd7c9a6bbae521855b559c506cdc3e06"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::MaxOutOfBounds</b> = 9999999.0</td></tr>
+<tr class="separator:acd7c9a6bbae521855b559c506cdc3e06"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3e05b069ac811a887ca7828ae204e1c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad3e05b069ac811a887ca7828ae204e1c"></a>
 const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::RotateLabels</b> = true</td></tr>
 <tr class="separator:ad3e05b069ac811a887ca7828ae204e1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -278,6 +284,18 @@ const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSS
 <tr class="memitem:a2dc4dc7f32e743b4cada33a93942af42"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2dc4dc7f32e743b4cada33a93942af42"></a>
 const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ReadAllPoints</b> = false</td></tr>
 <tr class="separator:a2dc4dc7f32e743b4cada33a93942af42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af63bfe9e1d35bd37bf077cd72102f2e4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af63bfe9e1d35bd37bf077cd72102f2e4"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ResetPositionAlso</b> = true</td></tr>
+<tr class="separator:af63bfe9e1d35bd37bf077cd72102f2e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6441a7a6f80c96f1ed7dcfaa4d506916"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6441a7a6f80c96f1ed7dcfaa4d506916"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::DontResetPosition</b> = false</td></tr>
+<tr class="separator:a6441a7a6f80c96f1ed7dcfaa4d506916"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e6288c2c406abce23905daedbeb73b8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9e6288c2c406abce23905daedbeb73b8"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::LeaveGapsWhereNegative</b> = true</td></tr>
+<tr class="separator:a9e6288c2c406abce23905daedbeb73b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7306b1cc7565ddd34608221d0e8a1fd8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7306b1cc7565ddd34608221d0e8a1fd8"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::DontLeaveGapsWhereNegative</b> = false</td></tr>
+<tr class="separator:a7306b1cc7565ddd34608221d0e8a1fd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a285f6e37e936263a76881f766862ffc6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a285f6e37e936263a76881f766862ffc6"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::HiddenDir</b> = &quot;.MSSPM&quot;</td></tr>
 <tr class="separator:a285f6e37e936263a76881f766862ffc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -320,6 +338,15 @@ const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConst
 <tr class="memitem:aa66f9e9e7a638dc446b6766b923e1d30"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa66f9e9e7a638dc446b6766b923e1d30"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::OutputImagesDir</b> = &quot;outputImages&quot;</td></tr>
 <tr class="separator:aa66f9e9e7a638dc446b6766b923e1d30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7baa705e571b21ad3f45f416d03fe29d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7baa705e571b21ad3f45f416d03fe29d"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::OutputImagesDirMMode</b> = &quot;Remora/outputImages&quot;</td></tr>
+<tr class="separator:a7baa705e571b21ad3f45f416d03fe29d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7409b1cb90c9e729917bda47084c8611"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7409b1cb90c9e729917bda47084c8611"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::OutputDataDirMMode</b> = &quot;Remora/outputData&quot;</td></tr>
+<tr class="separator:a7409b1cb90c9e729917bda47084c8611"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad49f01212097e74096fb0e0665150e9e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad49f01212097e74096fb0e0665150e9e"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::OutputScenariosDirMMode</b> = &quot;Remora/scenarios&quot;</td></tr>
+<tr class="separator:ad49f01212097e74096fb0e0665150e9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Definition for constants used in MSSPM tool. </p>

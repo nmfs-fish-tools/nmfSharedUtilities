@@ -21,6 +21,8 @@ namespace nmfConstantsMSCAA
     const bool         DontClearSummary  = false;
     const bool         ShowFirstPoint    = true;
     const bool         HideFirstPoint    = false;
+    const bool         LeaveGapsWhereNegative     = true;
+    const bool         DontLeaveGapsWhereNegative = false;
 
     const std::string  HiddenDir                      = ".MSCAA";
     const std::string  HiddenDataDir                  = ".MSCAA/data";

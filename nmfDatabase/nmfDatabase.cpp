@@ -1474,6 +1474,79 @@ nmfDatabase::getListOfAuthenticatedDatabaseNames(
     return true;
 }
 
+
+
+bool
+nmfDatabase::getTimeSeriesData(
+        QWidget*           Widget,
+        nmfLogger*         Logger,
+        const std::string& ProjectSettingsConfig,
+        const std::string  MohnsRhoLabel,
+        const std::string  ForecastName,
+        const std::string& TableName,
+        const int&         NumSpecies,
+        const int&         RunLength,
+        boost::numeric::ublas::matrix<double>& TableData)
+{
+    int m=0;
+    int NumRecords;
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+    std::string errorMsg;
+    std::string ModifiedTableName = "";
+    QString msg;
+    QString SystemName = QString::fromStdString(ProjectSettingsConfig);
+    auto parts = SystemName.split("__");
+    SystemName = parts[0];
+
+    nmfUtils::initialize(TableData,RunLength+1,NumSpecies); // +1 because there's a 0 year
+
+    // Load data
+    if (ForecastName == "") {
+        ModifiedTableName = TableName;
+        fields   = {"MohnsRhoLabel","SystemName","SpeName","Year","Value"};
+        queryStr = "SELECT MohnsRhoLabel,SystemName,SpeName,Year,Value FROM " + ModifiedTableName +
+                   " WHERE SystemName = '" + SystemName.toStdString() +
+                   "' AND MohnsRhoLabel = '" + MohnsRhoLabel + "' ORDER BY SpeName,Year";
+    } else {
+        ModifiedTableName = "Forecast" + TableName;;
+        fields   = {"ForecastName","SpeName","Year","Value"};
+        queryStr = "SELECT ForecastName,SpeName,Year,Value FROM " + ModifiedTableName +
+                   " WHERE ForecastName = '" + ForecastName +
+                   "' ORDER BY SpeName,Year";
+    }
+    dataMap    = nmfQueryDatabase(queryStr, fields);
+    NumRecords = dataMap["SpeName"].size();
+    if (NumRecords == 0) {
+        Logger->logMsg(nmfConstants::Error,"[Error 1] getTimeSeriesData: No records found in table "+TableName);
+        Logger->logMsg(nmfConstants::Error,queryStr);
+        msg = "\nMissing or unsaved data. Please populate and resave table: " + QString::fromStdString(TableName);
+        QMessageBox::critical(Widget, "Error", msg, QMessageBox::Ok);
+        return false;
+    }
+    if (NumRecords != NumSpecies*(RunLength+1)) {
+        errorMsg  = "[Error 2] getTimeSeriesData: Number of records found (" + std::to_string(NumRecords) + ") in ";
+        errorMsg += "table " + ModifiedTableName + " does not equal number of Species*(RunLength+1) (";
+        errorMsg += std::to_string(NumSpecies) + "*" + std::to_string((RunLength+1)) + "=";
+        errorMsg += std::to_string(NumSpecies*(RunLength+1)) + ") records";
+        errorMsg += "\n" + queryStr;
+        Logger->logMsg(nmfConstants::Error,errorMsg);
+        msg = "\nMissing or unsaved data.\n\nPlease populate and resave table: " + QString::fromStdString(ModifiedTableName) + "\n";
+        QMessageBox::critical(Widget, "Error", msg, QMessageBox::Ok);
+        return false;
+    }
+
+
+    for (int species=0; species<NumSpecies; ++species) {
+        for (int time=0; time<=RunLength; ++time) {
+            TableData(time,species) = std::stod(dataMap["Value"][m++]);
+        }
+    }
+
+    return true;
+}
+
 bool
 nmfDatabase::getForecastInfo(
         const std::string TableName,
@@ -1646,6 +1719,209 @@ nmfDatabase::getForecastBiomassMonteCarlo(
 }
 
 
+
+bool
+nmfDatabase::getForecastMonteCarloParameters(
+        QWidget*             widget,
+        nmfLogger*           logger,
+        const std::string&   ForecastName,
+        std::string&         Algorithm,
+        std::string&         Minimizer,
+        std::string&         ObjectiveCriterion,
+        std::string&         Scaling,
+        QStringList&         HoverData)
+{
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+    std::string TableName = "ForecastMonteCarloParameters";
+    double val1;
+    double val2;
+    double val3;
+    QString str1;
+    QString str2;
+    QString str3;
+
+    fields     = {"ForecastName","RunNum","Algorithm","Minimizer","ObjectiveCriterion","Scaling",
+                  "SpeName","GrowthRate","CarryingCapacity","Harvest"};
+    queryStr   = "SELECT ForecastName,RunNum,Algorithm,Minimizer,ObjectiveCriterion,Scaling,";
+    queryStr  += "SpeName,GrowthRate,CarryingCapacity,Harvest FROM " + TableName;
+    queryStr  += " WHERE ForecastName = '" + ForecastName +
+            "' AND Algorithm = '"          + Algorithm +
+            "' AND Minimizer = '"          + Minimizer +
+            "' AND ObjectiveCriterion = '" + ObjectiveCriterion +
+            "' AND Scaling = '"            + Scaling +
+            "' AND SpeName = 'A' ORDER by RunNum,SpeName";  // RSK - fix this hardcodedness for species!!!
+    dataMap = nmfQueryDatabase(queryStr, fields);
+    int NumRecords = dataMap["GrowthRate"].size();
+    if (NumRecords == 0) {
+        logger->logMsg(nmfConstants::Error, queryStr);
+        return false;
+    }
+
+    for (int i=0;i<NumRecords;++i) {
+        val1 = std::stod(dataMap["GrowthRate"][i])*100.0;
+        val2 = std::stod(dataMap["CarryingCapacity"][i])*100.0;
+        val3 = std::stod(dataMap["Harvest"][i])*100.0;
+        str1 = QString{"%1%"}.arg(val1,4,'f',1); // Ex. 12.3%
+        str2 = QString{"%1%"}.arg(val2,4,'f',1);
+        str3 = QString{"%1%"}.arg(val3,4,'f',1);
+        HoverData << "( " + str1 + ", " + str2 + ", " + str3 + " )"; // Ex
+    }
+
+    return true;
+}
+
+
+
+bool
+nmfDatabase::getForecastCatch(
+        QWidget*           Widget,
+        nmfLogger*         Logger,
+        const std::string& ForecastName,
+        const int&         NumSpecies,
+        const int&         RunLength,
+        std::string&       Algorithm,
+        std::string&       Minimizer,
+        std::string&       ObjectiveCriterion,
+        std::string&       Scaling,
+        std::vector<boost::numeric::ublas::matrix<double> >& ForecastCatch)
+{
+    int m=0;
+    int NumRecords;
+    std::vector<std::string> fields;
+    std::string queryStr;
+    std::string errorMsg;
+    QString msg;
+    std::map<std::string, std::vector<std::string> > dataMap;
+
+    ForecastCatch.clear();
+
+    // Load Forecast Catch data
+    fields    = {"ForecastName","Algorithm","Minimizer","ObjectiveCriterion","Scaling","SpeName","Year","Value"};
+    queryStr  = "SELECT ForecastName,Algorithm,Minimizer,ObjectiveCriterion,Scaling,SpeName,Year,Value FROM ForecastCatch";
+    queryStr += " WHERE ForecastName = '" + ForecastName +
+                "' AND Algorithm = '" + Algorithm +
+                "' AND Minimizer = '" + Minimizer +
+                "' AND ObjectiveCriterion = '" + ObjectiveCriterion +
+                "' AND Scaling = '" + Scaling +
+                "' ORDER BY SpeName,Year";
+    dataMap = nmfQueryDatabase(queryStr, fields);
+    NumRecords = dataMap["SpeName"].size();
+    if (NumRecords == 0) {
+        errorMsg  = "[Warning] getForecastCatch: No records found in table ForecastCatch";
+        Logger->logMsg(nmfConstants::Warning,errorMsg);
+        msg = "\nNo ForecastCatch records found.\n\nPlease make sure a Forecast has been run.\n";
+        QMessageBox::warning(Widget, "Warning", msg, QMessageBox::Ok);
+        return false;
+    }
+    if (NumRecords != NumSpecies*(RunLength+1)) {
+        errorMsg  = "[Error 2] getForecastCatch: Number of records found (" + std::to_string(NumRecords) + ") in ";
+        errorMsg += "table ForecastCatch does not equal number of NumSpecies*(RunLength+1) (";
+        errorMsg += std::to_string(NumSpecies) + "*" + std::to_string((RunLength+1)) + "=";
+        errorMsg += std::to_string(NumSpecies*(RunLength+1)) + ") records";
+        errorMsg += "\n" + queryStr;
+        Logger->logMsg(nmfConstants::Error,errorMsg);
+        return false;
+    }
+
+    boost::numeric::ublas::matrix<double> TmpMatrix;
+    nmfUtils::initialize(TmpMatrix,RunLength+1,NumSpecies);
+
+    for (int species=0; species<NumSpecies; ++species) {
+        for (int time=0; time<=RunLength; ++time) {
+            TmpMatrix(time,species) = std::stod(dataMap["Value"][m++]);
+        }
+    }
+    ForecastCatch.push_back(TmpMatrix);
+    return true;
+}
+
+
+bool
+nmfDatabase::updateForecastMonteCarloParameters(
+        QWidget*             widget,
+        nmfLogger*           logger,
+        const std::string&   ForecastName,
+        std::string&         Algorithm,
+        std::string&         Minimizer,
+        std::string&         ObjectiveCriterion,
+        std::string&         Scaling,
+        QStringList&         Species,
+        int&                 RunNumber,
+        std::vector<double>& GrowthRandomValues,
+        std::vector<double>& CarryingCapacityRandomValues,
+        std::vector<double>& CatchabilityRandomValues,
+        std::vector<double>& ExponentRandomValues,
+        std::vector<double>& CompetitionAlphaRandomValues,
+        std::vector<double>& CompetitionBetaSpeciesRandomValues,
+        std::vector<double>& CompetitionBetaGuildsRandomValues,
+        std::vector<double>& PredationRandomValues,
+        std::vector<double>& HandlingRandomValues,
+        std::vector<double>& HarvestRandomValues)
+{
+    std::string saveCmd;
+    std::string deleteCmd;
+    std::string errorMsg;
+    std::string tableName = "ForecastMonteCarloParameters";
+    QString msg;
+
+    // Delete the current entry here
+    deleteCmd  = "DELETE FROM " + tableName;
+    deleteCmd += " WHERE ForecastName = '" + ForecastName +
+            "' AND RunNum = "              + std::to_string(RunNumber) +
+            " AND Algorithm = '"          + Algorithm +
+            "' AND Minimizer = '"          + Minimizer +
+            "' AND ObjectiveCriterion = '" + ObjectiveCriterion +
+            "' AND Scaling = '"            + Scaling + "'";
+    errorMsg = nmfUpdateDatabase(deleteCmd);
+    if (errorMsg != " ") {
+        msg = "\nError in ForecastMonteCarloParameters command. Couldn't delete all records from " +
+                QString::fromStdString(tableName) + " table";
+        logger->logMsg(nmfConstants::Error,"nmfDatabase::updateForecastMonteCarloParameters: DELETE error: " + errorMsg);
+        logger->logMsg(nmfConstants::Error,"cmd: " + deleteCmd);
+        QMessageBox::warning(widget, "Error", msg, QMessageBox::Ok);
+        return false;
+    }
+
+    saveCmd  = "INSERT INTO " + tableName + " (ForecastName,RunNum,Algorithm,Minimizer,ObjectiveCriterion,Scaling,";
+    saveCmd += "SpeName,GrowthRate,CarryingCapacity,";
+//  saveCmd += "Catchability,Exponent,CompetitionAlpha,CompetitionBetaSpecies,CompetitionBetaGuilds,Predation,Handling,";
+    saveCmd += "Harvest) VALUES ";
+    int NumValues = GrowthRandomValues.size();
+    for (int j=0; j<NumValues; ++j) {
+        saveCmd += "('"   + ForecastName +
+                "',"  + std::to_string(RunNumber) +
+                ",'"  + Algorithm +
+                "','" + Minimizer +
+                "','" + ObjectiveCriterion +
+                "','" + Scaling +
+                "','" + Species[j].toStdString() +
+                "',"  + std::to_string(GrowthRandomValues[j]) +
+                " ,"  + std::to_string(CarryingCapacityRandomValues[j]) +
+
+// RSK - add this later!
+//                "',"  + std::to_string(CatchabilityRandomValues[j]) +
+//                "',"  + std::to_string(ExponentRandomValues[j]) +
+//                "',"  + std::to_string(CompetitionAlphaRandomValues[j]) +
+//                "',"  + std::to_string(CompetitionBetaSpeciesRandomValues[j]) +
+//                "',"  + std::to_string(CompetitionBetaGuildsRandomValues[j]) +
+//                "',"  + std::to_string(PredationRandomValues[j]) +
+//                "',"  + std::to_string(HandlingRandomValues[j]) +
+
+                " ,"  + std::to_string(HarvestRandomValues[j]) + "),";
+    }
+
+    saveCmd = saveCmd.substr(0,saveCmd.size()-1);
+    errorMsg = nmfUpdateDatabase(saveCmd);
+    if (errorMsg != " ") {
+        logger->logMsg(nmfConstants::Error,"[Error] updateForecastMonteCarloParameters: Write table error: " + errorMsg);
+        logger->logMsg(nmfConstants::Error,"saveCmd: " + saveCmd);
+        return false;
+    }
+
+    return true;
+}
 
 
 bool

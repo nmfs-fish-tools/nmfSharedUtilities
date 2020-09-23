@@ -1,7 +1,7 @@
 <map id="nmfUtilities/nmfConstantsMSSPM.h" name="nmfUtilities/nmfConstantsMSSPM.h">
 <area shape="rect" id="node2" href="$_bees_algorithm_8h_source.html" title="BeesAlgorithm/BeesAlgorithm.h" alt="" coords="135,95,341,121"/>
 <area shape="rect" id="node3" href="$nmf_utils_qt_8h.html" title="Definition for Qt widgets and functions that operate on widgets. " alt="" coords="365,95,532,121"/>
-<area shape="rect" id="node4" href="$nmf_viewer_widget_8h.html" title="This file contains the definition for the screenshot image viewer widget. " alt="" coords="5,177,207,203"/>
+<area shape="rect" id="node4" href="$nmf_viewer_widget_8h.html" title="GUI definition for the Image Viewer set of widgets. " alt="" coords="5,177,207,203"/>
 <area shape="rect" id="node5" href="$nmf_database_8cpp.html" title="This file contains the NMFS DatabaseAPI implementation. " alt="" coords="231,177,437,203"/>
 <area shape="rect" id="node6" href="$nmf_abundance_8h_source.html" title="nmfDynamics/nmfAbundance.h" alt="" coords="462,177,667,203"/>
 <area shape="rect" id="node7" href="$nmf_database_connect_dialog_8h_source.html" title="nmfGuiDialogs/nmfDatabase\lConnectDialog.h" alt="" coords="692,169,883,211"/>

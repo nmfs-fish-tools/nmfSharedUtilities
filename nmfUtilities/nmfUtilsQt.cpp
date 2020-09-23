@@ -1123,6 +1123,16 @@ void checkForAndReplaceInvalidCharacters(QString &stringValue)
     stringValue.replace(" ","_");
 }
 
+
+void switchFileExtensions(QString& filename,
+                          const QString& newExt,
+                          const QStringList& oldExts)
+{
+    for (QString ext : oldExts) {
+        filename.replace(ext,newExt);
+    }
+}
+
 void clearTableView(const QList<QTableView*>& tables)
 {
     QStandardItemModel *smodel;

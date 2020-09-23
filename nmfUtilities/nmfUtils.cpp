@@ -172,6 +172,13 @@ void printVector(const std::string &name,
     }
 }
 
+void initialize(std::vector<double>& vec, const int& numValues)
+{
+    for (int i=0; i<numValues; ++i) {
+        vec.push_back(0.0);
+    }
+}
+
 void initialize(boost::numeric::ublas::vector<std::string> &vec, const int &nrows) {
     vec.resize(nrows);
     vec.clear();

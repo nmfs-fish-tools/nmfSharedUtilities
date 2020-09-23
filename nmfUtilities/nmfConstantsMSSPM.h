@@ -36,6 +36,8 @@ namespace nmfConstantsMSSPM
      const int    Column_SpeciesKMin    = 16;
      const int    Column_SpeciesKMax    = 17;
 
+     const double NoFishingMortality   = -1.0;
+     const double MaxOutOfBounds       = 9999999.0;
      const bool   RotateLabels         = true;
      const bool   DontRotateLabels     = false;
      const int    MaxNumberLogFiles    =  50;
@@ -70,6 +72,10 @@ namespace nmfConstantsMSSPM
      const bool   LoadAllRows          = false;
      const bool   ReadValidPointsOnly  = true;
      const bool   ReadAllPoints        = false;
+     const bool   ResetPositionAlso    = true;
+     const bool   DontResetPosition    = false;
+     const bool   LeaveGapsWhereNegative     = true;
+     const bool   DontLeaveGapsWhereNegative = false;
 
      const std::string  HiddenDir                      = ".MSSPM";
      const std::string  HiddenDataDir                  = ".MSSPM/data";
@@ -85,6 +91,9 @@ namespace nmfConstantsMSSPM
      const std::string  InputDataDir                   = "inputData";
      const std::string  OutputDataDir                  = "outputData";
      const std::string  OutputImagesDir                = "outputImages";
+     const std::string  OutputImagesDirMMode           = "Remora/outputImages";
+     const std::string  OutputDataDirMMode             = "Remora/outputData";
+     const std::string  OutputScenariosDirMMode        = "Remora/scenarios";
 
 }
 

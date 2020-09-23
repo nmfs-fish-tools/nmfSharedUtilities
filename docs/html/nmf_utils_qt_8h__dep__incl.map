@@ -1,5 +1,5 @@
 <map id="nmfUtilities/nmfUtilsQt.h" name="nmfUtilities/nmfUtilsQt.h">
-<area shape="rect" id="node2" href="$nmf_viewer_widget_8h.html" title="This file contains the definition for the screenshot image viewer widget. " alt="" coords="5,87,207,114"/>
+<area shape="rect" id="node2" href="$nmf_viewer_widget_8h.html" title="GUI definition for the Image Viewer set of widgets. " alt="" coords="5,87,207,114"/>
 <area shape="rect" id="node3" href="$nmf_database_8cpp.html" title="This file contains the NMFS DatabaseAPI implementation. " alt="" coords="231,87,437,114"/>
 <area shape="rect" id="node4" href="$nmf_abundance_8h_source.html" title="nmfDynamics/nmfAbundance.h" alt="" coords="462,87,667,114"/>
 <area shape="rect" id="node5" href="$nmf_database_connect_dialog_8h_source.html" title="nmfGuiDialogs/nmfDatabase\lConnectDialog.h" alt="" coords="692,80,883,121"/>

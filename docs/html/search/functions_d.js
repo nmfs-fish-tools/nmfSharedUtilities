@@ -2,7 +2,6 @@ var searchData=
 [
   ['saveapplicationtable',['saveApplicationTable',['../classnmf_database.html#ad5d69588497726129a45329a0bba4751',1,'nmfDatabase']]],
   ['savemodeltocsvfile',['saveModelToCSVFile',['../namespacenmf_utils_qt.html#ac47e06c5ccb74f228199347fb206a292',1,'nmfUtilsQt']]],
-  ['scenarios',['Scenarios',['../struct_scenarios.html',1,'']]],
   ['selectall',['selectAll',['../namespacenmf_utils_qt.html#a364636a207e94c9b445dbd53316ee7ce',1,'nmfUtilsQt']]],
   ['selectcenterpoint',['selectCenterPoint',['../classnmf_chart_surface.html#a49c31c105ab0b68fb02ac6fd6baeedd9',1,'nmfChartSurface']]],
   ['selectminimumpoint',['selectMinimumPoint',['../classnmf_chart_surface.html#abac17654e54bc2b0387ff51e0cde7898',1,'nmfChartSurface']]],
@@ -15,6 +14,5 @@ var searchData=
   ['showdatatab',['showDataTab',['../classnmf_viewer_widget.html#afc64a4cb4f977bfe868b40b923986d5b',1,'nmfViewerWidget']]],
   ['showframe',['showFrame',['../classnmf_viewer_widget.html#a9653de2cff7abc178b2e05a4ac1494e8',1,'nmfViewerWidget']]],
   ['solvef',['SolveF',['../namespacenmf_utils_solvers.html#a267980fdd7062d3afbcdc093ea96e43a',1,'nmfUtilsSolvers']]],
-  ['stopplayback',['stopPlayback',['../classnmf_viewer_widget.html#a3ccee3aed36c2f171894ab5e47346555',1,'nmfViewerWidget']]],
-  ['systemdata',['SystemData',['../struct_system_data.html',1,'']]]
+  ['stopplayback',['stopPlayback',['../classnmf_viewer_widget.html#a3ccee3aed36c2f171894ab5e47346555',1,'nmfViewerWidget']]]
 ];

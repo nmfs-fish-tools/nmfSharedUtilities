@@ -7,9 +7,11 @@
 #include <QLegendMarker>
 #include <QLine>
 #include <QLineSeries>
+#include <QPushButton>
 #include <QScatterSeries>
 #include <QString>
 #include <QStringList>
+#include <QTimer>
 #include <QToolTip>
 #include <QValueAxis>
 
@@ -30,6 +32,7 @@ class nmfChartLine : public QObject
     Q_OBJECT
 
 private:
+    std::map<QString,QString> m_HoverLabels;
     std::map<QString,QString> m_tooltips;
 
 
@@ -46,9 +49,11 @@ public:
             const double&      XOffset,
             const bool&        XAxisIsInteger,
             const double&      YMinSliderVal,
+            const bool&        LeaveGapsWhereNegative,
             const boost::numeric::ublas::matrix<double> &YAxisData,
             const QStringList& RowLabels,
             const QStringList& ColumnLabels,
+            const QStringList& HoverLabels,
             std::string&       MainTitle,
             std::string&       XTitle,
             std::string&       YTitle,
@@ -57,10 +62,13 @@ public:
             const QColor&      LineColor,
             const std::string& LineColorName,
             const double&      XInc);
+    void clear(QChart* chart);
+
 signals:
 
 public slots:
     void callback_hoveredLine(const QPointF& point,bool hovered);
+//  void callback_HideTooltip();
 
 };
 

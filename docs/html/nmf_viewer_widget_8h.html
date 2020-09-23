@@ -92,7 +92,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>This file contains the definition for the screenshot image viewer widget.  
+<p>GUI definition for the Image Viewer set of widgets.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;QApplication&gt;</code><br />
 <code>#include &lt;QComboBox&gt;</code><br />
@@ -105,6 +105,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &lt;QObject&gt;</code><br />
 <code>#include &lt;QPushButton&gt;</code><br />
 <code>#include &lt;QSpacerItem&gt;</code><br />
+<code>#include &lt;QTimer&gt;</code><br />
 <code>#include &lt;QVBoxLayout&gt;</code><br />
 <code>#include &quot;<a class="el" href="nmf_logger_8h_source.html">nmfLogger.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="nmf_utils_qt_8h_source.html">nmfUtilsQt.h</a>&quot;</code><br />
@@ -113,12 +114,12 @@ Include dependency graph for nmfViewerWidget.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="nmf_viewer_widget_8h__incl.png" border="0" usemap="#nmf_charts_2nmf_viewer_widget_8h" alt=""/></div>
 <map name="nmf_charts_2nmf_viewer_widget_8h" id="nmf_charts_2nmf_viewer_widget_8h">
-<area shape="rect" id="node14" href="nmf_logger_8h.html" title="Definition for the MultiSpecies Logger class. " alt="" coords="898,237,993,263"/>
-<area shape="rect" id="node19" href="nmf_utils_qt_8h.html" title="Definition for Qt widgets and functions that operate on widgets. " alt="" coords="1779,80,1875,107"/>
-<area shape="rect" id="node42" href="nmf_utils_8h.html" title="Definition for common typedefs and structs (i.e., non&#45;graphical) " alt="" coords="1304,155,1387,181"/>
-<area shape="rect" id="node43" href="nmf_constants_m_s_v_p_a_8h.html" title="Definition for constants used in MSVPA_X2 tool. " alt="" coords="1383,237,1545,263"/>
-<area shape="rect" id="node48" href="nmf_constants_m_s_c_a_a_8h.html" title="Definition for constants used in MSCAA tool. " alt="" coords="2200,237,2363,263"/>
-<area shape="rect" id="node49" href="nmf_constants_m_s_s_p_m_8h.html" title="Definition for constants used in MSSPM tool. " alt="" coords="2387,237,2551,263"/>
+<area shape="rect" id="node15" href="nmf_logger_8h.html" title="Definition for the MultiSpecies Logger class. " alt="" coords="1665,237,1759,263"/>
+<area shape="rect" id="node20" href="nmf_utils_qt_8h.html" title="Definition for Qt widgets and functions that operate on widgets. " alt="" coords="2168,80,2264,107"/>
+<area shape="rect" id="node43" href="nmf_utils_8h.html" title="Definition for common typedefs and structs (i.e., non&#45;graphical) " alt="" coords="2136,155,2219,181"/>
+<area shape="rect" id="node44" href="nmf_constants_m_s_v_p_a_8h.html" title="Definition for constants used in MSVPA_X2 tool. " alt="" coords="2613,237,2776,263"/>
+<area shape="rect" id="node48" href="nmf_constants_m_s_c_a_a_8h.html" title="Definition for constants used in MSCAA tool. " alt="" coords="2989,237,3152,263"/>
+<area shape="rect" id="node49" href="nmf_constants_m_s_s_p_m_8h.html" title="Definition for constants used in MSSPM tool. " alt="" coords="2801,237,2965,263"/>
 </map>
 </div>
 </div>
@@ -127,10 +128,28 @@ Include dependency graph for nmfViewerWidget.h:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_viewer_widget.html">nmfViewerWidget</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class is an image viewer class that allows the user to sequence through a series of images. Using the VCR-like controls, the user can mark a start image and an end image and cycle through the images in between, automatically, in an animated fashion. <br />
+<br />
+ To use this class, set a child widget to be the viewer's main widget. <br />
+<br />
+ For example, if the parent widget is: <br />
+<br />
+ DockWidgetParent, call: <br />
+<br />
+ viewerWidget = <a class="el" href="classnmf_viewer_widget.html" title="This class is an image viewer class that allows the user to sequence through a series of images...">nmfViewerWidget</a>(...)<br />
+ DockWidgetParent-&gt;setWidget(viewerWidget-&gt;<a class="el" href="classnmf_viewer_widget.html#ac919d86da3d411ae1be5269e93ae2f07" title="Returns the main widget that contains all of the image viewers widgets. ">getMainWidget()</a>);.  <a href="classnmf_viewer_widget.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This file contains the definition for the screenshot image viewer widget. </p>
+<div class="textblock"><p>GUI definition for the Image Viewer set of widgets. </p>
+<p>This file contains the definition for the screenshot image viewer widget.</p>
+<p>This file contains the GUI definitions for the controls and widgets use in the Image Viewer class. This class allows the user to view images one by one or set a begin and end image and flip through them in an animated fashion.</p>
+<dl class="section copyright"><dt>Copyright</dt><dd>Public Domain Notice<br />
+ National Oceanic And Atmospheric Administration<br />
+<br />
+ This software is a "United States Government Work" under the terms of the United States Copyright Act. It was written as part of the author's official duties as a United States Government employee/contractor and thus cannot be copyrighted. This software is freely available to the public for use. The National Oceanic And Atmospheric Administration and the U.S. Government have not placed any restriction on its use or reproduction. Although all reasonable efforts have been taken to ensure the accuracy and reliability of the software and data, the National Oceanic And Atmospheric Administration and the U.S. Government do not and cannot warrant the performance or results that may be obtained by using this software or data. The National Oceanic And Atmospheric Administration and the U.S. Government disclaim all warranties, express or implied, including warranties of performance, merchantability or fitness for any particular purpose.<br />
+<br />
+ Please cite the author(s) in any work or product based on this material.</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>rklasky </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>2017 NOAA - National Marine Fisheries Service </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>Feb 16, 2018 </dd></dl>

@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['initlogger',['initLogger',['../classnmf_logger.html#a438524867cec8b85112ffe98c4676040',1,'nmfLogger']]]
+  ['hide',['hide',['../classnmf_chart_movable_line.html#a639db1b6874f960726589c477979b35b',1,'nmfChartMovableLine']]],
+  ['hidedatatab',['hideDataTab',['../classnmf_viewer_widget.html#aa69a2df2ad0c1ffa5f11ee56e9a76983',1,'nmfViewerWidget']]],
+  ['hideframe',['hideFrame',['../classnmf_viewer_widget.html#ad92e7d97603ece871017bbd4deebbedd',1,'nmfViewerWidget']]]
 ];

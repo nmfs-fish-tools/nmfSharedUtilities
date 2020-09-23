@@ -149,7 +149,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <area shape="rect" id="node18" href="nmf_utils_statistics_8h.html" title="This header file defines multi&#45;species statistical utility functions. " alt="" coords="1168,177,1375,203"/>
 <area shape="rect" id="node19" href="nmf_utils_qt_8h.html" title="Definition for Qt widgets and functions that operate on widgets. " alt="" coords="1591,87,1757,114"/>
 <area shape="rect" id="node17" href="nmf_utils_complex_8cpp.html" title="These routines were originally from Complex2.bas. " alt="" coords="925,177,1143,203"/>
-<area shape="rect" id="node20" href="nmf_viewer_widget_8h.html" title="This file contains the definition for the screenshot image viewer widget. " alt="" coords="1860,177,2061,203"/>
+<area shape="rect" id="node20" href="nmf_viewer_widget_8h.html" title="GUI definition for the Image Viewer set of widgets. " alt="" coords="1860,177,2061,203"/>
 <area shape="rect" id="node21" href="nmf_database_connect_dialog_8h_source.html" title="nmfGuiDialogs/nmfDatabase\lConnectDialog.h" alt="" coords="2085,169,2276,211"/>
 </map>
 </div>
@@ -225,6 +225,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ab89bc6ae835fe8dba79b78bea3d695c1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtils::getVectorSum</b> (const boost::numeric::ublas::vector&lt; double &gt; &amp;vec)</td></tr>
 <tr class="memdesc:ab89bc6ae835fe8dba79b78bea3d695c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the sum over all of the vector elements.  <a href="nmf_utils_8cpp.html#ab89bc6ae835fe8dba79b78bea3d695c1">More...</a><br /></td></tr>
 <tr class="separator:ab89bc6ae835fe8dba79b78bea3d695c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3691a65ca97dcd969fabe349f85ebb96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtils::initialize</b> (std::vector&lt; double &gt; &amp;vec, const int &amp;numValues)</td></tr>
+<tr class="memdesc:a3691a65ca97dcd969fabe349f85ebb96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes an STL vector of doubles.  <a href="nmf_utils_8cpp.html#a3691a65ca97dcd969fabe349f85ebb96">More...</a><br /></td></tr>
+<tr class="separator:a3691a65ca97dcd969fabe349f85ebb96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ab827c76afa6862895b1474f9d0e738"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtils::initialize</b> (boost::numeric::ublas::vector&lt; std::string &gt; &amp;vec, const int &amp;nrows)</td></tr>
 <tr class="memdesc:a1ab827c76afa6862895b1474f9d0e738"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a vector of std::string types.  <a href="nmf_utils_8cpp.html#a1ab827c76afa6862895b1474f9d0e738">More...</a><br /></td></tr>
 <tr class="separator:a1ab827c76afa6862895b1474f9d0e738"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -760,6 +763,41 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>: The sum over all of the vector elements </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="file_a3691a65ca97dcd969fabe349f85ebb96"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtils::initialize </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>vec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numValues</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initializes an STL vector of doubles. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vec</td><td>: vector to initialize </td></tr>
+    <tr><td class="paramname">numValues</td><td>: number of doubles in vector </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

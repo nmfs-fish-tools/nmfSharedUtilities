@@ -1,6 +1,8 @@
 var searchData=
 [
   ['abundancesystemstruct',['AbundanceSystemStruct',['../struct_abundance_system_struct.html',1,'']]],
+  ['adddatatab',['addDataTab',['../classnmf_viewer_widget.html#a919d71ddc32c6ca5c288b769dec7629b',1,'nmfViewerWidget']]],
+  ['addpoint',['addPoint',['../classnmf_chart_movable_line.html#a1cb3e4ccf693b69ca1e234d3318d1012',1,'nmfChartMovableLine']]],
   ['addtreeitem',['addTreeItem',['../namespacenmf_utils_qt.html#a4a9412e25b28f518c98f49b12ab0d6fc',1,'nmfUtilsQt']]],
   ['addtreeroot',['addTreeRoot',['../namespacenmf_utils_qt.html#a4daebe5b5dd4b56b8e93051207562e1e',1,'nmfUtilsQt']]],
   ['allcellsarepopulated',['allCellsArePopulated',['../namespacenmf_utils_qt.html#a326fe77c7f0902888bd4a1d2124c0695',1,'nmfUtilsQt::allCellsArePopulated(QTabWidget *tabWidget, QTableView *tableView, bool showError)'],['../namespacenmf_utils_qt.html#a2b2a1497f5fa1e583e648aa0c743fc9e',1,'nmfUtilsQt::allCellsArePopulated(QTabWidget *tabWidget, QTableWidget *tableWidget, bool showError, bool skipFirstRow)']]],

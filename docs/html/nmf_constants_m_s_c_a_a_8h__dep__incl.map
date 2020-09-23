@@ -1,7 +1,7 @@
 <map id="nmfUtilities/nmfConstantsMSCAA.h" name="nmfUtilities/nmfConstantsMSCAA.h">
 <area shape="rect" id="node2" href="$nmf_database_connect_dialog_8h_source.html" title="nmfGuiDialogs/nmfDatabase\lConnectDialog.h" alt="" coords="5,169,196,211"/>
 <area shape="rect" id="node3" href="$nmf_utils_qt_8h.html" title="Definition for Qt widgets and functions that operate on widgets. " alt="" coords="237,95,404,121"/>
-<area shape="rect" id="node4" href="$nmf_viewer_widget_8h.html" title="This file contains the definition for the screenshot image viewer widget. " alt="" coords="220,177,421,203"/>
+<area shape="rect" id="node4" href="$nmf_viewer_widget_8h.html" title="GUI definition for the Image Viewer set of widgets. " alt="" coords="220,177,421,203"/>
 <area shape="rect" id="node5" href="$nmf_database_8cpp.html" title="This file contains the NMFS DatabaseAPI implementation. " alt="" coords="445,177,652,203"/>
 <area shape="rect" id="node6" href="$nmf_abundance_8h_source.html" title="nmfDynamics/nmfAbundance.h" alt="" coords="677,177,882,203"/>
 </map>

@@ -104,7 +104,17 @@ public:
             const std::string &userName,
             const std::string &password,
             std::string&       errorMsg);
-
+    bool getForecastCatch(
+            QWidget*           Widget,
+            nmfLogger*         Logger,
+            const std::string& ForecastName,
+            const int&         NumSpecies,
+            const int&         RunLength,
+            std::string&       Algorithm,
+            std::string&       Minimizer,
+            std::string&       ObjectiveCriterion,
+            std::string&       Scaling,
+            std::vector<boost::numeric::ublas::matrix<double> >& ForecastCatch);
     /**
      * @brief Closes the database
      * @param none
@@ -166,9 +176,47 @@ public:
                         float&       MinLength,
                         float&       MaxLength,
                         int&         NumLengthBins);
+    bool getTimeSeriesData(
+            QWidget*           Widget,
+            nmfLogger*         Logger,
+            const std::string& ProjectSettingsConfig,
+            const std::string  MohnsRhoLabel,
+            const std::string  ForecastName,
+            const std::string& TableName,
+            const int&         NumSpecies,
+            const int&         RunLength,
+            boost::numeric::ublas::matrix<double>& TableData);
     std::vector<std::string> nmfGetTableNames();
     int getSpeciesIndex(std::string SpeciesName);
-
+    bool getForecastMonteCarloParameters(
+            QWidget*             widget,
+            nmfLogger*           logger,
+            const std::string&   ForecastName,
+            std::string&         Algorithm,
+            std::string&         Minimizer,
+            std::string&         ObjectiveCriterion,
+            std::string&         Scaling,
+            QStringList&         HoverData);
+    bool updateForecastMonteCarloParameters(
+            QWidget*             widget,
+            nmfLogger*           logger,
+            const std::string&   ForecastName,
+            std::string&         Algorithm,
+            std::string&         Minimizer,
+            std::string&         ObjectiveCriterion,
+            std::string&         Scaling,
+            QStringList&         Species,
+            int&                 RunNumber,
+            std::vector<double>& GrowthRandomValues,
+            std::vector<double>& CarryingCapacityRandomValues,
+            std::vector<double>& CatchabilityRandomValues,
+            std::vector<double>& ExponentRandomValues,
+            std::vector<double>& CompetitionAlphaRandomValues,
+            std::vector<double>& CompetitionBetaSpeciesRandomValues,
+            std::vector<double>& CompetitionBetaGuildsRandomValues,
+            std::vector<double>& PredationRandomValues,
+            std::vector<double>& HandlingRandomValues,
+            std::vector<double>& HarvestRandomValues);
 
     /**
      * @brief Closes the Qt SQL database connection

@@ -9,6 +9,11 @@ nmfChartLine::nmfChartLine()
     m_tooltips.clear();
 }
 
+void
+nmfChartLine::clear(QChart* chart)
+{
+    chart->removeAllSeries();
+}
 
 void
 nmfChartLine::populateChart(
@@ -20,9 +25,11 @@ nmfChartLine::populateChart(
         const double&      XOffset,
         const bool&        XAxisIsInteger,
         const double&      YMinSliderVal,
+        const bool&        LeaveGapsWhereNegative,
         const boost::numeric::ublas::matrix<double> &YAxisData,
         const QStringList& RowLabels,
         const QStringList& ColumnLabels,
+        const QStringList& HoverLabels,
         std::string&       MainTitle,
         std::string&       XTitle,
         std::string&       YTitle,
@@ -32,7 +39,7 @@ nmfChartLine::populateChart(
         const std::string& LineColorName,
         const double&      XInc)
 {
-    bool showLegend = (ColumnLabels.size() > 0);
+    //bool showLegend = (ColumnLabels.size() > 0);
     QLineSeries *series = nullptr;
     QPen pen;
     int XStartVal = (ShowFirstPoint) ? 0 : 1;
@@ -40,6 +47,8 @@ nmfChartLine::populateChart(
     double yVal;
     bool skipRest = false;
     QString lineColorName = QString::fromStdString(LineColorName);
+    QString hoverLabel;
+    int NumXValues = YAxisData.size1();
 
     // Set main title
     QFont mainTitleFont = chart->titleFont();
@@ -70,15 +79,26 @@ nmfChartLine::populateChart(
         }
 
         chart->addSeries(series);
-//      series->setName(ColumnLabels[0]);
         series->setPointsVisible();
 
     } else if (type == "Line") {
 
         // Load data into series and then add series to the chart
         for (unsigned line=0; line<YAxisData.size2(); ++line) {
-            skipRest = false;
             series = new QLineSeries();
+            hoverLabel = (HoverLabels.size() <= line) ? "" : HoverLabels[line];
+            if (hoverLabel.isEmpty()) {
+                hoverLabel = "No Label Set";
+            }
+
+            m_HoverLabels[hoverLabel] = hoverLabel;
+
+            // Using the hover help QString as the name of the series so that I can
+            // find later on the hover help that corresponds to the series the user is
+            // hovering over.
+            series->setName(hoverLabel);
+
+            skipRest = false;
             pen = series->pen();
             if (lineColorName == "MonteCarloSimulation") {
                 pen.setColor(LineColor);
@@ -97,25 +117,21 @@ nmfChartLine::populateChart(
             }
             series->setPen(pen);
 
-            for (unsigned j=XStartVal-XOffset; j<YAxisData.size1(); ++j) {
+            for (unsigned j=XStartVal-XOffset; j<NumXValues; ++j) {
                 yVal = YAxisData(j,line);
                 if (yVal != nmfConstants::NoValueDouble) {
                     series->append(XOffset+j*XInc,yVal);
                 }
             }
+
             chart->addSeries(series);
 
-            if (line < ColumnLabels.size()) {
-                series->setName(ColumnLabels[line]);
-            }
             if (ColumnLabels.size() > 0) {
                 m_tooltips[ColumnLabels[0]] = lineColorName;
             }
             disconnect(series,0,0,0);
             connect(series, SIGNAL(hovered(const QPointF&,bool)),
                     this,   SLOT(callback_hoveredLine(const QPointF&,bool)));
-
-
         }
     }
 
@@ -136,6 +152,31 @@ nmfChartLine::populateChart(
         currentAxisY->applyNiceNumbers();
     }
 
+
+    if (LeaveGapsWhereNegative) {
+        double currentYMax = currentAxisY->max();
+        // Replace any y = -1 found in series with 99999
+        // Then restore the previous y max value
+        // This should have the effect of omitting -1 values but allowing in range values
+        // if they appear any time after the -1 values in the series
+        QLineSeries* lineSeries;
+        QPointF seriesPoint;
+        for (QAbstractSeries* series : chart->series()) {
+            lineSeries = qobject_cast<QLineSeries*>(series);
+            for (int i=0; i<lineSeries->count(); ++i) {
+                seriesPoint = lineSeries->at(i);
+                if (seriesPoint.y() == nmfConstantsMSSPM::NoFishingMortality) {
+                    lineSeries->replace(i,QPointF(seriesPoint.x(),nmfConstantsMSSPM::MaxOutOfBounds));
+                }
+
+            }
+        }
+        currentAxisY->setMax(currentYMax);
+    }
+
+
+
+
     QValueAxis *currentAxisX = qobject_cast<QValueAxis*>(chart->axisX());
     currentAxisX->setTitleFont(titleFont);
     currentAxisX->setTitleText(QString::fromStdString(XTitle));
@@ -144,25 +185,18 @@ nmfChartLine::populateChart(
         currentAxisX->setLabelFormat("%d");
     }
 
+    // Set range so plot completely fills out chart in the x-direction
+    currentAxisX->setRange(XStartVal,XStartVal+NumXValues-1);
+
     // Set grid line visibility
     chart->axisX()->setGridLineVisible(GridLines[0]);
     chart->axisY()->setGridLineVisible(GridLines[1]);
 
-//    // Show legend
-//    if ((lineColorName == "MonteCarloSimulation") ||
-//        (lineColorName.isEmpty()))
-//    {
-//        showLegend = false;
-//    } else {
-//        showLegend = true;
-//    }
-
+    // Set legend visibility
     chart->legend()->setVisible(ShowLegend);
     chart->legend()->setAlignment(Qt::AlignRight);
     chart->legend()->setShowToolTips(true);
     chart->legend()->setMarkerShape(QLegend::MarkerShapeFromSeries);
-
-
 }
 
 void
@@ -172,13 +206,27 @@ nmfChartLine::callback_hoveredLine(const QPointF& point, bool hovered)
     QPoint pos = QCursor::pos();
 
     if (hovered) {
-        if (m_tooltips.size() > 0) {
+        if (m_HoverLabels.size() > 0) {
+            tooltip = m_HoverLabels[qobject_cast<QLineSeries* >(QObject::sender())->name()];
+        }
+        else if (m_tooltips.size() > 0) {
             tooltip = m_tooltips[qobject_cast<QLineSeries* >(QObject::sender())->name()];
         }
-        QToolTip::showText(pos, tooltip);
+
+        // Call singleshot timer
+//      int ToolTipDuration = 5*1000; // in seconds
+//      QTimer::singleShot(ToolTipDuration, this, SLOT(callback_HideTooltip()));
+        QToolTip::showText(pos, tooltip, new QWidget(), QRect(), 10000);
+//      QWidget::setToolTipDuration(10000);  // RSK - can't seem to set the duration of the tooltip
+
     } else {
         QToolTip::hideText();
     }
 }
 
+//void
+//nmfChartLine::callback_HideTooltip()
+//{
+//    QToolTip::hideText();
+//}
 

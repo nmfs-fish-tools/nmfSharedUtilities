@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['logmsg',['logMsg',['../classnmf_logger.html#a0e607badf8844edfa4663bc68e8c69b9',1,'nmfLogger']]]
+  ['initlogger',['initLogger',['../classnmf_logger.html#a438524867cec8b85112ffe98c4676040',1,'nmfLogger']]]
 ];

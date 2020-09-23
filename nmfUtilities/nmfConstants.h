@@ -89,6 +89,7 @@ namespace nmfConstants
     EXTERN const int    NoValueInt      = -9999;
     EXTERN const double NoValueDouble   = -9999.0;
     EXTERN const int    ProgressUpdateFrequency = 1000; // How often to update progress bar (milliseconds).
+    EXTERN const double MaxBiomass      = 1e12;
 
     EXTERN const int    Normal    = 0;
     EXTERN const int    Bold      = 1;

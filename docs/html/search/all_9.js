@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['movablelineeventfilter',['MovableLineEventFilter',['../class_movable_line_event_filter.html',1,'']]]
+  ['linregout',['LinRegOut',['../struct_lin_reg_out.html',1,'']]],
+  ['logmsg',['logMsg',['../classnmf_logger.html#a0e607badf8844edfa4663bc68e8c69b9',1,'nmfLogger']]]
 ];
