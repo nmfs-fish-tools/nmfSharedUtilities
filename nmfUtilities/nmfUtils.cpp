@@ -280,6 +280,10 @@ double getRandomNumber(int seedValue, double lowerLimit, double upperLimit)
     return dist(rng);
 }
 
+bool isNearlyZero(const double& value)
+{
+    return (std::abs(value) < nmfConstants::NearlyZero);
+}
 
 double round(double number, int decimalPlaces)
 {

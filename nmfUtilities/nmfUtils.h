@@ -371,6 +371,12 @@ namespace nmfUtils {
      */
     void initialize(Boost5DArrayDouble& array5d);
     /**
+     * @brief Checks to see if the passed double is very close to 0
+     * @param value : value to check to see if close to 0
+     * @return boolean true if nearly zero, else false
+     */
+    bool isNearlyZero(const double& value);
+    /**
      * @brief Returns True/False if current operating system is Windows (either 32-bit or 64-bit)
      * @return True or False signifying current operating system is Windows
      */

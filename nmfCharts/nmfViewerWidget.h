@@ -26,6 +26,9 @@
 
 #include "nmfLogger.h"
 #include "nmfUtilsQt.h"
+#include <chrono>
+#include <thread>
+#include <boost/thread/thread.hpp>
 
 /**
  * @brief This class is an image viewer class that allows the user to sequence through
