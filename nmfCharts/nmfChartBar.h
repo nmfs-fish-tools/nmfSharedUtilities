@@ -11,6 +11,7 @@
 #include <QStackedBarSeries>
 #include <QString>
 #include <QStringList>
+#include <QToolTip>
 #include <QValueAxis>
 
 #include <boost/numeric/ublas/matrix.hpp>
@@ -20,6 +21,7 @@
 #include <boost/range/algorithm_ext/erase.hpp>
 
 #include <vector>
+#include <math.h>
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -36,7 +38,8 @@ public:
 
     void populateChart(
             QChart  *chart,
-            std::string &type,
+            const std::string &type,
+            double& maxYVal,
             const boost::numeric::ublas::matrix<double> &ChartData,
             const QStringList &RowLabels,
             const QStringList &ColumnLabels,
@@ -48,7 +51,7 @@ public:
 signals:
 
 public slots:
-
+    void callback_BarSetHovered(bool val1,int val2);
 };
 
 #endif // NMFCHARTBAR_H

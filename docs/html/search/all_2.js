@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['calculatemulticolumnwidth',['calculateMultiColumnWidth',['../namespacenmf_utils_qt.html#a10ca273199708a36838a7d6f17331e2d',1,'nmfUtilsQt']]],
   ['calculateyearlypoints',['calculateYearlyPoints',['../classnmf_chart_movable_line.html#a3408af71cd280f55ad619357a1e07804',1,'nmfChartMovableLine']]],
   ['callback_5fbounceplaynextimage',['callback_BouncePlayNextImage',['../classnmf_viewer_widget.html#aa67a26b1b9d203ebb1a47f2ea8bf140a',1,'nmfViewerWidget']]],
   ['callback_5fbouncesetupplaypb',['callback_BounceSetupPlayPB',['../classnmf_viewer_widget.html#abb5bb0f5a0644ce628c0e22cf6fc7c6f',1,'nmfViewerWidget']]],

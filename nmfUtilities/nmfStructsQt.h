@@ -21,6 +21,8 @@
 #include <QPushButton>
 #include <QString>
 
+class nmfDatabase;
+
 /**
  * @brief These are common Qt structures and classes
  */

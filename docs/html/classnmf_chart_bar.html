@@ -85,6 +85,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-slots">Public Slots</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classnmf_chart_bar-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -102,11 +103,17 @@ Collaboration diagram for nmfChartBar:</div>
 <div class="center"><img src="classnmf_chart_bar__coll__graph.png" border="0" usemap="#nmf_chart_bar_coll__map" alt="Collaboration graph"/></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-slots"></a>
+Public Slots</h2></td></tr>
+<tr class="memitem:a3553b06bcf0b0cab2e1808972377482f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3553b06bcf0b0cab2e1808972377482f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>callback_BarSetHovered</b> (bool val1, int val2)</td></tr>
+<tr class="separator:a3553b06bcf0b0cab2e1808972377482f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad2a80409488ca9fd9a61cddeeb398a54"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad2a80409488ca9fd9a61cddeeb398a54"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>populateChart</b> (QChart *chart, std::string &amp;type, const boost::numeric::ublas::matrix&lt; double &gt; &amp;ChartData, const QStringList &amp;RowLabels, const QStringList &amp;ColumnLabels, std::string &amp;MainTitle, std::string &amp;XTitle, std::string &amp;YTitle, const std::vector&lt; bool &gt; &amp;GridLines, const int Theme)</td></tr>
-<tr class="separator:ad2a80409488ca9fd9a61cddeeb398a54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b149d7beef44a881151355637687054"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3b149d7beef44a881151355637687054"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>populateChart</b> (QChart *chart, const std::string &amp;type, double &amp;maxYVal, const boost::numeric::ublas::matrix&lt; double &gt; &amp;ChartData, const QStringList &amp;RowLabels, const QStringList &amp;ColumnLabels, std::string &amp;MainTitle, std::string &amp;XTitle, std::string &amp;YTitle, const std::vector&lt; bool &gt; &amp;GridLines, const int Theme)</td></tr>
+<tr class="separator:a3b149d7beef44a881151355637687054"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>nmfCharts/<a class="el" href="nmf_chart_bar_8h_source.html">nmfChartBar.h</a></li>

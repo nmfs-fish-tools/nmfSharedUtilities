@@ -3,6 +3,7 @@ var searchData=
   ['nlregout',['NLRegOut',['../struct_n_l_reg_out.html',1,'']]],
   ['nmfabundance',['nmfAbundance',['../classnmf_abundance.html',1,'']]],
   ['nmfchartbar',['nmfChartBar',['../classnmf_chart_bar.html',1,'']]],
+  ['nmfchartdonut',['nmfChartDonut',['../classnmf_chart_donut.html',1,'']]],
   ['nmfchartlegend',['nmfChartLegend',['../classnmf_chart_legend.html',1,'']]],
   ['nmfchartline',['nmfChartLine',['../classnmf_chart_line.html',1,'']]],
   ['nmfchartlinewithscatter',['nmfChartLineWithScatter',['../classnmf_chart_line_with_scatter.html',1,'']]],

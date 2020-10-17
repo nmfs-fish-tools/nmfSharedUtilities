@@ -179,6 +179,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a741f31eeae5a15f711cb728beafb509b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a741f31eeae5a15f711cb728beafb509b">removeSettingsFile</a> ()</td></tr>
 <tr class="memdesc:a741f31eeae5a15f711cb728beafb509b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the Qt settings file from the file system. Useful for resetting the application GUI in case it disappears (i.e., in case some bad GUI settings are saved)  <a href="#a741f31eeae5a15f711cb728beafb509b">More...</a><br /></td></tr>
 <tr class="separator:a741f31eeae5a15f711cb728beafb509b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10ca273199708a36838a7d6f17331e2d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a10ca273199708a36838a7d6f17331e2d">calculateMultiColumnWidth</a> (QTableView *tableview, const int &amp;firstCol, const int &amp;lastCol)</td></tr>
+<tr class="memdesc:a10ca273199708a36838a7d6f17331e2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the sum of the widths of the column range.  <a href="#a10ca273199708a36838a7d6f17331e2d">More...</a><br /></td></tr>
+<tr class="separator:a10ca273199708a36838a7d6f17331e2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac47e06c5ccb74f228199347fb206a292"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#ac47e06c5ccb74f228199347fb206a292">saveModelToCSVFile</a> (std::string projectDir, std::string tabName, QTableView *table)</td></tr>
 <tr class="memdesc:ac47e06c5ccb74f228199347fb206a292"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the data in the passed model to the appropriate directory and file.  <a href="#ac47e06c5ccb74f228199347fb206a292">More...</a><br /></td></tr>
 <tr class="separator:ac47e06c5ccb74f228199347fb206a292"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -405,6 +408,49 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if all the max model cells are greater than or equal to the min model cells, else False </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a10ca273199708a36838a7d6f17331e2d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int nmfUtilsQt::calculateMultiColumnWidth </td>
+          <td>(</td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tableview</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>firstCol</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>lastCol</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculates the sum of the widths of the column range. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tableview</td><td>: tableview whose column widths are to be measured </td></tr>
+    <tr><td class="paramname">firstCol</td><td>: first column in range to be measured </td></tr>
+    <tr><td class="paramname">lastCol</td><td>: last column in range to be measured </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
 </div>
 </div>

@@ -195,6 +195,16 @@ namespace nmfUtilsQt {
             QStandardItemModel* smodelMin,
             QStandardItemModel* smodelMax);
     /**
+     * @brief Calculates the sum of the widths of the column range
+     * @param tableview : tableview whose column widths are to be measured
+     * @param firstCol : first column in range to be measured
+     * @param lastCol : last column in range to be measured
+     * @return
+     */
+    int calculateMultiColumnWidth(QTableView* tableview,
+                                  const int&  firstCol,
+                                  const int&  lastCol);
+    /**
      * @brief Creates the passed directories if they don't already exist
      * @param dir : typically a hidden application directory
      * @param dataDir : the application data directory

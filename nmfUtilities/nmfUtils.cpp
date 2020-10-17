@@ -285,6 +285,11 @@ bool isNearlyZero(const double& value)
     return (std::abs(value) < nmfConstants::NearlyZero);
 }
 
+bool isWholeNumber(double value)
+{
+    return (floor(value) == ceil(value));
+}
+
 double round(double number, int decimalPlaces)
 {
     if (decimalPlaces < 0) {

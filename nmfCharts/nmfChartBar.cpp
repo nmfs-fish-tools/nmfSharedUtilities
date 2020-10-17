@@ -10,7 +10,8 @@ nmfChartBar::nmfChartBar()
 void
 nmfChartBar::populateChart(
         QChart *chart,
-        std::string &type,
+        const std::string &type,
+        double& maxYVal,
         const boost::numeric::ublas::matrix<double> &ChartData,
         const QStringList &RowLabels,
         const QStringList &ColumnLabels,
@@ -76,13 +77,16 @@ nmfChartBar::populateChart(
 
         // Load data into series and then add series to the chart
         for (unsigned int i=0; i<ChartData.size2(); ++i) {
-            if (ColumnLabels.size() == ChartData.size2())
+            if (ColumnLabels.size() == ChartData.size2()) {
                 newSet = new QBarSet((ColumnLabels[i]));
-            else
+            } else {
                 newSet = new QBarSet("");
+            }
             for (unsigned int j=0; j<ChartData.size1(); ++j) {
                 *newSet << ChartData(j,i);
             }
+            connect(newSet, SIGNAL(hovered(bool,int)),
+                    this,   SLOT(callback_BarSetHovered(bool,int)));
             series->append(newSet);
         }
         chart->addSeries(series);
@@ -125,6 +129,9 @@ nmfChartBar::populateChart(
     QValueAxis *currentAxisY = qobject_cast<QValueAxis*>(chart->axisY());
     currentAxisY->setTitleFont(titleFont);
     currentAxisY->setTitleText(QString::fromStdString(YTitle));
+    if (maxYVal > 0) {
+        currentAxisY->setMax(maxYVal);
+    }
     currentAxisY->applyNiceNumbers();
 
     // Set grid line visibility
@@ -132,3 +139,14 @@ nmfChartBar::populateChart(
     chart->axisY()->setGridLineVisible(GridLines[1]);
 }
 
+void
+nmfChartBar::callback_BarSetHovered(bool hovered, int index)
+{
+    if (hovered) {
+        QBarSet* barset = qobject_cast<QBarSet* >(QObject::sender());
+        double value = barset->at(index);
+        int numDecimals = (floor(value) == ceil(value)) ? 0 : 1; // value%1 tells if double has no decimal component (i.e., 20.0)
+        QToolTip::showText(QCursor::pos(),barset->label() + " - " +
+                           QString::number(value,'f',numDecimals) + "%");
+    }
+}

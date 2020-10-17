@@ -371,6 +371,12 @@ namespace nmfUtils {
      */
     void initialize(Boost5DArrayDouble& array5d);
     /**
+     * @brief Tests the passed value if there's no decimal part and returns true, else returns false
+     * @param value : number to test if there's a decimal part
+     * @return True or False value signifying if the passed number is a "whole" number (i.e., there's no decimal part)
+     */
+    bool isWholeNumber(double value);
+    /**
      * @brief Checks to see if the passed double is very close to 0
      * @param value : value to check to see if close to 0
      * @return boolean true if nearly zero, else false

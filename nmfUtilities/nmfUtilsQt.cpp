@@ -562,7 +562,7 @@ QString
 copy(QApplication* qtApp, QTableView* tableView)
 {
     if (! tableView) {
-        return "\nNo table found.";
+        return "\nCopy not available.";
     }
 
     QString text;
@@ -626,7 +626,7 @@ QString
 paste(QApplication* qtApp, QTableView* tableView)
 {
     if (! tableView) {
-        return "\nNo table found.";
+        return "\nPaste not available.";
     }
 
     int m = 0;
@@ -744,7 +744,7 @@ QString
 clearAll(QTableView* tableView)
 {
     if (! tableView) {
-        return "\nNo table found.";
+        return "\nClear All not available.";
     }
 
     QModelIndex pasteIndex;
@@ -775,7 +775,7 @@ clear(QApplication* qtApp,
       QTableView*   tableView)
 {
     if (! tableView) {
-        return "\nNo table found.";
+        return "\nClear not available.";
     }
 
     QString retv;
@@ -818,7 +818,7 @@ QString
 selectAll(QTableView* tableView)
 {
     if (! tableView) {
-        return "\nNo table found.";
+        return "\nSelect All not available.";
     }
 
     tableView->selectAll();
@@ -831,7 +831,7 @@ QString
 deselectAll(QTableView* tableView)
 {
     if (! tableView) {
-        return "\nNo table found.";
+        return "\nDeselect All not available.";
     }
 
     tableView->selectionModel()->clear();
@@ -1024,6 +1024,20 @@ std::cout << "Removing: " << fileToRemove.toStdString() << std::endl;
     }
     return true;
 }
+
+
+int calculateMultiColumnWidth(
+        QTableView *tv,
+        const int& firstCol,
+        const int& lastCol)
+{
+    int newWidth = 0;
+    for (int col=firstCol; col<=lastCol; ++col) {
+        newWidth += tv->columnWidth(col);
+    }
+    return newWidth;
+}
+
 
 void saveModelToCSVFile(std::string projectDir,
                         std::string tabName,
