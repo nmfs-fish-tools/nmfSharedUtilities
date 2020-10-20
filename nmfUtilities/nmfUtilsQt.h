@@ -48,6 +48,7 @@
 #include "nmfConstantsMSCAA.h"
 #include "nmfConstantsMSSPM.h"
 #include "nmfConstantsMSVPA.h"
+#include "nmfConstantsDonut.h"
 
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/io.hpp>

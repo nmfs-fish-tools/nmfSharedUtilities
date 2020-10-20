@@ -1013,6 +1013,12 @@ std::cout << "Removing: " << fileToRemove.toStdString() << std::endl;
             if (! dir.remove(fileToRemove)) {
                 std::cout << "Error: failed to remove settings file" << std::endl;
             }
+        } else if (appName == "Donut") {
+            fileToRemove = QDir(QString::fromStdString(nmfConstantsDonut::SettingsDirWindows)).filePath(appName+"_Settings.ini");
+std::cout << "Removing: " << fileToRemove.toStdString() << std::endl;
+            if (! dir.remove(fileToRemove)) {
+                std::cout << "Error: failed to remove settings file" << std::endl;
+            }
         } else {
           return false;
         }
