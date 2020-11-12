@@ -1,0 +1,16 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node20 [label="QDialog",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node20 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node0 [label="nmfDatabaseConnectDialog",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnmf_database_connect_dialog.html",tooltip=" "];
+  Node20 -> Node22 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node22 [label="nmfFileViewer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnmf_file_viewer.html",tooltip="This class creates a dialog that contains a text edit widget displaying the contents of the passed fi..."];
+  Node20 -> Node23 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node23 [label="nmfStructsQt::ChartSaveDlg",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnmf_structs_qt_1_1_chart_save_dlg.html",tooltip="This class displays a QDialog and allows the user to do a screen grab of the displayed chart...."];
+  Node20 -> Node24 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node24 [label="nmfTestDialog",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnmf_test_dialog.html",tooltip=" "];
+}

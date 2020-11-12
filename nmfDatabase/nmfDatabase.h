@@ -32,6 +32,7 @@
 #define NMFDATABASE_H_
 
 #include "nmfLogger.h"
+#include "nmfUtilsQt.h"
 
 #include <iostream>
 #include <memory>

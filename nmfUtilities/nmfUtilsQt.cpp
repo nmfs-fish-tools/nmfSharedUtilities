@@ -1167,7 +1167,7 @@ void clearTableView(const QList<QTableView*>& tables)
 
 bool emptyField(QStringList fields)
 {
-    for (unsigned int i=0; i<fields.size(); ++i) {
+    for (int i=0; i<fields.size(); ++i) {
         if (fields[i].isEmpty()) {
             return true;
         }
@@ -1178,7 +1178,7 @@ bool emptyField(QStringList fields)
 bool outOfRange(QStringList fields, QString& badParam)
 {
     double value;
-    for (unsigned int i=0; i<fields.size(); i+=4) {
+    for (int i=0; i<fields.size(); i+=4) {
         value = fields[i+1].toDouble();
         if ((value < fields[i+2].toDouble()) ||
             (value > fields[i+3].toDouble())) {
@@ -1188,5 +1188,12 @@ bool outOfRange(QStringList fields, QString& badParam)
     }
     return false;
 }
+
+
+bool isAnError(std::string errorMsg)
+{
+    return (! QString::fromStdString(errorMsg).trimmed().isEmpty() );
+}
+
 
 } // end namespace

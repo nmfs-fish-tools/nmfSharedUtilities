@@ -269,7 +269,7 @@ nmfDatabase::nmfDeleteRecordsFromTable(std::string table, std::string MSVPAName)
 
     queryStr = "DELETE FROM " + table + " WHERE MSVPAname=\""+MSVPAName+"\";";
     errorMsg = nmfUpdateDatabase(queryStr);
-    if ( errorMsg != " " ) {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         nmfUtils::printError(queryStr,errorMsg);
         ok = false;
     }
@@ -361,7 +361,7 @@ nmfDatabase::nmfDeleteRecordsFromTable(std::string table,
                " AND ForeName = '" + ForecastName + "' " +
                " AND Scenario = '" + Scenario + "' ";
     errorMsg = nmfUpdateDatabase(queryStr);
-    if ( errorMsg != " " ) {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         nmfUtils::printError(queryStr,errorMsg);
         ok = false;
     }
@@ -543,7 +543,7 @@ nmfDatabase::nmfQueryDatabase(
         errorMsg = db.lastError().text().toStdString();
         if (errorMsg.empty()) {
             std::cout << "Error: Check for loaded database." << std::endl;
-        } else if (errorMsg != " ") {
+        } else if (nmfUtilsQt::isAnError(errorMsg)) {
             // This prints an errorMsg on startup of:
             // Error: Access denied for user ... (using password: NO) QMYSQL: Unable to connect
             // which came from:
@@ -1218,7 +1218,7 @@ nmfDatabase::importDatabase(QWidget*     widget,
         // create the database
         cmd = "CREATE DATABASE " + fileDatabaseName;
         errorMsg = nmfUpdateDatabase(cmd.toStdString());
-        if (errorMsg != " ") {
+        if (nmfUtilsQt::isAnError(errorMsg)) {
             logger->logMsg(nmfConstants::Error,"Error: nmfUtilsQt::importDatabase: "+errorMsg);
             return "";
         }
@@ -1875,7 +1875,7 @@ nmfDatabase::updateForecastMonteCarloParameters(
             "' AND ObjectiveCriterion = '" + ObjectiveCriterion +
             "' AND Scaling = '"            + Scaling + "'";
     errorMsg = nmfUpdateDatabase(deleteCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         msg = "\nError in ForecastMonteCarloParameters command. Couldn't delete all records from " +
                 QString::fromStdString(tableName) + " table";
         logger->logMsg(nmfConstants::Error,"nmfDatabase::updateForecastMonteCarloParameters: DELETE error: " + errorMsg);
@@ -1914,7 +1914,7 @@ nmfDatabase::updateForecastMonteCarloParameters(
 
     saveCmd = saveCmd.substr(0,saveCmd.size()-1);
     errorMsg = nmfUpdateDatabase(saveCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         logger->logMsg(nmfConstants::Error,"[Error] updateForecastMonteCarloParameters: Write table error: " + errorMsg);
         logger->logMsg(nmfConstants::Error,"saveCmd: " + saveCmd);
         return false;
@@ -1984,8 +1984,8 @@ nmfDatabase::saveApplicationTable(
     // Delete the current entry here
     deleteCmd = "DELETE FROM " + tableName; // delete all rows
     errorMsg = nmfUpdateDatabase(deleteCmd);
-    if (errorMsg != " ") {
-        msg = "\nError in saveApplicationTable command. Couldn't delete all records from " +
+    if (nmfUtilsQt::isAnError(errorMsg)) {
+        msg = "\nError  in saveApplicationTable command. Couldn't delete all records from " +
                 QString::fromStdString(tableName) + " table";
         logger->logMsg(nmfConstants::Error,"nmfDatabase::saveApplicationTable: DELETE error: " + errorMsg);
         logger->logMsg(nmfConstants::Error,"cmd: " + deleteCmd);
@@ -1996,7 +1996,7 @@ nmfDatabase::saveApplicationTable(
     // Save the new data
     saveCmd = "INSERT INTO " + tableName +" (Name) VALUES ('" + appName + "')";
     errorMsg = nmfUpdateDatabase(saveCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         logger->logMsg(nmfConstants::Error,"nmfDatabase::saveApplicationTable: Write table error: " + errorMsg);
         logger->logMsg(nmfConstants::Error,"cmd: " + saveCmd);
         QMessageBox::warning(widget, "Error",

@@ -329,6 +329,12 @@ namespace nmfUtilsQt {
      */
     int getTabIndex(QTabWidget* tabWidget, QString tabName);
     /**
+     * @brief Determine if the passed string is an error message
+     * @param errorMsg : return string from previous database call
+     * @return True if errorMsg represents an error, False if it does not
+     */
+    bool isAnError(std::string errorMsg);
+    /**
      * @brief Tests the passed fields to see if the parameters are out of range of their min, max fields
      * @param fields : list of parameters and their respective ranges (i.e., GrowthRate,GrowthRateMin,GrowthRateMax,...)
      * @param badParam : name of the out of range parameter

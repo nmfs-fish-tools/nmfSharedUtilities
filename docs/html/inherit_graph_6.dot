@@ -1,0 +1,8 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node0 [label="Data_Struct",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct_data___struct.html",tooltip="The data structure used for parameter estimation. It contains the parameter min max limits as well as..."];
+}
