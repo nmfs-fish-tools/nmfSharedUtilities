@@ -93,6 +93,7 @@ class nmfOutputChartLine: public nmfOutputChartBase {
             Boost3DArrayDouble &Maturity);
 
     static std::string getYAxisUnits(
+            nmfDatabase* databasePtr,
             std::string selectedSpecies);
 
     static void Forecast_MultispeciesPopulations_TotalBiomass(

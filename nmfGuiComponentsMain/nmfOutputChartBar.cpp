@@ -34,7 +34,7 @@ void nmfOutputChartBar::loadChartWithData(
 
     series = new QBarSeries();
 
-    if (LegendNames.size() < ChartData.size2()) {
+    if (LegendNames.size() < int(ChartData.size2())) {
         msg = "Error: nmfOutputChartBar::loadChartWithData array size problem. ";
         msg += "\n       LegendNames size of " + std::to_string(LegendNames.size()) + " < ";
         msg += "ChartData size of " + std::to_string(ChartData.size2());
@@ -57,7 +57,11 @@ void nmfOutputChartBar::loadChartWithData(
     chart->legend()->setVisible(showLegend);
 
     QValueAxis *axisY = new QValueAxis();
-    chart->setAxisY(axisY, series);
+    // chart->setAxisY(axisY, series);
+//    chart->addAxis(axisY, Qt::AlignBottom);
+//    series->attachAxis(axisY);
+    nmfUtilsQt::setAxisY(chart,axisY,series);
+
     if (maxValue > 0.0) {
         axisY->setRange(0, maxValue);
     } else {
@@ -99,11 +103,13 @@ void nmfOutputChartBar::setTitles(
     QBarCategoryAxis *axis = new QBarCategoryAxis();
     axis->append(categories);
     chart->createDefaultAxes();
-    chart->setAxisX(axis, series);
-    //chart->legend()->setVisible(false);
+    // chart->setAxisX(axis, series);
+//    chart->addAxis(axis, Qt::AlignLeft);
+//    series->attachAxis(axis);
+    nmfUtilsQt::setAxisX(chart,axis,series);
 
     // Set font and labels of x axis
-    QAbstractAxis *axisX = chart->axisX();
+    QAbstractAxis *axisX = chart->axes(Qt::Horizontal).back();
     QFont titleFont = axisX->titleFont();
     titleFont.setPointSize(12);
     titleFont.setWeight(QFont::Bold);
@@ -115,7 +121,7 @@ void nmfOutputChartBar::setTitles(
         axis->setLabelsAngle(0);
 
     // Set font and labels of y axis
-    QAbstractAxis *axisY = chart->axisY();
+    QAbstractAxis *axisY = chart->axes(Qt::Vertical).back();
     axisY->setTitleFont(titleFont);
     axisY->setTitleText(yLabel.c_str());
 
@@ -271,9 +277,9 @@ void nmfOutputChartBar::getMaturityData(
 //{
 //    if (whichLines == "horizontal") {
 //        hGridLine = showGridLines;
-//        chart->axisY()->setGridLineVisible(showGridLines);
+//        chart->axes(Qt::Vertical).back()->setGridLineVisible(showGridLines);
 //    } else {
-//        chart->axisX()->setGridLineVisible(showGridLines);
+//        chart->axes(Qt::Horizontal).back()->setGridLineVisible(showGridLines);
 //    }
 
 //} // setHGridLines
@@ -328,9 +334,9 @@ void nmfOutputChartBar::getChartData(
     boost::numeric::ublas::matrix<double> CatchData;
     boost::numeric::ublas::matrix<double> tempData;
     QStringList PreyList;
-    int firstYear;
-    int nYears;
-    double AvgFA = 0.0;
+    int firstYear = 0;
+    int nYears    = 0;
+    double AvgFA  = 0.0;
 
     // Get conversion factor
     double WtConversion = 1.0;
@@ -1340,7 +1346,7 @@ void nmfOutputChartBar::getChartDataOfPredationMortalityByPredator(
                    seasonStr + " GROUP BY YEAR ";
         dataMap = databasePtr->nmfQueryDatabase(queryStr, fields);
         NumRecords = dataMap["TotCons"].size();
-        if (NYears != dataMap["TotCons"].size()) {
+        if (NYears != int(dataMap["TotCons"].size())) {
             std::cout << queryStr << std::endl;
             std::cout << "Warning: NYears (" << NYears << ") not equal to number of records from above query ("
                       << dataMap["TotCons"].size() << ").  Re-run MSVPA configuration." << std::endl;
@@ -1408,7 +1414,7 @@ void nmfOutputChartBar::queryDataAndLoadChart(
         QStringList &LegendNames)
 {
     int ageVal=0;
-    QBarSeries *series;
+    QBarSeries *series = nullptr;
     QStringList categories;
     std::string newAgeStr = ageStr;
     std::string newYLabel="";
@@ -1521,7 +1527,7 @@ void nmfOutputChartBar::querySpawningStockBiomassDataAndLoadChart(
     std::map<std::string, std::vector<std::string> > dataMap;
     std::vector<std::string> fields;
     std::string field;
-    QBarSeries *series;
+    QBarSeries *series = nullptr;
     std::size_t foundSpawning;
     QStringList categories;
     std::string newAgeStr = ageStr;
@@ -2945,8 +2951,8 @@ void nmfOutputChartBar::redrawChart(
     }
 
     // Set grid line visibility
-    chart->axisX()->setGridLineVisible(vGridLine);
-    chart->axisY()->setGridLineVisible(hGridLine);
+    chart->axes(Qt::Horizontal).back()->setGridLineVisible(vGridLine);
+    chart->axes(Qt::Vertical).back()->setGridLineVisible(hGridLine);
 
 } // end redrawChart
 

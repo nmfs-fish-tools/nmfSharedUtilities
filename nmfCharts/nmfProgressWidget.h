@@ -32,6 +32,7 @@
 #include <QValueAxis>
 
 #include "nmfUtils.h"
+#include "nmfUtilsQt.h"
 #include "nmfLogger.h"
 
 

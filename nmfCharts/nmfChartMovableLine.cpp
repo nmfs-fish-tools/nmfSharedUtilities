@@ -117,7 +117,7 @@ nmfChartMovableLine::getRange(int& xMin, int& xMax)
 double
 nmfChartMovableLine::getYValue(const int& xValue)
 {
-    if (xValue < m_yearlyPoints.size()) {
+    if (xValue < int(m_yearlyPoints.size())) {
         return m_yearlyPoints[xValue].y();
     } else {
         return -1.0;
@@ -182,8 +182,8 @@ nmfChartMovableLine::populateChart(
     boldFont.setWeight(QFont::Bold);
     m_Chart->setTitleFont(boldFont);
     m_Chart->setTitle(QString::fromStdString(m_MainTitle));
-    m_Chart->axisX()->setTitleText(QString::fromStdString(m_XTitle));
-    m_Chart->axisY()->setTitleText(QString::fromStdString(m_YTitle));
+    m_Chart->axes(Qt::Horizontal).back()->setTitleText(QString::fromStdString(m_XTitle));
+    m_Chart->axes(Qt::Vertical).back()->setTitleText(QString::fromStdString(m_YTitle));
     QMargins chartMargins(35, 10, 20, 10);
     m_Chart->setMargins(chartMargins);
 
@@ -263,7 +263,7 @@ void
 nmfChartMovableLine::setMaxYValue(int maxYValue)
 {
     m_MaxY = maxYValue;
-    m_Chart->axisY()->setMax(m_MaxY);
+    m_Chart->axes(Qt::Vertical).back()->setMax(m_MaxY);
 
     switch (m_MaxY) {
       case 1:
@@ -297,7 +297,7 @@ void
 nmfChartMovableLine::setRange(const int& numYears)
 {
     m_MaxX = m_MinX + numYears;
-    m_Chart->axisX()->setRange(m_MinX,m_MaxX);
+    m_Chart->axes(Qt::Horizontal).back()->setRange(m_MinX,m_MaxX);
     resetEndPoints();
 }
 
@@ -315,7 +315,7 @@ nmfChartMovableLine::updateChart(
     m_MinX = startYear;
     m_MaxX = endYear;
 
-    m_Chart->axisX()->setRange(m_MinX,m_MaxX);
+    m_Chart->axes(Qt::Horizontal).back()->setRange(m_MinX,m_MaxX);
 }
 
 

@@ -84,6 +84,7 @@ nmfViewerWidget::nmfViewerWidget(QWidget* parent,
             this,    SLOT(callback_BouncePlayNextImage()));
 
     setupOutputScreenShotViewerWidgets();
+
 }
 
 nmfViewerWidget::~nmfViewerWidget() {
@@ -186,6 +187,7 @@ nmfViewerWidget::loadDataTables(QString fullFilename)
             tableView->hide();
         }
     }
+
 }
 
 bool
@@ -224,10 +226,11 @@ nmfViewerWidget::readDataFile(
 
     QTextStream in(&file);
 
+    // The first 2 lines are for num species and num years
     line = in.readLine().trimmed();
-    numCols = line.split(":")[1].trimmed().toInt() + 1; // +1 to include the first Year columns
+    numCols = line.split(",")[1].trimmed().toInt() + 1; // +1 to include the first Year columns
     line = in.readLine().trimmed();
-    numRows = line.split(":")[1].trimmed().toInt() + 1; // +1 to make the year range inclusive
+    numRows = line.split(",")[1].trimmed().toInt() + 1; // +1 to make the year range inclusive
 
     nmfUtils::initialize(tmpMtx,numRows,numCols);
 
@@ -406,27 +409,29 @@ nmfViewerWidget::setupOutputScreenShotViewerWidgets()
     m_SetSpeedSL->setFixedWidth(200);
     m_SetSpeedSL->setValue(50);
 
-    connect(m_ImageCMB,         SIGNAL(activated(QString)),
-            this,                        SLOT(callback_ImagesCMB(QString)));
-    connect(m_DeletePB,       SIGNAL(clicked()),
-            this,                        SLOT(callback_DeletePB()));
+    connect(m_ImageCMB,        SIGNAL(activated(QString)),
+            this,              SLOT(callback_ImagesCMB(QString)));
+    connect(m_DeletePB,        SIGNAL(clicked()),
+            this,              SLOT(callback_DeletePB()));
     connect(m_RefreshPB,       SIGNAL(clicked()),
-            this,                        SLOT(callback_RefreshPB()));
-    connect(m_RenamePB,       SIGNAL(clicked()),
-            this,                        SLOT(callback_RenamePB()));
+            this,              SLOT(callback_RefreshPB()));
+    connect(m_RenamePB,        SIGNAL(clicked()),
+            this,              SLOT(callback_RenamePB()));
     connect(m_PlayReversePB,   SIGNAL(clicked()),
-            this,                        SLOT(callback_PlayReversePB()));
-    connect(m_PlayForwardPB,      SIGNAL(clicked()),
-            this,                        SLOT(callback_PlayForwardPB()));
+            this,              SLOT(callback_PlayReversePB()));
+    connect(m_PlayForwardPB,   SIGNAL(clicked()),
+            this,              SLOT(callback_PlayForwardPB()));
     connect(m_PlayBouncePB,    SIGNAL(clicked()),
-            this,                        SLOT(callback_BounceSetupPlayPB()));
-    connect(m_SetFirstImagePB,SIGNAL(toggled(bool)),
-            this,                        SLOT(callback_SetFirstImagePB(bool)));
-    connect(m_SetLastImagePB, SIGNAL(toggled(bool)),
-            this,                        SLOT(callback_SetLastImagePB(bool)));
-    connect(m_SetSpeedSL,     SIGNAL(valueChanged(int)),
-            this,                        SLOT(callback_SetSpeedSL(int)));
+            this,              SLOT(callback_BounceSetupPlayPB()));
+    connect(m_SetFirstImagePB, SIGNAL(toggled(bool)),
+            this,              SLOT(callback_SetFirstImagePB(bool)));
+    connect(m_SetLastImagePB,  SIGNAL(toggled(bool)),
+            this,              SLOT(callback_SetLastImagePB(bool)));
+    connect(m_SetSpeedSL,      SIGNAL(valueChanged(int)),
+            this,              SLOT(callback_SetSpeedSL(int)));
+
     updateScreenShotViewer("");
+
 }
 
 void
@@ -554,6 +559,7 @@ nmfViewerWidget::callback_ImagesCMB(QString filename)
     m_PixmapLBL->setPixmap(QPixmap::fromImage(image));
 
     loadDataTables(fullFilename.replace("outputImages","outputData"));
+
 }
 
 void

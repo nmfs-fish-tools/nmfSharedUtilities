@@ -45,7 +45,6 @@ nmfChartLine::populateChart(
     int XStartVal = (ShowFirstPoint) ? 0 : 1;
     XStartVal += XOffset;
     double yVal;
-    bool skipRest = false;
     QString lineColorName = QString::fromStdString(LineColorName);
     QString hoverLabel;
     int NumXValues = YAxisData.size1();
@@ -86,7 +85,7 @@ nmfChartLine::populateChart(
         // Load data into series and then add series to the chart
         for (unsigned line=0; line<YAxisData.size2(); ++line) {
             series = new QLineSeries();
-            hoverLabel = (HoverLabels.size() <= line) ? "" : HoverLabels[line];
+            hoverLabel = (unsigned(HoverLabels.size()) <= line) ? "" : HoverLabels[line];
             if (hoverLabel.isEmpty()) {
                 hoverLabel = "No Label Set";
             }
@@ -98,7 +97,6 @@ nmfChartLine::populateChart(
             // hovering over.
             series->setName(hoverLabel);
 
-            skipRest = false;
             pen = series->pen();
             if (lineColorName == "MonteCarloSimulation") {
                 pen.setColor(LineColor);
@@ -117,7 +115,7 @@ nmfChartLine::populateChart(
             }
             series->setPen(pen);
 
-            for (unsigned j=XStartVal-XOffset; j<NumXValues; ++j) {
+            for (int j=XStartVal-XOffset; j<NumXValues; ++j) {
                 yVal = YAxisData(j,line);
                 if (yVal != nmfConstants::NoValueDouble) {
                     series->append(XOffset+j*XInc,yVal);
@@ -137,12 +135,12 @@ nmfChartLine::populateChart(
 
     // Setup X and Y axes
     chart->createDefaultAxes();
-    QAbstractAxis *axisX = chart->axisX();
+    QAbstractAxis *axisX = chart->axes(Qt::Horizontal).back();
     QFont titleFont = axisX->titleFont();
     titleFont.setPointSize(12);
     titleFont.setWeight(QFont::Bold);
 
-    QValueAxis *currentAxisY = qobject_cast<QValueAxis*>(chart->axisY());
+    QValueAxis *currentAxisY = qobject_cast<QValueAxis*>(chart->axes(Qt::Vertical).back());
     currentAxisY->setTitleFont(titleFont);
     currentAxisY->setTitleText(QString::fromStdString(YTitle));
     currentAxisY->applyNiceNumbers();
@@ -177,7 +175,7 @@ nmfChartLine::populateChart(
 
 
 
-    QValueAxis *currentAxisX = qobject_cast<QValueAxis*>(chart->axisX());
+    QValueAxis *currentAxisX = qobject_cast<QValueAxis*>(chart->axes(Qt::Horizontal).back());
     currentAxisX->setTitleFont(titleFont);
     currentAxisX->setTitleText(QString::fromStdString(XTitle));
     currentAxisX->applyNiceNumbers();
@@ -189,8 +187,8 @@ nmfChartLine::populateChart(
     currentAxisX->setRange(XStartVal,XStartVal+NumXValues-1);
 
     // Set grid line visibility
-    chart->axisX()->setGridLineVisible(GridLines[0]);
-    chart->axisY()->setGridLineVisible(GridLines[1]);
+    chart->axes(Qt::Horizontal).back()->setGridLineVisible(GridLines[0]);
+    chart->axes(Qt::Vertical).back()->setGridLineVisible(GridLines[1]);
 
     // Set legend visibility
     chart->legend()->setVisible(ShowLegend);

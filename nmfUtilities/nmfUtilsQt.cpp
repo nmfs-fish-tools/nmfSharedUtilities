@@ -324,7 +324,7 @@ void sendToOutputWindow(
 
 int getTabIndex(QTabWidget* tabWidget, QString tabName)
 {
-    for (unsigned index=0; index<tabWidget->count(); ++index) {
+    for (int index=0; index<tabWidget->count(); ++index) {
         if (tabName == tabWidget->tabText(index)) {
             return index;
         }
@@ -573,10 +573,11 @@ copy(QApplication* qtApp, QTableView* tableView)
     if (! selection->hasSelection()) {
         return "\nNo valid selection found. Cells must have data prior to making a selection.";
     }
-    QModelIndexList      indexes   = selection->selectedIndexes();
+    QModelIndexList indexes = selection->selectedIndexes();
 
     // Sort the indexes in case the user selects from bottom right to top left.
-    qSort(indexes);
+//  qSort(indexes);
+    std::sort(indexes.begin(),indexes.end());
 
     // Copy a single cell
     if (indexes.size() == 1) {
@@ -1099,7 +1100,7 @@ void saveModelToCSVFile(std::string projectDir,
         if (! vHeaderTitle.empty()) {
             outputFile << vHeaderTitle << ", ";
         }
-        for (unsigned j=0; j<numColumns; ++j) {
+        for (int j=0; j<numColumns; ++j) {
             outputFile << smodel->horizontalHeaderItem(j)->text().toStdString();
             if (j < numColumns-1) {
                 outputFile << ", ";
@@ -1107,8 +1108,8 @@ void saveModelToCSVFile(std::string projectDir,
                 outputFile << "\n";
             }
         }
-        for (unsigned i=0; i<numRows; ++i) {
-            for (unsigned j=0; j<numColumns; ++j) {
+        for (int i=0; i<numRows; ++i) {
+            for (int j=0; j<numColumns; ++j) {
                 if (j == 0) {
                     if (smodel->verticalHeaderItem(i) != nullptr) {
                         outputFile << smodel->verticalHeaderItem(i)->text().toStdString() << ", ";
@@ -1195,5 +1196,57 @@ bool isAnError(std::string errorMsg)
     return (! QString::fromStdString(errorMsg).trimmed().isEmpty() );
 }
 
+void setAxisX(QChart*      chart,
+              QValueAxis*  axisX,
+              QLineSeries* series)
+{
+    chart->removeAxis(chart->axes(Qt::Horizontal).back());
+    chart->addAxis(axisX, Qt::AlignBottom);
+    series->attachAxis(axisX);
+}
+
+void setAxisY(QChart*      chart,
+              QValueAxis*  axisY,
+              QLineSeries* series)
+{
+    chart->removeAxis(chart->axes(Qt::Vertical).back());
+    chart->addAxis(axisY, Qt::AlignLeft);
+    series->attachAxis(axisY);
+}
+
+void setAxisX(QChart*            chart,
+              QBarCategoryAxis*  axisX,
+              QStackedBarSeries* series)
+{
+    chart->removeAxis(chart->axes(Qt::Horizontal).back());
+    chart->addAxis(axisX, Qt::AlignBottom);
+    series->attachAxis(axisX);
+}
+
+void setAxisX(QChart*            chart,
+              QBarCategoryAxis*  axisX,
+              QBarSeries*        series)
+{
+    chart->removeAxis(chart->axes(Qt::Horizontal).back());
+    chart->addAxis(axisX, Qt::AlignBottom);
+    series->attachAxis(axisX);
+}
+void setAxisY(QChart*            chart,
+              QValueAxis*        axisY,
+              QStackedBarSeries* series)
+{
+    chart->removeAxis(chart->axes(Qt::Vertical).back());
+    chart->addAxis(axisY, Qt::AlignLeft);
+    series->attachAxis(axisY);
+}
+
+void setAxisY(QChart*     chart,
+              QValueAxis* axisY,
+              QBarSeries* series)
+{
+    chart->removeAxis(chart->axes(Qt::Vertical).back());
+    chart->addAxis(axisY, Qt::AlignLeft);
+    series->attachAxis(axisY);
+}
 
 } // end namespace

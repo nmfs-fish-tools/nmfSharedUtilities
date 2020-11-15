@@ -58,11 +58,13 @@ void nmfOutputChartStackedBar::setTitles(
     QBarCategoryAxis *axis = new QBarCategoryAxis();
     axis->append(categories);
     chart->createDefaultAxes();
-    chart->setAxisX(axis, series);
+//  chart->setAxisX(axis, series);
+    nmfUtilsQt::setAxisX(chart,axis,series);
+
     chart->legend()->setVisible(true);
     chart->legend()->setAlignment(Qt::AlignRight);
 
-    QAbstractAxis *axisX = chart->axisX();
+    QAbstractAxis *axisX = chart->axes(Qt::Horizontal).back();
     QFont titleFont = axisX->titleFont();
     titleFont.setPointSize(12);
     titleFont.setWeight(QFont::Bold);
@@ -79,7 +81,11 @@ void nmfOutputChartStackedBar::setTitles(
     newAxisY->setTitleText(yLabel.c_str());
     newAxisY->setRange(0,1.0);
     newAxisY->setTickCount(6);
-    chart->setAxisY(newAxisY,series);
+    //chart->setAxisY(newAxisY,series);
+//    chart->addAxis(newAxisY, Qt::AlignBottom);
+//    series->attachAxis(newAxisY);
+    nmfUtilsQt::setAxisY(chart,newAxisY,series);
+
 
 }
 
@@ -253,7 +259,7 @@ void nmfOutputChartStackedBar::redrawChart(
     std::string PredAge;
     std::string ageSizePrefix = "";
     std::string xLabel = "";
-    QStackedBarSeries *series;
+    QStackedBarSeries *series = nullptr;
     //boost::numeric::ublas::matrix<double> ChartData;
     int MSVPA_FirstYear=0;
     int MSVPA_LastYear=0;
@@ -266,9 +272,9 @@ void nmfOutputChartStackedBar::redrawChart(
     int NOthPreds;
     std::string PredAgeStr = "";
     std::string PredName = selectedSpecies;
-    int firstYear;
-    int nYears;
-    double AvgFA = 0.0;
+    int firstYear = 0;
+    int nYears    = 0;
+    double AvgFA  = 0.0;
 
     std::string seasonStr = selectedSeason;
 
@@ -490,7 +496,7 @@ void nmfOutputChartStackedBar::redrawChart(
             rowLabels << QString::number(firstYear + i);
             for (int j = 0; j < NPreyAge; ++j) {
                 colLabels << QString::fromStdString("Age "+std::to_string(j));
-                if (m < dataMap3["SBM"].size()) {
+                if (m < int(dataMap3["SBM"].size())) {
                     if (std::stoi(dataMap3["PreyAge"][j]) == j) {
                         ChartData(i,j) = std::stod(dataMap3["SBM"][m++]) / AvgFA;
                     }
@@ -922,7 +928,7 @@ std::cout << "hereee: " << Forecast_NYears << ", " << NPrey << std::endl;
     }
 
     // Set grid line visibility
-    chart->axisX()->setGridLineVisible(vGridLine);
-    chart->axisY()->setGridLineVisible(hGridLine);
+    chart->axes(Qt::Horizontal).back()->setGridLineVisible(vGridLine);
+    chart->axes(Qt::Vertical).back()->setGridLineVisible(hGridLine);
 
 } // end redrawChart

@@ -19,7 +19,7 @@ nmfDatabaseConnectDialog::nmfDatabaseConnectDialog(QMainWindow*       parent,
 
     QVBoxLayout *vLayout          = new QVBoxLayout();
     QHBoxLayout *hLayout          = new QHBoxLayout();
-    QHBoxLayout *passwordLayt     = new QHBoxLayout();
+    // QHBoxLayout *passwordLayt     = new QHBoxLayout();
     QLabel      *hostNameLBL      = new QLabel("Host name:");
     QLabel      *userNameLBL      = new QLabel("Database user name:");
     QLabel      *passwordLBL      = new QLabel("Database password:");

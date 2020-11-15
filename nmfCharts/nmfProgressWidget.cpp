@@ -170,14 +170,17 @@ nmfProgressWidget::nmfProgressWidget(QTimer *theTimer,
     validPointsCB->setStatusTip("Show valid points only (i.e., omit 99999)");
 
     // Show empty grid
-    QValueAxis *newXAxis = new QValueAxis();
-    QValueAxis *newYAxis = new QValueAxis();
-    m_chart->setAxisX(newXAxis, new QLineSeries());
-    m_chart->setAxisY(newYAxis, new QLineSeries());
+    QValueAxis  *newXAxis  = new QValueAxis();
+    QValueAxis  *newYAxis  = new QValueAxis();
+//  m_chart->setAxisX(newXAxis, new QLineSeries());
+//  m_chart->setAxisY(newYAxis, new QLineSeries());
+    nmfUtilsQt::setAxisX(m_chart,newXAxis,new QLineSeries());
+    nmfUtilsQt::setAxisY(m_chart,newYAxis,new QLineSeries());
+
     xRange = getXRange();
     yRange = getYRange();
-    m_chart->axisX()->setRange(xRange.first,xRange.second);
-    m_chart->axisY()->setRange(yRange.first,yRange.second);
+    m_chart->axes(Qt::Horizontal).back()->setRange(xRange.first,xRange.second);
+    m_chart->axes(Qt::Vertical).back()->setRange(yRange.first,yRange.second);
 //    newXAxis->applyNiceNumbers();
 //    newYAxis->applyNiceNumbers();
     newXAxis->setLabelFormat("%d");
@@ -444,11 +447,11 @@ nmfProgressWidget::updateChart()
 
         // Update Chart
         m_chart->setTitle(m_mainTitle);
-//      m_chart->axisX()->setRange(m_xMin, m_xMax); // Caused x-axis to rescale...not what's wanted
-        m_chart->axisX()->setTitleText(m_xTitle);
-        m_chart->axisY()->setRange(m_yMin, m_yMax);
-        m_chart->axisY()->setTitleText(m_yTitle);
-        adjustYAxisLabelPrecision(qobject_cast<QValueAxis*>(m_chart->axisY()),
+//      m_chart->axes(Qt::Horizontal).back()->setRange(m_xMin, m_xMax); // Caused x-axis to rescale...not what's wanted
+        m_chart->axes(Qt::Horizontal).back()->setTitleText(m_xTitle);
+        m_chart->axes(Qt::Vertical).back()->setRange(m_yMin, m_yMax);
+        m_chart->axes(Qt::Vertical).back()->setTitleText(m_yTitle);
+        adjustYAxisLabelPrecision(qobject_cast<QValueAxis*>(m_chart->axes(Qt::Vertical).back()),
                                   m_yMin, m_yMax);
         m_chart->update();
 
@@ -589,7 +592,7 @@ void
 nmfProgressWidget::callback_minSB(int value) {
 
     if (isStopped()) {
-        m_chart->axisX()->setMin(value);
+        m_chart->axes(Qt::Horizontal).back()->setMin(value);
         m_chart->update();
     }
 
@@ -599,7 +602,7 @@ void
 nmfProgressWidget::callback_maxSB(int value)
 {
     if (isStopped()) {
-        m_chart->axisX()->setMax(value);
+        m_chart->axes(Qt::Horizontal).back()->setMax(value);
         m_chart->update();
     }
 
@@ -651,10 +654,10 @@ nmfProgressWidget::callback_rangeSetPB()
     double min =  99999;
     double max = -99999;
 
-    for (unsigned i=0; i<allSeries.count(); ++i) {
+    for (int i=0; i<allSeries.count(); ++i) {
         lineSeries = qobject_cast<QLineSeries *>(allSeries[i]);
         if (lineSeries) {
-            for (unsigned j=0; j<lineSeries->count(); ++j) {
+            for (int j=0; j<lineSeries->count(); ++j) {
                 value = lineSeries->at(j).y();
                 min = (value < min) ? value : min;
                 max = (value > max) ? value : max;
@@ -872,7 +875,7 @@ nmfProgressWidget::readChartDataFile(std::string type,
             boost::split(parts,validLines[0],boost::is_any_of(","));
             theRunName = parts[0];
             strVector.push_back(validLines[0]);
-            for (int i=1; i<validLines.size(); ++i) {
+            for (int i=1; i<int(validLines.size()); ++i) {
                 boost::split(parts,validLines[i],boost::is_any_of(","));
                 if (theRunName == parts[0]) {
                     strVector.push_back(validLines[i]);
@@ -887,10 +890,10 @@ nmfProgressWidget::readChartDataFile(std::string type,
         }
 
         m_chart->removeAllSeries();
-        for (int i=0; i<chartData.size(); ++i) {
+        for (int i=0; i<int(chartData.size()); ++i) {
             lseries = new QLineSeries();
             strVector = chartData[i];
-            for (int j=0; j<strVector.size(); ++j) {
+            for (int j=0; j<int(strVector.size()); ++j) {
                 boost::split(parts,strVector[j],boost::is_any_of(","));
                 lseries->setName(QString::fromStdString(parts[0]));
                 lseries->append(std::stoi(parts[1]),std::stod(parts[2]));
@@ -1034,8 +1037,10 @@ nmfProgressWidget::readChartDataFile(std::string type,
         lineSeries->setPointLabelsVisible(labelsCB->isChecked());
         lineSeries->setPen(QPen(whichColor,2));
         lineSeries->setColor(whichColor);
-        m_chart->setAxisX(newXAxis, lineSeries);
-        m_chart->setAxisY(newYAxis, lineSeries);
+//      m_chart->setAxisX(newXAxis, lineSeries);
+//      m_chart->setAxisY(newYAxis, lineSeries);
+        nmfUtilsQt::setAxisX(m_chart,newXAxis,lineSeries);
+        nmfUtilsQt::setAxisY(m_chart,newYAxis,lineSeries);
     }
 
     // Find max y value in lineSeries
@@ -1075,8 +1080,8 @@ nmfProgressWidget::readChartDataFile(std::string type,
 
     maxX = (maxX > xRange.second) ? maxX : xRange.second;
 
-    m_chart->axisX()->setRange(xRange.first,maxX);
-    m_chart->axisY()->setRange(yRange.first,yRange.second);
+    m_chart->axes(Qt::Horizontal).back()->setRange(xRange.first,maxX);
+    m_chart->axes(Qt::Vertical).back()->setRange(yRange.first,yRange.second);
 //  newXAxis->applyNiceNumbers();
     newXAxis->setLabelFormat("%d");
     newYAxis->setLabelFormat("%0.2f");

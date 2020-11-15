@@ -60,23 +60,23 @@ nmfChartScatter::populateChart(
     chart->legend()->setVisible(false);
     //chart->legend()->setAlignment(Qt::AlignRight);
 
-    QAbstractAxis *axisX = chart->axisX();
+    QAbstractAxis *axisX = chart->axes(Qt::Horizontal).back();
     QFont titleFont = axisX->titleFont();
     titleFont.setPointSize(12);
     titleFont.setWeight(QFont::Bold);
     axisX->setTitleFont(titleFont);
     axisX->setTitleText(QString::fromStdString(XTitle));
 
-    QValueAxis *currentAxisY = qobject_cast<QValueAxis*>(chart->axisY());
+    QValueAxis *currentAxisY = qobject_cast<QValueAxis*>(chart->axes(Qt::Vertical).back());
     currentAxisY->setTitleFont(titleFont);
     currentAxisY->setTitleText(QString::fromStdString(YTitle));
     currentAxisY->applyNiceNumbers();
 
-    QValueAxis *currentAxisX = qobject_cast<QValueAxis*>(chart->axisX());
+    QValueAxis *currentAxisX = qobject_cast<QValueAxis*>(chart->axes(Qt::Horizontal).back());
     currentAxisX->applyNiceNumbers();
 
     // Set grid line visibility
-    chart->axisX()->setGridLineVisible(GridLines[0]);
-    chart->axisY()->setGridLineVisible(GridLines[1]);
+    chart->axes(Qt::Horizontal).back()->setGridLineVisible(GridLines[0]);
+    chart->axes(Qt::Vertical).back()->setGridLineVisible(GridLines[1]);
 }
 

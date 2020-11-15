@@ -421,6 +421,7 @@ nmfAbundance::getSystemData(
         SystemData.TotalBiomass *= 1000000;
     }
 
+    return true;
 }
 
 
@@ -502,15 +503,15 @@ nmfAbundance::calculateSizePreference(
     double eta;
 
     // RSK - This assumes all species have same num years!!
-    for (int year = 0; year < m_WeightMap[AllSpecies[0]].size1(); ++year) {
+    for (int year = 0; year < int(m_WeightMap[AllSpecies[0]].size1()); ++year) {
         preyNum = -1;
         for (std::string preySpecies : AllSpecies) {
             ++preyNum;
-            for (int preyAge = 0; preyAge < m_WeightMap[preySpecies].size2(); ++preyAge) {
+            for (int preyAge = 0; preyAge < int(m_WeightMap[preySpecies].size2()); ++preyAge) {
                 predNum = -1;
                 for (std::string predSpecies : AllSpecies) {
                     ++predNum;
-                    for (int predAge = 0; predAge < m_WeightMap[predSpecies].size2(); ++predAge) {
+                    for (int predAge = 0; predAge < int(m_WeightMap[predSpecies].size2()); ++predAge) {
                         weightRatio  = m_WeightMap[predSpecies](year,predAge) /
                                        m_WeightMap[preySpecies](year,preyAge);
                         eta = PreferredRatioEta(predNum,preyNum);
@@ -549,15 +550,15 @@ nmfAbundance::calculateSuitability(
     int predNum;
     int preyNum;
 
-    for (int year = 0; year < m_WeightMap[AllSpecies[0]].size1(); ++year) {
+    for (int year = 0; year < int(m_WeightMap[AllSpecies[0]].size1()); ++year) {
         preyNum = -1;
         for (std::string preySpecies : AllSpecies) {
             ++preyNum;
-            for (int preyAge = 0; preyAge < m_WeightMap[preySpecies].size2(); ++preyAge) {
+            for (int preyAge = 0; preyAge < int(m_WeightMap[preySpecies].size2()); ++preyAge) {
                 predNum = -1;
                 for (std::string predSpecies : AllSpecies) {
                     ++predNum;
-                    for (int predAge = 0; predAge < m_WeightMap[predSpecies].size2(); ++predAge) {
+                    for (int predAge = 0; predAge < int(m_WeightMap[predSpecies].size2()); ++predAge) {
                         VulnerabilityNu[preyNum][preyAge][predNum][predAge][year] =
                                 VulnerabilityRho(preyNum,predNum) *
                                 SizePreferenceG[preyNum][preyAge][predNum][predAge][year];
@@ -592,7 +593,7 @@ nmfAbundance::calculateSuitabilityNuOther(
         predNum = -1;
         for (std::string predSpecies : AllSpecies) {
             ++predNum;
-            for (int predAge = 0; predAge < m_WeightMap[predSpecies].size2(); ++predAge) {
+            for (int predAge = 0; predAge < int(m_WeightMap[predSpecies].size2()); ++predAge) {
                 nuOther += VulnerabilityNu[0][0][predNum][predAge][year];
                 ++numValues;
             }
@@ -633,22 +634,22 @@ nmfAbundance::calculateScaledSuitability(
     setNuOther(nuOther);
 //std::cout << "*** *** Using nu other value of: " << nuOther << std::endl;
 
-    for (int year = 0; year < m_WeightMap[AllSpecies[0]].size1(); ++year) {
+    for (int year = 0; year < int(m_WeightMap[AllSpecies[0]].size1()); ++year) {
         preyNum = -1;
         for (std::string preySpecies : AllSpecies) {
             ++preyNum;
-            for (int preyAge = 0; preyAge < m_WeightMap[preySpecies].size2(); ++preyAge) {
+            for (int preyAge = 0; preyAge < int(m_WeightMap[preySpecies].size2()); ++preyAge) {
                 predNum = -1;
                 for (std::string predSpecies : AllSpecies) {
                     ++predNum;
 
-                    for (int predAge = 0; predAge < m_WeightMap[predSpecies].size2(); ++predAge) {
+                    for (int predAge = 0; predAge < int(m_WeightMap[predSpecies].size2()); ++predAge) {
 
                         nuSum = 0;
                         preyNum2 = -1;
                         for (std::string preySpecies2 : AllSpecies) {
                             ++preyNum2;
-                            for (int preyAge2 = 0; preyAge2 < m_WeightMap[preySpecies2].size2(); ++preyAge2) {
+                            for (int preyAge2 = 0; preyAge2 < int(m_WeightMap[preySpecies2].size2()); ++preyAge2) {
                                 nuSum +=  VulnerabilityNu[preyNum2][preyAge2][predNum][predAge][year];
                             }
                         }
@@ -732,7 +733,7 @@ nmfAbundance::calculatePredation(
         std::map<std::string,boost::numeric::ublas::matrix<double> >& PredationMortality,
         std::map<std::string,boost::numeric::ublas::matrix<double> >& AbundanceTable)
 {
-    int NumYears;
+//    int NumYears = 0;
     int preyNum = -1;
     int NumPreyAges;
     int predNum;
@@ -744,7 +745,7 @@ nmfAbundance::calculatePredation(
 //std::cout << preySpecies << std::endl;
 
         ++preyNum;
-        NumYears    = m_WeightMap[preySpecies].size1();
+        // NumYears    = m_WeightMap[preySpecies].size1();
         NumPreyAges = m_WeightMap[preySpecies].size2();
         for (int preyAge = 0; preyAge < NumPreyAges; ++preyAge) {
 //std::cout << "preyage: " << preyAge << std::endl;
@@ -753,8 +754,8 @@ nmfAbundance::calculatePredation(
             for (std::string predSpecies : AllSpecies) {
 //std::cout << "  " << predSpecies << std::endl;
                 ++predNum;
-                for (int predAge = 0; predAge < m_WeightMap[predSpecies].size2(); ++predAge) {
-                    if (year >= m_ConsumptionBiomassRatio[predSpecies].size1()) {
+                for (int predAge = 0; predAge < int(m_WeightMap[predSpecies].size2()); ++predAge) {
+                    if (year >= int(m_ConsumptionBiomassRatio[predSpecies].size1())) {
                         m_logger->logMsg(nmfConstants::Error,"nmfAbundance::calculatePredation: Found species with different number of years.");
                         return;
                     }
@@ -836,11 +837,11 @@ nmfAbundance::calculateBiomassAvailablePreyPhi(
     int preyNum = -1;
     for (std::string preySpecies : AllSpecies) {
         ++preyNum;
-        for (int preyAge = 0; preyAge < m_WeightMap[preySpecies].size2(); ++preyAge) {
+        for (int preyAge = 0; preyAge < int(m_WeightMap[preySpecies].size2()); ++preyAge) {
             predNum = -1;
             for (std::string predSpecies : AllSpecies) {
                 ++predNum;
-                for (int predAge = 0; predAge < m_WeightMap[predSpecies].size2(); ++predAge) {
+                for (int predAge = 0; predAge < int(m_WeightMap[predSpecies].size2()); ++predAge) {
                     BiomassAvailablePreyPhi[preyNum][preyAge][predNum][predAge][year] =
                             ScaledSuitabilityNuTilde[preyNum][preyAge][predNum][predAge][year] *
                             Biomass[preyNum][preyAge][year];
@@ -871,16 +872,16 @@ nmfAbundance::calculateBiomassTotalPreyPhi(
 
     for (std::string preySpecies : AllSpecies) {
        ++preyNum;
-       for (int preyAge = 0; preyAge < m_WeightMap[preySpecies].size2(); ++preyAge) {
+       for (int preyAge = 0; preyAge < int(m_WeightMap[preySpecies].size2()); ++preyAge) {
            predNum = -1;
            for (std::string predSpecies : AllSpecies) {
                ++predNum;
-               for (int predAge = 0; predAge < m_WeightMap[predSpecies].size2(); ++predAge) {
+               for (int predAge = 0; predAge < int(m_WeightMap[predSpecies].size2()); ++predAge) {
                    sumPhi   = 0;
                    preyNum2 = -1;
                    for (std::string preySpecies : AllSpecies) {
                        ++preyNum2;
-                       for (int preyAge2 = 0; preyAge2 < m_WeightMap[preySpecies].size2(); ++preyAge2) {
+                       for (int preyAge2 = 0; preyAge2 < int(m_WeightMap[preySpecies].size2()); ++preyAge2) {
                            sumPhi += BiomassAvailablePreyPhi[preyNum2][preyAge2][predNum][predAge][year];
                        }
                    }
@@ -1078,8 +1079,8 @@ std::cout << "nmfAbundance::getData start" << std::endl;
 std::cout << "Predation Matrix" << std::endl;
 for (std::string species : AllSpecies) {
    std::cout << species << std::endl;
-   for (int i = 0; i < PredationMortality[species].size1(); ++i) {
-       for (int j = 0; j < PredationMortality[species].size2(); ++j) {
+   for (int i = 0; i < int(PredationMortality[species].size1()); ++i) {
+       for (int j = 0; j < int(PredationMortality[species].size2()); ++j) {
            std::cout << PredationMortality[species](i,j) << " ";
        }
        std::cout << std::endl;

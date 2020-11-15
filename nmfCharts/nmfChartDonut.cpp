@@ -23,7 +23,6 @@ nmfChartDonut::populateChart(
     double minSize = 0.2;
     double maxSize = 0.9;
     double width = (maxSize - minSize) / numDonuts;
-    double value;
     QString label;
     QStringList parts;
 
@@ -76,7 +75,7 @@ nmfChartDonut::populateChart(
 //  chart->legend()->setVisible(true);
 //  chart->legend()->setAlignment(Qt::AlignRight);
 
-    QAbstractAxis *axisX = chart->axisX();
+    QAbstractAxis *axisX = chart->axes(Qt::Horizontal).back();
     QFont titleFont = axisX->titleFont();
     titleFont.setPointSize(12);
     titleFont.setWeight(QFont::Bold);
@@ -85,19 +84,19 @@ nmfChartDonut::populateChart(
     axisX->setLabelsVisible(false);
     axisX->setLineVisible(false);
 
-//  QValueAxis *currentAxisY = qobject_cast<QValueAxis*>(chart->axisY());
+//  QValueAxis *currentAxisY = qobject_cast<QValueAxis*>(chart->axes(Qt::Vertical).back());
 //  currentAxisY->setTitleFont(titleFont);
 //  currentAxisY->setTitleText(QString::fromStdString(YTitle));
 
     // Set grid line visibility
-//  chart->axisX()->setGridLineVisible(GridLines[0]);
-//  chart->axisY()->setGridLineVisible(GridLines[1]);
-    chart->axisX()->setGridLineVisible(false);
-    chart->axisY()->setGridLineVisible(false);
-    chart->axisX()->setShadesVisible(false);
-    chart->axisY()->setShadesVisible(false);
-//  chart->axisX()->hide();
-    chart->axisY()->hide();
+//  chart->axes(Qt::Horizontal).back()->setGridLineVisible(GridLines[0]);
+//  chart->axes(Qt::Vertical).back()->setGridLineVisible(GridLines[1]);
+    chart->axes(Qt::Horizontal).back()->setGridLineVisible(false);
+    chart->axes(Qt::Vertical).back()->setGridLineVisible(false);
+    chart->axes(Qt::Horizontal).back()->setShadesVisible(false);
+    chart->axes(Qt::Vertical).back()->setShadesVisible(false);
+//  chart->axes(Qt::Horizontal).back()->hide();
+    chart->axes(Qt::Vertical).back()->hide();
 }
 
 void

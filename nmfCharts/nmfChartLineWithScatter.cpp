@@ -108,13 +108,13 @@ nmfChartLineWithScatter::populateChart(
 
     // Setup X and Y axes
     chart->createDefaultAxes();
-    QFont titleFont = chart->axisX()->titleFont();
+    QFont titleFont = chart->axes(Qt::Horizontal).back()->titleFont();
     titleFont.setPointSize(12);
     titleFont.setWeight(QFont::Bold);
-    chart->axisX()->setTitleFont(titleFont);
-    chart->axisX()->setTitleText(QString::fromStdString(XTitle));
+    chart->axes(Qt::Horizontal).back()->setTitleFont(titleFont);
+    chart->axes(Qt::Horizontal).back()->setTitleText(QString::fromStdString(XTitle));
 
-    QValueAxis *currentAxisY = qobject_cast<QValueAxis*>(chart->axisY());
+    QValueAxis *currentAxisY = qobject_cast<QValueAxis*>(chart->axes(Qt::Vertical).back());
     currentAxisY->setTitleFont(titleFont);
     currentAxisY->setTitleText(QString::fromStdString(YTitle));
     currentAxisY->applyNiceNumbers();
@@ -124,15 +124,15 @@ nmfChartLineWithScatter::populateChart(
         currentAxisY->applyNiceNumbers();
     }
 
-    QValueAxis *currentAxisX = qobject_cast<QValueAxis*>(chart->axisX());
+    QValueAxis *currentAxisX = qobject_cast<QValueAxis*>(chart->axes(Qt::Horizontal).back());
     currentAxisX->applyNiceNumbers();
     if (xAxisIsInteger) {
         currentAxisX->setLabelFormat("%d");
     }
 
     //   Set grid line visibility
-    chart->axisX()->setGridLineVisible(GridLines[0]);
-    chart->axisY()->setGridLineVisible(GridLines[1]);
+    chart->axes(Qt::Horizontal).back()->setGridLineVisible(GridLines[0]);
+    chart->axes(Qt::Vertical).back()->setGridLineVisible(GridLines[1]);
 
     // Show legend
     chart->legend()->setVisible(true);

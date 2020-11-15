@@ -1176,6 +1176,7 @@ nmfDatabase::importDatabase(QWidget*     widget,
     QString msg;
     QString cmd;
     QString existingDatabase;
+    QStringList nullArgs = {};
     QProcess process;
     QStringList args;
     std::string errorMsg="";
@@ -1199,7 +1200,8 @@ nmfDatabase::importDatabase(QWidget*     widget,
 
     // Does database already exist?
     bool databaseAlreadyExists = databaseExists(fileDatabaseName.toStdString());
-    QApplication::flush();
+    //QApplication::flush();
+    QApplication::processEvents();
 
     // If database exists, ask user if they want it overwritten.
     // If database does not exists, create it first prior to importing.
@@ -1248,7 +1250,7 @@ nmfDatabase::importDatabase(QWidget*     widget,
         QApplication::setOverrideCursor(Qt::WaitCursor);
 
         // Execute import batch file
-        QProcess::execute(importBatchFile.c_str());
+        QProcess::execute(importBatchFile.c_str(),nullArgs);
 
         // Remove import batch file
         std::remove(importBatchFile.c_str());
@@ -1302,7 +1304,8 @@ nmfDatabase::exportDatabase(QWidget*     widget,
         QFileDialog::DontConfirmOverwrite);
     if (OutputFileName.isEmpty())
         return;
-    QApplication::flush();
+    //QApplication::flush();
+    QApplication::processEvents();
 
     // Check for correct file extension and add one if it's not there or is incorrect.
     QFileInfo fi(OutputFileName);

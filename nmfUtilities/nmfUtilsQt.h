@@ -17,6 +17,9 @@
 #include <vector>
 
 #include <QApplication>
+#include <QBarCategoryAxis>
+#include <QBarSeries>
+#include <QtCharts/QChart>
 #include <QClipboard>
 #include <QDate>
 #include <QDebug>
@@ -27,6 +30,7 @@
 #include <QInputDialog>
 #include <QLabel>
 #include <QLineEdit>
+#include <QLineSeries>
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QMimeData>
@@ -35,6 +39,7 @@
 #include <QScrollBar>
 #include <QSettings>
 #include <QSpacerItem>
+#include <QStackedBarSeries>
 #include <QStandardItemModel>
 #include <QString>
 #include <QTableView>
@@ -43,6 +48,7 @@
 #include <QTextEdit>
 #include <QTextStream>
 #include <QTreeWidgetItem>
+#include <QValueAxis>
 
 #include "nmfUtils.h"
 #include "nmfConstantsMSCAA.h"
@@ -69,6 +75,9 @@ typedef boost::multi_array<double, 5> Boost5DArrayDouble;
 //    QString buildOutput;
 //    QString runOutput;
 //};
+
+
+QT_CHARTS_USE_NAMESPACE
 
 /**
  * @brief This class creates a dialog that contains a text edit widget displaying
@@ -427,6 +436,36 @@ namespace nmfUtilsQt {
             boost::numeric::ublas::matrix<double>& outMatrix,
             int                      numDigits,
             int                      numDecimals);
+    /**
+     * @brief Convenience function to reset an X axis (the original Qt call was deprecated)
+     * @param chart : the chart on which the axis is to be placed
+     * @param axisX : the new axis with which to replace the old one
+     * @param series : the series to which the axis refers
+     */
+    void setAxisX(QChart*      chart,
+                  QValueAxis*  axisX,
+                  QLineSeries* series);
+    void setAxisX(QChart*      chart,
+                  QBarCategoryAxis*  axisX,
+                  QStackedBarSeries* series);
+    void setAxisX(QChart*            chart,
+                  QBarCategoryAxis*  axisX,
+                  QBarSeries*        series);
+    /**
+     * @brief Convenience function to reset a Y axis (the original Qt call was deprecated)
+     * @param chart : the chart on which the axis is to be placed
+     * @param axisX : the new axis with which to replace the old one
+     * @param series : the series to which the axis refers
+     */
+    void setAxisY(QChart*      chart,
+                  QValueAxis*  axisY,
+                  QLineSeries* series);
+    void setAxisY(QChart*      chart,
+                  QValueAxis*  axisY,
+                  QStackedBarSeries* series);
+    void setAxisY(QChart*      chart,
+                  QValueAxis*  axisY,
+                  QBarSeries* series);
     /**
      * @brief Show the About dialog for the application
      * @param parent : parent needed so as to know how to position the popup

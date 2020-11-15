@@ -45,10 +45,10 @@ nmfOutputChartLine::loadChartWithData(
         std::vector<std::string> xLabels,
         bool rotateLabels)
 {
-    QLineSeries *series;
+    QLineSeries *series = nullptr;
 
-    chart->removeAxis(chart->axisY());
-    chart->removeAxis(chart->axisX());
+    chart->removeAxis(chart->axes(Qt::Vertical).back());
+    chart->removeAxis(chart->axes(Qt::Horizontal).back());
 
     // Draw main chart title
     std::stringstream ss;
@@ -89,7 +89,9 @@ nmfOutputChartLine::loadChartWithData(
         }
         chart->addSeries(series);
         series->setName(QString::fromStdString(LegendNames(line)));
-        chart->setAxisY(axisY,series);
+        //chart->setAxisY(axisY,series);
+        nmfUtilsQt::setAxisY(chart,axisY,series);
+
     }
     axisY = qobject_cast<QValueAxis *>(chart->axes(Qt::Vertical).at(0));
     if (YMaxOverride > 0.0) {
@@ -102,7 +104,9 @@ nmfOutputChartLine::loadChartWithData(
     }
 
     // Set title on X axis
-    chart->setAxisX(axisX, series);
+    //chart->setAxisX(axisX, series);
+    nmfUtilsQt::setAxisX(chart,axisX,series);
+
     QFont titleFont = axisX->titleFont();
     titleFont.setPointSize(12);
     titleFont.setWeight(QFont::Bold);
@@ -137,8 +141,8 @@ void nmfOutputChartLine::setTitles(
     chart->legend()->setAlignment(Qt::AlignRight);
 
     // Remove the previous X axis
-    chart->removeAxis(chart->axisX());
-    chart->removeAxis(chart->axisY());
+    chart->removeAxis(chart->axes(Qt::Horizontal).back());
+    chart->removeAxis(chart->axes(Qt::Vertical).back());
 
 
     // Create a new X axis, add labels and the title
@@ -152,7 +156,9 @@ void nmfOutputChartLine::setTitles(
         axisX->setLabelsAngle(-90);
     else
         axisX->setLabelsAngle(0);
-    chart->setAxisX(axisX, series);
+    // chart->setAxisX(axisX, series);
+    nmfUtilsQt::setAxisX(chart,axisX,series);
+
     QFont titleFont = axisX->titleFont();
     titleFont.setPointSize(12);
     titleFont.setWeight(QFont::Bold);
@@ -167,7 +173,9 @@ void nmfOutputChartLine::setTitles(
         axisY->append(yLabels[i].c_str(),(i+1));
     }
     axisY->setRange(0, NumYLabels);
-    chart->setAxisY(axisY, series);
+    // chart->setAxisY(axisY, series);
+    nmfUtilsQt::setAxisY(chart,axisY,series);
+
     titleFont.setPointSize(12);
     titleFont.setWeight(QFont::Bold);
     axisY->setTitleFont(titleFont);
@@ -539,8 +547,8 @@ void nmfOutputChartLine::redrawChart(
     }
 
     // Set grid line visibility
-    chart->axisX()->setGridLineVisible(vGridLine);
-    chart->axisY()->setGridLineVisible(hGridLine);
+    chart->axes(Qt::Horizontal).back()->setGridLineVisible(vGridLine);
+    chart->axes(Qt::Vertical).back()->setGridLineVisible(hGridLine);
 
 } // end redrawChart
 
@@ -1029,9 +1037,10 @@ void nmfOutputChartLine::Forecast_MultispeciesPopulations_SpawningStockBiomass(
 
 
 std::string
-nmfOutputChartLine::getYAxisUnits(std::string selectedSpecies)
+nmfOutputChartLine::getYAxisUnits(nmfDatabase* databasePtr,
+                                  std::string selectedSpecies)
 {
-    nmfDatabase* databasePtr;
+//    nmfDatabase* databasePtr;
     std::string queryStr;
     std::map<std::string, std::vector<std::string> > dataMap;
     std::vector<std::string> fields;
@@ -1082,7 +1091,7 @@ void nmfOutputChartLine::Forecast_YieldPerRecruit_YPRvsF(
     char buf[1000];
     std::vector<std::string> XLabelNames;
     double YMax=0.0;
-    std::string yAxisUnits = getYAxisUnits(selectedSpecies);
+    std::string yAxisUnits = getYAxisUnits(databasePtr,selectedSpecies);
     boost::numeric::ublas::matrix<double> Pmature;
     boost::numeric::ublas::matrix<double> FatAge;
     boost::numeric::ublas::matrix<double> WtAtAge;
@@ -1226,7 +1235,7 @@ nmfOutputChartLine::Forecast_YieldPerRecruit_SSBvsF(
     char buf[100];
     std::vector<std::string> XLabelNames;
     double YMax=0.0;
-    std::string yAxisUnits = getYAxisUnits(selectedSpecies);
+    std::string yAxisUnits = getYAxisUnits(databasePtr,selectedSpecies);
     boost::numeric::ublas::matrix<double> Pmature;
     boost::numeric::ublas::matrix<double> FatAge;
     boost::numeric::ublas::matrix<double> WtAtAge;
@@ -1370,7 +1379,7 @@ nmfOutputChartLine::Forecast_YieldPerRecruit_ProjectedYPR(
 {
     std::vector<std::string> XLabelNames;
     double YMax=0.0;
-    std::string yAxisUnits = getYAxisUnits(selectedSpecies);
+    std::string yAxisUnits = getYAxisUnits(databasePtr,selectedSpecies);
     boost::numeric::ublas::matrix<double> Pmature;
     boost::numeric::ublas::matrix<double> FatAge;
     boost::numeric::ublas::matrix<double> WtAtAge;
@@ -1509,7 +1518,7 @@ nmfOutputChartLine::Forecast_YieldPerRecruit_ProjectedFBenchmarks(
 {
     std::vector<std::string> XLabelNames;
     double YMax=0.0;
-    std::string yAxisUnits = getYAxisUnits(selectedSpecies);
+    std::string yAxisUnits = getYAxisUnits(databasePtr,selectedSpecies);
     boost::numeric::ublas::matrix<double> Pmature;
     boost::numeric::ublas::matrix<double> FatAge;
     boost::numeric::ublas::matrix<double> WtAtAge;
@@ -1671,7 +1680,7 @@ nmfOutputChartLine::Forecast_YieldPerRecruit_ProjectedSSBBenchmarks(
     double yprObs;
     double ssbMax03;
     double ssbMax10;
-    std::string yAxisUnits = getYAxisUnits(selectedSpecies);
+    std::string yAxisUnits = getYAxisUnits(databasePtr,selectedSpecies);
     boost::numeric::ublas::matrix<double> Pmature;
     boost::numeric::ublas::matrix<double> FatAge;
     boost::numeric::ublas::matrix<double> WtAtAge;
@@ -1823,7 +1832,7 @@ nmfOutputChartLine::MSVPA_YieldPerRecruit_YPRvsF (
     char buf[100];
     std::vector<std::string> XLabelNames;
     double YMax=0.0;
-    std::string yAxisUnits = getYAxisUnits(selectedSpecies);
+    std::string yAxisUnits = getYAxisUnits(databasePtr,selectedSpecies);
     boost::numeric::ublas::matrix<double> Pmature;
     boost::numeric::ublas::matrix<double> FatAge;
     boost::numeric::ublas::matrix<double> WtAtAge;
@@ -1970,7 +1979,7 @@ nmfOutputChartLine::MSVPA_YieldPerRecruit_SSBvsF(
     char buf[100];
     std::vector<std::string> XLabelNames;
     double YMax=0.0;
-    std::string yAxisUnits = getYAxisUnits(selectedSpecies);
+    std::string yAxisUnits = getYAxisUnits(databasePtr,selectedSpecies);
     boost::numeric::ublas::matrix<double> Pmature;
     boost::numeric::ublas::matrix<double> FatAge;
     boost::numeric::ublas::matrix<double> WtAtAge;
@@ -2115,7 +2124,7 @@ nmfOutputChartLine::MSVPA_YieldPerRecruit_HistoricalYPR(
 {
     std::vector<std::string> XLabelNames;
     double YMax=0.0;
-    std::string yAxisUnits = getYAxisUnits(selectedSpecies);
+    std::string yAxisUnits = getYAxisUnits(databasePtr,selectedSpecies);
     boost::numeric::ublas::matrix<double> Pmature;
     boost::numeric::ublas::matrix<double> FatAge;
     boost::numeric::ublas::matrix<double> WtAtAge;
@@ -2255,7 +2264,7 @@ nmfOutputChartLine::MSVPA_YieldPerRecruit_HistoricalFBenchmarks(
 {
     std::vector<std::string> XLabelNames;
     double YMax=0.0;
-    std::string yAxisUnits = getYAxisUnits(selectedSpecies);
+    std::string yAxisUnits = getYAxisUnits(databasePtr,selectedSpecies);
     boost::numeric::ublas::matrix<double> Pmature;
     boost::numeric::ublas::matrix<double> FatAge;
     boost::numeric::ublas::matrix<double> WtAtAge;
@@ -2420,7 +2429,7 @@ nmfOutputChartLine::MSVPA_YieldPerRecruit_HistoricalSSBBenchmarks(
 {
     std::vector<std::string> XLabelNames;
     double YMax=0.0;
-    std::string yAxisUnits = getYAxisUnits(selectedSpecies);
+    std::string yAxisUnits = getYAxisUnits(databasePtr,selectedSpecies);
     boost::numeric::ublas::matrix<double> Pmature;
     boost::numeric::ublas::matrix<double> FatAge;
     boost::numeric::ublas::matrix<double> WtAtAge;
