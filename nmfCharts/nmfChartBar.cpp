@@ -103,9 +103,10 @@ nmfChartBar::populateChart(
     if (RowLabels.size() > 0)
         axis->append(RowLabels);
     chart->createDefaultAxes();
-
     //chart->setAxisX(axis, NULL);
-    chart->addAxis(axis, Qt::AlignBottom);
+    QBarSeries* seriesEmpty = new QBarSeries();
+    chart->addSeries(seriesEmpty);
+    nmfUtilsQt::setAxisX(chart,axis,seriesEmpty);
 
     chart->legend()->setVisible(true);
     chart->legend()->setAlignment(Qt::AlignRight);

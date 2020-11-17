@@ -23,6 +23,8 @@
 #include <vector>
 #include <math.h>
 
+#include "nmfUtilsQt.h"
+
 QT_CHARTS_USE_NAMESPACE
 
 const int NumCategoriesForVerticalNotation = 10;
