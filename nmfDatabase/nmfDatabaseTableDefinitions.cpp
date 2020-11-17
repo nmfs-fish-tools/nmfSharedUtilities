@@ -49,7 +49,7 @@ void nmfDatabase::checkForTableAndCreate(QString table)
         m_FunctionMap[table](table,qcmd);
 
         errorMsg = nmfUpdateDatabase(qcmd.toStdString());
-        if (errorMsg != " ") {
+        if (nmfUtilsQt::isAnError(errorMsg)) {
             nmfUtils::printError("Create table error: ", errorMsg);
         }
 
