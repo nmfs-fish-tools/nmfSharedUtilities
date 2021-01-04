@@ -1202,7 +1202,9 @@ void setAxisX(QChart*      chart,
 {
     chart->removeAxis(chart->axes(Qt::Horizontal).back());
     chart->addAxis(axisX, Qt::AlignBottom);
-    series->attachAxis(axisX);
+    if (series != nullptr) {
+        series->attachAxis(axisX);
+    }
 }
 
 void setAxisY(QChart*      chart,
@@ -1211,7 +1213,9 @@ void setAxisY(QChart*      chart,
 {
     chart->removeAxis(chart->axes(Qt::Vertical).back());
     chart->addAxis(axisY, Qt::AlignLeft);
-    series->attachAxis(axisY);
+    if (series != nullptr) {
+        series->attachAxis(axisY);
+    }
 }
 
 void setAxisX(QChart*            chart,
@@ -1220,7 +1224,9 @@ void setAxisX(QChart*            chart,
 {
     chart->removeAxis(chart->axes(Qt::Horizontal).back());
     chart->addAxis(axisX, Qt::AlignBottom);
-    series->attachAxis(axisX);
+    if (series != nullptr) {
+        series->attachAxis(axisX);
+    }
 }
 
 void setAxisX(QChart*            chart,
@@ -1229,7 +1235,9 @@ void setAxisX(QChart*            chart,
 {
     chart->removeAxis(chart->axes(Qt::Horizontal).back());
     chart->addAxis(axisX, Qt::AlignBottom);
-    series->attachAxis(axisX);
+    if (series != nullptr) {
+        series->attachAxis(axisX);
+    }
 }
 void setAxisY(QChart*            chart,
               QValueAxis*        axisY,
@@ -1237,7 +1245,9 @@ void setAxisY(QChart*            chart,
 {
     chart->removeAxis(chart->axes(Qt::Vertical).back());
     chart->addAxis(axisY, Qt::AlignLeft);
-    series->attachAxis(axisY);
+    if (series != nullptr) {
+        series->attachAxis(axisY);
+    }
 }
 
 void setAxisY(QChart*     chart,
@@ -1246,7 +1256,31 @@ void setAxisY(QChart*     chart,
 {
     chart->removeAxis(chart->axes(Qt::Vertical).back());
     chart->addAxis(axisY, Qt::AlignLeft);
-    series->attachAxis(axisY);
+    if (series != nullptr) {
+        series->attachAxis(axisY);
+    }
+}
+
+void
+modelCopy(QStandardItemModel* originalModel, QStandardItemModel* copyModel)
+{
+    QList<QStandardItem*> rowItems;
+
+    copyModel->removeRows(0,copyModel->rowCount());
+    for (int row=0; row<originalModel->rowCount(); row++) {
+        rowItems.clear();
+        for (int col=0; col<originalModel->columnCount(); col++) {
+            rowItems.append(originalModel->item(row,col)->clone());
+        }
+        copyModel->appendRow(rowItems);
+    }
 }
 
 } // end namespace
+
+
+
+
+
+
+

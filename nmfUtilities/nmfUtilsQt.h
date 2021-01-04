@@ -344,6 +344,12 @@ namespace nmfUtilsQt {
      */
     bool isAnError(std::string errorMsg);
     /**
+     * @brief Copies the contents of the first model into the second model
+     * @param originalModel : original model containing the data to be copied
+     * @param copyModel : new model to receive a copy of the data from the original model
+     */
+    void modelCopy(QStandardItemModel* originalModel, QStandardItemModel* copyModel);
+    /**
      * @brief Tests the passed fields to see if the parameters are out of range of their min, max fields
      * @param fields : list of parameters and their respective ranges (i.e., GrowthRate,GrowthRateMin,GrowthRateMax,...)
      * @param badParam : name of the out of range parameter

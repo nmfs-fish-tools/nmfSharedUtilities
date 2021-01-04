@@ -34,6 +34,8 @@ class nmfChartBar : public QObject
 
     Q_OBJECT
 
+    bool m_areDataPercentages;
+
 public:
     nmfChartBar();
     virtual ~nmfChartBar() {}
@@ -48,6 +50,7 @@ public:
             std::string &MainTitle,
             std::string &XTitle,
             std::string &YTitle,
+            const bool& areDataPercentages,
             const std::vector<bool> &GridLines,
             const int Theme);
 signals:

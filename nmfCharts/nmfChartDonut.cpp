@@ -51,9 +51,9 @@ nmfChartDonut::populateChart(
             label = slice->label();
             parts = label.split("-");
             if (int(10.0*value) == 10.0*int(value)) {
-                slice->setLabel(parts[0]+" - "+QString::number(value,'f',0)+"%");
+                slice->setLabel(parts[0].trimmed()+" - "+QString::number(value,'f',0)+"%");
             } else {
-                slice->setLabel(parts[0]+" - "+QString::number(value,'f',1)+"%");
+                slice->setLabel(parts[0].trimmed()+" - "+QString::number(value,'f',1)+"%");
             }
 
             connect(slice, &QPieSlice::hovered, this, &nmfChartDonut::callback_ExplodeSlice);

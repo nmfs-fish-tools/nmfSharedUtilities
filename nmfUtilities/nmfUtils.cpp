@@ -230,6 +230,26 @@ void initialize(Boost5DArrayDouble &array5d)
                         array5d[i][j][k][l][m] = 0.0;
 }
 
+bool invertMatrix(
+        boost::numeric::ublas::matrix<double>& matrix,
+        boost::numeric::ublas::matrix<double>& inverseMatrix)
+{
+    bool retv = true;
+
+    initialize(inverseMatrix,int(matrix.size1()),int(matrix.size2()));
+
+    try {
+        inverseMatrix = boost::numeric::ublas::identity_matrix<float>(matrix.size1());
+        boost::numeric::ublas::permutation_matrix<std::size_t> pm(matrix.size1());
+        boost::numeric::ublas::lu_factorize(matrix,pm);
+        boost::numeric::ublas::lu_substitute(matrix, pm, inverseMatrix);
+    }  catch (...) {
+        retv = false;
+    }
+
+    return retv;
+}
+
 double getMatrixMax(boost::numeric::ublas::matrix<double> &mat,
                          bool roundOff=false)
 {
@@ -264,7 +284,7 @@ double getMatrixMax(boost::numeric::ublas::matrix<double> &mat,
  * If seed < 0, no seed is used and the algorithm is stochastic.
  * If seed >= 0, then that seed is used and the algorithm is deterministic.
  */
-double getRandomNumber(int seedValue, double lowerLimit, double upperLimit)
+double    getRandomNumber(int seedValue, double lowerLimit, double upperLimit)
 {
 //    std::random_device rd;
 //    int RandomSeed = (seed < 0) ? rd() : seed;

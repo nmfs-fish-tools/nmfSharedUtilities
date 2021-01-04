@@ -17,6 +17,8 @@ namespace nmfConstantsDonut
 {
      const bool ResetPositionAlso      = true;
      const bool DontResetPosition      = false;
+     const bool DataArePercentages     = true;
+     const bool DataAreNotPercentages  = false;
 
      const int COLUMN_SPECIES          =  0;
      const int COLUMN_REL_ABUND        =  1;

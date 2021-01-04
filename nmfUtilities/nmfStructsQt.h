@@ -15,6 +15,7 @@
 
 #include <QComboBox>
 #include <QDialog>
+#include <QFileInfo>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>

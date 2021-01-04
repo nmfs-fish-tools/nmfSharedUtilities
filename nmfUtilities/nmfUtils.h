@@ -28,6 +28,11 @@
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/matrix_proxy.hpp>
 #include <boost/numeric/ublas/io.hpp>
+#include <boost/numeric/ublas/vector.hpp>
+#include <boost/numeric/ublas/triangular.hpp>
+#include <boost/numeric/ublas/vector_proxy.hpp>
+#include <boost/numeric/ublas/operation.hpp>
+#include <boost/numeric/ublas/lu.hpp>
 #include <boost/multi_array.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string.hpp>
@@ -370,6 +375,16 @@ namespace nmfUtils {
      * @param array5d : 5d array to initialize
      */
     void initialize(Boost5DArrayDouble& array5d);
+
+    /**
+     * @brief Finds the inverse of the passed matrix. (In order for an inverse to be found, the determinant of the matrix must not be 0.)
+     * @param matrix : matrix whose inverse is desired
+     * @param inverseMatrix : the inverse of the passed in matrix
+     * @return True if inverse was found, else False
+     */
+    bool invertMatrix(
+            boost::numeric::ublas::matrix<double>& matrix,
+            boost::numeric::ublas::matrix<double>& inverseMatrix);
     /**
      * @brief Tests the passed value if there's no decimal part and returns true, else returns false
      * @param value : number to test if there's a decimal part

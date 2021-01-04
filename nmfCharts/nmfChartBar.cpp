@@ -4,6 +4,7 @@
 
 nmfChartBar::nmfChartBar()
 {
+    m_areDataPercentages = true;
 }
 
 
@@ -18,11 +19,14 @@ nmfChartBar::populateChart(
         std::string &MainTitle,
         std::string &XTitle,
         std::string &YTitle,
+        const bool& areDataPercentages,
         const std::vector<bool> &GridLines,
         const int Theme)
 {
     QBarSet    *newSet = NULL;
     QBarSeries *series = NULL;
+    QBarSeries* nullBarSeries = nullptr;
+    m_areDataPercentages = areDataPercentages;
 
     // Set current theme
     chart->setTheme(static_cast<QChart::ChartTheme>(Theme));
@@ -33,17 +37,19 @@ nmfChartBar::populateChart(
 
         // Load data into series and then add series to the chart
         for (unsigned int i=0; i<ChartData.size2(); ++i) {
-            if (ColumnLabels.size() == int(ChartData.size2()))
+            if (ColumnLabels.size() == int(ChartData.size2())) {
                 newSet = new QBarSet((ColumnLabels[i]));
-            else
+            } else {
                 newSet = new QBarSet("");
+            }
             for (unsigned int val=0; val<ChartData.size1(); ++val) {
                 *newSet << ChartData(val,i);
             }
+            connect(newSet, SIGNAL(hovered(bool,int)),
+                    this,   SLOT(callback_BarSetHovered(bool,int)));
             series->append(newSet);
         }
         chart->addSeries(series);
-
     } else if (type == "Line") {
 
         // Load data into series and then add series to the chart
@@ -91,6 +97,7 @@ nmfChartBar::populateChart(
         }
         chart->addSeries(series);
     }
+
     // Set main title
     QFont mainTitleFont = chart->titleFont();
     mainTitleFont.setPointSize(14);
@@ -103,10 +110,12 @@ nmfChartBar::populateChart(
     if (RowLabels.size() > 0)
         axis->append(RowLabels);
     chart->createDefaultAxes();
-    //chart->setAxisX(axis, NULL);
-    QBarSeries* seriesEmpty = new QBarSeries();
-    chart->addSeries(seriesEmpty);
-    nmfUtilsQt::setAxisX(chart,axis,seriesEmpty);
+
+//  chart->setAxisX(axis, NULL);
+//  QBarSeries* seriesEmpty = new QBarSeries();
+//  chart->addSeries(seriesEmpty);
+//  nmfUtilsQt::setAxisX(chart,axis,seriesEmpty);
+    nmfUtilsQt::setAxisX(chart,axis,nullBarSeries);
 
     chart->legend()->setVisible(true);
     chart->legend()->setAlignment(Qt::AlignRight);
@@ -127,9 +136,13 @@ nmfChartBar::populateChart(
         QValueAxis *newAxisY = new QValueAxis();
         newAxisY->setRange(0,1.0);
         newAxisY->setTickCount(6);
-        //chart->setAxisY(newAxisY,series);
-        chart->addAxis(newAxisY, Qt::AlignLeft);
-        series->attachAxis(newAxisY);
+//      chart->setAxisY(newAxisY,series);
+        nmfUtilsQt::setAxisY(chart,newAxisY,nullBarSeries);
+//      chart->addAxis(newAxisY, Qt::AlignLeft);
+//      series->attachAxis(newAxisY);
+        if (RowLabels.count() > NumCategoriesForVerticalNotation) {
+            axis->setLabelsAngle(-45);
+        }
     }
 
     QValueAxis *currentAxisY = qobject_cast<QValueAxis*>(chart->axes(Qt::Vertical).back());
@@ -149,10 +162,11 @@ void
 nmfChartBar::callback_BarSetHovered(bool hovered, int index)
 {
     if (hovered) {
+        QString  suffix = (m_areDataPercentages) ? "%" : "";
         QBarSet* barset = qobject_cast<QBarSet* >(QObject::sender());
         double value = barset->at(index);
         int numDecimals = (floor(value) == ceil(value)) ? 0 : 1; // value%1 tells if double has no decimal component (i.e., 20.0)
         QToolTip::showText(QCursor::pos(),barset->label() + " - " +
-                           QString::number(value,'f',numDecimals) + "%");
+                           QString::number(value,'f',numDecimals) + suffix);
     }
 }
