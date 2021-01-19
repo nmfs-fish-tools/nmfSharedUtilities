@@ -164,6 +164,18 @@ Functions</h2></td></tr>
 <tr class="memitem:ac47e06c5ccb74f228199347fb206a292"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#ac47e06c5ccb74f228199347fb206a292">saveModelToCSVFile</a> (std::string projectDir, std::string tabName, QTableView *table)</td></tr>
 <tr class="memdesc:ac47e06c5ccb74f228199347fb206a292"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the data in the passed model to the appropriate directory and file.  <a href="namespacenmf_utils_qt.html#ac47e06c5ccb74f228199347fb206a292">More...</a><br /></td></tr>
 <tr class="separator:ac47e06c5ccb74f228199347fb206a292"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3650fb32ef1ab23988e316845acf3cd5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a3650fb32ef1ab23988e316845acf3cd5">loadTableWidgetData</a> (QTabWidget *parentTabWidget, QTableWidget *tableWidget, const QString &amp;inputDataPath, const QStringList &amp;guildValues, QString &amp;errorMsg)</td></tr>
+<tr class="memdesc:a3650fb32ef1ab23988e316845acf3cd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load data from a .csv file into a QTableWidget.  <a href="namespacenmf_utils_qt.html#a3650fb32ef1ab23988e316845acf3cd5">More...</a><br /></td></tr>
+<tr class="separator:a3650fb32ef1ab23988e316845acf3cd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5aa1138f386bd84b833a7879b1304572"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a5aa1138f386bd84b833a7879b1304572">loadTimeSeries</a> (QTabWidget *parentTabWidget, QTableView *tableView, QString &amp;inputDataPath, const QString &amp;inputFilename, const bool &amp;firstLineReadOnly, QString &amp;errorMsg)</td></tr>
+<tr class="memdesc:a5aa1138f386bd84b833a7879b1304572"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a time series .csv file into a QTableView.  <a href="namespacenmf_utils_qt.html#a5aa1138f386bd84b833a7879b1304572">More...</a><br /></td></tr>
+<tr class="separator:a5aa1138f386bd84b833a7879b1304572"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88a7290840c8f1ed4c13682b280c319c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a88a7290840c8f1ed4c13682b280c319c">saveTableWidgetData</a> (QTabWidget *parentTabWidget, QTableWidget *tableWidget, QString &amp;inputDataPath, const QString &amp;outputFilename)</td></tr>
+<tr class="memdesc:a88a7290840c8f1ed4c13682b280c319c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save the passed QTableWidget data to a .csv file.  <a href="namespacenmf_utils_qt.html#a88a7290840c8f1ed4c13682b280c319c">More...</a><br /></td></tr>
+<tr class="separator:a88a7290840c8f1ed4c13682b280c319c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a887e86a1ae7b4475f20af3442986ed94"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a887e86a1ae7b4475f20af3442986ed94">saveTimeSeries</a> (QTabWidget *parentTabWidget, QStandardItemModel *smodel, QString &amp;inputDataPath, const QString &amp;outputFilename)</td></tr>
+<tr class="memdesc:a887e86a1ae7b4475f20af3442986ed94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the data in the passed model to a csv file in the passed directory.  <a href="namespacenmf_utils_qt.html#a887e86a1ae7b4475f20af3442986ed94">More...</a><br /></td></tr>
+<tr class="separator:a887e86a1ae7b4475f20af3442986ed94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35f68a447343a380c47bfa1d31b948f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a35f68a447343a380c47bfa1d31b948f1">checkForAndReplaceInvalidCharacters</a> (QString &amp;stringValue)</td></tr>
 <tr class="memdesc:a35f68a447343a380c47bfa1d31b948f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes any non-alphanumeric characters and replaces any space characters with an underscore character.  <a href="namespacenmf_utils_qt.html#a35f68a447343a380c47bfa1d31b948f1">More...</a><br /></td></tr>
 <tr class="separator:a35f68a447343a380c47bfa1d31b948f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -182,6 +194,27 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>switchFileExtensions<
 <tr class="memitem:a79cb045897a2a250cf95ad8ff330613b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a79cb045897a2a250cf95ad8ff330613b">isAnError</a> (std::string errorMsg)</td></tr>
 <tr class="memdesc:a79cb045897a2a250cf95ad8ff330613b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine if the passed string is an error message.  <a href="namespacenmf_utils_qt.html#a79cb045897a2a250cf95ad8ff330613b">More...</a><br /></td></tr>
 <tr class="separator:a79cb045897a2a250cf95ad8ff330613b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc1f187a62652c7e14228bbef42ea2bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#abc1f187a62652c7e14228bbef42ea2bb">setAxisX</a> (QChart *chart, QValueAxis *axisX, QLineSeries *series)</td></tr>
+<tr class="memdesc:abc1f187a62652c7e14228bbef42ea2bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to reset an X axis (the original Qt call was deprecated)  <a href="namespacenmf_utils_qt.html#abc1f187a62652c7e14228bbef42ea2bb">More...</a><br /></td></tr>
+<tr class="separator:abc1f187a62652c7e14228bbef42ea2bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae438a08b64322bf5506bff7672543a00"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#ae438a08b64322bf5506bff7672543a00">setAxisY</a> (QChart *chart, QValueAxis *axisY, QLineSeries *series)</td></tr>
+<tr class="memdesc:ae438a08b64322bf5506bff7672543a00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to reset a Y axis (the original Qt call was deprecated)  <a href="namespacenmf_utils_qt.html#ae438a08b64322bf5506bff7672543a00">More...</a><br /></td></tr>
+<tr class="separator:ae438a08b64322bf5506bff7672543a00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fd4957c9b83254a1b57ca602edba3cd"><td class="memItemLeft" align="right" valign="top"><a id="a6fd4957c9b83254a1b57ca602edba3cd"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setAxisX</b> (QChart *chart, QBarCategoryAxis *axisX, QStackedBarSeries *series)</td></tr>
+<tr class="separator:a6fd4957c9b83254a1b57ca602edba3cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c0336dc1cd49e148fe82684840d3f72"><td class="memItemLeft" align="right" valign="top"><a id="a7c0336dc1cd49e148fe82684840d3f72"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setAxisX</b> (QChart *chart, QBarCategoryAxis *axisX, QBarSeries *series)</td></tr>
+<tr class="separator:a7c0336dc1cd49e148fe82684840d3f72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1261b29e0fd97d90497043f1e339b9f"><td class="memItemLeft" align="right" valign="top"><a id="ac1261b29e0fd97d90497043f1e339b9f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setAxisY</b> (QChart *chart, QValueAxis *axisY, QStackedBarSeries *series)</td></tr>
+<tr class="separator:ac1261b29e0fd97d90497043f1e339b9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a2bdcc62a0d8196ec5390adee6d0913"><td class="memItemLeft" align="right" valign="top"><a id="a5a2bdcc62a0d8196ec5390adee6d0913"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setAxisY</b> (QChart *chart, QValueAxis *axisY, QBarSeries *series)</td></tr>
+<tr class="separator:a5a2bdcc62a0d8196ec5390adee6d0913"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafce4f1107a07be8f43e90bdf2518c98"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#aafce4f1107a07be8f43e90bdf2518c98">modelCopy</a> (QStandardItemModel *originalModel, QStandardItemModel *copyModel)</td></tr>
+<tr class="memdesc:aafce4f1107a07be8f43e90bdf2518c98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the contents of the first model into the second model.  <a href="namespacenmf_utils_qt.html#aafce4f1107a07be8f43e90bdf2518c98">More...</a><br /></td></tr>
+<tr class="separator:aafce4f1107a07be8f43e90bdf2518c98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -1053,6 +1086,168 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 
 </div>
 </div>
+<a id="a3650fb32ef1ab23988e316845acf3cd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3650fb32ef1ab23988e316845acf3cd5">&#9670;&nbsp;</a></span>loadTableWidgetData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfUtilsQt::loadTableWidgetData </td>
+          <td>(</td>
+          <td class="paramtype">QTabWidget *&#160;</td>
+          <td class="paramname"><em>parentTabWidget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableWidget *&#160;</td>
+          <td class="paramname"><em>tableWidget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>inputDataPath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QStringList &amp;&#160;</td>
+          <td class="paramname"><em>guildValues</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString &amp;&#160;</td>
+          <td class="paramname"><em>errorMsg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Load data from a .csv file into a QTableWidget. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parentTabWidget</td><td>: parent widget onto which any popup message will be displayed </td></tr>
+    <tr><td class="paramname">tableWidget</td><td>: table widget that will contain the csv data </td></tr>
+    <tr><td class="paramname">inputDataPath</td><td>: input directory containing the csv data </td></tr>
+    <tr><td class="paramname">guildValues</td><td>: QStringList containing all of the guilds </td></tr>
+    <tr><td class="paramname">errorMsg</td><td>: passes back any error message </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Boolean with true for a successful load else false </dd></dl>
+
+</div>
+</div>
+<a id="a5aa1138f386bd84b833a7879b1304572"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5aa1138f386bd84b833a7879b1304572">&#9670;&nbsp;</a></span>loadTimeSeries()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfUtilsQt::loadTimeSeries </td>
+          <td>(</td>
+          <td class="paramtype">QTabWidget *&#160;</td>
+          <td class="paramname"><em>parentTabWidget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tableView</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString &amp;&#160;</td>
+          <td class="paramname"><em>inputDataPath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>inputFilename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>firstLineReadOnly</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString &amp;&#160;</td>
+          <td class="paramname"><em>errorMsg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Load a time series .csv file into a QTableView. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parentTabWidget</td><td>: parent tab containing the QTableView object </td></tr>
+    <tr><td class="paramname">tableView</td><td>: QTableView that will contain the .csv data </td></tr>
+    <tr><td class="paramname">inputDataPath</td><td>: default path for the input .csv file </td></tr>
+    <tr><td class="paramname">inputFilename</td><td>: CSV filename if default is not desired </td></tr>
+    <tr><td class="paramname">firstLineReadOnly</td><td>: boolean to make the first line of the table read-only with gray background </td></tr>
+    <tr><td class="paramname">errorMsg</td><td>: error message produced during the load </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>: Boolean signifying a successful load (true) or an unsuccessful load (false) </dd></dl>
+
+</div>
+</div>
+<a id="aafce4f1107a07be8f43e90bdf2518c98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafce4f1107a07be8f43e90bdf2518c98">&#9670;&nbsp;</a></span>modelCopy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::modelCopy </td>
+          <td>(</td>
+          <td class="paramtype">QStandardItemModel *&#160;</td>
+          <td class="paramname"><em>originalModel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QStandardItemModel *&#160;</td>
+          <td class="paramname"><em>copyModel</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copies the contents of the first model into the second model. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">originalModel</td><td>: original model containing the data to be copied </td></tr>
+    <tr><td class="paramname">copyModel</td><td>: new model to receive a copy of the data from the original model </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a4af2be598ee50bb8cba239067c9b6bd8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4af2be598ee50bb8cba239067c9b6bd8">&#9670;&nbsp;</a></span>outOfRange()</h2>
 
@@ -1262,7 +1457,108 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
   <table class="params">
     <tr><td class="paramname">projectDir</td><td>: directory where application files are written to </td></tr>
     <tr><td class="paramname">tabName</td><td>: name of the tab whose data is to be written out; method uses it to determine what to name the vertical headers </td></tr>
-    <tr><td class="paramname">rable</td><td>: qtableview containing data to be written out </td></tr>
+    <tr><td class="paramname">table</td><td>: qtableview containing data to be written out </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a88a7290840c8f1ed4c13682b280c319c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88a7290840c8f1ed4c13682b280c319c">&#9670;&nbsp;</a></span>saveTableWidgetData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::saveTableWidgetData </td>
+          <td>(</td>
+          <td class="paramtype">QTabWidget *&#160;</td>
+          <td class="paramname"><em>parentTabWidget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableWidget *&#160;</td>
+          <td class="paramname"><em>tableWidget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString &amp;&#160;</td>
+          <td class="paramname"><em>inputDataPath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>outputFilename</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Save the passed QTableWidget data to a .csv file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parentTabWidget</td><td>: parent widget onto which will be displayed any popups </td></tr>
+    <tr><td class="paramname">tableWidget</td><td>: QTableWidget containing data to save as .csv file </td></tr>
+    <tr><td class="paramname">inputDataPath</td><td>: directory containing the project's .csv files </td></tr>
+    <tr><td class="paramname">outputFilename</td><td>: name of .csv output file if default name is not to be used </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a887e86a1ae7b4475f20af3442986ed94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a887e86a1ae7b4475f20af3442986ed94">&#9670;&nbsp;</a></span>saveTimeSeries()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::saveTimeSeries </td>
+          <td>(</td>
+          <td class="paramtype">QTabWidget *&#160;</td>
+          <td class="paramname"><em>parentTabWidget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QStandardItemModel *&#160;</td>
+          <td class="paramname"><em>smodel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString &amp;&#160;</td>
+          <td class="paramname"><em>inputDataPath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>outputFilename</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Saves the data in the passed model to a csv file in the passed directory. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parentTabWidget</td><td>: parent table widget of table to be saved </td></tr>
+    <tr><td class="paramname">smodel</td><td>: table model containing data to be saved </td></tr>
+    <tr><td class="paramname">inputDataPath</td><td>: default path where .csv file is to be saved </td></tr>
   </table>
   </dd>
 </dl>
@@ -1443,6 +1739,94 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
     <tr><td class="paramname">outMatrix</td><td>: output matrix of double type values to display </td></tr>
     <tr><td class="paramname">numDigits</td><td>: number of characters to allocate for each matrix value </td></tr>
     <tr><td class="paramname">numDecimals</td><td>: number of decimal places that each matrix value will have </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abc1f187a62652c7e14228bbef42ea2bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc1f187a62652c7e14228bbef42ea2bb">&#9670;&nbsp;</a></span>setAxisX()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::setAxisX </td>
+          <td>(</td>
+          <td class="paramtype">QChart *&#160;</td>
+          <td class="paramname"><em>chart</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QValueAxis *&#160;</td>
+          <td class="paramname"><em>axisX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QLineSeries *&#160;</td>
+          <td class="paramname"><em>series</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convenience function to reset an X axis (the original Qt call was deprecated) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">chart</td><td>: the chart on which the axis is to be placed </td></tr>
+    <tr><td class="paramname">axisX</td><td>: the new axis with which to replace the old one </td></tr>
+    <tr><td class="paramname">series</td><td>: the series to which the axis refers </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae438a08b64322bf5506bff7672543a00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae438a08b64322bf5506bff7672543a00">&#9670;&nbsp;</a></span>setAxisY()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::setAxisY </td>
+          <td>(</td>
+          <td class="paramtype">QChart *&#160;</td>
+          <td class="paramname"><em>chart</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QValueAxis *&#160;</td>
+          <td class="paramname"><em>axisY</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QLineSeries *&#160;</td>
+          <td class="paramname"><em>series</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convenience function to reset a Y axis (the original Qt call was deprecated) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">chart</td><td>: the chart on which the axis is to be placed </td></tr>
+    <tr><td class="paramname">axisX</td><td>: the new axis with which to replace the old one </td></tr>
+    <tr><td class="paramname">series</td><td>: the series to which the axis refers </td></tr>
   </table>
   </dd>
 </dl>

@@ -17,6 +17,16 @@ namespace nmfConstantsMSSPM
 {
      const int    Start_Year            = 1900;
 
+     const int    Column_Species_SpeName     =  0;
+     const int    Column_Species_InitBiomass =  2;
+     const int    Column_Species_GrowthRate  =  3;
+     const int    Column_Species_SpeciesK    =  4;
+
+     const int    Column_Supp_SpeName     =  0;
+     const int    Column_Supp_InitBiomass =  1;
+     const int    Column_Supp_GrowthRate  =  4;
+     const int    Column_Supp_SpeciesK    =  8;
+
      const int    Column_SpeId          =  0;
      const int    Column_SpeName        =  1;
      const int    Column_GuildName      =  2;
@@ -76,6 +86,8 @@ namespace nmfConstantsMSSPM
      const bool   DontResetPosition    = false;
      const bool   LeaveGapsWhereNegative     = true;
      const bool   DontLeaveGapsWhereNegative = false;
+     const bool   FirstLineReadOnly    = true;
+     const bool   FirstLineNotReadOnly = false;
 
      const std::string  HiddenDir                      = ".MSSPM";
      const std::string  HiddenDataDir                  = ".MSSPM/data";

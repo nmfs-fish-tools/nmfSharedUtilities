@@ -1,2 +1,4 @@
 <map id="nmfChartSurface" name="nmfChartSurface">
+<area shape="rect" id="node1" title="This class allows the user to display a 3d surface using the passed arguments for customization." alt="" coords="5,80,137,107"/>
+<area shape="rect" id="node2" title=" " alt="" coords="34,5,109,32"/>
 </map>

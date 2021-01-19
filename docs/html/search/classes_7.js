@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['updatedatastruct_244',['UpdateDataStruct',['../structnmf_structs_qt_1_1_update_data_struct.html',1,'nmfStructsQt']]]
+  ['scenarios_253',['Scenarios',['../struct_scenarios.html',1,'']]],
+  ['systemdata_254',['SystemData',['../struct_system_data.html',1,'']]]
 ];

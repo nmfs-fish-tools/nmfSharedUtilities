@@ -1,2 +1,4 @@
 <map id="nmfViewerWidget" name="nmfViewerWidget">
+<area shape="rect" id="node1" title="This class is an image viewer class that allows the user to sequence through a series of images...." alt="" coords="5,80,144,107"/>
+<area shape="rect" id="node2" title=" " alt="" coords="37,5,112,32"/>
 </map>

@@ -344,6 +344,36 @@ namespace nmfUtilsQt {
      */
     bool isAnError(std::string errorMsg);
     /**
+     * @brief Load data from a .csv file into a QTableWidget
+     * @param parentTabWidget : parent widget onto which any popup message will be displayed
+     * @param tableWidget : table widget that will contain the csv data
+     * @param inputDataPath : input directory containing the csv data
+     * @param guildValues : QStringList containing all of the guilds
+     * @param errorMsg : passes back any error message
+     * @return Boolean with true for a successful load else false
+     */
+    bool loadTableWidgetData(QTabWidget* parentTabWidget,
+                             QTableWidget* tableWidget,
+                             const QString& inputDataPath,
+                             const QStringList& guildValues,
+                             QString& errorMsg);
+    /**
+     * @brief Load a time series .csv file into a QTableView
+     * @param parentTabWidget : parent tab containing the QTableView object
+     * @param tableView : QTableView that will contain the .csv data
+     * @param inputDataPath : default path for the input .csv file
+     * @param inputFilename : CSV filename if default is not desired
+     * @param firstLineReadOnly : boolean to make the first line of the table read-only with gray background
+     * @param errorMsg : error message produced during the load
+     * @return : Boolean signifying a successful load (true) or an unsuccessful load (false)
+     */
+    bool loadTimeSeries(QTabWidget* parentTabWidget,
+                        QTableView* tableView,
+                        QString& inputDataPath,
+                        const QString& inputFilename,
+                        const bool& firstLineReadOnly,
+                        QString& errorMsg);
+    /**
      * @brief Copies the contents of the first model into the second model
      * @param originalModel : original model containing the data to be copied
      * @param copyModel : new model to receive a copy of the data from the original model
@@ -395,11 +425,32 @@ namespace nmfUtilsQt {
      * @brief Saves the data in the passed model to the appropriate directory and file
      * @param projectDir : directory where application files are written to
      * @param tabName : name of the tab whose data is to be written out; method uses it to determine what to name the vertical headers
-     * @param rable : qtableview containing data to be written out
+     * @param table : qtableview containing data to be written out
      */
     void saveModelToCSVFile(std::string projectDir,
                             std::string tabName,
                             QTableView* table);
+    /**
+     * @brief Saves the data in the passed model to a csv file in the passed directory
+     * @param parentTabWidget : parent table widget of table to be saved
+     * @param smodel : table model containing data to be saved
+     * @param inputDataPath : default path where .csv file is to be saved
+     */
+    void saveTimeSeries(QTabWidget* parentTabWidget,
+                        QStandardItemModel* smodel,
+                        QString& inputDataPath,
+                        const QString& outputFilename);
+    /**
+     * @brief Save the passed QTableWidget data to a .csv file
+     * @param parentTabWidget : parent widget onto which will be displayed any popups
+     * @param tableWidget : QTableWidget containing data to save as .csv file
+     * @param inputDataPath : directory containing the project's .csv files
+     * @param outputFilename : name of .csv output file if default name is not to be used
+     */
+    void saveTableWidgetData(QTabWidget* parentTabWidget,
+                             QTableWidget* tableWidget,
+                             QString& inputDataPath,
+                             const QString& outputFilename);
     /**
      * @brief Selects all items in passed table view widget
      * @param tableView : table view widget in which to select all elements
