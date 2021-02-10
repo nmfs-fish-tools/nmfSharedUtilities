@@ -9,6 +9,7 @@
 #include <functional>
 
 #include "nmfUtils.h"
+#include "nmfConstantsMSSPM.h"
 
 
 class nmfGrowthForm {
@@ -45,7 +46,7 @@ public:
             double&                    systemCarryingCapacity);
     void loadParameterRanges(
             std::vector<std::pair<double,double> >& parameterRanges,
-            Data_Struct& beeStruct);
+            const Data_Struct& beeStruct);
     static double LinearGrowth(int    &speciesNum,
                                double &biomassAtTime,
                                std::vector<double> &growthRate,

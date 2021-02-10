@@ -83,6 +83,9 @@ private:
     bool StoppedByUser();
     bool isABetterFitness(double& bestFitnessInPopulation,
                           double& bestBeesFitness);
+    void loadInitBiomassParameterRanges(
+            std::vector<std::pair<double,double> >& parameterRanges,
+            Data_Struct& dataStruct);
 
 public:
     BeesAlgorithm(const Data_Struct &m_BeeStruct,
@@ -104,6 +107,9 @@ public:
     void extractHarvestParameters(const std::vector<double>& parameters,
                                   int& startPos,
                                   std::vector<double>& catchabilityRate);
+    void extractInitBiomass(const std::vector<double>& parameters,
+                            int&                       startPos,
+                            std::vector<double>&       initBiomass);
     void extractCompetitionParameters(const std::vector<double>& parameters,
                                       int& startPos,
                                       boost::numeric::ublas::matrix<double>& alpha,

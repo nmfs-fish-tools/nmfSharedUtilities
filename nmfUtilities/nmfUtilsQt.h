@@ -344,6 +344,23 @@ namespace nmfUtilsQt {
      */
     bool isAnError(std::string errorMsg);
     /**
+     * @brief Load a non time series .csv file into a QTableView
+     * @param parentTabWidget : parent tab containing the QTableView object
+     * @param tableView : QTableView that will contain the .csv data
+     * @param type : type of tableview (i.e., "Guild" or "Species")
+     * @param inputDataPath : default path for the input .csv file
+     * @param inputFilename : CSV filename if default is not desired
+     * @param errorMsg : error message produced during the load
+     * @return : Boolean signifying a successful load (true) or an unsuccessful load (false)
+     */
+    bool loadGuildsSpeciesTableview(QTabWidget* parentTabWidget,
+                                    QTableView* tableView,
+                                    const QString& type,
+                                    const QString& inputDataPath,
+                                    const QString& inputFilename,
+                                    QList<QString>& SpeciesGuilds,
+                                    QString& errorMsg);
+    /**
      * @brief Load data from a .csv file into a QTableWidget
      * @param parentTabWidget : parent widget onto which any popup message will be displayed
      * @param tableWidget : table widget that will contain the csv data
@@ -369,7 +386,7 @@ namespace nmfUtilsQt {
      */
     bool loadTimeSeries(QTabWidget* parentTabWidget,
                         QTableView* tableView,
-                        QString& inputDataPath,
+                        const QString& inputDataPath,
                         const QString& inputFilename,
                         const bool& firstLineReadOnly,
                         QString& errorMsg);
@@ -424,22 +441,68 @@ namespace nmfUtilsQt {
     /**
      * @brief Saves the data in the passed model to the appropriate directory and file
      * @param projectDir : directory where application files are written to
-     * @param tabName : name of the tab whose data is to be written out; method uses it to determine what to name the vertical headers
+     * @param tabName : name of the tab whose data is to be written out; method uses
+     * it to determine what to name the vertical headers
      * @param table : qtableview containing data to be written out
      */
     void saveModelToCSVFile(std::string projectDir,
                             std::string tabName,
                             QTableView* table);
     /**
+     * @brief Saves the data in the passed non time series but a table view model to a
+     * csv file in the passed directory
+     * @param parentTabWidget : parent table widget of table to be saved
+     * @param smodel : table model containing data to be saved
+     * @param inputDataPath : default path where .csv file is to be saved
+     * @param outputFilename : name of the output filename with path
+     * @param GuildName : guild names
+     * @param GrowthRate : guild growth rates
+     * @param GuildK : guild carrying capacities
+     * @return true/false denoting successful or unsuccessful save
+     */
+    bool saveGuildsTableView(QTabWidget* parentTabWidget,
+                       QStandardItemModel* smodel,
+                       QString& inputDataPath,
+                       QString& outputFilename,
+                       QList<QString>& GuildName,
+                       QList<QString>& GrowthRate,
+                       QList<QString>& GuildK);
+    /**
+     * @brief Saves the data in the passed non time series but a table view model to a
+     * csv file in the passed directory
+     * @param parentTabWidget : parent table widget of table to be saved
+     * @param smodel : table model containing data to be saved
+     * @param inputDataPath : default path where .csv file is to be saved
+     * @param outputFilename : name of the output filename with path
+     * @param SpeciesName : list of Species names
+     * @param SpeciesGuild : list of guilds each species is a member of
+     * @param SpeciesInitialBiomass : list of species initial biomasses
+     * @param SpeciesGrowthRate : list of species growth rates
+     * @param SpeciesK : list of species carrying capacities
+     * @return true/false denoting successful or unsuccessful save
+     */
+    bool saveSpeciesTableView(QTabWidget* parentTabWidget,
+                              QStandardItemModel* smodel,
+                              QString& inputDataPath,
+                              QString& outputFilename,
+                              QList<QString>& SpeciesName,
+                              QList<QString>& SpeciesGuild,
+                              QList<QString>& SpeciesInitialBiomass,
+                              QList<QString>& SpeciesGrowthRate,
+                              QList<QString>& SpeciesK);
+
+    /**
      * @brief Saves the data in the passed model to a csv file in the passed directory
      * @param parentTabWidget : parent table widget of table to be saved
      * @param smodel : table model containing data to be saved
      * @param inputDataPath : default path where .csv file is to be saved
+     * @param outputFilename : name of the output filename with path
+     * @return true/false denoting successful or unsuccessful save
      */
-    void saveTimeSeries(QTabWidget* parentTabWidget,
+    bool saveTimeSeries(QTabWidget* parentTabWidget,
                         QStandardItemModel* smodel,
                         QString& inputDataPath,
-                        const QString& outputFilename);
+                        QString& outputFilename);
     /**
      * @brief Save the passed QTableWidget data to a .csv file
      * @param parentTabWidget : parent widget onto which will be displayed any popups

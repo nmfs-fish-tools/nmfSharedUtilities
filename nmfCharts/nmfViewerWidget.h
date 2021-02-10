@@ -142,6 +142,11 @@ public:
      */
     void refreshList();
     /**
+     * @brief Sets the image path for the viewer if it's changed after the constructor is called
+     * @param imagePath : directory where captured images are kept
+     */
+    void setImagePath(const QString& imagePath);
+    /**
      * @brief Shows the data tab in the viewer
      */
     void showDataTab();

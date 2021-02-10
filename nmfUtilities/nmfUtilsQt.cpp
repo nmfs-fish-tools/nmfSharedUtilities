@@ -1208,14 +1208,94 @@ loadTableWidgetData(QTabWidget* parentTabWidget,
     return true;
 }
 
+bool
+loadGuildsSpeciesTableview(QTabWidget* parentTabWidget,
+                           QTableView* tableView,
+                           const QString& type,
+                           const QString& inputDataPath,
+                           const QString& inputFilename,
+                           QList<QString>& SpeciesGuilds,
+                           QString& errorMsg)
+{
+    bool retv = false;
+    bool isSpecies = (type == "Species");
+    int offset = (isSpecies) ? 1 : 0;
+    QString allLines;
+    QString filename;
+    QStringList lineList;
+    QStringList dataParts;
+    QStringList ColumnLabelList  = {};
+    QStandardItem* item;
+    QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(tableView->model());
+    errorMsg.clear();
+    SpeciesGuilds.clear();
+
+    if (smodel == nullptr) {
+        errorMsg = "Error: No model found in table. Please save initial table data.";
+        return false;
+    }
+
+    filename = (inputFilename.isEmpty()) ?
+                QFileDialog::getOpenFileName(parentTabWidget,
+                   QObject::tr("Select CSV file"), inputDataPath,
+                   QObject::tr("Data Files (*.csv)")) :
+                inputFilename;
+
+    if (! filename.isEmpty()) {
+        QFile file(filename);
+        if (file.open(QIODevice::ReadOnly)) {
+            allLines = file.readAll().trimmed();
+            lineList = allLines.split('\n');
+            int numLines   = lineList.count()-1; // -1 for the header
+            int numColumns = lineList[0].split(',').count()-offset; // offset needed because we don't want the Guild field from the Species .csv file in the model
+            if ((smodel->rowCount()    == numLines) &&
+                (smodel->columnCount() == numColumns))
+            {
+                QStringList columnLabelParts = lineList[0].split(',');
+                if (isSpecies) {
+                    columnLabelParts.removeAt(nmfConstantsMSSPM::Column_Species_Guild);
+                }
+                for (int j=0;j<columnLabelParts.count();++j) {
+                    ColumnLabelList << columnLabelParts[j];
+                }
+                for (int i=1; i<lineList.count(); ++i) {
+                    dataParts = lineList[i].split(',');
+                    if (isSpecies) {
+                        SpeciesGuilds.push_back(dataParts[nmfConstantsMSSPM::Column_Species_Guild]);
+                        dataParts.removeAt(nmfConstantsMSSPM::Column_Species_Guild);
+                    }
+                    for (int j=0; j<dataParts.count(); ++j) {
+                        item = new QStandardItem(dataParts[j]);
+                        item->setTextAlignment(Qt::AlignCenter);
+                        smodel->setItem(i-1, j, item);
+                    }
+                }
+                smodel->setHorizontalHeaderLabels(ColumnLabelList);
+                tableView->setModel(smodel);
+                tableView->resizeColumnsToContents();
+            } else {
+                errorMsg = "Error: table size from .csv file (" +
+                        QString::number(numLines) + "x" + QString::number(numColumns) +
+                        ") does not equal current size of table (" +
+                        QString::number(smodel->rowCount()) + "x" +
+                        QString::number(smodel->columnCount()) + ")";
+            }
+            file.close();
+        }
+        retv = true;
+    } else {
+        retv = false;
+    }
+    return retv;
+}
 
 bool
 loadTimeSeries(QTabWidget* parentTabWidget,
                QTableView* tableView,
-               QString&    inputDataPath,
+               const QString& inputDataPath,
                const QString& inputFilename,
                const bool& firstLineReadOnly,
-               QString&    errorMsg)
+               QString& errorMsg)
 {
     Qt::ItemFlags flags;
     QString allLines;
@@ -1238,6 +1318,7 @@ loadTimeSeries(QTabWidget* parentTabWidget,
                    QObject::tr("Select CSV file"), inputDataPath,
                    QObject::tr("Data Files (*.csv)")) :
                 inputFilename;
+
     if (! filename.isEmpty()) {
         QFile file(filename);
         if (file.open(QIODevice::ReadOnly)) {
@@ -1256,7 +1337,7 @@ loadTimeSeries(QTabWidget* parentTabWidget,
                     dataParts = lineList[i].split(',');
                     VerticalList << " " + dataParts[0] + " ";
                     for (int j=1; j<dataParts.count(); ++j) {
-                        item = new QStandardItem(dataParts[j]);
+                        item = new QStandardItem(QString::number(dataParts[j].toDouble(),'f',6));
                         item->setTextAlignment(Qt::AlignCenter);
                         if (firstLineReadOnly && (i == 1)) {
                             item->setEditable(false);
@@ -1341,12 +1422,159 @@ saveTableWidgetData(QTabWidget* parentTabWidget,
     }
 }
 
-void
+bool
+saveSpeciesTableView(QTabWidget* parentTabWidget,
+                     QStandardItemModel* smodel,
+                     QString& inputDataPath,
+                     QString& outputFilename,
+                     QList<QString>& SpeciesName,
+                     QList<QString>& SpeciesGuild,
+                     QList<QString>& SpeciesInitialBiomass,
+                     QList<QString>& SpeciesGrowthRate,
+                     QList<QString>& SpeciesK)
+{
+    bool retv = true;
+    bool fromTableWidget = (SpeciesName.size() != 0);
+    QString filename;
+
+    filename = (outputFilename.isEmpty()) ?
+        QFileDialog::getSaveFileName(parentTabWidget,
+            QObject::tr("Output CSV file"), inputDataPath,
+            QObject::tr("Data Files (*.csv)")) :
+        outputFilename;
+
+    if (! filename.isEmpty()) {
+        // Assure that file has a .csv extension
+        QFileInfo fileInfo(filename);
+        if (fileInfo.suffix().toLower() != "csv") {
+            filename += ".csv";
+        }
+        QFile file(filename);
+        QString value;
+        if (file.open(QIODevice::WriteOnly)) {
+            QTextStream stream(&file);
+            int numRows = smodel->rowCount();
+            int numCols = smodel->columnCount();
+            stream << smodel->headerData(0,Qt::Horizontal).toString() << ",Guild";
+            for (int col=1; col<numCols; ++col) {
+                stream << "," << smodel->headerData(col,Qt::Horizontal).toString();
+            }
+            stream << "\n";
+            for (int row=0; row<numRows; ++row) {
+                for (int col=0; col<numCols; ++col) {
+                    if (fromTableWidget) {
+                        if (col == nmfConstantsMSSPM::Column_Supp_Species_Name) {
+                            value = SpeciesName[row];
+                            stream << value << ",";
+                            value = SpeciesGuild[row];
+                        } else if (col == nmfConstantsMSSPM::Column_Supp_Species_InitBiomass) {
+                            value = SpeciesInitialBiomass[row];
+                        } else if (col == nmfConstantsMSSPM::Column_Supp_Species_GrowthRate) {
+                            value = SpeciesGrowthRate[row];
+                        } else if (col == nmfConstantsMSSPM::Column_Supp_Species_CarryingCapacity) {
+                            value = SpeciesK[row];
+                        } else {
+                            value = smodel->index(row,col).data().toString();
+                        }
+                    } else {
+                        value = smodel->index(row,col).data().toString();
+                        if (col == nmfConstantsMSSPM::Column_Supp_Species_Name) {
+                            stream << value << ",";
+                            value = SpeciesGuild[row];
+                        }
+                    }
+                    stream << value;
+                    if (col < numCols-1) {
+                        stream << ",";
+                    }
+                }
+                stream << "\n";
+            }
+            file.close();
+        }
+    } else {
+        retv = false;
+    }
+
+    outputFilename = filename;
+    return retv;
+}
+
+bool
+saveGuildsTableView(QTabWidget* parentTabWidget,
+                    QStandardItemModel* smodel,
+                    QString& inputDataPath,
+                    QString& outputFilename,
+                    QList<QString>& GuildName,
+                    QList<QString>& GrowthRate,
+                    QList<QString>& GuildK)
+{
+    bool retv = true;
+    bool fromTableWidget = (GuildName.size() != 0);
+    QString filename;
+
+    filename = (outputFilename.isEmpty()) ?
+        QFileDialog::getSaveFileName(parentTabWidget,
+            QObject::tr("Output CSV file"), inputDataPath,
+            QObject::tr("Data Files (*.csv)")) :
+        outputFilename;
+
+    if (! filename.isEmpty()) {
+        // Assure that file has a .csv extension
+        QFileInfo fileInfo(filename);
+        if (fileInfo.suffix().toLower() != "csv") {
+            filename += ".csv";
+        }
+        QFile file(filename);
+        QString value;
+        if (file.open(QIODevice::WriteOnly)) {
+            QTextStream stream(&file);
+            int numRows = smodel->rowCount();
+            int numCols = smodel->columnCount();
+            stream << smodel->headerData(0,Qt::Horizontal).toString();
+            for (int col=1; col<numCols; ++col) {
+                stream << "," << smodel->headerData(col,Qt::Horizontal).toString();
+            }
+            stream << "\n";
+            for (int row=0; row<numRows; ++row) {
+                for (int col=0; col<numCols; ++col) {
+                    if (fromTableWidget) {
+                        if (col == nmfConstantsMSSPM::Column_Supp_Guild_Name) {
+                            value = GuildName[row];
+                        } else if (col == nmfConstantsMSSPM::Column_Supp_Guild_GrowthRate) {
+                            value = GrowthRate[row];
+                        } else if (col == nmfConstantsMSSPM::Column_Supp_Guild_CarryingCapacity) {
+                            value = GuildK[row];
+                        } else {
+                            value = smodel->index(row,col).data().toString();
+                        }
+                    } else {
+                        value = smodel->index(row,col).data().toString();
+                    }
+                    stream << value;
+                    if (col < numCols-1) {
+                        stream << ",";
+                    }
+                }
+                stream << "\n";
+            }
+            file.close();
+        }
+    } else {
+        retv = false;
+    }
+
+    outputFilename = filename;
+    return retv;
+}
+
+bool
 saveTimeSeries(QTabWidget* parentTabWidget,
                QStandardItemModel* smodel,
                QString& inputDataPath,
-               const QString& outputFilename)
+               QString& outputFilename)
 {
+    bool retv = true;
     QString filename;
 
     filename = (outputFilename.isEmpty()) ?
@@ -1381,7 +1609,13 @@ saveTimeSeries(QTabWidget* parentTabWidget,
             }
             file.close();
         }
+
+    } else {
+        retv = false;
     }
+
+    outputFilename = filename;
+    return retv;
 }
 
 void checkForAndReplaceInvalidCharacters(QString &stringValue)

@@ -789,7 +789,7 @@ nmfDatabase::getMortalityData(
     dataMap    = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SpeName"].size();
     if (NumRecords == 0) {
-        msg = "getMortalityData: No records found in table: " + TableName;
+        msg = "nmfDatabase::getMortalityData: No records found in table: " + TableName;
         logger->logMsg(nmfConstants::Error,msg);
         logger->logMsg(nmfConstants::Error,queryStr);
         return false;
@@ -1092,7 +1092,7 @@ nmfDatabase::getRunLengthAndStartYear(
     NumRecords = dataMap["RunLength"].size();
     if (NumRecords == 0){
         if (! ProjectSettingsConfig.empty()) {
-            logger->logMsg(nmfConstants::Error,"[Error 1] nmfDiagnostic_Tab2::getRunLengthAndStartYear: No records found in table Systems for Name = "+ProjectSettingsConfig);
+            logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::getRunLengthAndStartYear: No records found in table Systems for Name = "+ProjectSettingsConfig);
         }
         return false;
     }
@@ -1192,7 +1192,7 @@ nmfDatabase::importDatabase(QWidget*     widget,
         "*.sql");
     QString fileDatabaseName = QFileInfo(InputFileName).baseName();
     if (fileDatabaseName.isEmpty() || fileDatabaseName.contains(" ")) {
-        msg  = "Error: Illegal filename found (" + fileDatabaseName + "). ";
+        msg  = "Error: nmfDatabase::importDatabase: Illegal filename found (" + fileDatabaseName + "). ";
         msg += "Filename may not contain spaces.";
         logger->logMsg(nmfConstants::Error,msg.toStdString());
         return "";
@@ -1221,7 +1221,7 @@ nmfDatabase::importDatabase(QWidget*     widget,
         cmd = "CREATE DATABASE " + fileDatabaseName;
         errorMsg = nmfUpdateDatabase(cmd.toStdString());
         if (nmfUtilsQt::isAnError(errorMsg)) {
-            logger->logMsg(nmfConstants::Error,"Error: nmfUtilsQt::importDatabase: "+errorMsg);
+            logger->logMsg(nmfConstants::Error,"Error: nmfDatabase::importDatabase: "+errorMsg);
             return "";
         }
     }
@@ -1372,7 +1372,7 @@ nmfDatabase::getSpeciesData(
     queryStr  += "WHERE SpeName = '" + species + "'";
     dataMap    = nmfQueryDatabase(queryStr, fields);
     if (dataMap["SpeName"].size() == 0) {
-        msg = "nmfMSCAAUtils::getSpeciesData No records found in Species for: " +species;
+        msg = "nmfDatabase::getSpeciesData: No records found in Species for: " +species;
         logger->logMsg(nmfConstants::Error,msg);
         return false;
     }
@@ -1406,7 +1406,7 @@ bool nmfDatabase::getAllSpecies(
     dataMap    = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SpeName"].size();
     if (NumRecords == 0) {
-        msg = "nmfDatabase::getAllSpecies No records found";
+        msg = "nmfDatabase::getAllSpecies: No records found";
         logger->logMsg(nmfConstants::Error,msg);
         return false;
     }
@@ -1434,7 +1434,7 @@ bool nmfDatabase::getAllGuilds(
     dataMap    = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["GuildName"].size();
     if (NumRecords == 0) {
-        msg = "nmfDatabase::getAllGuilds No records found";
+        msg = "nmfDatabase::getAllGuilds: No records found";
         logger->logMsg(nmfConstants::Error,msg);
         return false;
     }
@@ -1522,14 +1522,14 @@ nmfDatabase::getTimeSeriesData(
     dataMap    = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SpeName"].size();
     if (NumRecords == 0) {
-        Logger->logMsg(nmfConstants::Error,"[Error 1] getTimeSeriesData: No records found in table "+TableName);
+        Logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::getTimeSeriesData: No records found in table "+TableName);
         Logger->logMsg(nmfConstants::Error,queryStr);
         msg = "\nMissing or unsaved data. Please populate and resave table: " + QString::fromStdString(TableName);
         QMessageBox::critical(Widget, "Error", msg, QMessageBox::Ok);
         return false;
     }
     if (NumRecords != NumSpecies*(RunLength+1)) {
-        errorMsg  = "[Error 2] getTimeSeriesData: Number of records found (" + std::to_string(NumRecords) + ") in ";
+        errorMsg  = "[Error 2] nmfDatabase::getTimeSeriesData: Number of records found (" + std::to_string(NumRecords) + ") in ";
         errorMsg += "table " + ModifiedTableName + " does not equal number of Species*(RunLength+1) (";
         errorMsg += std::to_string(NumSpecies) + "*" + std::to_string((RunLength+1)) + "=";
         errorMsg += std::to_string(NumSpecies*(RunLength+1)) + ") records";
@@ -1622,7 +1622,7 @@ nmfDatabase::getForecastBiomass(
     NumRecords = dataMapForecastBiomass["SpeName"].size();
     if (NumRecords == 0) {
 //        m_ChartView2d->hide();
-        errorMsg  = "[Warning] getForecastBiomass: No records found in table ForecastBiomass";
+        errorMsg  = "[Warning] nmfDatabase::getForecastBiomass: No records found in table ForecastBiomass";
         //errorMsg += "\n" + queryStr;
         Logger->logMsg(nmfConstants::Warning,errorMsg);
         msg = "\nNo ForecastBiomass records found.\n\nPlease make sure a Forecast has been run.\n";
@@ -1630,7 +1630,7 @@ nmfDatabase::getForecastBiomass(
         return false;
     }
     if (NumRecords != NumSpecies*(RunLength+1)) {
-        errorMsg  = "[Error 2] getForecastBiomass: Number of records found (" + std::to_string(NumRecords) + ") in ";
+        errorMsg  = "[Error 2] nmfDatabase::getForecastBiomass: Number of records found (" + std::to_string(NumRecords) + ") in ";
         errorMsg += "table ForecastBiomass does not equal number of NumSpecies*(RunLength+1) (";
         errorMsg += std::to_string(NumSpecies) + "*" + std::to_string((RunLength+1)) + "=";
         errorMsg += std::to_string(NumSpecies*(RunLength+1)) + ") records";
@@ -1690,14 +1690,14 @@ nmfDatabase::getForecastBiomassMonteCarlo(
     NumRecords = dataMapForecastBiomassMonteCarlo["SpeName"].size();
     if (NumRecords == 0) {
         //m_ChartView2d->hide();
-        errorMsg  = "[Error 1] getForecastBiomassMonteCarlo: No records found in table ForecastBiomass";
+        errorMsg  = "[Error 1] nmfDatabase::getForecastBiomassMonteCarlo: No records found in table ForecastBiomass";
         Logger->logMsg(nmfConstants::Error,errorMsg);
         msg = "\nNo ForecastBiomass records found.\n\nPlease make sure a Forecast has been run.\n";
         QMessageBox::warning(Widget, "Warning", msg, QMessageBox::Ok);
         return false;
     }
     if (NumRecords != NumRuns*NumSpecies*(RunLength+1)) {
-        errorMsg  = "[Error 2] getForecastBiomassMonteCarlo: Number of records found (" + std::to_string(NumRecords) + ") in ";
+        errorMsg  = "[Error 2] nmfDatabase::getForecastBiomassMonteCarlo: Number of records found (" + std::to_string(NumRecords) + ") in ";
         errorMsg += "table ForecastBiomass does not equal number of NumRuns*NumSpecies*(RunLength+1) (";
         errorMsg += std::to_string(NumRuns) + "*";
         errorMsg += std::to_string(NumSpecies) + "*" + std::to_string((RunLength+1)) + "=";
@@ -1727,6 +1727,7 @@ bool
 nmfDatabase::getForecastMonteCarloParameters(
         QWidget*             widget,
         nmfLogger*           logger,
+        const std::string&   Species,
         const std::string&   ForecastName,
         std::string&         Algorithm,
         std::string&         Minimizer,
@@ -1754,7 +1755,7 @@ nmfDatabase::getForecastMonteCarloParameters(
             "' AND Minimizer = '"          + Minimizer +
             "' AND ObjectiveCriterion = '" + ObjectiveCriterion +
             "' AND Scaling = '"            + Scaling +
-            "' AND SpeName = 'A' ORDER by RunNum,SpeName";  // RSK - fix this hardcodedness for species!!!
+            "' AND SpeName = '" + Species + "' ORDER by RunNum,SpeName";
     dataMap = nmfQueryDatabase(queryStr, fields);
     int NumRecords = dataMap["GrowthRate"].size();
     if (NumRecords == 0) {
@@ -1812,14 +1813,14 @@ nmfDatabase::getForecastCatch(
     dataMap = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SpeName"].size();
     if (NumRecords == 0) {
-        errorMsg  = "[Warning] getForecastCatch: No records found in table ForecastCatch";
+        errorMsg  = "[Warning] nmfDatabase::getForecastCatch: No records found in table ForecastCatch";
         Logger->logMsg(nmfConstants::Warning,errorMsg);
         msg = "\nNo ForecastCatch records found.\n\nPlease make sure a Forecast has been run.\n";
         QMessageBox::warning(Widget, "Warning", msg, QMessageBox::Ok);
         return false;
     }
     if (NumRecords != NumSpecies*(RunLength+1)) {
-        errorMsg  = "[Error 2] getForecastCatch: Number of records found (" + std::to_string(NumRecords) + ") in ";
+        errorMsg  = "[Error 2] nmfDatabase::getForecastCatch: Number of records found (" + std::to_string(NumRecords) + ") in ";
         errorMsg += "table ForecastCatch does not equal number of NumSpecies*(RunLength+1) (";
         errorMsg += std::to_string(NumSpecies) + "*" + std::to_string((RunLength+1)) + "=";
         errorMsg += std::to_string(NumSpecies*(RunLength+1)) + ") records";
@@ -1918,7 +1919,7 @@ nmfDatabase::updateForecastMonteCarloParameters(
     saveCmd = saveCmd.substr(0,saveCmd.size()-1);
     errorMsg = nmfUpdateDatabase(saveCmd);
     if (nmfUtilsQt::isAnError(errorMsg)) {
-        logger->logMsg(nmfConstants::Error,"[Error] updateForecastMonteCarloParameters: Write table error: " + errorMsg);
+        logger->logMsg(nmfConstants::Error,"[Error] nmfDatabase::updateForecastMonteCarloParameters: Write table error: " + errorMsg);
         logger->logMsg(nmfConstants::Error,"saveCmd: " + saveCmd);
         return false;
     }

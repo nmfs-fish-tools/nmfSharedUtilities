@@ -271,6 +271,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a5488fed14ff3859959b99b1fd0f252b3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtils::invertMatrix</b> (boost::numeric::ublas::matrix&lt; double &gt; &amp;matrix, boost::numeric::ublas::matrix&lt; double &gt; &amp;inverseMatrix)</td></tr>
 <tr class="memdesc:a5488fed14ff3859959b99b1fd0f252b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the inverse of the passed matrix. (In order for an inverse to be found, the determinant of the matrix must not be 0.)  <a href="nmf_utils_8cpp.html#a5488fed14ff3859959b99b1fd0f252b3">More...</a><br /></td></tr>
 <tr class="separator:a5488fed14ff3859959b99b1fd0f252b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ebd648a6af34992f5974b79585485d2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtils::isEstimateParameterChecked</b> (const <a class="el" href="struct_data___struct.html">Data_Struct</a> &amp;dataStruct, const std::string &amp;ParameterName)</td></tr>
+<tr class="memdesc:a2ebd648a6af34992f5974b79585485d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks a list from within the passes <a class="el" href="struct_data___struct.html" title="The data structure used for parameter estimation. It contains the parameter min max limits as well as...">Data_Struct</a> to see if a specific parameter has has its checkbox checked on the Estimation Tab6 page.  <a href="nmf_utils_8cpp.html#a2ebd648a6af34992f5974b79585485d2">More...</a><br /></td></tr>
+<tr class="separator:a2ebd648a6af34992f5974b79585485d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abdc0f0125ae7a0a8cc338ca4c828b1a0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtils::isWholeNumber</b> (double value)</td></tr>
 <tr class="memdesc:abdc0f0125ae7a0a8cc338ca4c828b1a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests the passed value if there's no decimal part and returns true, else returns false.  <a href="nmf_utils_8cpp.html#abdc0f0125ae7a0a8cc338ca4c828b1a0">More...</a><br /></td></tr>
 <tr class="separator:abdc0f0125ae7a0a8cc338ca4c828b1a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1168,6 +1171,44 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if inverse was found, else False </dd></dl>
+
+</div>
+</div>
+<a id="a2ebd648a6af34992f5974b79585485d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ebd648a6af34992f5974b79585485d2">&#9670;&nbsp;</a></span>isEstimateParameterChecked()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfUtils::isEstimateParameterChecked </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_data___struct.html">Data_Struct</a> &amp;&#160;</td>
+          <td class="paramname"><em>dataStruct</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>ParameterName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks a list from within the passes <a class="el" href="struct_data___struct.html" title="The data structure used for parameter estimation. It contains the parameter min max limits as well as...">Data_Struct</a> to see if a specific parameter has has its checkbox checked on the Estimation Tab6 page. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dataStruct</td><td>: data structure to check a list for the passed parameter name </td></tr>
+    <tr><td class="paramname">ParameterName</td><td>: name of parameter to check in list in <a class="el" href="struct_data___struct.html" title="The data structure used for parameter estimation. It contains the parameter min max limits as well as...">Data_Struct</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if parameter should be estimated, false otherwise </dd></dl>
 
 </div>
 </div>

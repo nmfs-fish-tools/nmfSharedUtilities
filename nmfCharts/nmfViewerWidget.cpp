@@ -92,6 +92,12 @@ nmfViewerWidget::~nmfViewerWidget() {
 }
 
 void
+nmfViewerWidget::setImagePath(const QString& imagePath)
+{
+    m_ImagePath = imagePath;
+}
+
+void
 nmfViewerWidget::addDataTab(
         const QString& title,
         QTableView* tableview)

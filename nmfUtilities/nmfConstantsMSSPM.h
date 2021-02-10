@@ -17,15 +17,24 @@ namespace nmfConstantsMSSPM
 {
      const int    Start_Year            = 1900;
 
+     const int    Column_Guild_Name       =  0;
+     const int    Column_Guild_GrowthRate =  1;
+     const int    Column_Guild_GuildK     =  2;
+
      const int    Column_Species_SpeName     =  0;
+     const int    Column_Species_Guild       =  1;
      const int    Column_Species_InitBiomass =  2;
      const int    Column_Species_GrowthRate  =  3;
      const int    Column_Species_SpeciesK    =  4;
 
-     const int    Column_Supp_SpeName     =  0;
-     const int    Column_Supp_InitBiomass =  1;
-     const int    Column_Supp_GrowthRate  =  4;
-     const int    Column_Supp_SpeciesK    =  8;
+     const int    Column_Supp_Guild_Name             =  0;
+     const int    Column_Supp_Guild_GrowthRate       =  1;
+     const int    Column_Supp_Guild_CarryingCapacity =  4;
+
+     const int    Column_Supp_Species_Name             =  0;
+     const int    Column_Supp_Species_InitBiomass      =  1;
+     const int    Column_Supp_Species_GrowthRate       =  4;
+     const int    Column_Supp_Species_CarryingCapacity =  8;
 
      const int    Column_SpeId          =  0;
      const int    Column_SpeName        =  1;
@@ -45,6 +54,8 @@ namespace nmfConstantsMSSPM
      const int    Column_GrowthRateMax  = 15;
      const int    Column_SpeciesKMin    = 16;
      const int    Column_SpeciesKMax    = 17;
+
+//     const double epsilon               = 0.0; // 0.001;
 
      const double NoFishingMortality   = -1.0;
      const double MaxOutOfBounds       = 9999999.0;
@@ -88,6 +99,10 @@ namespace nmfConstantsMSSPM
      const bool   DontLeaveGapsWhereNegative = false;
      const bool   FirstLineReadOnly    = true;
      const bool   FirstLineNotReadOnly = false;
+     const bool   IsATimeSeries        = true;
+     const bool   IsNotATimeSeries     = false;
+     const bool   UpdateSetup          = true;
+     const bool   DontUpdateSetup      = false;
 
      const std::string  HiddenDir                      = ".MSSPM";
      const std::string  HiddenDataDir                  = ".MSSPM/data";

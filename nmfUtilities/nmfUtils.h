@@ -166,11 +166,13 @@ struct Data_Struct {
     boost::numeric::ublas::matrix<double> Catch;
     boost::numeric::ublas::matrix<double> Effort;
     boost::numeric::ublas::matrix<double> Exploitation;
-//    boost::numeric::ublas::vector<double> InitialBiomassMin;
-//    boost::numeric::ublas::vector<double> InitialBiomassMax;
+    boost::numeric::ublas::vector<double> InitBiomass;
+    boost::numeric::ublas::vector<double> InitBiomassMin;
+    boost::numeric::ublas::vector<double> InitBiomassMax;
+    boost::numeric::ublas::vector<double> GrowthRate;
     boost::numeric::ublas::vector<double> GrowthRateMin;
     boost::numeric::ublas::vector<double> GrowthRateMax;
-    boost::numeric::ublas::vector<double> CarryingCapacityInitial;
+    boost::numeric::ublas::vector<double> CarryingCapacity;
     boost::numeric::ublas::vector<double> CarryingCapacityMin;
     boost::numeric::ublas::vector<double> CarryingCapacityMax;
     boost::numeric::ublas::vector<double> ExploitationRateMin;
@@ -191,6 +193,8 @@ struct Data_Struct {
     std::vector<double>                   ExponentMax;
     std::vector<double>                   Parameters;
 //  boost::numeric::ublas::matrix<double> OutputBiomass;
+
+    std::vector<std::string>              EstimateRunBoxes;
 };
 
 
@@ -385,6 +389,15 @@ namespace nmfUtils {
     bool invertMatrix(
             boost::numeric::ublas::matrix<double>& matrix,
             boost::numeric::ublas::matrix<double>& inverseMatrix);
+    /**
+     * @brief Checks a list from within the passes Data_Struct to see if a specific parameter has has its checkbox checked on the Estimation Tab6 page
+     * @param dataStruct : data structure to check a list for the passed parameter name
+     * @param ParameterName : name of parameter to check in list in Data_Struct
+     * @return True if parameter should be estimated, false otherwise
+     */
+    bool isEstimateParameterChecked(
+            const Data_Struct& dataStruct,
+            const std::string& ParameterName);
     /**
      * @brief Tests the passed value if there's no decimal part and returns true, else returns false
      * @param value : number to test if there's a decimal part

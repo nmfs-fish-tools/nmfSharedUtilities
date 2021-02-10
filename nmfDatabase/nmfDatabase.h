@@ -192,6 +192,7 @@ public:
     bool getForecastMonteCarloParameters(
             QWidget*             widget,
             nmfLogger*           logger,
+            const std::string&   Species,
             const std::string&   ForecastName,
             std::string&         Algorithm,
             std::string&         Minimizer,

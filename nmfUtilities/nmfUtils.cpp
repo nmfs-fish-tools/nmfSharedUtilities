@@ -520,6 +520,23 @@ rescaleMatrixMinMax(boost::numeric::ublas::matrix<double> &Matrix)
     }
 }
 
+bool isEstimateParameterChecked(
+        const Data_Struct& dataStruct,
+        const std::string& ParameterName)
+{
+    bool isChecked = false;
+
+    std::vector<std::string> EstimateRunBoxes = dataStruct.EstimateRunBoxes;
+    for (std::string cbox : EstimateRunBoxes) {
+        if (cbox == ParameterName) {
+            isChecked = true;
+            break;
+        }
+    }
+
+    return isChecked;
+}
+
 std::string
 convertToScientificNotation(double val)
 {
