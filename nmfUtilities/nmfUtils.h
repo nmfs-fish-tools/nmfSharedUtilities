@@ -75,6 +75,23 @@ typedef boost::multi_array<double, 5> Boost5DArrayDouble;
 // //  boost::numeric::ublas::vector<double> CompetitionPosition; // Position of parameters in each row (i.e., per Species)
 //};
 
+struct StatStruct {
+    std::vector<double> SSresiduals;
+    std::vector<double> SSdeviations;
+    std::vector<double> SStotals;
+    std::vector<double> rsquared;
+    std::vector<double> correlationCoeff;
+    std::vector<double> aic;
+    std::vector<double> rmse;
+    std::vector<double> ri;
+    std::vector<double> ae;
+    std::vector<double> aae;
+    std::vector<double> mef;
+    std::vector<double> mohnsRhoGrowthRate;
+    std::vector<double> mohnsRhoCarryingCapacity;
+    std::vector<double> mohnsRhoEstimatedBiomass;
+};
+
 /**
  * @brief Structure contains all of the parameters in a particular Model
  */
@@ -114,6 +131,7 @@ struct SystemData {
     double      NLoptStopVal;
     int         NLoptStopAfterTime;
     int         NLoptStopAfterIter;
+    int         NLoptNumberOfRuns;
 };
 
 /**
@@ -130,34 +148,39 @@ struct Data_Struct {
     double NLoptStopVal;
     int    NLoptStopAfterTime;
     int    NLoptStopAfterIter;
+    int    NLoptNumberOfRuns;
 
+    std::string MultiRunSpeciesFilename;
+    std::string MultiRunModelFilename;
+    std::string MultiRunSetupFilename;
     int    RunLength;
     int    NumSpecies;
     int    NumGuilds;
 
+    int    BeesMaxGenerations;
     int    BeesNumTotal;
+    int    BeesNumBestSites;
+    int    BeesNumEliteSites;
     int    BeesNumElite;
     int    BeesNumOther;
-    int    BeesNumEliteSites;
-    int    BeesNumBestSites;
-    int    BeesNumRepetitions;
-    int    BeesMaxGenerations;
     float  BeesNeighborhoodSize;
+    int    BeesNumRepetitions;
 
     int    GAGenerations;
     int    GAConvergence;
 
-    std::string Scaling;
     int         TotalNumberParameters;
     std::string Benchmark;
-    std::string EstimationType;
 
     std::string GrowthForm;
     std::string HarvestForm;
     std::string CompetitionForm;
     std::string PredationForm;
-    std::string Minimizer;
+
+    std::string EstimationAlgorithm;
+    std::string MinimizerAlgorithm;
     std::string ObjectiveCriterion;
+    std::string ScalingAlgorithm;
 
     std::map<int,std::vector<int> >       GuildSpecies; // List of species numbers that make up guild num
     std::vector<int>                      GuildNum;     // Specifies which species are members of which guilds
@@ -273,6 +296,12 @@ namespace nmfUtils {
      * @return The number of hours, minutes, or seconds that have elapsed (in a string format)
      */
     std::string elapsedTime(std::chrono::time_point<std::chrono::high_resolution_clock> startTime);
+    /**
+     * @brief Calculates the time elapsed between the passed startTime and the currentTime and displays it in a condensed format
+     * @param startTime : The start time with which to calculate the elapsed time
+     * @return A string represent the time passed in format: hh:mm:ss
+     */
+    std::string elapsedTimeCondensed(std::chrono::time_point<std::chrono::high_resolution_clock> startTime);
     /**
      * @brief Returns the files in the passed directory having the given extension
      * @param path : directory in which to search for files

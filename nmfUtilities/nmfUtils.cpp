@@ -23,6 +23,33 @@ startTimer()
 }
 
 std::string
+elapsedTimeCondensed(std::chrono::time_point<std::chrono::high_resolution_clock> startTime)
+{
+    std::string elapsedTimeStr = "";
+    char buffer[50];
+
+    auto endTime = std::chrono::high_resolution_clock::now();
+    int elapsedTimeSec = int(std::chrono::duration_cast<std::chrono::milliseconds>(endTime-startTime).count()/1000.0+0.5);
+
+    std::string day  = std::to_string(elapsedTimeSec / (24*3600));
+    std::string hour = std::to_string((elapsedTimeSec % (24*3600)) / 3600);
+    std::string min  = std::to_string((elapsedTimeSec % 3600) / 60);
+    std::string sec  = std::to_string(elapsedTimeSec % 60);
+
+    // add leading zero if needed
+    std::string dd = std::string(2 - day.length(), '0') + day;
+    std::string hh = std::string(2 - hour.length(),'0') + hour;
+    std::string mm = std::string(2 - min.length(), '0') + min;
+    std::string ss = std::string(2 - sec.length(), '0') + sec;
+
+    if (day == "0") {
+        return hh + ':' + mm + ":" + ss;
+    } else {
+        return dd + ":" + hh + ':' + mm + ":" + ss;
+    }
+}
+
+std::string
 elapsedTime(std::chrono::time_point<std::chrono::high_resolution_clock> startTime)
 {
     std::string elapsedTimeStr = "";

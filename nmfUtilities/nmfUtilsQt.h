@@ -361,6 +361,16 @@ namespace nmfUtilsQt {
                                     QList<QString>& SpeciesGuilds,
                                     QString& errorMsg);
     /**
+     * @brief Loads all of the multi-run file data into a vector of QStrings
+     * @param DataStruct : struct containing all run parameters
+     * @param MultiRunLines : contents of multi-run file
+     * @param TotalIndividualRuns : total number of individual runs
+     * @return True if a successful load, false otherwise
+     */
+    bool loadMultiRunData(const Data_Struct& DataStruct,
+                          std::vector<QString>& MultiRunLines,
+                          int& TotalIndividualRuns);
+    /**
      * @brief Load data from a .csv file into a QTableWidget
      * @param parentTabWidget : parent widget onto which any popup message will be displayed
      * @param tableWidget : table widget that will contain the csv data
@@ -420,6 +430,14 @@ namespace nmfUtilsQt {
      */
     QString pasteAll(QApplication* qtApp,
                      QTableView* tableView);
+    /**
+     * @brief Reloads the passed dataStruct with the passed line from the multi-run line file
+     * @param dataStruct : the data struct to reload
+     * @param MultiRunLine : a line from the multi-run line file
+     */
+    void reloadDataStruct(
+            Data_Struct& dataStruct,
+            const QString& MultiRunLine);
     /**
      * @brief Removes the Qt settings file from the file system.
      * Useful for resetting the application GUI in case it disappears

@@ -61,7 +61,7 @@ namespace nmfConstantsAvailability
     const double MaxExponent                      = 2.0;
 
     const QString BeginSection_pPrey = "# The order of the prey groups is defined by your functional ";
-    const QString EndSection_pPrey   = "## Ontogenetic diet";
+    const QString EndSection_pPrey   = "## Ontogenetic diet preferences";
 
     const std::string  HiddenDir                      = ".Atlantis_Availability";
     const std::string  HiddenDataDir                  = ".Atlantis_Availability/data";

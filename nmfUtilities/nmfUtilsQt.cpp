@@ -1756,6 +1756,79 @@ modelCopy(QStandardItemModel* originalModel, QStandardItemModel* copyModel)
     }
 }
 
+bool
+loadMultiRunData(const Data_Struct& dataStruct,
+                 std::vector<QString>& MultiRunLines,
+                 int& TotalIndividualRuns)
+{
+    bool retv = false;
+
+    TotalIndividualRuns = 0;
+
+    std::string line;
+    QString lineStr;
+    std::ifstream multiRunFile(dataStruct.MultiRunSetupFilename);
+    if (multiRunFile.is_open()) {
+        getline(multiRunFile,line); // First line is the header
+        while (getline(multiRunFile,line)) {
+            lineStr = QString::fromStdString(line);
+            TotalIndividualRuns += lineStr.split(',')[0].toInt();
+            MultiRunLines.push_back(lineStr);
+        }
+        multiRunFile.close();
+        retv = true;
+    }
+    return retv;
+}
+
+void
+reloadDataStruct(
+        Data_Struct& dataStruct,
+        const QString& MultiRunLine)
+{
+    QStringList parts = MultiRunLine.split(",");
+//std::cout << "num parts: " << parts.size() << std::endl;
+
+    dataStruct.NLoptNumberOfRuns     = parts[0].toInt();
+
+    dataStruct.EstimationAlgorithm   = parts[1].toStdString();
+    dataStruct.MinimizerAlgorithm    = parts[2].toStdString();
+    dataStruct.ObjectiveCriterion    = parts[3].toStdString();
+    dataStruct.ScalingAlgorithm      = parts[4].toStdString();
+
+//std::cout << "Processing: " << dataStruct.NLoptNumberOfRuns << " runs: " <<
+//             dataStruct.EstimationAlgorithm << "," <<
+//             dataStruct.MinimizerAlgorithm << "," <<
+//             dataStruct.ObjectiveCriterion << "," <<
+//             dataStruct.ScalingAlgorithm << std::endl;
+
+    dataStruct.BeesMaxGenerations    = parts[5].toInt();
+    dataStruct.BeesNumTotal          = parts[6].toInt();
+    dataStruct.BeesNumBestSites      = parts[7].toInt();
+    dataStruct.BeesNumEliteSites     = parts[8].toInt();
+    dataStruct.BeesNumElite          = parts[9].toInt();
+    dataStruct.BeesNumOther          = parts[10].toInt();
+    dataStruct.BeesNeighborhoodSize  = parts[11].toFloat();
+    dataStruct.BeesNumRepetitions    = parts[12].toInt();
+
+    dataStruct.NLoptUseStopVal       = parts[14].toInt();
+    dataStruct.NLoptStopVal          = parts[15].toInt();
+    dataStruct.NLoptUseStopAfterTime = parts[17].toInt();
+    dataStruct.NLoptStopAfterTime    = parts[18].toInt();
+    dataStruct.NLoptUseStopAfterIter = parts[20].toInt();
+    dataStruct.NLoptStopAfterIter    = parts[21].toInt();
+
+    dataStruct.EstimateRunBoxes.clear();
+    int startIndex = 22;
+    for (int col=22; col<parts.size()-3; ++col) {
+        if ((parts[col+1].toInt()==1) && (parts[col+2].toInt()==1)) {
+            dataStruct.EstimateRunBoxes.push_back(nmfConstantsMSSPM::EstimateCheckboxNames[col-startIndex]);
+        } else {
+            dataStruct.EstimateRunBoxes.push_back("");
+        }
+    }
+}
+
 
 
 } // end namespace

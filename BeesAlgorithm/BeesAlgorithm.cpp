@@ -23,7 +23,7 @@ BeesAlgorithm::BeesAlgorithm(const Data_Struct &theBeeStruct,
     m_GuildNum     = theBeeStruct.GuildNum;
 
     // Get number of independent runs
-    m_Scaling = theBeeStruct.Scaling;
+    m_Scaling = theBeeStruct.ScalingAlgorithm;
     if (verbose) {
         std::cout << "\nBeesAlgorithm: Parameters to Estimate: " << m_BeeStruct.TotalNumberParameters << std::endl;
     }

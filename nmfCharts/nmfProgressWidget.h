@@ -61,8 +61,10 @@ public:
     QHBoxLayout *statusLayt;
     QVBoxLayout *vGroupLayt;
     QHBoxLayout *buttonLayt;
+    QHBoxLayout *timeLayt;
     QHBoxLayout *pointsLayt;
     QLabel      *statusLBL;
+    QLabel      *timeLBL;
     QLabel      *pointLBL;
     QLabel      *rangeLBL;
     QLabel      *minLBL;
@@ -79,10 +81,11 @@ public:
     QPushButton *clearPB;
     QPushButton *stopPB;
     QPushButton *rangeSetPB;
-    QTimer      *timer;
+    QLineEdit   *timeLE;
     QLineEdit   *runLE;
     QLineEdit   *subRunLE;
 
+    QTimer*     m_timer;
     std::chrono::_V2::system_clock::time_point m_startTime;
     int         m_maxNumGenerations;
     QString     m_mainTitle;
@@ -97,6 +100,8 @@ public:
     bool        m_yAxisAdjusted;
     int         m_lastX;
     std::string m_RunType;
+    std::string m_elapsedTime;
+    bool        m_wasStopped;
 
     nmfProgressWidget(QTimer *theTimer,
                       nmfLogger *logger,
@@ -152,18 +157,20 @@ public:
     void setWhatsThis(QString whatsThis);
     void clearChart();
     void clearChartOnly();
+    void clearRunBoxes();
     void shouldYRangeEditsStick(bool state);
     bool ifYRangeEditsShouldStick();
     bool readValidPointsOnly();
     void hideLegend();
     void showLegend();
-
-protected:
-//    bool event(QEvent *event);
-//    bool eventFilter(QObject *obj, QEvent *evt);
+    void updateTime();
+    void clearTime();
+    std::string getElapsedTime();
+    bool wasStopped();
 
 signals:
     void StopTheRun();
+    void StopTheTimer();
     void RedrawValidPointsOnly(bool checked, bool clear);
 
 public Q_SLOTS:

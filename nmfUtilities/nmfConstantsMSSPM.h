@@ -103,6 +103,8 @@ namespace nmfConstantsMSSPM
      const bool   IsNotATimeSeries     = false;
      const bool   UpdateSetup          = true;
      const bool   DontUpdateSetup      = false;
+     const bool   IsAveraged           = true;
+     const bool   IsNotAveraged        = false;
 
      const std::string  HiddenDir                      = ".MSSPM";
      const std::string  HiddenDataDir                  = ".MSSPM/data";
@@ -122,6 +124,18 @@ namespace nmfConstantsMSSPM
      const std::string  OutputDataDirMMode             = "Remora/outputData";
      const std::string  OutputScenariosDirMMode        = "Remora/scenarios";
 
+     const std::vector<std::string> EstimateCheckboxNames =
+         {"InitBiomass",
+          "GrowthRate",
+          "CarryingCapacity",
+          "Catchability",
+          "Handling",
+          "CompetitionAlpha",
+          "CompetitionBetaSpeciesSpecies",
+          "CompetitionBetaGuildSpecies",
+          "CompetitionBetaGuildGuild",
+          "PredationRho",
+          "PredationExponent"};
 }
 
 

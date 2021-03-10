@@ -36,10 +36,11 @@ nmfProgressWidget::nmfProgressWidget(QTimer *theTimer,
     m_chartView = nullptr;
     m_xInc = (xMax-xMin)/10;
     m_yInc = (yMax-yMin)/5;
+    m_elapsedTime.clear();
+    m_wasStopped = false;
 
-
-    logger  = theLogger;
-    timer   = theTimer;
+    logger    = theLogger;
+    m_timer   = theTimer;
     m_RunType = runType;
     m_lastX   = 0;
 
@@ -53,10 +54,12 @@ nmfProgressWidget::nmfProgressWidget(QTimer *theTimer,
     statusLayt  = new QHBoxLayout();
     vGroupLayt  = new QVBoxLayout();
     buttonLayt  = new QHBoxLayout();
+    timeLayt    = new QHBoxLayout();
     pointsLayt  = new QHBoxLayout();
     m_chartView = new QChartView();
     controlsGB  = new QGroupBox();
     statusLBL   = new QLabel();
+    timeLBL     = new QLabel("Elapsed Time:");
     pointLBL    = new QLabel("Points:");
     markersCB   = new QCheckBox("Markers");
     labelsCB    = new QCheckBox("Labels");
@@ -66,6 +69,7 @@ nmfProgressWidget::nmfProgressWidget(QTimer *theTimer,
     yMaxSB      = new QDoubleSpinBox();
     rangeSetPB  = new QPushButton("[↕]");
     runStatusLBL= new QLabel("Completed (Run, SubRun):");
+    timeLE      = new QLineEdit();
     runLE       = new QLineEdit();
     subRunLE    = new QLineEdit();
     rangeLBL    = new QLabel("Iterations (X) Axis:");
@@ -76,8 +80,11 @@ nmfProgressWidget::nmfProgressWidget(QTimer *theTimer,
     clearPB     = new QPushButton("Clear Chart");
     stopPB      = new QPushButton("Stop");
 
-
     // Setup widgets
+    timeLBL->setFixedWidth(100);
+    timeLE->setFixedWidth(80);
+    timeLE->setReadOnly(true);
+    pointLBL->setFixedWidth(100);
     m_yAxisAdjusted = false;
     yMinSB->setDecimals(2);
     yMaxSB->setDecimals(2);
@@ -97,6 +104,8 @@ nmfProgressWidget::nmfProgressWidget(QTimer *theTimer,
     subRunLE->setReadOnly(true);
     runLE->clear();
     subRunLE->clear();
+    timeLBL->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
+    timeLE->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
     runLE->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
     subRunLE->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
 
@@ -117,9 +126,13 @@ nmfProgressWidget::nmfProgressWidget(QTimer *theTimer,
     hRangeLayt->addWidget(maxSB);
     buttonLayt->addWidget(clearPB);
     buttonLayt->addWidget(stopPB);
-    vGroupLayt->addWidget(pointLBL);
+    timeLayt->addWidget(timeLBL);
+    timeLayt->addWidget(timeLE);
+    timeLayt->addSpacerItem(new QSpacerItem(95,1,QSizePolicy::Fixed,QSizePolicy::Fixed));
+    pointsLayt->addWidget(pointLBL);
     pointsLayt->addWidget(markersCB);
     pointsLayt->addWidget(labelsCB);
+    vGroupLayt->addLayout(timeLayt);
     vGroupLayt->addLayout(pointsLayt);
     vGroupLayt->addWidget(yAxisLBL);
     vGroupLayt->addLayout(yRangeLayt);
@@ -168,6 +181,10 @@ nmfProgressWidget::nmfProgressWidget(QTimer *theTimer,
     clearPB->setStatusTip("Clears the chart of all previous plots.");
     validPointsCB->setToolTip("Show valid points only (i.e., omit 99999)");
     validPointsCB->setStatusTip("Show valid points only (i.e., omit 99999)");
+    timeLBL->setToolTip("The current run's elapsed time in hh:mm:ss format");
+    timeLBL->setStatusTip("The current run's elapsed time in hh:mm:ss format");
+    timeLE->setToolTip("The current run's elapsed time in hh:mm:ss format");
+    timeLE->setStatusTip("The current run's elapsed time in hh:mm:ss format");
 
     // Show empty grid
     QValueAxis  *newXAxis  = new QValueAxis();
@@ -309,6 +326,12 @@ nmfProgressWidget::setXInc(const double& xInc)
     updateChart();
 }
 
+void
+nmfProgressWidget::clearRunBoxes()
+{
+    runLE->setText("");
+    subRunLE->setText("");
+}
 
 void
 nmfProgressWidget::setRunBoxes(const int& run,
@@ -435,6 +458,18 @@ nmfProgressWidget::setMaxNumGenerations(const int& MaxNumGenerations)
 }
 
 void
+nmfProgressWidget::updateTime()
+{
+    timeLE->setText(QString::fromStdString(nmfUtils::elapsedTimeCondensed(m_startTime)));
+}
+
+void
+nmfProgressWidget::clearTime()
+{
+    timeLE->setText("");
+}
+
+void
 nmfProgressWidget::updateChart()
 {
     if (m_chart != nullptr) {
@@ -487,7 +522,7 @@ nmfProgressWidget::setupConnections() {
 void
 nmfProgressWidget::stopTimer()
 {
-    timer->stop();
+    m_timer->stop();
 }
 
 void
@@ -496,10 +531,18 @@ nmfProgressWidget::startTimer(int delayMillisec)
     logger->logMsg(nmfConstants::Normal,"Start " + m_RunType + " Progress Chart Timer");
 
     // Start Progress Chart's timer here
-    timer->start(delayMillisec);
+    m_timer->start(delayMillisec);
     startRun();
 
-} // end startTimer
+    clearTime();
+
+}
+
+bool
+nmfProgressWidget::wasStopped()
+{
+    return m_wasStopped;
+}
 
 void
 nmfProgressWidget::callback_stopPB(bool unused)
@@ -507,8 +550,8 @@ nmfProgressWidget::callback_stopPB(bool unused)
     logger->logMsg(nmfConstants::Normal,"Stop " + m_RunType + " Progress Chart Timer");
 
     emit StopTheRun();
-
     StopRun();
+    m_wasStopped = true;
 
     if (m_RunType == "MSSPM") {
         updateChartDataLabel(nmfConstantsMSSPM::MSSPMProgressChartLabelFile,
@@ -539,6 +582,7 @@ void
 nmfProgressWidget::callback_clearPB() {
 
     m_chart->removeAllSeries();
+    clearRunBoxes();
 
     // Initialize progress output file
     if (m_RunType == "MSSPM") {
@@ -696,17 +740,23 @@ nmfProgressWidget::callback_scatterSeriesHovered(QPointF point,bool state)
 
 } // end callback_scatterSeriesHovered
 
+std::string
+nmfProgressWidget::getElapsedTime()
+{
+    return m_elapsedTime;
+}
 
 void
 nmfProgressWidget::StopRun()
 {
-    std::string elapsedTimeStr = nmfUtils::elapsedTime(m_startTime);
+    m_elapsedTime = nmfUtils::elapsedTime(m_startTime);
+    emit StopTheTimer();
 
     if (m_RunType == "MSSPM") {
         std::ofstream outputFile(nmfConstantsMSSPM::MSSPMStopRunFile);
         outputFile << "StoppedByUser" << std::endl;
         outputFile << "unused" << std::endl;
-        outputFile << elapsedTimeStr << std::endl;
+        outputFile << m_elapsedTime << std::endl;
         outputFile << m_lastX << std::endl;
         outputFile.close();
    } else if (m_RunType == "MSVPA") {
@@ -728,7 +778,8 @@ nmfProgressWidget::StopRun()
 void
 nmfProgressWidget::startRun()
 {
-    m_startTime = nmfUtils::startTimer();
+    m_startTime  = nmfUtils::startTimer();
+    m_wasStopped = false;
 
     if (m_RunType == "MSSPM") {
         std::ofstream outputFile(nmfConstantsMSSPM::MSSPMStopRunFile);
@@ -1100,31 +1151,3 @@ nmfProgressWidget::readChartDataFile(std::string type,
 } // end readChartDataFile
 
 
-//bool nmfProgressWidget::event(QEvent *event)
-//{
-//    if (event->type() == QEvent::KeyPress) {
-//        QKeyEvent *ke = static_cast<QKeyEvent *>(event);
-//        if (ke->key() == Qt::Key_Tab) {
-//            std::cout << "----------" << std::endl;
-//            return true;
-//        }
-//    } else if (event->type() == QEvent::MouseButtonPress) {
-// //        MyCustomEvent *myEvent = static_cast<MyCustomEvent *>(event);
-//        std::cout << "============" << std::endl;
-//        return true;
-//    }
-
-//    return this->event(event);
-//}
-
-//bool nmfProgressWidget::eventFilter(QObject *obj, QEvent *evt)
-//{
-//std::cout << 111 << std::endl;
-//    if(evt->type() == QEvent::MouseButtonPress)
-//    {
-//        std::cout << 222 << std::endl;
-
-//    }
-
-//    return nmfProgressWidget::eventFilter(obj,evt);
-//}
