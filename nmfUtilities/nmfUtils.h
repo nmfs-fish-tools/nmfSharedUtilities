@@ -208,6 +208,8 @@ struct Data_Struct {
     std::vector<std::vector<double> >     CompetitionBetaSpeciesMax;
     std::vector<std::vector<double> >     CompetitionBetaGuildsMin;
     std::vector<std::vector<double> >     CompetitionBetaGuildsMax;
+    std::vector<std::vector<double> >     CompetitionBetaGuildsGuildsMin;
+    std::vector<std::vector<double> >     CompetitionBetaGuildsGuildsMax;
     std::vector<std::vector<double> >     PredationMin;
     std::vector<std::vector<double> >     PredationMax;
     std::vector<std::vector<double> >     HandlingMin;

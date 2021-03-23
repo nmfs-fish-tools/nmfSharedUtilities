@@ -440,10 +440,11 @@ BeesAlgorithm::extractCompetitionParameters(const std::vector<double>& parameter
                                             int& startPos,
                                             boost::numeric::ublas::matrix<double>& alpha,
                                             boost::numeric::ublas::matrix<double>& betaSpecies,
-                                            boost::numeric::ublas::matrix<double>& betaGuilds)
+                                            boost::numeric::ublas::matrix<double>& betaGuilds,
+                                            boost::numeric::ublas::matrix<double>& betaGuildsGuilds)
 {
     if ((m_CompetitionForm != nullptr)) {
-        m_CompetitionForm->extractParameters(parameters,startPos,alpha,betaSpecies,betaGuilds);
+        m_CompetitionForm->extractParameters(parameters,startPos,alpha,betaSpecies,betaGuilds,betaGuildsGuilds);
     }
 }
 
@@ -511,6 +512,7 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     boost::numeric::ublas::matrix<double> competitionAlpha;
     boost::numeric::ublas::matrix<double> competitionBetaSpecies;
     boost::numeric::ublas::matrix<double> competitionBetaGuilds;
+    boost::numeric::ublas::matrix<double> competitionBetaGuildsGuilds;
     boost::numeric::ublas::matrix<double> predation;
     boost::numeric::ublas::matrix<double> handling;
     nmfUtils::initialize(estBiomassSpecies,                   NumYears,           NumSpeciesOrGuilds);
@@ -520,6 +522,7 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     nmfUtils::initialize(competitionAlpha,                    NumSpeciesOrGuilds, NumSpeciesOrGuilds);
     nmfUtils::initialize(competitionBetaSpecies,              NumSpecies,         NumSpecies);
     nmfUtils::initialize(competitionBetaGuilds,               NumSpeciesOrGuilds, NumGuilds);
+    nmfUtils::initialize(competitionBetaGuildsGuilds,         NumGuilds,          NumGuilds);
     nmfUtils::initialize(predation,                           NumSpeciesOrGuilds, NumSpeciesOrGuilds);
     nmfUtils::initialize(handling,                            NumSpeciesOrGuilds, NumSpeciesOrGuilds);
 
@@ -531,10 +534,9 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     m_GrowthForm->extractParameters(parameters,startPos,growthRate,
                                     carryingCapacity,systemCarryingCapacity);
     m_HarvestForm->extractParameters(parameters,startPos,catchabilityRate);
-    m_CompetitionForm->extractParameters(parameters,startPos,
-                                         competitionAlpha,
-                                         competitionBetaSpecies,
-                                         competitionBetaGuilds);
+    m_CompetitionForm->extractParameters(parameters,startPos,competitionAlpha,
+                                         competitionBetaSpecies,competitionBetaGuilds,
+                                         competitionBetaGuildsGuilds);
     m_PredationForm->extractPredationParameters(parameters,startPos,predation);
     m_PredationForm->extractHandlingParameters(parameters,startPos,handling);
     m_PredationForm->extractExponentParameters(parameters,startPos,exponent);
@@ -612,6 +614,7 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
                                    competitionAlpha,
                                    competitionBetaSpecies,
                                    competitionBetaGuilds,
+                                   competitionBetaGuildsGuilds,
                                    estBiomassSpecies,
                                    estBiomassGuilds);
             predationTerm   = m_PredationForm->evaluate(

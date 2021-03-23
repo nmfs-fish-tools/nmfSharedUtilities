@@ -114,7 +114,8 @@ public:
                                       int& startPos,
                                       boost::numeric::ublas::matrix<double>& alpha,
                                       boost::numeric::ublas::matrix<double>& betaSpecies,
-                                      boost::numeric::ublas::matrix<double>& betaGuilds);
+                                      boost::numeric::ublas::matrix<double>& betaGuilds,
+                                      boost::numeric::ublas::matrix<double>& betaGuildsGuilds);
     void extractPredationParameters(const std::vector<double>& parameters,
                                     int& startPos,
                                     boost::numeric::ublas::matrix<double>& predation);

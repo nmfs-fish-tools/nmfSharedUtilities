@@ -7,9 +7,10 @@ nmfHarvestForm::nmfHarvestForm(std::string harvestType)
     m_type = harvestType;
     m_parameterRanges.clear();
 
-    m_FunctionMap["Exploitation (F)"] = ExploitationHarvest;
-    m_FunctionMap["Effort (qE)"]      = EffortHarvest;
-    m_FunctionMap["Catch"]            = CatchHarvest;
+    m_FunctionMap["Null"]             = &nmfHarvestForm::NoHarvest;
+    m_FunctionMap["Catch"]            = &nmfHarvestForm::CatchHarvest;
+    m_FunctionMap["Effort (qE)"]      = &nmfHarvestForm::EffortHarvest;
+    m_FunctionMap["Exploitation (F)"] = &nmfHarvestForm::ExploitationHarvest;
 }
 
 
@@ -78,69 +79,76 @@ nmfHarvestForm::loadParameterRanges(
 
 
 double
-nmfHarvestForm::evaluate(int& timeT,
-                         int& speciesNum,
-                         boost::numeric::ublas::matrix<double>& Catch,
-                         boost::numeric::ublas::matrix<double>& Effort,
-                         boost::numeric::ublas::matrix<double>& Exploitation,
-                         double& biomassAtTime,
-                         std::vector<double>& catchabilityRate)
+nmfHarvestForm::evaluate(const int& timeT,
+                         const int& speciesNum,
+                         const boost::numeric::ublas::matrix<double>& Catch,
+                         const boost::numeric::ublas::matrix<double>& Effort,
+                         const boost::numeric::ublas::matrix<double>& Exploitation,
+                         const double& biomassAtTime,
+                         const std::vector<double>& catchabilityRate)
 {
     if (m_FunctionMap.find(m_type) == m_FunctionMap.end()) {
         return 0;
     } else {
-        return m_FunctionMap[m_type](timeT,speciesNum,Catch,Effort,Exploitation,
-                                     biomassAtTime,catchabilityRate);
+        return (this->*m_FunctionMap[m_type])(timeT,speciesNum,Catch,Effort,Exploitation,
+                                              biomassAtTime,catchabilityRate);
     }
 }
 
+
 double
-nmfHarvestForm::ExploitationHarvest(int& timeT,
-                                    int& speciesNum,
-                                    boost::numeric::ublas::matrix<double> &Catch,
-                                    boost::numeric::ublas::matrix<double> &Effort,
-                                    boost::numeric::ublas::matrix<double> &Exploitation,
-                                    double& biomassAtTime,
-                                    std::vector<double>& catchabilityRate)
+nmfHarvestForm::NoHarvest(const int &timeT,
+                          const int &speciesNum,
+                          const boost::numeric::ublas::matrix<double> &Catch,
+                          const boost::numeric::ublas::matrix<double> &Effort,
+                          const boost::numeric::ublas::matrix<double> &Exploitation,
+                          const double& biomassAtTime,
+                          const std::vector<double>& catchabilityRate)
 {
-   return Exploitation(timeT,speciesNum)*biomassAtTime;
+    return 0.0;
 }
 
-
 double
-nmfHarvestForm::CatchHarvest(int &timeT,
-                             int &speciesNum,
-                             boost::numeric::ublas::matrix<double> &Catch,
-                             boost::numeric::ublas::matrix<double> &Effort,
-                             boost::numeric::ublas::matrix<double> &Exploitation,
-                             double& biomassAtTime,
-                             std::vector<double>& catchabilityRate)
+nmfHarvestForm::CatchHarvest(const int &timeT,
+                             const int &speciesNum,
+                             const boost::numeric::ublas::matrix<double> &Catch,
+                             const boost::numeric::ublas::matrix<double> &Effort,
+                             const boost::numeric::ublas::matrix<double> &Exploitation,
+                             const double& biomassAtTime,
+                             const std::vector<double>& catchabilityRate)
 {
    return Catch(timeT,speciesNum);
 }
 
 
 double
-nmfHarvestForm::EffortHarvest(int& timeT,
-                              int& speciesNum,
-                              boost::numeric::ublas::matrix<double> &Catch,
-                              boost::numeric::ublas::matrix<double> &Effort,
-                              boost::numeric::ublas::matrix<double> &Exploitation,
-                              double& biomassAtTime,
-                              std::vector<double>& catchabilityRate)
+nmfHarvestForm::EffortHarvest(const int& timeT,
+                              const int& speciesNum,
+                              const boost::numeric::ublas::matrix<double> &Catch,
+                              const boost::numeric::ublas::matrix<double> &Effort,
+                              const boost::numeric::ublas::matrix<double> &Exploitation,
+                              const double& biomassAtTime,
+                              const std::vector<double>& catchabilityRate)
 {
     if (catchabilityRate.size() == 0) {
         std::cout << "ERROR: No catchabilityRate rate found.  Please update code." << std::endl;
         return 0;
     }
 
+    return (catchabilityRate[speciesNum]*
+            Effort(timeT,speciesNum)*
+            biomassAtTime);
+}
 
-//std::cout <<  timeT << "," << speciesNum << "; " <<
-//              catchabilityRate[speciesNum] << ", " <<
-//              Effort(timeT,speciesNum) << ", " <<
-//              biomassAtTime << ": " <<
-//              catchabilityRate[speciesNum]*Effort(timeT,speciesNum)*biomassAtTime << std::endl;
-   return (catchabilityRate[speciesNum]*
-           Effort(timeT,speciesNum)*
-           biomassAtTime);
+
+double
+nmfHarvestForm::ExploitationHarvest(const int& timeT,
+                                    const int& speciesNum,
+                                    const boost::numeric::ublas::matrix<double> &Catch,
+                                    const boost::numeric::ublas::matrix<double> &Effort,
+                                    const boost::numeric::ublas::matrix<double> &Exploitation,
+                                    const double& biomassAtTime,
+                                    const std::vector<double>& catchabilityRate)
+{
+   return Exploitation(timeT,speciesNum)*biomassAtTime;
 }

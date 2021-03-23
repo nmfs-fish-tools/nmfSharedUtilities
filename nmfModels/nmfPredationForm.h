@@ -19,21 +19,21 @@ class nmfPredationForm {
 private:
 
     bool m_isAggProd;
-    int m_numSpecies;
-    int m_numGuilds;
-    int m_numberParameters;
-    int m_NumSpeciesOrGuilds;
+    int  m_numSpecies;
+    int  m_numGuilds;
+    int  m_numberParameters;
+    int  m_NumSpeciesOrGuilds;
     std::string m_type; // "Type I", "Type II", ...
     std::vector<std::pair<double,double> > m_parameterRanges;
 
-    std::map<std::string, double(*)(
-            int &timeMinus1,
-            int &SpeciesNum,
-            boost::numeric::ublas::matrix<double> &EstPredation,
-            boost::numeric::ublas::matrix<double> &EstHandling,
-            std::vector<double> &EstExponent,
-            boost::numeric::ublas::matrix<double> &EstimatedBiomass,
-            double &EstimatedBiomassTimeMinus1
+    std::map<std::string, double(nmfPredationForm::*)(
+            const int &timeMinus1,
+            const int &SpeciesNum,
+            const boost::numeric::ublas::matrix<double> &EstPredation,
+            const boost::numeric::ublas::matrix<double> &EstHandling,
+            const std::vector<double> &EstExponent,
+            const boost::numeric::ublas::matrix<double> &EstimatedBiomass,
+            const double &EstimatedBiomassTimeMinus1
     )> m_FunctionMap;
 
 
@@ -59,37 +59,45 @@ public:
             std::vector<std::pair<double,double> >& parameterRanges,
             Data_Struct& beeStruct);
 
-    double evaluate(int &timeMinus1,
-                    int &SpeciesNum,
-                    boost::numeric::ublas::matrix<double> &EstPredation,
-                    boost::numeric::ublas::matrix<double> &EstHandling,
-                    std::vector<double> &EstExponent,
-                    boost::numeric::ublas::matrix<double> &EstimatedBiomass,
-                    double &EstimatedBiomassTimeMinus1);
+    double evaluate(const int &timeMinus1,
+                    const int &SpeciesNum,
+                    const boost::numeric::ublas::matrix<double> &EstPredation,
+                    const boost::numeric::ublas::matrix<double> &EstHandling,
+                    const std::vector<double> &EstExponent,
+                    const boost::numeric::ublas::matrix<double> &EstimatedBiomass,
+                    const double &EstimatedBiomassTimeMinus1);
 
-    static double TypeIPredation(int &timeMinus1,
-                                 int &SpeciesNum,
-                                 boost::numeric::ublas::matrix<double> &EstPredation,
-                                 boost::numeric::ublas::matrix<double> &EstHandling,
-                                 std::vector<double> &EstExponent,
-                                 boost::numeric::ublas::matrix<double> &EstimatedBiomass,
-                                 double &EstimatedBiomassTimeMinus1);
+    double TypeNullPredation(const int &timeMinus1,
+                             const int &SpeciesNum,
+                             const boost::numeric::ublas::matrix<double> &EstPredation,
+                             const boost::numeric::ublas::matrix<double> &EstHandling,
+                             const std::vector<double> &EstExponent,
+                             const boost::numeric::ublas::matrix<double> &EstimatedBiomass,
+                             const double &EstimatedBiomassTimeMinus1);
 
-    static double TypeIIPredation(int &timeMinus1,
-                                  int &SpeciesNum,
-                                  boost::numeric::ublas::matrix<double> &EstPredation,
-                                  boost::numeric::ublas::matrix<double> &EstHandling,
-                                  std::vector<double> &EstExponent,
-                                  boost::numeric::ublas::matrix<double> &EstimatedBiomass,
-                                  double &EstimatedBiomassTimeMinus1);
+    double TypeIPredation(const int &timeMinus1,
+                          const int &SpeciesNum,
+                          const boost::numeric::ublas::matrix<double> &EstPredation,
+                          const boost::numeric::ublas::matrix<double> &EstHandling,
+                          const std::vector<double> &EstExponent,
+                          const boost::numeric::ublas::matrix<double> &EstimatedBiomass,
+                          const double &biomassAtTime);
 
-    static double TypeIIIPredation(int &timeMinus1,
-                                   int &SpeciesNum,
-                                   boost::numeric::ublas::matrix<double> &EstPredation,
-                                   boost::numeric::ublas::matrix<double> &EstHandling,
-                                   std::vector<double> &EstExponent,
-                                   boost::numeric::ublas::matrix<double> &EstimatedBiomass,
-                                   double &EstimatedBiomassTimeMinus1);
+    double TypeIIPredation(const int &timeMinus1,
+                           const int &SpeciesNum,
+                           const boost::numeric::ublas::matrix<double> &EstPredation,
+                           const boost::numeric::ublas::matrix<double> &EstHandling,
+                           const std::vector<double> &EstExponent,
+                           const boost::numeric::ublas::matrix<double> &EstimatedBiomass,
+                           const double &EstimatedBiomassTimeMinus1);
+
+    double TypeIIIPredation(const int &timeMinus1,
+                            const int &SpeciesNum,
+                            const boost::numeric::ublas::matrix<double> &EstPredation,
+                            const boost::numeric::ublas::matrix<double> &EstHandling,
+                            const std::vector<double> &EstExponent,
+                            const boost::numeric::ublas::matrix<double> &EstimatedBiomass,
+                            const double &EstimatedBiomassTimeMinus1);
 };
 
 

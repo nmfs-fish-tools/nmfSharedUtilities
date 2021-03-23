@@ -19,11 +19,11 @@ private:
     int m_numberParameters;
     std::string m_type; // "Null","Linear","Logistic"
     std::vector<std::pair<double,double> > m_parameterRanges;
-    std::map<std::string, double(*)(
-            int    &speciesNum,
-            double &initBiomass,
-            std::vector<double> &growthRate,
-            std::vector<double> &carryingCapacity
+    std::map<std::string, double(nmfGrowthForm::*)(
+            const int    &speciesNum,
+            const double &initBiomass,
+            const std::vector<double> &growthRate,
+            const std::vector<double> &carryingCapacity
     )> FunctionMap;
 
 
@@ -32,10 +32,10 @@ public:
     nmfGrowthForm(std::string theType);
    ~nmfGrowthForm() {};
 
-    double evaluate(int    &speciesNum,
-                    double &biomassAtTime,
-                    std::vector<double> &growthRate,
-                    std::vector<double> &carryingCapacity);
+    double evaluate(const int    &speciesNum,
+                    const double &biomassAtTime,
+                    const std::vector<double> &growthRate,
+                    const std::vector<double> &carryingCapacity);
     int getNumParameters();
     std::string getType();
     void extractParameters(
@@ -47,14 +47,18 @@ public:
     void loadParameterRanges(
             std::vector<std::pair<double,double> >& parameterRanges,
             const Data_Struct& beeStruct);
-    static double LinearGrowth(int    &speciesNum,
-                               double &biomassAtTime,
-                               std::vector<double> &growthRate,
-                               std::vector<double> &carryingCapacity);
-    static double LogisticGrowth(int    &speciesNum,
-                                 double &biomassAtTime,
-                                 std::vector<double> &growthRate,
-                                 std::vector<double> &carryingCapacity);
+    double NoGrowth(const int &speciesNum,
+                    const double &biomassAtTime,
+                    const std::vector<double> &growthRate,
+                    const std::vector<double> &carryingCapacity);
+    double LinearGrowth(const int &speciesNum,
+                        const double &biomassAtTime,
+                        const std::vector<double> &growthRate,
+                        const std::vector<double> &carryingCapacity);
+    double LogisticGrowth(const int &speciesNum,
+                          const double &biomassAtTime,
+                          const std::vector<double> &growthRate,
+                          const std::vector<double> &carryingCapacity);
 };
 
 

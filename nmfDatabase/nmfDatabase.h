@@ -425,6 +425,70 @@ public:
             std::string& Scaling,
             std::string& CompetitionForm,
             const bool&  showPopupError);
+    bool loadVector(
+            const std::vector<std::map<std::string, std::vector<std::string> > >& dataMaps,
+            const int& NumRows,
+            std::vector<double>& vec,
+            nmfLogger* Logger);
+
+    bool loadMatrix(
+            const std::vector<std::map<std::string, std::vector<std::string> > >& dataMaps,
+            const int& NumRows,
+            const int& NumCols,
+            boost::numeric::ublas::matrix<double>& mat,
+            nmfLogger* Logger);
+
+    bool getGuildData(nmfLogger* Logger,
+                      const int& NumGuilds,
+                      const int& RunLength,
+                      const QStringList& GuildList,
+                      std::map<int,std::vector<int> >& GuildSpecies,
+                      std::vector<int>& GuildNum,
+                      boost::numeric::ublas::matrix<double>& ObservedBiomassByGuilds);
+
+    bool getHarvestData(const std::string& HarvestType,
+                        nmfLogger* Logger,
+                        const std::string& ProjectSettingsConfig,
+                        const int& NumSpecies,
+                        const int& RunLength,
+                        boost::numeric::ublas::matrix<double>& Catch,
+                        boost::numeric::ublas::matrix<double>& Effort,
+                        boost::numeric::ublas::matrix<double>& Exploitation,
+                        std::vector<double>& Catchability);
+
+    bool getPredationData(const std::string& PredationType,
+                          nmfLogger* Logger,
+                          std::string ProjectSettingsConfig,
+                          const int& NumSpecies,
+                          boost::numeric::ublas::matrix<double>& Rho,
+                          boost::numeric::ublas::matrix<double>& Handling,
+                          std::vector<double>& Exponent);
+
+    bool getCompetitionData(const std::string& CompetitionType,
+                            nmfLogger* Logger,
+                            const std::string& ProjectSettingsConfig,
+                            const int& NumSpecies,
+                            const int& NumGuilds,
+                            boost::numeric::ublas::matrix<double>& CompetitionAlpha,
+                            boost::numeric::ublas::matrix<double>& CompetitionBetaSpecies,
+                            boost::numeric::ublas::matrix<double>& CompetitionBetaGuild,
+                            boost::numeric::ublas::matrix<double>& CompetitionBetaGuildGuild);
+
+    bool getSpeciesInitialData(int& NumSpecies,
+                               QStringList& SpeciesList,
+                               std::vector<double>& InitBiomass,
+                               std::vector<double>& GrowthRate,
+                               std::vector<double>& SpeciesK,
+                               nmfLogger*     Logger);
+
+    bool getModelFormData(std::string& GrowthForm,
+                          std::string& HarvestForm,
+                          std::string& CompetitionForm,
+                          std::string& PredationForm,
+                          int&         RunLength,
+                          int&         InitialYear,
+                          nmfLogger*   Logger,
+                          std::string  ProjectSettingsConfig);
 
     bool getRunLengthAndStartYear(
             nmfLogger* logger,

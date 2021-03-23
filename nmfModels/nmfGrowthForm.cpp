@@ -7,8 +7,9 @@ nmfGrowthForm::nmfGrowthForm(std::string growthType)
     m_parameterRanges.clear();
     m_numberParameters = 0;
 
-    FunctionMap["Linear"]   = LinearGrowth;
-    FunctionMap["Logistic"] = LogisticGrowth;
+    FunctionMap["Null"]     = &nmfGrowthForm::NoGrowth;
+    FunctionMap["Linear"]   = &nmfGrowthForm::LinearGrowth;
+    FunctionMap["Logistic"] = &nmfGrowthForm::LogisticGrowth;
 }
 
 void
@@ -20,13 +21,14 @@ nmfGrowthForm::loadParameterRanges(
     bool isCheckedCarryingCapacity = nmfUtils::isEstimateParameterChecked(dataStruct,"CarryingCapacity");
     std::pair<double,double> aPair;
     m_numberParameters = 0;
-std::cout << "==> isCheckedGrowthRate: " << isCheckedGrowthRate << std::endl;
-std::cout << "==> isCheckedCarryingCapacity: " << isCheckedCarryingCapacity << std::endl;
+std::cout << "==3==> isCheckedGrowthRate: " << isCheckedGrowthRate << std::endl;
+std::cout << "==3==> isCheckedCarryingCapacity: " << isCheckedCarryingCapacity << std::endl;
 // Always load growth rate values
     for (unsigned species=0; species<dataStruct.GrowthRateMin.size(); ++species) {
         if (isCheckedGrowthRate) {
             aPair = std::make_pair(dataStruct.GrowthRateMin[species],
                                    dataStruct.GrowthRateMax[species]);
+std::cout << "==3==> adding for r: " <<  aPair.first << ", " << aPair.second << std::endl;
         } else {
             aPair = std::make_pair(dataStruct.GrowthRate[species], //-nmfConstantsMSSPM::epsilon,
                                    dataStruct.GrowthRate[species]); //+nmfConstantsMSSPM::epsilon);
@@ -41,6 +43,7 @@ std::cout << "==> isCheckedCarryingCapacity: " << isCheckedCarryingCapacity << s
             if (isCheckedCarryingCapacity) {
                 aPair = std::make_pair(dataStruct.CarryingCapacityMin[species],
                                        dataStruct.CarryingCapacityMax[species]);
+std::cout << "==3==> adding for K: " <<  aPair.first << ", " << aPair.second << std::endl;
             } else {
                 aPair = std::make_pair(dataStruct.CarryingCapacity[species], //-nmfConstantsMSSPM::epsilon,
                                        dataStruct.CarryingCapacity[species]); //+nmfConstantsMSSPM::epsilon);
@@ -101,32 +104,44 @@ nmfGrowthForm::extractParameters(
 }
 
 double
-nmfGrowthForm::evaluate(int    &SpeciesNum,
-                        double &biomassAtTimeT,
-                        std::vector<double> &growthRate,
-                        std::vector<double> &carryingCapacity)
+nmfGrowthForm::evaluate(const int &SpeciesNum,
+                        const double &biomassAtTimeT,
+                        const std::vector<double> &growthRate,
+                        const std::vector<double> &carryingCapacity)
 {
     if (FunctionMap.find(m_type) == FunctionMap.end()) {
         return 0;
     } else {
-        return FunctionMap[m_type](SpeciesNum,biomassAtTimeT,growthRate,carryingCapacity);
+        return (this->*FunctionMap[m_type])(SpeciesNum,biomassAtTimeT,growthRate,carryingCapacity);
     }
 }
 
 double
-nmfGrowthForm::LinearGrowth(int    &speciesNum,
-                            double &biomassAtTime,
-                            std::vector<double> &growthRate,
-                            std::vector<double> &carryingCapacity)
+nmfGrowthForm::NoGrowth(const int &speciesNum,
+                        const double &biomassAtTime,
+                        const std::vector<double> &growthRate,
+                        const std::vector<double> &carryingCapacity)
+{
+    return 0.0;
+}
+
+double
+nmfGrowthForm::LinearGrowth(const int &speciesNum,
+                            const double &biomassAtTime,
+                            const std::vector<double> &growthRate,
+                            const std::vector<double> &carryingCapacity)
 {
    return growthRate[speciesNum]*biomassAtTime;
 }
 
 double
-nmfGrowthForm::LogisticGrowth(int    &speciesNum,
-                              double &biomassAtTime,
-                              std::vector<double> &growthRate,
-                              std::vector<double> &carryingCapacity)
+nmfGrowthForm::LogisticGrowth(const int &speciesNum,
+                              const double &biomassAtTime,
+                              const std::vector<double> &growthRate,
+                              const std::vector<double> &carryingCapacity)
 {
+std::cout << "LogisticG: " << growthRate[speciesNum] << ", " <<
+             biomassAtTime << ", " <<
+             carryingCapacity[speciesNum] << std::endl;
     return growthRate[speciesNum]*biomassAtTime * (1.0-biomassAtTime/carryingCapacity[speciesNum]);
 }
