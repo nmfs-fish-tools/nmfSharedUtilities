@@ -44,7 +44,7 @@ public:
             const std::vector<double> &parameters,
             int& startPos,
             std::vector<double>& catchabilityRate);
-    double evaluate(const int    &time,
+    double evaluate(const int    &timeMinus1,
                     const int    &speciesNum,
                     const boost::numeric::ublas::matrix<double> &Catch,
                     const boost::numeric::ublas::matrix<double> &Effort,
@@ -54,28 +54,28 @@ public:
     void loadParameterRanges(
                     std::vector<std::pair<double,double> >& parameterRanges,
                     Data_Struct& beeStruct);
-    double NoHarvest(const int &time,
+    double NoHarvest(const int &timeMinus1,
                      const int &speciesNum,
                      const boost::numeric::ublas::matrix<double> &Catch,
                      const boost::numeric::ublas::matrix<double> &Effort,
                      const boost::numeric::ublas::matrix<double> &Exploitation,
                      const double& biomassAtTime,
                      const std::vector<double>& catchabilityRate);
-    double ExploitationHarvest(const int &time,
+    double ExploitationHarvest(const int &timeMinus1,
                                const int &speciesNum,
                                const boost::numeric::ublas::matrix<double> &Catch,
                                const boost::numeric::ublas::matrix<double> &Effort,
                                const boost::numeric::ublas::matrix<double> &Exploitation,
                                const double& biomassAtTime,
                                const std::vector<double>& catchabilityRate);
-    double CatchHarvest(const int &time,
+    double CatchHarvest(const int &timeMinus1,
                         const int &speciesNum,
                         const boost::numeric::ublas::matrix<double> &Catch,
                         const boost::numeric::ublas::matrix<double> &Effort,
                         const boost::numeric::ublas::matrix<double> &Exploitation,
                         const double& biomassAtTime,
                         const std::vector<double>& catchabilityRate);
-    double EffortHarvest(const int& timeT,
+    double EffortHarvest(const int& timeMinus1,
                          const int& speciesNum,
                          const boost::numeric::ublas::matrix<double> &Catch,
                          const boost::numeric::ublas::matrix<double> &Effort,

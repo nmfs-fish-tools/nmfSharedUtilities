@@ -32,7 +32,7 @@ struct beesCompareGT
 class BeesAlgorithm
 {
 
-    const int kTimeToSpendSearching = 3; // time to look for a bee in microseconds
+    const int kTimeToSpendSearching = 30; //3; // time to look for a bee in microseconds
 
 private:
     int                                    m_Seed;
@@ -88,11 +88,11 @@ private:
             Data_Struct& dataStruct);
 
 public:
-    BeesAlgorithm(const Data_Struct &m_BeeStruct,
+    BeesAlgorithm(Data_Struct &m_BeeStruct,
                   const bool &verbose);
    ~BeesAlgorithm();
 
-    void initializeParameterRangesAndPatchSizes();
+    void initializeParameterRangesAndPatchSizes(Data_Struct& theBeeStruct);
     int calculateActualNumEstParameters();
     bool estimateParameters(double &bestFitness,
                             std::vector<double> &bestParameters,

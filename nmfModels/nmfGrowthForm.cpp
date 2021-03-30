@@ -28,7 +28,7 @@ std::cout << "==3==> isCheckedCarryingCapacity: " << isCheckedCarryingCapacity <
         if (isCheckedGrowthRate) {
             aPair = std::make_pair(dataStruct.GrowthRateMin[species],
                                    dataStruct.GrowthRateMax[species]);
-std::cout << "==3==> adding for r: " <<  aPair.first << ", " << aPair.second << std::endl;
+//std::cout << "==3==> adding for r: " <<  aPair.first << ", " << aPair.second << std::endl;
         } else {
             aPair = std::make_pair(dataStruct.GrowthRate[species], //-nmfConstantsMSSPM::epsilon,
                                    dataStruct.GrowthRate[species]); //+nmfConstantsMSSPM::epsilon);
@@ -43,7 +43,7 @@ std::cout << "==3==> adding for r: " <<  aPair.first << ", " << aPair.second << 
             if (isCheckedCarryingCapacity) {
                 aPair = std::make_pair(dataStruct.CarryingCapacityMin[species],
                                        dataStruct.CarryingCapacityMax[species]);
-std::cout << "==3==> adding for K: " <<  aPair.first << ", " << aPair.second << std::endl;
+//std::cout << "==3==> adding for K: " <<  aPair.first << ", " << aPair.second << std::endl;
             } else {
                 aPair = std::make_pair(dataStruct.CarryingCapacity[species], //-nmfConstantsMSSPM::epsilon,
                                        dataStruct.CarryingCapacity[species]); //+nmfConstantsMSSPM::epsilon);
@@ -140,8 +140,5 @@ nmfGrowthForm::LogisticGrowth(const int &speciesNum,
                               const std::vector<double> &growthRate,
                               const std::vector<double> &carryingCapacity)
 {
-std::cout << "LogisticG: " << growthRate[speciesNum] << ", " <<
-             biomassAtTime << ", " <<
-             carryingCapacity[speciesNum] << std::endl;
     return growthRate[speciesNum]*biomassAtTime * (1.0-biomassAtTime/carryingCapacity[speciesNum]);
 }

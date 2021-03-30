@@ -1788,7 +1788,9 @@ reloadDataStruct(
 {
     QStringList parts = MultiRunLine.split(",");
 //std::cout << "num parts: " << parts.size() << std::endl;
-
+//for (int ii=0; ii<parts.size(); ++ii) {
+// std::cout << ii << ": " << parts[ii].toStdString() << std::endl;
+//}
     dataStruct.NLoptNumberOfRuns     = parts[0].toInt();
 
     dataStruct.EstimationAlgorithm   = parts[1].toStdString();
@@ -1820,9 +1822,9 @@ reloadDataStruct(
 
     dataStruct.EstimateRunBoxes.clear();
     int startIndex = 22;
-    for (int col=22; col<parts.size()-3; ++col) {
+    for (int col=22; col<parts.size()-3; col+=3) {
         if ((parts[col+1].toInt()==1) && (parts[col+2].toInt()==1)) {
-            dataStruct.EstimateRunBoxes.push_back(nmfConstantsMSSPM::EstimateCheckboxNames[col-startIndex]);
+            dataStruct.EstimateRunBoxes.push_back(nmfConstantsMSSPM::EstimateCheckboxNames[(col-startIndex)/3]);
         } else {
             dataStruct.EstimateRunBoxes.push_back("");
         }

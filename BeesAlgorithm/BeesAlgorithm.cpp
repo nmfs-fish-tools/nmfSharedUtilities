@@ -2,7 +2,7 @@
 
 
 
-BeesAlgorithm::BeesAlgorithm(const Data_Struct &theBeeStruct,
+BeesAlgorithm::BeesAlgorithm(Data_Struct &theBeeStruct,
                              const bool &verbose)
 {
     bool isAggProd  = (theBeeStruct.CompetitionForm == "AGG-PROD");
@@ -41,7 +41,7 @@ BeesAlgorithm::BeesAlgorithm(const Data_Struct &theBeeStruct,
     m_PredationForm   = std::make_unique<nmfPredationForm>(predationForm);
 
     // Set up default parameters ranges and neighborhood patch sizes
-    initializeParameterRangesAndPatchSizes();
+    initializeParameterRangesAndPatchSizes(theBeeStruct);
 
     if (verbose) {
         std::cout << "BeesAlgorithm: Initialized " << m_ParameterRanges.size() << " parameter ranges" << std::endl;
@@ -250,17 +250,18 @@ BeesAlgorithm::loadInitBiomassParameterRanges(
  * forms: growth, catch, competition, predation.
  */
 void
-BeesAlgorithm::initializeParameterRangesAndPatchSizes()
+BeesAlgorithm::initializeParameterRangesAndPatchSizes(Data_Struct& theBeeStruct)
 {
+std::cout << "*** BeesAlgorithm::initializeParameterRangesAndPatchSizes ** " << std::endl;
     std::vector<std::pair<double,double> > parameterRanges;
 
     m_ParameterRanges.clear();
     m_PatchSizes.clear();
-    loadInitBiomassParameterRanges(        parameterRanges, m_BeeStruct);
-    m_GrowthForm->loadParameterRanges(     parameterRanges, m_BeeStruct);
-    m_HarvestForm->loadParameterRanges(    parameterRanges, m_BeeStruct);
-    m_CompetitionForm->loadParameterRanges(parameterRanges, m_BeeStruct);
-    m_PredationForm->loadParameterRanges(  parameterRanges, m_BeeStruct);
+    loadInitBiomassParameterRanges(        parameterRanges, theBeeStruct);
+    m_GrowthForm->loadParameterRanges(     parameterRanges, theBeeStruct);
+    m_HarvestForm->loadParameterRanges(    parameterRanges, theBeeStruct);
+    m_CompetitionForm->loadParameterRanges(parameterRanges, theBeeStruct);
+    m_PredationForm->loadParameterRanges(  parameterRanges, theBeeStruct);
     m_ParameterRanges = parameterRanges;
 
     // Calculate the patch sizes for each parameter range
@@ -629,7 +630,9 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
 //             ", c: " << competitionTerm <<
 //             ", p: " << predationTerm << std::endl;
 //std::cout << "estBiomassVal: " << estBiomassVal << std::endl;
-
+if (estBiomassVal < 0) {
+ estBiomassVal = 0;
+}
             if ((estBiomassVal < 0) || (std::isnan(std::fabs(estBiomassVal)))) {
 //std::cout << "*** Returning... *** " << std::endl;
                 return m_DefaultFitness;
@@ -701,23 +704,22 @@ BeesAlgorithm::createRandomBee(bool doWhileLoop, std::string& errorMsg)
     std::vector<double> NullParameters = {};
     std::vector<double> parameters(m_BeeStruct.TotalNumberParameters,0.0);
 
-//std::cout << "Num Parameters: " << m_BeeStruct.TotalNumberParameters << std::endl;
+//std::cout << "--> Num Parameters: " << m_BeeStruct.TotalNumberParameters << std::endl;
     while (! foundAPotentialBee) {
         for (int i=0; i<m_BeeStruct.TotalNumberParameters; ++i) {
             minVal = m_ParameterRanges[i].first;
             maxVal = m_ParameterRanges[i].second;
-//std::cout << "range: " << i << "  [" << minVal << "," << maxVal << "] ";
+//std::cout << "--> range: " << i << "  [" << minVal << "," << maxVal << "] ";
             parameters[i] = (maxVal == minVal) ? minVal :
                              minVal+(maxVal-minVal)*(nmfUtils::getRandomNumber(m_Seed,0.0,1.0));
-//std::cout << parameters[i] << std::endl;
+//std::cout << "--> " << parameters[i] << std::endl;
         }
-//std::cout << std::endl;
         fitness = evaluateObjectiveFunction(parameters);
-//std::cout << "fitness: " << fitness << std::endl;
+//std::cout << "--> fitness: " << fitness << std::endl;
         endTime = std::chrono::steady_clock::now();
 
         timeDiff = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count();
-//std::cout << "timeDiff: " << timeDiff/1000000.0 << std::endl;
+//std::cout << "--> timeDiff: " << timeDiff/1000000.0 << "\n" << std::endl;
         timesUp = (timeDiff/1000000.0 > kTimeToSpendSearching);
 
         foundAPotentialBee = (fitness != m_DefaultFitness) || doWhileLoop || timesUp;

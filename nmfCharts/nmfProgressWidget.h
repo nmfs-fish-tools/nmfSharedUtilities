@@ -167,6 +167,7 @@ public:
     void clearTime();
     std::string getElapsedTime();
     bool wasStopped();
+    void clearChartData(std::string filename);
 
 signals:
     void StopTheRun();

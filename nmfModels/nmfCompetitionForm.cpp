@@ -124,7 +124,7 @@ nmfCompetitionForm::loadParameterRanges(
     }
 }
 
-double
+long double
 nmfCompetitionForm::evaluate(const int& TimeMinus1,
                              const int& SpeciesNum,
                              const double& BiomassAtTime,
@@ -153,7 +153,7 @@ nmfCompetitionForm::evaluate(const int& TimeMinus1,
     }
 }
 
-double
+long double
 nmfCompetitionForm::NoCompetition(const int& timeMinus1,
                                   const int& speciesNum,
                                   const double& biomassAtTime,
@@ -175,7 +175,7 @@ nmfCompetitionForm::NoCompetition(const int& timeMinus1,
  *  B(i,t)[(∑{α(i,j)B(j,t)}]
  *
  */
-double
+long double
 nmfCompetitionForm::NOKCompetition(const int& timeMinus1,
                                    const int& speciesNum,
                                    const double& biomassAtTime,
@@ -189,22 +189,20 @@ nmfCompetitionForm::NOKCompetition(const int& timeMinus1,
                                    const boost::numeric::ublas::matrix<double> &EstBiomassSpecies,
                                    const boost::numeric::ublas::matrix<double> &EstBiomassGuild)
 {
-    double competitionSum = 0;
+    long double competitionSum = 0;
 
     for (unsigned row=0; row<EstCompetitionAlpha.size2(); ++row) {
-//std::cout << "Comp Multiplying: " <<  EstCompetitionAlpha(row,speciesNum) << " * " << EstBiomassSpecies(timeMinus1,row) << std::endl;
-
-        competitionSum += EstCompetitionAlpha(row,speciesNum) * EstBiomassSpecies(timeMinus1,row);
+        competitionSum += (long double)(EstCompetitionAlpha(row,speciesNum)) * (long double)(EstBiomassSpecies(timeMinus1,row));
     }
 
-    return biomassAtTime*competitionSum;
+    return double(biomassAtTime)*double(competitionSum);
 }
 
 
 /*
  *  r(i)B(i,t)[(∑β(i,j)B(j,t))/KG - (∑β(i,G)B(G,t))/(K(σ) - K(G))]
  */
-double
+long double
 nmfCompetitionForm::MSPRODCompetition(
         const int& timeMinus1,
         const int& speciesNum,
@@ -252,7 +250,7 @@ nmfCompetitionForm::MSPRODCompetition(
 /*
  *  r(i)B(i,t)[(∑β(i,G)B(G,t))/(Kσ - KG)]
  */
-double
+long double
 nmfCompetitionForm::AGGPRODCompetition(
         const int& timeMinus1,
         const int& speciesOrGuildNum,

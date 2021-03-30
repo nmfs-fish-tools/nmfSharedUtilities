@@ -24,7 +24,7 @@ private:
     std::string m_type; // "Null","NO_K"
     std::vector<std::pair<double,double> > m_parameterRanges;
 
-    std::map<std::string, double(nmfCompetitionForm::*)(
+    std::map<std::string, long double(nmfCompetitionForm::*)(
             const int& timeMinus1,
             const int& speciesNum,
             const double& biomassAtTime,
@@ -56,7 +56,7 @@ public:
     void loadParameterRanges(
             std::vector<std::pair<double,double> >& parameterRanges,
             Data_Struct& beeStruct);
-    double evaluate(const int& timeMinus1,
+    long double evaluate(const int& timeMinus1,
                     const int& speciesNum,
                     const double& biomassAtTime,
                     const double& systemCarryingCapacity,
@@ -68,7 +68,7 @@ public:
                     const boost::numeric::ublas::matrix<double>& EstCompetitionBetaGuildGuild,
                     const boost::numeric::ublas::matrix<double>& EstBiomassSpecies,
                     const boost::numeric::ublas::matrix<double>& EstBiomassGuild);
-    double NoCompetition(const int& timeMinus1,
+    long double NoCompetition(const int& timeMinus1,
                          const int& speciesNum,
                          const double& biomassAtTime,
                          const double& systemCarryingCapacity,
@@ -80,7 +80,7 @@ public:
                          const boost::numeric::ublas::matrix<double>& EstCompetitionBetaGuildGuild,
                          const boost::numeric::ublas::matrix<double>& EstBiomassSpecies,
                          const boost::numeric::ublas::matrix<double>& EstBiomassGuild);
-    double NOKCompetition(const int& timeMinus1,
+    long double NOKCompetition(const int& timeMinus1,
                           const int& speciesNum,
                           const double& biomassAtTime,
                           const double& systemCarryingCapacity,
@@ -92,7 +92,7 @@ public:
                           const boost::numeric::ublas::matrix<double>& EstCompetitionBetaGuildGuild,
                           const boost::numeric::ublas::matrix<double>& EstBiomassSpecies,
                           const boost::numeric::ublas::matrix<double>& EstBiomassGuild);
-    double MSPRODCompetition(const int& timeMinus1,
+    long double MSPRODCompetition(const int& timeMinus1,
                              const int& speciesNum,
                              const double& biomassAtTime,
                              const double& systemCarryingCapacity,
@@ -104,7 +104,7 @@ public:
                              const boost::numeric::ublas::matrix<double>& EstCompetitionBetaGuildGuild,
                              const boost::numeric::ublas::matrix<double>& EstBiomassSpecies,
                              const boost::numeric::ublas::matrix<double>& EstBiomassGuild);
-    double AGGPRODCompetition(const int& timeMinus1,
+    long double AGGPRODCompetition(const int& timeMinus1,
                               const int& speciesNum,
                               const double& biomassAtTime,
                               const double& systemCarryingCapacity,

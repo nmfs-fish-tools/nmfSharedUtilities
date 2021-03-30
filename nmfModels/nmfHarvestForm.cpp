@@ -79,7 +79,7 @@ nmfHarvestForm::loadParameterRanges(
 
 
 double
-nmfHarvestForm::evaluate(const int& timeT,
+nmfHarvestForm::evaluate(const int& timeMinus1,
                          const int& speciesNum,
                          const boost::numeric::ublas::matrix<double>& Catch,
                          const boost::numeric::ublas::matrix<double>& Effort,
@@ -90,14 +90,14 @@ nmfHarvestForm::evaluate(const int& timeT,
     if (m_FunctionMap.find(m_type) == m_FunctionMap.end()) {
         return 0;
     } else {
-        return (this->*m_FunctionMap[m_type])(timeT,speciesNum,Catch,Effort,Exploitation,
+        return (this->*m_FunctionMap[m_type])(timeMinus1,speciesNum,Catch,Effort,Exploitation,
                                               biomassAtTime,catchabilityRate);
     }
 }
 
 
 double
-nmfHarvestForm::NoHarvest(const int &timeT,
+nmfHarvestForm::NoHarvest(const int &timeMinus1,
                           const int &speciesNum,
                           const boost::numeric::ublas::matrix<double> &Catch,
                           const boost::numeric::ublas::matrix<double> &Effort,
@@ -109,7 +109,7 @@ nmfHarvestForm::NoHarvest(const int &timeT,
 }
 
 double
-nmfHarvestForm::CatchHarvest(const int &timeT,
+nmfHarvestForm::CatchHarvest(const int &timeMinus1,
                              const int &speciesNum,
                              const boost::numeric::ublas::matrix<double> &Catch,
                              const boost::numeric::ublas::matrix<double> &Effort,
@@ -117,12 +117,12 @@ nmfHarvestForm::CatchHarvest(const int &timeT,
                              const double& biomassAtTime,
                              const std::vector<double>& catchabilityRate)
 {
-   return Catch(timeT,speciesNum);
+   return Catch(timeMinus1,speciesNum);
 }
 
 
 double
-nmfHarvestForm::EffortHarvest(const int& timeT,
+nmfHarvestForm::EffortHarvest(const int& timeMinus1,
                               const int& speciesNum,
                               const boost::numeric::ublas::matrix<double> &Catch,
                               const boost::numeric::ublas::matrix<double> &Effort,
@@ -136,13 +136,13 @@ nmfHarvestForm::EffortHarvest(const int& timeT,
     }
 
     return (catchabilityRate[speciesNum]*
-            Effort(timeT,speciesNum)*
+            Effort(timeMinus1,speciesNum)*
             biomassAtTime);
 }
 
 
 double
-nmfHarvestForm::ExploitationHarvest(const int& timeT,
+nmfHarvestForm::ExploitationHarvest(const int& timeMinus1,
                                     const int& speciesNum,
                                     const boost::numeric::ublas::matrix<double> &Catch,
                                     const boost::numeric::ublas::matrix<double> &Effort,
@@ -150,5 +150,5 @@ nmfHarvestForm::ExploitationHarvest(const int& timeT,
                                     const double& biomassAtTime,
                                     const std::vector<double>& catchabilityRate)
 {
-   return Exploitation(timeT,speciesNum)*biomassAtTime;
+   return Exploitation(timeMinus1,speciesNum)*biomassAtTime;
 }

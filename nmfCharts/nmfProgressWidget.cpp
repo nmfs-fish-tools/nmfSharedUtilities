@@ -579,6 +579,13 @@ nmfProgressWidget::clearChartOnly()
 }
 
 void
+nmfProgressWidget::clearChartData(std::string filename)
+{
+    std::ofstream outputFileMSSPM(filename);
+    outputFileMSSPM.close();
+}
+
+void
 nmfProgressWidget::callback_clearPB() {
 
     m_chart->removeAllSeries();
