@@ -200,6 +200,7 @@ struct Data_Struct {
     boost::numeric::ublas::vector<double> CarryingCapacityMax;
     boost::numeric::ublas::vector<double> ExploitationRateMin;
     boost::numeric::ublas::vector<double> ExploitationRateMax;
+    boost::numeric::ublas::vector<double> Catchability;
     boost::numeric::ublas::vector<double> CatchabilityMin;
     boost::numeric::ublas::vector<double> CatchabilityMax;
     std::vector<std::vector<double> >     CompetitionMin;

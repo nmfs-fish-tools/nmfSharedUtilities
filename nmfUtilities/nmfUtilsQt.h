@@ -391,6 +391,8 @@ namespace nmfUtilsQt {
      * @param inputDataPath : default path for the input .csv file
      * @param inputFilename : CSV filename if default is not desired
      * @param firstLineReadOnly : boolean to make the first line of the table read-only with gray background
+     * @param scientificNotation : boolean to display data using scientific notation
+     * @param nonZeroCell : row,col of first non-zero cell; used to set the pct range spin box where appropriate
      * @param errorMsg : error message produced during the load
      * @return : Boolean signifying a successful load (true) or an unsuccessful load (false)
      */
@@ -399,6 +401,8 @@ namespace nmfUtilsQt {
                         const QString& inputDataPath,
                         const QString& inputFilename,
                         const bool& firstLineReadOnly,
+                        const bool& scientificNotation,
+                        std::pair<int,int>& nonZeroCell,
                         QString& errorMsg);
     /**
      * @brief Copies the contents of the first model into the second model
@@ -605,6 +609,17 @@ namespace nmfUtilsQt {
                   QValueAxis*  axisY,
                   QBarSeries* series);
     /**
+     * @brief Sets the min max range tables using the passed in pct value
+     * @param pct : percent value to create the min and max range tables
+     * @param tableView : initial table
+     * @param tableView1 : minimum table
+     * @param tableView2 : maximum table
+     */
+    void setMinMax(const double& pct,
+                   QTableView* tableView,
+                   QTableView* tableView1,
+                   QTableView* tableView2);
+    /**
      * @brief Show the About dialog for the application
      * @param parent : parent needed so as to know how to position the popup
      * @param name : name of the application
@@ -630,5 +645,19 @@ namespace nmfUtilsQt {
     void switchFileExtensions(QString& filename,
                               const QString& newExt,
                               const QStringList& oldExts);
+    /**
+     * @brief Convenience method to take the transpose of a model
+     * @param tv : tableview widget whose model to transpose
+     */
+    void transposeModel(QTableView* tv);
+    /**
+     * @brief Extracts the embedded tag from the passed filename
+     * @param filename : name of file to extract tag from
+     * @param tag : descriptor tag embedded in filename
+     * @return Boolean : true - success, false - failure
+     */
+    bool extractTag(const QString filename,
+                    QString& tag);
+
 } // end namespace
 

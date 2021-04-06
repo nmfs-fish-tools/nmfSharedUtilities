@@ -105,6 +105,8 @@ namespace nmfConstantsMSSPM
      const bool   DontUpdateSetup      = false;
      const bool   IsAveraged           = true;
      const bool   IsNotAveraged        = false;
+     const bool   ScientificNotation   = true;
+     const bool   FixedNotation        = false;
 
      const std::string  HiddenDir                      = ".MSSPM";
      const std::string  HiddenDataDir                  = ".MSSPM/data";

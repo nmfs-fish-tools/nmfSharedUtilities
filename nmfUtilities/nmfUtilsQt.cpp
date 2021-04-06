@@ -1295,6 +1295,8 @@ loadTimeSeries(QTabWidget* parentTabWidget,
                const QString& inputDataPath,
                const QString& inputFilename,
                const bool& firstLineReadOnly,
+               const bool& scientificNotation,
+               std::pair<int,int>& nonZeroCell,
                QString& errorMsg)
 {
     Qt::ItemFlags flags;
@@ -1307,6 +1309,7 @@ loadTimeSeries(QTabWidget* parentTabWidget,
     QStandardItem* item;
     QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(tableView->model());
     errorMsg.clear();
+    double value;
 
     if (smodel == nullptr) {
         errorMsg = "Error: No model found in table. Please save initial table data.";
@@ -1337,7 +1340,15 @@ loadTimeSeries(QTabWidget* parentTabWidget,
                     dataParts = lineList[i].split(',');
                     VerticalList << " " + dataParts[0] + " ";
                     for (int j=1; j<dataParts.count(); ++j) {
-                        item = new QStandardItem(QString::number(dataParts[j].toDouble(),'f',6));
+                        value = dataParts[j].toDouble();
+                        if (value != 0) {
+                            nonZeroCell = std::make_pair(i-1,j-1);
+                        }
+                        if (scientificNotation) {
+                            item = new QStandardItem(QString::number(value,'g'));
+                        } else {
+                            item = new QStandardItem(QString::number(value,'f',6));
+                        }
                         item->setTextAlignment(Qt::AlignCenter);
                         if (firstLineReadOnly && (i == 1)) {
                             item->setEditable(false);
@@ -1618,12 +1629,58 @@ saveTimeSeries(QTabWidget* parentTabWidget,
     return retv;
 }
 
+void transposeModel(QTableView* tv)
+{
+    QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(tv->model());
+    int numRows = smodel->rowCount();
+    int numCols = smodel->columnCount();
+    QStandardItemModel* transposedModel = new QStandardItemModel(numRows, numCols);
+    QString value;
+    QStandardItem* item;
+    QModelIndex index;
+    QStringList species = {};
+
+    // Can only take the transpose of a square matrix
+    if (smodel->rowCount() != smodel->columnCount()) {
+        return;
+    }
+
+    for (int i=0; i<smodel->rowCount(); ++i) {
+        species << smodel->verticalHeaderItem(i)->text();
+        for (int j=0; j<smodel->columnCount(); ++j) {
+            index = smodel->index(i,j);
+            value = index.data().toString();
+            item  = new QStandardItem(value);
+            item->setTextAlignment(Qt::AlignCenter);
+            transposedModel->setItem(j,i,item);
+        }
+    }
+    transposedModel->setHorizontalHeaderLabels(species);
+    transposedModel->setVerticalHeaderLabels(species);
+    tv->setModel(transposedModel);
+}
+
 void checkForAndReplaceInvalidCharacters(QString &stringValue)
 {
     stringValue.remove(QRegExp("[^a-zA-Z_\\d\\s]"));
     stringValue.replace(" ","_");
 }
 
+bool extractTag(const QString filename,
+                QString& tag)
+{
+    QStringList parts = filename.split("_");
+    int numParts = parts.size();
+    if (numParts <= 1) {
+        return false;
+    }
+
+    tag = parts[1];
+    for (int i=2; i<numParts; ++i) {
+        tag += "_"+parts[i];
+    }
+    return true;
+}
 
 void switchFileExtensions(QString& filename,
                           const QString& newExt,
@@ -1739,6 +1796,39 @@ void setAxisY(QChart*     chart,
     if (series != nullptr) {
         series->attachAxis(axisY);
     }
+}
+
+void setMinMax(const double& pct,
+               QTableView* tableView,
+               QTableView* tableView1,
+               QTableView* tableView2)
+{
+    double value;
+    double minValue;
+    double maxValue;
+    double delta;
+    QModelIndex index;
+    QModelIndex indexMin;
+    QModelIndex indexMax;
+    QStandardItemModel* smodel  = qobject_cast<QStandardItemModel*>(tableView->model());
+    QStandardItemModel* smodel1 = qobject_cast<QStandardItemModel*>(tableView1->model());
+    QStandardItemModel* smodel2 = qobject_cast<QStandardItemModel*>(tableView2->model());
+
+    for (int row=0; row<smodel->rowCount(); ++row) {
+        for (int col=0; col<smodel->columnCount(); ++col) {
+            index    = smodel->index(row,col);
+            indexMin = smodel1->index(row,col);
+            indexMax = smodel2->index(row,col);
+            value    = index.data().toDouble();
+            delta    = std::fabs(value)*pct;
+            minValue = value - delta;
+            maxValue = value + delta;
+            smodel1->setData(indexMin,minValue);
+            smodel2->setData(indexMax,maxValue);
+        }
+    }
+    tableView1->resizeColumnsToContents();
+    tableView2->resizeColumnsToContents();
 }
 
 void

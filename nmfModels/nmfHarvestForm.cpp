@@ -50,31 +50,32 @@ nmfHarvestForm::extractParameters(
 void
 nmfHarvestForm::loadParameterRanges(
         std::vector<std::pair<double,double> >& parameterRanges,
-        Data_Struct& beeStruct)
+        Data_Struct& dataStruct)
 
 {
     std::pair<double,double> aPair;
+    bool isCheckedCatchability = nmfUtils::isEstimateParameterChecked(dataStruct,"Catchability");
 
-//    if (m_type == "Exploitation (F)") {
-//        for (unsigned i=0; i<beeStruct.ExploitationRateMin.size(); ++i) {
-//            aPair = std::make_pair(beeStruct.ExploitationRateMin[i],
-//                                   beeStruct.ExploitationRateMax[i]);
-//            parameterRanges.emplace_back(aPair);
-//            m_parameterRanges.emplace_back(aPair);
-//        }
-//        m_numParameters = beeStruct.ExploitationRateMin.size();
-//    } else
+    m_numParameters = 0;
+
+    if (m_type == "Null")
+        return;
+
     if (m_type == "Effort (qE)") {
-        for (unsigned i=0; i<beeStruct.CatchabilityMin.size(); ++i) {
-            aPair = std::make_pair(beeStruct.CatchabilityMin[i],
-                                   beeStruct.CatchabilityMax[i]);
+        for (unsigned i=0; i<dataStruct.CatchabilityMin.size(); ++i) {
+            if (isCheckedCatchability) {
+                aPair = std::make_pair(dataStruct.CatchabilityMin[i],
+                                       dataStruct.CatchabilityMax[i]);
+            } else {
+                aPair = std::make_pair(dataStruct.Catchability[i],
+                                       dataStruct.Catchability[i]);
+            }
             parameterRanges.emplace_back(aPair);
             m_parameterRanges.emplace_back(aPair);
         }
-        m_numParameters = beeStruct.CatchabilityMin.size();
-    } else if (m_type == "Catch") {
-        m_numParameters = 0;
+        m_numParameters = dataStruct.CatchabilityMin.size();
     }
+
 }
 
 

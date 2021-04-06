@@ -19,16 +19,15 @@ nmfGrowthForm::loadParameterRanges(
 {
     bool isCheckedGrowthRate       = nmfUtils::isEstimateParameterChecked(dataStruct,"GrowthRate");
     bool isCheckedCarryingCapacity = nmfUtils::isEstimateParameterChecked(dataStruct,"CarryingCapacity");
+
     std::pair<double,double> aPair;
     m_numberParameters = 0;
-std::cout << "==3==> isCheckedGrowthRate: " << isCheckedGrowthRate << std::endl;
-std::cout << "==3==> isCheckedCarryingCapacity: " << isCheckedCarryingCapacity << std::endl;
-// Always load growth rate values
+
+    // Always load growth rate values
     for (unsigned species=0; species<dataStruct.GrowthRateMin.size(); ++species) {
         if (isCheckedGrowthRate) {
             aPair = std::make_pair(dataStruct.GrowthRateMin[species],
                                    dataStruct.GrowthRateMax[species]);
-//std::cout << "==3==> adding for r: " <<  aPair.first << ", " << aPair.second << std::endl;
         } else {
             aPair = std::make_pair(dataStruct.GrowthRate[species], //-nmfConstantsMSSPM::epsilon,
                                    dataStruct.GrowthRate[species]); //+nmfConstantsMSSPM::epsilon);
@@ -43,7 +42,6 @@ std::cout << "==3==> isCheckedCarryingCapacity: " << isCheckedCarryingCapacity <
             if (isCheckedCarryingCapacity) {
                 aPair = std::make_pair(dataStruct.CarryingCapacityMin[species],
                                        dataStruct.CarryingCapacityMax[species]);
-//std::cout << "==3==> adding for K: " <<  aPair.first << ", " << aPair.second << std::endl;
             } else {
                 aPair = std::make_pair(dataStruct.CarryingCapacity[species], //-nmfConstantsMSSPM::epsilon,
                                        dataStruct.CarryingCapacity[species]); //+nmfConstantsMSSPM::epsilon);

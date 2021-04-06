@@ -68,7 +68,15 @@ nmfCompetitionForm::loadParameterRanges(
         std::vector<std::pair<double,double> >& parameterRanges,
         Data_Struct& dataStruct)
 {
+    bool isCheckedAlpha              = nmfUtils::isEstimateParameterChecked(dataStruct,"CompetitionAlpha");
+    bool isCheckedBetaSpeciesSpecies = nmfUtils::isEstimateParameterChecked(dataStruct,"CompetitionBetaSpeciesSpecies");
+    bool isCheckedBetaGuildSpecies   = nmfUtils::isEstimateParameterChecked(dataStruct,"CompetitionBetaGuildSpecies");
+    bool isCheckedBetaGuildGuild     = nmfUtils::isEstimateParameterChecked(dataStruct,"CompetitionBetaGuildGuild");
+    double min;
     std::pair<double,double> aPair;
+
+    if (m_type == "Null")
+        return;
 
     m_numSpecies = dataStruct.NumSpecies;
     m_numGuilds  = dataStruct.NumGuilds;
@@ -76,8 +84,13 @@ nmfCompetitionForm::loadParameterRanges(
     if (m_type == "NO_K") {
         for (unsigned i=0; i<dataStruct.CompetitionMin.size(); ++i) {
             for (unsigned j=0; j<dataStruct.CompetitionMin[0].size(); ++j) {
-                aPair = std::make_pair(dataStruct.CompetitionMin[i][j],
-                                       dataStruct.CompetitionMax[i][j]);
+                if (isCheckedAlpha) {
+                    aPair = std::make_pair(dataStruct.CompetitionMin[i][j],
+                                           dataStruct.CompetitionMax[i][j]);
+                } else {
+                    min   = dataStruct.CompetitionMin[i][j];
+                    aPair = std::make_pair(min,min);
+                }
                 parameterRanges.emplace_back(aPair);
                 m_parameterRanges.emplace_back(aPair);
             }
@@ -89,8 +102,13 @@ nmfCompetitionForm::loadParameterRanges(
     else if (m_type == "MS-PROD") {
         for (unsigned i=0; i<dataStruct.CompetitionBetaSpeciesMin.size(); ++i) {
             for (unsigned j=0; j<dataStruct.CompetitionBetaSpeciesMin[0].size(); ++j) {
-                aPair = std::make_pair(dataStruct.CompetitionBetaSpeciesMin[i][j],
-                                       dataStruct.CompetitionBetaSpeciesMax[i][j]);
+                if (isCheckedBetaSpeciesSpecies) {
+                    aPair = std::make_pair(dataStruct.CompetitionBetaSpeciesMin[i][j],
+                                           dataStruct.CompetitionBetaSpeciesMax[i][j]);
+                } else {
+                    min   = dataStruct.CompetitionBetaSpeciesMin[i][j];
+                    aPair = std::make_pair(min,min);
+                }
                 parameterRanges.emplace_back(aPair);
                 m_parameterRanges.emplace_back(aPair);
             }
@@ -100,8 +118,13 @@ nmfCompetitionForm::loadParameterRanges(
 
         for (unsigned i=0; i<dataStruct.CompetitionBetaGuildsMin.size(); ++i) {
             for (unsigned j=0; j<dataStruct.CompetitionBetaGuildsMin[0].size(); ++j) {
-                aPair = std::make_pair(dataStruct.CompetitionBetaGuildsMin[i][j],
-                                       dataStruct.CompetitionBetaGuildsMax[i][j]);
+                if (isCheckedBetaGuildSpecies) {
+                    aPair = std::make_pair(dataStruct.CompetitionBetaGuildsMin[i][j],
+                                           dataStruct.CompetitionBetaGuildsMax[i][j]);
+                } else {
+                    min   = dataStruct.CompetitionBetaGuildsMin[i][j];
+                    aPair = std::make_pair(min,min);
+                }
                 parameterRanges.emplace_back(aPair);
                 m_parameterRanges.emplace_back(aPair);
             }
@@ -113,8 +136,13 @@ nmfCompetitionForm::loadParameterRanges(
     else if (m_type == "AGG-PROD") {
         for (unsigned i=0; i<dataStruct.CompetitionBetaGuildsGuildsMin.size(); ++i) {
             for (unsigned j=0; j<dataStruct.CompetitionBetaGuildsGuildsMin[0].size(); ++j) {
-                aPair = std::make_pair(dataStruct.CompetitionBetaGuildsGuildsMin[i][j],
-                                       dataStruct.CompetitionBetaGuildsGuildsMax[i][j]);
+                if (isCheckedBetaGuildGuild) {
+                    aPair = std::make_pair(dataStruct.CompetitionBetaGuildsGuildsMin[i][j],
+                                           dataStruct.CompetitionBetaGuildsGuildsMax[i][j]);
+                } else {
+                    min   = dataStruct.CompetitionBetaGuildsGuildsMin[i][j];
+                    aPair = std::make_pair(min,min);
+                }
                 parameterRanges.emplace_back(aPair);
                 m_parameterRanges.emplace_back(aPair);
             }
