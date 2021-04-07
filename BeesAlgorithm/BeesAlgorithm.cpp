@@ -2,13 +2,12 @@
 
 
 
-BeesAlgorithm::BeesAlgorithm(Data_Struct &theBeeStruct,
+BeesAlgorithm::BeesAlgorithm(Data_Struct theBeeStruct,
                              const bool &verbose)
 {
     bool isAggProd  = (theBeeStruct.CompetitionForm == "AGG-PROD");
     int  numSpecies =  theBeeStruct.NumSpecies;
     int  numGuilds  =  theBeeStruct.NumGuilds;
-
     m_BeeStruct      = theBeeStruct;
     m_Seed           = -1;
     m_DefaultFitness =  99999;
@@ -102,6 +101,7 @@ BeesAlgorithm::BeesAlgorithm(Data_Struct &theBeeStruct,
     if (verbose) {
         std::cout << "BeesAlgorithm: Read Exploitation" << std::endl;
     }
+std::cout << "BeesAlgorithm::BeesAlgorithm end" << std::endl;
 }
 
 BeesAlgorithm::~BeesAlgorithm()

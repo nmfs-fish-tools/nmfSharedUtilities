@@ -88,7 +88,7 @@ private:
             Data_Struct& dataStruct);
 
 public:
-    BeesAlgorithm(Data_Struct &m_BeeStruct,
+    BeesAlgorithm(Data_Struct BeeStruct,
                   const bool &verbose);
    ~BeesAlgorithm();
 
