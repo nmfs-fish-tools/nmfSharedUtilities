@@ -28,12 +28,14 @@
 #include <QFileDialog>
 #include <QGridLayout>
 #include <QInputDialog>
+#include <QItemSelectionModel>
 #include <QLabel>
 #include <QLineEdit>
 #include <QLineSeries>
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QMimeData>
+#include <QModelIndexList>
 #include <QProcess>
 #include <QPushButton>
 #include <QScrollBar>
@@ -620,6 +622,17 @@ namespace nmfUtilsQt {
                    QTableView* tableView1,
                    QTableView* tableView2);
     /**
+     * @brief Sets the min max range on only the selected cells using the passed in pct value
+     * @param pct : percent value to create the min and max range tables
+     * @param tableView0 : initial table
+     * @param tableView1 : minimum table
+     * @param tableView2 : maximum table
+     */
+    void setMinMaxOnSelections(const double& pct,
+                               QTableView* tableView0,
+                               QTableView* tableView1,
+                               QTableView* tableView2);
+    /**
      * @brief Show the About dialog for the application
      * @param parent : parent needed so as to know how to position the popup
      * @param name : name of the application
@@ -645,6 +658,14 @@ namespace nmfUtilsQt {
     void switchFileExtensions(QString& filename,
                               const QString& newExt,
                               const QStringList& oldExts);
+    /**
+     * @brief Convenience method to see if anything in either table has been selected
+     * @param tableView1 : one tableview to check for selection
+     * @param tableView2 : another tableview to check for selection
+     * @return Returns true if a selection in either tableview has been found, else false
+     */
+    bool thereAreSelections(QTableView* tableView1,
+                            QTableView* tableView2);
     /**
      * @brief Convenience method to take the transpose of a model
      * @param tv : tableview widget whose model to transpose

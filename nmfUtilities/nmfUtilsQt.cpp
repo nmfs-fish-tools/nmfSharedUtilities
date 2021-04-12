@@ -1649,7 +1649,7 @@ void transposeModel(QTableView* tv)
         species << smodel->verticalHeaderItem(i)->text();
         for (int j=0; j<smodel->columnCount(); ++j) {
             index = smodel->index(i,j);
-            value = index.data().toString();
+            value = QString::number(index.data().toDouble());
             item  = new QStandardItem(value);
             item->setTextAlignment(Qt::AlignCenter);
             transposedModel->setItem(j,i,item);
@@ -1798,6 +1798,64 @@ void setAxisY(QChart*     chart,
     }
 }
 
+
+bool thereAreSelections(QTableView* tableView1, QTableView* tableView2)
+{
+    QItemSelectionModel *selectionModel1;
+    QItemSelectionModel *selectionModel2;
+    QModelIndexList indexes1;
+    QModelIndexList indexes2;
+
+    if (tableView1 != nullptr) {
+        selectionModel1 = tableView1->selectionModel();
+        indexes1        = selectionModel1->selectedIndexes();
+    }
+    if (tableView2 != nullptr) {
+        selectionModel2 = tableView2->selectionModel();
+        indexes2        = selectionModel2->selectedIndexes();
+    }
+
+    return ((indexes1.size() > 0) || (indexes2.size() > 0));
+}
+
+void setMinMaxOnSelections(const double& pct,
+               QTableView* tableView0,
+               QTableView* tableView1,
+               QTableView* tableView2)
+{
+    int row;
+    int col;
+    std::vector<int> maxOrMin = {-1,1};
+    double value;
+    double delta;
+    QStandardItemModel* smodel = nullptr;
+    QStandardItemModel* smodel0 = qobject_cast<QStandardItemModel*>(tableView0->model());
+    QModelIndex index0;
+
+    // Process the tables...RSK continue here....
+    int i=0;
+    for (QTableView* tableView : {tableView1,tableView2}) {
+        if (tableView != nullptr) {
+            QItemSelectionModel *selectionModel = tableView->selectionModel();
+            QModelIndexList indexes = selectionModel->selectedIndexes();
+            smodel0 = qobject_cast<QStandardItemModel*>(tableView0->model());
+            smodel  = qobject_cast<QStandardItemModel*>(tableView->model());
+
+            for (QModelIndex index : indexes) {
+                row = index.row();
+                col = index.column();
+                index0 = smodel0->index(row,col);
+                value = index0.data().toDouble();
+                delta = std::fabs(value)*pct;
+                smodel->setData(index,value+maxOrMin[i]*delta);
+            }
+            tableView->resizeColumnsToContents();
+        }
+        ++i;
+    }
+
+}
+
 void setMinMax(const double& pct,
                QTableView* tableView,
                QTableView* tableView1,
@@ -1810,25 +1868,40 @@ void setMinMax(const double& pct,
     QModelIndex index;
     QModelIndex indexMin;
     QModelIndex indexMax;
+    QStandardItemModel* smodel1 = nullptr;
+    QStandardItemModel* smodel2 = nullptr;
     QStandardItemModel* smodel  = qobject_cast<QStandardItemModel*>(tableView->model());
-    QStandardItemModel* smodel1 = qobject_cast<QStandardItemModel*>(tableView1->model());
-    QStandardItemModel* smodel2 = qobject_cast<QStandardItemModel*>(tableView2->model());
+
+    if (tableView1 != nullptr) {
+        smodel1 = qobject_cast<QStandardItemModel*>(tableView1->model());
+    }
+    if (tableView2 != nullptr) {
+        smodel2 = qobject_cast<QStandardItemModel*>(tableView2->model());
+    }
 
     for (int row=0; row<smodel->rowCount(); ++row) {
         for (int col=0; col<smodel->columnCount(); ++col) {
-            index    = smodel->index(row,col);
-            indexMin = smodel1->index(row,col);
-            indexMax = smodel2->index(row,col);
-            value    = index.data().toDouble();
-            delta    = std::fabs(value)*pct;
-            minValue = value - delta;
-            maxValue = value + delta;
-            smodel1->setData(indexMin,minValue);
-            smodel2->setData(indexMax,maxValue);
+            index = smodel->index(row,col);
+            value = index.data().toDouble();
+            delta = std::fabs(value)*pct;
+            if (smodel1 != nullptr) {
+                minValue = value - delta;
+                indexMin = smodel1->index(row,col);
+                smodel1->setData(indexMin,minValue);
+            }
+            if (smodel2 != nullptr) {
+                maxValue = value + delta;
+                indexMax = smodel2->index(row,col);
+                smodel2->setData(indexMax,maxValue);
+            }
         }
     }
-    tableView1->resizeColumnsToContents();
-    tableView2->resizeColumnsToContents();
+    if (tableView1 != nullptr) {
+        tableView1->resizeColumnsToContents();
+    }
+    if (tableView2 != nullptr) {
+        tableView2->resizeColumnsToContents();
+    }
 }
 
 void
