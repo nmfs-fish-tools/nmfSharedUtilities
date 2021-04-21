@@ -130,7 +130,8 @@ public:
     std::string nmfGetCurrentDatabase();
 
     std::vector<std::string> nmfGetDatabaseNames();
-
+    bool clearTable(nmfLogger*   Logger,
+                    const std::string& TableName);
     bool getAllSpecies(nmfLogger*  logger,
                        std::vector<std::string>& species);
     bool getAllGuilds(nmfLogger*  logger,

@@ -2422,6 +2422,19 @@ nmfDatabase::getSpeciesInitialData(int& NumSpecies,
     return true;
 }
 
+bool
+nmfDatabase::clearTable(nmfLogger* Logger,
+                        const std::string& TableName)
+{
+    std::string cmd      = "truncate table " + TableName;
+    std::string errorMsg = nmfUpdateDatabase(cmd);
+    if (nmfUtilsQt::isAnError(errorMsg)) {
+        Logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::clearTable: truncate error: " + errorMsg);
+        Logger->logMsg(nmfConstants::Error,"cmd: " + cmd);
+        return false;
+    }
+    return true;
+}
 
 bool
 nmfDatabase::getModelFormData(std::string& GrowthForm,

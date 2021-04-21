@@ -57,7 +57,8 @@ public:
             const QColor &DashedLineColor,
             const QColor &ScatterColor,
             const std::string &LineColor,
-            const std::string &lineColorName);
+            const std::string &lineColorName,
+            const QList<QString>& multiRunLineLabels);
 signals:
 
 public slots:

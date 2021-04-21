@@ -30,11 +30,12 @@ nmfChartLineWithScatter::populateChart(
         const QColor &DashedLineColor,
         const QColor &ScatterColor,
         const std::string &LineColorValue,
-        const std::string &lineColorName)
+        const std::string &lineColorName,
+        const QList<QString>& multiRunLineLabels)
 {
     QLineSeries    *lineSeries    = nullptr;
     QScatterSeries *scatterSeries = nullptr;
-    QString scatterSeriesName = "Biomass Obs";
+    QString scatterSeriesName = "Obs Biomass";
     QPen pen;
     QColor  LineColor(QString::fromStdString(LineColorValue));
     QString LineColorName = QString::fromStdString(lineColorName);
@@ -75,8 +76,14 @@ nmfChartLineWithScatter::populateChart(
             lineSeries->append(j+XOffset,YAxisData(j,line));
         }
         chart->addSeries(lineSeries);
-        lineSeries->setName(ColumnLabels[0]);
-        m_tooltips[ColumnLabels[0]] = LineColorName;
+
+        if (multiRunLineLabels.size() > 0) {
+            lineSeries->setName(multiRunLineLabels[line]);
+            m_tooltips[multiRunLineLabels[line]] = multiRunLineLabels[line];
+        } else {
+            lineSeries->setName(ColumnLabels[0]);
+            m_tooltips[ColumnLabels[0]] = LineColorName;
+        }
 
         disconnect(lineSeries,0,0,0);
         connect(lineSeries, SIGNAL(hovered(const QPointF&,bool)),
@@ -92,7 +99,7 @@ nmfChartLineWithScatter::populateChart(
         }
         chart->addSeries(scatterSeries);
         scatterSeries->setName(scatterSeriesName);
-        m_tooltips[scatterSeriesName] = "Deep Sky Blue";
+        m_tooltips[scatterSeriesName] = scatterSeriesName; //"Deep Sky Blue";
 
         disconnect(scatterSeries,0,0,0);
         connect(scatterSeries, SIGNAL(hovered(const QPointF&,bool)),
