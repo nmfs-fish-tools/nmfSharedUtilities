@@ -4,30 +4,18 @@
 
 nmfUtilsStatisticsAveraging::nmfUtilsStatisticsAveraging()
 {
-    m_AIC.clear();
-    m_EstInitBiomass.clear();
-    m_EstGrowthRates.clear();
-    m_EstCarryingCapacities.clear();
-    m_EstPredationHandling.clear();
-    m_EstPredationRho.clear();
-    m_EstPredationExponent.clear();
-    m_EstCompetitionAlpha.clear();
-    m_EstCompetitionBetaSpecies.clear();
-    m_EstCompetitionBetaGuilds.clear();
-    m_EstCompetitionBetaGuildsGuilds.clear();
+    clearEstData();
+    clearTrimmedData();
+    clearAveragedData();
 
-    m_AIC_trimmed.clear();
-    m_EstInitBiomass_trimmed.clear();
-    m_EstGrowthRates_trimmed.clear();
-    m_EstCarryingCapacities_trimmed.clear();
-    m_EstPredationHandling_trimmed.clear();
-    m_EstPredationRho_trimmed.clear();
-    m_EstPredationExponent_trimmed.clear();
-    m_EstCompetitionAlpha_trimmed.clear();
-    m_EstCompetitionBetaSpecies_trimmed.clear();
-    m_EstCompetitionBetaGuilds_trimmed.clear();
-    m_EstCompetitionBetaGuildsGuilds_trimmed.clear();
+    // Set up function map
+    m_FunctionMap["Unweighted"]   = &nmfUtilsStatisticsAveraging::calculateUnweighted;
+    m_FunctionMap["AIC Weighted"] = &nmfUtilsStatisticsAveraging::calculateAICWeighted;
+}
 
+void
+nmfUtilsStatisticsAveraging::clearAveragedData()
+{
     m_AveInitBiomass.clear();
     m_AveGrowthRates.clear();
     m_AveCarryingCapacities.clear();
@@ -40,10 +28,41 @@ nmfUtilsStatisticsAveraging::nmfUtilsStatisticsAveraging()
     m_AvePredationRho.clear();
     m_AvePredationHandling.clear();
     m_AveBiomass.clear();
+}
 
-    // Set up function map
-    m_FunctionMap["Unweighted"]   = &nmfUtilsStatisticsAveraging::calculateUnweighted;
-    m_FunctionMap["AIC Weighted"] = &nmfUtilsStatisticsAveraging::calculateAICWeighted;
+void
+nmfUtilsStatisticsAveraging::clearEstData()
+{
+    m_Fitness.clear();
+    m_AIC.clear();
+    m_EstInitBiomass.clear();
+    m_EstGrowthRates.clear();
+    m_EstCarryingCapacities.clear();
+    m_EstPredationExponent.clear();
+    m_EstCatchability.clear();
+    m_EstCompetitionAlpha.clear();
+    m_EstCompetitionBetaSpecies.clear();
+    m_EstCompetitionBetaGuilds.clear();
+    m_EstCompetitionBetaGuildsGuilds.clear();
+    m_EstPredationRho.clear();
+    m_EstPredationHandling.clear();
+    m_EstBiomass.clear();
+}
+
+void
+nmfUtilsStatisticsAveraging::clearTrimmedData()
+{
+    m_AIC_trimmed.clear();
+    m_EstInitBiomass_trimmed.clear();
+    m_EstGrowthRates_trimmed.clear();
+    m_EstCarryingCapacities_trimmed.clear();
+    m_EstPredationHandling_trimmed.clear();
+    m_EstPredationRho_trimmed.clear();
+    m_EstPredationExponent_trimmed.clear();
+    m_EstCompetitionAlpha_trimmed.clear();
+    m_EstCompetitionBetaSpecies_trimmed.clear();
+    m_EstCompetitionBetaGuilds_trimmed.clear();
+    m_EstCompetitionBetaGuildsGuilds_trimmed.clear();
 }
 
 void
@@ -124,6 +143,7 @@ nmfUtilsStatisticsAveraging::calculateWeighted(const std::vector<double>& weight
                                                    m_AveCarryingCapacities,
                                                    m_AvePredationExponent,
                                                    m_AveCatchability};
+    clearAveragedData();
 
     // Find averages for all vector estimated parameters
     for (std::vector<std::vector<double> > estVector : {m_EstInitBiomass_trimmed,
@@ -200,15 +220,19 @@ nmfUtilsStatisticsAveraging::calculateAverage(const int& numberOfTopRunsToUse,
                                               const QString& averagingAlgorithm)
 {
     // Need to trim vectors and matrices to include only the top n as specified by the following arguments
-    createTrimmedStructures(numberOfTopRunsToUse,isPercent);
+    bool ok = createTrimmedStructures(numberOfTopRunsToUse,isPercent);
 
-    (this->*m_FunctionMap[averagingAlgorithm])();
+    if (ok) {
+        (this->*m_FunctionMap[averagingAlgorithm])();
+    }
 }
 
-void
+bool
 nmfUtilsStatisticsAveraging::createTrimmedStructures(const int& numberOfTopRunsToUse,
                                                      const bool& isPercent)
 {
+    clearTrimmedData();
+
     if (numberOfTopRunsToUse == 100) {
         m_AIC_trimmed                            = m_AIC;
         m_EstInitBiomass_trimmed                 = m_EstInitBiomass;
@@ -249,7 +273,7 @@ nmfUtilsStatisticsAveraging::createTrimmedStructures(const int& numberOfTopRunsT
                 positionOfTopNRuns.push_back(std::distance(m_AIC.begin(),iter));
             else {
                 std::cout << "Error createTrimmedStructures: Item not found" << std::endl;
-                return;
+                return false;
             }
             ++run;
         }
@@ -271,6 +295,7 @@ nmfUtilsStatisticsAveraging::createTrimmedStructures(const int& numberOfTopRunsT
             m_EstBiomass_trimmed.push_back(m_EstBiomass[index]);
         }
     }
+    return true;
 }
 
 void
@@ -330,7 +355,7 @@ nmfUtilsStatisticsAveraging::calculateAICWeighted()
 
     // print out weights:
     for (int i=0; i<NumRuns; ++i) {
-std::cout << "Run: " << i << ": " << aicWeight[i] << std::endl;
+std::cout << "AIC Weight for Run (" << i+1 << " of " << NumRuns << "): " << aicWeight[i] << std::endl;
     }
 
 

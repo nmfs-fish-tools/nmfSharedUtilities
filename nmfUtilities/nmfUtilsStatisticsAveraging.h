@@ -67,8 +67,12 @@ private:
 
     std::map<QString, void(nmfUtilsStatisticsAveraging::*)()> m_FunctionMap;
     void calculateWeighted(const std::vector<double>& weights);
-    void createTrimmedStructures(const int& numberOfTopRunsToUse,
+    bool createTrimmedStructures(const int& numberOfTopRunsToUse,
                                  const bool& isPercent);
+    void clearAveragedData();
+    void clearEstData();
+    void clearTrimmedData();
+
 public:
     nmfUtilsStatisticsAveraging();
    ~nmfUtilsStatisticsAveraging() {}
