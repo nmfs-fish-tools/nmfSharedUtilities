@@ -25,7 +25,8 @@
 class nmfUtilsStatisticsAveraging {
 
 private:
-    std::vector< std::vector<double> > m_AIC;
+    std::vector<double> m_Fitness;
+    std::vector<double> m_AIC; // Not a vector of vectors because we're just using the model AIC value and not the AIC values from each of the species
     std::vector< std::vector<double> > m_EstInitBiomass;
     std::vector< std::vector<double> > m_EstGrowthRates;
     std::vector< std::vector<double> > m_EstCarryingCapacities;
@@ -50,14 +51,30 @@ private:
     boost::numeric::ublas::matrix<double> m_AvePredationRho;
     boost::numeric::ublas::matrix<double> m_AvePredationHandling;
     boost::numeric::ublas::matrix<double> m_AveBiomass;
+    std::vector<double> m_AIC_trimmed;
+    std::vector< std::vector<double> > m_EstInitBiomass_trimmed;
+    std::vector< std::vector<double> > m_EstGrowthRates_trimmed;
+    std::vector< std::vector<double> > m_EstCarryingCapacities_trimmed;
+    std::vector< std::vector<double> > m_EstPredationExponent_trimmed;
+    std::vector< std::vector<double> > m_EstCatchability_trimmed;
+    std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionAlpha_trimmed;
+    std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionBetaSpecies_trimmed;
+    std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionBetaGuilds_trimmed;
+    std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionBetaGuildsGuilds_trimmed;
+    std::vector< boost::numeric::ublas::matrix<double> > m_EstPredationRho_trimmed;
+    std::vector< boost::numeric::ublas::matrix<double> > m_EstPredationHandling_trimmed;
+    std::vector< boost::numeric::ublas::matrix<double> > m_EstBiomass_trimmed;
 
     std::map<QString, void(nmfUtilsStatisticsAveraging::*)()> m_FunctionMap;
-
+    void calculateWeighted(const std::vector<double>& weights);
+    void createTrimmedStructures(const int& numberOfTopRunsToUse,
+                                 const bool& isPercent);
 public:
     nmfUtilsStatisticsAveraging();
    ~nmfUtilsStatisticsAveraging() {}
 
-    void loadEstData(std::vector<double>& AIC,
+    void loadEstData(double& Fitness,
+                     std::vector<double>& AIC,
                      std::vector<double>& EstInitBiomass,
                      std::vector<double>& EstGrowthRates,
                      std::vector<double>& EstCarryingCapacities,
@@ -70,10 +87,13 @@ public:
                      boost::numeric::ublas::matrix<double>& EstPredationRho,
                      boost::numeric::ublas::matrix<double>& EstPredationHandling,
                      boost::numeric::ublas::matrix<double>& EstBiomass);
-    void calculateAverage(const QString& averagingAlgorithm);
+    void calculateAverage(const int& numberOfTopRunsToUse,
+                          const bool& isPercent,
+                          const QString& averagingAlgorithm);
     void calculateUnweighted();
     void calculateAICWeighted();
-    void getAveData(std::vector<double>& AveInitBiomass,
+    void getAveData(std::vector<double>& Fitness,
+                    std::vector<double>& AveInitBiomass,
                     std::vector<double>& AveGrowthRates,
                     std::vector<double>& AveCarryingCapacities,
                     std::vector<double>& AveExponent,

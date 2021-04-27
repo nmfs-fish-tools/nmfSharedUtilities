@@ -46,6 +46,7 @@ public:
    ~nmfCompetitionForm() {};
 
     int getNumParameters();
+    void setType(std::string newType);
     void extractParameters(
             const std::vector<double>& parameters,
             int& startPos,

@@ -43,6 +43,7 @@ public:
    ~nmfPredationForm() {};
 
     int getNumParameters();
+    void setType(std::string newType);
     void extractPredationParameters(
             const std::vector<double> &parameters,
             int& startPos,

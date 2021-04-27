@@ -14,6 +14,13 @@ nmfCompetitionForm::nmfCompetitionForm(std::string competitionType)
     m_FunctionMap["AGG-PROD"] = &nmfCompetitionForm::AGGPRODCompetition;
 }
 
+
+void
+nmfCompetitionForm::setType(std::string newType)
+{
+    m_type = newType;
+}
+
 int
 nmfCompetitionForm::getNumParameters()
 {

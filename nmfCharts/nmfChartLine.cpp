@@ -214,7 +214,7 @@ nmfChartLine::callback_hoveredLine(const QPointF& point, bool hovered)
         // Call singleshot timer
 //      int ToolTipDuration = 5*1000; // in seconds
 //      QTimer::singleShot(ToolTipDuration, this, SLOT(callback_HideTooltip()));
-        QToolTip::showText(pos, tooltip, new QWidget(), QRect(), 10000);
+        QToolTip::showText(pos, tooltip, new QWidget(), QRect(), 2000);
 //      QWidget::setToolTipDuration(10000);  // RSK - can't seem to set the duration of the tooltip
 
     } else {

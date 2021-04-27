@@ -14,6 +14,12 @@ nmfHarvestForm::nmfHarvestForm(std::string harvestType)
 }
 
 
+void
+nmfHarvestForm::setType(std::string newType)
+{
+    m_type = newType;
+}
+
 int
 nmfHarvestForm::getNumParameters()
 {

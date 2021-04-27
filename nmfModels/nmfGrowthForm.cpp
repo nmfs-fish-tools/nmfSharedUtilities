@@ -59,6 +59,12 @@ nmfGrowthForm::getNumParameters()
     return m_numberParameters; //m_parameterRanges.size();
 }
 
+void
+nmfGrowthForm::setType(std::string newType)
+{
+    m_type = newType;
+}
+
 std::string
 nmfGrowthForm::getType()
 {

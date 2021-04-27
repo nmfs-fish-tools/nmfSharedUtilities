@@ -37,6 +37,7 @@ public:
                     const std::vector<double> &growthRate,
                     const std::vector<double> &carryingCapacity);
     int getNumParameters();
+    void setType(std::string newType);
     std::string getType();
     void extractParameters(
             const std::vector<double>& parameters,

@@ -15,6 +15,11 @@ nmfPredationForm::nmfPredationForm(std::string predationType)
     m_FunctionMap["Type III"] = &nmfPredationForm::TypeIIIPredation;
 }
 
+void
+nmfPredationForm::setType(std::string newType)
+{
+    m_type = newType;
+}
 
 int
 nmfPredationForm::getNumParameters()

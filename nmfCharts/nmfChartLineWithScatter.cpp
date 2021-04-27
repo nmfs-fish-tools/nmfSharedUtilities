@@ -165,7 +165,7 @@ nmfChartLineWithScatter::callback_hoveredLine(const QPointF& point, bool hovered
 
     if (hovered) {
         tooltip = m_tooltips[qobject_cast<QLineSeries* >(QObject::sender())->name()];
-        QToolTip::showText(pos, tooltip);
+        QToolTip::showText(pos, tooltip, nullptr, QRect(), 2000);
     } else {
         QToolTip::hideText();
     }
@@ -179,7 +179,7 @@ nmfChartLineWithScatter::callback_hoveredScatter(const QPointF& point, bool hove
 
     if (hovered) {
         tooltip = m_tooltips[qobject_cast<QScatterSeries* >(QObject::sender())->name()];
-        QToolTip::showText(pos, tooltip);
+        QToolTip::showText(pos, tooltip, nullptr, QRect(), 2000);
     } else {
         QToolTip::hideText();
     }

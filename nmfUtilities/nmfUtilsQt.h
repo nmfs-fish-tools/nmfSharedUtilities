@@ -24,6 +24,7 @@
 #include <QDate>
 #include <QDebug>
 #include <QDir>
+#include <QEventLoop>
 #include <QFile>
 #include <QFileDialog>
 #include <QGridLayout>
@@ -49,6 +50,7 @@
 #include <QTabWidget>
 #include <QTextEdit>
 #include <QTextStream>
+#include <QTimer>
 #include <QTreeWidgetItem>
 #include <QValueAxis>
 
@@ -301,6 +303,11 @@ namespace nmfUtilsQt {
      */
     QSettings* createSettings(const std::string& windowsDir,
                               const QString&     name);
+    /**
+     * @brief delays program execution by the passed number of milliseconds
+     * @param milliseconds : number of milliseconds by which to delay program execution
+     */
+    void delayMSec(const int& milliseconds);
     /**
      * @brief deselects all cells in the passed tableView
      * @param tableView : tableView to deselect cells

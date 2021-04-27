@@ -1944,6 +1944,20 @@ loadMultiRunData(const Data_Struct& dataStruct,
     return retv;
 }
 
+/*
+ * To delay execution without freezing GUI. Useful if you need to let
+ * any signals catch up with the application.
+ */
+void
+delayMSec(const int& milliseconds)
+{
+    QEventLoop eventLoop;
+    QTimer timer;
+    timer.connect(&timer, &QTimer::timeout, &eventLoop, &QEventLoop::quit);
+    timer.start(milliseconds);
+    eventLoop.exec();
+}
+
 void
 reloadDataStruct(
         Data_Struct& dataStruct,
