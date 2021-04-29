@@ -6,7 +6,10 @@
 
 nmfChartLine::nmfChartLine()
 {
-    m_tooltips.clear();
+    m_Tooltips.clear();
+
+    // Create custom tool tip
+    m_CustomToolTip = new nmfToolTip();
 }
 
 void
@@ -125,9 +128,10 @@ nmfChartLine::populateChart(
             chart->addSeries(series);
 
             if (ColumnLabels.size() > 0) {
-                m_tooltips[ColumnLabels[0]] = lineColorName;
+                m_Tooltips[ColumnLabels[0]] = lineColorName;
             }
             disconnect(series,0,0,0);
+
             connect(series, SIGNAL(hovered(const QPointF&,bool)),
                     this,   SLOT(callback_hoveredLine(const QPointF&,bool)));
         }
@@ -173,8 +177,6 @@ nmfChartLine::populateChart(
     }
 
 
-
-
     QValueAxis *currentAxisX = qobject_cast<QValueAxis*>(chart->axes(Qt::Horizontal).back());
     currentAxisX->setTitleFont(titleFont);
     currentAxisX->setTitleText(QString::fromStdString(XTitle));
@@ -207,24 +209,31 @@ nmfChartLine::callback_hoveredLine(const QPointF& point, bool hovered)
         if (m_HoverLabels.size() > 0) {
             tooltip = m_HoverLabels[qobject_cast<QLineSeries* >(QObject::sender())->name()];
         }
-        else if (m_tooltips.size() > 0) {
-            tooltip = m_tooltips[qobject_cast<QLineSeries* >(QObject::sender())->name()];
+        else if (m_Tooltips.size() > 0) {
+            tooltip = m_Tooltips[qobject_cast<QLineSeries* >(QObject::sender())->name()];
         }
 
-        // Call singleshot timer
-//      int ToolTipDuration = 5*1000; // in seconds
-//      QTimer::singleShot(ToolTipDuration, this, SLOT(callback_HideTooltip()));
-        QToolTip::showText(pos, tooltip, new QWidget(), QRect(), 2000);
-//      QWidget::setToolTipDuration(10000);  // RSK - can't seem to set the duration of the tooltip
+        // Workaround code to keep tooltip up for 2 seconds.  See note below.
+        m_CustomToolTip->move(pos.x(),pos.y()-20);
+        m_CustomToolTip->setLabel(tooltip);
+        m_CustomToolTip->show();
+        QTimer::singleShot(nmfConstantsMSSPM::ToolTipDuration, this, SLOT(callback_HideTooltip()));
 
+        // The following line doesn't keep the tooltip on for 5 seconds...just 1 second.
+        // Could be a QT bug. As a workaround, I created a custom tooltip (m_CustomToolTip) and
+        // and showing it in this method (above) and then hiding it with a singleShot timer.
+        // QToolTip::showText(pos, tooltip, nullptr, QRect(), 5000); // 5000 milliseconds = 5 seconds
     } else {
-        QToolTip::hideText();
+        // QToolTip::hideText();
+        m_CustomToolTip->hide();
     }
+
 }
 
-//void
-//nmfChartLine::callback_HideTooltip()
-//{
-//    QToolTip::hideText();
-//}
+void
+nmfChartLine::callback_HideTooltip()
+{
+    // QToolTip::hideText();
+    m_CustomToolTip->hide();
+}
 

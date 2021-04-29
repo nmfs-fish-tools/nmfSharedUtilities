@@ -68,6 +68,8 @@ namespace nmfConstantsMSSPM
      const int    MaxNumberYears       = 100;
      const int    MaxNumberSpecies     =  12;
      const int    MaxTotalSpecies      =  50;
+     const int    ToolTipDuration      = 2000; // milliseconds
+     const double ValueToStartEE       = 1000000.0;
      const bool   RearrangeTitle       = true;
      const bool   DontRearrangeTitle   = false;
      const bool   Clear                = true;

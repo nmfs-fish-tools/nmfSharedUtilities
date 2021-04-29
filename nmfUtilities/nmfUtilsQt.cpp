@@ -17,6 +17,26 @@
 #include <QComboBox>
 #include <stdio.h>
 
+nmfToolTip::nmfToolTip()
+{
+    setWindowFlag(Qt::ToolTip);
+    m_Label = new QLabel();
+    m_Label->setStyleSheet(("QLabel { background-color : #ffffd0; color : black; }"));
+    QHBoxLayout* layt = new QHBoxLayout();
+    layt->addWidget(m_Label);
+    layt->setContentsMargins(1,1,1,1);
+    setLayout(layt);
+//  hide();
+}
+
+void
+nmfToolTip::setLabel(const QString& label)
+{
+    m_Label->setText(label);
+}
+
+
+
 nmfFileViewer::nmfFileViewer(QWidget* parent,
                             const char* fileName) : QDialog(parent)
 {

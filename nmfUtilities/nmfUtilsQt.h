@@ -108,6 +108,17 @@ private slots:
     void callback_FontSizePB(QString fontSize);
 };
 
+class nmfToolTip : public QWidget {
+
+    Q_OBJECT
+
+    QLabel* m_Label;
+
+public:
+    nmfToolTip();
+    ~nmfToolTip() {}
+    void setLabel(const QString& label);
+};
 
 /*
 // Currently unused and TBD. Will be further developed in

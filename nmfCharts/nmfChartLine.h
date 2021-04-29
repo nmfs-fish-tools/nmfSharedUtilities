@@ -2,6 +2,7 @@
 #define NMFCHARTLINE_H
 
 #include <QChart>
+#include <QHBoxLayout>
 #include <QLabel>
 #include <QLegend>
 #include <QLegendMarker>
@@ -22,6 +23,7 @@
 #include <boost/range/algorithm_ext/erase.hpp>
 
 #include <vector>
+#include "nmfUtilsQt.h"
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -33,12 +35,12 @@ class nmfChartLine : public QObject
 
 private:
     std::map<QString,QString> m_HoverLabels;
-    std::map<QString,QString> m_tooltips;
-
+    std::map<QString,QString> m_Tooltips;
+    nmfToolTip*               m_CustomToolTip;
 
 public:
     nmfChartLine();
-    virtual ~nmfChartLine() {}
+    virtual ~nmfChartLine() {delete m_CustomToolTip;}
 
     void populateChart(
             QChart*            chart,
@@ -68,7 +70,7 @@ signals:
 
 public slots:
     void callback_hoveredLine(const QPointF& point,bool hovered);
-//  void callback_HideTooltip();
+    void callback_HideTooltip();
 
 };
 

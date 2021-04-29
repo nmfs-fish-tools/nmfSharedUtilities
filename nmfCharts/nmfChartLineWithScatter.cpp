@@ -5,6 +5,7 @@
 nmfChartLineWithScatter::nmfChartLineWithScatter()
 {
     m_tooltips.clear();
+    m_CustomToolTip = new nmfToolTip();
 }
 
 
@@ -165,9 +166,20 @@ nmfChartLineWithScatter::callback_hoveredLine(const QPointF& point, bool hovered
 
     if (hovered) {
         tooltip = m_tooltips[qobject_cast<QLineSeries* >(QObject::sender())->name()];
-        QToolTip::showText(pos, tooltip, nullptr, QRect(), 2000);
+
+        // Workaround code to keep tooltip up for 2 seconds.  See note below.
+        m_CustomToolTip->move(pos.x(),pos.y()-20);
+        m_CustomToolTip->setLabel(tooltip);
+        m_CustomToolTip->show();
+        QTimer::singleShot(nmfConstantsMSSPM::ToolTipDuration, this, SLOT(callback_HideTooltip()));
+
+        // The following line doesn't keep the tooltip on for 2 seconds...just 1 second.
+        // Could be a QT bug. As a workaround, I created a custom tooltip (m_CustomToolTip) and
+        // and showing it in this method (above) and then hiding it with a singleShot timer.
+        // QToolTip::showText(pos, tooltip, nullptr, QRect(), 2000);
     } else {
-        QToolTip::hideText();
+        // QToolTip::hideText();
+        m_CustomToolTip->hide();
     }
 }
 
@@ -179,9 +191,14 @@ nmfChartLineWithScatter::callback_hoveredScatter(const QPointF& point, bool hove
 
     if (hovered) {
         tooltip = m_tooltips[qobject_cast<QScatterSeries* >(QObject::sender())->name()];
-        QToolTip::showText(pos, tooltip, nullptr, QRect(), 2000);
+        m_CustomToolTip->move(pos.x(),pos.y()-20);
+        m_CustomToolTip->setLabel(tooltip);
+        m_CustomToolTip->show();
+        QTimer::singleShot(nmfConstantsMSSPM::ToolTipDuration, this, SLOT(callback_HideTooltip()));
+        // QToolTip::showText(pos, tooltip, nullptr, QRect(), 2000);
     } else {
-        QToolTip::hideText();
+        // QToolTip::hideText();
+        m_CustomToolTip->hide();
     }
 }
 
@@ -199,3 +216,9 @@ nmfChartLineWithScatter::callback_hoveredLegend(bool hovered)
     }
 }
 
+void
+nmfChartLineWithScatter::callback_HideTooltip()
+{
+    // QToolTip::hideText();
+    m_CustomToolTip->hide();
+}

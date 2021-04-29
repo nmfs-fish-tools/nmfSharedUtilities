@@ -20,6 +20,7 @@
 #include <boost/range/algorithm_ext/erase.hpp>
 
 #include <vector>
+#include "nmfUtilsQt.h"
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -31,6 +32,7 @@ class nmfChartLineWithScatter : public QObject
 
 private:
     std::map<QString,QString> m_tooltips;
+    nmfToolTip*               m_CustomToolTip;
 
 public:
     nmfChartLineWithScatter();
@@ -65,7 +67,7 @@ public slots:
     void callback_hoveredLegend(bool hovered);
     void callback_hoveredLine(const QPointF& point, bool hovered);
     void callback_hoveredScatter(const QPointF& point, bool hovered);
-
+    void callback_HideTooltip();
 
 };
 
