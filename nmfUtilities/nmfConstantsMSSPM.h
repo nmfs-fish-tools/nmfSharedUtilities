@@ -54,6 +54,9 @@ namespace nmfConstantsMSSPM
      const int    Column_GrowthRateMax  = 15;
      const int    Column_SpeciesKMin    = 16;
      const int    Column_SpeciesKMax    = 17;
+     const int    Last_Review_Column_Visible = 13;
+     const bool   Query_User_For_Filename = true;
+     const bool   Dont_Query_User_For_Filename = false;
 
 //     const double epsilon               = 0.0; // 0.001;
 
@@ -111,6 +114,8 @@ namespace nmfConstantsMSSPM
      const bool   FixedNotation        = false;
      const bool   IsEnsemble           = true;
      const bool   IsNotEnsemble        = false;
+     const bool   IsMonteCarlo         = true;
+     const bool   IsNotMonteCarlo      = false;
 
      const std::string  HiddenDir                      = ".MSSPM";
      const std::string  HiddenDataDir                  = ".MSSPM/data";
@@ -129,6 +134,9 @@ namespace nmfConstantsMSSPM
      const std::string  OutputImagesDirMMode           = "Remora/outputImages";
      const std::string  OutputDataDirMMode             = "Remora/outputData";
      const std::string  OutputScenariosDirMMode        = "Remora/scenarios";
+     const std::string  MultiRunFilename               = "MultiRunParameter.csv";
+     const std::string  ModelReviewFilename            = "ModelReview.csv";
+     const std::string  EstimatedParametersFilename    = "EstimatedParameters.csv";
 
      const std::vector<std::string> EstimateCheckboxNames =
          {"InitBiomass",
@@ -141,7 +149,8 @@ namespace nmfConstantsMSSPM
           "CompetitionBetaGuildSpecies",
           "CompetitionBetaGuildGuild",
           "PredationRho",
-          "PredationExponent"};
+          "PredationExponent",
+          "SurveyQ"};
 }
 
 

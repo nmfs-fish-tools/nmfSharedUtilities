@@ -13,14 +13,8 @@
 #include <iostream>
 #include <vector>
 
-//#ifndef NMF_CONSTANTS
-//#define EXTERN
-//#else
-//#define extern
-//#endif
+#include <math.h>
 
-//#include <iostream>
-//#include <vector>
 
 namespace nmfConstants
 {
@@ -77,6 +71,8 @@ namespace nmfConstants
     const bool   DontReverseAxis         = false;
     const bool   ShowLegend              = true;
     const bool   DontShowLegend          = false;
+    const bool   TimestampWithUnderscore = true;
+    const bool   TimestampWithoutUnderscore = false;
 
     const double KgToLbs       = 2.20462;
     const double MortalityMax  = 5.0;
@@ -97,6 +93,7 @@ namespace nmfConstants
     const int    ProgressUpdateFrequency = 1000; // How often to update progress bar (milliseconds).
     const double MaxBiomass      = 1e12;
     const double NearlyZero      = 0.000001;
+    const double RAD_to_DEG      = (180.0/M_PI);
 
     const int    Normal    = 0;
     const int    Bold      = 1;

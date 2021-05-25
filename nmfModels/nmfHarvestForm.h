@@ -22,6 +22,9 @@ private:
     int m_numParameters;
     std::string m_type; // "Catch, F, QE"
     std::vector<std::pair<double,double> > m_parameterRanges;
+    std::map<std::string,std::string> m_HarvestMap;
+    std::map<std::string,std::string> m_HarvestKey;
+    bool m_isAGGPROD;
 
     std::map<std::string, double(nmfHarvestForm::*)(
             const int    &TimeT,
@@ -54,7 +57,7 @@ public:
                     const std::vector<double>& catchabilityRate);
     void loadParameterRanges(
                     std::vector<std::pair<double,double> >& parameterRanges,
-                    Data_Struct& beeStruct);
+                    nmfStructsQt::ModelDataStruct& beeStruct);
     double NoHarvest(const int &timeMinus1,
                      const int &speciesNum,
                      const boost::numeric::ublas::matrix<double> &Catch,
@@ -83,6 +86,10 @@ public:
                          const boost::numeric::ublas::matrix<double> &Exploitation,
                          const double& biomassAtTime,
                          const std::vector<double>& catchabilityRate);
+    void setupFormMaps();
+    std::string getExpression();
+    std::string getKey();
+    void setAggProd(bool isAggProd);
 
 };
 

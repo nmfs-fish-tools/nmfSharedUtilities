@@ -6,11 +6,16 @@ nmfHarvestForm::nmfHarvestForm(std::string harvestType)
     m_numParameters = 0;
     m_type = harvestType;
     m_parameterRanges.clear();
+    m_isAGGPROD = false;
+    m_HarvestMap.clear();
+    m_HarvestKey.clear();
 
     m_FunctionMap["Null"]             = &nmfHarvestForm::NoHarvest;
     m_FunctionMap["Catch"]            = &nmfHarvestForm::CatchHarvest;
     m_FunctionMap["Effort (qE)"]      = &nmfHarvestForm::EffortHarvest;
     m_FunctionMap["Exploitation (F)"] = &nmfHarvestForm::ExploitationHarvest;
+
+    setupFormMaps();
 }
 
 
@@ -24,6 +29,44 @@ int
 nmfHarvestForm::getNumParameters()
 {
     return m_numParameters;
+}
+
+void
+nmfHarvestForm::setAggProd(bool isAggProd)
+{
+    m_isAGGPROD = isAggProd;
+}
+
+void
+nmfHarvestForm::setupFormMaps()
+{
+    std::string index1 = (m_isAGGPROD) ? "I" : "i";
+    std::string Bit    = "B<sub>"+index1+",t</sub>";       // right hand side of equation
+    std::string Fit    = "F<sub>"+index1+",t</sub>";
+    std::string qiEit  = "q<sub>"+index1+"</sub>E<sub>"+index1+",t</sub>";
+    std::string Cit    = "C<sub>"+index1+",t</sub>";
+
+    m_HarvestMap["Null"]             = "";
+    m_HarvestMap["Exploitation (F)"] = " - " +  Fit  + Bit;
+    m_HarvestMap["Effort (qE)"]      = " - " + qiEit + Bit;
+    m_HarvestMap["Catch"]            = " - " +  Cit;
+
+    m_HarvestKey["Null"]             = "";
+    m_HarvestKey["Exploitation (F)"] = "F = Exploitation Rate<br/>";
+    m_HarvestKey["Effort (qE)"]      = "q = Catchability<br/>E = Effort<br/>";
+    m_HarvestKey["Catch"]            = "C = Catch<br/>";
+}
+
+std::string
+nmfHarvestForm::getExpression()
+{
+    return m_HarvestMap[m_type];
+}
+
+std::string
+nmfHarvestForm::getKey()
+{
+    return m_HarvestKey[m_type];
 }
 
 void
@@ -56,7 +99,7 @@ nmfHarvestForm::extractParameters(
 void
 nmfHarvestForm::loadParameterRanges(
         std::vector<std::pair<double,double> >& parameterRanges,
-        Data_Struct& dataStruct)
+        nmfStructsQt::ModelDataStruct& dataStruct)
 
 {
     std::pair<double,double> aPair;

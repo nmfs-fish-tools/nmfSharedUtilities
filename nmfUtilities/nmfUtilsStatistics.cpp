@@ -887,7 +887,7 @@ double calculateMaximumLikelihoodNoRescale(
 
         sigma = sqrt((1.0/(NumPoints-1))*sumSq);
         if (sigma == 0) {
-            std::cout << "Error: Found sigma=0 in NLopt_Estimator::calculateMLE" << std::endl;
+            std::cout << "Error: Found sigma=0 in nmfUtilsStatistics::calculateMaximumLikelihoodNoRescale" << std::endl;
             return 0;
         }
 

@@ -128,7 +128,10 @@ public:
 
     void nmfSaveDatabase();
     std::string nmfGetCurrentDatabase();
-
+    double checkForValues(
+            const int& index,
+            const int& numValues,
+            const std::vector<double>& vec);
     std::vector<std::string> nmfGetDatabaseNames();
     bool clearTable(nmfLogger*   Logger,
                     const std::string& TableName);
@@ -217,6 +220,7 @@ public:
             std::vector<double>& CompetitionAlphaRandomValues,
             std::vector<double>& CompetitionBetaSpeciesRandomValues,
             std::vector<double>& CompetitionBetaGuildsRandomValues,
+            std::vector<double>& CompetitionBetaGuildsGuildsRandomValues,
             std::vector<double>& PredationRandomValues,
             std::vector<double>& HandlingRandomValues,
             std::vector<double>& HarvestRandomValues);

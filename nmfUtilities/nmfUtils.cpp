@@ -168,6 +168,9 @@ void print4DArray(
     }
 }
 
+
+// RSK - improve with templates...
+
 void printVector(const std::string &name,
         const boost::numeric::ublas::vector<std::string> &vec) {
     std::cout << "\n" << name << ": " << vec.size() << std::endl;
@@ -547,15 +550,25 @@ rescaleMatrixMinMax(boost::numeric::ublas::matrix<double> &Matrix)
     }
 }
 
+void reset(boost::numeric::ublas::matrix<double>& mat,
+           const double& resetValue)
+{
+    for (int i=0; i<int(mat.size1()); ++i) {
+        for (int j=0; j<int(mat.size2()); ++j) {
+            mat(i,j) = resetValue;
+        }
+    }
+}
+
 bool isEstimateParameterChecked(
-        const Data_Struct& dataStruct,
+        const nmfStructsQt::ModelDataStruct& dataStruct,
         const std::string& ParameterName)
 {
     bool isChecked = false;
 
-    std::vector<std::string> EstimateRunBoxes = dataStruct.EstimateRunBoxes;
-    for (std::string cbox : EstimateRunBoxes) {
-        if (cbox == ParameterName) {
+    std::vector<nmfStructsQt::EstimateRunBox> EstimateRunBoxes = dataStruct.EstimateRunBoxes;
+    for (nmfStructsQt::EstimateRunBox runBox : EstimateRunBoxes) {
+        if (runBox.parameter == ParameterName) {
             isChecked = true;
             break;
         }

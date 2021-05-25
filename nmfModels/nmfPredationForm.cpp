@@ -8,17 +8,71 @@ nmfPredationForm::nmfPredationForm(std::string predationType)
     m_numberParameters = 0;
     m_parameterRanges.clear();
     m_isAggProd        = false;
+    m_PredationMap.clear();
+    m_PredationKey.clear();
 
     m_FunctionMap["Null"]     = &nmfPredationForm::TypeNullPredation;
     m_FunctionMap["Type I"]   = &nmfPredationForm::TypeIPredation;
     m_FunctionMap["Type II"]  = &nmfPredationForm::TypeIIPredation;
     m_FunctionMap["Type III"] = &nmfPredationForm::TypeIIIPredation;
+
+    setupFormMaps();
+}
+
+void
+nmfPredationForm::setupFormMaps()
+{
+    std::string index1    = (m_isAggProd) ? "I" : "i";
+    std::string index2    = (m_isAggProd) ? "J" : "j";
+    std::string index3    = (m_isAggProd) ? "K" : "k";
+
+    std::string Bit       = "B<sub>"+index1+",t</sub>";
+    std::string Bjt       = "B<sub>"+index2+",t</sub>";
+    std::string Bkt       = "B<sub>"+index3+",t</sub>";
+    std::string hkj       = "h<sub>"+index3+","+index2+"</sub>";
+    std::string rhoij     = "&rho;<sub>"+index1+","+index2+"</sub>";
+    std::string rhokj     = "&rho;<sub>"+index3+","+index2+"</sub>";
+    std::string supSubi   = (m_isAggProd) ? "<sup>b&#x2081;</sup>" : "<sup>b&#x1d62;+1</sup>";
+    std::string supSubk   = (m_isAggProd) ? "<sup>b&#x2082;</sup>" : "<sup>b&#x2096;+1</sup>";
+    std::string predj     = (m_isAggProd) ? "Predator Guild J" : "Predator Species j";
+    std::string preyk     = (m_isAggProd) ? "Prey Guild K" : "Prey Species k";
+    std::string preyi     = (m_isAggProd) ? "Prey Guild I" : "Prey Species i";
+
+    m_PredationMap["Null"]        = "";
+    m_PredationMap["Type I"]      = " - " + Bit + "&sum;"  + rhoij + Bjt;
+    m_PredationMap["Type II"]     = " - " + Bit + "&sum;[" + rhoij + Bjt + "/" +
+                       "(1+&sum;" + hkj + rhokj + Bkt + ")]";
+    m_PredationMap["Type III"]    = " - " + Bit + supSubi + " &sum;[" + rhoij + Bjt + "/\
+            (1+&sum;" + hkj + rhokj + Bkt + supSubk +")]";
+
+    m_PredationKey["Null"]        = "";
+    m_PredationKey["Type I"]      = rhoij + " = Predation Coefficient for " + predj + " on " + preyi + "<br/>";
+    m_PredationKey["Type II"]     = rhoij + " = Predation Coefficient for " + predj + " on " + preyi + "<br/>" + hkj + " = Handling time for " + predj + " with " + preyk + "<br/>";
+    m_PredationKey["Type III"]    = rhoij + " = Predation Coefficient for " + predj + " on " + preyi + "<br/>" + hkj + " = Handling time for " + predj + " with " + preyk + "<br/>b = Predator Dependent Parameter<br/>";
+}
+
+std::string
+nmfPredationForm::getExpression()
+{
+    return m_PredationMap[m_type];
+}
+
+std::string
+nmfPredationForm::getKey()
+{
+    return m_PredationKey[m_type];
 }
 
 void
 nmfPredationForm::setType(std::string newType)
 {
     m_type = newType;
+}
+
+void
+nmfPredationForm::setAggProd(bool isAggProd)
+{
+    m_isAggProd = isAggProd;
 }
 
 int
@@ -76,7 +130,7 @@ nmfPredationForm::extractExponentParameters(
 void
 nmfPredationForm::loadParameterRanges(
         std::vector<std::pair<double,double> >& parameterRanges,
-        Data_Struct& dataStruct)
+        nmfStructsQt::ModelDataStruct& dataStruct)
 {
     bool isCheckedRho      = nmfUtils::isEstimateParameterChecked(dataStruct,"PredationRho");
     bool isCheckedHandling = nmfUtils::isEstimateParameterChecked(dataStruct,"Handling");
@@ -92,53 +146,53 @@ nmfPredationForm::loadParameterRanges(
     m_isAggProd  = (dataStruct.CompetitionForm == "AGG-PROD");
     m_NumSpeciesOrGuilds = (m_isAggProd) ? m_numGuilds : m_numSpecies;
 
-    for (unsigned i=0; i<dataStruct.PredationMin.size(); ++i) {
-        for (unsigned int j=0; j<dataStruct.PredationMin[0].size(); ++j) {
+    for (unsigned i=0; i<dataStruct.PredationRhoMin.size(); ++i) {
+        for (unsigned int j=0; j<dataStruct.PredationRhoMin[0].size(); ++j) {
             if (isCheckedRho) {
-                aPair = std::make_pair(dataStruct.PredationMin[i][j],
-                                       dataStruct.PredationMax[i][j]);
+                aPair = std::make_pair(dataStruct.PredationRhoMin[i][j],
+                                       dataStruct.PredationRhoMax[i][j]);
             } else {
-                min   = dataStruct.PredationMin[i][j];
+                min   = dataStruct.PredationRhoMin[i][j];
                 aPair = std::make_pair(min,min);
             }
             parameterRanges.emplace_back(aPair);
             m_parameterRanges.emplace_back(aPair);
         }
     }
-    m_numberParameters = dataStruct.PredationMin.size() *
-                         dataStruct.PredationMin[0].size();
+    m_numberParameters = dataStruct.PredationRhoMin.size() *
+                         dataStruct.PredationRhoMin[0].size();
 
     if ((m_type == "Type II") || (m_type == "Type III")) {
-        for (unsigned i=0; i<dataStruct.HandlingMin.size(); ++i) {
-            for (unsigned int j=0; j<dataStruct.HandlingMin[0].size(); ++j) {
+        for (unsigned i=0; i<dataStruct.PredationHandlingMin.size(); ++i) {
+            for (unsigned int j=0; j<dataStruct.PredationHandlingMin[0].size(); ++j) {
                 if (isCheckedHandling) {
-                    aPair = std::make_pair(dataStruct.HandlingMin[i][j],
-                                           dataStruct.HandlingMax[i][j]);
+                    aPair = std::make_pair(dataStruct.PredationHandlingMin[i][j],
+                                           dataStruct.PredationHandlingMax[i][j]);
                 } else {
-                    min   = dataStruct.HandlingMin[i][j];
+                    min   = dataStruct.PredationHandlingMin[i][j];
                     aPair = std::make_pair(min,min);
                 }
                 parameterRanges.emplace_back(aPair);
                 m_parameterRanges.emplace_back(aPair);
             }
         }
-        m_numberParameters += dataStruct.HandlingMin.size() *
-                              dataStruct.HandlingMin[0].size();
+        m_numberParameters += dataStruct.PredationHandlingMin.size() *
+                              dataStruct.PredationHandlingMin[0].size();
     }
 
     if (m_type == "Type III") {
-        for (unsigned i=0; i<dataStruct.ExponentMin.size(); ++i) {
+        for (unsigned i=0; i<dataStruct.PredationExponentMin.size(); ++i) {
             if (isCheckedExponent) {
-                aPair = std::make_pair(dataStruct.ExponentMin[i],
-                                       dataStruct.ExponentMax[i]);
+                aPair = std::make_pair(dataStruct.PredationExponentMin[i],
+                                       dataStruct.PredationExponentMax[i]);
             } else {
-                min   = dataStruct.ExponentMin[i];
+                min   = dataStruct.PredationExponentMin[i];
                 aPair = std::make_pair(min,min);
             }
             parameterRanges.emplace_back(aPair);
             m_parameterRanges.emplace_back(aPair);
         }
-        m_numberParameters += dataStruct.ExponentMin.size();
+        m_numberParameters += dataStruct.PredationExponentMin.size();
     }
 }
 

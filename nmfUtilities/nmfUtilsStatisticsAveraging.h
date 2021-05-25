@@ -32,6 +32,7 @@ private:
     std::vector< std::vector<double> > m_EstCarryingCapacities;
     std::vector< std::vector<double> > m_EstPredationExponent;
     std::vector< std::vector<double> > m_EstCatchability;
+    std::vector< std::vector<double> > m_EstSurveyQ;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionAlpha;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionBetaSpecies;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionBetaGuilds;
@@ -44,6 +45,7 @@ private:
     std::vector<double> m_AveCarryingCapacities;
     std::vector<double> m_AvePredationExponent;
     std::vector<double> m_AveCatchability;
+    std::vector<double> m_AveSurveyQ;
     boost::numeric::ublas::matrix<double> m_AveCompetitionAlpha;
     boost::numeric::ublas::matrix<double> m_AveCompetitionBetaSpecies;
     boost::numeric::ublas::matrix<double> m_AveCompetitionBetaGuilds;
@@ -57,6 +59,7 @@ private:
     std::vector< std::vector<double> > m_EstCarryingCapacities_trimmed;
     std::vector< std::vector<double> > m_EstPredationExponent_trimmed;
     std::vector< std::vector<double> > m_EstCatchability_trimmed;
+    std::vector< std::vector<double> > m_EstSurveyQ_trimmed;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionAlpha_trimmed;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionBetaSpecies_trimmed;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionBetaGuilds_trimmed;
@@ -84,6 +87,7 @@ public:
                      std::vector<double>& EstCarryingCapacities,
                      std::vector<double>& EstExponent,
                      std::vector<double>& EstCatchability,
+                     std::vector<double>& EstSurveyQ,
                      boost::numeric::ublas::matrix<double>& EstCompetitionAlpha,
                      boost::numeric::ublas::matrix<double>& EstCompetitionBetaSpecies,
                      boost::numeric::ublas::matrix<double>& EstCompetitionBetaGuilds,
@@ -102,6 +106,7 @@ public:
                     std::vector<double>& AveCarryingCapacities,
                     std::vector<double>& AveExponent,
                     std::vector<double>& AveCatchability,
+                    std::vector<double>& AveSurveyQ,
                     boost::numeric::ublas::matrix<double>& AveCompetitionAlpha,
                     boost::numeric::ublas::matrix<double>& AveCompetitionBetaSpecies,
                     boost::numeric::ublas::matrix<double>& AveCompetitionBetaGuilds,

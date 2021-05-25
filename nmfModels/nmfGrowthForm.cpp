@@ -6,16 +6,65 @@ nmfGrowthForm::nmfGrowthForm(std::string growthType)
     m_type = growthType;
     m_parameterRanges.clear();
     m_numberParameters = 0;
+    m_isAGGPROD = false;
+    m_Prefix.clear();
+    m_GrowthMap.clear();
+    m_GrowthKey.clear();
 
     FunctionMap["Null"]     = &nmfGrowthForm::NoGrowth;
     FunctionMap["Linear"]   = &nmfGrowthForm::LinearGrowth;
     FunctionMap["Logistic"] = &nmfGrowthForm::LogisticGrowth;
+
+    setupFormMaps();
+}
+
+void
+nmfGrowthForm::setupFormMaps()
+{
+    std::string index1    = (m_isAGGPROD) ? "I" : "i";
+    std::string lhs       = "B<sub>"+index1+",t+1</sub> = ";  // left hand side of equation
+    std::string Bit       = "B<sub>"+index1+",t</sub>";       // right hand side of equation
+    std::string Ki        = "K<sub>"+index1+"</sub>";
+    std::string riBit     = "r<sub>"+index1+"</sub>" + Bit;
+    m_Prefix              = lhs + Bit;
+
+    m_GrowthMap["Null"]     = "";
+    m_GrowthMap["Linear"]   = " + " + riBit;
+    m_GrowthMap["Logistic"] = " + " + riBit + "(1 - " + Bit + "/" + Ki + ")";
+
+    m_GrowthKey["Null"]     = "";
+    m_GrowthKey["Linear"]   = "B = Biomass<br/>r = Growth Rate<br/>";
+    m_GrowthKey["Logistic"] = "B = Biomass<br/>r = Growth Rate<br/>K = Carrying Capacity<br/>";
+}
+
+std::string
+nmfGrowthForm::getPrefix()
+{
+    return m_Prefix;
+}
+
+std::string
+nmfGrowthForm::getExpression()
+{
+    return m_GrowthMap[m_type];
+}
+
+std::string
+nmfGrowthForm::getKey()
+{
+    return m_GrowthKey[m_type];
+}
+
+void
+nmfGrowthForm::setAggProd(bool isAggProd)
+{
+    m_isAGGPROD = isAggProd;
 }
 
 void
 nmfGrowthForm::loadParameterRanges(
         std::vector<std::pair<double,double> >& parameterRanges,
-        const Data_Struct& dataStruct)
+        const nmfStructsQt::ModelDataStruct& dataStruct)
 {
     bool isCheckedGrowthRate       = nmfUtils::isEstimateParameterChecked(dataStruct,"GrowthRate");
     bool isCheckedCarryingCapacity = nmfUtils::isEstimateParameterChecked(dataStruct,"CarryingCapacity");

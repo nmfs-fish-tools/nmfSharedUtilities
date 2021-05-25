@@ -1841,6 +1841,18 @@ nmfDatabase::getForecastCatch(
     return true;
 }
 
+double
+nmfDatabase::checkForValues(
+            const int& index,
+            const int& numValues,
+            const std::vector<double>& vec)
+{
+    double retv = 0;
+    if (int(vec.size()) >= numValues) {
+        retv = vec[index];
+    }
+    return retv;
+}
 
 bool
 nmfDatabase::updateForecastMonteCarloParameters(
@@ -1860,6 +1872,7 @@ nmfDatabase::updateForecastMonteCarloParameters(
         std::vector<double>& CompetitionAlphaRandomValues,
         std::vector<double>& CompetitionBetaSpeciesRandomValues,
         std::vector<double>& CompetitionBetaGuildsRandomValues,
+        std::vector<double>& CompetitionBetaGuildsGuildsRandomValues,
         std::vector<double>& PredationRandomValues,
         std::vector<double>& HandlingRandomValues,
         std::vector<double>& HarvestRandomValues)
@@ -1869,6 +1882,16 @@ nmfDatabase::updateForecastMonteCarloParameters(
     std::string errorMsg;
     std::string tableName = "ForecastMonteCarloParameters";
     QString msg;
+    double catchability;
+    double exponent;
+    double alpha;
+    double betaSpecies;
+    double betaGuilds;
+    double betaGuildsGuilds;
+    double predation;
+    double handling;
+    double harvest;
+    double carryingCapacity;
 
     // Delete the current entry here
     deleteCmd  = "DELETE FROM " + tableName;
@@ -1889,11 +1912,22 @@ nmfDatabase::updateForecastMonteCarloParameters(
     }
 
     saveCmd  = "INSERT INTO " + tableName + " (ForecastName,RunNum,Algorithm,Minimizer,ObjectiveCriterion,Scaling,";
-    saveCmd += "SpeName,GrowthRate,CarryingCapacity,";
-//  saveCmd += "Catchability,Exponent,CompetitionAlpha,CompetitionBetaSpecies,CompetitionBetaGuilds,Predation,Handling,";
+    saveCmd += "SpeName,GrowthRate,CarryingCapacity,Catchability,";
+    saveCmd += "Exponent,CompetitionAlpha,CompetitionBetaSpecies,CompetitionBetaGuilds,CompetitionBetaGuildsGuilds,Predation,Handling,";
     saveCmd += "Harvest) VALUES ";
     int NumValues = GrowthRandomValues.size();
+
     for (int j=0; j<NumValues; ++j) {
+        carryingCapacity = checkForValues(j,NumValues,CarryingCapacityRandomValues);
+        catchability     = checkForValues(j,NumValues,CatchabilityRandomValues);
+        exponent         = checkForValues(j,NumValues,ExponentRandomValues);
+        alpha            = checkForValues(j,NumValues,CompetitionAlphaRandomValues);
+        betaSpecies      = checkForValues(j,NumValues,CompetitionBetaSpeciesRandomValues);
+        betaGuilds       = checkForValues(j,NumValues,CompetitionBetaGuildsRandomValues);
+        betaGuildsGuilds = checkForValues(j,NumValues,CompetitionBetaGuildsGuildsRandomValues);
+        predation        = checkForValues(j,NumValues,PredationRandomValues);
+        handling         = checkForValues(j,NumValues,HandlingRandomValues);
+        harvest          = checkForValues(j,NumValues,HarvestRandomValues);
         saveCmd += "('"   + ForecastName +
                 "',"  + std::to_string(RunNumber) +
                 ",'"  + Algorithm +
@@ -1902,21 +1936,20 @@ nmfDatabase::updateForecastMonteCarloParameters(
                 "','" + Scaling +
                 "','" + Species[j].toStdString() +
                 "',"  + std::to_string(GrowthRandomValues[j]) +
-                " ,"  + std::to_string(CarryingCapacityRandomValues[j]) +
-
-// RSK - add this later!
-//                "',"  + std::to_string(CatchabilityRandomValues[j]) +
-//                "',"  + std::to_string(ExponentRandomValues[j]) +
-//                "',"  + std::to_string(CompetitionAlphaRandomValues[j]) +
-//                "',"  + std::to_string(CompetitionBetaSpeciesRandomValues[j]) +
-//                "',"  + std::to_string(CompetitionBetaGuildsRandomValues[j]) +
-//                "',"  + std::to_string(PredationRandomValues[j]) +
-//                "',"  + std::to_string(HandlingRandomValues[j]) +
-
-                " ,"  + std::to_string(HarvestRandomValues[j]) + "),";
+                ","   + std::to_string(carryingCapacity) +
+                ","   + std::to_string(catchability) +
+                ","   + std::to_string(exponent) +
+                ","   + std::to_string(alpha) +
+                ","   + std::to_string(betaSpecies) +
+                ","   + std::to_string(betaGuilds) +
+                ","   + std::to_string(betaGuildsGuilds) +
+                ","   + std::to_string(predation) +
+                ","   + std::to_string(handling) +
+                ","   + std::to_string(harvest) + "),";
     }
 
     saveCmd = saveCmd.substr(0,saveCmd.size()-1);
+
     errorMsg = nmfUpdateDatabase(saveCmd);
     if (nmfUtilsQt::isAnError(errorMsg)) {
         logger->logMsg(nmfConstants::Error,"[Error] nmfDatabase::updateForecastMonteCarloParameters: Write table error: " + errorMsg);
@@ -2234,9 +2267,9 @@ nmfDatabase::getPredationData(const std::string& PredationForm,
     std::string queryStr;
     QString SystemName = QString::fromStdString(ProjectSettingsConfig);
     std::vector<std::map<std::string, std::vector<std::string> > > dataMaps = {dataMapMin,dataMapMax};
-    std::vector<std::string> rhoFilenames      = {"PredationLossRatesMin", "PredationLossRatesMax"};
-    std::vector<std::string> handlingFilenames = {"HandlingTimeMin",       "HandlingTimeMax"};
-    std::vector<std::string> exponentFilenames = {"PredationExponentMin",  "PredationExponentMax"};
+    std::vector<std::string> rhoFilenames      = {"PredationRhoMin",      "PredationRhoMax"};
+    std::vector<std::string> handlingFilenames = {"PredationHandlingMin", "PredationHandlingMax"};
+    std::vector<std::string> exponentFilenames = {"PredationExponentMin", "PredationExponentMax"};
 
     if (PredationForm == "Null") {
         return true;

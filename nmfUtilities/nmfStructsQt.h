@@ -22,6 +22,22 @@
 #include <QPushButton>
 #include <QString>
 
+#include "nmfLogger.h"
+
+#include <boost/numeric/ublas/matrix.hpp>
+#include <boost/numeric/ublas/matrix_proxy.hpp>
+#include <boost/numeric/ublas/io.hpp>
+#include <boost/numeric/ublas/vector.hpp>
+#include <boost/numeric/ublas/triangular.hpp>
+#include <boost/numeric/ublas/vector_proxy.hpp>
+#include <boost/numeric/ublas/operation.hpp>
+#include <boost/numeric/ublas/lu.hpp>
+#include <boost/multi_array.hpp>
+#include <boost/algorithm/string/trim.hpp>
+#include <boost/algorithm/string.hpp>
+#include <boost/range/algorithm_ext/erase.hpp>
+#include <boost/filesystem.hpp>
+
 class nmfDatabase;
 
 /**
@@ -129,6 +145,147 @@ struct UpdateDataStruct {
     QString      SelectMode;
     std::vector<std::string> SelectedYears;
 };
+
+struct EstimateRunBox {
+    std::string parameter;
+    std::pair<bool,bool> state;
+};
+
+struct ModelReviewStruct {
+    QString ModelName;
+    QString setToDeterministic;
+    QString isStopAfterValue;
+    QString stopAfterValue;
+    QString isStopAfterTime;
+    QString stopAfterTime;
+    QString isStopAfterIter;
+    QString stopAfterIter;
+    QString isEstInitialBiomassEnabled;
+    QString isEstInitialBiomassChecked;
+    QString isEstGrowthRateEnabled;
+    QString isEstGrowthRateChecked;
+    QString isEstCarryingCapacityEnabled;
+    QString isEstCarryingCapacityChecked;
+    QString isEstCatchabilityEnabled;
+    QString isEstCatchabilityChecked;
+    QString isEstCompetitionAlphaEnabled;
+    QString isEstCompetitionAlphaChecked;
+    QString isEstCompetitionBetaSpeciesEnabled;
+    QString isEstCompetitionBetaSpeciesChecked;
+    QString isEstCompetitionBetaGuildsEnabled;
+    QString isEstCompetitionBetaGuildsChecked;
+    QString isEstCompetitionBetaGuildsGuildsEnabled;
+    QString isEstCompetitionBetaGuildsGuildsChecked;
+    QString isEstPredationRhoEnabled;
+    QString isEstPredationRhoChecked;
+    QString isEstPredationHandlingEnabled;
+    QString isEstPredationHandlingChecked;
+    QString isEstPredationExponentEnabled;
+    QString isEstPredationExponentChecked;
+    QString isEstSurveyQEnabled;
+    QString isEstSurveyQChecked;
+    QString isAMultiRun;
+    QString ensembleAveragingAlgorithm;
+    QString ensembleAverageBy;
+    QString ensembleUsingBy;
+    QString ensembleUsingAmountValue;
+    QString isEnsembleUsingPct;
+    QString ensembleFilename;
+};
+
+
+/**
+ * @brief The data structure used for parameter estimation. It contains the parameter
+ * min max limits as well as the input data.
+ */
+struct ModelDataStruct {
+
+    bool   showDiagnosticChart;
+
+    bool   NLoptUseStopVal;
+    bool   NLoptUseStopAfterTime;
+    bool   NLoptUseStopAfterIter;
+    double NLoptStopVal;
+    int    NLoptStopAfterTime;
+    int    NLoptStopAfterIter;
+    int    NLoptNumberOfRuns;
+
+    std::string MultiRunSpeciesFilename;
+    std::string MultiRunModelFilename;
+    std::string MultiRunSetupFilename;
+    int    RunLength;
+    int    NumSpecies;
+    int    NumGuilds;
+
+    int    BeesMaxGenerations;
+    int    BeesNumTotal;
+    int    BeesNumBestSites;
+    int    BeesNumEliteSites;
+    int    BeesNumElite;
+    int    BeesNumOther;
+    float  BeesNeighborhoodSize;
+    int    BeesNumRepetitions;
+
+    int    GAGenerations;
+    int    GAConvergence;
+
+    int         TotalNumberParameters;
+    std::string Benchmark;
+
+    std::string GrowthForm;
+    std::string HarvestForm;
+    std::string CompetitionForm;
+    std::string PredationForm;
+
+    std::string EstimationAlgorithm;
+    std::string MinimizerAlgorithm;
+    std::string ObjectiveCriterion;
+    std::string ScalingAlgorithm;
+
+    std::map<int,std::vector<int> >       GuildSpecies; // List of species numbers that make up guild num
+    std::vector<int>                      GuildNum;     // Specifies which species are members of which guilds
+    boost::numeric::ublas::matrix<double> ObservedBiomassBySpecies;
+    boost::numeric::ublas::matrix<double> ObservedBiomassByGuilds;
+    boost::numeric::ublas::matrix<double> Catch;
+    boost::numeric::ublas::matrix<double> Effort;
+    boost::numeric::ublas::vector<double> InitBiomass;
+    boost::numeric::ublas::vector<double> InitBiomassMin;
+    boost::numeric::ublas::vector<double> InitBiomassMax;
+    boost::numeric::ublas::vector<double> GrowthRate;
+    boost::numeric::ublas::vector<double> GrowthRateMin;
+    boost::numeric::ublas::vector<double> GrowthRateMax;
+    boost::numeric::ublas::vector<double> CarryingCapacity;
+    boost::numeric::ublas::vector<double> CarryingCapacityMin;
+    boost::numeric::ublas::vector<double> CarryingCapacityMax;
+    boost::numeric::ublas::matrix<double> Exploitation;
+    boost::numeric::ublas::vector<double> ExploitationRateMin; // RSK - change this to matrix?
+    boost::numeric::ublas::vector<double> ExploitationRateMax; // RSK - change this to matrix?
+    boost::numeric::ublas::vector<double> Catchability;
+    boost::numeric::ublas::vector<double> CatchabilityMin;
+    boost::numeric::ublas::vector<double> CatchabilityMax;
+    boost::numeric::ublas::vector<double> SurveyQ;
+    boost::numeric::ublas::vector<double> SurveyQMin;
+    boost::numeric::ublas::vector<double> SurveyQMax;
+    std::vector<std::vector<double> >     CompetitionMin;
+    std::vector<std::vector<double> >     CompetitionMax;
+    std::vector<std::vector<double> >     CompetitionBetaSpeciesMin;
+    std::vector<std::vector<double> >     CompetitionBetaSpeciesMax;
+    std::vector<std::vector<double> >     CompetitionBetaGuildsMin;
+    std::vector<std::vector<double> >     CompetitionBetaGuildsMax;
+    std::vector<std::vector<double> >     CompetitionBetaGuildsGuildsMin;
+    std::vector<std::vector<double> >     CompetitionBetaGuildsGuildsMax;
+    std::vector<std::vector<double> >     PredationRhoMin;
+    std::vector<std::vector<double> >     PredationRhoMax;
+    std::vector<std::vector<double> >     PredationHandlingMin;
+    std::vector<std::vector<double> >     PredationHandlingMax;
+    std::vector<double>                   PredationExponentMin;
+    std::vector<double>                   PredationExponentMax;
+    std::vector<double>                   Parameters;
+//  boost::numeric::ublas::matrix<double> OutputBiomass;
+
+    std::vector<EstimateRunBox> EstimateRunBoxes;
+};
+
 
 }
 

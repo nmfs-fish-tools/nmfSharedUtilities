@@ -23,6 +23,9 @@ private:
     int m_numGuilds;
     std::string m_type; // "Null","NO_K"
     std::vector<std::pair<double,double> > m_parameterRanges;
+    std::map<std::string,std::string> m_CompetitionMap;
+    std::map<std::string,std::string> m_CompetitionKey;
+    bool m_isAGGPROD;
 
     std::map<std::string, long double(nmfCompetitionForm::*)(
             const int& timeMinus1,
@@ -56,7 +59,7 @@ public:
             boost::numeric::ublas::matrix<double>& competitionBetaGuildsGuilds);
     void loadParameterRanges(
             std::vector<std::pair<double,double> >& parameterRanges,
-            Data_Struct& beeStruct);
+            nmfStructsQt::ModelDataStruct& beeStruct);
     long double evaluate(const int& timeMinus1,
                     const int& speciesNum,
                     const double& biomassAtTime,
@@ -117,7 +120,10 @@ public:
                               const boost::numeric::ublas::matrix<double>& EstCompetitionBetaGuildGuild,
                               const boost::numeric::ublas::matrix<double>& EstBiomassSpecies,
                               const boost::numeric::ublas::matrix<double>& EstBiomassGuild);
-
+    void setupFormMaps();
+    void setAggProd(bool isAggProd);
+    std::string getExpression();
+    std::string getKey();
 };
 
 

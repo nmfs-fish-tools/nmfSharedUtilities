@@ -2,7 +2,7 @@
 
 
 
-BeesAlgorithm::BeesAlgorithm(Data_Struct theBeeStruct,
+BeesAlgorithm::BeesAlgorithm(nmfStructsQt::ModelDataStruct theBeeStruct,
                              const bool &verbose)
 {
     bool isAggProd  = (theBeeStruct.CompetitionForm == "AGG-PROD");
@@ -225,7 +225,7 @@ BeesAlgorithm::printParameterRanges(const int& NumSpecies,
 void
 BeesAlgorithm::loadInitBiomassParameterRanges(
         std::vector<std::pair<double,double> >& parameterRanges,
-        Data_Struct& dataStruct)
+        nmfStructsQt::ModelDataStruct& dataStruct)
 {
     std::pair<double,double> aPair;
     bool isCheckedInitBiomass = nmfUtils::isEstimateParameterChecked(dataStruct,"InitBiomass");
@@ -250,7 +250,7 @@ BeesAlgorithm::loadInitBiomassParameterRanges(
  * forms: growth, catch, competition, predation.
  */
 void
-BeesAlgorithm::initializeParameterRangesAndPatchSizes(Data_Struct& theBeeStruct)
+BeesAlgorithm::initializeParameterRangesAndPatchSizes(nmfStructsQt::ModelDataStruct& theBeeStruct)
 {
 std::cout << "*** BeesAlgorithm::initializeParameterRangesAndPatchSizes ** " << std::endl;
     std::vector<std::pair<double,double> > parameterRanges;
@@ -479,7 +479,18 @@ BeesAlgorithm::extractExponentParameters(const std::vector<double>& parameters,
     }
 }
 
+void
+BeesAlgorithm::extractSurveyQParameters(const std::vector<double>& parameters,
+                              int&                       startPos,
+                              std::vector<double>&       surveyQ)
+{
+    int numSurveyQParameters = m_BeeStruct.SurveyQMin.size();
 
+    for (int i=startPos; i<numSurveyQParameters; ++i) {
+        surveyQ.emplace_back(parameters[i]);
+    }
+    startPos += numSurveyQParameters;
+}
 
 double
 BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)

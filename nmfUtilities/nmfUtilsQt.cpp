@@ -1065,26 +1065,92 @@ int calculateMultiColumnWidth(
     return newWidth;
 }
 
+bool loadModelFromCSVFile(std::string projectDir,
+                          std::string fileType,
+                          QTableView* table,
+                          QString fileName,
+                          int& numRows)
+{
+    int numCols=0;
+    QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(table->model());
+    QString dataPath = QDir(QString::fromStdString(projectDir)).filePath("outputData");
+    QString line;
+    QStringList parts;
+    QStringList horizHeader;
+    QList<QStringList> allLines;
+    QStandardItem* item;
+    QFile file(fileName);
+
+    numRows = 0;
+    if (file.open(QIODevice::ReadOnly)) {
+        QTextStream stream(&file);
+        while (stream.readLineInto(&line)) {
+            parts = line.trimmed().split(",");
+            if (numRows == 0) {
+                if (line.trimmed() != QString::fromStdString(fileType).trimmed()) {
+                    return false;
+                }
+            }
+            else if (numRows == 1) {
+                horizHeader = parts;
+                numCols = parts.size();
+            } else {
+                allLines << parts;
+            }
+            ++numRows;
+        }
+    }
+    if (numRows < 2) {
+        return true;
+    }
+
+    smodel = new QStandardItemModel( allLines.size(), numCols );
+    int row = 0;
+    int col = 0;
+    for (QStringList line : allLines) {
+        col = 0;
+        for (QString part : line) {
+            part.replace("||","\n");
+            item = new QStandardItem(part.trimmed());
+            item->setTextAlignment(Qt::AlignCenter);
+            smodel->setItem(row, col, item);
+            ++col;
+        }
+        ++row;
+    }
+
+    smodel->setHorizontalHeaderLabels(horizHeader);
+    table->setModel(smodel);
+    table->resizeColumnsToContents();
+    table->resizeRowsToContents();
+
+    return true;
+}
 
 void saveModelToCSVFile(std::string projectDir,
+                        std::string fileType,
                         std::string tabName,
-                        QTableView* table)
+                        QTableView* table,
+                        bool queryFilename,
+                        QString theFilename)
 {
-    bool ok;
+    bool ok = true;
     QString val;
     QString msg;
     std::string vHeaderTitle;
     QMessageBox::StandardButton reply;
-    QString dataPath = QDir(QString::fromStdString(projectDir)).filePath("outputData");
-    QString filename = QInputDialog::getText(table, QObject::tr("CSV Filename"),
-                                         QObject::tr("Enter desired CSV filename:"), QLineEdit::Normal,
-                                         QObject::tr(""), &ok);
     QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(table->model());
     int numColumns = smodel->columnCount();
     int numRows    = smodel->rowCount();
+    QString dataPath = QDir(QString::fromStdString(projectDir)).filePath("outputData");
+    QString filename;
+    QString fullPath = "";
+    QString value;
 
-    if (ok && !filename.isEmpty())
-    {
+    if (queryFilename) {
+        filename = QInputDialog::getText(table, QObject::tr("CSV Filename"),
+                                         QObject::tr("Enter desired CSV filename:"), QLineEdit::Normal,
+                                         QObject::tr(""), &ok);
         QString fullPath = QDir(dataPath).filePath(filename);
 
         // if file exists, query user if they wan't to overwrite
@@ -1096,10 +1162,16 @@ void saveModelToCSVFile(std::string projectDir,
                 return;
             }
         }
+    } else {
+        fullPath = theFilename;
+    }
 
+    if (ok && !fullPath.isEmpty())
+    {
         // open output file
         std::ofstream outputFile;
         outputFile.open(fullPath.toLatin1());
+        outputFile << fileType << "\n";
 
         // get data from model and write to output file in csv fashion
         if (smodel->verticalHeaderItem(0) == nullptr) {
@@ -1116,18 +1188,21 @@ void saveModelToCSVFile(std::string projectDir,
             }
         }
 
-
         if (! vHeaderTitle.empty()) {
             outputFile << vHeaderTitle << ", ";
         }
+
         for (int j=0; j<numColumns; ++j) {
-            outputFile << smodel->horizontalHeaderItem(j)->text().toStdString();
+            value = smodel->horizontalHeaderItem(j)->text().trimmed();
+            value.replace(",",";");
+            outputFile << value.toStdString();
             if (j < numColumns-1) {
-                outputFile << ", ";
+                outputFile << ",";
             } else {
                 outputFile << "\n";
             }
         }
+
         for (int i=0; i<numRows; ++i) {
             for (int j=0; j<numColumns; ++j) {
                 if (j == 0) {
@@ -1135,15 +1210,16 @@ void saveModelToCSVFile(std::string projectDir,
                         outputFile << smodel->verticalHeaderItem(i)->text().toStdString() << ", ";
                     }
                 }
-                val = smodel->item(i,j)->text();
+                val = smodel->item(i,j)->text().trimmed();
+                val.replace(",",";");
+                val.replace("\n","||");
                 outputFile << val.toStdString();
                 if (j < numColumns-1) {
-                    outputFile << ", ";
+                    outputFile << ",";
                 } else {
                     outputFile << "\n";
                 }
             }
-
         }
 
         // close output file
@@ -1940,7 +2016,7 @@ modelCopy(QStandardItemModel* originalModel, QStandardItemModel* copyModel)
 }
 
 bool
-loadMultiRunData(const Data_Struct& dataStruct,
+loadMultiRunData(const nmfStructsQt::ModelDataStruct& dataStruct,
                  std::vector<QString>& MultiRunLines,
                  int& TotalIndividualRuns)
 {
@@ -1980,7 +2056,7 @@ delayMSec(const int& milliseconds)
 
 void
 reloadDataStruct(
-        Data_Struct& dataStruct,
+        nmfStructsQt::ModelDataStruct& dataStruct,
         const QString& MultiRunLine)
 {
     QStringList parts = MultiRunLine.split(",");
@@ -1990,9 +2066,9 @@ reloadDataStruct(
 //}
     dataStruct.NLoptNumberOfRuns     = parts[0].toInt();
 
-    dataStruct.EstimationAlgorithm   = parts[1].toStdString();
-    dataStruct.MinimizerAlgorithm    = parts[2].toStdString();
-    dataStruct.ObjectiveCriterion    = parts[3].toStdString();
+    dataStruct.ObjectiveCriterion    = parts[1].toStdString();
+    dataStruct.EstimationAlgorithm   = parts[2].toStdString();
+    dataStruct.MinimizerAlgorithm    = parts[3].toStdString();
     dataStruct.ScalingAlgorithm      = parts[4].toStdString();
 
 //std::cout << "Processing: " << dataStruct.NLoptNumberOfRuns << " runs: " <<
@@ -2019,16 +2095,19 @@ reloadDataStruct(
 
     dataStruct.EstimateRunBoxes.clear();
     int startIndex = 22;
+    nmfStructsQt::EstimateRunBox runBox;
     for (int col=22; col<parts.size()-3; col+=3) {
         if ((parts[col+1].toInt()==1) && (parts[col+2].toInt()==1)) {
-            dataStruct.EstimateRunBoxes.push_back(nmfConstantsMSSPM::EstimateCheckboxNames[(col-startIndex)/3]);
+            runBox.parameter = nmfConstantsMSSPM::EstimateCheckboxNames[(col-startIndex)/3];
+            runBox.state     = std::make_pair(true,true);
+            dataStruct.EstimateRunBoxes.push_back(runBox);
         } else {
-            dataStruct.EstimateRunBoxes.push_back("");
+            runBox.parameter = "";
+            runBox.state     = std::make_pair(false,false);
+            dataStruct.EstimateRunBoxes.push_back(runBox);
         }
     }
 }
-
-
 
 } // end namespace
 

@@ -22,8 +22,9 @@
 #include <utility>
 #include <vector>
 
-#include "nmfLogger.h"
+#include "nmfStructsQt.h"
 #include "nmfConstantsMSVPA.h"
+#include "nmfLogger.h"
 
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/matrix_proxy.hpp>
@@ -138,90 +139,93 @@ struct SystemData {
  * @brief The data structure used for parameter estimation. It contains the parameter
  * min max limits as well as the input data.
  */
-struct Data_Struct {
+//struct Data_Struct {
 
-    bool   showDiagnosticChart;
+//    bool   showDiagnosticChart;
 
-    bool   NLoptUseStopVal;
-    bool   NLoptUseStopAfterTime;
-    bool   NLoptUseStopAfterIter;
-    double NLoptStopVal;
-    int    NLoptStopAfterTime;
-    int    NLoptStopAfterIter;
-    int    NLoptNumberOfRuns;
+//    bool   NLoptUseStopVal;
+//    bool   NLoptUseStopAfterTime;
+//    bool   NLoptUseStopAfterIter;
+//    double NLoptStopVal;
+//    int    NLoptStopAfterTime;
+//    int    NLoptStopAfterIter;
+//    int    NLoptNumberOfRuns;
 
-    std::string MultiRunSpeciesFilename;
-    std::string MultiRunModelFilename;
-    std::string MultiRunSetupFilename;
-    int    RunLength;
-    int    NumSpecies;
-    int    NumGuilds;
+//    std::string MultiRunSpeciesFilename;
+//    std::string MultiRunModelFilename;
+//    std::string MultiRunSetupFilename;
+//    int    RunLength;
+//    int    NumSpecies;
+//    int    NumGuilds;
 
-    int    BeesMaxGenerations;
-    int    BeesNumTotal;
-    int    BeesNumBestSites;
-    int    BeesNumEliteSites;
-    int    BeesNumElite;
-    int    BeesNumOther;
-    float  BeesNeighborhoodSize;
-    int    BeesNumRepetitions;
+//    int    BeesMaxGenerations;
+//    int    BeesNumTotal;
+//    int    BeesNumBestSites;
+//    int    BeesNumEliteSites;
+//    int    BeesNumElite;
+//    int    BeesNumOther;
+//    float  BeesNeighborhoodSize;
+//    int    BeesNumRepetitions;
 
-    int    GAGenerations;
-    int    GAConvergence;
+//    int    GAGenerations;
+//    int    GAConvergence;
 
-    int         TotalNumberParameters;
-    std::string Benchmark;
+//    int         TotalNumberParameters;
+//    std::string Benchmark;
 
-    std::string GrowthForm;
-    std::string HarvestForm;
-    std::string CompetitionForm;
-    std::string PredationForm;
+//    std::string GrowthForm;
+//    std::string HarvestForm;
+//    std::string CompetitionForm;
+//    std::string PredationForm;
 
-    std::string EstimationAlgorithm;
-    std::string MinimizerAlgorithm;
-    std::string ObjectiveCriterion;
-    std::string ScalingAlgorithm;
+//    std::string EstimationAlgorithm;
+//    std::string MinimizerAlgorithm;
+//    std::string ObjectiveCriterion;
+//    std::string ScalingAlgorithm;
 
-    std::map<int,std::vector<int> >       GuildSpecies; // List of species numbers that make up guild num
-    std::vector<int>                      GuildNum;     // Specifies which species are members of which guilds
-    boost::numeric::ublas::matrix<double> ObservedBiomassBySpecies;
-    boost::numeric::ublas::matrix<double> ObservedBiomassByGuilds;
-    boost::numeric::ublas::matrix<double> Catch;
-    boost::numeric::ublas::matrix<double> Effort;
-    boost::numeric::ublas::matrix<double> Exploitation;
-    boost::numeric::ublas::vector<double> InitBiomass;
-    boost::numeric::ublas::vector<double> InitBiomassMin;
-    boost::numeric::ublas::vector<double> InitBiomassMax;
-    boost::numeric::ublas::vector<double> GrowthRate;
-    boost::numeric::ublas::vector<double> GrowthRateMin;
-    boost::numeric::ublas::vector<double> GrowthRateMax;
-    boost::numeric::ublas::vector<double> CarryingCapacity;
-    boost::numeric::ublas::vector<double> CarryingCapacityMin;
-    boost::numeric::ublas::vector<double> CarryingCapacityMax;
-    boost::numeric::ublas::vector<double> ExploitationRateMin;
-    boost::numeric::ublas::vector<double> ExploitationRateMax;
-    boost::numeric::ublas::vector<double> Catchability;
-    boost::numeric::ublas::vector<double> CatchabilityMin;
-    boost::numeric::ublas::vector<double> CatchabilityMax;
-    std::vector<std::vector<double> >     CompetitionMin;
-    std::vector<std::vector<double> >     CompetitionMax;
-    std::vector<std::vector<double> >     CompetitionBetaSpeciesMin;
-    std::vector<std::vector<double> >     CompetitionBetaSpeciesMax;
-    std::vector<std::vector<double> >     CompetitionBetaGuildsMin;
-    std::vector<std::vector<double> >     CompetitionBetaGuildsMax;
-    std::vector<std::vector<double> >     CompetitionBetaGuildsGuildsMin;
-    std::vector<std::vector<double> >     CompetitionBetaGuildsGuildsMax;
-    std::vector<std::vector<double> >     PredationMin;
-    std::vector<std::vector<double> >     PredationMax;
-    std::vector<std::vector<double> >     HandlingMin;
-    std::vector<std::vector<double> >     HandlingMax;
-    std::vector<double>                   ExponentMin;
-    std::vector<double>                   ExponentMax;
-    std::vector<double>                   Parameters;
-//  boost::numeric::ublas::matrix<double> OutputBiomass;
+//    std::map<int,std::vector<int> >       GuildSpecies; // List of species numbers that make up guild num
+//    std::vector<int>                      GuildNum;     // Specifies which species are members of which guilds
+//    boost::numeric::ublas::matrix<double> ObservedBiomassBySpecies;
+//    boost::numeric::ublas::matrix<double> ObservedBiomassByGuilds;
+//    boost::numeric::ublas::matrix<double> Catch;
+//    boost::numeric::ublas::matrix<double> Effort;
+//    boost::numeric::ublas::vector<double> InitBiomass;
+//    boost::numeric::ublas::vector<double> InitBiomassMin;
+//    boost::numeric::ublas::vector<double> InitBiomassMax;
+//    boost::numeric::ublas::vector<double> GrowthRate;
+//    boost::numeric::ublas::vector<double> GrowthRateMin;
+//    boost::numeric::ublas::vector<double> GrowthRateMax;
+//    boost::numeric::ublas::vector<double> CarryingCapacity;
+//    boost::numeric::ublas::vector<double> CarryingCapacityMin;
+//    boost::numeric::ublas::vector<double> CarryingCapacityMax;
+//    boost::numeric::ublas::matrix<double> Exploitation;
+//    boost::numeric::ublas::vector<double> ExploitationRateMin; // RSK - change this to matrix?
+//    boost::numeric::ublas::vector<double> ExploitationRateMax; // RSK - change this to matrix?
+//    boost::numeric::ublas::vector<double> Catchability;
+//    boost::numeric::ublas::vector<double> CatchabilityMin;
+//    boost::numeric::ublas::vector<double> CatchabilityMax;
+//    boost::numeric::ublas::vector<double> SurveyQ;
+//    boost::numeric::ublas::vector<double> SurveyQMin;
+//    boost::numeric::ublas::vector<double> SurveyQMax;
+//    std::vector<std::vector<double> >     CompetitionMin;
+//    std::vector<std::vector<double> >     CompetitionMax;
+//    std::vector<std::vector<double> >     CompetitionBetaSpeciesMin;
+//    std::vector<std::vector<double> >     CompetitionBetaSpeciesMax;
+//    std::vector<std::vector<double> >     CompetitionBetaGuildsMin;
+//    std::vector<std::vector<double> >     CompetitionBetaGuildsMax;
+//    std::vector<std::vector<double> >     CompetitionBetaGuildsGuildsMin;
+//    std::vector<std::vector<double> >     CompetitionBetaGuildsGuildsMax;
+//    std::vector<std::vector<double> >     PredationRhoMin;
+//    std::vector<std::vector<double> >     PredationRhoMax;
+//    std::vector<std::vector<double> >     PredationHandlingMin;
+//    std::vector<std::vector<double> >     PredationHandlingMax;
+//    std::vector<double>                   PredationExponentMin;
+//    std::vector<double>                   PredationExponentMax;
+//    std::vector<double>                   Parameters;
+////  boost::numeric::ublas::matrix<double> OutputBiomass;
 
-    std::vector<std::string>              EstimateRunBoxes;
-};
+//    std::vector<nmfStructsQt::EstimateRunBox> EstimateRunBoxes;
+//};
 
 
 /**
@@ -428,7 +432,7 @@ namespace nmfUtils {
      * @return True if parameter should be estimated, false otherwise
      */
     bool isEstimateParameterChecked(
-            const Data_Struct& dataStruct,
+            const nmfStructsQt::ModelDataStruct& dataStruct,
             const std::string& ParameterName);
     /**
      * @brief Tests the passed value if there's no decimal part and returns true, else returns false
@@ -566,6 +570,9 @@ namespace nmfUtils {
      * @param matrix : the matrix to rescale
      */
     void rescaleMatrixMinMax(boost::numeric::ublas::matrix<double>& matrix);
+
+    void reset(boost::numeric::ublas::matrix<double>& mat,
+               const double& resetValue);
     /**
      * @brief rounds a number to a specific number of decimal places
      * @param number : number to round

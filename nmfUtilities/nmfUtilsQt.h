@@ -55,6 +55,7 @@
 #include <QValueAxis>
 
 #include "nmfUtils.h"
+#include "nmfStructsQt.h"
 #include "nmfConstantsMSCAA.h"
 #include "nmfConstantsMSSPM.h"
 #include "nmfConstantsMSVPA.h"
@@ -387,7 +388,7 @@ namespace nmfUtilsQt {
      * @param TotalIndividualRuns : total number of individual runs
      * @return True if a successful load, false otherwise
      */
-    bool loadMultiRunData(const Data_Struct& DataStruct,
+    bool loadMultiRunData(const nmfStructsQt::ModelDataStruct& DataStruct,
                           std::vector<QString>& MultiRunLines,
                           int& TotalIndividualRuns);
     /**
@@ -460,7 +461,7 @@ namespace nmfUtilsQt {
      * @param MultiRunLine : a line from the multi-run line file
      */
     void reloadDataStruct(
-            Data_Struct& dataStruct,
+            nmfStructsQt::ModelDataStruct& dataStruct,
             const QString& MultiRunLine);
     /**
      * @brief Removes the Qt settings file from the file system.
@@ -481,15 +482,35 @@ namespace nmfUtilsQt {
     int rename(QString fileIn,
                QString fileOut);
     /**
+     * @brief Loads the CSV file into the passed tableview's model
+     * @param projectDir : directory where application files are written to
+     * @param fileType : type of csv file (used as a check, so the user knows they're opening the correct type of file)
+     * @param table : qtableview containing data to be written out
+     * @param filename : if queryFilename = false, then this is the filename to be used; otherwise the method will query the user
+     * @param numRows : number of rows read from file
+     * @return Returns true if load was successful, else false
+     */
+    bool loadModelFromCSVFile(std::string projectDir,
+                              std::string fileType,
+                              QTableView* table,
+                              QString filename,
+                              int& numRows);
+    /**
      * @brief Saves the data in the passed model to the appropriate directory and file
      * @param projectDir : directory where application files are written to
+     * @param fileType : type of csv file (needed as a check so user can't open incorrect type of csv file)
      * @param tabName : name of the tab whose data is to be written out; method uses
      * it to determine what to name the vertical headers
      * @param table : qtableview containing data to be written out
+     * @param queryFilename : true if method should query user for filename, false otherwise
+     * @param theFilename : if queryFilename = false, then this is the filename to be used; otherwise the method will query the user
      */
     void saveModelToCSVFile(std::string projectDir,
+                            std::string fileType,
                             std::string tabName,
-                            QTableView* table);
+                            QTableView* table,
+                            bool queryFilename,
+                            QString theFilename);
     /**
      * @brief Saves the data in the passed non time series but a table view model to a
      * csv file in the passed directory

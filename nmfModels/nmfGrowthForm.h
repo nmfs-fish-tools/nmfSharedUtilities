@@ -19,6 +19,11 @@ private:
     int m_numberParameters;
     std::string m_type; // "Null","Linear","Logistic"
     std::vector<std::pair<double,double> > m_parameterRanges;
+    std::map<std::string,std::string> m_GrowthMap;
+    std::map<std::string,std::string> m_GrowthKey;
+    bool m_isAGGPROD;
+    std::string m_Prefix;
+
     std::map<std::string, double(nmfGrowthForm::*)(
             const int    &speciesNum,
             const double &initBiomass,
@@ -47,7 +52,7 @@ public:
             double&                    systemCarryingCapacity);
     void loadParameterRanges(
             std::vector<std::pair<double,double> >& parameterRanges,
-            const Data_Struct& beeStruct);
+            const nmfStructsQt::ModelDataStruct& beeStruct);
     double NoGrowth(const int &speciesNum,
                     const double &biomassAtTime,
                     const std::vector<double> &growthRate,
@@ -60,6 +65,12 @@ public:
                           const double &biomassAtTime,
                           const std::vector<double> &growthRate,
                           const std::vector<double> &carryingCapacity);
+    void setupFormMaps();
+    void setAggProd(bool isAggProd);
+    std::string getExpression();
+    std::string getKey();
+    std::string getPrefix();
+
 };
 
 

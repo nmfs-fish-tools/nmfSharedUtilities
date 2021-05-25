@@ -47,7 +47,7 @@ private:
     boost::numeric::ublas::matrix<double>  m_Exploitation;
     std::vector<std::pair<double,double> > m_ParameterRanges;
     std::vector<double>                    m_PatchSizes;
-    Data_Struct                            m_BeeStruct;
+    nmfStructsQt::ModelDataStruct              m_BeeStruct;
     std::unique_ptr<nmfGrowthForm>         m_GrowthForm;
     std::unique_ptr<nmfHarvestForm>        m_HarvestForm;
     std::unique_ptr<nmfCompetitionForm>    m_CompetitionForm;
@@ -85,14 +85,14 @@ private:
                           double& bestBeesFitness);
     void loadInitBiomassParameterRanges(
             std::vector<std::pair<double,double> >& parameterRanges,
-            Data_Struct& dataStruct);
+            nmfStructsQt::ModelDataStruct& dataStruct);
 
 public:
-    BeesAlgorithm(Data_Struct BeeStruct,
+    BeesAlgorithm(nmfStructsQt::ModelDataStruct BeeStruct,
                   const bool &verbose);
    ~BeesAlgorithm();
 
-    void initializeParameterRangesAndPatchSizes(Data_Struct& theBeeStruct);
+    void initializeParameterRangesAndPatchSizes(nmfStructsQt::ModelDataStruct& theBeeStruct);
     int calculateActualNumEstParameters();
     bool estimateParameters(double &bestFitness,
                             std::vector<double> &bestParameters,
@@ -125,6 +125,9 @@ public:
     void extractExponentParameters(const std::vector<double>& parameters,
                                    int& startPos,
                                    std::vector<double>& exponents);
+    void extractSurveyQParameters(const std::vector<double>& parameters,
+                                  int&                       startPos,
+                                  std::vector<double>&       surveyQ);
     double evaluateObjectiveFunction(const std::vector<double> &parameters);
 
 };

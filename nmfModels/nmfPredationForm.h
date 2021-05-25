@@ -25,6 +25,8 @@ private:
     int  m_NumSpeciesOrGuilds;
     std::string m_type; // "Type I", "Type II", ...
     std::vector<std::pair<double,double> > m_parameterRanges;
+    std::map<std::string,std::string> m_PredationMap;
+    std::map<std::string,std::string> m_PredationKey;
 
     std::map<std::string, double(nmfPredationForm::*)(
             const int &timeMinus1,
@@ -58,7 +60,7 @@ public:
             std::vector<double> &exponents);
     void loadParameterRanges(
             std::vector<std::pair<double,double> >& parameterRanges,
-            Data_Struct& beeStruct);
+            nmfStructsQt::ModelDataStruct& beeStruct);
 
     double evaluate(const int &timeMinus1,
                     const int &SpeciesNum,
@@ -99,6 +101,10 @@ public:
                             const std::vector<double> &EstExponent,
                             const boost::numeric::ublas::matrix<double> &EstimatedBiomass,
                             const double &EstimatedBiomassTimeMinus1);
+    void setupFormMaps();
+    void setAggProd(bool isAggProd);
+    std::string getExpression();
+    std::string getKey();
 };
 
 
