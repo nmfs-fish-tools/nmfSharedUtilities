@@ -65,7 +65,6 @@
 #include <boost/numeric/ublas/io.hpp>
 #include <boost/multi_array.hpp>
 #include <boost/version.hpp>
-#include <boost/filesystem.hpp>
 
 typedef boost::multi_array<double, 3> Boost3DArrayDouble;
 typedef boost::multi_array<double, 4> Boost4DArrayDouble;

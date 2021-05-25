@@ -22,6 +22,8 @@
 #include <utility>
 #include <vector>
 
+#include <QDir>
+
 #include "nmfStructsQt.h"
 #include "nmfConstantsMSVPA.h"
 #include "nmfLogger.h"
@@ -38,7 +40,6 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/range/algorithm_ext/erase.hpp>
-#include <boost/filesystem.hpp>
 
 
 typedef boost::multi_array<double, 3> Boost3DArrayDouble;
@@ -317,7 +318,7 @@ namespace nmfUtils {
      */
     void getFilesWithExt(std::string path,
                          std::string ext,
-                         std::vector<std::string>& filesToCopy);
+                         QStringList& filesToCopy);
     /**
      * @brief Gets the maximum element value from the passed matrix
      * @param mat : matrix in which to find the maximum value

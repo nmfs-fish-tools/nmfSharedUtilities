@@ -591,20 +591,13 @@ convertToScientificNotation(double val)
 void
 getFilesWithExt(std::string path,
                 std::string ext,
-                std::vector<std::string>& filesToCopy)
+                QStringList& filesToCopy)
 {
-    boost::filesystem::recursive_directory_iterator it(path);
-    boost::filesystem::recursive_directory_iterator endit;
-
+    QString fullExt = "*" + QString::fromStdString(ext);
     filesToCopy.clear();
 
-    while (it != endit) {
-        if (boost::filesystem::is_regular_file(*it) &&
-            it->path().extension() == ext) {
-            filesToCopy.push_back(it->path().string());
-        }
-        ++it;
-    }
+    QDir directory(QString::fromStdString(path));
+    filesToCopy = directory.entryList(QStringList() << fullExt << fullExt,QDir::Files);
 }
 
 void

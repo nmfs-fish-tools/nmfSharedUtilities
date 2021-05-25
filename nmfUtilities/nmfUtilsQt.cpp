@@ -923,14 +923,10 @@ checkForAndDeleteLogFiles(QString name,
     QString title = name + " Log Files";
     QMessageBox::StandardButton reply;
     size_t NumLogFiles = 0;
-    boost::filesystem::path logDir(logDirName);
-    boost::filesystem::recursive_directory_iterator endIter;
-    std::vector<std::string> filenames;
-
-    for (boost::filesystem::recursive_directory_iterator it(logDir); it != endIter; ++it) {
-        ++NumLogFiles;
-        filenames.push_back(it->path().string());
-    }
+    QString fileToRemoveWithPath;
+    QDir directory(QString::fromStdString(logDirName));
+    QStringList filenames = directory.entryList(QStringList() << "*.log" << "*.log",QDir::Files);
+    NumLogFiles = filenames.size();
 
     // Ask if user wants to remove log files if there are a multiple of
     // nmfConstants::MaxNumberLogFiles of them.
@@ -947,8 +943,9 @@ checkForAndDeleteLogFiles(QString name,
         if (reply == QMessageBox::Yes) {
             bool delOK = true;
             bool allDeleted = true;
-            for (std::string filename : filenames) {
-                delOK = (std::remove(filename.c_str()) == 0);
+            for (QString filename : filenames) {
+                fileToRemoveWithPath = QDir(QString::fromStdString(logDirName)).filePath(filename);
+                delOK = (std::remove(fileToRemoveWithPath.toLatin1()) == 0);
                 if (!delOK) {
                     allDeleted = false;
                 }

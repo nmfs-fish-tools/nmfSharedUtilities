@@ -36,7 +36,6 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/range/algorithm_ext/erase.hpp>
-#include <boost/filesystem.hpp>
 
 class nmfDatabase;
 
