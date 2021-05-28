@@ -22,12 +22,12 @@
 #include <QPushButton>
 #include <QSpacerItem>
 #include <QTimer>
+#include <QThread>
 #include <QVBoxLayout>
 
 #include "nmfLogger.h"
 #include "nmfUtilsQt.h"
-#include <chrono>
-#include <thread>
+//#include <thread>
 #include <boost/thread/thread.hpp>
 
 /**

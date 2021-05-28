@@ -593,8 +593,8 @@ nmfViewerWidget::callback_PlayForwardPB()
             // Need this so as to ensure each screen shot finishes
             // before the next one starts.
             QApplication::sync();
-            boost::this_thread::sleep(boost::posix_time::microseconds(int(m_TimeMicroSec)));
-//            usleep(m_TimeMicroSec);
+//          boost::this_thread::sleep(boost::posix_time::microseconds(int(m_TimeMicroSec)));
+            QThread::usleep((unsigned long)(m_TimeMicroSec));
         }
         if (m_LastImageNum == i) {
             okToView = false;
@@ -635,8 +635,8 @@ nmfViewerWidget::callback_PlayReversePB()
             // Need this so as to ensure each screen shot finishes
             // before the next one starts.
             QApplication::sync();
-            boost::this_thread::sleep(boost::posix_time::microseconds(int(m_TimeMicroSec)));
-//            usleep(m_TimeMicroSec);
+//          boost::this_thread::sleep(boost::posix_time::microseconds(int(m_TimeMicroSec)));
+            QThread::usleep((unsigned long)(m_TimeMicroSec));
         }
         if (m_FirstImageNum == i) {
             okToView = false;

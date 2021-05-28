@@ -2106,10 +2106,59 @@ reloadDataStruct(
     }
 }
 
+QDateTime
+getCurrentTime()
+{
+    return QDateTime::currentDateTime();
+}
+
+std::string
+elapsedTime(QDateTime startTime)
+{
+    std::string elapsedTimeStr = "";
+    char buffer[50];
+
+    QDateTime endTime = QDateTime::currentDateTime();
+    auto elapsedTimeMSec = startTime.msecsTo(endTime);
+
+    if (elapsedTimeMSec >= 60000) {
+        sprintf(buffer,"%6.1f",elapsedTimeMSec/60000.0);
+        elapsedTimeStr = std::string(buffer) + " minute(s)";
+    } else if (elapsedTimeMSec >= 1000) {
+        sprintf(buffer,"%6.1f",elapsedTimeMSec/1000.0);
+        elapsedTimeStr = std::string(buffer) + " second(s)";
+    } else {
+        elapsedTimeStr = std::to_string(elapsedTimeMSec) + " millisecond(s)";
+    }
+    return elapsedTimeStr;
+}
+
+std::string
+elapsedTimeCondensed(QDateTime startTime)
+{
+    std::string elapsedTimeStr = "";
+    auto endTime        = getCurrentTime();
+    auto elapsedTimeSec = startTime.secsTo(endTime)+1;
+
+    std::string day  = std::to_string(int(elapsedTimeSec) / (24*3600));
+    std::string hour = std::to_string((int(elapsedTimeSec) % (24*3600)) / 3600);
+    std::string min  = std::to_string((int(elapsedTimeSec) % 3600) / 60);
+    std::string sec  = std::to_string(int(elapsedTimeSec) % 60);
+
+    // add leading zero if needed
+    std::string dd = std::string(2 - day.length(), '0') + day;
+    std::string hh = std::string(2 - hour.length(),'0') + hour;
+    std::string mm = std::string(2 - min.length(), '0') + min;
+    std::string ss = std::string(2 - sec.length(), '0') + sec;
+
+    if (day == "0") {
+        return hh + ':' + mm + ":" + ss;
+    } else {
+        return dd + ":" + hh + ':' + mm + ":" + ss;
+    }
+}
+
 } // end namespace
-
-
-
 
 
 

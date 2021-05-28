@@ -460,7 +460,7 @@ nmfProgressWidget::setMaxNumGenerations(const int& MaxNumGenerations)
 void
 nmfProgressWidget::updateTime()
 {
-    timeLE->setText(QString::fromStdString(nmfUtils::elapsedTimeCondensed(m_startTime)));
+    timeLE->setText(QString::fromStdString(nmfUtilsQt::elapsedTimeCondensed(m_startTime)));
 }
 
 void
@@ -756,7 +756,7 @@ nmfProgressWidget::getElapsedTime()
 void
 nmfProgressWidget::StopRun()
 {
-    m_elapsedTime = nmfUtils::elapsedTime(m_startTime);
+    m_elapsedTime = nmfUtilsQt::elapsedTime(m_startTime);
     emit StopTheTimer();
 
     if (m_RunType == "MSSPM") {
@@ -785,7 +785,7 @@ nmfProgressWidget::StopRun()
 void
 nmfProgressWidget::startRun()
 {
-    m_startTime  = nmfUtils::startTimer();
+    m_startTime  = nmfUtilsQt::getCurrentTime();
     m_wasStopped = false;
 
     if (m_RunType == "MSSPM") {
