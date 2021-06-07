@@ -522,6 +522,8 @@ nmfProgressWidget::setupConnections() {
 void
 nmfProgressWidget::stopTimer()
 {
+    logger->logMsg(nmfConstants::Normal,"Stop " + m_RunType + " Progress Chart Timer");
+
     m_timer->stop();
 }
 
@@ -549,19 +551,21 @@ nmfProgressWidget::callback_stopPB(bool unused)
 {
     logger->logMsg(nmfConstants::Normal,"Stop " + m_RunType + " Progress Chart Timer");
 
-    emit StopTheRun();
-    StopRun();
-    m_wasStopped = true;
+    if (! wasStopped()) {
+        emit StopTheRun();
+        StopRun();
+        m_wasStopped = true;
 
-    if (m_RunType == "MSSPM") {
-        updateChartDataLabel(nmfConstantsMSSPM::MSSPMProgressChartLabelFile,
-                             "<b>Status:&nbsp;&nbsp;</b>User halted MSSPM run. Output data incomplete.");
-    } else if (m_RunType == "MSVPA") {
-        updateChartDataLabel(nmfConstantsMSVPA::MSVPAProgressChartLabelFile,
-                             "<b>Status:&nbsp;&nbsp;</b>User halted MSVPA run. Output data incomplete.");
-    } else if (m_RunType == "Forecast") {
-        updateChartDataLabel(nmfConstantsMSVPA::ForecastProgressChartLabelFile,
-                             "<b>Status:&nbsp;&nbsp;</b>User halted Forecast run. Output data incomplete.");
+        if (m_RunType == "MSSPM") {
+            updateChartDataLabel(nmfConstantsMSSPM::MSSPMProgressChartLabelFile,
+                                 "<b>Status:&nbsp;&nbsp;</b>User halted MSSPM run. Output data incomplete.");
+        } else if (m_RunType == "MSVPA") {
+            updateChartDataLabel(nmfConstantsMSVPA::MSVPAProgressChartLabelFile,
+                                 "<b>Status:&nbsp;&nbsp;</b>User halted MSVPA run. Output data incomplete.");
+        } else if (m_RunType == "Forecast") {
+            updateChartDataLabel(nmfConstantsMSVPA::ForecastProgressChartLabelFile,
+                                 "<b>Status:&nbsp;&nbsp;</b>User halted Forecast run. Output data incomplete.");
+        }
     }
 
 } // end callback_stopPB

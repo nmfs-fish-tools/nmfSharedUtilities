@@ -315,11 +315,11 @@ namespace nmfUtilsQt {
      */
     QSettings* createSettings(const std::string& windowsDir,
                               const QString&     name);
-    /**
-     * @brief delays program execution by the passed number of milliseconds
-     * @param milliseconds : number of milliseconds by which to delay program execution
-     */
-    void delayMSec(const int& milliseconds);
+//    /**
+//     * @brief delays program execution by the passed number of milliseconds
+//     * @param milliseconds : number of milliseconds by which to delay program execution
+//     */
+//    void delayMSec(const int& milliseconds);
     /**
      * @brief deselects all cells in the passed tableView
      * @param tableView : tableView to deselect cells

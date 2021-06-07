@@ -87,8 +87,9 @@ nmfViewerWidget::nmfViewerWidget(QWidget* parent,
 
 }
 
-nmfViewerWidget::~nmfViewerWidget() {
-
+nmfViewerWidget::~nmfViewerWidget()
+{
+    delete m_Timer;
 }
 
 void

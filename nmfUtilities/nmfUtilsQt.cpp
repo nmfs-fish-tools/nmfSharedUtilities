@@ -2041,15 +2041,15 @@ loadMultiRunData(const nmfStructsQt::ModelDataStruct& dataStruct,
  * To delay execution without freezing GUI. Useful if you need to let
  * any signals catch up with the application.
  */
-void
-delayMSec(const int& milliseconds)
-{
-    QEventLoop eventLoop;
-    QTimer timer;
-    timer.connect(&timer, &QTimer::timeout, &eventLoop, &QEventLoop::quit);
-    timer.start(milliseconds);
-    eventLoop.exec();
-}
+//void
+//delayMSec(const int& milliseconds)
+//{
+//    QEventLoop eventLoop;
+//    QTimer timer;
+//    timer.connect(&timer, &QTimer::timeout, &eventLoop, &QEventLoop::quit);
+//    timer.start(milliseconds);
+//    eventLoop.exec();
+//}
 
 void
 reloadDataStruct(
@@ -2138,7 +2138,8 @@ elapsedTimeCondensed(QDateTime startTime)
 {
     std::string elapsedTimeStr = "";
     auto endTime        = getCurrentTime();
-    auto elapsedTimeSec = startTime.secsTo(endTime)+1;
+    //auto elapsedTimeSec = startTime.secsTo(endTime); // this is about a second short
+    auto elapsedTimeSec = endTime.toSecsSinceEpoch()-startTime.toSecsSinceEpoch();
 
     std::string day  = std::to_string(int(elapsedTimeSec) / (24*3600));
     std::string hour = std::to_string((int(elapsedTimeSec) % (24*3600)) / 3600);
