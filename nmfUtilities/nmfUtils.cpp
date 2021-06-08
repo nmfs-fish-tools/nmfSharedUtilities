@@ -268,11 +268,10 @@ double getRandomNumber(int seedValue, double lowerLimit, double upperLimit)
 //    std::uniform_real_distribution<> dist(lowerLimit,upperLimit);
 //    return dist(e2);
 
-    unsigned RandomSeed = nmfUtilsQt::getCurrentTime().toSecsSinceEpoch();
+    unsigned RandomSeed = nmfUtilsQt::getCurrentTime().currentMSecsSinceEpoch();
     unsigned Seed = (seedValue < 0) ? RandomSeed : seedValue;
     std::uniform_real_distribution<double> dist(lowerLimit,upperLimit);
     std::mt19937_64 rng(Seed);
-
     return dist(rng);
 }
 
