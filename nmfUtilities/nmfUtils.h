@@ -581,6 +581,13 @@ namespace nmfUtils {
                std::string delim,
                std::string& str1,
                std::string& str2);
+    /**
+     * @brief appends the new vector to the current vector
+     * @param newVec : vector to be appended
+     * @param mainVec : the resultant appended vector
+     */
+    void append(std::vector<double>& newVec,
+                std::vector<double>& currentVec);
 
 }
 

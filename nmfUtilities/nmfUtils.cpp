@@ -588,5 +588,11 @@ getOS()
     #endif
 }
 
+void
+append(std::vector<double>& newVec,
+       std::vector<double>& currentVec)
+{
+    currentVec.insert(currentVec.end(), newVec.begin(), newVec.end());
+}
 
 }
