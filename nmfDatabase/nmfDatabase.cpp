@@ -1622,9 +1622,7 @@ nmfDatabase::getForecastBiomass(
     dataMapForecastBiomass = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMapForecastBiomass["SpeName"].size();
     if (NumRecords == 0) {
-//        m_ChartView2d->hide();
         errorMsg  = "[Warning] nmfDatabase::getForecastBiomass: No records found in table ForecastBiomass";
-        //errorMsg += "\n" + queryStr;
         Logger->logMsg(nmfConstants::Warning,errorMsg);
         msg = "\nNo ForecastBiomass records found.\n\nPlease make sure a Forecast has been run.\n";
         QMessageBox::warning(Widget, "Warning", msg, QMessageBox::Ok);
@@ -1780,7 +1778,7 @@ nmfDatabase::getForecastMonteCarloParameters(
 
 
 bool
-nmfDatabase::getForecastCatch(
+nmfDatabase::getForecastHarvest(
         QWidget*           Widget,
         nmfLogger*         Logger,
         const std::string& ForecastName,
@@ -1790,7 +1788,8 @@ nmfDatabase::getForecastCatch(
         std::string&       Minimizer,
         std::string&       ObjectiveCriterion,
         std::string&       Scaling,
-        std::vector<boost::numeric::ublas::matrix<double> >& ForecastCatch)
+        const std::string& HarvestForm,
+        std::vector<boost::numeric::ublas::matrix<double> >& ForecastHarvest)
 {
     int m=0;
     int NumRecords;
@@ -1799,12 +1798,18 @@ nmfDatabase::getForecastCatch(
     std::string errorMsg;
     QString msg;
     std::map<std::string, std::vector<std::string> > dataMap;
+    std::string ForecastTable = "ForecastHarvestCatch";
+    ForecastHarvest.clear();
 
-    ForecastCatch.clear();
+    if (HarvestForm == "Effort (qE)") {
+        ForecastTable = "ForecastHarvestEffort";
+    } else if (HarvestForm == "Exploitation (F)") {
+        ForecastTable = "ForecastHarvestExploitation";
+    }
 
-    // Load Forecast Catch data
+    // Load Forecast Harvest data
     fields    = {"ForecastName","Algorithm","Minimizer","ObjectiveCriterion","Scaling","SpeName","Year","Value"};
-    queryStr  = "SELECT ForecastName,Algorithm,Minimizer,ObjectiveCriterion,Scaling,SpeName,Year,Value FROM ForecastCatch";
+    queryStr  = "SELECT ForecastName,Algorithm,Minimizer,ObjectiveCriterion,Scaling,SpeName,Year,Value FROM " + ForecastTable;
     queryStr += " WHERE ForecastName = '" + ForecastName +
                 "' AND Algorithm = '" + Algorithm +
                 "' AND Minimizer = '" + Minimizer +
@@ -1814,15 +1819,15 @@ nmfDatabase::getForecastCatch(
     dataMap = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SpeName"].size();
     if (NumRecords == 0) {
-        errorMsg  = "[Warning] nmfDatabase::getForecastCatch: No records found in table ForecastCatch";
+        errorMsg  = "[Warning] nmfDatabase::getForecastCatch: No records found in table " + ForecastTable;
         Logger->logMsg(nmfConstants::Warning,errorMsg);
-        msg = "\nNo ForecastCatch records found.\n\nPlease make sure a Forecast has been run.\n";
+        msg = "\nNo " + QString::fromStdString(ForecastTable) + " records found.\n\nPlease make sure a Forecast has been run.\n";
         QMessageBox::warning(Widget, "Warning", msg, QMessageBox::Ok);
         return false;
     }
     if (NumRecords != NumSpecies*(RunLength+1)) {
         errorMsg  = "[Error 2] nmfDatabase::getForecastCatch: Number of records found (" + std::to_string(NumRecords) + ") in ";
-        errorMsg += "table ForecastCatch does not equal number of NumSpecies*(RunLength+1) (";
+        errorMsg += "table " + ForecastTable + " does not equal number of NumSpecies*(RunLength+1) (";
         errorMsg += std::to_string(NumSpecies) + "*" + std::to_string((RunLength+1)) + "=";
         errorMsg += std::to_string(NumSpecies*(RunLength+1)) + ") records";
         errorMsg += "\n" + queryStr;
@@ -1838,7 +1843,7 @@ nmfDatabase::getForecastCatch(
             TmpMatrix(time,species) = std::stod(dataMap["Value"][m++]);
         }
     }
-    ForecastCatch.push_back(TmpMatrix);
+    ForecastHarvest.push_back(TmpMatrix);
     return true;
 }
 

@@ -105,7 +105,7 @@ public:
             const std::string &userName,
             const std::string &password,
             std::string&       errorMsg);
-    bool getForecastCatch(
+    bool getForecastHarvest(
             QWidget*           Widget,
             nmfLogger*         Logger,
             const std::string& ForecastName,
@@ -115,6 +115,7 @@ public:
             std::string&       Minimizer,
             std::string&       ObjectiveCriterion,
             std::string&       Scaling,
+            const std::string& HarvestForm,
             std::vector<boost::numeric::ublas::matrix<double> >& ForecastCatch);
     /**
      * @brief Closes the database
