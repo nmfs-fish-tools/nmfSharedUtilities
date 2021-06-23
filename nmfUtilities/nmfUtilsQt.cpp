@@ -2023,6 +2023,7 @@ loadMultiRunData(const nmfStructsQt::ModelDataStruct& dataStruct,
 
     std::string line;
     QString lineStr;
+std::cout << "Loading multi run file: " << dataStruct.MultiRunSetupFilename << std::endl;
     std::ifstream multiRunFile(dataStruct.MultiRunSetupFilename);
     if (multiRunFile.is_open()) {
         getline(multiRunFile,line); // First line is the header

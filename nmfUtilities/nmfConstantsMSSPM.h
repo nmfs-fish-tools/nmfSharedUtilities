@@ -118,6 +118,8 @@ namespace nmfConstantsMSSPM
      const bool   IsMonteCarlo         = true;
      const bool   IsNotMonteCarlo      = false;
      const bool   PreEstimation        = true;
+     const bool   ShowLegend           = true;
+     const bool   DontShowLegend       = false;
      const QString ChartType2d         = "2d";
      const QString ChartType3d         = "3d";
 

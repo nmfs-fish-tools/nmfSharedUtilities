@@ -61,7 +61,8 @@ public:
             const QColor &ScatterColor,
             const std::string &LineColor,
             const std::string &lineColorName,
-            const QList<QString>& multiRunLineLabels);
+            const QList<QString>& multiRunLineLabels,
+            const bool& showLegend);
 signals:
 
 public slots:
