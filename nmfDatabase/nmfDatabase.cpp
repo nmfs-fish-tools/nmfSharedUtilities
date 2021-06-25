@@ -1775,7 +1775,24 @@ nmfDatabase::getForecastMonteCarloParameters(
     return true;
 }
 
+bool
+nmfDatabase::isARelativeBiomassModel(const std::string& modelName)
+{
+    bool retv=false;
+    std::vector<std::string> fields;
+    std::string queryStr;
+    std::map<std::string, std::vector<std::string> > dataMap;
 
+    fields    = {"SystemName","ObsBiomassType"};
+    queryStr  = "SELECT SystemName,ObsBiomassType FROM Systems";
+    queryStr += " WHERE SystemName = '" + modelName + "'";
+    dataMap   = nmfQueryDatabase(queryStr,fields);
+    int NumRecords = dataMap["SystemName"].size();
+    if (NumRecords == 1) {
+        retv = (dataMap["ObsBiomassType"][0] == "Relative");
+    }
+    return retv;
+}
 
 bool
 nmfDatabase::getForecastHarvest(
@@ -2509,6 +2526,46 @@ nmfDatabase::getModelFormData(std::string& GrowthForm,
     return true;
 }
 
+QStringList
+nmfDatabase::getVectorParameterNames(
+        nmfLogger*   logger,
+        std::string& projectSettingsConfig)
+{
+    int NumRecords;
+    std::vector<std::string> fields;
+    std::string queryStr;
+    std::map<std::string, std::vector<std::string> > dataMap;
+
+    QStringList parameterNames = nmfConstantsMSSPM::VectorParameterNames;
+
+    // Get Model structure data
+    fields     = {"SystemName","ObsBiomassType","GrowthForm","HarvestForm","WithinGuildCompetitionForm","PredationForm"};
+    queryStr   = "SELECT SystemName,ObsBiomassType,GrowthForm,HarvestForm,WithinGuildCompetitionForm,PredationForm";
+    queryStr  += " FROM Systems WHERE SystemName='" + projectSettingsConfig + "'";
+    dataMap    = nmfQueryDatabase(queryStr, fields);
+    NumRecords = dataMap["SystemName"].size();
+    if (NumRecords == 0) {
+        logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::callback_UpdateDiagnosticParameterChoices: No records found in table Systems for Name = "+projectSettingsConfig);
+        return {};
+    }
+
+    // Check for appropriate items in parameter combo boxes.
+    if (dataMap["ObsBiomassType"][0] != "Relative") {
+        parameterNames.removeAll("SurveyQ");
+    }
+    if (dataMap["GrowthForm"][0] != "Logistic") {
+        parameterNames.removeAll("Carrying Capacity (K)");
+    }
+    if (dataMap["GrowthForm"][0] == "Null") {
+        parameterNames.removeAll("Growth Rate (r)");
+    }
+    if (dataMap["HarvestForm"][0] != "Effort (qE)") {
+        parameterNames.removeAll("Catchability (q)");
+    }
+
+    return parameterNames;
+}
+
 void
 nmfDatabase::loadEstimatedVectorParameters(
         nmfLogger*   logger,
@@ -2533,6 +2590,7 @@ nmfDatabase::loadEstimatedVectorParameters(
     }
 
     // Figure out which items should be in the pulldown lists based upon the Model structure
+    cmbox->blockSignals(true);
     cmbox->clear();
     cmbox->addItems(nmfConstantsMSSPM::VectorParameterNames);
 
@@ -2553,4 +2611,5 @@ nmfDatabase::loadEstimatedVectorParameters(
         index = cmbox->findText("Catchability (q)");
         cmbox->removeItem(index);
     }
+    cmbox->blockSignals(false);
 }

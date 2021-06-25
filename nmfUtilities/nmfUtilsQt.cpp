@@ -2174,6 +2174,12 @@ updateProgressDlg(nmfLogger* logger,
     QCoreApplication::processEvents();
 }
 
+void
+setBackgroundLineEdit(QLineEdit* lineEdit, const QString& backgroundStyleSheet)
+{
+    lineEdit->setStyleSheet(backgroundStyleSheet);
+}
+
 } // end namespace
 
 

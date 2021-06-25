@@ -144,6 +144,12 @@ namespace nmfConstantsMSSPM
      const std::string  MohnsRhoRunFilename            = "MohnsRhoMultiRunParameter.csv";
      const std::string  ModelReviewFilename            = "ModelReview.csv";
      const std::string  EstimatedParametersFilename    = "EstimatedParameters.csv";
+     const QString      OutputChartBiomass             = "Biomass vs Time";
+     const QString      OutputChartHarvest             = "Harvest vs Time";
+     const QString      OutputChartExploitation        = "Exploitation Rate";
+     const QString      OutputChartExploitationCatchAverageTitle = "Exploitation Rate Ave(C/Bc)";
+     const QString      OutputChartExploitationCatchTitle   = "Exploitation Rate (C/Bc)";
+     const QString      OutputChartExploitationEffortTitle  = "Exploitation Rate ((qE)/Bc)";
 
      const QStringList VectorParameterNames =
          {"Initial Biomass (B₀)",
