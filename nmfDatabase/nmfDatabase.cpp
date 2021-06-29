@@ -1480,6 +1480,108 @@ nmfDatabase::getListOfAuthenticatedDatabaseNames(
 
 
 
+
+void
+nmfDatabase::getSpeciesGuildMap(std::map<std::string,std::string>& SpeciesGuildMap)
+{
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+
+    fields   = {"SpeName","GuildName"};
+    queryStr = "SELECT SpeName,GuildName FROM Species ORDER BY SpeName";
+    dataMap  = nmfQueryDatabase(queryStr, fields);
+
+    for (unsigned i=0; i<dataMap["SpeName"].size(); ++i) {
+        SpeciesGuildMap[dataMap["SpeName"][i]] = dataMap["GuildName"][i];
+    }
+}
+
+
+
+bool
+nmfDatabase::getTimeSeriesDataByGuild(
+        nmfLogger* logger,
+        const std::string& modelName,
+        std::string ForecastName,
+        const std::string &TableName,
+        const int &NumGuilds,
+        const int &RunLength,
+        boost::numeric::ublas::matrix<double> &TableData)
+{
+    int m=0;
+    int NumRecords;
+    int NumSpecies;
+    int NumGuilds2;
+    int GuildNum;
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+    std::string errorMsg;
+    std::string ModifiedTableName = "";
+    std::string GuildName;
+    std::string SpeciesName;
+    QStringList SpeciesList;
+    QStringList GuildList;
+    std::map<std::string,std::string> SpeciesToGuildMap;
+    std::map<std::string,int> GuildNameToNumMap;
+
+    nmfUtils::initialize(TableData,RunLength+1,NumGuilds); // +1 because there's a 0 year
+
+    if (! getGuilds(logger,NumGuilds2,GuildList)) {
+        return false;
+    }
+
+    // Get Species names
+    if (! getSpecies(logger,NumSpecies,SpeciesList))
+        return false;
+
+    // Load data
+    if (ForecastName == "") {
+        ModifiedTableName = TableName;;
+        fields   = {"MohnsRhoLabel","SystemName","SpeName","Year","Value"};
+        queryStr = "SELECT MohnsRhoLabel,SystemName,SpeName,Year,Value FROM " + ModifiedTableName +
+                   " WHERE MohnsRhoLabel = '' AND SystemName = '" + modelName + "' ORDER BY SpeName,Year";
+    } else {
+        ModifiedTableName = "Forecast" + TableName;
+        fields   = {"ForecastName","SpeName","Year","Value"};
+        queryStr = "SELECT ForecastName,SpeName,Year,Value FROM " + ModifiedTableName +
+                   " WHERE ForecastName = '" + ForecastName + "' ORDER BY SpeName,Year";
+    }
+    dataMap    = nmfQueryDatabase(queryStr, fields);
+    NumRecords = dataMap["SpeName"].size();
+    if (NumRecords == 0) {
+        logger->logMsg(nmfConstants::Error,"[Error 1] getTimeSeriesDataByGuild: No records found in table "+TableName);
+        return false;
+    }
+    if (NumRecords != NumSpecies*(RunLength+1)) {
+        errorMsg  = "[Error 2] getTimeSeriesDataByGuild: Number of records found (" + std::to_string(NumRecords) + ") in ";
+        errorMsg += "table " + ModifiedTableName + " does not equal number of Species*(RunLength+1) (";
+        errorMsg += std::to_string(NumSpecies) + "*" + std::to_string((RunLength+1)) + "=";
+        errorMsg += std::to_string(NumSpecies*(RunLength+1)) + ") records";
+        errorMsg += "\n" + queryStr;
+        logger->logMsg(nmfConstants::Error,errorMsg);
+    }
+
+    m = 0;
+    int num=0;
+    for (QString guildName : GuildList) {
+        GuildNameToNumMap[guildName.toStdString()] = num++;
+    }
+    getSpeciesGuildMap(SpeciesToGuildMap);
+    for (int i=0; i<NumSpecies; ++i) {
+        SpeciesName = dataMap["SpeName"][m];
+        GuildName   = SpeciesToGuildMap[SpeciesName];
+        GuildNum    = GuildNameToNumMap[GuildName];
+        for (int time=0; time<=RunLength; ++time) {
+            TableData(time,GuildNum) += std::stod(dataMap["Value"][m++]);
+        }
+    }
+
+    return true;
+}
+
+
 bool
 nmfDatabase::getTimeSeriesData(
         QWidget*           Widget,
@@ -1540,7 +1642,6 @@ nmfDatabase::getTimeSeriesData(
         QMessageBox::critical(Widget, "Error", msg, QMessageBox::Ok);
         return false;
     }
-
 
     for (int species=0; species<NumSpecies; ++species) {
         for (int time=0; time<=RunLength; ++time) {
@@ -2195,7 +2296,6 @@ nmfDatabase::getGuildData(nmfLogger* Logger,
     return true;
 }
 
-
 bool
 nmfDatabase::getHarvestData(const std::string& HarvestType,
                             nmfLogger* Logger,
@@ -2612,4 +2712,180 @@ nmfDatabase::loadEstimatedVectorParameters(
         cmbox->removeItem(index);
     }
     cmbox->blockSignals(false);
+}
+
+bool
+nmfDatabase::getGuilds(
+        nmfLogger* logger,
+        int &NumGuilds,
+        QStringList &GuildList)
+{
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+
+    GuildList.clear();
+
+    fields   = {"GuildName"};
+    queryStr = "SELECT GuildName from Guilds ORDER BY GuildName";
+    dataMap  = nmfQueryDatabase(queryStr, fields);
+    NumGuilds = dataMap["GuildName"].size();
+    if (NumGuilds == 0) {
+        logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::getGuilds: No guilds found in table Guilds");
+        return false;
+    }
+
+    for (int guild=0; guild<NumGuilds; ++guild) {
+        GuildList << QString::fromStdString(dataMap["GuildName"][guild]);
+    }
+
+    return true;
+}
+
+bool
+nmfDatabase::getSpecies(
+        nmfLogger* logger,
+        int &NumSpecies,
+        QStringList &SpeciesList)
+{
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+
+    SpeciesList.clear();
+
+    fields   = {"SpeName"};
+    queryStr = "SELECT SpeName from Species ORDER BY SpeName";
+    dataMap  = nmfQueryDatabase(queryStr, fields);
+    NumSpecies = dataMap["SpeName"].size();
+    if (NumSpecies == 0) {
+        logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::getSpecies: No species found in table Species");
+        return false;
+    }
+
+    for (int species=0; species<NumSpecies; ++species) {
+        SpeciesList << QString::fromStdString(dataMap["SpeName"][species]);
+    }
+
+    return true;
+}
+
+
+bool
+nmfDatabase::getHarvestDataByGuild(
+        nmfLogger* logger,
+        const std::string& modelName,
+        const int& numSpeciesOrGuilds,
+        const std::vector<double>& EstSurveyQ,
+        std::string& chartLabel,
+        boost::numeric::ublas::matrix<double>& harvestData)
+{
+    int RunLength;
+    std::string HarvestForm;
+
+    getHarvestFormData(logger,modelName,RunLength,HarvestForm);
+    chartLabel = HarvestForm;
+
+    // Get appropriate Harvest data (i.e., Catch or Effort)
+    if (HarvestForm == nmfConstantsMSSPM::HarvestCatch.toStdString()) {
+        if (! getTimeSeriesDataByGuild(logger,modelName,
+                                       "","HarvestCatch",
+                                       numSpeciesOrGuilds,RunLength,harvestData)) {
+            return false;
+        }
+    } else if (HarvestForm == nmfConstantsMSSPM::HarvestEffort.toStdString()) {
+        if (! getTimeSeriesDataByGuild(logger,modelName,
+                                       "","HarvestEffort",
+                                       numSpeciesOrGuilds,RunLength,harvestData)) {
+            return false;
+        }
+        // Multiply the Effort data by the estimated Survey Q data
+        double surveyQ = 0;
+        for (int species=0; species<(int)harvestData.size2(); ++species) {
+            surveyQ = EstSurveyQ[species];
+            for (int time=0; time<(int)harvestData.size1(); ++time) {
+                harvestData(time,species) *= surveyQ;
+            }
+        }
+    } else if (HarvestForm == nmfConstantsMSSPM::HarvestExploitation.toStdString()) {
+        if (! getTimeSeriesDataByGuild(logger,modelName,
+                                       "","HarvestExploitation",
+                                       numSpeciesOrGuilds,RunLength,harvestData)) {
+            return false;
+        }
+    } else {
+        return false;
+    }
+
+
+    return true;
+}
+
+bool
+nmfDatabase::getHarvestFormData(
+        nmfLogger* logger,
+        const std::string& modelName,
+        int& RunLength,
+        std::string& HarvestForm)
+{
+    int NumRecords;
+    std::vector<std::string> fields;
+    std::string queryStr;
+    std::map<std::string, std::vector<std::string> > dataMap;
+
+    // Get needed data from Systems table
+    fields     = {"RunLength","HarvestForm"};
+    queryStr   = "SELECT RunLength,HarvestForm FROM Systems WHERE SystemName='" + modelName + "'";
+    dataMap    = nmfQueryDatabase(queryStr, fields);
+    NumRecords = dataMap["RunLength"].size();
+    if (NumRecords == 0) {
+        logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::getHarvestData: No records found in table Systems for Name = "+modelName);
+        return false;
+    }
+    RunLength   = std::stoi(dataMap["RunLength"][0]);
+    HarvestForm = dataMap["HarvestForm"][0];
+
+    return true;
+}
+
+bool
+nmfDatabase::getHarvestData(
+        QWidget* parent,
+        nmfLogger* logger,
+        const std::string& modelName,
+        const int& numSpeciesOrGuilds,
+        const std::vector<double>& EstSurveyQ,
+        boost::numeric::ublas::matrix<double>& harvestData)
+{
+    int RunLength;
+    std::string HarvestForm;
+
+    getHarvestFormData(logger,modelName,RunLength,HarvestForm);
+
+    // Get appropriate Harvest data (i.e., Catch or Effort)
+    if (HarvestForm == nmfConstantsMSSPM::HarvestCatch.toStdString()) {
+        if (! getTimeSeriesData(parent,logger,modelName,
+                                "","","HarvestCatch",
+                                numSpeciesOrGuilds,RunLength,harvestData)) {
+            return false;
+        }
+    } else if (HarvestForm == nmfConstantsMSSPM::HarvestEffort.toStdString()) {
+        if (! getTimeSeriesData(parent,logger,modelName,
+                                "","","HarvestEffort",
+                                numSpeciesOrGuilds,RunLength,harvestData)) {
+            return false;
+        }
+        // Multiply the Effort data by the estimated Survey Q data
+        double surveyQ = 0;
+        for (int species=0; species<(int)harvestData.size2(); ++species) {
+            surveyQ = EstSurveyQ[species];
+            for (int time=0; time<(int)harvestData.size1(); ++time) {
+                harvestData(time,species) *= surveyQ;
+            }
+        }
+    } else {
+        return false;
+    }
+
+    return true;
 }

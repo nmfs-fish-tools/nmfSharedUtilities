@@ -148,8 +148,12 @@ namespace nmfConstantsMSSPM
      const QString      OutputChartHarvest             = "Harvest vs Time";
      const QString      OutputChartExploitation        = "Exploitation Rate";
      const QString      OutputChartExploitationCatchAverageTitle = "Exploitation Rate Ave(C/Bc)";
-     const QString      OutputChartExploitationCatchTitle   = "Exploitation Rate (C/Bc)";
-     const QString      OutputChartExploitationEffortTitle  = "Exploitation Rate ((qE)/Bc)";
+     const QString      OutputChartExploitationCatchTitle        = "Exploitation Rate (C/Bc)";
+     const QString      OutputChartExploitationEffortTitle       = "Exploitation Rate ((qE)/Bc)";
+     const QString      HarvestNone                    = "Null";
+     const QString      HarvestCatch                   = "Catch";
+     const QString      HarvestEffort                  = "Effort (qE)";
+     const QString      HarvestExploitation            = "Exploitation Rate (Harvest/Bc)";
 
      const QStringList VectorParameterNames =
          {"Initial Biomass (B₀)",
