@@ -97,8 +97,9 @@ struct StatStruct {
 /**
  * @brief Structure contains all of the parameters in a particular Model
  */
-struct SystemData {
-    std::string Name;
+struct ModelData {
+    std::string ProjectName;
+    std::string ModelName;
     std::string CarryingCapacity;
     std::string GrowthForm;
     std::string HarvestForm;

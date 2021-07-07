@@ -36,7 +36,8 @@ class nmfAbundance {
 private:
     nmfDatabase* m_databasePtr;
     nmfLogger*   m_logger;
-    std::string  m_ProjectSettingsConfig;
+    std::string  m_ProjectName;
+    std::string  m_ModelName;
     double       m_nuOther;
     boost::numeric::ublas::matrix<double> m_PreferredRatioEta;
     boost::numeric::ublas::matrix<double> m_PreferredGTRatio;
@@ -44,7 +45,7 @@ private:
     boost::numeric::ublas::matrix<double> m_VulnerabilityRho;
     std::map<std::string,boost::numeric::ublas::matrix<double> > m_WeightMap;
     std::map<std::string,boost::numeric::ublas::matrix<double> > m_InitialAbundance;
-//    std::map<std::string,boost::numeric::ublas::matrix<double> > m_Abundance;
+//  std::map<std::string,boost::numeric::ublas::matrix<double> > m_Abundance;
     std::map<std::string,boost::numeric::ublas::matrix<double> > m_ConsumptionBiomassRatio;
     std::map<std::string,boost::numeric::ublas::matrix<double> > m_Maturity;
     std::map<std::string,boost::numeric::ublas::matrix<double> > m_NaturalMortality;

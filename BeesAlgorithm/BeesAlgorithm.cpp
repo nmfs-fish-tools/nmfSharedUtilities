@@ -243,6 +243,26 @@ BeesAlgorithm::loadInitBiomassParameterRanges(
     }
 }
 
+void
+BeesAlgorithm::loadSurveyQParameterRanges(
+        std::vector<std::pair<double,double> >& parameterRanges,
+        nmfStructsQt::ModelDataStruct& dataStruct)
+{
+    std::pair<double,double> aPair;
+    bool isCheckedSurveyQ = nmfUtils::isEstimateParameterChecked(dataStruct,"SurveyQ");
+
+    // If Survey Q is not estimated, hardcode 1.0's as min and max
+    for (unsigned species=0; species<dataStruct.SurveyQMin.size(); ++species) {
+        if (isCheckedSurveyQ) {
+            aPair = std::make_pair(dataStruct.SurveyQMin[species],
+                                   dataStruct.SurveyQMax[species]);
+        } else {
+            aPair = std::make_pair(1.0,1.0);
+        }
+        parameterRanges.emplace_back(aPair);
+    }
+}
+
 
 /*
  *
@@ -262,6 +282,7 @@ std::cout << "*** BeesAlgorithm::initializeParameterRangesAndPatchSizes ** " << 
     m_HarvestForm->loadParameterRanges(    parameterRanges, theBeeStruct);
     m_CompetitionForm->loadParameterRanges(parameterRanges, theBeeStruct);
     m_PredationForm->loadParameterRanges(  parameterRanges, theBeeStruct);
+    loadSurveyQParameterRanges(            parameterRanges, theBeeStruct);
     m_ParameterRanges = parameterRanges;
 
     // Calculate the patch sizes for each parameter range
@@ -412,6 +433,7 @@ BeesAlgorithm::extractInitBiomass(const std::vector<double>& parameters,
     startPos = numInitBiomassParameters;
 }
 
+
 void
 BeesAlgorithm::extractGrowthParameters(const std::vector<double>& parameters,
                                        int&                       startPos,
@@ -479,14 +501,14 @@ BeesAlgorithm::extractExponentParameters(const std::vector<double>& parameters,
     }
 }
 
+
 void
 BeesAlgorithm::extractSurveyQParameters(const std::vector<double>& parameters,
-                              int&                       startPos,
-                              std::vector<double>&       surveyQ)
+                                        int&                       startPos,
+                                        std::vector<double>&       surveyQ)
 {
     int numSurveyQParameters = m_BeeStruct.SurveyQMin.size();
-
-    for (int i=startPos; i<numSurveyQParameters; ++i) {
+    for (int i=startPos; i<startPos+numSurveyQParameters; ++i) {
         surveyQ.emplace_back(parameters[i]);
     }
     startPos += numSurveyQParameters;
@@ -504,6 +526,7 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     double systemCarryingCapacity;
     double guildK;
     double fitness=0;
+    double surveyQVal;
     int startPos=0;
     int timeMinus1;
     int NumYears   = m_BeeStruct.RunLength+1;
@@ -517,10 +540,12 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     std::vector<double> guildCarryingCapacity;
     std::vector<double> exponent;
     std::vector<double> catchabilityRate;
+    std::vector<double> surveyQ;
     boost::numeric::ublas::matrix<double> estBiomassSpecies;
     boost::numeric::ublas::matrix<double> estBiomassGuilds;
     boost::numeric::ublas::matrix<double> estBiomassRescaled;
     boost::numeric::ublas::matrix<double> obsBiomassBySpeciesOrGuildsRescaled;
+    boost::numeric::ublas::matrix<double> obsBiomassBySpeciesOrGuilds;
     boost::numeric::ublas::matrix<double> competitionAlpha;
     boost::numeric::ublas::matrix<double> competitionBetaSpecies;
     boost::numeric::ublas::matrix<double> competitionBetaGuilds;
@@ -538,6 +563,14 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     nmfUtils::initialize(predation,                           NumSpeciesOrGuilds, NumSpeciesOrGuilds);
     nmfUtils::initialize(handling,                            NumSpeciesOrGuilds, NumSpeciesOrGuilds);
 
+    if (isAggProd) {
+        NumSpeciesOrGuilds = NumGuilds;
+        obsBiomassBySpeciesOrGuilds = m_BeeStruct.ObservedBiomassByGuilds;
+    } else {
+        NumSpeciesOrGuilds = NumSpecies;
+        obsBiomassBySpeciesOrGuilds = m_BeeStruct.ObservedBiomassBySpecies;
+    }
+
 //std::cout << "num params: " << parameters.size() << std::endl;
     // Load the parameters into their respective data structures for use in the objective function.
     extractInitBiomass(parameters,startPos,initBiomass);
@@ -552,6 +585,16 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     m_PredationForm->extractPredationParameters(parameters,startPos,predation);
     m_PredationForm->extractHandlingParameters(parameters,startPos,handling);
     m_PredationForm->extractExponentParameters(parameters,startPos,exponent);
+    extractSurveyQParameters(parameters,startPos,surveyQ);
+
+    // Since we may be estimating SurveyQ, need to divide the Observed Biomass by the SurveyQ
+    for (int species=0; species<int(obsBiomassBySpeciesOrGuilds.size2()); ++species) {
+        surveyQVal = surveyQ[species];
+        for (int time=0; time<int(obsBiomassBySpeciesOrGuilds.size1()); ++time) {
+            obsBiomassBySpeciesOrGuilds(time,species) /= surveyQVal;
+        }
+    }
+
 //std::cout << "last start pos: " << startPos << std::endl;
 
     // guildCarryingCapacity is carrying capacity for the guild the species is a member of
@@ -575,6 +618,9 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
         guildCarryingCapacity.push_back(guildK);
     }
 
+
+
+
     // Evaluate the objective function for all years and species or guilds and put
     // result in matrix
     for (int i=0; i<NumSpeciesOrGuilds; ++i) {
@@ -587,12 +633,9 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
 
     bool isCheckedInitBiomass = nmfUtils::isEstimateParameterChecked(m_BeeStruct,"InitBiomass");
 
-//std::cout << "num years:: " << NumYears << std::endl;
     for (int time=1; time<NumYears; ++time) {
-//std::cout << "year :: " << time << std::endl;
         timeMinus1 = time - 1;
         for (int i=0; i<NumSpeciesOrGuilds; ++i) {
-//std::cout << "i :: " << i << std::endl;
             // Find guild that speciesNum is in
             guildNum = m_GuildNum[i];
 
@@ -605,11 +648,6 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
             } else {
                 estBiomassVal = estBiomassSpecies(timeMinus1,i);
             }
-//          estBiomassVal = estBiomassSpecies(timeMinus1,i);
-
-//std::cout << " estBiomassVal: " << estBiomassVal << std::endl;
-//std::cout << " growthRate size: " << growthRate.size() << std::endl;
-//std::cout << " carryingCapacity size: " << carryingCapacity.size() << std::endl;
 
             growthTerm      = m_GrowthForm->evaluate(i,estBiomassVal,
                                                      growthRate,carryingCapacity);

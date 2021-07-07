@@ -766,7 +766,7 @@ nmfDatabase::nmfQueryMortalityData(
 bool
 nmfDatabase::getMortalityData(
         nmfLogger*   logger,
-        const std::string& ProjectSettingsConfig,
+        const std::string& ModelName,
         const std::string &Species,
         const int &NumYears,
         const int &NumAges,
@@ -781,9 +781,9 @@ nmfDatabase::getMortalityData(
     std::string queryStr;
     std::string msg;
 
-    fields     = {"SystemName","SpeName","Segment","ColName","Value"};
-    queryStr   = "SELECT SystemName,SpeName,Segment,ColName,Value FROM " + TableName;
-    queryStr  += " WHERE SystemName = '" + ProjectSettingsConfig + "'";
+    fields     = {"ModelName","SpeName","Segment","ColName","Value"};
+    queryStr   = "SELECT ModelName,SpeName,Segment,ColName,Value FROM " + TableName;
+    queryStr  += " WHERE ModelName = '" + ModelName + "'";
     queryStr  += " AND SpeName = '" + Species + "'";
     queryStr  += " ORDER BY Segment";
     dataMap    = nmfQueryDatabase(queryStr, fields);
@@ -1075,7 +1075,8 @@ nmfDatabase::createScenarioMap(std::map<QString,QStringList>& ScenarioForecastMa
 bool
 nmfDatabase::getRunLengthAndStartYear(
         nmfLogger* logger,
-        const std::string& ProjectSettingsConfig,
+        const std::string& ProjectName,
+        const std::string& ModelName,
         int &RunLength,
         int &StartYear)
 {
@@ -1084,15 +1085,15 @@ nmfDatabase::getRunLengthAndStartYear(
     std::map<std::string, std::vector<std::string> > dataMap;
     std::string queryStr;
 
-    // Find Systems data
+    // Find Models data
     fields    = {"RunLength","StartYear"};
-    queryStr  = "SELECT RunLength,StartYear FROM Systems WHERE ";
-    queryStr += "SystemName = '" + ProjectSettingsConfig + "'";
+    queryStr  = "SELECT RunLength,StartYear FROM Models WHERE ";
+    queryStr += "ProjectName = '" + ProjectName + "' AND ModelName = '" + ModelName + "'";
     dataMap   = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["RunLength"].size();
     if (NumRecords == 0){
-        if (! ProjectSettingsConfig.empty()) {
-            logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::getRunLengthAndStartYear: No records found in table Systems for Name = "+ProjectSettingsConfig);
+        if (! ModelName.empty()) {
+            logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::getRunLengthAndStartYear: No records found in table Models for ModelName = "+ModelName);
         }
         return false;
     }
@@ -1102,10 +1103,98 @@ nmfDatabase::getRunLengthAndStartYear(
 }
 
 bool
+nmfDatabase::updateAllModelsInProject(
+        QWidget* parent,
+        const std::string& type,
+        const std::string& projectName,
+        const std::string& currentModel,
+        std::vector<std::string>& modelsInProject)
+{
+    int NumRecords;
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+    std::string HarvestForm;
+    std::string ObsBiomassType;
+    std::string whereClause = "ProjectName = '" + projectName + "'";
+    QString msg;
+
+    // Get information about the current model
+    modelsInProject.clear();
+    fields    = {"ProjectName","ModelName","HarvestForm","ObsBiomassType"};
+    queryStr  = "SELECT ProjectName,ModelName,HarvestForm,ObsBiomassType FROM Models WHERE ";
+    queryStr += "ProjectName = '" + projectName + "' AND ModelName = '" + currentModel + "'";
+    dataMap   = nmfQueryDatabase(queryStr, fields);
+    NumRecords = (int)dataMap["ModelName"].size();
+    if (NumRecords == 0) {
+        return true;
+    }
+    if (type == "Harvest") {
+        whereClause += " AND HarvestForm = '" + dataMap["HarvestForm"][0] + "'";
+    } else if (type == "ObservedBiomass") {
+        whereClause += " AND ObsBiomassType = '" + dataMap["ObsBiomassType"][0] + "'";
+    }
+
+    // Get data from other models in current project
+    fields    = {"ProjectName","ModelName","HarvestForm","ObsBiomassType"};
+    queryStr  = "SELECT ProjectName,ModelName,HarvestForm,ObsBiomassType FROM Models WHERE ";
+    queryStr += whereClause;
+    dataMap   = nmfQueryDatabase(queryStr, fields);
+    NumRecords = (int)dataMap["ModelName"].size();
+    if (NumRecords == 0) {
+        return true;
+    }
+    for (int i=0;i<NumRecords;++i) {
+        modelsInProject.push_back(dataMap["ModelName"][i]);
+    }
+    int numModelsInProject = (int)modelsInProject.size();
+
+    // Query user
+    if (numModelsInProject > 1) {
+        msg  = "\nFound " + QString::number(numModelsInProject) + " models in the current project. ";
+        msg += "Saving this data will cause all of this project's models to be updated. " ;
+        msg += "\n\nOK to proceed?\n";
+        QMessageBox::StandardButton reply = QMessageBox::question(parent, QObject::tr("Save"),
+                                                                  QObject::tr(msg.toLatin1()),
+                                                                  QMessageBox::No|QMessageBox::Yes,
+                                                                  QMessageBox::Yes);
+        if (reply == QMessageBox::No) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool
+nmfDatabase::cleanTables(
+        nmfLogger* logger,
+        const std::string& projectName,
+        const std::string& modelName)
+{
+    std::string cmd;
+    std::string errorMsg;
+
+    for (std::string tableToClean : nmfConstantsMSSPM::TablesToClean) {
+        cmd  = "DELETE FROM " + tableToClean  +
+               " WHERE ProjectName = '" + projectName +
+               "' AND ModelName = '" + modelName + "'";
+        errorMsg = nmfUpdateDatabase(cmd);
+        if (nmfUtilsQt::isAnError(errorMsg)) {
+            logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::cleanTables: Delete error: " + errorMsg);
+            logger->logMsg(nmfConstants::Error,"cmd: " + cmd);
+            return false;
+        }
+    }
+    return true;
+}
+
+bool
 nmfDatabase::getAlgorithmIdentifiers(
         QWidget*     widget,
         nmfLogger*   logger,
-        const std::string& ProjectSettingsConfig,
+        const std::string& ProjectName,
+        const std::string& ModelName,
         std::string& Algorithm,
         std::string& Minimizer,
         std::string& ObjectiveCriterion,
@@ -1119,13 +1208,14 @@ nmfDatabase::getAlgorithmIdentifiers(
 
     // Get current algorithm and run its estimation routine
     fields     = {"Algorithm","Minimizer","ObjectiveCriterion","WithinGuildCompetitionForm","Scaling"};
-    queryStr   = "SELECT Algorithm,Minimizer,ObjectiveCriterion,WithinGuildCompetitionForm,Scaling FROM Systems WHERE SystemName='" + ProjectSettingsConfig + "'";
+    queryStr   = "SELECT Algorithm,Minimizer,ObjectiveCriterion,WithinGuildCompetitionForm,Scaling FROM Models WHERE ";
+    queryStr  += "ProjectName = '" + ProjectName + "' AND ModelName='" + ModelName + "'";
     dataMap    = nmfQueryDatabase(queryStr, fields);
     if (dataMap["Algorithm"].size() == 0) {
-        logger->logMsg(nmfConstants::Warning,"[Warning] nmfDatabase::AlgorithmIdentifiers: No Systems found. Please create a System and click Save on Setup Tab 3.");
+        logger->logMsg(nmfConstants::Warning,"[Warning] nmfDatabase::AlgorithmIdentifiers: No Models found. Please create a Model and click Save on Setup Tab 3.");
         logger->logMsg(nmfConstants::Warning,queryStr);
-        if (showMsg) {
-            QString msg = "\nNo Systems set. Please confirm the following:\n\n";
+        if (showMsg && (widget != nullptr)) {
+            QString msg = "\nNo Models set. Please confirm the following:\n\n";
             msg += "1. In Setup Page 2: Create/Load a Project\n\n";
             msg += "2. In Setup Page 3: Create Guilds/Species\n\n";
             msg += "3. In Setup Page 4: Save a Model\n";
@@ -1502,11 +1592,16 @@ nmfDatabase::getSpeciesGuildMap(std::map<std::string,std::string>& SpeciesGuildM
 bool
 nmfDatabase::getTimeSeriesDataByGuild(
         nmfLogger* logger,
-        const std::string& modelName,
-        std::string ForecastName,
-        const std::string &TableName,
+        const std::string& ProjectName,
+        const std::string& ModelName,
+        const std::string& ForecastName,
+        const std::string& TableName,
         const int &NumGuilds,
         const int &RunLength,
+        const bool& divideByBiomass,
+        const bool& multiplyByBiomass,
+        const bool& multiplyByCatchability,
+        boost::numeric::ublas::matrix<double> &OutputBiomass,
         boost::numeric::ublas::matrix<double> &TableData)
 {
     int m=0;
@@ -1525,11 +1620,29 @@ nmfDatabase::getTimeSeriesDataByGuild(
     QStringList GuildList;
     std::map<std::string,std::string> SpeciesToGuildMap;
     std::map<std::string,int> GuildNameToNumMap;
+    std::string CompetitionForm;
+    std::string Algorithm;
+    std::string Minimizer;
+    std::string ObjectiveCriterion;
+    std::string Scaling;
+    std::string isAggProdStr = "0";
+    std::vector<double> EstCatchability = {};
+    bool isCatch  = (TableName == "HarvestCatch");
+    bool isEffort = (TableName == "HarvestEffort");
 
     nmfUtils::initialize(TableData,RunLength+1,NumGuilds); // +1 because there's a 0 year
 
     if (! getGuilds(logger,NumGuilds2,GuildList)) {
         return false;
+    }
+
+    if (multiplyByCatchability) {
+        getAlgorithmIdentifiers(
+                    nullptr,logger,ProjectName,ModelName,
+                    Algorithm,Minimizer,ObjectiveCriterion,
+                    Scaling,CompetitionForm,nmfConstantsMSSPM::DontShowPopupError);
+        getEstimatedParameter("OutputCatchability",Algorithm,Minimizer,ObjectiveCriterion,
+                              Scaling,isAggProdStr,EstCatchability);
     }
 
     // Get Species names
@@ -1539,14 +1652,15 @@ nmfDatabase::getTimeSeriesDataByGuild(
     // Load data
     if (ForecastName == "") {
         ModifiedTableName = TableName;;
-        fields   = {"MohnsRhoLabel","SystemName","SpeName","Year","Value"};
-        queryStr = "SELECT MohnsRhoLabel,SystemName,SpeName,Year,Value FROM " + ModifiedTableName +
-                   " WHERE MohnsRhoLabel = '' AND SystemName = '" + modelName + "' ORDER BY SpeName,Year";
+        fields   = {"ProjectName","ModelName","SpeName","Year","Value"};
+        queryStr = "SELECT ProjectName,ModelName,SpeName,Year,Value FROM " + ModifiedTableName +
+                   " WHERE ProjectName = '" + ProjectName + "' AND ModelName = '" + ModelName +
+                   "' ORDER BY SpeName,Year";
     } else {
         ModifiedTableName = "Forecast" + TableName;
         fields   = {"ForecastName","SpeName","Year","Value"};
         queryStr = "SELECT ForecastName,SpeName,Year,Value FROM " + ModifiedTableName +
-                   " WHERE ForecastName = '" + ForecastName + "' ORDER BY SpeName,Year";
+                   " WHERE ProjectName = '" + ProjectName + "' AND ForecastName = '" + ForecastName + "' ORDER BY SpeName,Year";
     }
     dataMap    = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SpeName"].size();
@@ -1565,6 +1679,7 @@ nmfDatabase::getTimeSeriesDataByGuild(
 
     m = 0;
     int num=0;
+    double den;
     for (QString guildName : GuildList) {
         GuildNameToNumMap[guildName.toStdString()] = num++;
     }
@@ -1574,7 +1689,24 @@ nmfDatabase::getTimeSeriesDataByGuild(
         GuildName   = SpeciesToGuildMap[SpeciesName];
         GuildNum    = GuildNameToNumMap[GuildName];
         for (int time=0; time<=RunLength; ++time) {
-            TableData(time,GuildNum) += std::stod(dataMap["Value"][m++]);
+            if (isEffort && multiplyByBiomass && multiplyByCatchability) {
+                TableData(time,GuildNum) += std::stod(dataMap["Value"][m++])*EstCatchability[i]*OutputBiomass(time,i);
+            } else if (isEffort && (! multiplyByBiomass) && multiplyByCatchability) {
+                TableData(time,GuildNum) += std::stod(dataMap["Value"][m++])*EstCatchability[i];
+            } else if (divideByBiomass) {
+                TableData(time,GuildNum) += std::stod(dataMap["Value"][m++])/OutputBiomass(time,i);
+//                den = OutputBiomass(time,i);
+//                if (den != 0) {
+//                    TableData(time,GuildNum) += std::stod(dataMap["Value"][m++])/den;
+//                } else {
+//                    errorMsg  = "[Error 3] getTimeSeriesDataByGuild: Found 0 OutputBiomass for ";
+//                    errorMsg += "Species: " + std::to_string(i) + ", year: " + std::to_string(time);
+//                    logger->logMsg(nmfConstants::Error,errorMsg);
+//                    TableData(time,GuildNum) += 0;
+//                }
+            } else {
+                TableData(time,GuildNum) += std::stod(dataMap["Value"][m++]);
+            }
         }
     }
 
@@ -1586,8 +1718,8 @@ bool
 nmfDatabase::getTimeSeriesData(
         QWidget*           Widget,
         nmfLogger*         Logger,
-        const std::string& ProjectSettingsConfig,
-        const std::string  MohnsRhoLabel,
+        const std::string& ProjectName,
+        const std::string& ModelName,
         const std::string  ForecastName,
         const std::string& TableName,
         const int&         NumSpecies,
@@ -1602,24 +1734,21 @@ nmfDatabase::getTimeSeriesData(
     std::string errorMsg;
     std::string ModifiedTableName = "";
     QString msg;
-    QString SystemName = QString::fromStdString(ProjectSettingsConfig);
-    auto parts = SystemName.split("__");
-    SystemName = parts[0];
 
     nmfUtils::initialize(TableData,RunLength+1,NumSpecies); // +1 because there's a 0 year
 
     // Load data
     if (ForecastName == "") {
         ModifiedTableName = TableName;
-        fields   = {"MohnsRhoLabel","SystemName","SpeName","Year","Value"};
-        queryStr = "SELECT MohnsRhoLabel,SystemName,SpeName,Year,Value FROM " + ModifiedTableName +
-                   " WHERE SystemName = '" + SystemName.toStdString() +
-                   "' AND MohnsRhoLabel = '" + MohnsRhoLabel + "' ORDER BY SpeName,Year";
+        fields   = {"ProjectName","ModelName","SpeName","Year","Value"};
+        queryStr = "SELECT ProjectName,ModelName,SpeName,Year,Value FROM " + ModifiedTableName +
+                   " WHERE ProjectName = '" + ProjectName + "' AND ModelName = '" + ModelName +
+                   "' ORDER BY SpeName,Year";
     } else {
         ModifiedTableName = "Forecast" + TableName;;
-        fields   = {"ForecastName","SpeName","Year","Value"};
-        queryStr = "SELECT ForecastName,SpeName,Year,Value FROM " + ModifiedTableName +
-                   " WHERE ForecastName = '" + ForecastName +
+        fields   = {"ProjectName","ForecastName","SpeName","Year","Value"};
+        queryStr = "SELECT ProjectName,ForecastName,SpeName,Year,Value FROM " + ModifiedTableName +
+                   " WHERE ProjectName = '" + ProjectName + "' AND ForecastName = '" + ForecastName +
                    "' ORDER BY SpeName,Year";
     }
     dataMap    = nmfQueryDatabase(queryStr, fields);
@@ -1654,24 +1783,25 @@ nmfDatabase::getTimeSeriesData(
 
 bool
 nmfDatabase::getForecastInfo(
-        const std::string TableName,
-        const std::string ForecastName,
-        int&         RunLength,
-        int&         StartForecastYear,
-        std::string& Algorithm,
-        std::string& Minimizer,
-        std::string& ObjectiveCriterion,
-        std::string& Scaling,
-        int&         NumRuns)
+        const std::string& TableName,
+        const std::string& ProjectName,
+        const std::string& ForecastName,
+        int&               RunLength,
+        int&               StartForecastYear,
+        std::string&       Algorithm,
+        std::string&       Minimizer,
+        std::string&       ObjectiveCriterion,
+        std::string&       Scaling,
+        int&               NumRuns)
 {
     std::vector<std::string> fields;
     std::map<std::string, std::vector<std::string> > dataMap;
     std::string queryStr;
 
     // Find Forecast info
-    fields    = {"ForecastName","Algorithm","Minimizer","ObjectiveCriterion","Scaling","GrowthForm","HarvestForm","WithinGuildCompetitionForm","PredationForm","RunLength","StartYear","EndYear","NumRuns"};
-    queryStr  = "SELECT ForecastName,Algorithm,Minimizer,ObjectiveCriterion,Scaling,GrowthForm,HarvestForm,WithinGuildCompetitionForm,PredationForm,RunLength,StartYear,EndYear,NumRuns FROM " + TableName + " where ";
-    queryStr += "ForecastName = '" + ForecastName + "'";
+    fields    = {"ProjectName","ForecastName","Algorithm","Minimizer","ObjectiveCriterion","Scaling","GrowthForm","HarvestForm","WithinGuildCompetitionForm","PredationForm","RunLength","StartYear","EndYear","NumRuns"};
+    queryStr  = "SELECT ProjectName,ForecastName,Algorithm,Minimizer,ObjectiveCriterion,Scaling,GrowthForm,HarvestForm,WithinGuildCompetitionForm,PredationForm,RunLength,StartYear,EndYear,NumRuns FROM " + TableName + " where ";
+    queryStr += "ProjectName = '" + ProjectName + "' AND ForecastName = '" + ForecastName + "'";
     dataMap   = nmfQueryDatabase(queryStr, fields);
     if (dataMap["ForecastName"].size() != 0) {
         RunLength          = std::stoi(dataMap["RunLength"][0]);
@@ -1692,6 +1822,7 @@ bool
 nmfDatabase::getForecastBiomass(
         QWidget*           Widget,
         nmfLogger*         Logger,
+        const std::string& ProjectName,
         const std::string& ForecastName,
         const int&         NumSpecies,
         const int&         RunLength,
@@ -1712,9 +1843,9 @@ nmfDatabase::getForecastBiomass(
     ForecastBiomass.clear();
 
     // Load Forecast Biomass data (ie, calculated from estimated parameters r and alpha)
-    fields    = {"ForecastName","Algorithm","Minimizer","ObjectiveCriterion","Scaling","SpeName","Year","Value"};
-    queryStr  = "SELECT ForecastName,Algorithm,Minimizer,ObjectiveCriterion,Scaling,SpeName,Year,Value FROM ForecastBiomass";
-    queryStr += " WHERE ForecastName = '" + ForecastName +
+    fields    = {"ProjectName","ForecastName","Algorithm","Minimizer","ObjectiveCriterion","Scaling","SpeName","Year","Value"};
+    queryStr  = "SELECT ProjectName,ForecastName,Algorithm,Minimizer,ObjectiveCriterion,Scaling,SpeName,Year,Value FROM ForecastBiomass";
+    queryStr += " WHERE ProjectName = '" + ProjectName + "' AND ForecastName = '" + ForecastName +
                 "' AND Algorithm = '" + Algorithm +
                 "' AND Minimizer = '" + Minimizer +
                 "' AND ObjectiveCriterion = '" + ObjectiveCriterion +
@@ -1756,6 +1887,7 @@ bool
 nmfDatabase::getForecastBiomassMonteCarlo(
         QWidget*           Widget,
         nmfLogger*         Logger,
+        const std::string& ProjectName,
         const std::string& ForecastName,
         const int&         NumSpecies,
         const int&         RunLength,
@@ -1778,9 +1910,9 @@ nmfDatabase::getForecastBiomassMonteCarlo(
     ForecastBiomassMonteCarlo.clear();
 
     // Load Forecast Biomass data (ie, calculated from estimated parameters r and alpha)
-    fields    = {"ForecastName","RunNum","Algorithm","Minimizer","ObjectiveCriterion","Scaling","SpeName","Year","Value"};
-    queryStr  = "SELECT ForecastName,RunNum,Algorithm,Minimizer,ObjectiveCriterion,Scaling,SpeName,Year,Value FROM ForecastBiomassMonteCarlo";
-    queryStr += " WHERE ForecastName = '" + ForecastName +
+    fields    = {"ProjectName","ForecastName","RunNum","Algorithm","Minimizer","ObjectiveCriterion","Scaling","SpeName","Year","Value"};
+    queryStr  = "SELECT ProjectName,ForecastName,RunNum,Algorithm,Minimizer,ObjectiveCriterion,Scaling,SpeName,Year,Value FROM ForecastBiomassMonteCarlo";
+    queryStr += " WHERE ProjectName = '" + ProjectName + "' AND ForecastName = '" + ForecastName +
                 "' AND Algorithm = '" + Algorithm +
                 "' AND Minimizer = '" + Minimizer +
                 "' AND ObjectiveCriterion = '" + ObjectiveCriterion +
@@ -1828,6 +1960,7 @@ nmfDatabase::getForecastMonteCarloParameters(
         QWidget*             widget,
         nmfLogger*           logger,
         const std::string&   Species,
+        const std::string&   ProjectName,
         const std::string&   ForecastName,
         std::string&         Algorithm,
         std::string&         Minimizer,
@@ -1846,11 +1979,11 @@ nmfDatabase::getForecastMonteCarloParameters(
     QString str2;
     QString str3;
 
-    fields     = {"ForecastName","RunNum","Algorithm","Minimizer","ObjectiveCriterion","Scaling",
+    fields     = {"ProjectName","ForecastName","RunNum","Algorithm","Minimizer","ObjectiveCriterion","Scaling",
                   "SpeName","GrowthRate","CarryingCapacity","Harvest"};
-    queryStr   = "SELECT ForecastName,RunNum,Algorithm,Minimizer,ObjectiveCriterion,Scaling,";
+    queryStr   = "SELECT ProjectName,ForecastName,RunNum,Algorithm,Minimizer,ObjectiveCriterion,Scaling,";
     queryStr  += "SpeName,GrowthRate,CarryingCapacity,Harvest FROM " + TableName;
-    queryStr  += " WHERE ForecastName = '" + ForecastName +
+    queryStr  += " WHERE ProjectName = '" + ProjectName + "' AND ForecastName = '" + ForecastName +
             "' AND Algorithm = '"          + Algorithm +
             "' AND Minimizer = '"          + Minimizer +
             "' AND ObjectiveCriterion = '" + ObjectiveCriterion +
@@ -1877,18 +2010,20 @@ nmfDatabase::getForecastMonteCarloParameters(
 }
 
 bool
-nmfDatabase::isARelativeBiomassModel(const std::string& modelName)
+nmfDatabase::isARelativeBiomassModel(
+        const std::string& ProjectName,
+        const std::string& ModelName)
 {
     bool retv=false;
     std::vector<std::string> fields;
     std::string queryStr;
     std::map<std::string, std::vector<std::string> > dataMap;
 
-    fields    = {"SystemName","ObsBiomassType"};
-    queryStr  = "SELECT SystemName,ObsBiomassType FROM Systems";
-    queryStr += " WHERE SystemName = '" + modelName + "'";
+    fields    = {"ModelName","ObsBiomassType"};
+    queryStr  = "SELECT ModelName,ObsBiomassType FROM Models";
+    queryStr += " WHERE ProjectName = '" + ProjectName + "' AND ModelName = '" + ModelName + "'";
     dataMap   = nmfQueryDatabase(queryStr,fields);
-    int NumRecords = dataMap["SystemName"].size();
+    int NumRecords = dataMap["ModelName"].size();
     if (NumRecords == 1) {
         retv = (dataMap["ObsBiomassType"][0] == "Relative");
     }
@@ -1899,6 +2034,7 @@ bool
 nmfDatabase::getForecastHarvest(
         QWidget*           Widget,
         nmfLogger*         Logger,
+        const std::string& ProjectName,
         const std::string& ForecastName,
         const int&         NumSpecies,
         const int&         RunLength,
@@ -1926,9 +2062,9 @@ nmfDatabase::getForecastHarvest(
     }
 
     // Load Forecast Harvest data
-    fields    = {"ForecastName","Algorithm","Minimizer","ObjectiveCriterion","Scaling","SpeName","Year","Value"};
-    queryStr  = "SELECT ForecastName,Algorithm,Minimizer,ObjectiveCriterion,Scaling,SpeName,Year,Value FROM " + ForecastTable;
-    queryStr += " WHERE ForecastName = '" + ForecastName +
+    fields    = {"ProjectName","ForecastName","Algorithm","Minimizer","ObjectiveCriterion","Scaling","SpeName","Year","Value"};
+    queryStr  = "SELECT ProjectName,ForecastName,Algorithm,Minimizer,ObjectiveCriterion,Scaling,SpeName,Year,Value FROM " + ForecastTable;
+    queryStr += " WHERE ProjectName = '" + ProjectName + "' AND ForecastName = '" + ForecastName +
                 "' AND Algorithm = '" + Algorithm +
                 "' AND Minimizer = '" + Minimizer +
                 "' AND ObjectiveCriterion = '" + ObjectiveCriterion +
@@ -1982,6 +2118,7 @@ bool
 nmfDatabase::updateForecastMonteCarloParameters(
         QWidget*             widget,
         nmfLogger*           logger,
+        const std::string&   ProjectName,
         const std::string&   ForecastName,
         std::string&         Algorithm,
         std::string&         Minimizer,
@@ -2019,9 +2156,10 @@ nmfDatabase::updateForecastMonteCarloParameters(
 
     // Delete the current entry here
     deleteCmd  = "DELETE FROM " + tableName;
-    deleteCmd += " WHERE ForecastName = '" + ForecastName +
+    deleteCmd += " WHERE ProjectName = '"  + ProjectName +
+            "' AND ForecastName = '"       + ForecastName +
             "' AND RunNum = "              + std::to_string(RunNumber) +
-            " AND Algorithm = '"          + Algorithm +
+            "  AND Algorithm = '"          + Algorithm +
             "' AND Minimizer = '"          + Minimizer +
             "' AND ObjectiveCriterion = '" + ObjectiveCriterion +
             "' AND Scaling = '"            + Scaling + "'";
@@ -2035,7 +2173,7 @@ nmfDatabase::updateForecastMonteCarloParameters(
         return false;
     }
 
-    saveCmd  = "INSERT INTO " + tableName + " (ForecastName,RunNum,Algorithm,Minimizer,ObjectiveCriterion,Scaling,";
+    saveCmd  = "INSERT INTO " + tableName + " (ProjectName,ForecastName,RunNum,Algorithm,Minimizer,ObjectiveCriterion,Scaling,";
     saveCmd += "SpeName,GrowthRate,CarryingCapacity,Catchability,";
     saveCmd += "Exponent,CompetitionAlpha,CompetitionBetaSpecies,CompetitionBetaGuilds,CompetitionBetaGuildsGuilds,Predation,Handling,";
     saveCmd += "Harvest) VALUES ";
@@ -2052,24 +2190,25 @@ nmfDatabase::updateForecastMonteCarloParameters(
         predation        = checkForValues(j,NumValues,PredationRandomValues);
         handling         = checkForValues(j,NumValues,HandlingRandomValues);
         harvest          = checkForValues(j,NumValues,HarvestRandomValues);
-        saveCmd += "('"   + ForecastName +
-                "',"  + std::to_string(RunNumber) +
-                ",'"  + Algorithm +
-                "','" + Minimizer +
-                "','" + ObjectiveCriterion +
-                "','" + Scaling +
-                "','" + Species[j].toStdString() +
-                "',"  + std::to_string(GrowthRandomValues[j]) +
-                ","   + std::to_string(carryingCapacity) +
-                ","   + std::to_string(catchability) +
-                ","   + std::to_string(exponent) +
-                ","   + std::to_string(alpha) +
-                ","   + std::to_string(betaSpecies) +
-                ","   + std::to_string(betaGuilds) +
-                ","   + std::to_string(betaGuildsGuilds) +
-                ","   + std::to_string(predation) +
-                ","   + std::to_string(handling) +
-                ","   + std::to_string(harvest) + "),";
+        saveCmd += "('"   + ProjectName +
+                    "','" + ForecastName +
+                    "',"  + std::to_string(RunNumber) +
+                    ",'"  + Algorithm +
+                    "','" + Minimizer +
+                    "','" + ObjectiveCriterion +
+                    "','" + Scaling +
+                    "','" + Species[j].toStdString() +
+                    "',"  + std::to_string(GrowthRandomValues[j]) +
+                    ","   + std::to_string(carryingCapacity) +
+                    ","   + std::to_string(catchability) +
+                    ","   + std::to_string(exponent) +
+                    ","   + std::to_string(alpha) +
+                    ","   + std::to_string(betaSpecies) +
+                    ","   + std::to_string(betaGuilds) +
+                    ","   + std::to_string(betaGuildsGuilds) +
+                    ","   + std::to_string(predation) +
+                    ","   + std::to_string(handling) +
+                    ","   + std::to_string(harvest) + "),";
     }
 
     saveCmd = saveCmd.substr(0,saveCmd.size()-1);
@@ -2296,87 +2435,12 @@ nmfDatabase::getGuildData(nmfLogger* Logger,
     return true;
 }
 
-bool
-nmfDatabase::getHarvestData(const std::string& HarvestType,
-                            nmfLogger* Logger,
-                            const std::string& ProjectSettingsConfig,
-                            const int& NumSpecies,
-                            const int& RunLength,
-                            boost::numeric::ublas::matrix<double>& Catch,
-                            boost::numeric::ublas::matrix<double>& Effort,
-                            boost::numeric::ublas::matrix<double>& Exploitation,
-                            std::vector<double>& Catchability)
-{
-    bool retv = true;
-    int m;
-    int NumRecords;
-    std::vector<std::string> fields;
-    std::map<std::string, std::vector<std::string> > dataMap;
-    std::string queryStr;
-    QString SystemName = QString::fromStdString(ProjectSettingsConfig);
-    std::string msg;
-    std::string HarvestTypePrefix;
-
-    // Because type could be: "Effort (qE)" or "Exploitation (F)"
-    HarvestTypePrefix = QString::fromStdString(HarvestType).split(" ")[0].toStdString();
-
-    // Strip off the MohnsRho suffix
-    auto parts = SystemName.split("__");
-    SystemName =  parts[0];
-
-    fields   = {"MohnsRhoLabel","SystemName","SpeName","Year","Value"};
-    queryStr = "SELECT MohnsRhoLabel,SystemName,SpeName,Year,Value FROM " + HarvestTypePrefix +
-               " WHERE SystemName = '" + SystemName.toStdString() +
-               "' AND MohnsRhoLabel = '' ORDER BY SpeName,Year ";
-    dataMap  = nmfQueryDatabase(queryStr, fields);
-    NumRecords = dataMap["SpeName"].size();
-    if (NumSpecies*RunLength != NumRecords) {
-        msg = "\nnmfDatabase::getHarvestData: NumSpecies*RunLength (" + std::to_string(NumSpecies) +
-                "x" + std::to_string(RunLength) + ") != NumRecords (" +
-                std::to_string(NumRecords) + ")";
-        Logger->logMsg(nmfConstants::Error,msg);
-        retv = false;
-    } else {
-        m = 0;
-        for (int species=0; species<NumSpecies; ++species) {
-            for (int year=0; year<RunLength; ++year) {
-                if (HarvestTypePrefix == "Catch") {
-                    Catch(year,species) = std::stod(dataMap["Value"][m++]);
-                } else if (HarvestTypePrefix == "Effort") {
-                    Effort(year,species) = std::stod(dataMap["Value"][m++]);
-                } else if (HarvestTypePrefix == "Exploitation") {
-                    Exploitation(year,species) = std::stod(dataMap["Value"][m++]);
-                }
-            }
-        }
-    }
-
-    if (HarvestTypePrefix == "Effort") {
-        fields   = {"SpeName","Catchability"};
-        queryStr = "SELECT SpeName,Catchability FROM Species ORDER BY SpeName ";
-        dataMap  = nmfQueryDatabase(queryStr, fields);
-        NumRecords = dataMap["SpeName"].size();
-        if (NumSpecies != NumRecords) {
-            msg = "\nnmfDatabase::getHarvestData: NumSpecies (" + std::to_string(NumSpecies) +
-                    ") != NumRecords (" + std::to_string(NumRecords) + ")";
-            Logger->logMsg(nmfConstants::Error,msg);
-            retv = false;
-        } else {
-            m = 0;
-            for (int species=0; species<NumSpecies; ++species) {
-                    Catchability.push_back(std::stod(dataMap["Catchability"][m++]));
-            }
-        }
-    }
-
-    return retv;
-}
-
 
 bool
 nmfDatabase::getPredationData(const std::string& PredationForm,
                               nmfLogger* Logger,
-                              std::string ProjectSettingsConfig,
+                              const std::string& ProjectName,
+                              const std::string& ModelName,
                               const int& NumSpecies,
                               boost::numeric::ublas::matrix<double>& Rho,
                               boost::numeric::ublas::matrix<double>& Handling,
@@ -2388,7 +2452,6 @@ nmfDatabase::getPredationData(const std::string& PredationForm,
     std::map<std::string, std::vector<std::string> > dataMapMin;
     std::map<std::string, std::vector<std::string> > dataMapMax;
     std::string queryStr;
-    QString SystemName = QString::fromStdString(ProjectSettingsConfig);
     std::vector<std::map<std::string, std::vector<std::string> > > dataMaps = {dataMapMin,dataMapMax};
     std::vector<std::string> rhoFilenames      = {"PredationRhoMin",      "PredationRhoMax"};
     std::vector<std::string> handlingFilenames = {"PredationHandlingMin", "PredationHandlingMax"};
@@ -2398,16 +2461,12 @@ nmfDatabase::getPredationData(const std::string& PredationForm,
         return true;
     }
 
-     // Strip off the MohnsRho suffix
-    auto parts = SystemName.split("__");
-    SystemName =  parts[0];
-
-    fields   = {"SystemName","SpeciesA","SpeciesB","Value"};
+    fields   = {"ProjectName","ModelName","SpeciesA","SpeciesB","Value"};
 
     // Calculate the Rho regardless of the Predation type
     for (int i=0; i<int(rhoFilenames.size()); ++i) {
-        queryStr = "SELECT SystemName,SpeciesA,SpeciesB,Value FROM " + rhoFilenames[i]  +
-                " WHERE SystemName = '" + SystemName.toStdString() +
+        queryStr = "SELECT ProjectName,ModelName,SpeciesA,SpeciesB,Value FROM " + rhoFilenames[i]  +
+                " WHERE ProjectName = '" + ProjectName + "' AND ModelName = '" + ModelName +
                 "' ORDER BY SpeciesA,SpeciesB ";
         dataMaps[i] = nmfQueryDatabase(queryStr, fields);
     }
@@ -2419,8 +2478,8 @@ nmfDatabase::getPredationData(const std::string& PredationForm,
     // Calculate Handling if need be
     if ((PredationForm == "Type II") || (PredationForm == "Type III")) {
         for (int i=0; i<int(handlingFilenames.size()); ++i) {
-            queryStr = "SELECT SystemName,SpeciesA,SpeciesB,Value FROM " + handlingFilenames[i]  +
-                       " WHERE SystemName = '" + SystemName.toStdString() +
+            queryStr = "SELECT ModelName,SpeciesA,SpeciesB,Value FROM " + handlingFilenames[i]  +
+                       " WHERE ModelName = '" + ModelName +
                        "' ORDER BY SpeciesA,SpeciesB ";
             dataMaps[i] = nmfQueryDatabase(queryStr, fields);
         }
@@ -2433,9 +2492,9 @@ nmfDatabase::getPredationData(const std::string& PredationForm,
     // Calculate the Exponent if need be
     if (PredationForm == "Type III") {
         for (int i=0; i<int(exponentFilenames.size()); ++i) {
-            fields   = {"SystemName","SpeName","Value"};
-            queryStr = "SELECT SystemName,SpeName,Value FROM " + exponentFilenames[i]  +
-                       " WHERE SystemName = '" + SystemName.toStdString() +
+            fields   = {"ModelName","SpeName","Value"};
+            queryStr = "SELECT ModelName,SpeName,Value FROM " + exponentFilenames[i]  +
+                       " WHERE ModelName = '" + ModelName +
                        "' ORDER BY SpeName ";
             dataMaps[i] = nmfQueryDatabase(queryStr, fields);
         }
@@ -2451,7 +2510,8 @@ nmfDatabase::getPredationData(const std::string& PredationForm,
 bool
 nmfDatabase::getCompetitionData(const std::string& CompetitionType,
                                 nmfLogger* Logger,
-                                const std::string& ProjectSettingsConfig,
+                                const std::string& ProjectName,
+                                const std::string& ModelName,
                                 const int& NumSpecies,
                                 const int& NumGuilds,
                                 boost::numeric::ublas::matrix<double>& CompetitionAlpha,
@@ -2465,28 +2525,23 @@ nmfDatabase::getCompetitionData(const std::string& CompetitionType,
     std::map<std::string, std::vector<std::string> > dataMapMin;
     std::map<std::string, std::vector<std::string> > dataMapMax;
     std::string queryStr;
-    QString SystemName = QString::fromStdString(ProjectSettingsConfig);
     std::vector<std::map<std::string, std::vector<std::string> > > dataMaps = {dataMapMin,dataMapMax};
-    std::vector<std::string> AlphaFilenames       = {"CompetitionAlphaMin",      "CompetitionAlphaMax"};
-    std::vector<std::string> BetaSpeciesFilenames = {"CompetitionBetaSpeciesMin","CompetitionBetaSpeciesMax"};
-    std::vector<std::string> BetaGuildsFilenames  = {"CompetitionBetaGuildsMin", "CompetitionBetaGuildsMin"};
+    std::vector<std::string> AlphaFilenames            = {"CompetitionAlphaMin",           "CompetitionAlphaMax"};
+    std::vector<std::string> BetaSpeciesFilenames      = {"CompetitionBetaSpeciesMin",     "CompetitionBetaSpeciesMax"};
+    std::vector<std::string> BetaGuildsFilenames       = {"CompetitionBetaGuildsMin",      "CompetitionBetaGuildsMin"};
     std::vector<std::string> BetaGuildsGuildsFilenames = {"CompetitionBetaGuildsGuildsMin","CompetitionBetaGuildsGuildsMax"};
 
     if (CompetitionType == "Null") {
         return true;
     }
 
-     // Strip off the MohnsRho suffix
-    auto parts = SystemName.split("__");
-    SystemName =  parts[0];
-
     if (CompetitionType == "NO_K") {
 
         // AlphaFilenames
-        fields   = {"SystemName","SpeciesA","SpeciesB","Value"};
+        fields   = {"ProjectName","ModelName","SpeciesA","SpeciesB","Value"};
         for (int i=0; i<int(AlphaFilenames.size()); ++i) {
-            queryStr = "SELECT SystemName,SpeciesA,SpeciesB,Value FROM " + AlphaFilenames[i]  +
-                       " WHERE SystemName = '" + SystemName.toStdString() +
+            queryStr = "SELECT ProjectName,ModelName,SpeciesA,SpeciesB,Value FROM " + AlphaFilenames[i]  +
+                       " WHERE ProjectName = '" + ProjectName + "' AND ModelName = '" + ModelName +
                        "' ORDER BY SpeciesA,SpeciesB ";
             dataMaps[i] = nmfQueryDatabase(queryStr, fields);
         }
@@ -2498,10 +2553,10 @@ nmfDatabase::getCompetitionData(const std::string& CompetitionType,
     } else if (CompetitionType == "MS-PROD") {
 
         // BetaSpeciesFilenames
-        fields   = {"SystemName","SpeciesA","SpeciesB","Value"};
+        fields   = {"ProjectName","ModelName","SpeciesA","SpeciesB","Value"};
         for (int i=0; i<int(BetaSpeciesFilenames.size()); ++i) {
-            queryStr = "SELECT SystemName,SpeciesA,SpeciesB,Value FROM " + BetaSpeciesFilenames[i]  +
-                       " WHERE SystemName = '" + SystemName.toStdString() +
+            queryStr = "SELECT ProjectName,ModelName,SpeciesA,SpeciesB,Value FROM " + BetaSpeciesFilenames[i]  +
+                       " WHERE ProjectName = '" + ProjectName + "' AND ModelName = '" + ModelName +
                        "' ORDER BY SpeciesA,SpeciesB ";
             dataMaps[i] = nmfQueryDatabase(queryStr, fields);
         }
@@ -2511,10 +2566,10 @@ nmfDatabase::getCompetitionData(const std::string& CompetitionType,
         }
 
         // BetaGuildsFilenames
-        fields   = {"SystemName","Guild","SpeName","Value"};
+        fields   = {"ProjectName","ModelName","Guild","SpeName","Value"};
         for (int i=0; i<int(BetaGuildsFilenames.size()); ++i) {
-            queryStr = "SELECT SystemName,Guild,SpeName,Value FROM " + BetaGuildsFilenames[i]  +
-                       " WHERE SystemName = '" + SystemName.toStdString() +
+            queryStr = "SELECT ProjectName,ModelName,Guild,SpeName,Value FROM " + BetaGuildsFilenames[i]  +
+                       " WHERE ProjectName = '" + ProjectName + "' AND ModelName = '" + ModelName +
                        "' ORDER BY Guild,SpeName ";
             dataMaps[i] = nmfQueryDatabase(queryStr, fields);
         }
@@ -2526,10 +2581,10 @@ nmfDatabase::getCompetitionData(const std::string& CompetitionType,
     } else if (CompetitionType == "AGG-PROD") {
 
         // BetaGuildsGuildsFilenames
-        fields   = {"SystemName","GuildA","GuildB","Value"};
+        fields   = {"ProjectName","ModelName","GuildA","GuildB","Value"};
         for (int i=0; i<int(BetaGuildsGuildsFilenames.size()); ++i) {
-            queryStr = "SELECT SystemName,GuildA,GuildB,Value FROM " + BetaGuildsGuildsFilenames[i]  +
-                       " WHERE SystemName = '" + SystemName.toStdString() +
+            queryStr = "SELECT ProjectName,ModelName,GuildA,GuildB,Value FROM " + BetaGuildsGuildsFilenames[i]  +
+                       " WHERE ProjectName = '" + ProjectName + "' AND ModelName = '" + ModelName +
                        "' ORDER BY GuildA,GuildB ";
             dataMaps[i] = nmfQueryDatabase(queryStr, fields);
         }
@@ -2600,7 +2655,8 @@ nmfDatabase::getModelFormData(std::string& GrowthForm,
                               int&         RunLength,
                               int&         InitialYear,
                               nmfLogger*   Logger,
-                              std::string  ProjectSettingsConfig)
+                              const std::string& ProjectName,
+                              const std::string& ModelName)
 {
     std::vector<std::string> fields;
     std::map<std::string, std::vector<std::string> > dataMap,dataMapMin,dataMapMax;
@@ -2609,10 +2665,10 @@ nmfDatabase::getModelFormData(std::string& GrowthForm,
     // Find model forms
     fields     = {"GrowthForm","HarvestForm","WithinGuildCompetitionForm","PredationForm","RunLength","StartYear"};
     queryStr   = "SELECT GrowthForm,HarvestForm,WithinGuildCompetitionForm,PredationForm,RunLength,StartYear ";
-    queryStr  += "FROM Systems WHERE SystemName='" + ProjectSettingsConfig + "'";
+    queryStr  += "FROM Models WHERE ProjectName = '" + ProjectName + "' AND ModelName='" + ModelName + "'";
     dataMap    = nmfQueryDatabase(queryStr, fields);
     if (dataMap["GrowthForm"].size() == 0) {
-        std::string msg = "[Error 1] getModelFormData: No Form data found in Systems table for SystemName = " + ProjectSettingsConfig;
+        std::string msg = "[Error 1] getModelFormData: No Form data found in Models table for ModelName = " + ModelName;
         Logger->logMsg(nmfConstants::Error,msg);
         return false;
     }
@@ -2629,7 +2685,8 @@ nmfDatabase::getModelFormData(std::string& GrowthForm,
 QStringList
 nmfDatabase::getVectorParameterNames(
         nmfLogger*   logger,
-        std::string& projectSettingsConfig)
+        const std::string& ProjectName,
+        const std::string& ModelName)
 {
     int NumRecords;
     std::vector<std::string> fields;
@@ -2639,13 +2696,13 @@ nmfDatabase::getVectorParameterNames(
     QStringList parameterNames = nmfConstantsMSSPM::VectorParameterNames;
 
     // Get Model structure data
-    fields     = {"SystemName","ObsBiomassType","GrowthForm","HarvestForm","WithinGuildCompetitionForm","PredationForm"};
-    queryStr   = "SELECT SystemName,ObsBiomassType,GrowthForm,HarvestForm,WithinGuildCompetitionForm,PredationForm";
-    queryStr  += " FROM Systems WHERE SystemName='" + projectSettingsConfig + "'";
+    fields     = {"ProjectName","ModelName","ObsBiomassType","GrowthForm","HarvestForm","WithinGuildCompetitionForm","PredationForm"};
+    queryStr   = "SELECT ProjectName,ModelName,ObsBiomassType,GrowthForm,HarvestForm,WithinGuildCompetitionForm,PredationForm";
+    queryStr  += " FROM Models WHERE ProjectName = '" + ProjectName + "' AND ModelName='" + ModelName + "'";
     dataMap    = nmfQueryDatabase(queryStr, fields);
-    NumRecords = dataMap["SystemName"].size();
+    NumRecords = dataMap["ModelName"].size();
     if (NumRecords == 0) {
-        logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::callback_UpdateDiagnosticParameterChoices: No records found in table Systems for Name = "+projectSettingsConfig);
+        logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::callback_UpdateDiagnosticParameterChoices: No records found in table Models for ModelName = "+ModelName);
         return {};
     }
 
@@ -2669,7 +2726,8 @@ nmfDatabase::getVectorParameterNames(
 void
 nmfDatabase::loadEstimatedVectorParameters(
         nmfLogger*   logger,
-        std::string& projectSettingsConfig,
+        const std::string& ProjectName,
+        const std::string& ModelName,
         QComboBox*   cmbox)
 {
     int index;
@@ -2679,13 +2737,13 @@ nmfDatabase::loadEstimatedVectorParameters(
     std::map<std::string, std::vector<std::string> > dataMap;
 
     // Get Model structure data
-    fields     = {"SystemName","ObsBiomassType","GrowthForm","HarvestForm","WithinGuildCompetitionForm","PredationForm"};
-    queryStr   = "SELECT SystemName,ObsBiomassType,GrowthForm,HarvestForm,WithinGuildCompetitionForm,PredationForm";
-    queryStr  += " FROM Systems WHERE SystemName='" + projectSettingsConfig + "'";
+    fields     = {"ProjectName","ModelName","ObsBiomassType","GrowthForm","HarvestForm","WithinGuildCompetitionForm","PredationForm"};
+    queryStr   = "SELECT ProjectName,ModelName,ObsBiomassType,GrowthForm,HarvestForm,WithinGuildCompetitionForm,PredationForm";
+    queryStr  += " FROM Models WHERE ProjectName = '" + ProjectName + "' AND ModelName='" + ModelName + "'";
     dataMap    = nmfQueryDatabase(queryStr, fields);
-    NumRecords = dataMap["SystemName"].size();
+    NumRecords = dataMap["ModelName"].size();
     if (NumRecords == 0) {
-        logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::callback_UpdateDiagnosticParameterChoices: No records found in table Systems for Name = "+projectSettingsConfig);
+        logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::callback_UpdateDiagnosticParameterChoices: No records found in table Models for ModelName = "+ModelName);
         return;
     }
 
@@ -2774,43 +2832,53 @@ nmfDatabase::getSpecies(
 bool
 nmfDatabase::getHarvestDataByGuild(
         nmfLogger* logger,
+        const std::string& projectName,
         const std::string& modelName,
+        const QString& outputChartType,
         const int& numSpeciesOrGuilds,
-        const std::vector<double>& EstSurveyQ,
         std::string& chartLabel,
+        boost::numeric::ublas::matrix<double>& OutputBiomass,
         boost::numeric::ublas::matrix<double>& harvestData)
 {
     int RunLength;
     std::string HarvestForm;
 
-    getHarvestFormData(logger,modelName,RunLength,HarvestForm);
+    getHarvestFormData(logger,projectName,modelName,RunLength,HarvestForm);
     chartLabel = HarvestForm;
 
     // Get appropriate Harvest data (i.e., Catch or Effort)
+    bool divByBiomass = nmfConstantsMSSPM::DontDivideTableByOutputBiomass;
     if (HarvestForm == nmfConstantsMSSPM::HarvestCatch.toStdString()) {
-        if (! getTimeSeriesDataByGuild(logger,modelName,
-                                       "","HarvestCatch",
-                                       numSpeciesOrGuilds,RunLength,harvestData)) {
+        divByBiomass = (outputChartType == nmfConstantsMSSPM::OutputChartExploitation) ?
+                        nmfConstantsMSSPM::DivideTableByOutputBiomass :
+                        nmfConstantsMSSPM::DontDivideTableByOutputBiomass;
+        if (! getTimeSeriesDataByGuild(logger,projectName,modelName,"","HarvestCatch",
+                                       numSpeciesOrGuilds,RunLength,
+                                       divByBiomass,
+                                       nmfConstantsMSSPM::DontMultiplyTableByOutputBiomass,
+                                       nmfConstantsMSSPM::DontMultiplyTableByCatchability,
+                                       OutputBiomass,harvestData)) {
             return false;
         }
     } else if (HarvestForm == nmfConstantsMSSPM::HarvestEffort.toStdString()) {
-        if (! getTimeSeriesDataByGuild(logger,modelName,
-                                       "","HarvestEffort",
-                                       numSpeciesOrGuilds,RunLength,harvestData)) {
+        bool multByBiomass = (outputChartType == nmfConstantsMSSPM::OutputChartExploitation) ?
+                    nmfConstantsMSSPM::DontMultiplyTableByOutputBiomass :
+                    nmfConstantsMSSPM::MultiplyTableByOutputBiomass;
+        if (! getTimeSeriesDataByGuild(logger,projectName,modelName,"","HarvestEffort",
+                                       numSpeciesOrGuilds,RunLength,
+                                       divByBiomass,
+                                       multByBiomass,
+                                       nmfConstantsMSSPM::MultiplyTableByCatchability,
+                                       OutputBiomass,harvestData)) {
             return false;
         }
-        // Multiply the Effort data by the estimated Survey Q data
-        double surveyQ = 0;
-        for (int species=0; species<(int)harvestData.size2(); ++species) {
-            surveyQ = EstSurveyQ[species];
-            for (int time=0; time<(int)harvestData.size1(); ++time) {
-                harvestData(time,species) *= surveyQ;
-            }
-        }
     } else if (HarvestForm == nmfConstantsMSSPM::HarvestExploitation.toStdString()) {
-        if (! getTimeSeriesDataByGuild(logger,modelName,
-                                       "","HarvestExploitation",
-                                       numSpeciesOrGuilds,RunLength,harvestData)) {
+        if (! getTimeSeriesDataByGuild(logger,projectName,modelName,"","HarvestExploitation",
+                                       numSpeciesOrGuilds,RunLength,
+                                       divByBiomass,
+                                       nmfConstantsMSSPM::DontMultiplyTableByOutputBiomass,
+                                       nmfConstantsMSSPM::MultiplyTableByCatchability,
+                                       OutputBiomass,harvestData)) {
             return false;
         }
     } else {
@@ -2824,6 +2892,7 @@ nmfDatabase::getHarvestDataByGuild(
 bool
 nmfDatabase::getHarvestFormData(
         nmfLogger* logger,
+        const std::string& projectName,
         const std::string& modelName,
         int& RunLength,
         std::string& HarvestForm)
@@ -2833,13 +2902,14 @@ nmfDatabase::getHarvestFormData(
     std::string queryStr;
     std::map<std::string, std::vector<std::string> > dataMap;
 
-    // Get needed data from Systems table
+    // Get needed data from Models table
     fields     = {"RunLength","HarvestForm"};
-    queryStr   = "SELECT RunLength,HarvestForm FROM Systems WHERE SystemName='" + modelName + "'";
+    queryStr   = "SELECT RunLength,HarvestForm FROM Models WHERE ProjectName = '" + projectName +
+                 "' AND ModelName='" + modelName + "'";
     dataMap    = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["RunLength"].size();
     if (NumRecords == 0) {
-        logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::getHarvestData: No records found in table Systems for Name = "+modelName);
+        logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::getHarvestData: No records found in table Models for ModelName = "+modelName);
         return false;
     }
     RunLength   = std::stoi(dataMap["RunLength"][0]);
@@ -2848,41 +2918,170 @@ nmfDatabase::getHarvestFormData(
     return true;
 }
 
+
+bool
+nmfDatabase::getHarvestData(const std::string& HarvestType,
+                            nmfLogger* Logger,
+                            const std::string& ProjectName,
+                            const std::string& ModelName,
+                            const int& NumSpecies,
+                            const int& RunLength,
+                            boost::numeric::ublas::matrix<double>& Catch,
+                            boost::numeric::ublas::matrix<double>& Effort,
+                            boost::numeric::ublas::matrix<double>& Exploitation,
+                            std::vector<double>& Catchability)
+{
+    bool retv = true;
+    int m;
+    int NumRecords;
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+    std::string msg;
+    std::string HarvestTypePrefix;
+
+    // Because type could be: "Effort (qE)" or "Exploitation (F)"
+    HarvestTypePrefix = QString::fromStdString(HarvestType).split(" ")[0].toStdString();
+
+    fields   = {"ProjectName","ModelName","SpeName","Year","Value"};
+    queryStr = "SELECT ProjectName,ModelName,SpeName,Year,Value FROM " + HarvestTypePrefix +
+               " WHERE ProjectName = '" + ProjectName + "' AND ModelName = '" + ModelName +
+               "' ORDER BY SpeName,Year ";
+    dataMap  = nmfQueryDatabase(queryStr, fields);
+    NumRecords = dataMap["SpeName"].size();
+    if (NumSpecies*RunLength != NumRecords) {
+        msg = "\nnmfDatabase::getHarvestData: NumSpecies*RunLength (" + std::to_string(NumSpecies) +
+                "x" + std::to_string(RunLength) + ") != NumRecords (" +
+                std::to_string(NumRecords) + ")";
+        Logger->logMsg(nmfConstants::Error,msg);
+        retv = false;
+    } else {
+        m = 0;
+        for (int species=0; species<NumSpecies; ++species) {
+            for (int year=0; year<RunLength; ++year) {
+                if (HarvestTypePrefix == "Catch") {
+                    Catch(year,species) = std::stod(dataMap["Value"][m++]);
+                } else if (HarvestTypePrefix == "Effort") {
+                    Effort(year,species) = std::stod(dataMap["Value"][m++]);
+                } else if (HarvestTypePrefix == "Exploitation") {
+                    Exploitation(year,species) = std::stod(dataMap["Value"][m++]);
+                }
+            }
+        }
+    }
+
+    if (HarvestTypePrefix == "Effort") {
+        fields   = {"SpeName","Catchability"};
+        queryStr = "SELECT SpeName,Catchability FROM Species ORDER BY SpeName ";
+        dataMap  = nmfQueryDatabase(queryStr, fields);
+        NumRecords = dataMap["SpeName"].size();
+        if (NumSpecies != NumRecords) {
+            msg = "\nnmfDatabase::getHarvestData: NumSpecies (" + std::to_string(NumSpecies) +
+                    ") != NumRecords (" + std::to_string(NumRecords) + ")";
+            Logger->logMsg(nmfConstants::Error,msg);
+            retv = false;
+        } else {
+            m = 0;
+            for (int species=0; species<NumSpecies; ++species) {
+                    Catchability.push_back(std::stod(dataMap["Catchability"][m++]));
+            }
+        }
+    }
+
+    return retv;
+}
+
+bool
+nmfDatabase::getEstimatedParameter(
+        const std::string& TableName,
+        const std::string& Algorithm,
+        const std::string& Minimizer,
+        const std::string& ObjectiveCriterion,
+        const std::string& Scaling,
+        const std::string& isAggProd,
+        std::vector<double>& EstParameter)
+{
+    int NumRecords;
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+
+    EstParameter.clear();
+
+    fields   = {"Algorithm","Minimizer","ObjectiveCriterion","Scaling","isAggProd","SpeName","Value"};
+    queryStr = "SELECT Algorithm,Minimizer,ObjectiveCriterion,Scaling,isAggProd,SpeName,Value FROM " + TableName +
+               " WHERE Algorithm = '" + Algorithm + "' AND Minimizer = '" + Minimizer +
+               "' AND ObjectiveCriterion = '" + ObjectiveCriterion + "' AND Scaling = '" + Scaling +
+               "' AND isAggProd = " + isAggProd + " ORDER BY SpeName ";
+
+    dataMap  = nmfQueryDatabase(queryStr, fields);
+    NumRecords = dataMap["SpeName"].size();
+    if (NumRecords == 0) {
+        return false;
+    }
+
+    for (int i=0; i<NumRecords; ++i) {
+        EstParameter.push_back(std::stod(dataMap["Value"][i]));
+    }
+
+    return true;
+}
+
 bool
 nmfDatabase::getHarvestData(
         QWidget* parent,
         nmfLogger* logger,
+        const std::string& projectName,
         const std::string& modelName,
         const int& numSpeciesOrGuilds,
-        const std::vector<double>& EstSurveyQ,
+        const bool& divideByOutputBiomass,
+        const bool& multiplyByOutputBiomass,
+        const bool& multiplyByCatchability,
+        const std::vector<double>& EstCatchability,
+        const std::vector<boost::numeric::ublas::matrix<double> >& OutputBiomass,
         boost::numeric::ublas::matrix<double>& harvestData)
 {
     int RunLength;
     std::string HarvestForm;
 
-    getHarvestFormData(logger,modelName,RunLength,HarvestForm);
+    getHarvestFormData(logger,projectName,modelName,RunLength,HarvestForm);
 
     // Get appropriate Harvest data (i.e., Catch or Effort)
     if (HarvestForm == nmfConstantsMSSPM::HarvestCatch.toStdString()) {
-        if (! getTimeSeriesData(parent,logger,modelName,
-                                "","","HarvestCatch",
+        if (! getTimeSeriesData(parent,logger,projectName,modelName,
+                                "","HarvestCatch",
                                 numSpeciesOrGuilds,RunLength,harvestData)) {
             return false;
         }
-    } else if (HarvestForm == nmfConstantsMSSPM::HarvestEffort.toStdString()) {
-        if (! getTimeSeriesData(parent,logger,modelName,
-                                "","","HarvestEffort",
-                                numSpeciesOrGuilds,RunLength,harvestData)) {
-            return false;
-        }
-        // Multiply the Effort data by the estimated Survey Q data
-        double surveyQ = 0;
-        for (int species=0; species<(int)harvestData.size2(); ++species) {
-            surveyQ = EstSurveyQ[species];
-            for (int time=0; time<(int)harvestData.size1(); ++time) {
-                harvestData(time,species) *= surveyQ;
+        if (divideByOutputBiomass) {
+            for (int species=0; species<(int)harvestData.size2(); ++species) {
+                for (int time=0; time<(int)harvestData.size1(); ++time) {
+                        harvestData(time,species) /= OutputBiomass[0](time,species);
+                }
             }
         }
+    } else if (HarvestForm == nmfConstantsMSSPM::HarvestEffort.toStdString()) {
+        if (! getTimeSeriesData(parent,logger,projectName,modelName,
+                                "","HarvestEffort",
+                                numSpeciesOrGuilds,RunLength,harvestData)) {
+            return false;
+        }
+        boost::numeric::ublas::matrix<double> tmpHarvestData;
+        nmfUtils::initialize(tmpHarvestData,harvestData.size1(),harvestData.size2());
+
+        // Multiply the Effort data by the estimated catchability and output biomass data
+        double catchability = 0;
+        for (int species=0; species<(int)harvestData.size2(); ++species) {
+            catchability = EstCatchability[species];
+            for (int time=0; time<(int)harvestData.size1(); ++time) {
+                if (multiplyByCatchability && multiplyByOutputBiomass) {
+                    tmpHarvestData(time,species) += harvestData(time,species) * catchability * OutputBiomass[0](time,species);
+                } else if (multiplyByCatchability && (! multiplyByOutputBiomass)) {
+                    tmpHarvestData(time,species) += harvestData(time,species) * catchability;
+                }
+            }
+        }
+        harvestData = tmpHarvestData;
     } else {
         return false;
     }

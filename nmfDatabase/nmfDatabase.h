@@ -108,6 +108,7 @@ public:
     bool getForecastHarvest(
             QWidget*           Widget,
             nmfLogger*         Logger,
+            const std::string& ProjectName,
             const std::string& ForecastName,
             const int&         NumSpecies,
             const int&         RunLength,
@@ -126,13 +127,6 @@ public:
     std::string nmfLastError();
 
     void nmfStartTransaction();
-    bool getHarvestData(
-            QWidget* parent,
-            nmfLogger* logger,
-            const std::string& modelName,
-            const int& numSpeciesOrGuilds,
-            const std::vector<double>& EstSurveyQ,
-            boost::numeric::ublas::matrix<double>& harvestData);
     void nmfSaveDatabase();
     std::string nmfGetCurrentDatabase();
     double checkForValues(
@@ -142,6 +136,25 @@ public:
     std::vector<std::string> nmfGetDatabaseNames();
     bool clearTable(nmfLogger* logger,
                     const std::string& tableName);
+    /**
+     * @brief Removes all data associated with the passed project and model names from all of the relevant tables
+     * @param logger : application logger
+     * @param projectName : name of current project
+     * @param modelName : name of model just deleted
+     * @return true for successful delete and false otherwise
+     */
+    bool cleanTables(
+            nmfLogger* logger,
+            const std::string& projectName,
+            const std::string& modelName);
+    bool getEstimatedParameter(
+            const std::string& TableName,
+            const std::string& Algorithm,
+            const std::string& Minimizer,
+            const std::string& ObjectiveCriterion,
+            const std::string& Scaling,
+            const std::string& isAggProd,
+            std::vector<double>& EstParameter);
     bool getAllSpecies(nmfLogger* logger,
                        std::vector<std::string>& species);
     bool getAllGuilds(nmfLogger* logger,
@@ -149,17 +162,22 @@ public:
     void getSpeciesGuildMap(std::map<std::string,std::string>& SpeciesGuildMap);
     bool getTimeSeriesDataByGuild(
             nmfLogger* logger,
-            const std::string& modelName,
-            std::string ForecastName,
-            const std::string &TableName,
+            const std::string& ProjectName,
+            const std::string& ModelName,
+            const std::string& ForecastName,
+            const std::string& TableName,
             const int &NumGuilds,
             const int &RunLength,
+            const bool& divideByBiomass,
+            const bool& multiplyByBiomass,
+            const bool& multiplyByCatchability,
+            boost::numeric::ublas::matrix<double> &Biomass,
             boost::numeric::ublas::matrix<double> &TableData);
     bool getTimeSeriesData(
             QWidget*           Widget,
             nmfLogger*         Logger,
-            const std::string& ProjectSettingsConfig,
-            const std::string  MohnsRhoLabel,
+            const std::string& ProjectName,
+            const std::string& ModelName,
             const std::string  ForecastName,
             const std::string& TableName,
             const int&         NumSpecies,
@@ -174,8 +192,9 @@ public:
             int &NumSpecies,
             QStringList &SpeciesList);
     bool getForecastInfo(
-            const std::string TableName,
-            const std::string ForecastName,
+            const std::string& TableName,
+            const std::string& ProjectName,
+            const std::string& ForecastName,
             int&         RunLength,
             int&         StartForecastYear,
             std::string& Algorithm,
@@ -186,6 +205,7 @@ public:
     bool getForecastBiomass(
             QWidget*           Widget,
             nmfLogger*         Logger,
+            const std::string& ProjectName,
             const std::string& ForecastName,
             const int&         NumSpecies,
             const int&         RunLength,
@@ -196,19 +216,23 @@ public:
             std::vector<boost::numeric::ublas::matrix<double> >& ForecastBiomass);
     bool getHarvestFormData(
             nmfLogger* logger,
+            const std::string& projectName,
             const std::string& modelName,
             int& RunLength,
             std::string& HarvestForm);
     bool getHarvestDataByGuild(
             nmfLogger* logger,
+            const std::string& projectName,
             const std::string& modelName,
+            const QString& outputChartType,
             const int& numSpeciesOrGuilds,
-            const std::vector<double>& EstSurveyQ,
             std::string& chartLabel,
+            boost::numeric::ublas::matrix<double>& OutputBiomass,
             boost::numeric::ublas::matrix<double>& harvestData);
     bool getForecastBiomassMonteCarlo(
             QWidget*           Widget,
             nmfLogger*         Logger,
+            const std::string& ProjectName,
             const std::string& ForecastName,
             const int&         NumSpecies,
             const int&         RunLength,
@@ -233,16 +257,25 @@ public:
             QWidget*             widget,
             nmfLogger*           logger,
             const std::string&   Species,
+            const std::string&   ProjectName,
             const std::string&   ForecastName,
             std::string&         Algorithm,
             std::string&         Minimizer,
             std::string&         ObjectiveCriterion,
             std::string&         Scaling,
             QStringList&         HoverData);
-    bool isARelativeBiomassModel(const std::string& modelName);
+    bool updateAllModelsInProject(
+            QWidget* parent,
+            const std::string& type,
+            const std::string& projectName,
+            const std::string& currentModel,
+            std::vector<std::string>& modelsInProject);
+    bool isARelativeBiomassModel(const std::string& projectName,
+                                 const std::string& modelName);
     bool updateForecastMonteCarloParameters(
             QWidget*             widget,
             nmfLogger*           logger,
+            const std::string&   ProjectName,
             const std::string&   ForecastName,
             std::string&         Algorithm,
             std::string&         Minimizer,
@@ -264,7 +297,8 @@ public:
 
     QStringList getVectorParameterNames(
             nmfLogger*   logger,
-            std::string& projectSettingsConfig);
+            const std::string& ProjectName,
+            const std::string& ModelName);
 
     /**
      * @brief Closes the Qt SQL database connection
@@ -428,7 +462,7 @@ public:
 
     bool getMortalityData(
             nmfLogger* logger,
-            const std::string& ProjectSettingsConfig,
+            const std::string& ModelName,
             const std::string &Species,
             const int &NumYears,
             const int &NumAges,
@@ -464,7 +498,8 @@ public:
     bool getAlgorithmIdentifiers(
             QWidget*     widget,
             nmfLogger*   logger,
-            const std::string& ProjectSettingsConfig,
+            const std::string& ProjectName,
+            const std::string& ModelName,
             std::string& Algorithm,
             std::string& Minimizer,
             std::string& ObjectiveCriterion,
@@ -491,10 +526,21 @@ public:
                       std::map<int,std::vector<int> >& GuildSpecies,
                       std::vector<int>& GuildNum,
                       boost::numeric::ublas::matrix<double>& ObservedBiomassByGuilds);
-
+    bool getHarvestData(QWidget* parent,
+                        nmfLogger* logger,
+                        const std::string& projectName,
+                        const std::string& modelName,
+                        const int& numSpeciesOrGuilds,
+                        const bool& divideByOutputBiomass,
+                        const bool& multiplyByOutputBiomass,
+                        const bool& multiplyByCatchability,
+                        const std::vector<double>& EstCatchability,
+                        const std::vector<boost::numeric::ublas::matrix<double> >& OutputBiomass,
+                        boost::numeric::ublas::matrix<double>& harvestData);
     bool getHarvestData(const std::string& HarvestType,
                         nmfLogger* Logger,
-                        const std::string& ProjectSettingsConfig,
+                        const std::string& ProjectName,
+                        const std::string& ModelName,
                         const int& NumSpecies,
                         const int& RunLength,
                         boost::numeric::ublas::matrix<double>& Catch,
@@ -504,7 +550,8 @@ public:
 
     bool getPredationData(const std::string& PredationType,
                           nmfLogger* Logger,
-                          std::string ProjectSettingsConfig,
+                          const std::string& ProjectName,
+                          const std::string& ModelName,
                           const int& NumSpecies,
                           boost::numeric::ublas::matrix<double>& Rho,
                           boost::numeric::ublas::matrix<double>& Handling,
@@ -512,7 +559,8 @@ public:
 
     bool getCompetitionData(const std::string& CompetitionType,
                             nmfLogger* Logger,
-                            const std::string& ProjectSettingsConfig,
+                            const std::string& ProjectName,
+                            const std::string& ModelName,
                             const int& NumSpecies,
                             const int& NumGuilds,
                             boost::numeric::ublas::matrix<double>& CompetitionAlpha,
@@ -534,11 +582,13 @@ public:
                           int&         RunLength,
                           int&         InitialYear,
                           nmfLogger*   Logger,
-                          std::string  ProjectSettingsConfig);
+                          const std::string& ProjectName,
+                          const std::string& ModelName);
 
     bool getRunLengthAndStartYear(
             nmfLogger* logger,
-            const std::string& ProjectSettingsConfig,
+            const std::string& ProjectName,
+            const std::string& ModelName,
             int &RunLength,
             int &StartYear);
 
@@ -556,7 +606,8 @@ public:
 
     void loadEstimatedVectorParameters(
             nmfLogger*   logger,
-            std::string& projectSettingsConfig,
+            const std::string& ProjectName,
+            const std::string& ModelName,
             QComboBox*   cmbox);
 
     /**

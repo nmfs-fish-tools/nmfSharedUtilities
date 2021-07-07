@@ -20,7 +20,7 @@ nmfAbundance::nmfAbundance(
     m_databasePtr = databasePtr;
     m_logger      = logger;
     m_nuOther     = 0;
-    m_ProjectSettingsConfig.clear();
+    m_ModelName.clear();
     m_PreferredRatioEta.clear();
     m_PreferredGTRatio.clear();
     m_PreferredLTRatio.clear();
@@ -128,15 +128,15 @@ nmfAbundance::getFleetCatchTotals(const std::string &Species,
     // Find number of fleets for the species
     fields = {"NumFleets"};
     queryStr  = "SELECT COUNT(DISTINCT(Fleet)) AS NumFleets FROM " + TableName;
-    queryStr += " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
+    queryStr += " WHERE ModelName = '" + m_ModelName + "'";
     queryStr += " AND SpeName = '" + Species + "'";
     dataMap   = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumFleets = std::stoi(dataMap["NumFleets"][0]);
 
     // Sum up yearly totals per fleet per age
-    fields     = {"SystemName","SpeName","Fleet","Year","Age","Value","Units"};
-    queryStr   = "SELECT SystemName,SpeName,Fleet,Year,Age,Value,Units FROM " + TableName;
-    queryStr  += " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
+    fields     = {"ModelName","SpeName","Fleet","Year","Age","Value","Units"};
+    queryStr   = "SELECT ModelName,SpeName,Fleet,Year,Age,Value,Units FROM " + TableName;
+    queryStr  += " WHERE ModelName = '" + m_ModelName + "'";
     queryStr  += " AND SpeName = '" + Species + "'";
     queryStr  += " ORDER BY Fleet,Year,Age";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
@@ -200,9 +200,9 @@ nmfAbundance::getSpeciesParameters(
     std::vector<std::string> ParameterNames = {"alpha","beta","gamma"};
     int NumParameters = ParameterNames.size();
 
-    fields     = {"SystemName","Algorithm","SpeName","ParameterName","Value"};
-    queryStr   = "SELECT SystemName,Algorithm,SpeName,ParameterName,Value FROM " + TableName;
-    queryStr  += " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
+    fields     = {"ModelName","Algorithm","SpeName","ParameterName","Value"};
+    queryStr   = "SELECT ModelName,Algorithm,SpeName,ParameterName,Value FROM " + TableName;
+    queryStr  += " WHERE ModelName = '" + m_ModelName + "'";
 //    queryStr  += " AND SpeName = '" + Species + "'";
     queryStr  += " AND Algorithm = '" + RecruitmentType + "'";
     queryStr  += " ORDER BY ParameterName";
@@ -242,7 +242,7 @@ nmfAbundance::getMortalityData(const std::string& species,
     boost::numeric::ublas::matrix<double> tempMatrix;
 
     if (! m_databasePtr->getMortalityData(
-                m_logger,m_ProjectSettingsConfig,species,
+                m_logger,m_ModelName,species,
                 numYears,numAges,tableName,tempMatrix)) {
         m_logger->logMsg(nmfConstants::Warning,"No " + tableName + " data found.");
         return;
@@ -278,7 +278,11 @@ nmfAbundance::ReadSettings()
     QSettings* settings = nmfUtilsQt::createSettings(nmfConstantsMSCAA::SettingsDirWindows,"MSCAA");
 
     settings->beginGroup("Settings");
-    m_ProjectSettingsConfig = settings->value("Name","").toString().toStdString();
+    m_ModelName = settings->value("Name","").toString().toStdString();
+    settings->endGroup();
+
+    settings->beginGroup("SetupTab");
+    m_ProjectName = settings->value("ProjectName","").toString().toStdString();
     settings->endGroup();
 
     delete settings;
@@ -301,9 +305,9 @@ nmfAbundance::getTheMortalityData(
     std::string queryStr;
     std::string msg;
 
-    fields     = {"SystemName","SpeName","Segment","ColName","Value"};
-    queryStr   = "SELECT SystemName,SpeName,Segment,ColName,Value FROM " + TableName;
-    queryStr  += " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
+    fields     = {"ModelName","SpeName","Segment","ColName","Value"};
+    queryStr   = "SELECT ModelName,SpeName,Segment,ColName,Value FROM " + TableName;
+    queryStr  += " WHERE ModelName = '" + m_ModelName + "'";
     queryStr  += " AND SpeName = '" + Species + "'";
     queryStr  += " ORDER BY Segment";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
@@ -354,9 +358,9 @@ nmfAbundance::getPredatorPreyData(
     std::string queryStr;
     std::string msg;
 
-    fields     = {"SystemName","PredatorName","PreyName","Value"};
-    queryStr   = "SELECT SystemName,PredatorName,PreyName,Value FROM " + TableName;
-    queryStr  += " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
+    fields     = {"ModelName","PredatorName","PreyName","Value"};
+    queryStr   = "SELECT ModelName,PredatorName,PreyName,Value FROM " + TableName;
+    queryStr  += " WHERE ModelName = '" + m_ModelName + "'";
     queryStr  += " ORDER BY PredatorName,PreyName";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["PredatorName"].size();
@@ -394,9 +398,9 @@ nmfAbundance::getSystemData(
     std::string queryStr;
     std::string msg;
 
-    fields     = {"SystemName","TotalBiomass","FH_FirstYear","FH_LastYear","NumSpInter","AbundanceDriver"};
-    queryStr   = "SELECT SystemName,TotalBiomass,FH_FirstYear,FH_LastYear,NumSpInter,AbundanceDriver FROM " + TableName;
-    queryStr  += " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
+    fields     = {"ModelName","TotalBiomass","FH_FirstYear","FH_LastYear","NumSpInter","AbundanceDriver"};
+    queryStr   = "SELECT ModelName,TotalBiomass,FH_FirstYear,FH_LastYear,NumSpInter,AbundanceDriver FROM " + TableName;
+    queryStr  += " WHERE ModelName = '" + m_ModelName + "'";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["TotalBiomass"].size();
     if (NumRecords == 0) {
@@ -406,7 +410,7 @@ nmfAbundance::getSystemData(
     }
 
     QString totalBiomass = QString::fromStdString(dataMap["TotalBiomass"][0]);
-    SystemData.SystemName      = dataMap["SystemName"][0];
+    SystemData.SystemName      = dataMap["ModelName"][0];
     SystemData.FH_FirstYear    = std::stoi(dataMap["FH_FirstYear"][0]);
     SystemData.FH_LastYear     = std::stoi(dataMap["FH_LastYear"][0]);
     SystemData.NumSpInter      = std::stoi(dataMap["NumSpInter"][0]);
@@ -447,10 +451,10 @@ nmfAbundance::getDatabaseData(
     nmfUtils::initialize(TableData,NumYears,NumAges);
     NumYears2 = (TableName == "InitialAbundance") ? 1 : NumYears;
 
-    fields     = {"SystemName","SpeName","Year","Age","Value","Units"};
-    queryStr   = "SELECT SystemName,SpeName,Year,Age,Value,Units FROM " + TableName;
+    fields     = {"ModelName","SpeName","Year","Age","Value","Units"};
+    queryStr   = "SELECT ModelName,SpeName,Year,Age,Value,Units FROM " + TableName;
     queryStr  += " WHERE SpeName = '"  + Species + "'";
-    queryStr  += " AND SystemName = '" + m_ProjectSettingsConfig + "'";
+    queryStr  += " AND ModelName = '" + m_ModelName + "'";
     queryStr  += " ORDER BY Year,Age";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SpeName"].size();
@@ -689,9 +693,9 @@ nmfAbundance::getYearlyParameters(
     std::vector<double> Sigma;
     std::vector<double> Zeta;
 
-    fields     = {"SystemName","SpeName","Year","ParameterName","Value"};
-    queryStr   = "SELECT SystemName,SpeName,Year,ParameterName,Value FROM " + TableName;
-    queryStr  += " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
+    fields     = {"ModelName","SpeName","Year","ParameterName","Value"};
+    queryStr   = "SELECT ModelName,SpeName,Year,ParameterName,Value FROM " + TableName;
+    queryStr  += " WHERE ModelName = '" + m_ModelName + "'";
     queryStr  += " AND SpeName = '" + Species + "'";
     queryStr  += " ORDER BY ParameterName,Year";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);

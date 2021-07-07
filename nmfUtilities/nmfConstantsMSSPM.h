@@ -122,6 +122,12 @@ namespace nmfConstantsMSSPM
      const bool   DontShowLegend       = false;
      const QString ChartType2d         = "2d";
      const QString ChartType3d         = "3d";
+     const bool   MultiplyTableByCatchability      = true;
+     const bool   DontMultiplyTableByCatchability  = false;
+     const bool   MultiplyTableByOutputBiomass     = true;
+     const bool   DontMultiplyTableByOutputBiomass = false;
+     const bool   DivideTableByOutputBiomass       = true;
+     const bool   DontDivideTableByOutputBiomass   = false;
 
      const std::string  HiddenDir                      = ".MSSPM";
      const std::string  HiddenDataDir                  = ".MSSPM/data";
@@ -176,6 +182,37 @@ namespace nmfConstantsMSSPM
           "PredationRho",
           "PredationExponent",
           "SurveyQ"};
+
+     const std::vector<std::string> TablesToClean =
+        {"BiomassAbsolute",
+         "BiomassRelative",
+         "BiomassRelativeDividedByEstSurveyQ",
+         "BiomassRelativeScalars",
+         "CompetitionAlpha",
+         "CompetitionAlphaMax",
+         "CompetitionAlphaMin",
+         "CompetitionBetaGuilds",
+         "CompetitionBetaGuildsGuilds",
+         "CompetitionBetaGuildsGuildsMax",
+         "CompetitionBetaGuildsGuildsMin",
+         "CompetitionBetaGuildsMax",
+         "CompetitionBetaGuildsMin",
+         "CompetitionBetaSpecies",
+         "CompetitionBetaSpeciesMax",
+         "CompetitionBetaSpeciesMin",
+         "HarvestCatch",
+         "HarvestEffort",
+         "HarvestExploitation",
+         "Models",
+         "PredationExponent",
+         "PredationExponentMax",
+         "PredationExponentMin",
+         "PredationHandling",
+         "PredationHandlingMax",
+         "PredationHandlingMin",
+         "PredationRho",
+         "PredationRhoMax",
+         "PredationRhoMin"};
 }
 
 

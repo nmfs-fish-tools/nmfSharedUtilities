@@ -88,6 +88,9 @@ private:
     void loadInitBiomassParameterRanges(
             std::vector<std::pair<double,double> >& parameterRanges,
             nmfStructsQt::ModelDataStruct& dataStruct);
+    void loadSurveyQParameterRanges(
+            std::vector<std::pair<double,double> >& parameterRanges,
+            nmfStructsQt::ModelDataStruct& dataStruct);
 
 public:
     BeesAlgorithm(nmfStructsQt::ModelDataStruct BeeStruct,
