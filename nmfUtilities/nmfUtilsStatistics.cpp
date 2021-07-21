@@ -739,40 +739,84 @@ bool calculateMEF(const int& NumSpeciesOrGuilds,
     return true;
 }
 
-bool calculateMohnsRhoForParameter(
-        const int& NumPeels,
-        const int& NumSpecies,
-        const int& RunLength,
-        const std::vector<double>& EstParameter,
-        std::vector<double>& mohnsRhoValue)
+
+bool calculateMohnsRhoFor1dParameter(
+        std::vector<boost::numeric::ublas::matrix<double> >& VectorOfParameterMatrices,
+        std::vector<double>& mohnsRhoVector)
 {
-    int lastIndex,currIndex;
+    int NumPeels   = VectorOfParameterMatrices.size();
+    int NumSpecies = VectorOfParameterMatrices[0].size1();
     double den;
     double value;
+    double aveValue=0;
 
-    if ((RunLength == 0) || (NumPeels == 0)) {
+    if (NumPeels == 0) {
         return false;
     }
 
     // Est Parameters are organized from Max Num Peels to 0.
     // Ex. If NumSpecies = 4, and NumPeels = 3, there should be
     // 16 est params listed as follows in the vector:
-    // peel=3, peel=2, peel=1, peel=0
-    mohnsRhoValue.clear();
+    // peel=0, peel=1, peel=2, peel=3
+    mohnsRhoVector.clear();
     for (int species=0; species<NumSpecies; ++species) {
         value = 0;
-        lastIndex = NumPeels*NumSpecies+species; // represents peel=0 or no peel in year range
-        for (int peel=0; peel<NumPeels; ++peel)  {
-            currIndex = peel*NumSpecies+species;
-            den = EstParameter[lastIndex];
-            if (den == 0) {
-                return false;
-            }
-            value += (EstParameter[currIndex] - den)/den;
+        den = VectorOfParameterMatrices[0](species,0);
+        if (den == 0) {
+            return false;
         }
-        value /= NumPeels;
-        mohnsRhoValue.push_back(value);
+        for (int peel=1; peel<NumPeels; ++peel)  {
+            value += (VectorOfParameterMatrices[peel](species,0) - den)/den;
+        }
+        value /= (NumPeels-1);
+        aveValue += value;
+        mohnsRhoVector.push_back(value);
     }
+    aveValue /= NumSpecies;
+    mohnsRhoVector.push_back(aveValue);
+
+    return true;
+}
+
+bool calculateMohnsRhoFor2dParameter(
+        std::vector<boost::numeric::ublas::matrix<double> >& VectorOfParameterMatrices,
+        std::vector<double>& mohnsRhoVector)
+{
+    int NumPeels   = VectorOfParameterMatrices.size();
+    int NumSpecies = VectorOfParameterMatrices[0].size1();
+    int NumColumns = VectorOfParameterMatrices[0].size2();
+    int numNonZeroSubParameters;
+    double den;
+    double value;
+    double aveValue=0;
+
+    if ((NumPeels == 0) || (NumSpecies != NumColumns)) {
+        return false;
+    }
+
+    // Est Parameters are organized from Max Num Peels to 0.
+    // Ex. If NumSpecies = 4, and NumPeels = 3, there should be
+    // 16 est params listed as follows in the vector:
+    // peel=0, peel=1, peel=2, peel=3
+    mohnsRhoVector.clear();
+    for (int species=0; species<NumSpecies; ++species) {
+        numNonZeroSubParameters = 0;
+        value = 0;
+        for (int col=0; col<NumColumns; ++col) {
+            den = VectorOfParameterMatrices[0](species,col);
+            if (den != 0) { // Some of these subparameters may be 0 (i.e., unused)
+                for (int peel=1; peel<NumPeels; ++peel)  {
+                    value += (VectorOfParameterMatrices[peel](species,col) - den)/den;
+                    ++numNonZeroSubParameters;
+                }
+            }
+        }
+        value /= numNonZeroSubParameters;
+        aveValue += value;
+        mohnsRhoVector.push_back(value);
+    }
+    aveValue /= NumSpecies;
+    mohnsRhoVector.push_back(aveValue);
 
     return true;
 }
@@ -781,54 +825,38 @@ bool calculateMohnsRhoForTimeSeries(
         const int& NumPeels,
         const int& NumSpecies,
         const std::vector<std::vector<double> >& TimeSeries,
-        std::vector<double>& mohnsRhoValue)
+        std::vector<double>& mohnsRhoVector)
 {
-    int PeelRunLength=0;
     int num=0;
+    int timeSeriesPeeledLength;
     double den;
     double value=0;
+    double aveValue=0;
 
-    if ((TimeSeries.size() == 0) ||
-        (NumPeels < 1) ||
-        (NumSpecies == 0)) {
+    if ((TimeSeries.size() == 0) || (NumPeels < 1) || (NumSpecies == 0)) {
         return false;
     }
-std::cout << "Calculating Mohns Rho est biomass..." << std::endl;
-std::cout << "Time series: " << TimeSeries.size() << std::endl;
-for (unsigned i=0; i<TimeSeries.size(); ++i) {
-std::cout << "Time series sub sizes: " << TimeSeries[i].size() << std::endl;
-}
-    mohnsRhoValue.clear();
-/*
+
+    mohnsRhoVector.clear();
+
     for (int species=0; species<NumSpecies; ++species) {
         num = 0;
-        for (int peel=0; peel<=NumPeels-1; ++peel) {
-            PeelRunLength = TimeSeries[peel].size()/NumSpecies;
-            for (int i=0; i<PeelRunLength; ++i) {
-                den = TimeSeries[NumPeels-1][species*PeelRunLength+i];
-                value += (TimeSeries[peel][species*PeelRunLength+i] - den)/den;
-                ++num;
+        for (int peel=1; peel<=NumPeels; ++peel) { // Ex. 4: skip 0, then 1, 2, 3
+            timeSeriesPeeledLength = (int)TimeSeries[peel].size() - peel;
+            for (int i=0; i<timeSeriesPeeledLength; ++i) {
+                den = TimeSeries[0][i];
+                if (den != 0) {
+                    value += (TimeSeries[peel][i] - den)/den;
+                    ++num;
+                }
             }
         }
         value /= num;
-        mohnsRhoValue.push_back(value);
+        aveValue += value;
+        mohnsRhoVector.push_back(value);
     }
-std::cout << "den: " << den << ", species*PeelRunLength+i: " << species*PeelRunLength+i << std::endl;
-std::cout << "Species: " << species << ", value: " << value << ", num: " << num << std::endl;
-*/
-    for (int species=0; species<NumSpecies; ++species) {
-        num = 0;
-        for (int peel=NumPeels; peel>0; --peel) { // Ex. 3: 3,2,1; skip 0
-            PeelRunLength = TimeSeries[peel].size()/NumSpecies;
-            for (int i=0; i<PeelRunLength; ++i) {
-                den = TimeSeries[0][i];
-                value += (TimeSeries[peel][i] - den)/den;
-                ++num;
-            }
-            value /= num;
-            mohnsRhoValue.push_back(value);
-        }
-    }
+    aveValue /= NumSpecies;
+    mohnsRhoVector.push_back(aveValue);
 
     return true;
 }

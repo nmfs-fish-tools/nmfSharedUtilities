@@ -19,7 +19,8 @@ nmfChartLineWithScatter::populateChart(
         const bool &AddScatter,
         const int &XOffset,
         const bool &xAxisIsInteger,
-        const double &YMinSliderVal,
+        const double &YMinVal,
+        const double &YMaxVal,
         const boost::numeric::ublas::matrix<double> &YAxisData,
         const boost::numeric::ublas::matrix<double> &ScatterData,
         const QStringList &RowLabels,
@@ -37,6 +38,7 @@ nmfChartLineWithScatter::populateChart(
         const bool& showLegend)
 {
     int numPointsInLine = 0;
+    double currentYMin  = 0;
     QLineSeries    *lineSeries    = nullptr;
     QScatterSeries *scatterSeries = nullptr;
     QString scatterSeriesName = "Obs Biomass";
@@ -134,13 +136,14 @@ nmfChartLineWithScatter::populateChart(
     QValueAxis *currentAxisY = qobject_cast<QValueAxis*>(chart->axes(Qt::Vertical).back());
     currentAxisY->setTitleFont(titleFont);
     currentAxisY->setTitleText(QString::fromStdString(YTitle));
-    currentAxisY->applyNiceNumbers();
-    double currentYMin = currentAxisY->min();
-    if (YMinSliderVal >= 0) {
-        currentAxisY->setMin(currentYMin*YMinSliderVal/100.0);
-        currentAxisY->applyNiceNumbers();
+    currentYMin = currentAxisY->min();
+    if (YMinVal >= 0) {
+        currentAxisY->setMin(currentYMin*YMinVal/100.0);
     }
-//std::cout << 4 << std::endl;
+    if (YMaxVal >= 0) {
+        currentAxisY->setMax(YMaxVal);
+    }
+    currentAxisY->applyNiceNumbers();
 
     QValueAxis *currentAxisX = qobject_cast<QValueAxis*>(chart->axes(Qt::Horizontal).back());
     currentAxisX->applyNiceNumbers();

@@ -168,9 +168,7 @@ public:
             const std::string& TableName,
             const int &NumGuilds,
             const int &RunLength,
-            const bool& divideByBiomass,
-            const bool& multiplyByBiomass,
-            const bool& multiplyByCatchability,
+            const QString& OutputChartType,
             boost::numeric::ublas::matrix<double> &Biomass,
             boost::numeric::ublas::matrix<double> &TableData);
     bool getTimeSeriesData(

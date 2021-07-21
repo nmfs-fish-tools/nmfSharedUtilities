@@ -258,17 +258,12 @@ nmfUtilsStatisticsAveraging::createTrimmedStructures(const int& numberOfTopRunsT
         m_EstPredationHandling_trimmed           = m_EstPredationHandling;
         m_EstBiomass_trimmed                     = m_EstBiomass;
     } else {
-for (int i=0;i<m_AIC.size();++i) {
- std::cout << "m_AIC["<<i<<"]: " << m_AIC[i] << std::endl;
-}
-
         int NumRuns_trimmed = numberOfTopRunsToUse;
         if (isPercent) {
             int NumRuns = m_AIC.size();
-std::cout << "==> Num Runs: " << NumRuns << std::endl;
             NumRuns_trimmed = NumRuns*(numberOfTopRunsToUse/100.0);
         }
-std::cout << "==> Num Runs Trimmed: " << NumRuns_trimmed << std::endl;
+
         // Go through the fitness vector and keep the top NumRuns_trimmed runs
         // Copy the list and then sort it
         std::vector<double> m_AIC_sorted = m_AIC;
@@ -281,7 +276,6 @@ std::cout << "==> Num Runs Trimmed: " << NumRuns_trimmed << std::endl;
         while (run < NumRuns_trimmed) {
             // Find index of m_AIC_sorted in m_AIC
             fitnessValueToFind = m_AIC_sorted[run];
-std::cout << "==>top n value: " << fitnessValueToFind << std::endl;
             std::vector<double>::iterator iter = std::find(m_AIC.begin(), m_AIC.end(), fitnessValueToFind);
             if (iter != m_AIC.end())
                 // Get index of element from iterator
@@ -295,7 +289,6 @@ std::cout << "==>top n value: " << fitnessValueToFind << std::endl;
 
         // Now copy the appropriate
         for (int index : positionOfTopNRuns) {
-std::cout << "==>position in original vector: " << index << std::endl;
             m_AIC_trimmed.push_back(m_AIC[index]);
             m_EstInitBiomass_trimmed.push_back(m_EstInitBiomass[index]);
             m_EstGrowthRates_trimmed.push_back(m_EstGrowthRates[index]);

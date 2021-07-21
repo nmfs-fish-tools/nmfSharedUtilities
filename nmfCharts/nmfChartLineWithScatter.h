@@ -48,6 +48,7 @@ public:
             const int  &XOffset,
             const bool &xAxisIsInteger,
             const double &YMin,
+            const double &YMax,
             const boost::numeric::ublas::matrix<double> &LineData,
             const boost::numeric::ublas::matrix<double> &ScatterData,
             const QStringList &RowLabels,

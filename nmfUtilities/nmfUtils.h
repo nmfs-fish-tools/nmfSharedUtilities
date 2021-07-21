@@ -89,9 +89,10 @@ struct StatStruct {
     std::vector<double> ae;
     std::vector<double> aae;
     std::vector<double> mef;
-    std::vector<double> mohnsRhoGrowthRate;
-    std::vector<double> mohnsRhoCarryingCapacity;
-    std::vector<double> mohnsRhoEstimatedBiomass;
+//    std::vector<double> mohnsRhoGrowthRate;
+//    std::vector<double> mohnsRhoCarryingCapacity;
+//    std::vector<double> mohnsRhoEstimatedBiomass;
+    std::vector<std::vector<double> > mohnsRhoParameters;
 };
 
 /**
@@ -590,5 +591,12 @@ namespace nmfUtils {
     void append(std::vector<double>& newVec,
                 std::vector<double>& currentVec);
 
+    /**
+     * @brief Converts a vector to a one dimensional matrix
+     * @param vec : vector to convert
+     * @return one-dimensional matrix
+     */
+    boost::numeric::ublas::matrix<double>
+        convertVectorToMatrix(std::vector<double>& vec);
 }
 

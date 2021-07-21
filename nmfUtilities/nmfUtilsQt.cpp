@@ -2094,7 +2094,7 @@ reloadDataStruct(
     dataStruct.EstimateRunBoxes.clear();
     int startIndex = 22;
     nmfStructsQt::EstimateRunBox runBox;
-    for (int col=22; col<parts.size()-3; col+=3) {
+    for (int col=22; col<parts.size()-2; col+=3) { // -2 since still need to include the last parameter's name field
         if ((parts[col+1].toInt()==1) && (parts[col+2].toInt()==1)) {
             runBox.parameter = nmfConstantsMSSPM::EstimateCheckboxNames[(col-startIndex)/3];
             runBox.state     = std::make_pair(true,true);

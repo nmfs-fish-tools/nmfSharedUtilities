@@ -27,7 +27,8 @@ nmfChartLine::populateChart(
         const bool&        ShowLegend,
         const double&      XOffset,
         const bool&        XAxisIsInteger,
-        const double&      YMinSliderVal,
+        const double&      YMinVal,
+        const double&      YMaxVal,
         const bool&        LeaveGapsWhereNegative,
         const boost::numeric::ublas::matrix<double> &YAxisData,
         const QStringList& RowLabels,
@@ -147,13 +148,14 @@ nmfChartLine::populateChart(
     QValueAxis *currentAxisY = qobject_cast<QValueAxis*>(chart->axes(Qt::Vertical).back());
     currentAxisY->setTitleFont(titleFont);
     currentAxisY->setTitleText(QString::fromStdString(YTitle));
-    currentAxisY->applyNiceNumbers();
     double currentYMin = currentAxisY->min();
-    if (YMinSliderVal >= 0) {
-        currentAxisY->setMin(currentYMin*YMinSliderVal/100.0); // RSK - modify this
-        currentAxisY->applyNiceNumbers();
+    if (YMinVal >= 0) {
+        currentAxisY->setMin(currentYMin*YMinVal/100.0);
     }
-
+    if (YMaxVal >= 0) {
+        currentAxisY->setMax(YMaxVal);
+    }
+    currentAxisY->applyNiceNumbers();
 
     if (LeaveGapsWhereNegative) {
         double currentYMax = currentAxisY->max();

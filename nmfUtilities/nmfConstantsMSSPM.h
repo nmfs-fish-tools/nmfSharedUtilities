@@ -161,6 +161,19 @@ namespace nmfConstantsMSSPM
      const QString      HarvestEffort                  = "Effort (qE)";
      const QString      HarvestExploitation            = "Exploitation Rate (Harvest/Bc)";
 
+     const QString      ParameterNameInitialBiomass            = "Initial Absolute Biomass";
+     const QString      ParameterNameSurveyQ                   = "SurveyQ";
+     const QString      ParameterNameGrowthRate                = "Growth Rate";
+     const QString      ParameterNameCarryingCapacity          = "Carrying Capacity";
+     const QString      ParameterNameCatchability              = "Catchability";
+     const QString      ParameterNameCompetitionAlpha          = "Alpha";
+     const QString      ParameterNameCompetitionBetaSpecies    = "Beta SpeciesSpecies";
+     const QString      ParameterNameCompetitionBetaGuild      = "Beta GuildSpecies";
+     const QString      ParameterNameCompetitionBetaGuildGuild = "Beta GuildGuild";
+     const QString      ParameterNamePredationRho              = "Predation Effect";
+     const QString      ParameterNamePredationHandling         = "Handling Time";
+     const QString      ParameterNamePredationExponent         = "Predation Exponent";
+
      const QStringList VectorParameterNames =
          {"Initial Biomass (B₀)",
           "Growth Rate (r)",

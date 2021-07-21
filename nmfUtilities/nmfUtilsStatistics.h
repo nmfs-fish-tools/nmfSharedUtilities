@@ -155,35 +155,39 @@ namespace nmfUtilsStatistics {
      */
     double calculateModelEfficiency(const boost::numeric::ublas::matrix<double>& EstBiomass,
                                     const boost::numeric::ublas::matrix<double>& ObsBiomass);
+
     /**
-     * @brief Calculates the Mohns Rho values for the given parameter
-     * @param numPeels : number of peels, where a peel is defined as a
-     * year range which is 1 year less than the previous
-     * @param numSpeciesOrGuilds : the number of either species or guilds
-     * @param runLength : time period in years
-     * @param estParameter : estimated parameter per species or guild to calculate Mohns Rho value for
-     * @param mohnsRhoValue : Mohns Rho value per species or guild
+     * @brief Calculates the Mohns Rho values for the given 1-dimensional parameter
+     * @param VectorOfParameterMatrices
+     * @param MohnsRhoVector
      * @return True if no error found, else False
      */
-    bool calculateMohnsRhoForParameter(const int& numPeels,
-                                       const int& numSpeciesOrGuilds,
-                                       const int& runLength,
-                                       const std::vector<double>& estParameter,
-                                       std::vector<double>& mohnsRhoValue);
+    bool calculateMohnsRhoFor1dParameter(
+            std::vector<boost::numeric::ublas::matrix<double> >& VectorOfParameterMatrices,
+            std::vector<double>& MohnsRhoVector);
+    /**
+     * @brief Calculates the Mohns Rho values for the given 2-dimensional parameter
+     * @param VectorOfParameterMatrices ; vector containing 2d parameters (i.e., competition alpha)
+     * @param MohnsRhoVector : vector of doubles containing Mohn's Rho value per species
+     * @return True if no error found, else False
+     */
+    bool calculateMohnsRhoFor2dParameter(
+            std::vector<boost::numeric::ublas::matrix<double> >& VectorOfParameterMatrices,
+            std::vector<double>& MohnsRhoVector);
     /**
      * @brief Calculates the Mohns Rho values for the given time series
      * @param numPeels : number of peels, where a peel is defined as a
      * year range which is 1 year less than the previous
      * @param numSpecies : number of species
      * @param timeSeries : time series to calculate Mohns rho values for
-     * @param mohnsRhoValue : Mohns Rho value per species
+     * @param mohnsRhoVector : Mohns Rho value per species
      * @return True if no error found, else False
      */
     bool calculateMohnsRhoForTimeSeries(
             const int& numPeels,
             const int& numSpecies,
             const std::vector<std::vector<double> >& timeSeries,
-            std::vector<double>& mohnsRhoValue);
+            std::vector<double>& mohnsRhoVector);
     /**
      * @brief Calculates the sum of squares fitness of ⵉ(Be - Bo)²
      * @param EstBiomass : estimated biomass matrix

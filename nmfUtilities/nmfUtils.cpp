@@ -255,6 +255,21 @@ double getMatrixMax(boost::numeric::ublas::matrix<double> &mat,
 
 }
 
+boost::numeric::ublas::matrix<double>
+convertVectorToMatrix(std::vector<double>& vec)
+{
+    int i = 0;
+    boost::numeric::ublas::matrix<double> matrix;
+
+    initialize(matrix,vec.size(),1);
+    for (double val : vec) {
+        matrix(i++,0) = val;
+    }
+
+    return matrix;
+}
+
+
 /*
  * Returns a random number between the passed limits: [lowerLimit,upperLimit)
  * If seed < 0, no seed is used and the algorithm is stochastic.
@@ -509,17 +524,14 @@ bool isEstimateParameterChecked(
         const nmfStructsQt::ModelDataStruct& dataStruct,
         const std::string& ParameterName)
 {
-    bool isChecked = false;
-
     std::vector<nmfStructsQt::EstimateRunBox> EstimateRunBoxes = dataStruct.EstimateRunBoxes;
     for (nmfStructsQt::EstimateRunBox runBox : EstimateRunBoxes) {
         if (runBox.parameter == ParameterName) {
-            isChecked = true;
-            break;
+            return true;
         }
     }
 
-    return isChecked;
+    return false;
 }
 
 std::string
