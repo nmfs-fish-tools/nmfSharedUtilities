@@ -174,6 +174,11 @@ namespace nmfConstantsMSSPM
      const QString      ParameterNamePredationHandling         = "Handling Time";
      const QString      ParameterNamePredationExponent         = "Predation Exponent";
 
+     const QString      SectionSetup                           = "Setup";
+     const QString      SectionEstimation                      = "Estimation Data Input";
+     const QString      SectionDiagnostic                      = "Diagnostic Data Input";
+     const QString      SectionForecast                        = "Forecast";
+
      const QStringList VectorParameterNames =
          {"Initial Biomass (B₀)",
           "Growth Rate (r)",
