@@ -147,6 +147,16 @@ public:
             nmfLogger* logger,
             const std::string& projectName,
             const std::string& modelName);
+    bool getEstimatedBiomass(
+            const int&         NumSpecies,
+            const int&         RunLength,
+            const std::string& TableName,
+            const std::string& Algorithm,
+            const std::string& Minimizer,
+            const std::string& ObjectiveCriterion,
+            const std::string& Scaling,
+            const std::string& isAggProd,
+            boost::numeric::ublas::matrix<double>& EstBiomass);
     bool getEstimatedParameter(
             const std::string& TableName,
             const std::string& Algorithm,

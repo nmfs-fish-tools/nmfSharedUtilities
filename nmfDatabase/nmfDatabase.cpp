@@ -1314,6 +1314,14 @@ nmfDatabase::importDatabase(QWidget*     widget,
             logger->logMsg(nmfConstants::Error,"Error: nmfDatabase::importDatabase: "+errorMsg);
             return "";
         }
+
+        cmd = "USE " + fileDatabaseName;
+        errorMsg = nmfUpdateDatabase(cmd.toStdString());
+        if (nmfUtilsQt::isAnError(errorMsg)) {
+            logger->logMsg(nmfConstants::Error,"Error: nmfDatabase::importDatabase: "+errorMsg);
+            return "";
+        }
+
     }
 
     // Hiro -update logic for Mac OS
@@ -2988,6 +2996,50 @@ nmfDatabase::getHarvestData(const std::string& HarvestType,
 
     return retv;
 }
+
+bool
+nmfDatabase::getEstimatedBiomass(
+        const int&         NumSpecies,
+        const int&         RunLength,
+        const std::string& TableName,
+        const std::string& Algorithm,
+        const std::string& Minimizer,
+        const std::string& ObjectiveCriterion,
+        const std::string& Scaling,
+        const std::string& isAggProd,
+        boost::numeric::ublas::matrix<double>& EstBiomass)
+{
+    int NumRecords;
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+
+    EstBiomass.clear();
+    nmfUtils::initialize(EstBiomass,RunLength+1,NumSpecies);
+
+    fields   = {"Algorithm","Minimizer","ObjectiveCriterion","Scaling","isAggProd","SpeName","Year","Value"};
+    queryStr = "SELECT Algorithm,Minimizer,ObjectiveCriterion,Scaling,isAggProd,SpeName,Year,Value FROM " + TableName +
+               " WHERE Algorithm = '" + Algorithm + "' AND Minimizer = '" + Minimizer +
+               "' AND ObjectiveCriterion = '" + ObjectiveCriterion + "' AND Scaling = '" + Scaling +
+               "' AND isAggProd = " + isAggProd + " ORDER BY SpeName,Year ";
+    dataMap  = nmfQueryDatabase(queryStr, fields);
+    NumRecords = dataMap["SpeName"].size();
+    if ((NumRecords == 0) ||
+        (NumRecords != NumSpecies*(RunLength+1))) {
+        std::cout << queryStr << std::endl;
+        return false;
+    }
+
+    int m = 0;
+    for (int i=0; i<NumSpecies; ++i) {
+        for (int j=0; j<=RunLength; ++j) {
+            EstBiomass(j,i) = std::stod(dataMap["Value"][m++]);
+        }
+    }
+
+    return true;
+}
+
 
 bool
 nmfDatabase::getEstimatedParameter(

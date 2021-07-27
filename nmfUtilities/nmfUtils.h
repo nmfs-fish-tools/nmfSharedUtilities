@@ -89,6 +89,7 @@ struct StatStruct {
     std::vector<double> ae;
     std::vector<double> aae;
     std::vector<double> mef;
+    std::string         title;
 //    std::vector<double> mohnsRhoGrowthRate;
 //    std::vector<double> mohnsRhoCarryingCapacity;
 //    std::vector<double> mohnsRhoEstimatedBiomass;
