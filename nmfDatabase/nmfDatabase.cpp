@@ -1633,7 +1633,7 @@ nmfDatabase::getTimeSeriesDataByGuild(
     std::string Scaling;
     std::string isAggProdStr = "0";
     std::vector<double> EstCatchability = {};
-    bool isCatch  = (TableName == "HarvestCatch");
+//  bool isCatch  = (TableName == "HarvestCatch");
     bool isEffort = (TableName == "HarvestEffort");
 //  bool isChartBiomass      = (OutputChartType == nmfConstantsMSSPM::OutputChartBiomass);
     bool isChartHarvest      = (OutputChartType == nmfConstantsMSSPM::OutputChartHarvest);
@@ -1724,7 +1724,7 @@ nmfDatabase::getTimeSeriesDataByGuild(
     }
 
     if (isChartExploitation) {
-        for (int guild=0; guild<TableData.size2(); ++guild) {
+        for (int guild=0; guild<(int)TableData.size2(); ++guild) {
             for (int time=0; time<=RunLength; ++time) {
                 TableData(time,guild) /= DenominatorData(time,guild);
             }
