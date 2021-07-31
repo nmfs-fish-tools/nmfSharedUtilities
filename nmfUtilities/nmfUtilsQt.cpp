@@ -393,16 +393,17 @@ bool allCellsArePopulated(QTabWidget *tabW,
                                           QMessageBox::Ok);
                 }
                 return false;
-            } else if (value.contains(',')) {
-                if (showError) {
-                    msg = "Found an invalid numeric value of: " + value;
-                    msg += ". No commas or special characters allowed.";
-                    QMessageBox::warning(tabW, QT_TR_NOOP("Warning"),
-                                         QT_TR_NOOP("\n"+msg+"\n"),
-                                         QMessageBox::Ok);
-                }
-                return false;
             }
+//            else if (value.contains(',')) {
+//                if (showError) {
+//                    msg = "Found an invalid numeric value of: " + value;
+//                    msg += ". No commas or special characters allowed.";
+//                    QMessageBox::warning(tabW, QT_TR_NOOP("Warning"),
+//                                         QT_TR_NOOP("\n"+msg+"\n"),
+//                                         QMessageBox::Ok);
+//                }
+//                return false;
+//            }
         } // end for j
     } // end for i
 
@@ -1322,6 +1323,8 @@ loadGuildsSpeciesTableview(QTabWidget* parentTabWidget,
     QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(tableView->model());
     errorMsg.clear();
     SpeciesGuilds.clear();
+    QLocale locale(QLocale::English);
+    QString valueWithComma;
 
     if (smodel == nullptr) {
         errorMsg = "Error: No model found in table. Please save initial table data.";
@@ -1358,7 +1361,12 @@ loadGuildsSpeciesTableview(QTabWidget* parentTabWidget,
                         dataParts.removeAt(nmfConstantsMSSPM::Column_Species_Guild);
                     }
                     for (int j=0; j<dataParts.count(); ++j) {
-                        item = new QStandardItem(dataParts[j]);
+                        if (j > 0) {
+                            valueWithComma = locale.toString(dataParts[j].toDouble());
+                            item = new QStandardItem(valueWithComma);
+                        } else {
+                            item = new QStandardItem(dataParts[j]);
+                        }
                         item->setTextAlignment(Qt::AlignCenter);
                         smodel->setItem(i-1, j, item);
                     }
@@ -1403,6 +1411,8 @@ loadTimeSeries(QTabWidget* parentTabWidget,
     QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(tableView->model());
     errorMsg.clear();
     double value;
+    QLocale locale(QLocale::English);
+    QString valueWithComma;
 
     if (smodel == nullptr) {
         errorMsg = "Error: No model found in table. Please save initial table data.";
@@ -1438,9 +1448,13 @@ loadTimeSeries(QTabWidget* parentTabWidget,
                             nonZeroCell = std::make_pair(i-1,j-1);
                         }
                         if (scientificNotation) {
-                            item = new QStandardItem(QString::number(value,'g'));
+                            valueWithComma = locale.toString(value,'g');
+                            item = new QStandardItem(valueWithComma);
+//                          item = new QStandardItem(QString::number(value,'g'));
                         } else {
-                            item = new QStandardItem(QString::number(value,'f',6));
+                            valueWithComma = locale.toString(value,'f',6);
+                            item = new QStandardItem(valueWithComma);
+//                          item = new QStandardItem(QString::number(value,'f',6));
                         }
                         item->setTextAlignment(Qt::AlignCenter);
                         if (firstLineReadOnly && (i == 1)) {
@@ -1540,6 +1554,7 @@ saveSpeciesTableView(QTabWidget* parentTabWidget,
     bool retv = true;
     bool fromTableWidget = (SpeciesName.size() != 0);
     QString filename;
+    QString valueWithoutComma;
 
     filename = (outputFilename.isEmpty()) ?
         QFileDialog::getSaveFileName(parentTabWidget,
@@ -1578,10 +1593,12 @@ saveSpeciesTableView(QTabWidget* parentTabWidget,
                         } else if (col == nmfConstantsMSSPM::Column_Supp_Species_CarryingCapacity) {
                             value = SpeciesK[row];
                         } else {
-                            value = smodel->index(row,col).data().toString();
+                            valueWithoutComma = smodel->index(row,col).data().toString().remove(",");
+                            value = valueWithoutComma;
                         }
                     } else {
-                        value = smodel->index(row,col).data().toString();
+                        valueWithoutComma = smodel->index(row,col).data().toString().remove(",");
+                        value = valueWithoutComma;
                         if (col == nmfConstantsMSSPM::Column_Supp_Species_Name) {
                             stream << value << ",";
                             value = SpeciesGuild[row];
@@ -1700,13 +1717,13 @@ saveTimeSeries(QTabWidget* parentTabWidget,
             int numRows = smodel->rowCount();
             int numCols = smodel->columnCount();
             for (int col=0; col<numCols; ++col) {
-                stream << "," << smodel->headerData(col,Qt::Horizontal).toString();
+                stream << "," << smodel->headerData(col,Qt::Horizontal).toString().remove(",");
             }
             stream << "\n";
             for (int row=0; row<numRows; ++row) {
-                stream << smodel->headerData(row,Qt::Vertical).toString().trimmed();
+                stream << smodel->headerData(row,Qt::Vertical).toString().trimmed().remove(",");
                 for (int col=0; col<numCols; ++col) {
-                    value = smodel->index(row,col).data().toString();
+                    value = smodel->index(row,col).data().toString().remove(",");
                     stream << "," << value;
                 }
                 stream << "\n";
