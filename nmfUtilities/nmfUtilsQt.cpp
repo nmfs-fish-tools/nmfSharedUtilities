@@ -603,7 +603,7 @@ copy(QApplication* qtApp, QTableView* tableView)
     // Copy a single cell
     if (indexes.size() == 1) {
 
-        copiedText = tableView->model()->data(indexes[0]).toString();
+        copiedText = tableView->model()->data(indexes[0]).toString().remove(",");
         copiedText.append(QLatin1Char('\n'));
 
     } else if (indexes.size() > 1) { // Copy multiple cells
@@ -627,7 +627,7 @@ copy(QApplication* qtApp, QTableView* tableView)
         }
 
         // Don't forget the last item
-        copiedText.append(tableView->model()->data(current).toString());
+        copiedText.append(tableView->model()->data(current).toString().remove(","));
 
     } else {
         return "\nPlease select one or more cells to copy.";
