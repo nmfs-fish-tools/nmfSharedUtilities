@@ -613,7 +613,7 @@ copy(QApplication* qtApp, QTableView* tableView)
         indexes.removeFirst();
         Q_FOREACH (current,indexes)
         {
-            text = tableView->model()->data(previous).toString();
+            text = tableView->model()->data(previous).toString().remove(",");
             copiedText.append(text);
             text.replace("\n","<br>");
 
