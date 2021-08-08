@@ -234,6 +234,18 @@ namespace nmfUtilsQt {
     int calculateMultiColumnWidth(QTableView* tableview,
                                   const int&  firstCol,
                                   const int&  lastCol);
+
+    /**
+     * @brief Checks and calculates the passed value to the appropriate number of significant digits
+     * @param value : value to be converted using significant digits
+     * @param numSignificantDigits : number of significant digits
+     * @param numDecimalPlaces : number of decimal places to use as default if the significant digits toggle is turned off
+     * @return the encoded qstring with significant digits
+     */
+    QString checkAndCalculateWithSignificantDigits(
+            const double& value,
+            const int& numSignificantDigits,
+            const int& numDecimalPlaces);
     /**
      * @brief Creates the passed directories if they don't already exist
      * @param dir : typically a hidden application directory

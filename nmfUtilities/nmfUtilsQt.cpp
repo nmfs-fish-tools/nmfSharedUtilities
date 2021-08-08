@@ -2040,7 +2040,7 @@ loadMultiRunData(const nmfStructsQt::ModelDataStruct& dataStruct,
 
     std::string line;
     QString lineStr;
-std::cout << "Loading multi run file: " << dataStruct.MultiRunSetupFilename << std::endl;
+std::cout << "nmfUtilsQt::loadMultiRunData: Loading multi run file: " << dataStruct.MultiRunSetupFilename << std::endl;
     std::ifstream multiRunFile(dataStruct.MultiRunSetupFilename);
     if (multiRunFile.is_open()) {
         getline(multiRunFile,line); // First line is the header
@@ -2196,6 +2196,40 @@ setBackgroundLineEdit(QLineEdit* lineEdit, const QString& backgroundStyleSheet)
 {
     lineEdit->setStyleSheet(backgroundStyleSheet);
 }
+
+
+QString
+checkAndCalculateWithSignificantDigits(
+        const double& val,
+        const int& numSignificantDigits,
+        const int& numDecimalPlaces)
+{
+    QString retv = "";
+    QLocale locale(QLocale::English);
+    bool useEE = (numDecimalPlaces < 0);
+
+    int numDecimalPlacesAbs = std::abs(numDecimalPlaces);
+
+    if (numSignificantDigits >= 0) {
+        QString s1 = QString("%1").arg(val,0,'G',numSignificantDigits);
+        double  v1 = s1.toDouble();
+        int numDecimals = 0;
+        int lengthNumber = 1 + (int)std::log10(std::fabs(v1));
+        if (v1 == 0) {
+            numDecimals = 1;
+        } else {
+            numDecimals = (numSignificantDigits > lengthNumber) ? numSignificantDigits-lengthNumber : 0;
+        }
+        retv = (useEE) ? locale.toString(v1,'g',numDecimals) :
+                         locale.toString(v1,'f',numDecimals);
+
+    } else {
+        retv = locale.toString(val,'f',numDecimalPlacesAbs);
+    }
+
+    return retv;
+}
+
 
 } // end namespace
 
