@@ -33,6 +33,7 @@
 
 #include "nmfLogger.h"
 #include "nmfUtilsQt.h"
+#include "nmfConstantsMSSPM.h"
 
 #include <iostream>
 #include <memory>

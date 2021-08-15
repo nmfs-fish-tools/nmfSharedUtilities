@@ -1334,7 +1334,7 @@ loadGuildsSpeciesTableview(QTabWidget* parentTabWidget,
     filename = (inputFilename.isEmpty()) ?
                 QFileDialog::getOpenFileName(parentTabWidget,
                    QObject::tr("Select CSV file"), inputDataPath,
-                   QObject::tr("Data Files (*.csv)")) :
+                   QObject::tr("Data Files (species*.csv guilds*.csv)")) :
                 inputFilename;
 
     if (! filename.isEmpty()) {
