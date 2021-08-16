@@ -2948,10 +2948,10 @@ nmfDatabase::getHarvestData(const std::string& HarvestType,
     std::map<std::string, std::vector<std::string> > dataMap;
     std::string queryStr;
     std::string msg;
-    std::string HarvestTypePrefix;
+    std::string HarvestTypePrefix = "harvest";
 
     // Because type could be: "Effort (qE)" or "Exploitation (F)"
-    HarvestTypePrefix = QString::fromStdString(HarvestType).split(" ")[0].toStdString();
+    HarvestTypePrefix += QString::fromStdString(HarvestType).toLower().split(" ")[0].toStdString();
 
     fields   = {"ProjectName","ModelName","SpeName","Year","Value"};
     queryStr = "SELECT ProjectName,ModelName,SpeName,Year,Value FROM " + HarvestTypePrefix +
