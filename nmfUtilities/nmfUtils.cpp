@@ -607,4 +607,32 @@ append(std::vector<double>& newVec,
     currentVec.insert(currentVec.end(), newVec.begin(), newVec.end());
 }
 
+
+bool
+isStopped(std::string& runName,
+          std::string& msg1,
+          std::string& msg2,
+          std::string& stopRunFile,
+          std::string& state)
+{
+    std::string cmd;
+    std::ifstream inputFile(stopRunFile);
+    if (inputFile) {
+        std::getline(inputFile,cmd);
+        std::getline(inputFile,runName);
+        std::getline(inputFile,msg1);
+        std::getline(inputFile,msg2);
+    }
+    inputFile.close();
+
+    state = cmd;
+
+    return ((cmd == "Stop")           ||
+            (cmd == "StopAllOk")      ||
+            (cmd == "StopIncomplete") ||
+            (cmd == "StoppedByUser"));
+
+}
+
+
 }

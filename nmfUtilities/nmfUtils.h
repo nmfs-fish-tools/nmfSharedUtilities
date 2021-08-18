@@ -443,6 +443,12 @@ namespace nmfUtils {
      * @return True or False signifying current operating system is Windows
      */
     bool isOSWindows();
+
+    bool isStopped(std::string& runName,
+                   std::string& msg1,
+                   std::string& msg2,
+                   std::string& stopRunFile,
+                   std::string& state);
     /**
      * @brief prints out a 3d double array
      * @param name : name of array

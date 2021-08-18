@@ -1130,6 +1130,7 @@ void saveModelToCSVFile(std::string projectDir,
                         std::string tabName,
                         QTableView* table,
                         bool queryFilename,
+                        bool removeCommas,
                         QString theFilename)
 {
     bool ok = true;
@@ -1147,9 +1148,10 @@ void saveModelToCSVFile(std::string projectDir,
 
     if (queryFilename) {
         filename = QInputDialog::getText(table, QObject::tr("CSV Filename"),
-                                         QObject::tr("Enter desired CSV filename:"), QLineEdit::Normal,
+                                         QObject::tr("Enter desired CSV filename:"),
+                                         QLineEdit::Normal,
                                          QObject::tr(""), &ok);
-        QString fullPath = QDir(dataPath).filePath(filename);
+        fullPath = QDir(dataPath).filePath(filename);
 
         // if file exists, query user if they wan't to overwrite
         if (QFileInfo(fullPath).exists()) {
@@ -1192,10 +1194,14 @@ void saveModelToCSVFile(std::string projectDir,
 
         for (int j=0; j<numColumns; ++j) {
             value = smodel->horizontalHeaderItem(j)->text().trimmed();
-            value.replace(",",";");
+            if (removeCommas) {
+                value.replace(",","");
+            } else {
+                value.replace(",",";");
+            }
             outputFile << value.toStdString();
             if (j < numColumns-1) {
-                outputFile << ",";
+                outputFile << ", ";
             } else {
                 outputFile << "\n";
             }
@@ -1209,11 +1215,15 @@ void saveModelToCSVFile(std::string projectDir,
                     }
                 }
                 val = smodel->item(i,j)->text().trimmed();
-                val.replace(",",";");
+                if (removeCommas) {
+                    val.replace(",","");
+                } else {
+                    val.replace(",",";");
+                }
                 val.replace("\n","||");
                 outputFile << val.toStdString();
                 if (j < numColumns-1) {
-                    outputFile << ",";
+                    outputFile << ", ";
                 } else {
                     outputFile << "\n";
                 }

@@ -130,6 +130,8 @@ namespace nmfConstantsMSSPM
      const bool   DontDivideTableByOutputBiomass   = false;
      const bool   ReloadAllWidgets                 = true;
      const bool   DontReloadAllWidgets             = false;
+     const bool   RemoveCommas                     = true;
+     const bool   DontRemoveCommas                 = false;
 
      const std::string  HiddenDir                      = ".MSSPM";
      const std::string  HiddenDataDir                  = ".MSSPM/data";

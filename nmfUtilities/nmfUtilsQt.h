@@ -519,6 +519,7 @@ namespace nmfUtilsQt {
      * it to determine what to name the vertical headers
      * @param table : qtableview containing data to be written out
      * @param queryFilename : true if method should query user for filename, false otherwise
+     * @param removeCommas : if true, commas will be removed from cell items
      * @param theFilename : if queryFilename = false, then this is the filename to be used; otherwise the method will query the user
      */
     void saveModelToCSVFile(std::string projectDir,
@@ -526,6 +527,7 @@ namespace nmfUtilsQt {
                             std::string tabName,
                             QTableView* table,
                             bool queryFilename,
+                            bool removeCommas,
                             QString theFilename);
     /**
      * @brief Saves the data in the passed non time series but a table view model to a
