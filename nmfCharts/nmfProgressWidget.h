@@ -21,6 +21,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QLineSeries>
+#include <QMessageBox>
 #include <QObject>
 #include <QPushButton>
 #include <QMessageBox>
@@ -114,7 +115,7 @@ public:
    ~nmfProgressWidget();
 
     void setupConnections();
-    void StopRun();
+    void writeToStopRunFile();
     void startRun();
     bool isStopped();
     void startTimer(int delayMS);
@@ -173,6 +174,7 @@ signals:
     void StopTheRun();
     void StopTheTimer();
     void RedrawValidPointsOnly(bool checked, bool clear);
+    void StopAllRuns();
 
 public Q_SLOTS:
     void callback_stopPB(bool unused);

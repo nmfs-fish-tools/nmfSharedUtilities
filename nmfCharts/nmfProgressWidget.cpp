@@ -551,23 +551,39 @@ nmfProgressWidget::callback_stopPB(bool unused)
 {
     logger->logMsg(nmfConstants::Normal,"Stop " + m_RunType + " Progress Chart Timer");
 
+    writeToStopRunFile();
+    m_wasStopped = true;
+
+    emit StopAllRuns();
+
+    QApplication::restoreOverrideCursor();
+
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("Stop Run");
+    msgBox.setText("\nUser halted all run(s).\n");
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.setIcon(QMessageBox::Information);
+    msgBox.exec();
+
+/*
     if (! wasStopped()) {
         emit StopTheRun();
-        StopRun();
+        writeToStopRunFile();
         m_wasStopped = true;
-
-        if (m_RunType == "MSSPM") {
-            updateChartDataLabel(nmfConstantsMSSPM::MSSPMProgressChartLabelFile,
-                                 "<b>Status:&nbsp;&nbsp;</b>User halted MSSPM run. Output data incomplete.");
-        } else if (m_RunType == "MSVPA") {
-            updateChartDataLabel(nmfConstantsMSVPA::MSVPAProgressChartLabelFile,
-                                 "<b>Status:&nbsp;&nbsp;</b>User halted MSVPA run. Output data incomplete.");
-        } else if (m_RunType == "Forecast") {
-            updateChartDataLabel(nmfConstantsMSVPA::ForecastProgressChartLabelFile,
-                                 "<b>Status:&nbsp;&nbsp;</b>User halted Forecast run. Output data incomplete.");
-        }
+*/
+    if (m_RunType == "MSSPM") {
+        updateChartDataLabel(nmfConstantsMSSPM::MSSPMProgressChartLabelFile,
+                             "<b>Status:&nbsp;&nbsp;</b>User halted MSSPM run. Output data incomplete.");
+    } else if (m_RunType == "MSVPA") {
+        updateChartDataLabel(nmfConstantsMSVPA::MSVPAProgressChartLabelFile,
+                             "<b>Status:&nbsp;&nbsp;</b>User halted MSVPA run. Output data incomplete.");
+    } else if (m_RunType == "Forecast") {
+        updateChartDataLabel(nmfConstantsMSVPA::ForecastProgressChartLabelFile,
+                             "<b>Status:&nbsp;&nbsp;</b>User halted Forecast run. Output data incomplete.");
     }
-
+/*
+    }
+*/
 } // end callback_stopPB
 
 void
@@ -758,7 +774,7 @@ nmfProgressWidget::getElapsedTime()
 }
 
 void
-nmfProgressWidget::StopRun()
+nmfProgressWidget::writeToStopRunFile()
 {
     m_elapsedTime = nmfUtilsQt::elapsedTime(m_startTime);
     emit StopTheTimer();
