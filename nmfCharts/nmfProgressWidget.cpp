@@ -505,7 +505,7 @@ nmfProgressWidget::setupConnections() {
     rangeSetPB->disconnect();
     validPointsCB->disconnect();
 
-    connect(stopPB,     SIGNAL(clicked(bool)),        this, SLOT(callback_stopPB(bool)));
+    connect(stopPB,     SIGNAL(clicked()),            this, SLOT(callback_stopPB()));
     connect(clearPB,    SIGNAL(clicked()),            this, SLOT(callback_clearPB()));
     connect(labelsCB,   SIGNAL(stateChanged(int)),    this, SLOT(callback_labelsCB(int)));
     connect(markersCB,  SIGNAL(stateChanged(int)),    this, SLOT(callback_markersCB(int)));
@@ -547,8 +547,15 @@ nmfProgressWidget::wasStopped()
 }
 
 void
-nmfProgressWidget::callback_stopPB(bool unused)
+nmfProgressWidget::callback_stopPB()
 {
+    stopAllRuns(true);
+}
+
+void
+nmfProgressWidget::stopAllRuns(bool verboseOn)
+{
+std::cout << "verboseOn: " << verboseOn << std::endl;
     logger->logMsg(nmfConstants::Normal,"Stop " + m_RunType + " Progress Chart Timer");
 
     writeToStopRunFile();
@@ -558,12 +565,16 @@ nmfProgressWidget::callback_stopPB(bool unused)
 
     QApplication::restoreOverrideCursor();
 
-    QMessageBox msgBox;
-    msgBox.setWindowTitle("Stop Run");
-    msgBox.setText("\nUser halted all run(s).\n");
-    msgBox.setStandardButtons(QMessageBox::Ok);
-    msgBox.setIcon(QMessageBox::Information);
-    msgBox.exec();
+    if (verboseOn) {
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Stop Run");
+        msgBox.setText("\nUser halted all run(s).\n");
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.setIcon(QMessageBox::Information);
+        msgBox.exec();
+    }
+
+    callback_clearPB();
 
 /*
     if (! wasStopped()) {

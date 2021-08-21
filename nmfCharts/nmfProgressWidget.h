@@ -120,6 +120,7 @@ public:
     bool isStopped();
     void startTimer(int delayMS);
     void stopTimer();
+    void stopAllRuns(bool verboseOn);
     void updateChart();
     void readChartDataFile(std::string type,
                            std::string inputFileName,
@@ -177,7 +178,7 @@ signals:
     void StopAllRuns();
 
 public Q_SLOTS:
-    void callback_stopPB(bool unused);
+    void callback_stopPB();
     void callback_clearPB();
     void callback_labelsCB(int state);
     void callback_markersCB(int state);
