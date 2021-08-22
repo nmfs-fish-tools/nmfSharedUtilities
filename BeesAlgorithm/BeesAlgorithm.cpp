@@ -11,7 +11,7 @@ BeesAlgorithm::BeesAlgorithm(nmfStructsQt::ModelDataStruct theBeeStruct,
     m_BeeStruct      = theBeeStruct;
     m_Seed           = -1;
     m_DefaultFitness =  99999;
-    m_NullFitness    = -999.9;
+    m_NullFitness    = -999;
 
     std::string growthForm      = theBeeStruct.GrowthForm;
     std::string harvestForm     = theBeeStruct.HarvestForm;
@@ -108,6 +108,19 @@ BeesAlgorithm::~BeesAlgorithm()
 {
 }
 
+void
+BeesAlgorithm::setSeed(long seed)
+{
+    m_Seed = seed;
+}
+
+void
+BeesAlgorithm::checkAndIncrementSeed()
+{
+    if (m_Seed >= 0) {
+        ++m_Seed;
+    }
+}
 
 void
 BeesAlgorithm::printParameterRanges(const int& NumSpecies,
@@ -761,6 +774,7 @@ BeesAlgorithm::createRandomBee(bool doWhileLoop, std::string& errorMsg)
 //std::cout << "--> range: " << i << "  [" << minVal << "," << maxVal << "] ";
             parameters[i] = (maxVal == minVal) ? minVal :
                              minVal+(maxVal-minVal)*(nmfUtils::getRandomNumber(m_Seed,0.0,1.0));
+            checkAndIncrementSeed();
 //std::cout << "--> " << parameters[i] << std::endl;
         }
         fitness = evaluateObjectiveFunction(parameters);
@@ -797,6 +811,7 @@ BeesAlgorithm::createNeighborhoodBee(std::vector<double> &bestSiteParameters)
 //std::cout << i << ", " << patchSize << std::endl;
         val = bestSiteParameters[i];
         rval = nmfUtils::getRandomNumber(m_Seed,0.0,1.0);
+        checkAndIncrementSeed();
         if (patchSize > 0) {
             val = (rval < 0.5) ? (val+rval*patchSize) : (val-rval*patchSize);
             // In c++17, use...
@@ -1049,7 +1064,7 @@ BeesAlgorithm::estimateParameters(double &bestFitness,
     std::unique_ptr<Bee> bestBee;
 
     m_DefaultFitness =  99999;
-    m_NullFitness    = -999.9;
+    m_NullFitness    = -999;
 
     bestBee = searchParameterSpaceForBestBee(RunNum,subRunNum,errorMsg);
 

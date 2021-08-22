@@ -201,7 +201,8 @@ struct ModelDataStruct {
 
     bool   isMohnsRho;
     bool   showDiagnosticChart;
-    bool   useFixedSeed;
+    bool   useFixedSeedNLopt;
+    bool   useFixedSeedBees;
 
     bool   NLoptUseStopVal;
     bool   NLoptUseStopAfterTime;

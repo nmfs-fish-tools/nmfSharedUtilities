@@ -37,7 +37,7 @@ class BeesAlgorithm
     const int kTimeToSpendSearching = 30; //3; // time to look for a bee in microseconds
 
 private:
-    int                                    m_Seed;
+    long                                   m_Seed;
     int                                    m_DefaultFitness;
     int                                    m_NullFitness;
     double                                 m_PatchSizePct;
@@ -57,6 +57,7 @@ private:
     std::map<int,std::vector<int> >        m_GuildSpecies;
     std::vector<int>                       m_GuildNum;
 
+    void checkAndIncrementSeed();
     std::unique_ptr<Bee> createRandomBee(bool doWhileLoop,
                                          std::string& errorMsg);
     std::unique_ptr<Bee> searchParameterSpaceForBestBee(int& RunNum,
@@ -97,6 +98,7 @@ public:
                   const bool &verbose);
    ~BeesAlgorithm();
 
+    void setSeed(long seed);
     void initializeParameterRangesAndPatchSizes(nmfStructsQt::ModelDataStruct& theBeeStruct);
     int calculateActualNumEstParameters();
     bool estimateParameters(double &bestFitness,

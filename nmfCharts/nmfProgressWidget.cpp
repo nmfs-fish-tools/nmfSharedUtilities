@@ -522,7 +522,7 @@ nmfProgressWidget::setupConnections() {
 void
 nmfProgressWidget::stopTimer()
 {
-    logger->logMsg(nmfConstants::Normal,"Stop " + m_RunType + " Progress Chart Timer");
+    logger->logMsg(nmfConstants::Normal,"nmfProgressWidget::stopTimer " + m_RunType + " Progress Chart Timer");
 
     m_timer->stop();
 }
@@ -530,7 +530,7 @@ nmfProgressWidget::stopTimer()
 void
 nmfProgressWidget::startTimer(int delayMillisec)
 {
-    logger->logMsg(nmfConstants::Normal,"Start " + m_RunType + " Progress Chart Timer");
+    logger->logMsg(nmfConstants::Normal,"nmfProgressWidget::startTimer " + m_RunType + " Progress Chart Timer");
 
     // Start Progress Chart's timer here
     m_timer->start(delayMillisec);
@@ -555,12 +555,12 @@ nmfProgressWidget::callback_stopPB()
 void
 nmfProgressWidget::stopAllRuns(bool verboseOn)
 {
-std::cout << "verboseOn: " << verboseOn << std::endl;
-    logger->logMsg(nmfConstants::Normal,"Stop " + m_RunType + " Progress Chart Timer");
+    logger->logMsg(nmfConstants::Normal,"nmfProgressWidget::stopAllRuns " + m_RunType + " Progress Chart Timer");
 
     writeToStopRunFile();
     m_wasStopped = true;
 
+std::cout << "=== === ===> nmfProgressWidget::stopAllRuns emitting StopAllEstimationRuns" << std::endl;
     emit StopAllRuns();
 
     QApplication::restoreOverrideCursor();
@@ -575,6 +575,8 @@ std::cout << "verboseOn: " << verboseOn << std::endl;
     }
 
     callback_clearPB();
+    m_wasStopped = false;
+    writeToStopRunFile();
 
 /*
     if (! wasStopped()) {
@@ -818,6 +820,8 @@ nmfProgressWidget::startRun()
 {
     m_startTime  = nmfUtilsQt::getCurrentTime();
     m_wasStopped = false;
+
+    logger->logMsg(nmfConstants::Normal,"nmfProgressWidget::startRun: "+m_RunType);
 
     if (m_RunType == "MSSPM") {
         std::ofstream outputFile(nmfConstantsMSSPM::MSSPMStopRunFile);
