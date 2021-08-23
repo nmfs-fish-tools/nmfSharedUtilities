@@ -152,7 +152,16 @@ struct EstimateRunBox {
 
 struct ModelReviewStruct {
     QString ModelName;
-    QString setToDeterministic;
+    QString setToDeterministicBees;
+    int     maxGenerations;
+    int     numBees;
+    int     numBestSites;
+    int     numEliteSites;
+    int     numEliteBees;
+    int     numOtherBees;
+    int     neighborhoodSize;
+    int     numSubRuns;
+    QString setToDeterministicNLopt;
     QString isStopAfterValue;
     QString stopAfterValue;
     QString isStopAfterTime;
