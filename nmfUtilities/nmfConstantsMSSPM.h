@@ -55,7 +55,10 @@ namespace nmfConstantsMSSPM
      const int    Column_GrowthRateMax  = 15;
      const int    Column_SpeciesKMin    = 16;
      const int    Column_SpeciesKMax    = 17;
-     const int    Last_Review_Column_Visible = 13;
+     const int    Model_Review_Column_rSquared     =  1;
+     const int    Model_Review_Column_SSResiduals  =  2;
+     const int    Model_Review_Column_AIC          =  3;
+     const int    Model_Review_Column_Last_Visible = 13;
      const bool   Query_User_For_Filename = true;
      const bool   Dont_Query_User_For_Filename = false;
 
@@ -150,10 +153,11 @@ namespace nmfConstantsMSSPM
      const std::string  OutputImagesDirMMode           = "Remora/outputImages";
      const std::string  OutputDataDirMMode             = "Remora/outputData";
      const std::string  OutputScenariosDirMMode        = "Remora/scenarios";
-     const std::string  MultiRunFilename               = "MultiRunParameter.csv";
-     const std::string  MohnsRhoRunFilename            = "MohnsRhoMultiRunParameter.csv";
-     const std::string  ModelReviewFilename            = "ModelReview.csv";
-     const std::string  EstimatedParametersFilename    = "EstimatedParameters.csv";
+     const std::string  FilenameMultiRun               = "MultiRunParameter.csv";
+     const std::string  FilenameMohnsRhoRun            = "MohnsRhoMultiRunParameter.csv";
+     const std::string  FilenameModelReview            = "ModelReview.csv";
+     const std::string  FilenameSummaryModelFit        = "SummaryModelFit.csv";
+     const std::string  FilenameEstimatedParameters    = "EstimatedParameters.csv";
      const QString      OutputChartBiomass             = "Biomass vs Time";
      const QString      OutputChartHarvest             = "Harvest vs Time";
      const QString      OutputChartExploitation        = "Exploitation Rate";
@@ -251,6 +255,22 @@ namespace nmfConstantsMSSPM
      const std::string TablePredationRhoMin                    = QString::fromStdString("PredationRhoMin").toLower().toStdString();
      const std::string TableSpatialOverlap                     = QString::fromStdString("SpatialOverlap").toLower().toStdString();
      const std::string TableSpecies                            = QString::fromStdString("Species").toLower().toStdString();
+     const std::string TableModelReview                        = QString::fromStdString("ModelReview").toLower().toStdString();
+     const std::string TableSummaryModelFit                    = QString::fromStdString("SummaryModelFit").toLower().toStdString();
+     const std::string TableSummaryMohnsRho                    = QString::fromStdString("SummaryMohnsRho").toLower().toStdString();
+
+     const QStringList StatisticNames =
+         {"SSresiduals",
+          "SSdeviations",
+          "SStotals",
+          "r²",
+          "r",
+          "AIC",
+          "RMSE",
+          "RI",
+          "AE",
+          "AAE",
+          "MEF"};
 
      const QStringList VectorParameterNames =
          {"Initial Biomass (B₀)",

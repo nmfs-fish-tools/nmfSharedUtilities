@@ -2670,6 +2670,22 @@ nmfDatabase::clearTable(nmfLogger* Logger,
 }
 
 bool
+nmfDatabase::clearTable(nmfLogger* Logger,
+                        const std::string& TableName,
+                        const std::string& ProjectName)
+{
+    std::string cmd = "DELETE FROM " + TableName +
+                      " WHERE ProjectName = '" + ProjectName + "'";
+    std::string errorMsg = nmfUpdateDatabase(cmd);
+    if (nmfUtilsQt::isAnError(errorMsg)) {
+        Logger->logMsg(nmfConstants::Error,"[Error 2] nmfDatabase::clearTable: truncate error: " + errorMsg);
+        Logger->logMsg(nmfConstants::Error,"cmd: " + cmd);
+        return false;
+    }
+    return true;
+}
+
+bool
 nmfDatabase::getModelFormData(std::string& GrowthForm,
                               std::string& HarvestForm,
                               std::string& CompetitionForm,

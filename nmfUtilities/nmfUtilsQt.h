@@ -239,7 +239,8 @@ namespace nmfUtilsQt {
      * @brief Checks and calculates the passed value to the appropriate number of significant digits
      * @param value : value to be converted using significant digits
      * @param numSignificantDigits : number of significant digits
-     * @param numDecimalPlaces : number of decimal places to use as default if the significant digits toggle is turned off; if this value is negative, it means to use EE notation
+     * @param numDecimalPlaces : number of decimal places to use as default if the significant digits toggle is turned off;
+     * if this value is negative, it means to use EE notation
      * @return the encoded qstring with significant digits
      */
     QString checkAndCalculateWithSignificantDigits(
@@ -504,13 +505,15 @@ namespace nmfUtilsQt {
      * @param table : qtableview containing data to be written out
      * @param filename : if queryFilename = false, then this is the filename to be used; otherwise the method will query the user
      * @param numRows : number of rows read from file
+     * @param numSignificantDigits : number of significant digits to use in displayed numbers
      * @return Returns true if load was successful, else false
      */
     bool loadModelFromCSVFile(std::string projectDir,
                               std::string fileType,
                               QTableView* table,
                               QString filename,
-                              int& numRows);
+                              int& numRows,
+                              int& numSignificantDigits);
     /**
      * @brief Saves the data in the passed model to the appropriate directory and file
      * @param projectDir : directory where application files are written to
@@ -521,6 +524,7 @@ namespace nmfUtilsQt {
      * @param queryFilename : true if method should query user for filename, false otherwise
      * @param removeCommas : if true, commas will be removed from cell items
      * @param theFilename : if queryFilename = false, then this is the filename to be used; otherwise the method will query the user
+     * @param verboseOn : switch which if true will show popups, else won't show popups
      */
     void saveModelToCSVFile(std::string projectDir,
                             std::string fileType,
@@ -528,7 +532,8 @@ namespace nmfUtilsQt {
                             QTableView* table,
                             bool queryFilename,
                             bool removeCommas,
-                            QString theFilename);
+                            QString theFilename,
+                            bool verboseOn);
     /**
      * @brief Saves the data in the passed non time series but a table view model to a
      * csv file in the passed directory

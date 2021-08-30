@@ -1067,12 +1067,17 @@ bool loadModelFromCSVFile(std::string projectDir,
                           std::string fileType,
                           QTableView* table,
                           QString fileName,
-                          int& numRows)
+                          int& numRows,
+                          int& numSignificantDigits)
 {
+    bool ok;
     int numCols=0;
+    double value;
     QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(table->model());
     QString dataPath = QDir(QString::fromStdString(projectDir)).filePath("outputData");
     QString line;
+    QString valueWithComma;
+    QString valueStr;
     QStringList parts;
     QStringList horizHeader;
     QList<QStringList> allLines;
@@ -1109,7 +1114,21 @@ bool loadModelFromCSVFile(std::string projectDir,
         col = 0;
         for (QString part : line) {
             part.replace("||","\n");
-            item = new QStandardItem(part.trimmed());
+            valueStr = part.trimmed();
+            value    = valueStr.toDouble(&ok);
+            if (ok) {
+                if ((fileType == "Summary Model Fit") ||
+                    (col == nmfConstantsMSSPM::Model_Review_Column_rSquared) ||
+                    (col == nmfConstantsMSSPM::Model_Review_Column_AIC)) {
+                    valueWithComma = checkAndCalculateWithSignificantDigits(
+                                value,numSignificantDigits,4);
+                } else {
+                    valueWithComma = checkAndCalculateWithSignificantDigits(
+                                value,numSignificantDigits,-4);
+                }
+                valueStr = valueWithComma;
+            }
+            item = new QStandardItem(valueStr);
             item->setTextAlignment(Qt::AlignCenter);
             smodel->setItem(row, col, item);
             ++col;
@@ -1131,7 +1150,8 @@ void saveModelToCSVFile(std::string projectDir,
                         QTableView* table,
                         bool queryFilename,
                         bool removeCommas,
-                        QString theFilename)
+                        QString theFilename,
+                        bool verboseOn)
 {
     bool ok = true;
     QString val;
@@ -1233,10 +1253,13 @@ void saveModelToCSVFile(std::string projectDir,
         // close output file
         outputFile.close();
 
-        msg = "\nFile saved successfully:\n\n" + fullPath + "\n";
-        QMessageBox::information(table, QObject::tr("Project"),
-                                 msg,
-                                 QMessageBox::Ok);
+        if (verboseOn) {
+            msg = "\nFile saved successfully:\n\n" + fullPath + "\n";
+            QMessageBox::information(table, QObject::tr("Project"),
+                                     msg,
+                                     QMessageBox::Ok);
+        }
+
     }
 }
 

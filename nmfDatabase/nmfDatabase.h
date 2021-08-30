@@ -137,6 +137,9 @@ public:
     std::vector<std::string> nmfGetDatabaseNames();
     bool clearTable(nmfLogger* logger,
                     const std::string& tableName);
+    bool clearTable(nmfLogger* Logger,
+                    const std::string& TableName,
+                    const std::string& ProjectName);
     /**
      * @brief Removes all data associated with the passed project and model names from all of the relevant tables
      * @param logger : application logger
