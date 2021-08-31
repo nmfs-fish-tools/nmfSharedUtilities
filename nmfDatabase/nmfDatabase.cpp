@@ -542,7 +542,8 @@ nmfDatabase::nmfQueryDatabase(
         QSqlDatabase db = QSqlDatabase::database();
         errorMsg = db.lastError().text().toStdString();
         if (errorMsg.empty()) {
-            std::cout << "Error: Check for loaded database." << std::endl;
+            // This prints out when not always desired. Consider adding verbose flag to call.
+            //std::cout << "Error: Check for loaded database." << std::endl;
         } else if (nmfUtilsQt::isAnError(errorMsg)) {
             // This prints an errorMsg on startup of:
             // Error: Access denied for user ... (using password: NO) QMYSQL: Unable to connect
