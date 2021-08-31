@@ -2253,11 +2253,16 @@ checkAndCalculateWithSignificantDigits(
         } else {
             numDecimals = (numSignificantDigits > lengthNumber) ? numSignificantDigits-lengthNumber : 0;
         }
+        if (useEE) {
+            numDecimals = numSignificantDigits;
+        }
         retv = (useEE) ? locale.toString(v1,'g',numDecimals) :
                          locale.toString(v1,'f',numDecimals);
 
     } else {
-        retv = locale.toString(val,'f',numDecimalPlacesAbs);
+//        retv = locale.toString(val,'f',numDecimalPlacesAbs);
+        retv = (useEE) ? locale.toString(val,'g',numDecimalPlacesAbs) :
+                         locale.toString(val,'f',numDecimalPlacesAbs);
     }
 
     return retv;
