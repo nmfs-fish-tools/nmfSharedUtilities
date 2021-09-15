@@ -500,6 +500,7 @@ namespace nmfUtilsQt {
                QString fileOut);
     /**
      * @brief Loads the CSV file into the passed tableview's model
+     * @param logger : pointer to logger object
      * @param projectDir : directory where application files are written to
      * @param fileType : type of csv file (used as a check, so the user knows they're opening the correct type of file)
      * @param table : qtableview containing data to be written out
@@ -508,7 +509,8 @@ namespace nmfUtilsQt {
      * @param numSignificantDigits : number of significant digits to use in displayed numbers
      * @return Returns true if load was successful, else false
      */
-    bool loadModelFromCSVFile(std::string projectDir,
+    bool loadModelFromCSVFile(nmfLogger* logger,
+                              std::string projectDir,
                               std::string fileType,
                               QTableView* table,
                               QString filename,
@@ -773,4 +775,8 @@ namespace nmfUtilsQt {
 
     void setBackgroundLineEdit(QLineEdit* lineEdit,
                                const QString& backgroundStyleSheet);
+
+//    bool saveSigDigState(QAction* sigDigActn);
+//    void restoreSigDigState(QAction* sigDigActn, bool state);
+
 } // end namespace

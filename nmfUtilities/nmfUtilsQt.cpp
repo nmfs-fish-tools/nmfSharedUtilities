@@ -394,16 +394,6 @@ bool allCellsArePopulated(QTabWidget *tabW,
                 }
                 return false;
             }
-//            else if (value.contains(',')) {
-//                if (showError) {
-//                    msg = "Found an invalid numeric value of: " + value;
-//                    msg += ". No commas or special characters allowed.";
-//                    QMessageBox::warning(tabW, QT_TR_NOOP("Warning"),
-//                                         QT_TR_NOOP("\n"+msg+"\n"),
-//                                         QMessageBox::Ok);
-//                }
-//                return false;
-//            }
         } // end for j
     } // end for i
 
@@ -463,8 +453,8 @@ bool allMaxCellsGreaterThanMinCells(
         for (int j=0; j<numCols; ++ j) {
             indexMin = smodelMin->index(i,j);
             indexMax = smodelMax->index(i,j);
-            valueMin = indexMin.data().toDouble();
-            valueMax = indexMax.data().toDouble();
+            valueMin = indexMin.data().toString().remove(",").toDouble();
+            valueMax = indexMax.data().toString().remove(",").toDouble();
             if (valueMin > valueMax) {
                 return false;
             }
@@ -1063,7 +1053,8 @@ int calculateMultiColumnWidth(
     return newWidth;
 }
 
-bool loadModelFromCSVFile(std::string projectDir,
+bool loadModelFromCSVFile(nmfLogger* logger,
+                          std::string projectDir,
                           std::string fileType,
                           QTableView* table,
                           QString fileName,
@@ -1073,6 +1064,7 @@ bool loadModelFromCSVFile(std::string projectDir,
     bool ok;
     int numCols=0;
     double value;
+    std::string errorMsg;
     QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(table->model());
     QString dataPath = QDir(QString::fromStdString(projectDir)).filePath("outputData");
     QString line;
@@ -1091,6 +1083,9 @@ bool loadModelFromCSVFile(std::string projectDir,
             parts = line.trimmed().split(",");
             if (numRows == 0) {
                 if (line.trimmed() != QString::fromStdString(fileType).trimmed()) {
+                    errorMsg = "nmfUtilsQt::loadModelFromCSVFile: ";
+                    errorMsg += line.trimmed().toStdString() + " != " + fileType;
+                    logger->logMsg(nmfConstants::Error,errorMsg);
                     return false;
                 }
             }
@@ -1104,6 +1099,8 @@ bool loadModelFromCSVFile(std::string projectDir,
         }
     }
     if (numRows < 2) {
+        errorMsg = "nmfUtilsQt::loadModelFromCSVFile: num rows < 2";
+        logger->logMsg(nmfConstants::Error,errorMsg);
         return true;
     }
 
@@ -1116,16 +1113,20 @@ bool loadModelFromCSVFile(std::string projectDir,
             part.replace("||","\n");
             valueStr = part.trimmed();
             value    = valueStr.toDouble(&ok);
-            if (ok) {
-                if ((fileType == "Summary Model Fit") ||
-                    (col == nmfConstantsMSSPM::Model_Review_Column_rSquared) ||
-                    (col == nmfConstantsMSSPM::Model_Review_Column_AIC)) {
+
+            if (ok && (numSignificantDigits > 0)) {
+//                if (fileType == "Summary Diagnostic") {
+//                    valueWithComma = checkAndCalculateWithSignificantDigits(
+//                                value,numSignificantDigits,-4);
+//                } else if ((fileType == "Summary Model Fit") ||
+//                    (col == nmfConstantsMSSPM::Model_Review_Column_rSquared) ||
+//                    (col == nmfConstantsMSSPM::Model_Review_Column_AIC)) {
+//                    valueWithComma = checkAndCalculateWithSignificantDigits(
+//                                value,numSignificantDigits,-4);
+//                } else {
                     valueWithComma = checkAndCalculateWithSignificantDigits(
                                 value,numSignificantDigits,4);
-                } else {
-                    valueWithComma = checkAndCalculateWithSignificantDigits(
-                                value,numSignificantDigits,-4);
-                }
+//                }
                 valueStr = valueWithComma;
             }
             item = new QStandardItem(valueStr);
@@ -1199,7 +1200,7 @@ void saveModelToCSVFile(std::string projectDir,
         } else {
             if (tabName == "Data") {
                 vHeaderTitle = "Year";
-            } else if (tabName == "Model Fit Summary") {
+            } else if (tabName == "Summary Model Fit") {
                 vHeaderTitle = "Num";
             } else if (tabName == "Output Biomass:") {
                 vHeaderTitle = "Year";
@@ -1700,10 +1701,10 @@ saveGuildsTableView(QTabWidget* parentTabWidget,
                         } else if (col == nmfConstantsMSSPM::Column_Supp_Guild_CarryingCapacity) {
                             value = GuildK[row];
                         } else {
-                            value = smodel->index(row,col).data().toString();
+                            value = smodel->index(row,col).data().toString().remove(",");
                         }
                     } else {
-                        value = smodel->index(row,col).data().toString();
+                        value = smodel->index(row,col).data().toString().remove(",");
                     }
                     stream << value;
                     if (col < numCols-1) {
@@ -1792,7 +1793,8 @@ void transposeModel(QTableView* tv)
         species << smodel->verticalHeaderItem(i)->text();
         for (int j=0; j<smodel->columnCount(); ++j) {
             index = smodel->index(i,j);
-            value = QString::number(index.data().toDouble());
+//          value = QString::number(index.data().toDouble());
+            value = index.data().toString();
             item  = new QStandardItem(value);
             item->setTextAlignment(Qt::AlignCenter);
             transposedModel->setItem(j,i,item);
@@ -1988,7 +1990,7 @@ void setMinMaxOnSelections(const double& pct,
                 row = index.row();
                 col = index.column();
                 index0 = smodel0->index(row,col);
-                value = index0.data().toDouble();
+                value = index0.data().toString().remove(",").toDouble();
                 delta = std::fabs(value)*pct;
                 smodel->setData(index,value+maxOrMin[i]*delta);
             }
@@ -2025,7 +2027,7 @@ void setMinMax(const double& pct,
     for (int row=0; row<smodel->rowCount(); ++row) {
         for (int col=0; col<smodel->columnCount(); ++col) {
             index = smodel->index(row,col);
-            value = index.data().toDouble();
+            value = index.data().toString().remove(",").toDouble();
             delta = std::fabs(value)*pct;
             if (smodel1 != nullptr) {
                 minValue = value - delta;
@@ -2261,12 +2263,35 @@ checkAndCalculateWithSignificantDigits(
 
     } else {
 //        retv = locale.toString(val,'f',numDecimalPlacesAbs);
+//std::cout << "==> val: " << val << ", numd: " << numDecimalPlacesAbs << std::endl;
         retv = (useEE) ? locale.toString(val,'g',numDecimalPlacesAbs) :
                          locale.toString(val,'f',numDecimalPlacesAbs);
+//std::cout << "==> retv: " << retv.toStdString() << std::endl;
     }
 
     return retv;
 }
+
+//bool
+//saveSigDigState(QAction* sigDigActn)
+//{
+//    // If user selected significant digits, temporarily turn them off so the highest
+//    // precision of the values will be saved.  Then turn them on later.
+//    bool isSigDigChecked = sigDigActn->isChecked();
+//    sigDigActn->setChecked(false);
+//    return isSigDigChecked;
+//}
+
+//void
+//restoreSigDigState(QAction* sigDigActn,
+//                   bool state)
+//{
+//    // If the significant digits were just turned off a few lines up, turn
+//    // them back on.  This is so the highest precision of values will be saved which
+//    // is necessary so as not to lose an numerical precision when toggling between
+//    // significant digits on and off.
+//    sigDigActn->setChecked(state);
+//}
 
 
 } // end namespace

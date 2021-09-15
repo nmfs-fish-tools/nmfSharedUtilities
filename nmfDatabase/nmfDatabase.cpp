@@ -1042,7 +1042,10 @@ nmfDatabase::nmfSetConnectionByName(QString name)
  *
  */
 void
-nmfDatabase::createScenarioMap(std::map<QString,QStringList>& ScenarioForecastMap)
+nmfDatabase::createScenarioMap(
+        const std::string& ProjectName,
+        const std::string& ModelName,
+        std::map<QString,QStringList>& ScenarioForecastMap)
 {
     std::string queryStr;
     std::string ScenarioName;
@@ -1056,13 +1059,20 @@ nmfDatabase::createScenarioMap(std::map<QString,QStringList>& ScenarioForecastMa
 
     // Get Scenario Names
     fields   = {"ScenarioName"};
-    queryStr = "SELECT DISTINCT ScenarioName FROM " + nmfConstantsMSSPM::TableForecastBiomassMultiScenario;
+    queryStr = "SELECT DISTINCT ScenarioName FROM " +
+                nmfConstantsMSSPM::TableForecastBiomassMultiScenario +
+               " WHERE ProjectName = '" + ProjectName +
+               "' AND ModelName = '"    + ModelName   + "'";
     dataMapScenario = nmfQueryDatabase(queryStr, fields);
     for (unsigned i=0; i<dataMapScenario["ScenarioName"].size(); ++i) {
         ScenarioName = dataMapScenario["ScenarioName"][i];
         fields    = {"SortOrder","ForecastLabel"};
-        queryStr  = "SELECT DISTINCT SortOrder,ForecastLabel FROM " + nmfConstantsMSSPM::TableForecastBiomassMultiScenario;
-        queryStr += " WHERE ScenarioName = '" + ScenarioName + "' ORDER BY SortOrder,ForecastLabel";
+        queryStr  = "SELECT DISTINCT SortOrder,ForecastLabel FROM " +
+                     nmfConstantsMSSPM::TableForecastBiomassMultiScenario +
+                     " WHERE ProjectName = '" + ProjectName  +
+                     "' AND ModelName = '"    + ModelName    +
+                     "' AND ScenarioName = '" + ScenarioName +
+                     "' ORDER BY SortOrder,ForecastLabel";
         dataMapForecast = nmfQueryDatabase(queryStr, fields);
         tmpList.clear();
         for (unsigned j=0; j<dataMapForecast["ForecastLabel"].size(); ++j) {
@@ -1088,8 +1098,10 @@ nmfDatabase::getRunLengthAndStartYear(
 
     // Find Models data
     fields    = {"RunLength","StartYear"};
-    queryStr  = "SELECT RunLength,StartYear FROM " + nmfConstantsMSSPM::TableModels + " WHERE ";
-    queryStr += "ProjectName = '" + ProjectName + "' AND ModelName = '" + ModelName + "'";
+    queryStr  = "SELECT RunLength,StartYear FROM " +
+                 nmfConstantsMSSPM::TableModels +
+                " WHERE ProjectName = '" + ProjectName +
+                "' AND ModelName = '"    + ModelName + "'";
     dataMap   = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["RunLength"].size();
     if (NumRecords == 0){
@@ -1123,8 +1135,10 @@ nmfDatabase::updateAllModelsInProject(
     // Get information about the current model
     modelsInProject.clear();
     fields    = {"ProjectName","ModelName","HarvestForm","ObsBiomassType"};
-    queryStr  = "SELECT ProjectName,ModelName,HarvestForm,ObsBiomassType FROM " + nmfConstantsMSSPM::TableModels + " WHERE ";
-    queryStr += "ProjectName = '" + projectName + "' AND ModelName = '" + currentModel + "'";
+    queryStr  = "SELECT ProjectName,ModelName,HarvestForm,ObsBiomassType FROM " +
+                nmfConstantsMSSPM::TableModels +
+                " WHERE ProjectName = '" + projectName +
+                "' AND ModelName = '"    + currentModel + "'";
     dataMap   = nmfQueryDatabase(queryStr, fields);
     NumRecords = (int)dataMap["ModelName"].size();
     if (NumRecords == 0) {
@@ -1138,7 +1152,10 @@ nmfDatabase::updateAllModelsInProject(
 
     // Get data from other models in current project
     fields    = {"ProjectName","ModelName","HarvestForm","ObsBiomassType"};
-    queryStr  = "SELECT ProjectName,ModelName,HarvestForm,ObsBiomassType FROM " + nmfConstantsMSSPM::TableModels + " WHERE ";
+    queryStr  = "SELECT ProjectName,ModelName,HarvestForm,ObsBiomassType FROM " +
+                 nmfConstantsMSSPM::TableModels +
+                " WHERE ProjectName = '" + projectName +
+                "' AND ModelName = '"    + currentModel + "'";
     queryStr += whereClause;
     dataMap   = nmfQueryDatabase(queryStr, fields);
     NumRecords = (int)dataMap["ModelName"].size();
@@ -1179,7 +1196,7 @@ nmfDatabase::cleanTables(
     for (std::string tableToClean : nmfConstantsMSSPM::TablesToClean) {
         cmd  = "DELETE FROM " + tableToClean  +
                " WHERE ProjectName = '" + projectName +
-               "' AND ModelName = '" + modelName + "'";
+               "' AND ModelName = '"    + modelName + "'";
         errorMsg = nmfUpdateDatabase(cmd);
         if (nmfUtilsQt::isAnError(errorMsg)) {
             logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::cleanTables: Delete error: " + errorMsg);
@@ -1209,8 +1226,10 @@ nmfDatabase::getAlgorithmIdentifiers(
 
     // Get current algorithm and run its estimation routine
     fields     = {"Algorithm","Minimizer","ObjectiveCriterion","WithinGuildCompetitionForm","Scaling"};
-    queryStr   = "SELECT Algorithm,Minimizer,ObjectiveCriterion,WithinGuildCompetitionForm,Scaling FROM " + nmfConstantsMSSPM::TableModels + " WHERE ";
-    queryStr  += "ProjectName = '" + ProjectName + "' AND ModelName='" + ModelName + "'";
+    queryStr   = "SELECT Algorithm,Minimizer,ObjectiveCriterion,WithinGuildCompetitionForm,Scaling FROM " +
+                  nmfConstantsMSSPM::TableModels +
+                 " WHERE ProjectName = '" + ProjectName +
+                 "' AND ModelName = '"    + ModelName   + "'";
     dataMap    = nmfQueryDatabase(queryStr, fields);
     if (dataMap["Algorithm"].size() == 0) {
         logger->logMsg(nmfConstants::Warning,"[Warning] nmfDatabase::AlgorithmIdentifiers: No Models found. Please create a Model and click Save on Setup Tab 3.");
@@ -1468,8 +1487,9 @@ nmfDatabase::getSpeciesData(
 
     // Get species data
     fields     = {"SpeName","MinAge","MaxAge","FirstYear","LastYear","MinLength","MaxLength","NumLengthBins"};
-    queryStr   = "SELECT SpeName,MinAge,MaxAge,FirstYear,LastYear,MinLength,MaxLength,NumLengthBins FROM " + nmfConstantsMSSPM::TableSpecies;
-    queryStr  += " WHERE SpeName = '" + species + "'";
+    queryStr   = "SELECT SpeName,MinAge,MaxAge,FirstYear,LastYear,MinLength,MaxLength,NumLengthBins FROM " +
+                  nmfConstantsMSSPM::TableSpecies +
+                 " WHERE SpeName = '" + species + "'";
     dataMap    = nmfQueryDatabase(queryStr, fields);
     if (dataMap["SpeName"].size() == 0) {
         msg = "nmfDatabase::getSpeciesData: No records found in Species for: " +species;
@@ -1588,7 +1608,9 @@ nmfDatabase::getSpeciesGuildMap(std::map<std::string,std::string>& SpeciesGuildM
     std::string queryStr;
 
     fields   = {"SpeName","GuildName"};
-    queryStr = "SELECT SpeName,GuildName FROM " + nmfConstantsMSSPM::TableSpecies + " ORDER BY SpeName";
+    queryStr = "SELECT SpeName,GuildName FROM " +
+                nmfConstantsMSSPM::TableSpecies +
+               " ORDER BY SpeName";
     dataMap  = nmfQueryDatabase(queryStr, fields);
 
     for (unsigned i=0; i<dataMap["SpeName"].size(); ++i) {
@@ -1656,6 +1678,7 @@ nmfDatabase::getTimeSeriesDataByGuild(
                     Algorithm,Minimizer,ObjectiveCriterion,
                     Scaling,CompetitionForm,nmfConstantsMSSPM::DontShowPopupError);
         getEstimatedParameter(nmfConstantsMSSPM::TableOutputCatchability,
+                              ProjectName,ModelName,
                               Algorithm,Minimizer,ObjectiveCriterion,
                               Scaling,isAggProdStr,EstCatchability);
     }
@@ -1668,14 +1691,20 @@ nmfDatabase::getTimeSeriesDataByGuild(
     if (ForecastName == "") {
         ModifiedTableName = TableName;
         fields   = {"ProjectName","ModelName","SpeName","Year","Value"};
-        queryStr = "SELECT ProjectName,ModelName,SpeName,Year,Value FROM " + ModifiedTableName +
-                   " WHERE ProjectName = '" + ProjectName + "' AND ModelName = '" + ModelName +
+        queryStr = "SELECT ProjectName,ModelName,SpeName,Year,Value FROM " +
+                    ModifiedTableName +
+                   " WHERE ProjectName = '" + ProjectName +
+                   "' AND ModelName = '"    + ModelName +
                    "' ORDER BY SpeName,Year";
     } else {
         ModifiedTableName = "forecast" + TableName;
         fields   = {"ForecastName","SpeName","Year","Value"};
-        queryStr = "SELECT ForecastName,SpeName,Year,Value FROM " + ModifiedTableName +
-                   " WHERE ProjectName = '" + ProjectName + "' AND ForecastName = '" + ForecastName + "' ORDER BY SpeName,Year";
+        queryStr = "SELECT ForecastName,SpeName,Year,Value FROM " +
+                    ModifiedTableName +
+                   " WHERE ProjectName = '" + ProjectName +
+                   "' AND ModelName = '"    + ModelName +
+                   "' AND ForecastName = '" + ForecastName +
+                   "' ORDER BY SpeName,Year";
     }
     dataMap    = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SpeName"].size();
@@ -1764,14 +1793,19 @@ nmfDatabase::getTimeSeriesData(
     if (ForecastName == "") {
         ModifiedTableName = TableName;
         fields   = {"ProjectName","ModelName","SpeName","Year","Value"};
-        queryStr = "SELECT ProjectName,ModelName,SpeName,Year,Value FROM " + ModifiedTableName +
-                   " WHERE ProjectName = '" + ProjectName + "' AND ModelName = '" + ModelName +
+        queryStr = "SELECT ProjectName,ModelName,SpeName,Year,Value FROM " +
+                    ModifiedTableName +
+                   " WHERE ProjectName = '" + ProjectName +
+                   "' AND ModelName = '"    + ModelName +
                    "' ORDER BY SpeName,Year";
     } else {
         ModifiedTableName = "forecast" + TableName;;
-        fields   = {"ProjectName","ForecastName","SpeName","Year","Value"};
-        queryStr = "SELECT ProjectName,ForecastName,SpeName,Year,Value FROM " + ModifiedTableName +
-                   " WHERE ProjectName = '" + ProjectName + "' AND ForecastName = '" + ForecastName +
+        fields   = {"ProjectName","ModelName","ForecastName","SpeName","Year","Value"};
+        queryStr = "SELECT ProjectName,ModelName,ForecastName,SpeName,Year,Value FROM " +
+                    ModifiedTableName +
+                   " WHERE ProjectName = '" + ProjectName +
+                   "' AND ModelName = '"    + ModelName +
+                   "' AND ForecastName = '" + ForecastName +
                    "' ORDER BY SpeName,Year";
     }
     dataMap    = nmfQueryDatabase(queryStr, fields);
@@ -1808,6 +1842,7 @@ bool
 nmfDatabase::getForecastInfo(
         const std::string& TableName,
         const std::string& ProjectName,
+        const std::string& ModelName,
         const std::string& ForecastName,
         int&               RunLength,
         int&               StartForecastYear,
@@ -1822,9 +1857,12 @@ nmfDatabase::getForecastInfo(
     std::string queryStr;
 
     // Find Forecast info
-    fields    = {"ProjectName","ForecastName","Algorithm","Minimizer","ObjectiveCriterion","Scaling","GrowthForm","HarvestForm","WithinGuildCompetitionForm","PredationForm","RunLength","StartYear","EndYear","NumRuns"};
-    queryStr  = "SELECT ProjectName,ForecastName,Algorithm,Minimizer,ObjectiveCriterion,Scaling,GrowthForm,HarvestForm,WithinGuildCompetitionForm,PredationForm,RunLength,StartYear,EndYear,NumRuns FROM " + TableName + " where ";
-    queryStr += "ProjectName = '" + ProjectName + "' AND ForecastName = '" + ForecastName + "'";
+    fields    = {"ProjectName","ModelName","ForecastName","Algorithm","Minimizer","ObjectiveCriterion","Scaling","GrowthForm","HarvestForm","WithinGuildCompetitionForm","PredationForm","RunLength","StartYear","EndYear","NumRuns"};
+    queryStr  = "SELECT ProjectName,ModelName,ForecastName,Algorithm,Minimizer,ObjectiveCriterion,Scaling,GrowthForm,HarvestForm,WithinGuildCompetitionForm,PredationForm,RunLength,StartYear,EndYear,NumRuns FROM " +
+                 TableName +
+                " WHERE ProjectName = '" + ProjectName +
+                "' AND ModelName = '"    + ModelName +
+                "' AND ForecastName = '" + ForecastName + "'";
     dataMap   = nmfQueryDatabase(queryStr, fields);
     if (dataMap["ForecastName"].size() != 0) {
         RunLength          = std::stoi(dataMap["RunLength"][0]);
@@ -1846,6 +1884,7 @@ nmfDatabase::getForecastBiomass(
         QWidget*           Widget,
         nmfLogger*         Logger,
         const std::string& ProjectName,
+        const std::string& ModelName,
         const std::string& ForecastName,
         const int&         NumSpecies,
         const int&         RunLength,
@@ -1866,9 +1905,12 @@ nmfDatabase::getForecastBiomass(
     ForecastBiomass.clear();
 
     // Load Forecast Biomass data (ie, calculated from estimated parameters r and alpha)
-    fields    = {"ProjectName","ForecastName","Algorithm","Minimizer","ObjectiveCriterion","Scaling","SpeName","Year","Value"};
-    queryStr  = "SELECT ProjectName,ForecastName,Algorithm,Minimizer,ObjectiveCriterion,Scaling,SpeName,Year,Value FROM " + nmfConstantsMSSPM::TableForecastBiomass;
-    queryStr += " WHERE ProjectName = '" + ProjectName + "' AND ForecastName = '" + ForecastName +
+    fields    = {"ProjectName","ModelName","ForecastName","Algorithm","Minimizer","ObjectiveCriterion","Scaling","SpeName","Year","Value"};
+    queryStr  = "SELECT ProjectName,ModelName,ForecastName,Algorithm,Minimizer,ObjectiveCriterion,Scaling,SpeName,Year,Value FROM " +
+                 nmfConstantsMSSPM::TableForecastBiomass +
+                " WHERE ProjectName = '"       + ProjectName +
+                "' AND ModelName = '"          + ModelName +
+                "' AND ForecastName = '"       + ForecastName +
                 "' AND Algorithm = '"          + Algorithm +
                 "' AND Minimizer = '"          + Minimizer +
                 "' AND ObjectiveCriterion = '" + ObjectiveCriterion +
@@ -1911,6 +1953,7 @@ nmfDatabase::getForecastBiomassMonteCarlo(
         QWidget*           Widget,
         nmfLogger*         Logger,
         const std::string& ProjectName,
+        const std::string& ModelName,
         const std::string& ForecastName,
         const int&         NumSpecies,
         const int&         RunLength,
@@ -1933,27 +1976,31 @@ nmfDatabase::getForecastBiomassMonteCarlo(
     ForecastBiomassMonteCarlo.clear();
 
     // Load Forecast Biomass data (ie, calculated from estimated parameters r and alpha)
-    fields    = {"ProjectName","ForecastName","RunNum","Algorithm","Minimizer","ObjectiveCriterion","Scaling","SpeName","Year","Value"};
-    queryStr  = "SELECT ProjectName,ForecastName,RunNum,Algorithm,Minimizer,ObjectiveCriterion,Scaling,SpeName,Year,Value FROM " + nmfConstantsMSSPM::TableForecastBiomassMonteCarlo;
-    queryStr += " WHERE ProjectName = '" + ProjectName + "' AND ForecastName = '" + ForecastName +
-                "' AND Algorithm = '" + Algorithm +
-                "' AND Minimizer = '" + Minimizer +
+    fields    = {"ProjectName","ModelName","ForecastName","RunNum","Algorithm","Minimizer","ObjectiveCriterion","Scaling","SpeName","Year","Value"};
+    queryStr  = "SELECT ProjectName,ModelName,ForecastName,RunNum,Algorithm,Minimizer,ObjectiveCriterion,Scaling,SpeName,Year,Value FROM " +
+                 nmfConstantsMSSPM::TableForecastBiomassMonteCarlo +
+                " WHERE ProjectName = '"       + ProjectName +
+                "' AND ModelName = '"          + ModelName +
+                "' AND ForecastName = '"       + ForecastName +
+                "' AND Algorithm = '"          + Algorithm +
+                "' AND Minimizer = '"          + Minimizer +
                 "' AND ObjectiveCriterion = '" + ObjectiveCriterion +
-                "' AND Scaling = '" + Scaling + "'";
-    queryStr += " ORDER BY RunNum,SpeName,Year";
+                "' AND Scaling = '"            + Scaling +
+                "' ORDER BY RunNum,SpeName,Year";
     dataMapForecastBiomassMonteCarlo = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMapForecastBiomassMonteCarlo["SpeName"].size();
     if (NumRecords == 0) {
         //m_ChartView2d->hide();
-        errorMsg  = "[Error 1] nmfDatabase::getForecastBiomassMonteCarlo: No records found in table ForecastBiomass";
+        errorMsg  = "[Error 1] nmfDatabase::getForecastBiomassMonteCarlo: No records found in table ForecastBiomassMonteCarlo";
         Logger->logMsg(nmfConstants::Error,errorMsg);
-        msg = "\nNo ForecastBiomass records found.\n\nPlease make sure a Forecast has been run.\n";
+        Logger->logMsg(nmfConstants::Error,queryStr);
+        msg = "\nNo forecastbiomassmontecarlo records found.\n\nPlease make sure a Forecast has been run.\n";
         QMessageBox::warning(Widget, "Warning", msg, QMessageBox::Ok);
         return false;
     }
     if (NumRecords != NumRuns*NumSpecies*(RunLength+1)) {
         errorMsg  = "[Error 2] nmfDatabase::getForecastBiomassMonteCarlo: Number of records found (" + std::to_string(NumRecords) + ") in ";
-        errorMsg += "table ForecastBiomass does not equal number of NumRuns*NumSpecies*(RunLength+1) (";
+        errorMsg += "table forecastbiomassmontecarlo does not equal number of NumRuns*NumSpecies*(RunLength+1) (";
         errorMsg += std::to_string(NumRuns) + "*";
         errorMsg += std::to_string(NumSpecies) + "*" + std::to_string((RunLength+1)) + "=";
         errorMsg += std::to_string(NumRuns*NumSpecies*(RunLength+1)) + ") records";
@@ -1984,6 +2031,7 @@ nmfDatabase::getForecastMonteCarloParameters(
         nmfLogger*           logger,
         const std::string&   Species,
         const std::string&   ProjectName,
+        const std::string&   ModelName,
         const std::string&   ForecastName,
         std::string&         Algorithm,
         std::string&         Minimizer,
@@ -2002,16 +2050,20 @@ nmfDatabase::getForecastMonteCarloParameters(
     QString str2;
     QString str3;
 
-    fields     = {"ProjectName","ForecastName","RunNum","Algorithm","Minimizer","ObjectiveCriterion","Scaling",
+    fields     = {"ProjectName","ModelName","ForecastName","RunNum","Algorithm","Minimizer","ObjectiveCriterion","Scaling",
                   "SpeName","GrowthRate","CarryingCapacity","Harvest"};
-    queryStr   = "SELECT ProjectName,ForecastName,RunNum,Algorithm,Minimizer,ObjectiveCriterion,Scaling,";
-    queryStr  += "SpeName,GrowthRate,CarryingCapacity,Harvest FROM " + TableName;
-    queryStr  += " WHERE ProjectName = '" + ProjectName + "' AND ForecastName = '" + ForecastName +
-            "' AND Algorithm = '"          + Algorithm +
-            "' AND Minimizer = '"          + Minimizer +
-            "' AND ObjectiveCriterion = '" + ObjectiveCriterion +
-            "' AND Scaling = '"            + Scaling +
-            "' AND SpeName = '" + Species + "' ORDER by RunNum,SpeName";
+    queryStr   = "SELECT ProjectName,ModelName,ForecastName,RunNum,Algorithm,Minimizer,ObjectiveCriterion,Scaling,";
+    queryStr  += "SpeName,GrowthRate,CarryingCapacity,Harvest FROM " +
+                  TableName +
+                 " WHERE ProjectName = '"       + ProjectName +
+                 "' AND ModelName = '"          + ModelName +
+                 "' AND ForecastName = '"       + ForecastName +
+                 "' AND Algorithm = '"          + Algorithm +
+                 "' AND Minimizer = '"          + Minimizer +
+                 "' AND ObjectiveCriterion = '" + ObjectiveCriterion +
+                 "' AND Scaling = '"            + Scaling +
+                 "' AND SpeName = '"            + Species +
+                 "' ORDER by RunNum,SpeName";
     dataMap = nmfQueryDatabase(queryStr, fields);
     int NumRecords = dataMap["GrowthRate"].size();
     if (NumRecords == 0) {
@@ -2043,8 +2095,10 @@ nmfDatabase::isARelativeBiomassModel(
     std::map<std::string, std::vector<std::string> > dataMap;
 
     fields    = {"ModelName","ObsBiomassType"};
-    queryStr  = "SELECT ModelName,ObsBiomassType FROM " + nmfConstantsMSSPM::TableModels;
-    queryStr += " WHERE ProjectName = '" + ProjectName + "' AND ModelName = '" + ModelName + "'";
+    queryStr  = "SELECT ModelName,ObsBiomassType FROM " +
+                 nmfConstantsMSSPM::TableModels +
+                " WHERE ProjectName = '" + ProjectName +
+                "' AND ModelName = '"    + ModelName   + "'";
     dataMap   = nmfQueryDatabase(queryStr,fields);
     int NumRecords = dataMap["ModelName"].size();
     if (NumRecords == 1) {
@@ -2058,6 +2112,7 @@ nmfDatabase::getForecastHarvest(
         QWidget*           Widget,
         nmfLogger*         Logger,
         const std::string& ProjectName,
+        const std::string& ModelName,
         const std::string& ForecastName,
         const int&         NumSpecies,
         const int&         RunLength,
@@ -2085,13 +2140,16 @@ nmfDatabase::getForecastHarvest(
     }
 
     // Load Forecast Harvest data
-    fields    = {"ProjectName","ForecastName","Algorithm","Minimizer","ObjectiveCriterion","Scaling","SpeName","Year","Value"};
-    queryStr  = "SELECT ProjectName,ForecastName,Algorithm,Minimizer,ObjectiveCriterion,Scaling,SpeName,Year,Value FROM " + ForecastTable;
-    queryStr += " WHERE ProjectName = '" + ProjectName + "' AND ForecastName = '" + ForecastName +
-                "' AND Algorithm = '" + Algorithm +
-                "' AND Minimizer = '" + Minimizer +
+    fields    = {"ProjectName","ModelName","ForecastName","Algorithm","Minimizer","ObjectiveCriterion","Scaling","SpeName","Year","Value"};
+    queryStr  = "SELECT ProjectName,ModelName,ForecastName,Algorithm,Minimizer,ObjectiveCriterion,Scaling,SpeName,Year,Value FROM " +
+                 ForecastTable +
+                " WHERE ProjectName = '"       + ProjectName +
+                "' AND ModelName = '"          + ModelName +
+                "' AND ForecastName = '"       + ForecastName +
+                "' AND Algorithm = '"          + Algorithm +
+                "' AND Minimizer = '"          + Minimizer +
                 "' AND ObjectiveCriterion = '" + ObjectiveCriterion +
-                "' AND Scaling = '" + Scaling +
+                "' AND Scaling = '"            + Scaling +
                 "' ORDER BY SpeName,Year";
     dataMap = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SpeName"].size();
@@ -2142,6 +2200,7 @@ nmfDatabase::updateForecastMonteCarloParameters(
         QWidget*             widget,
         nmfLogger*           logger,
         const std::string&   ProjectName,
+        const std::string&   ModelName,
         const std::string&   ForecastName,
         std::string&         Algorithm,
         std::string&         Minimizer,
@@ -2179,13 +2238,14 @@ nmfDatabase::updateForecastMonteCarloParameters(
 
     // Delete the current entry here
     deleteCmd  = "DELETE FROM " + tableName;
-    deleteCmd += " WHERE ProjectName = '"  + ProjectName +
-            "' AND ForecastName = '"       + ForecastName +
-            "' AND RunNum = "              + std::to_string(RunNumber) +
-            "  AND Algorithm = '"          + Algorithm +
-            "' AND Minimizer = '"          + Minimizer +
-            "' AND ObjectiveCriterion = '" + ObjectiveCriterion +
-            "' AND Scaling = '"            + Scaling + "'";
+    deleteCmd += " WHERE ProjectName = '"       + ProjectName +
+                 "' AND ModelName = '"          + ModelName +
+                 "' AND ForecastName = '"       + ForecastName +
+                 "' AND RunNum = "              + std::to_string(RunNumber) +
+                 "  AND Algorithm = '"          + Algorithm +
+                 "' AND Minimizer = '"          + Minimizer +
+                 "' AND ObjectiveCriterion = '" + ObjectiveCriterion +
+                 "' AND Scaling = '"            + Scaling + "'";
     errorMsg = nmfUpdateDatabase(deleteCmd);
     if (nmfUtilsQt::isAnError(errorMsg)) {
         msg = "\nError in ForecastMonteCarloParameters command. Couldn't delete all records from " +
@@ -2196,10 +2256,13 @@ nmfDatabase::updateForecastMonteCarloParameters(
         return false;
     }
 
-    saveCmd  = "INSERT INTO " + tableName + " (ProjectName,ForecastName,RunNum,Algorithm,Minimizer,ObjectiveCriterion,Scaling,";
-    saveCmd += "SpeName,GrowthRate,CarryingCapacity,Catchability,";
-    saveCmd += "Exponent,CompetitionAlpha,CompetitionBetaSpecies,CompetitionBetaGuilds,CompetitionBetaGuildsGuilds,Predation,Handling,";
-    saveCmd += "Harvest) VALUES ";
+    saveCmd  = "INSERT INTO " +
+                tableName +
+               " (ProjectName,ModelName,ForecastName,RunNum,Algorithm,Minimizer,ObjectiveCriterion,Scaling," +
+               "SpeName,GrowthRate,CarryingCapacity,Catchability," +
+               "Exponent,CompetitionAlpha,CompetitionBetaSpecies,CompetitionBetaGuilds," +
+               "CompetitionBetaGuildsGuilds,Predation,Handling," +
+               "Harvest) VALUES ";
     int NumValues = GrowthRandomValues.size();
 
     for (int j=0; j<NumValues; ++j) {
@@ -2214,6 +2277,7 @@ nmfDatabase::updateForecastMonteCarloParameters(
         handling         = checkForValues(j,NumValues,HandlingRandomValues);
         harvest          = checkForValues(j,NumValues,HarvestRandomValues);
         saveCmd += "('"   + ProjectName +
+                    "','" + ModelName +
                     "','" + ForecastName +
                     "',"  + std::to_string(RunNumber) +
                     ",'"  + Algorithm +
@@ -2424,7 +2488,9 @@ nmfDatabase::getGuildData(nmfLogger* Logger,
     ObservedBiomassByGuilds.clear();
 
     fields    = {"GuildName","GuildK"};
-    queryStr  = "SELECT GuildName,GuildK from " + nmfConstantsMSSPM::TableGuilds + " ORDER by GuildName";
+    queryStr  = "SELECT GuildName,GuildK FROM " +
+                 nmfConstantsMSSPM::TableGuilds +
+                " ORDER by GuildName";
     dataMap   = nmfQueryDatabase(queryStr, fields);
     for (int i=0; i<NumGuilds; ++i) {
         guildName = dataMap["GuildName"][i];
@@ -2433,7 +2499,9 @@ nmfDatabase::getGuildData(nmfLogger* Logger,
 
     // Load Growth Rate Min and Max
     fields     = {"SpeName","GuildName","InitBiomass"};
-    queryStr   = "SELECT SpeName,GuildName,InitBiomass from " + nmfConstantsMSSPM::TableSpecies + " ORDER BY SpeName";
+    queryStr   = "SELECT SpeName,GuildName,InitBiomass FROM " +
+                  nmfConstantsMSSPM::TableSpecies +
+                 " ORDER BY SpeName";
     dataMap    = nmfQueryDatabase(queryStr, fields);
     NumSpecies = dataMap["SpeName"].size();
     if (NumSpecies == 0) {
@@ -2488,9 +2556,11 @@ nmfDatabase::getPredationData(const std::string& PredationForm,
 
     // Calculate the Rho regardless of the Predation type
     for (int i=0; i<int(rhoFilenames.size()); ++i) {
-        queryStr = "SELECT ProjectName,ModelName,SpeciesA,SpeciesB,Value FROM " + rhoFilenames[i]  +
-                " WHERE ProjectName = '" + ProjectName + "' AND ModelName = '" + ModelName +
-                "' ORDER BY SpeciesA,SpeciesB ";
+        queryStr = "SELECT ProjectName,ModelName,SpeciesA,SpeciesB,Value FROM " +
+                    rhoFilenames[i]  +
+                   " WHERE ProjectName = '" + ProjectName +
+                   "' AND  ModelName = '"   + ModelName   +
+                   "' ORDER BY SpeciesA,SpeciesB ";
         dataMaps[i] = nmfQueryDatabase(queryStr, fields);
     }
     ok = loadMatrix(dataMaps,NumSpecies,NumSpecies,Rho,Logger);
@@ -2501,8 +2571,10 @@ nmfDatabase::getPredationData(const std::string& PredationForm,
     // Calculate Handling if need be
     if ((PredationForm == "Type II") || (PredationForm == "Type III")) {
         for (int i=0; i<int(handlingFilenames.size()); ++i) {
-            queryStr = "SELECT ModelName,SpeciesA,SpeciesB,Value FROM " + handlingFilenames[i]  +
-                       " WHERE ModelName = '" + ModelName +
+            queryStr = "SELECT ModelName,SpeciesA,SpeciesB,Value FROM " +
+                        handlingFilenames[i]  +
+                       " WHERE ProjectName = '" + ProjectName +
+                       "' AND ModelName = '"    + ModelName +
                        "' ORDER BY SpeciesA,SpeciesB ";
             dataMaps[i] = nmfQueryDatabase(queryStr, fields);
         }
@@ -2516,8 +2588,10 @@ nmfDatabase::getPredationData(const std::string& PredationForm,
     if (PredationForm == "Type III") {
         for (int i=0; i<int(exponentFilenames.size()); ++i) {
             fields   = {"ModelName","SpeName","Value"};
-            queryStr = "SELECT ModelName,SpeName,Value FROM " + exponentFilenames[i]  +
-                       " WHERE ModelName = '" + ModelName +
+            queryStr = "SELECT ModelName,SpeName,Value FROM " +
+                        exponentFilenames[i]  +
+                       " WHERE ProjectName = '" + ProjectName +
+                       "' AND ModelName = '"    + ModelName +
                        "' ORDER BY SpeName ";
             dataMaps[i] = nmfQueryDatabase(queryStr, fields);
         }
@@ -2563,8 +2637,10 @@ nmfDatabase::getCompetitionData(const std::string& CompetitionType,
         // AlphaFilenames
         fields   = {"ProjectName","ModelName","SpeciesA","SpeciesB","Value"};
         for (int i=0; i<int(AlphaFilenames.size()); ++i) {
-            queryStr = "SELECT ProjectName,ModelName,SpeciesA,SpeciesB,Value FROM " + AlphaFilenames[i]  +
-                       " WHERE ProjectName = '" + ProjectName + "' AND ModelName = '" + ModelName +
+            queryStr = "SELECT ProjectName,ModelName,SpeciesA,SpeciesB,Value FROM " +
+                        AlphaFilenames[i]  +
+                       " WHERE ProjectName = '" + ProjectName +
+                       "' AND ModelName = '"    + ModelName +
                        "' ORDER BY SpeciesA,SpeciesB ";
             dataMaps[i] = nmfQueryDatabase(queryStr, fields);
         }
@@ -2578,8 +2654,10 @@ nmfDatabase::getCompetitionData(const std::string& CompetitionType,
         // BetaSpeciesFilenames
         fields   = {"ProjectName","ModelName","SpeciesA","SpeciesB","Value"};
         for (int i=0; i<int(BetaSpeciesFilenames.size()); ++i) {
-            queryStr = "SELECT ProjectName,ModelName,SpeciesA,SpeciesB,Value FROM " + BetaSpeciesFilenames[i]  +
-                       " WHERE ProjectName = '" + ProjectName + "' AND ModelName = '" + ModelName +
+            queryStr = "SELECT ProjectName,ModelName,SpeciesA,SpeciesB,Value FROM " +
+                        BetaSpeciesFilenames[i]  +
+                       " WHERE ProjectName = '" + ProjectName +
+                       "' AND ModelName = '"    + ModelName +
                        "' ORDER BY SpeciesA,SpeciesB ";
             dataMaps[i] = nmfQueryDatabase(queryStr, fields);
         }
@@ -2591,8 +2669,10 @@ nmfDatabase::getCompetitionData(const std::string& CompetitionType,
         // BetaGuildsFilenames
         fields   = {"ProjectName","ModelName","Guild","SpeName","Value"};
         for (int i=0; i<int(BetaGuildsFilenames.size()); ++i) {
-            queryStr = "SELECT ProjectName,ModelName,Guild,SpeName,Value FROM " + BetaGuildsFilenames[i]  +
-                       " WHERE ProjectName = '" + ProjectName + "' AND ModelName = '" + ModelName +
+            queryStr = "SELECT ProjectName,ModelName,Guild,SpeName,Value FROM " +
+                        BetaGuildsFilenames[i]  +
+                       " WHERE ProjectName = '" + ProjectName +
+                       "' AND ModelName = '"    + ModelName +
                        "' ORDER BY Guild,SpeName ";
             dataMaps[i] = nmfQueryDatabase(queryStr, fields);
         }
@@ -2606,8 +2686,10 @@ nmfDatabase::getCompetitionData(const std::string& CompetitionType,
         // BetaGuildsGuildsFilenames
         fields   = {"ProjectName","ModelName","GuildA","GuildB","Value"};
         for (int i=0; i<int(BetaGuildsGuildsFilenames.size()); ++i) {
-            queryStr = "SELECT ProjectName,ModelName,GuildA,GuildB,Value FROM " + BetaGuildsGuildsFilenames[i]  +
-                       " WHERE ProjectName = '" + ProjectName + "' AND ModelName = '" + ModelName +
+            queryStr = "SELECT ProjectName,ModelName,GuildA,GuildB,Value FROM " +
+                        BetaGuildsGuildsFilenames[i]  +
+                       " WHERE ProjectName = '" + ProjectName +
+                       "' AND ModelName = '"    + ModelName +
                        "' ORDER BY GuildA,GuildB ";
             dataMaps[i] = nmfQueryDatabase(queryStr, fields);
         }
@@ -2638,7 +2720,9 @@ nmfDatabase::getSpeciesInitialData(int& NumSpecies,
     SpeciesK.clear();
 
     fields   = {"SpeName","InitBiomass","GrowthRate","SpeciesK"};
-    queryStr = "SELECT SpeName,InitBiomass,GrowthRate,SpeciesK from " + nmfConstantsMSSPM::TableSpecies + " ORDER BY SpeName";
+    queryStr = "SELECT SpeName,InitBiomass,GrowthRate,SpeciesK from " +
+                nmfConstantsMSSPM::TableSpecies +
+               " ORDER BY SpeName";
     dataMap  = nmfQueryDatabase(queryStr, fields);
     NumSpecies = dataMap["SpeName"].size();
     if (NumSpecies == 0) {
@@ -2703,8 +2787,10 @@ nmfDatabase::getModelFormData(std::string& GrowthForm,
 
     // Find model forms
     fields     = {"GrowthForm","HarvestForm","WithinGuildCompetitionForm","PredationForm","RunLength","StartYear"};
-    queryStr   = "SELECT GrowthForm,HarvestForm,WithinGuildCompetitionForm,PredationForm,RunLength,StartYear ";
-    queryStr  += "FROM " + nmfConstantsMSSPM::TableModels + " WHERE ProjectName = '" + ProjectName + "' AND ModelName='" + ModelName + "'";
+    queryStr   = "SELECT GrowthForm,HarvestForm,WithinGuildCompetitionForm,PredationForm,RunLength,StartYear FROM " +
+                  nmfConstantsMSSPM::TableModels +
+                 " WHERE ProjectName = '" + ProjectName +
+                 "' AND ModelName = '"    + ModelName   + "'";
     dataMap    = nmfQueryDatabase(queryStr, fields);
     if (dataMap["GrowthForm"].size() == 0) {
         std::string msg = "[Error 1] getModelFormData: No Form data found in Models table for ModelName = " + ModelName;
@@ -2736,8 +2822,10 @@ nmfDatabase::getVectorParameterNames(
 
     // Get Model structure data
     fields     = {"ProjectName","ModelName","ObsBiomassType","GrowthForm","HarvestForm","WithinGuildCompetitionForm","PredationForm"};
-    queryStr   = "SELECT ProjectName,ModelName,ObsBiomassType,GrowthForm,HarvestForm,WithinGuildCompetitionForm,PredationForm";
-    queryStr  += " FROM " + nmfConstantsMSSPM::TableModels + " WHERE ProjectName = '" + ProjectName + "' AND ModelName='" + ModelName + "'";
+    queryStr   = "SELECT ProjectName,ModelName,ObsBiomassType,GrowthForm,HarvestForm,WithinGuildCompetitionForm,PredationForm FROM " +
+                  nmfConstantsMSSPM::TableModels +
+                 " WHERE ProjectName = '" + ProjectName +
+                 "' AND ModelName = '"    + ModelName   + "'";
     dataMap    = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["ModelName"].size();
     if (NumRecords == 0) {
@@ -2777,8 +2865,10 @@ nmfDatabase::loadEstimatedVectorParameters(
 
     // Get Model structure data
     fields     = {"ProjectName","ModelName","ObsBiomassType","GrowthForm","HarvestForm","WithinGuildCompetitionForm","PredationForm"};
-    queryStr   = "SELECT ProjectName,ModelName,ObsBiomassType,GrowthForm,HarvestForm,WithinGuildCompetitionForm,PredationForm";
-    queryStr  += " FROM " + nmfConstantsMSSPM::TableModels + " WHERE ProjectName = '" + ProjectName + "' AND ModelName='" + ModelName + "'";
+    queryStr   = "SELECT ProjectName,ModelName,ObsBiomassType,GrowthForm,HarvestForm,WithinGuildCompetitionForm,PredationForm FROM " +
+                  nmfConstantsMSSPM::TableModels +
+                 " WHERE ProjectName = '" + ProjectName +
+                 "' AND ModelName = '"    + ModelName   + "'";
     dataMap    = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["ModelName"].size();
     if (NumRecords == 0) {
@@ -2824,7 +2914,9 @@ nmfDatabase::getGuilds(
     GuildList.clear();
 
     fields   = {"GuildName"};
-    queryStr = "SELECT GuildName from " + nmfConstantsMSSPM::TableGuilds + " ORDER BY GuildName";
+    queryStr = "SELECT GuildName from " +
+                nmfConstantsMSSPM::TableGuilds +
+               " ORDER BY GuildName";
     dataMap  = nmfQueryDatabase(queryStr, fields);
     NumGuilds = dataMap["GuildName"].size();
     if (NumGuilds == 0) {
@@ -2852,7 +2944,9 @@ nmfDatabase::getSpecies(
     SpeciesList.clear();
 
     fields   = {"SpeName"};
-    queryStr = "SELECT SpeName from " + nmfConstantsMSSPM::TableSpecies + " ORDER BY SpeName";
+    queryStr = "SELECT SpeName from " +
+                nmfConstantsMSSPM::TableSpecies +
+               " ORDER BY SpeName";
     dataMap  = nmfQueryDatabase(queryStr, fields);
     NumSpecies = dataMap["SpeName"].size();
     if (NumSpecies == 0) {
@@ -2931,8 +3025,10 @@ nmfDatabase::getHarvestFormData(
 
     // Get needed data from Models table
     fields     = {"RunLength","HarvestForm"};
-    queryStr   = "SELECT RunLength,HarvestForm FROM " + nmfConstantsMSSPM::TableModels + " WHERE ProjectName = '" + projectName +
-                 "' AND ModelName='" + modelName + "'";
+    queryStr   = "SELECT RunLength,HarvestForm FROM " +
+                  nmfConstantsMSSPM::TableModels +
+                 " WHERE ProjectName = '" + projectName +
+                 "' AND ModelName = '"    + modelName   + "'";
     dataMap    = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["RunLength"].size();
     if (NumRecords == 0) {
@@ -2971,8 +3067,10 @@ nmfDatabase::getHarvestData(const std::string& HarvestType,
     HarvestTypePrefix += QString::fromStdString(HarvestType).toLower().split(" ")[0].toStdString();
 
     fields   = {"ProjectName","ModelName","SpeName","Year","Value"};
-    queryStr = "SELECT ProjectName,ModelName,SpeName,Year,Value FROM " + HarvestTypePrefix +
-               " WHERE ProjectName = '" + ProjectName + "' AND ModelName = '" + ModelName +
+    queryStr = "SELECT ProjectName,ModelName,SpeName,Year,Value FROM " +
+                HarvestTypePrefix +
+               " WHERE ProjectName = '" + ProjectName +
+               "' AND ModelName = '"    + ModelName +
                "' ORDER BY SpeName,Year ";
     dataMap  = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SpeName"].size();
@@ -2999,7 +3097,9 @@ nmfDatabase::getHarvestData(const std::string& HarvestType,
 
     if (HarvestTypePrefix == "Effort") {
         fields   = {"SpeName","Catchability"};
-        queryStr = "SELECT SpeName,Catchability FROM " + nmfConstantsMSSPM::TableSpecies + " ORDER BY SpeName ";
+        queryStr = "SELECT SpeName,Catchability FROM " +
+                    nmfConstantsMSSPM::TableSpecies +
+                    " ORDER BY SpeName ";
         dataMap  = nmfQueryDatabase(queryStr, fields);
         NumRecords = dataMap["SpeName"].size();
         if (NumSpecies != NumRecords) {
@@ -3023,6 +3123,8 @@ nmfDatabase::getEstimatedBiomass(
         const int&         NumSpecies,
         const int&         RunLength,
         const std::string& TableName,
+        const std::string& ProjectName,
+        const std::string& ModelName,
         const std::string& Algorithm,
         const std::string& Minimizer,
         const std::string& ObjectiveCriterion,
@@ -3038,11 +3140,17 @@ nmfDatabase::getEstimatedBiomass(
     EstBiomass.clear();
     nmfUtils::initialize(EstBiomass,RunLength+1,NumSpecies);
 
-    fields   = {"Algorithm","Minimizer","ObjectiveCriterion","Scaling","isAggProd","SpeName","Year","Value"};
-    queryStr = "SELECT Algorithm,Minimizer,ObjectiveCriterion,Scaling,isAggProd,SpeName,Year,Value FROM " + TableName +
-               " WHERE Algorithm = '" + Algorithm + "' AND Minimizer = '" + Minimizer +
-               "' AND ObjectiveCriterion = '" + ObjectiveCriterion + "' AND Scaling = '" + Scaling +
-               "' AND isAggProd = " + isAggProd + " ORDER BY SpeName,Year ";
+    fields   = {"ProjectName","ModelName","Algorithm","Minimizer","ObjectiveCriterion","Scaling","isAggProd","SpeName","Year","Value"};
+    queryStr = "SELECT ProjectName,ModelName,Algorithm,Minimizer,ObjectiveCriterion,Scaling,isAggProd,SpeName,Year,Value FROM " +
+                TableName +
+               " WHERE ProjectName = '"       + ProjectName +
+               "' AND ModelName = '"          + ModelName +
+               "' AND Algorithm = '"          + Algorithm   +
+               "' AND Minimizer = '"          + Minimizer +
+               "' AND ObjectiveCriterion = '" + ObjectiveCriterion +
+               "' AND Scaling = '"            + Scaling +
+               "' AND isAggProd = "           + isAggProd +
+               " ORDER BY SpeName,Year ";
     dataMap  = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SpeName"].size();
     if ((NumRecords == 0) ||
@@ -3065,6 +3173,8 @@ nmfDatabase::getEstimatedBiomass(
 bool
 nmfDatabase::getEstimatedParameter(
         const std::string& TableName,
+        const std::string& ProjectName,
+        const std::string& ModelName,
         const std::string& Algorithm,
         const std::string& Minimizer,
         const std::string& ObjectiveCriterion,
@@ -3079,11 +3189,17 @@ nmfDatabase::getEstimatedParameter(
 
     EstParameter.clear();
 
-    fields   = {"Algorithm","Minimizer","ObjectiveCriterion","Scaling","isAggProd","SpeName","Value"};
-    queryStr = "SELECT Algorithm,Minimizer,ObjectiveCriterion,Scaling,isAggProd,SpeName,Value FROM " + TableName +
-               " WHERE Algorithm = '" + Algorithm + "' AND Minimizer = '" + Minimizer +
-               "' AND ObjectiveCriterion = '" + ObjectiveCriterion + "' AND Scaling = '" + Scaling +
-               "' AND isAggProd = " + isAggProd + " ORDER BY SpeName ";
+    fields   = {"ProjectName","ModelName","Algorithm","Minimizer","ObjectiveCriterion","Scaling","isAggProd","SpeName","Value"};
+    queryStr = "SELECT ProjectName,ModelName,Algorithm,Minimizer,ObjectiveCriterion,Scaling,isAggProd,SpeName,Value FROM " +
+                TableName +
+               " WHERE ProjectName = '"       + ProjectName +
+               "' AND ModelName = '"          + ModelName +
+               "' AND Algorithm = '"          + Algorithm +
+               "' AND Minimizer = '"          + Minimizer +
+               "' AND ObjectiveCriterion = '" + ObjectiveCriterion +
+               "' AND Scaling = '"            + Scaling +
+               "' AND isAggProd = "           + isAggProd +
+               " ORDER BY SpeName ";
 
     dataMap  = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SpeName"].size();

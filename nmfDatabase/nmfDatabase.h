@@ -110,6 +110,7 @@ public:
             QWidget*           Widget,
             nmfLogger*         Logger,
             const std::string& ProjectName,
+            const std::string& ModelName,
             const std::string& ForecastName,
             const int&         NumSpecies,
             const int&         RunLength,
@@ -155,6 +156,8 @@ public:
             const int&         NumSpecies,
             const int&         RunLength,
             const std::string& TableName,
+            const std::string& ProjectName,
+            const std::string& ModelName,
             const std::string& Algorithm,
             const std::string& Minimizer,
             const std::string& ObjectiveCriterion,
@@ -163,6 +166,8 @@ public:
             boost::numeric::ublas::matrix<double>& EstBiomass);
     bool getEstimatedParameter(
             const std::string& TableName,
+            const std::string& ProjectName,
+            const std::string& ModelName,
             const std::string& Algorithm,
             const std::string& Minimizer,
             const std::string& ObjectiveCriterion,
@@ -206,6 +211,7 @@ public:
     bool getForecastInfo(
             const std::string& TableName,
             const std::string& ProjectName,
+            const std::string& ModelName,
             const std::string& ForecastName,
             int&         RunLength,
             int&         StartForecastYear,
@@ -218,6 +224,7 @@ public:
             QWidget*           Widget,
             nmfLogger*         Logger,
             const std::string& ProjectName,
+            const std::string& ModelName,
             const std::string& ForecastName,
             const int&         NumSpecies,
             const int&         RunLength,
@@ -245,6 +252,7 @@ public:
             QWidget*           Widget,
             nmfLogger*         Logger,
             const std::string& ProjectName,
+            const std::string& ModelName,
             const std::string& ForecastName,
             const int&         NumSpecies,
             const int&         RunLength,
@@ -270,6 +278,7 @@ public:
             nmfLogger*           logger,
             const std::string&   Species,
             const std::string&   ProjectName,
+            const std::string&   ModelName,
             const std::string&   ForecastName,
             std::string&         Algorithm,
             std::string&         Minimizer,
@@ -288,6 +297,7 @@ public:
             QWidget*             widget,
             nmfLogger*           logger,
             const std::string&   ProjectName,
+            const std::string&   ModelName,
             const std::string&   ForecastName,
             std::string&         Algorithm,
             std::string&         Minimizer,
@@ -503,7 +513,10 @@ public:
 
     void getSpeciesToIndexMap(std::map<std::string,int>& SpeciesToIndexMap);
 
-    void createScenarioMap(std::map<QString,QStringList>& ScenarioForecastMap);
+    void createScenarioMap(
+            const std::string& ProjectName,
+            const std::string& ModelName,
+            std::map<QString,QStringList>& ScenarioForecastMap);
 
     bool databaseExists(std::string dbName);
 

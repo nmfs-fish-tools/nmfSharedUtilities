@@ -97,6 +97,8 @@ private:
             int& numCols);
     bool resetAndCheckFirstAndLastImages();
     void setupOutputScreenShotViewerWidgets();
+    bool checkIntValueOK(const QString& line,
+                         int& intValue);
 
 public:
     /**

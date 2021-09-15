@@ -157,6 +157,7 @@ namespace nmfConstantsMSSPM
      const std::string  FilenameMohnsRhoRun            = "MohnsRhoMultiRunParameter.csv";
      const std::string  FilenameModelReview            = "ModelReview.csv";
      const std::string  FilenameSummaryModelFit        = "SummaryModelFit.csv";
+     const std::string  FilenameSummaryDiagnostic      = "SummaryDiagnostic.csv";
      const std::string  FilenameEstimatedParameters    = "EstimatedParameters.csv";
      const QString      OutputChartBiomass             = "Biomass vs Time";
      const QString      OutputChartHarvest             = "Harvest vs Time";
@@ -257,9 +258,9 @@ namespace nmfConstantsMSSPM
      const std::string TableSpecies                            = QString::fromStdString("Species").toLower().toStdString();
      const std::string TableModelReview                        = QString::fromStdString("ModelReview").toLower().toStdString();
      const std::string TableSummaryModelFit                    = QString::fromStdString("SummaryModelFit").toLower().toStdString();
-     const std::string TableSummaryMohnsRho                    = QString::fromStdString("SummaryMohnsRho").toLower().toStdString();
+     const std::string TableSummaryDiagnostic                  = QString::fromStdString("SummaryDiagnostic").toLower().toStdString();
 
-     const QStringList StatisticNames =
+     const QStringList SummaryModelFitStatisticNames =
          {"SSresiduals",
           "SSdeviations",
           "SStotals",
@@ -272,13 +273,32 @@ namespace nmfConstantsMSSPM
           "AAE",
           "MEF"};
 
+     const QStringList SummaryModelFitStatisticTooltips =
+         {"Sum of Squared Residuals",
+          "Sum of Squared Deviations",
+          "Total Sum of Squares",
+          "Determination Coefficient",
+          "Correlation Coefficient",
+          "Akaike Information Criterion",
+          "Root Mean Square Error",
+          "Reliability Index",
+          "Average Error",
+          "Average Absolute Error",
+          "Model Efficiency"};
+
+     const QStringList SummaryDiagnosticStatisticNames =
+         {"Mohn's Rho (Initial Absolute Biomass)",
+          "Mohn's Rho (Growth Rate)",
+          "Mohn's Rho (Carrying Capacity)",
+          "Mohn's Rho (Predation Effect)",
+          "Mohn's Rho (Estimated Biomass)"};
+
      const QStringList VectorParameterNames =
          {"Initial Biomass (B₀)",
           "Growth Rate (r)",
           "Carrying Capacity (K)",
           "Catchability (q)",
-          "SurveyQ"
-         };
+          "SurveyQ"};
 
      const std::vector<std::string> EstimateCheckboxNames =
          {"InitBiomass",

@@ -212,6 +212,24 @@ nmfViewerWidget::okToOverwrite(QString filenameWithPath)
 }
 
 bool
+nmfViewerWidget::checkIntValueOK(const QString& line,
+                                 int& intValue)
+{
+    bool ok;
+    int size = line.split(",").size();
+    if (size < 2) {
+        return false;
+    }
+
+    intValue = line.split(",")[1].trimmed().toInt(&ok);
+    if (! ok) {
+        return false;
+    }
+
+    return true;
+}
+
+bool
 nmfViewerWidget::readDataFile(
         const QString& filename,
         QStringList& header,
@@ -223,21 +241,27 @@ nmfViewerWidget::readDataFile(
     bool addTheMatrix = false;
     int i,j;
     QString line;
+    boost::numeric::ublas::matrix<double> tmpMtx;
 
     // Read .csv file and parse into data vector of matrices
     QFile file(filename);
     if (! file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         return false;
     }
-    boost::numeric::ublas::matrix<double> tmpMtx;
-
     QTextStream in(&file);
 
     // The first 2 lines are for num species and num years
     line = in.readLine().trimmed();
-    numCols = line.split(",")[1].trimmed().toInt() + 1; // +1 to include the first Year columns
+    if (! checkIntValueOK(line,numCols)) {
+        return false;
+    }
+    ++numCols; // +1 to include the first Year columns
+
     line = in.readLine().trimmed();
-    numRows = line.split(",")[1].trimmed().toInt() + 1; // +1 to make the year range inclusive
+    if (! checkIntValueOK(line,numRows)) {
+        return false;
+    }
+    ++numRows; // +1 to make the year range inclusive
 
     nmfUtils::initialize(tmpMtx,numRows,numCols);
 
