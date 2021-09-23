@@ -259,6 +259,7 @@ namespace nmfConstantsMSSPM
      const std::string TableModelReview                        = QString::fromStdString("ModelReview").toLower().toStdString();
      const std::string TableSummaryModelFit                    = QString::fromStdString("SummaryModelFit").toLower().toStdString();
      const std::string TableSummaryDiagnostic                  = QString::fromStdString("SummaryDiagnostic").toLower().toStdString();
+     const std::string TableOutputBiomassMohnsRhoOfEnsembles   = QString::fromStdString("OutputBiomassMohnsRhoOfEnsembles").toLower().toStdString();
 
      const QStringList SummaryModelFitStatisticNames =
          {"SSresiduals",

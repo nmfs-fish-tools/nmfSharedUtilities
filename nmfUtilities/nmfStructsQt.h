@@ -221,6 +221,8 @@ struct ModelDataStruct {
     int    NLoptStopAfterIter;
     int    NLoptNumberOfRuns;
 
+    int    NumMohnsRhoMultiRuns;
+
     std::string MultiRunSpeciesFilename;
     std::string MultiRunModelFilename;
     std::string MultiRunSetupFilename;
