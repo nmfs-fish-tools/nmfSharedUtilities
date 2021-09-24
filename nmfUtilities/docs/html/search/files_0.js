@@ -1,15 +1,19 @@
 var searchData=
 [
-  ['nmfconstants_2eh',['nmfConstants.h',['../nmf_constants_8h.html',1,'']]],
-  ['nmfconstantsmscaa_2eh',['nmfConstantsMSCAA.h',['../nmf_constants_m_s_c_a_a_8h.html',1,'']]],
-  ['nmfconstantsmsspm_2eh',['nmfConstantsMSSPM.h',['../nmf_constants_m_s_s_p_m_8h.html',1,'']]],
-  ['nmfconstantsmsvpa_2eh',['nmfConstantsMSVPA.h',['../nmf_constants_m_s_v_p_a_8h.html',1,'']]],
-  ['nmflogger_2eh',['nmfLogger.h',['../nmf_logger_8h.html',1,'']]],
-  ['nmfstructsqt_2eh',['nmfStructsQt.h',['../nmf_structs_qt_8h.html',1,'']]],
-  ['nmfutils_2eh',['nmfUtils.h',['../nmf_utils_8h.html',1,'']]],
-  ['nmfutilscomplex_2ecpp',['nmfUtilsComplex.cpp',['../nmf_utils_complex_8cpp.html',1,'']]],
-  ['nmfutilscomplex_2eh',['nmfUtilsComplex.h',['../nmf_utils_complex_8h.html',1,'']]],
-  ['nmfutilsqt_2eh',['nmfUtilsQt.h',['../nmf_utils_qt_8h.html',1,'']]],
-  ['nmfutilssolvers_2eh',['nmfUtilsSolvers.h',['../nmf_utils_solvers_8h.html',1,'']]],
-  ['nmfutilsstatistics_2eh',['nmfUtilsStatistics.h',['../nmf_utils_statistics_8h.html',1,'']]]
+  ['nmfconstants_2eh_141',['nmfConstants.h',['../nmf_constants_8h.html',1,'']]],
+  ['nmfconstantsavailability_2eh_142',['nmfConstantsAvailability.h',['../nmf_constants_availability_8h.html',1,'']]],
+  ['nmfconstantsdonut_2eh_143',['nmfConstantsDonut.h',['../nmf_constants_donut_8h.html',1,'']]],
+  ['nmfconstantsmscaa_2eh_144',['nmfConstantsMSCAA.h',['../nmf_constants_m_s_c_a_a_8h.html',1,'']]],
+  ['nmfconstantsmsspm_2eh_145',['nmfConstantsMSSPM.h',['../nmf_constants_m_s_s_p_m_8h.html',1,'']]],
+  ['nmfconstantsmsvpa_2eh_146',['nmfConstantsMSVPA.h',['../nmf_constants_m_s_v_p_a_8h.html',1,'']]],
+  ['nmflogger_2eh_147',['nmfLogger.h',['../nmf_logger_8h.html',1,'']]],
+  ['nmfstructsqt_2eh_148',['nmfStructsQt.h',['../nmf_structs_qt_8h.html',1,'']]],
+  ['nmfutils_2eh_149',['nmfUtils.h',['../nmf_utils_8h.html',1,'']]],
+  ['nmfutilscomplex_2ecpp_150',['nmfUtilsComplex.cpp',['../nmf_utils_complex_8cpp.html',1,'']]],
+  ['nmfutilscomplex_2eh_151',['nmfUtilsComplex.h',['../nmf_utils_complex_8h.html',1,'']]],
+  ['nmfutilsqt_2eh_152',['nmfUtilsQt.h',['../nmf_utils_qt_8h.html',1,'']]],
+  ['nmfutilssolvers_2eh_153',['nmfUtilsSolvers.h',['../nmf_utils_solvers_8h.html',1,'']]],
+  ['nmfutilsstatistics_2eh_154',['nmfUtilsStatistics.h',['../nmf_utils_statistics_8h.html',1,'']]],
+  ['nmfutilsstatisticsaveraging_2eh_155',['nmfUtilsStatisticsAveraging.h',['../nmf_utils_statistics_averaging_8h.html',1,'']]],
+  ['nmfutilsstatisticsmohnsrho_2eh_156',['nmfUtilsStatisticsMohnsRho.h',['../nmf_utils_statistics_mohns_rho_8h.html',1,'']]]
 ];

@@ -1,4 +1,6 @@
 <map id="nmfUtilsStatistics.h" name="nmfUtilsStatistics.h">
-<area shape="rect" id="node2" href="$nmf_utils_complex_8h.html" title="These routines were originally from Complex2.bas. " alt="" coords="12,80,147,107"/>
-<area shape="rect" id="node3" href="$nmf_utils_complex_8cpp.html" title="These routines were originally from Complex2.bas. " alt="" coords="5,155,153,181"/>
+<area shape="rect" id="node1" title="This header file defines multi&#45;species statistical utility functions." alt="" coords="11,5,162,32"/>
+<area shape="rect" id="node2" href="$nmf_utils_complex_8h.html" title="These routines were originally from Complex2.bas." alt="" coords="13,80,161,107"/>
+<area shape="rect" id="node4" href="$nmf_utils_statistics_mohns_rho_8h.html" title="Definition for the nmfUtilsStatisticsMohnsRho class." alt="" coords="185,80,404,107"/>
+<area shape="rect" id="node3" href="$nmf_utils_complex_8cpp.html" title="These routines were originally from Complex2.bas." alt="" coords="5,155,168,181"/>
 </map>

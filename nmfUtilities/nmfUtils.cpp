@@ -277,12 +277,6 @@ convertVectorToMatrix(std::vector<double>& vec)
  */
 double getRandomNumber(int seedValue, double lowerLimit, double upperLimit)
 {
-//    std::random_device rd;
-//    int RandomSeed = (seed < 0) ? rd() : seed;
-//    std::mt19937 e2(RandomSeed);
-//    std::uniform_real_distribution<> dist(lowerLimit,upperLimit);
-//    return dist(e2);
-
     unsigned RandomSeed = nmfUtilsQt::getCurrentTime().currentMSecsSinceEpoch();
     unsigned Seed = (seedValue < 0) ? RandomSeed : seedValue;
     std::uniform_real_distribution<double> dist(lowerLimit,upperLimit);
@@ -510,7 +504,8 @@ rescaleMatrixMinMax(boost::numeric::ublas::matrix<double> &Matrix)
     }
 }
 
-void reset(boost::numeric::ublas::matrix<double>& mat,
+void
+reset(boost::numeric::ublas::matrix<double>& mat,
            const double& resetValue)
 {
     for (int i=0; i<int(mat.size1()); ++i) {
@@ -520,7 +515,8 @@ void reset(boost::numeric::ublas::matrix<double>& mat,
     }
 }
 
-bool isEstimateParameterChecked(
+bool
+isEstimateParameterChecked(
         const nmfStructsQt::ModelDataStruct& dataStruct,
         const std::string& ParameterName)
 {

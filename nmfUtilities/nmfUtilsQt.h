@@ -7,6 +7,26 @@
  * This file contains common Qt widgets and functions that operate on Qt widgets
  * as used by the MultiSpecies applications.
  *
+ * @copyright
+ * Public Domain Notice\n
+ *
+ * National Oceanic And Atmospheric Administration\n\n
+ *
+ * This software is a "United States Government Work" under the terms of the
+ * United States Copyright Act.  It was written as part of the author's official
+ * duties as a United States Government employee/contractor and thus cannot be copyrighted.
+ * This software is freely available to the public for use. The National Oceanic
+ * And Atmospheric Administration and the U.S. Government have not placed any
+ * restriction on its use or reproduction.  Although all reasonable efforts have
+ * been taken to ensure the accuracy and reliability of the software and data,
+ * the National Oceanic And Atmospheric Administration and the U.S. Government
+ * do not and cannot warrant the performance or results that may be obtained
+ * by using this software or data. The National Oceanic And Atmospheric
+ * Administration and the U.S. Government disclaim all warranties, express
+ * or implied, including warranties of performance, merchantability or fitness
+ * for any particular purpose.\n\n
+ *
+ * Please cite the author(s) in any work or product based on this material.
  */
 
 #pragma once
@@ -72,17 +92,6 @@ typedef boost::multi_array<double, 3> Boost3DArrayDouble;
 typedef boost::multi_array<double, 4> Boost4DArrayDouble;
 typedef boost::multi_array<double, 5> Boost5DArrayDouble;
 
-//struct ADMBFilesStruct {
-//    QString dataFile;
-//    QString parameterFile;
-//    QString pinFile;
-//    QString tplFile;
-//    QString reportFile;
-//    QString buildOutput;
-//    QString runOutput;
-//};
-
-
 QT_CHARTS_USE_NAMESPACE
 
 /**
@@ -110,6 +119,9 @@ private slots:
     void callback_FontSizePB(QString fontSize);
 };
 
+/**
+ * @brief This class is used to create custom tooltips
+ */
 class nmfToolTip : public QWidget {
 
     Q_OBJECT
@@ -118,7 +130,8 @@ class nmfToolTip : public QWidget {
 
 public:
     nmfToolTip();
-    ~nmfToolTip() {}
+   ~nmfToolTip() {}
+
     void setLabel(const QString& label);
 };
 
@@ -140,7 +153,6 @@ public:
     void clear();
     void selectAllItems();
     void deselectAllItems();
-
     void keyPressEvent(QEvent* e);
 };
 
@@ -155,7 +167,6 @@ public:
     void copy();
     void paste();
     void pasteAll();
-
     void clearAll();
     void clear();
     void selectAllItems();
@@ -171,8 +182,8 @@ namespace nmfUtilsQt {
     /**
      * @brief Background color specification for a read only line edit widget
      */
-//    const QString ReadOnlyLineEditBgColor     = "QLineEdit { background: rgb(250,240,230);}";
-//    const QString ReadOnlyLineEditBgColorDark = "QLineEdit {background: rgb(103,110,113);}";
+//  const QString ReadOnlyLineEditBgColor     = "QLineEdit { background: rgb(250,240,230);}";
+//  const QString ReadOnlyLineEditBgColorDark = "QLineEdit {background: rgb(103,110,113);}";
     const QString ReadOnlyLineEditBgColorLight = "QLineEdit {background: rgb(240,240,240);}";
     const QString ReadOnlyLineEditBgColorDark  = "QLineEdit {background: rgb(110,110,110);}";
     /**
@@ -332,17 +343,29 @@ namespace nmfUtilsQt {
      */
     QSettings* createSettings(const std::string& windowsDir,
                               const QString&     name);
-//    /**
-//     * @brief delays program execution by the passed number of milliseconds
-//     * @param milliseconds : number of milliseconds by which to delay program execution
-//     */
-//    void delayMSec(const int& milliseconds);
     /**
      * @brief deselects all cells in the passed tableView
      * @param tableView : tableView to deselect cells
      * @return Returns error message if an error was found, else returns an empty string
      */
     QString deselectAll(QTableView* tableView);
+    /**
+     * @brief Calculates the time elapsed between the passed startTime and the currentTime
+     * @param startTime : The start time with which to calculate the elapsed time
+     * @return The number of hours, minutes, or seconds that have elapsed (in a string format)
+     */
+    std::string elapsedTime(QDateTime startTime);
+    /**
+     * @brief Calculates the time elapsed between the passed startTime and the currentTime and displays it in a condensed format
+     * @param startTime : The start time with which to calculate the elapsed time
+     * @return A string represent the time passed in format: hh:mm:ss
+     */
+    std::string elapsedTimeCondensed(QDateTime startTime);
+    /**
+     * @brief Tests if field is empty or not
+     * @return Returns boolean describing if argument is empty string
+     */
+    bool emptyField(QStringList fields);
     /**
      * @brief Equalizes the lengths of the 2 passed strings by
      * padding the shorter with spaces at the beginning of the string
@@ -352,10 +375,13 @@ namespace nmfUtilsQt {
     void equalizeQStringLengths(QString& string1,
                                 QString& string2);
     /**
-     * @brief Tests if field is empty or not
-     * @return Returns boolean describing if argument is empty string
+     * @brief Extracts the embedded tag from the passed filename
+     * @param filename : name of file to extract tag from
+     * @param tag : descriptor tag embedded in filename
+     * @return Boolean : true - success, false - failure
      */
-    bool emptyField(QStringList fields);
+    bool extractTag(const QString filename,
+                    QString& tag);
     /**
      * @brief Checks to see if the passed in filename exists
      * @param filenameWithPath : file to check for existence
@@ -368,6 +394,11 @@ namespace nmfUtilsQt {
      * @return Returns the name of the current tab
      */
     QString getCurrentTabName(QTabWidget* tabWidget);
+    /**
+     * @brief Returns the current time
+     * @return the current time
+     */
+    QDateTime getCurrentTime();
     /**
      * @brief Get the index value for the names tab
      * @param tabWidget : tab widget containing the tab in question
@@ -578,7 +609,6 @@ namespace nmfUtilsQt {
                               QList<QString>& SpeciesInitialBiomass,
                               QList<QString>& SpeciesGrowthRate,
                               QList<QString>& SpeciesK);
-
     /**
      * @brief Saves the data in the passed model to a csv file in the passed directory
      * @param parentTabWidget : parent table widget of table to be saved
@@ -648,14 +678,26 @@ namespace nmfUtilsQt {
      * @brief Convenience function to reset an X axis (the original Qt call was deprecated)
      * @param chart : the chart on which the axis is to be placed
      * @param axisX : the new axis with which to replace the old one
-     * @param series : the series to which the axis refers
+     * @param series : the QLineSeries to which the axis refers
      */
     void setAxisX(QChart*      chart,
                   QValueAxis*  axisX,
                   QLineSeries* series);
+    /**
+     * @brief Convenience function to reset an X axis (the original Qt call was deprecated)
+     * @param chart : the chart on which the axis is to be placed
+     * @param axisX : the new axis with which to replace the old one
+     * @param series : the QStackedBarSeries to which the axis refers
+     */
     void setAxisX(QChart*      chart,
                   QBarCategoryAxis*  axisX,
                   QStackedBarSeries* series);
+    /**
+     * @brief Convenience function to reset an X axis (the original Qt call was deprecated)
+     * @param chart : the chart on which the axis is to be placed
+     * @param axisX : the new axis with which to replace the old one
+     * @param series : the QBarSeries to which the axis refers
+     */
     void setAxisX(QChart*            chart,
                   QBarCategoryAxis*  axisX,
                   QBarSeries*        series);
@@ -663,17 +705,36 @@ namespace nmfUtilsQt {
      * @brief Convenience function to reset a Y axis (the original Qt call was deprecated)
      * @param chart : the chart on which the axis is to be placed
      * @param axisX : the new axis with which to replace the old one
-     * @param series : the series to which the axis refers
+     * @param series : the QLineSeries to which the axis refers
      */
     void setAxisY(QChart*      chart,
                   QValueAxis*  axisY,
                   QLineSeries* series);
+    /**
+     * @brief Convenience function to reset a Y axis (the original Qt call was deprecated)
+     * @param chart : the chart on which the axis is to be placed
+     * @param axisX : the new axis with which to replace the old one
+     * @param series : the QStackedBarSeries to which the axis refers
+     */
     void setAxisY(QChart*      chart,
                   QValueAxis*  axisY,
                   QStackedBarSeries* series);
+    /**
+     * @brief Convenience function to reset a Y axis (the original Qt call was deprecated)
+     * @param chart : the chart on which the axis is to be placed
+     * @param axisX : the new axis with which to replace the old one
+     * @param series : the QBarSeries to which the axis refers
+     */
     void setAxisY(QChart*      chart,
                   QValueAxis*  axisY,
                   QBarSeries* series);
+    /**
+     * @brief Sets the background color of a QLineEdit widget
+     * @param lineEdit : QLineEdit widget whose background is to be changed
+     * @param backgroundStyleSheet : new style sheet for the passed in QLineEdit
+     */
+    void setBackgroundLineEdit(QLineEdit* lineEdit,
+                               const QString& backgroundStyleSheet);
     /**
      * @brief Sets the min max range tables using the passed in pct value
      * @param pct : percent value to create the min and max range tables
@@ -713,7 +774,7 @@ namespace nmfUtilsQt {
             const QString& version,
             const QString& specialAcknowledgement,
             const QString& appMsg);
-    /*
+    /**
      * @brief Useful for changing .jpg,.png to .csv
      * @param filename : file name on which to modify the extension
      * @param newExt : the new file name extension
@@ -736,32 +797,6 @@ namespace nmfUtilsQt {
      */
     void transposeModel(QTableView* tv);
     /**
-     * @brief Extracts the embedded tag from the passed filename
-     * @param filename : name of file to extract tag from
-     * @param tag : descriptor tag embedded in filename
-     * @return Boolean : true - success, false - failure
-     */
-    bool extractTag(const QString filename,
-                    QString& tag);
-    /**
-     * @brief Returns the current time
-     * @return the current time
-     */
-    QDateTime getCurrentTime();
-    /**
-     * @brief Calculates the time elapsed between the passed startTime and the currentTime
-     * @param startTime : The start time with which to calculate the elapsed time
-     * @return The number of hours, minutes, or seconds that have elapsed (in a string format)
-     */
-    std::string elapsedTime(QDateTime startTime);
-    /**
-     * @brief Calculates the time elapsed between the passed startTime and the currentTime and displays it in a condensed format
-     * @param startTime : The start time with which to calculate the elapsed time
-     * @return A string represent the time passed in format: hh:mm:ss
-     */
-    std::string elapsedTimeCondensed(QDateTime startTime);
-
-    /**
      * @brief Updates the passed QProgressDialog widget
      * @param logger : application logger
      * @param dlg : QProgressDialog widget
@@ -772,11 +807,4 @@ namespace nmfUtilsQt {
                            QProgressDialog* dlg,
                            const std::string& msg,
                            int& pInc);
-
-    void setBackgroundLineEdit(QLineEdit* lineEdit,
-                               const QString& backgroundStyleSheet);
-
-//    bool saveSigDigState(QAction* sigDigActn);
-//    void restoreSigDigState(QAction* sigDigActn, bool state);
-
 } // end namespace

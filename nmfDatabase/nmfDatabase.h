@@ -35,15 +35,15 @@
 #include "nmfUtilsQt.h"
 #include "nmfConstantsMSSPM.h"
 
-#include <iostream>
-#include <memory>
-#include <vector>
-#include <string>
-#include <map>
 #include <algorithm>
-#include <iterator>
 #include <exception>
+#include <iostream>
+#include <iterator>
+#include <map>
+#include <memory>
+#include <string>
 #include <tuple>
+#include <vector>
 
 /*
 #include "fileIO.h"
@@ -58,15 +58,14 @@
 #include <boost/numeric/ublas/matrix.hpp>
 
 #include <QApplication>
-#include <QSqlDatabase>
-#include <QSqlQueryModel>
-#include <QSqlQuery>
-#include <QString>
+#include <QDebug>
 #include <QDir>
 #include <QFile>
-#include <QDebug>
+#include <QSqlDatabase>
 #include <QSqlError>
-
+#include <QSqlQuery>
+#include <QSqlQueryModel>
+#include <QString>
 
 /**
  * @brief Allows user to interact with MySQL database
@@ -92,7 +91,15 @@ public:
      * @brief Class constructor
      */
     nmfDatabase();
+   ~nmfDatabase() {}
 
+    /**
+     * @brief Closes the database
+     * @param none
+     * @return none
+     */
+    void nmfCloseDatabase();
+    std::string nmfLastError();
     /**
      * @brief Opens/prepares a database for I/O.
      * @param hostName - The name of the host computer
@@ -106,6 +113,12 @@ public:
             const std::string &userName,
             const std::string &password,
             std::string&       errorMsg);
+//  void nmfStartTransaction();
+//   void nmfSaveDatabase();
+    std::string nmfGetCurrentDatabase();
+
+
+
     bool getForecastHarvest(
             QWidget*           Widget,
             nmfLogger*         Logger,
@@ -120,17 +133,9 @@ public:
             std::string&       Scaling,
             const std::string& HarvestForm,
             std::vector<boost::numeric::ublas::matrix<double> >& ForecastCatch);
-    /**
-     * @brief Closes the database
-     * @param none
-     * @return none
-     */
-    void nmfCloseDatabase();
-    std::string nmfLastError();
 
-    void nmfStartTransaction();
-    void nmfSaveDatabase();
-    std::string nmfGetCurrentDatabase();
+
+
     double checkForValues(
             const int& index,
             const int& numValues,

@@ -218,39 +218,35 @@ std::cout << "Trying to close: " << dbToClose.toStdString() << std::endl;
     QSqlDatabase::removeDatabase(dbToClose);
 }
 
-void
-nmfDatabase::nmfSaveDatabase()
-{
-    QSqlDatabase db = QSqlDatabase::database();
-    db.commit();
-}
+//void
+//nmfDatabase::nmfSaveDatabase()
+//{
+//    QSqlDatabase db = QSqlDatabase::database();
+//    db.commit();
+//}
 
-void
-nmfDatabase::nmfStartTransaction()
-{
-    QSqlDatabase db = QSqlDatabase::database();
+//void
+//nmfDatabase::nmfStartTransaction()
+//{
+//    QSqlDatabase db = QSqlDatabase::database();
+//    bool supportsTransactions = db.transaction();
+//    if (!supportsTransactions) {
+//        std::cout <<
+//            "\nWarning: Database doesn't support transactions. " <<
+//            "All modifications will happen as you modify the database. " <<
+//            "\n         Change database format to InnoDB. Inspect with MySql command: show table status;\n"
+//            << std::endl;
+//    }
+//}
 
-    bool supportsTransactions = db.transaction();
-    if (!supportsTransactions) {
-        std::cout <<
-            "\nWarning: Database doesn't support transactions. " <<
-            "All modifications will happen as you modify the database. " <<
-            "\n         Change database format to InnoDB. Inspect with MySql command: show table status;\n"
-            << std::endl;
-    }
-}
 
 
-// Very slow
 std::string
 nmfDatabase::nmfUpdateDatabase(std::string qry)
 {
     //std::cout << "Updating database..." << std::endl;
-    //nmfStartTransaction();
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery retv = db.exec(QString::fromStdString(qry));
-
-    //nmfSaveDatabase();
 
     return retv.lastError().text().toStdString();
 }
@@ -265,16 +261,12 @@ nmfDatabase::nmfDeleteRecordsFromTable(std::string table, std::string MSVPAName)
     std::string errorMsg;
     bool ok=true;
 
-    //nmfStartTransaction();
-
     queryStr = "DELETE FROM " + table + " WHERE MSVPAname=\""+MSVPAName+"\";";
     errorMsg = nmfUpdateDatabase(queryStr);
     if (nmfUtilsQt::isAnError(errorMsg)) {
         nmfUtils::printError(queryStr,errorMsg);
         ok = false;
     }
-
-    //nmfSaveDatabase();
 
     return ok;
 }
@@ -365,8 +357,6 @@ nmfDatabase::nmfDeleteRecordsFromTable(std::string table,
         nmfUtils::printError(queryStr,errorMsg);
         ok = false;
     }
-
-    //nmfSaveDatabase();
 
     return ok;
 }

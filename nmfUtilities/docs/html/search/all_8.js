@@ -1,23 +1,7 @@
 var searchData=
 [
-  ['nmfutilities',['nmfUtilities',['../index.html',1,'']]],
-  ['nlregout',['NLRegOut',['../struct_n_l_reg_out.html',1,'']]],
-  ['nmfconstants_2eh',['nmfConstants.h',['../nmf_constants_8h.html',1,'']]],
-  ['nmfconstantsmscaa_2eh',['nmfConstantsMSCAA.h',['../nmf_constants_m_s_c_a_a_8h.html',1,'']]],
-  ['nmfconstantsmsspm_2eh',['nmfConstantsMSSPM.h',['../nmf_constants_m_s_s_p_m_8h.html',1,'']]],
-  ['nmfconstantsmsvpa_2eh',['nmfConstantsMSVPA.h',['../nmf_constants_m_s_v_p_a_8h.html',1,'']]],
-  ['nmffileviewer',['nmfFileViewer',['../classnmf_file_viewer.html',1,'nmfFileViewer'],['../classnmf_file_viewer.html#a04246e2e514bd3e6778ab9923fc81983',1,'nmfFileViewer::nmfFileViewer()']]],
-  ['nmflogger',['nmfLogger',['../classnmf_logger.html',1,'nmfLogger'],['../classnmf_logger.html#a3ca5a992a3e28751e1555beafb7ed13e',1,'nmfLogger::nmfLogger()']]],
-  ['nmflogger_2eh',['nmfLogger.h',['../nmf_logger_8h.html',1,'']]],
-  ['nmfstructsqt',['nmfStructsQt',['../namespacenmf_structs_qt.html',1,'']]],
-  ['nmfstructsqt_2eh',['nmfStructsQt.h',['../nmf_structs_qt_8h.html',1,'']]],
-  ['nmfutils_2eh',['nmfUtils.h',['../nmf_utils_8h.html',1,'']]],
-  ['nmfutilscomplex',['nmfUtilsComplex',['../namespacenmf_utils_complex.html',1,'']]],
-  ['nmfutilscomplex_2ecpp',['nmfUtilsComplex.cpp',['../nmf_utils_complex_8cpp.html',1,'']]],
-  ['nmfutilscomplex_2eh',['nmfUtilsComplex.h',['../nmf_utils_complex_8h.html',1,'']]],
-  ['nmfutilsqt',['nmfUtilsQt',['../namespacenmf_utils_qt.html',1,'']]],
-  ['nmfutilsqt_2eh',['nmfUtilsQt.h',['../nmf_utils_qt_8h.html',1,'']]],
-  ['nmfutilssolvers',['nmfUtilsSolvers',['../namespacenmf_utils_solvers.html',1,'']]],
-  ['nmfutilssolvers_2eh',['nmfUtilsSolvers.h',['../nmf_utils_solvers_8h.html',1,'']]],
-  ['nmfutilsstatistics_2eh',['nmfUtilsStatistics.h',['../nmf_utils_statistics_8h.html',1,'']]]
+  ['modelcopy_52',['modelCopy',['../namespacenmf_utils_qt.html#aafce4f1107a07be8f43e90bdf2518c98',1,'nmfUtilsQt']]],
+  ['modeldata_53',['ModelData',['../struct_model_data.html',1,'']]],
+  ['modeldatastruct_54',['ModelDataStruct',['../structnmf_structs_qt_1_1_model_data_struct.html',1,'nmfStructsQt']]],
+  ['modelreviewstruct_55',['ModelReviewStruct',['../structnmf_structs_qt_1_1_model_review_struct.html',1,'nmfStructsQt']]]
 ];

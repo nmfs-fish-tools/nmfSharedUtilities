@@ -1,0 +1,9 @@
+<map id="nmfUtilsQt.h" name="nmfUtilsQt.h">
+<area shape="rect" id="node1" title="Definition for Qt widgets and functions that operate on widgets." alt="" coords="303,5,409,32"/>
+<area shape="rect" id="node2" href="$nmf_utils_8h.html" title="Definition for common typedefs and structs (i.e., non&#45;graphical)" alt="" coords="311,80,401,107"/>
+<area shape="rect" id="node3" href="$nmf_utils_complex_8h.html" title="These routines were originally from Complex2.bas." alt="" coords="145,155,293,181"/>
+<area shape="rect" id="node5" href="$nmf_utils_statistics_8h.html" title="This header file defines multi&#45;species statistical utility functions." alt="" coords="193,229,343,256"/>
+<area shape="rect" id="node6" href="$nmf_utils_statistics_mohns_rho_8h.html" title="Definition for the nmfUtilsStatisticsMohnsRho class." alt="" coords="215,304,433,331"/>
+<area shape="rect" id="node7" href="$nmf_utils_statistics_averaging_8h.html" title="Definition for the nmfUtilsStatisticsAveraging class." alt="" coords="419,155,634,181"/>
+<area shape="rect" id="node4" href="$nmf_utils_complex_8cpp.html" title="These routines were originally from Complex2.bas." alt="" coords="5,229,168,256"/>
+</map>

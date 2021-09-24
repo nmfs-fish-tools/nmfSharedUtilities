@@ -6,6 +6,27 @@
  * This file contains typedefs, structs, and functions common to the MultiSpecies
  * applications. The functions that print various structures are located in this
  * file as well.
+ *
+ * @copyright
+ * Public Domain Notice\n
+ *
+ * National Oceanic And Atmospheric Administration\n\n
+ *
+ * This software is a "United States Government Work" under the terms of the
+ * United States Copyright Act.  It was written as part of the author's official
+ * duties as a United States Government employee/contractor and thus cannot be copyrighted.
+ * This software is freely available to the public for use. The National Oceanic
+ * And Atmospheric Administration and the U.S. Government have not placed any
+ * restriction on its use or reproduction.  Although all reasonable efforts have
+ * been taken to ensure the accuracy and reliability of the software and data,
+ * the National Oceanic And Atmospheric Administration and the U.S. Government
+ * do not and cannot warrant the performance or results that may be obtained
+ * by using this software or data. The National Oceanic And Atmospheric
+ * Administration and the U.S. Government disclaim all warranties, express
+ * or implied, including warranties of performance, merchantability or fitness
+ * for any particular purpose.\n\n
+ *
+ * Please cite the author(s) in any work or product based on this material.
  */
 
 #pragma once
@@ -41,42 +62,13 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/range/algorithm_ext/erase.hpp>
 
-
 typedef boost::multi_array<double, 3> Boost3DArrayDouble;
 typedef boost::multi_array<double, 4> Boost4DArrayDouble;
 typedef boost::multi_array<double, 5> Boost5DArrayDouble;
 
-//struct Gradient_Struct {
-//    int RunLength;
-//    int NumSpecies;
-//    int NumParameters;
-//    int MaxIterations;
-//    int MaxLineSearches;
-//    std::string GrowthForm;
-//    std::string HarvestForm;
-//    std::string CompetitionForm;
-//    std::string PredationForm;
-//    std::string Algorithm;
-//    std::string Minimizer;
-//    std::string ObjectiveCriterion;
-//    boost::numeric::ublas::matrix<double> ObservedBiomass;
-//    boost::numeric::ublas::matrix<double> OutputBiomass;
-//    boost::numeric::ublas::matrix<double> Catch;
-//    boost::numeric::ublas::vector<double> GrowthRateMin;
-//    boost::numeric::ublas::vector<double> GrowthRateMax;
-//    boost::numeric::ublas::vector<double> GrowthRateInit;
-//    boost::numeric::ublas::vector<double> CarryingCapacityMin;
-//    boost::numeric::ublas::vector<double> CarryingCapacityMax;
-//    boost::numeric::ublas::vector<double> CarryingCapacityInit;
-//    boost::numeric::ublas::vector<double> CompetitionMin;
-//    boost::numeric::ublas::vector<double> CompetitionMax;
-//    boost::numeric::ublas::vector<double> CompetitionInit;
-//    boost::numeric::ublas::vector<double> PredationMin;
-//    boost::numeric::ublas::vector<double> PredationMax;
-//    boost::numeric::ublas::vector<double> PredationInit;
-// //  boost::numeric::ublas::vector<double> CompetitionPosition; // Position of parameters in each row (i.e., per Species)
-//};
-
+/**
+ * @brief This structure contains data needed for the summary statitics tables
+ */
 struct StatStruct {
     std::vector<double> SSresiduals;
     std::vector<double> SSdeviations;
@@ -90,9 +82,6 @@ struct StatStruct {
     std::vector<double> aae;
     std::vector<double> mef;
     std::string         title;
-//    std::vector<double> mohnsRhoGrowthRate;
-//    std::vector<double> mohnsRhoCarryingCapacity;
-//    std::vector<double> mohnsRhoEstimatedBiomass;
     std::vector<std::vector<double> > mohnsRhoParameters;
 };
 
@@ -139,98 +128,6 @@ struct ModelData {
     int         NLoptNumberOfRuns;
 };
 
-/**
- * @brief The data structure used for parameter estimation. It contains the parameter
- * min max limits as well as the input data.
- */
-//struct Data_Struct {
-
-//    bool   showDiagnosticChart;
-
-//    bool   NLoptUseStopVal;
-//    bool   NLoptUseStopAfterTime;
-//    bool   NLoptUseStopAfterIter;
-//    double NLoptStopVal;
-//    int    NLoptStopAfterTime;
-//    int    NLoptStopAfterIter;
-//    int    NLoptNumberOfRuns;
-
-//    std::string MultiRunSpeciesFilename;
-//    std::string MultiRunModelFilename;
-//    std::string MultiRunSetupFilename;
-//    int    RunLength;
-//    int    NumSpecies;
-//    int    NumGuilds;
-
-//    int    BeesMaxGenerations;
-//    int    BeesNumTotal;
-//    int    BeesNumBestSites;
-//    int    BeesNumEliteSites;
-//    int    BeesNumElite;
-//    int    BeesNumOther;
-//    float  BeesNeighborhoodSize;
-//    int    BeesNumRepetitions;
-
-//    int    GAGenerations;
-//    int    GAConvergence;
-
-//    int         TotalNumberParameters;
-//    std::string Benchmark;
-
-//    std::string GrowthForm;
-//    std::string HarvestForm;
-//    std::string CompetitionForm;
-//    std::string PredationForm;
-
-//    std::string EstimationAlgorithm;
-//    std::string MinimizerAlgorithm;
-//    std::string ObjectiveCriterion;
-//    std::string ScalingAlgorithm;
-
-//    std::map<int,std::vector<int> >       GuildSpecies; // List of species numbers that make up guild num
-//    std::vector<int>                      GuildNum;     // Specifies which species are members of which guilds
-//    boost::numeric::ublas::matrix<double> ObservedBiomassBySpecies;
-//    boost::numeric::ublas::matrix<double> ObservedBiomassByGuilds;
-//    boost::numeric::ublas::matrix<double> Catch;
-//    boost::numeric::ublas::matrix<double> Effort;
-//    boost::numeric::ublas::vector<double> InitBiomass;
-//    boost::numeric::ublas::vector<double> InitBiomassMin;
-//    boost::numeric::ublas::vector<double> InitBiomassMax;
-//    boost::numeric::ublas::vector<double> GrowthRate;
-//    boost::numeric::ublas::vector<double> GrowthRateMin;
-//    boost::numeric::ublas::vector<double> GrowthRateMax;
-//    boost::numeric::ublas::vector<double> CarryingCapacity;
-//    boost::numeric::ublas::vector<double> CarryingCapacityMin;
-//    boost::numeric::ublas::vector<double> CarryingCapacityMax;
-//    boost::numeric::ublas::matrix<double> Exploitation;
-//    boost::numeric::ublas::vector<double> ExploitationRateMin; // RSK - change this to matrix?
-//    boost::numeric::ublas::vector<double> ExploitationRateMax; // RSK - change this to matrix?
-//    boost::numeric::ublas::vector<double> Catchability;
-//    boost::numeric::ublas::vector<double> CatchabilityMin;
-//    boost::numeric::ublas::vector<double> CatchabilityMax;
-//    boost::numeric::ublas::vector<double> SurveyQ;
-//    boost::numeric::ublas::vector<double> SurveyQMin;
-//    boost::numeric::ublas::vector<double> SurveyQMax;
-//    std::vector<std::vector<double> >     CompetitionMin;
-//    std::vector<std::vector<double> >     CompetitionMax;
-//    std::vector<std::vector<double> >     CompetitionBetaSpeciesMin;
-//    std::vector<std::vector<double> >     CompetitionBetaSpeciesMax;
-//    std::vector<std::vector<double> >     CompetitionBetaGuildsMin;
-//    std::vector<std::vector<double> >     CompetitionBetaGuildsMax;
-//    std::vector<std::vector<double> >     CompetitionBetaGuildsGuildsMin;
-//    std::vector<std::vector<double> >     CompetitionBetaGuildsGuildsMax;
-//    std::vector<std::vector<double> >     PredationRhoMin;
-//    std::vector<std::vector<double> >     PredationRhoMax;
-//    std::vector<std::vector<double> >     PredationHandlingMin;
-//    std::vector<std::vector<double> >     PredationHandlingMax;
-//    std::vector<double>                   PredationExponentMin;
-//    std::vector<double>                   PredationExponentMax;
-//    std::vector<double>                   Parameters;
-////  boost::numeric::ublas::matrix<double> OutputBiomass;
-
-//    std::vector<nmfStructsQt::EstimateRunBox> EstimateRunBoxes;
-//};
-
 
 /**
  * @brief The MSVPA Scenarios data structure
@@ -246,6 +143,13 @@ struct Scenarios {
 
 
 namespace nmfUtils {
+    /**
+     * @brief appends the new vector to the current vector
+     * @param newVec : vector to be appended
+     * @param mainVec : the resultant appended vector
+     */
+    void append(std::vector<double>& newVec,
+                std::vector<double>& currentVec);
     /**
      * @brief Checks that there's at least one item in the passed table's field
      * @param logger : application logger to which to post error messages
@@ -289,6 +193,13 @@ namespace nmfUtils {
      * @return String representing the passed in value in scientific notation
      */
     std::string convertToScientificNotation(double val);
+    /**
+     * @brief Converts a vector to a one dimensional matrix
+     * @param vec : vector to convert
+     * @return one-dimensional matrix
+     */
+    boost::numeric::ublas::matrix<double>
+        convertVectorToMatrix(std::vector<double>& vec);
     /**
      * @brief Converts the weight units string description to the appropriate factor value in kilograms
      * @param weightUnits : size units string (i.e., "Gram")
@@ -443,7 +354,15 @@ namespace nmfUtils {
      * @return True or False signifying current operating system is Windows
      */
     bool isOSWindows();
-
+    /**
+     * @brief Determines if a current run has been stopped
+     * @param runName : currently unused, here for future usage
+     * @param msg1 : time of run
+     * @param msg2 : currently unused; here for future usage
+     * @param stopRunFile : name of text file containing the "stop" information
+     * @param state : describes how the application was stopped
+     * @return True if valid Stop command was written to file, false otherwise
+     */
     bool isStopped(std::string& runName,
                    std::string& msg1,
                    std::string& msg2,
@@ -590,20 +509,5 @@ namespace nmfUtils {
                std::string delim,
                std::string& str1,
                std::string& str2);
-    /**
-     * @brief appends the new vector to the current vector
-     * @param newVec : vector to be appended
-     * @param mainVec : the resultant appended vector
-     */
-    void append(std::vector<double>& newVec,
-                std::vector<double>& currentVec);
-
-    /**
-     * @brief Converts a vector to a one dimensional matrix
-     * @param vec : vector to convert
-     * @return one-dimensional matrix
-     */
-    boost::numeric::ublas::matrix<double>
-        convertVectorToMatrix(std::vector<double>& vec);
 }
 

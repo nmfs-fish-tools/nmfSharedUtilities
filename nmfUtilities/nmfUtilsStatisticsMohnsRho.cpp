@@ -7,7 +7,34 @@ nmfUtilsStatisticsMohnsRho::nmfUtilsStatisticsMohnsRho()
     clearEstData();
 }
 
+bool
+nmfUtilsStatisticsMohnsRho::calculateMohnsRhoVectors(
+        const QStringList& EstParamNames,
+        std::vector<std::vector<double> >& MohnsRhoVectors)
+{
+    MohnsRhoVectors.clear();
+    std::vector<double> MohnsRhoVector;
+    std::vector< boost::numeric::ublas::matrix<double> > ParameterMatrices;
 
+    for (QString Parameter : EstParamNames) {
+        MohnsRhoVector.clear();
+        ParameterMatrices = m_ParameterMap[Parameter];
+        if (ParameterMatrices[0].size2() == 1) {
+            if (! nmfUtilsStatistics::calculateMohnsRhoFor1dParameter(
+                        ParameterMatrices,MohnsRhoVector)) {
+                return false;
+            }
+        } else if (ParameterMatrices[0].size2() > 1) {
+            if (! nmfUtilsStatistics::calculateMohnsRhoFor2dParameter(
+                        ParameterMatrices,MohnsRhoVector)) {
+                return false;
+            }
+        }
+        MohnsRhoVectors.push_back(MohnsRhoVector);
+    }
+
+    return true;
+}
 
 void
 nmfUtilsStatisticsMohnsRho::clearEstData()
@@ -28,6 +55,11 @@ nmfUtilsStatisticsMohnsRho::clearEstData()
     m_EstBiomass.clear();
 }
 
+int
+nmfUtilsStatisticsMohnsRho::getNumPeels()
+{
+    return (int)m_Peel.size();
+}
 
 void
 nmfUtilsStatisticsMohnsRho::loadEstData(
@@ -74,41 +106,3 @@ nmfUtilsStatisticsMohnsRho::loadEstData(
     m_ParameterMap[nmfConstantsMSSPM::ParameterNamePredationHandling]         = m_EstPredationHandling;
     m_ParameterMap[nmfConstantsMSSPM::ParameterNamePredationExponent]         = m_EstPredationExponent;
 }
-
-
-int
-nmfUtilsStatisticsMohnsRho::getNumPeels()
-{
-    return (int)m_Peel.size();
-}
-
-
-bool
-nmfUtilsStatisticsMohnsRho::calculateMohnsRhoVectors(
-        const QStringList& EstParamNames,
-        std::vector<std::vector<double> >& MohnsRhoVectors)
-{
-    MohnsRhoVectors.clear();
-    std::vector<double> MohnsRhoVector;
-    std::vector< boost::numeric::ublas::matrix<double> > ParameterMatrices;
-
-    for (QString Parameter : EstParamNames) {
-        MohnsRhoVector.clear();
-        ParameterMatrices = m_ParameterMap[Parameter];
-        if (ParameterMatrices[0].size2() == 1) {
-            if (! nmfUtilsStatistics::calculateMohnsRhoFor1dParameter(
-                        ParameterMatrices,MohnsRhoVector)) {
-                return false;
-            }
-        } else if (ParameterMatrices[0].size2() > 1) {
-            if (! nmfUtilsStatistics::calculateMohnsRhoFor2dParameter(
-                        ParameterMatrices,MohnsRhoVector)) {
-                return false;
-            }
-        }
-        MohnsRhoVectors.push_back(MohnsRhoVector);
-    }
-
-    return true;
-}
-

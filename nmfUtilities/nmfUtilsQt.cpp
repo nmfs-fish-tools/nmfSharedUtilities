@@ -1271,7 +1271,6 @@ loadTableWidgetData(QTabWidget* parentTabWidget,
                     const QStringList& guildValues,
                     QString& errorMsg)
 {
-    Qt::ItemFlags flags;
     QString allLines;
     QString filename;
     QStringList lineList;
@@ -1526,7 +1525,6 @@ saveTableWidgetData(QTabWidget* parentTabWidget,
 {
     QString filename;
     QComboBox* cbox;
-    QTableWidgetItem* item;
     bool isSpeciesTable = tableWidget->objectName().contains("Species");
 
     filename = (outputFilename.isEmpty()) ?
@@ -1559,7 +1557,6 @@ saveTableWidgetData(QTabWidget* parentTabWidget,
                 for (int col=1; col<numCols; ++col) {
                     // Account for combobox in 2nd column of Species table
                     if (isSpeciesTable && (col == 1)) {
-                        item  = tableWidget->item(row,col);
                         cbox  = qobject_cast<QComboBox *>(tableWidget->cellWidget(row,col));
                         value = cbox->currentText();
                     } else {
@@ -2089,20 +2086,6 @@ std::cout << "nmfUtilsQt::loadMultiRunData: Loading multi run file: " << dataStr
     }
     return retv;
 }
-
-/*
- * To delay execution without freezing GUI. Useful if you need to let
- * any signals catch up with the application.
- */
-//void
-//delayMSec(const int& milliseconds)
-//{
-//    QEventLoop eventLoop;
-//    QTimer timer;
-//    timer.connect(&timer, &QTimer::timeout, &eventLoop, &QEventLoop::quit);
-//    timer.start(milliseconds);
-//    eventLoop.exec();
-//}
 
 void
 reloadDataStruct(

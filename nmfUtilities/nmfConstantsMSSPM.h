@@ -5,6 +5,27 @@
  * @date Jan 14, 2020
  *
  * This file defines constants used in the MSSPM application program.
+ *
+ * @copyright
+ * Public Domain Notice\n
+ *
+ * National Oceanic And Atmospheric Administration\n\n
+ *
+ * This software is a "United States Government Work" under the terms of the
+ * United States Copyright Act.  It was written as part of the author's official
+ * duties as a United States Government employee/contractor and thus cannot be copyrighted.
+ * This software is freely available to the public for use. The National Oceanic
+ * And Atmospheric Administration and the U.S. Government have not placed any
+ * restriction on its use or reproduction.  Although all reasonable efforts have
+ * been taken to ensure the accuracy and reliability of the software and data,
+ * the National Oceanic And Atmospheric Administration and the U.S. Government
+ * do not and cannot warrant the performance or results that may be obtained
+ * by using this software or data. The National Oceanic And Atmospheric
+ * Administration and the U.S. Government disclaim all warranties, express
+ * or implied, including warranties of performance, merchantability or fitness
+ * for any particular purpose.\n\n
+ *
+ * Please cite the author(s) in any work or product based on this material.
  */
 
 #ifndef NMFCONSTANTSMSSPM_H
@@ -14,6 +35,9 @@
 #include <vector>
 #include <QStringList>
 
+/**
+ * @brief Constants used specifically in the MSSPM application
+ */
 namespace nmfConstantsMSSPM
 {
      const int    Start_Year            = 1900;
@@ -227,9 +251,11 @@ namespace nmfConstantsMSSPM
      const std::string TableHarvestCatch                       = QString::fromStdString("HarvestCatch").toLower().toStdString();
      const std::string TableHarvestEffort                      = QString::fromStdString("HarvestEffort").toLower().toStdString();
      const std::string TableHarvestExploitation                = QString::fromStdString("HarvestExploitation").toLower().toStdString();
+     const std::string TableModelReview                        = QString::fromStdString("ModelReview").toLower().toStdString();
      const std::string TableModels                             = QString::fromStdString("Models").toLower().toStdString();
      const std::string TableOutputBiomass                      = QString::fromStdString("OutputBiomass").toLower().toStdString();
      const std::string TableOutputBiomassEnsemble              = QString::fromStdString("OutputBiomassEnsemble").toLower().toStdString();
+     const std::string TableOutputBiomassMohnsRhoOfEnsembles   = QString::fromStdString("OutputBiomassMohnsRhoOfEnsembles").toLower().toStdString();
      const std::string TableOutputCarryingCapacity             = QString::fromStdString("OutputCarryingCapacity").toLower().toStdString();
      const std::string TableOutputCatchability                 = QString::fromStdString("OutputCatchability").toLower().toStdString();
      const std::string TableOutputCompetitionAlpha             = QString::fromStdString("OutputCompetitionAlpha").toLower().toStdString();
@@ -256,10 +282,8 @@ namespace nmfConstantsMSSPM
      const std::string TablePredationRhoMin                    = QString::fromStdString("PredationRhoMin").toLower().toStdString();
      const std::string TableSpatialOverlap                     = QString::fromStdString("SpatialOverlap").toLower().toStdString();
      const std::string TableSpecies                            = QString::fromStdString("Species").toLower().toStdString();
-     const std::string TableModelReview                        = QString::fromStdString("ModelReview").toLower().toStdString();
-     const std::string TableSummaryModelFit                    = QString::fromStdString("SummaryModelFit").toLower().toStdString();
      const std::string TableSummaryDiagnostic                  = QString::fromStdString("SummaryDiagnostic").toLower().toStdString();
-     const std::string TableOutputBiomassMohnsRhoOfEnsembles   = QString::fromStdString("OutputBiomassMohnsRhoOfEnsembles").toLower().toStdString();
+     const std::string TableSummaryModelFit                    = QString::fromStdString("SummaryModelFit").toLower().toStdString();
 
      const QStringList SummaryModelFitStatisticNames =
          {"SSresiduals",

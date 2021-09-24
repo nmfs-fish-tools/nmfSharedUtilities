@@ -1,6 +1,9 @@
 <map id="nmfUtils.h" name="nmfUtils.h">
-<area shape="rect" id="node2" href="$nmf_utils_complex_8h.html" title="These routines were originally from Complex2.bas. " alt="" coords="125,80,260,107"/>
-<area shape="rect" id="node4" href="$nmf_utils_statistics_8h.html" title="This header file defines multi&#45;species statistical utility functions. " alt="" coords="177,155,315,181"/>
-<area shape="rect" id="node5" href="$nmf_utils_qt_8h.html" title="Definition for Qt widgets and functions that operate on widgets. " alt="" coords="335,80,431,107"/>
-<area shape="rect" id="node3" href="$nmf_utils_complex_8cpp.html" title="These routines were originally from Complex2.bas. " alt="" coords="5,155,153,181"/>
+<area shape="rect" id="node1" title="Definition for common typedefs and structs (i.e., non&#45;graphical)" alt="" coords="229,5,320,32"/>
+<area shape="rect" id="node2" href="$nmf_utils_qt_8h.html" title="Definition for Qt widgets and functions that operate on widgets." alt="" coords="15,80,121,107"/>
+<area shape="rect" id="node3" href="$nmf_utils_complex_8h.html" title="These routines were originally from Complex2.bas." alt="" coords="145,80,293,107"/>
+<area shape="rect" id="node5" href="$nmf_utils_statistics_8h.html" title="This header file defines multi&#45;species statistical utility functions." alt="" coords="193,155,343,181"/>
+<area shape="rect" id="node6" href="$nmf_utils_statistics_mohns_rho_8h.html" title="Definition for the nmfUtilsStatisticsMohnsRho class." alt="" coords="215,229,433,256"/>
+<area shape="rect" id="node7" href="$nmf_utils_statistics_averaging_8h.html" title="Definition for the nmfUtilsStatisticsAveraging class." alt="" coords="419,80,634,107"/>
+<area shape="rect" id="node4" href="$nmf_utils_complex_8cpp.html" title="These routines were originally from Complex2.bas." alt="" coords="5,155,168,181"/>
 </map>

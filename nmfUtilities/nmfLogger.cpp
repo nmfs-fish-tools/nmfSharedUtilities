@@ -12,6 +12,15 @@ nmfLogger::~nmfLogger()
 
 }
 
+std::string
+nmfLogger::getLogFile()
+{
+    if (filename == "")
+        return "";
+    else
+        return filename;
+}
+
 std::string nmfLogger::getTimestamp(bool withUnderscores)
 {
     time_t rawtime;
@@ -38,15 +47,6 @@ void nmfLogger::initLogger(std::string appName)
     outputFileStream.close();
 }
 
-
-std::string
-nmfLogger::getLogFile()
-{
-    if (filename == "")
-        return "";
-    else
-        return filename;
-}
 
 void nmfLogger::logMsg(int color, std::string msg)
 {

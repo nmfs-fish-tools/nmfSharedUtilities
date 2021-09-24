@@ -1,3 +1,10 @@
 <map id="nmfConstantsMSCAA.h" name="nmfConstantsMSCAA.h">
-<area shape="rect" id="node2" href="$nmf_utils_qt_8h.html" title="Definition for Qt widgets and functions that operate on widgets. " alt="" coords="39,80,135,107"/>
+<area shape="rect" id="node1" title="Definition for constants used in MSCAA tool." alt="" coords="270,5,442,32"/>
+<area shape="rect" id="node2" href="$nmf_utils_qt_8h.html" title="Definition for Qt widgets and functions that operate on widgets." alt="" coords="303,80,409,107"/>
+<area shape="rect" id="node3" href="$nmf_utils_8h.html" title="Definition for common typedefs and structs (i.e., non&#45;graphical)" alt="" coords="311,155,401,181"/>
+<area shape="rect" id="node4" href="$nmf_utils_complex_8h.html" title="These routines were originally from Complex2.bas." alt="" coords="145,229,293,256"/>
+<area shape="rect" id="node6" href="$nmf_utils_statistics_8h.html" title="This header file defines multi&#45;species statistical utility functions." alt="" coords="193,304,343,331"/>
+<area shape="rect" id="node7" href="$nmf_utils_statistics_mohns_rho_8h.html" title="Definition for the nmfUtilsStatisticsMohnsRho class." alt="" coords="215,379,433,405"/>
+<area shape="rect" id="node8" href="$nmf_utils_statistics_averaging_8h.html" title="Definition for the nmfUtilsStatisticsAveraging class." alt="" coords="419,229,634,256"/>
+<area shape="rect" id="node5" href="$nmf_utils_complex_8cpp.html" title="These routines were originally from Complex2.bas." alt="" coords="5,304,168,331"/>
 </map>

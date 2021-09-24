@@ -842,11 +842,11 @@ bool calculateMohnsRhoForTimeSeries(
     for (int species=0; species<NumSpecies; ++species) {
         num = 0;
         for (int peel=1; peel<=NumPeels; ++peel) { // Ex. 4: skip 0, then 1, 2, 3
-            timeSeriesPeeledLength = (int)TimeSeries[peel].size() - peel;
+            timeSeriesPeeledLength = (int)TimeSeries[peel-1].size() - peel;
             for (int i=0; i<timeSeriesPeeledLength; ++i) {
                 den = TimeSeries[0][i];
                 if (den != 0) {
-                    value += (TimeSeries[peel][i] - den)/den;
+                    value += (TimeSeries[peel-1][i] - den)/den;
                     ++num;
                 }
             }

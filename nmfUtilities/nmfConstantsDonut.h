@@ -13,6 +13,9 @@
 #include <iostream>
 #include <vector>
 
+/**
+ * @brief Constants used in the Donut tool
+ */
 namespace nmfConstantsDonut
 {
      const bool ResetPositionAlso      = true;

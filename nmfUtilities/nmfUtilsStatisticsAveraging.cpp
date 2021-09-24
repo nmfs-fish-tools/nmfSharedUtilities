@@ -68,74 +68,6 @@ nmfUtilsStatisticsAveraging::clearTrimmedData()
 }
 
 void
-nmfUtilsStatisticsAveraging::loadEstData(
-        double& Fitness,
-        std::vector<double>& AIC,                   // per run, AIC values for all species and for model
-        std::vector<double>& EstInitBiomass,        // estimated values for each species
-        std::vector<double>& EstGrowthRates,
-        std::vector<double>& EstCarryingCapacities,
-        std::vector<double>& EstPredationExponent,
-        std::vector<double>& EstCatchability,
-        std::vector<double>& EstSurveyQ,
-        boost::numeric::ublas::matrix<double>& EstCompetitionAlpha,
-        boost::numeric::ublas::matrix<double>& EstCompetitionBetaSpecies,
-        boost::numeric::ublas::matrix<double>& EstCompetitionBetaGuilds,
-        boost::numeric::ublas::matrix<double>& EstCompetitionBetaGuildsGuilds,
-        boost::numeric::ublas::matrix<double>& EstPredationRho,
-        boost::numeric::ublas::matrix<double>& EstPredationHandling,
-        boost::numeric::ublas::matrix<double>& EstBiomass)
-{
-    m_Fitness.push_back(Fitness);
-    m_AIC.push_back(AIC.back()); // Store only the last element of AIC (it's the model average over all species for that particular run)
-    m_EstInitBiomass.push_back(EstInitBiomass);
-    m_EstGrowthRates.push_back(EstGrowthRates);
-    m_EstCarryingCapacities.push_back(EstCarryingCapacities);
-    m_EstPredationExponent.push_back(EstPredationExponent);
-    m_EstCatchability.push_back(EstCatchability);
-    m_EstSurveyQ.push_back(EstSurveyQ);
-    m_EstCompetitionAlpha.push_back(EstCompetitionAlpha);
-    m_EstCompetitionBetaSpecies.push_back(EstCompetitionBetaSpecies);
-    m_EstCompetitionBetaGuilds.push_back(EstCompetitionBetaGuilds);
-    m_EstCompetitionBetaGuildsGuilds.push_back(EstCompetitionBetaGuildsGuilds);
-    m_EstPredationRho.push_back(EstPredationRho);
-    m_EstPredationHandling.push_back(EstPredationHandling);
-    m_EstBiomass.push_back(EstBiomass);
-}
-
-
-void
-nmfUtilsStatisticsAveraging::getAveData(std::vector<double>& Fitness,
-                                        std::vector<double>& AveInitBiomass,
-                                        std::vector<double>& AveGrowthRates,
-                                        std::vector<double>& AveCarryingCapacities,
-                                        std::vector<double>& AvePredationExponent,
-                                        std::vector<double>& AveCatchability,
-                                        std::vector<double>& AveSurveyQ,
-                                        boost::numeric::ublas::matrix<double>& AveCompetitionAlpha,
-                                        boost::numeric::ublas::matrix<double>& AveCompetitionBetaSpecies,
-                                        boost::numeric::ublas::matrix<double>& AveCompetitionBetaGuilds,
-                                        boost::numeric::ublas::matrix<double>& AveCompetitionBetaGuildsGuilds,
-                                        boost::numeric::ublas::matrix<double>& AvePredationRho,
-                                        boost::numeric::ublas::matrix<double>& AvePredationHandling,
-                                        boost::numeric::ublas::matrix<double>& AveBiomass)
-{
-    Fitness                   = m_Fitness;
-    AveInitBiomass            = m_AveInitBiomass;
-    AveGrowthRates            = m_AveGrowthRates;
-    AveCarryingCapacities     = m_AveCarryingCapacities;
-    AvePredationExponent      = m_AvePredationExponent;
-    AveCatchability           = m_AveCatchability;
-    AveCompetitionAlpha       = m_AveCompetitionAlpha;
-    AveCompetitionBetaSpecies = m_AveCompetitionBetaSpecies;
-    AveCompetitionBetaGuilds  = m_AveCompetitionBetaGuilds;
-    AveCompetitionBetaGuildsGuilds = m_AveCompetitionBetaGuildsGuilds;
-    AvePredationRho           = m_AvePredationRho;
-    AvePredationHandling      = m_AvePredationHandling;
-    AveSurveyQ                = m_AveSurveyQ;
-    AveBiomass                = m_AveBiomass;
-}
-
-void
 nmfUtilsStatisticsAveraging::calculateWeighted(const std::vector<double>& weights)
 {
     int numRows;
@@ -221,7 +153,6 @@ nmfUtilsStatisticsAveraging::calculateWeighted(const std::vector<double>& weight
     m_AvePredationHandling           = aveMatrix[5];
     m_AveBiomass                     = aveMatrix[6];
 }
-
 
 void
 nmfUtilsStatisticsAveraging::calculateAverage(const int& numberOfTopRunsToUse,
@@ -368,9 +299,73 @@ nmfUtilsStatisticsAveraging::calculateAICWeighted()
 std::cout << "AIC Weight for Run (" << i+1 << " of " << NumRuns << "): " << aicWeight[i] << std::endl;
     }
 
-
     // Now apply the weights
     calculateWeighted(aicWeight);
-
 }
 
+void
+nmfUtilsStatisticsAveraging::getAveData(std::vector<double>& Fitness,
+                                        std::vector<double>& AveInitBiomass,
+                                        std::vector<double>& AveGrowthRates,
+                                        std::vector<double>& AveCarryingCapacities,
+                                        std::vector<double>& AvePredationExponent,
+                                        std::vector<double>& AveCatchability,
+                                        std::vector<double>& AveSurveyQ,
+                                        boost::numeric::ublas::matrix<double>& AveCompetitionAlpha,
+                                        boost::numeric::ublas::matrix<double>& AveCompetitionBetaSpecies,
+                                        boost::numeric::ublas::matrix<double>& AveCompetitionBetaGuilds,
+                                        boost::numeric::ublas::matrix<double>& AveCompetitionBetaGuildsGuilds,
+                                        boost::numeric::ublas::matrix<double>& AvePredationRho,
+                                        boost::numeric::ublas::matrix<double>& AvePredationHandling,
+                                        boost::numeric::ublas::matrix<double>& AveBiomass)
+{
+    Fitness                   = m_Fitness;
+    AveInitBiomass            = m_AveInitBiomass;
+    AveGrowthRates            = m_AveGrowthRates;
+    AveCarryingCapacities     = m_AveCarryingCapacities;
+    AvePredationExponent      = m_AvePredationExponent;
+    AveCatchability           = m_AveCatchability;
+    AveCompetitionAlpha       = m_AveCompetitionAlpha;
+    AveCompetitionBetaSpecies = m_AveCompetitionBetaSpecies;
+    AveCompetitionBetaGuilds  = m_AveCompetitionBetaGuilds;
+    AveCompetitionBetaGuildsGuilds = m_AveCompetitionBetaGuildsGuilds;
+    AvePredationRho           = m_AvePredationRho;
+    AvePredationHandling      = m_AvePredationHandling;
+    AveSurveyQ                = m_AveSurveyQ;
+    AveBiomass                = m_AveBiomass;
+}
+
+void
+nmfUtilsStatisticsAveraging::loadEstData(
+        double& Fitness,
+        std::vector<double>& AIC,                   // per run, AIC values for all species and for model
+        std::vector<double>& EstInitBiomass,        // estimated values for each species
+        std::vector<double>& EstGrowthRates,
+        std::vector<double>& EstCarryingCapacities,
+        std::vector<double>& EstPredationExponent,
+        std::vector<double>& EstCatchability,
+        std::vector<double>& EstSurveyQ,
+        boost::numeric::ublas::matrix<double>& EstCompetitionAlpha,
+        boost::numeric::ublas::matrix<double>& EstCompetitionBetaSpecies,
+        boost::numeric::ublas::matrix<double>& EstCompetitionBetaGuilds,
+        boost::numeric::ublas::matrix<double>& EstCompetitionBetaGuildsGuilds,
+        boost::numeric::ublas::matrix<double>& EstPredationRho,
+        boost::numeric::ublas::matrix<double>& EstPredationHandling,
+        boost::numeric::ublas::matrix<double>& EstBiomass)
+{
+    m_Fitness.push_back(Fitness);
+    m_AIC.push_back(AIC.back()); // Store only the last element of AIC (it's the model average over all species for that particular run)
+    m_EstInitBiomass.push_back(EstInitBiomass);
+    m_EstGrowthRates.push_back(EstGrowthRates);
+    m_EstCarryingCapacities.push_back(EstCarryingCapacities);
+    m_EstPredationExponent.push_back(EstPredationExponent);
+    m_EstCatchability.push_back(EstCatchability);
+    m_EstSurveyQ.push_back(EstSurveyQ);
+    m_EstCompetitionAlpha.push_back(EstCompetitionAlpha);
+    m_EstCompetitionBetaSpecies.push_back(EstCompetitionBetaSpecies);
+    m_EstCompetitionBetaGuilds.push_back(EstCompetitionBetaGuilds);
+    m_EstCompetitionBetaGuildsGuilds.push_back(EstCompetitionBetaGuildsGuilds);
+    m_EstPredationRho.push_back(EstPredationRho);
+    m_EstPredationHandling.push_back(EstPredationHandling);
+    m_EstBiomass.push_back(EstBiomass);
+}

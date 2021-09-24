@@ -6,6 +6,26 @@
  * This class describes the nmfUtilsStatisticsAveraging class for the MultiSpecies tools. It
  * allows the user to save find the timeseries averages of the passed timeseries.
  *
+ * @copyright
+ * Public Domain Notice\n
+ *
+ * National Oceanic And Atmospheric Administration\n\n
+ *
+ * This software is a "United States Government Work" under the terms of the
+ * United States Copyright Act.  It was written as part of the author's official
+ * duties as a United States Government employee/contractor and thus cannot be copyrighted.
+ * This software is freely available to the public for use. The National Oceanic
+ * And Atmospheric Administration and the U.S. Government have not placed any
+ * restriction on its use or reproduction.  Although all reasonable efforts have
+ * been taken to ensure the accuracy and reliability of the software and data,
+ * the National Oceanic And Atmospheric Administration and the U.S. Government
+ * do not and cannot warrant the performance or results that may be obtained
+ * by using this software or data. The National Oceanic And Atmospheric
+ * Administration and the U.S. Government disclaim all warranties, express
+ * or implied, including warranties of performance, merchantability or fitness
+ * for any particular purpose.\n\n
+ *
+ * Please cite the author(s) in any work or product based on this material.
  */
 #pragma once
 
@@ -21,7 +41,9 @@
 
 #include <boost/numeric/ublas/matrix.hpp>
 
-
+/**
+ * @brief This class is used to contain all data that comprise an average estimation
+ */
 class nmfUtilsStatisticsAveraging {
 
 private:
@@ -77,34 +99,51 @@ private:
     void clearTrimmedData();
 
 public:
+    /**
+     * @brief Class constructor
+     */
     nmfUtilsStatisticsAveraging();
    ~nmfUtilsStatisticsAveraging() {}
 
-    void loadEstData(double& Fitness,
-                     std::vector<double>& AIC,
-                     std::vector<double>& EstInitBiomass,
-                     std::vector<double>& EstGrowthRates,
-                     std::vector<double>& EstCarryingCapacities,
-                     std::vector<double>& EstExponent,
-                     std::vector<double>& EstCatchability,
-                     std::vector<double>& EstSurveyQ,
-                     boost::numeric::ublas::matrix<double>& EstCompetitionAlpha,
-                     boost::numeric::ublas::matrix<double>& EstCompetitionBetaSpecies,
-                     boost::numeric::ublas::matrix<double>& EstCompetitionBetaGuilds,
-                     boost::numeric::ublas::matrix<double>& EstCompetitionBetaGuildsGuilds,
-                     boost::numeric::ublas::matrix<double>& EstPredationRho,
-                     boost::numeric::ublas::matrix<double>& EstPredationHandling,
-                     boost::numeric::ublas::matrix<double>& EstBiomass);
+    /**
+     * @brief This method calculates the average biomass/parameters of the sub runs
+     * @param numberOfTopRunsToUse : determines how many and which sub runs to use
+     * @param isPercent : defines if the numberOfTopRunsToUse is an absolute number or a percentage
+     * @param averagingAlgorithm : algorithm by which to average the sub runs
+     */
     void calculateAverage(const int& numberOfTopRunsToUse,
                           const bool& isPercent,
                           const QString& averagingAlgorithm);
+    /**
+     * @brief Calculates an unweighted average
+     */
     void calculateUnweighted();
+    /**
+     * @brief Calculates an AIC (Akaike Information Criterion) average
+     */
     void calculateAICWeighted();
+    /**
+     * @brief Returns (by reference) the averaged parameters and biomass
+     * @param Fitness : average fitness values vector
+     * @param AveInitBiomass : average initial biomass vector
+     * @param AveGrowthRates : average growth rate vector
+     * @param AveCarryingCapacities : average carrying capacities vector
+     * @param AvePredationExponent : average predation exponent vector
+     * @param AveCatchability : average catchability vector
+     * @param AveSurveyQ : average survey q vector
+     * @param AveCompetitionAlpha : average competition alpha matrix
+     * @param AveCompetitionBetaSpecies : average competition beta for species matrix
+     * @param AveCompetitionBetaGuilds : average competition beta for guilds matrix
+     * @param AveCompetitionBetaGuildsGuilds : average competition beta for guilds guilds matrix
+     * @param AvePredationRho : average predation rho matrix
+     * @param AvePredationHandling : average predation handling matrix
+     * @param AveBiomass : average biomass matrix
+     */
     void getAveData(std::vector<double>& Fitness,
                     std::vector<double>& AveInitBiomass,
                     std::vector<double>& AveGrowthRates,
                     std::vector<double>& AveCarryingCapacities,
-                    std::vector<double>& AveExponent,
+                    std::vector<double>& AvePredationExponent,
                     std::vector<double>& AveCatchability,
                     std::vector<double>& AveSurveyQ,
                     boost::numeric::ublas::matrix<double>& AveCompetitionAlpha,
@@ -114,7 +153,39 @@ public:
                     boost::numeric::ublas::matrix<double>& AvePredationRho,
                     boost::numeric::ublas::matrix<double>& AvePredationHandling,
                     boost::numeric::ublas::matrix<double>& AveBiomass);
-
+    /**
+     * @brief Loads the passed in estimated values into their respective class structures
+     * @param Fitness : fitness value of estimated values
+     * @param AIC : Akaike Information Criterion of estimated values vector
+     * @param EstInitBiomass : estimated initial biomass vector
+     * @param EstGrowthRates : estimated growth rate vector
+     * @param EstCarryingCapacities : estimated carrying capacities vector
+     * @param EstPredationExponent : estimated predation exponent vector
+     * @param EstCatchability : estimated catchability vector
+     * @param EstSurveyQ : estimated survey q vector
+     * @param EstCompetitionAlpha : estimated competition alpha matrix
+     * @param EstCompetitionBetaSpecies : estimated competition beta species matrix
+     * @param EstCompetitionBetaGuilds : estimated competition beta guilds matrix
+     * @param EstCompetitionBetaGuildsGuilds : estimated competition beta guilds guilds matrix
+     * @param EstPredationRho : estimated predation rho matrix
+     * @param EstPredationHandling : estimated predation handling matrix
+     * @param EstBiomass : estimated biomass matrix
+     */
+    void loadEstData(double& Fitness,
+                     std::vector<double>& AIC,
+                     std::vector<double>& EstInitBiomass,
+                     std::vector<double>& EstGrowthRates,
+                     std::vector<double>& EstCarryingCapacities,
+                     std::vector<double>& EstPredationExponent,
+                     std::vector<double>& EstCatchability,
+                     std::vector<double>& EstSurveyQ,
+                     boost::numeric::ublas::matrix<double>& EstCompetitionAlpha,
+                     boost::numeric::ublas::matrix<double>& EstCompetitionBetaSpecies,
+                     boost::numeric::ublas::matrix<double>& EstCompetitionBetaGuilds,
+                     boost::numeric::ublas::matrix<double>& EstCompetitionBetaGuildsGuilds,
+                     boost::numeric::ublas::matrix<double>& EstPredationRho,
+                     boost::numeric::ublas::matrix<double>& EstPredationHandling,
+                     boost::numeric::ublas::matrix<double>& EstBiomass);
 };
 
 

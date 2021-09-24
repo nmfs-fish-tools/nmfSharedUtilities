@@ -1,7 +1,11 @@
 <map id="nmfLogger.h" name="nmfLogger.h">
-<area shape="rect" id="node2" href="$nmf_utils_8h.html" title="Definition for common typedefs and structs (i.e., non&#45;graphical) " alt="" coords="257,80,339,107"/>
-<area shape="rect" id="node3" href="$nmf_utils_complex_8h.html" title="These routines were originally from Complex2.bas. " alt="" coords="125,155,260,181"/>
-<area shape="rect" id="node5" href="$nmf_utils_statistics_8h.html" title="This header file defines multi&#45;species statistical utility functions. " alt="" coords="177,229,315,256"/>
-<area shape="rect" id="node6" href="$nmf_utils_qt_8h.html" title="Definition for Qt widgets and functions that operate on widgets. " alt="" coords="335,155,431,181"/>
-<area shape="rect" id="node4" href="$nmf_utils_complex_8cpp.html" title="These routines were originally from Complex2.bas. " alt="" coords="5,229,153,256"/>
+<area shape="rect" id="node1" title="Definition for the MultiSpecies Logger class." alt="" coords="351,5,455,32"/>
+<area shape="rect" id="node2" href="$nmf_structs_qt_8h.html" title="Definition for common qt gui widgets." alt="" coords="295,80,415,107"/>
+<area shape="rect" id="node4" href="$nmf_utils_8h.html" title="Definition for common typedefs and structs (i.e., non&#45;graphical)" alt="" coords="311,229,401,256"/>
+<area shape="rect" id="node3" href="$nmf_utils_qt_8h.html" title="Definition for Qt widgets and functions that operate on widgets." alt="" coords="258,155,363,181"/>
+<area shape="rect" id="node5" href="$nmf_utils_complex_8h.html" title="These routines were originally from Complex2.bas." alt="" coords="145,304,293,331"/>
+<area shape="rect" id="node7" href="$nmf_utils_statistics_8h.html" title="This header file defines multi&#45;species statistical utility functions." alt="" coords="193,379,343,405"/>
+<area shape="rect" id="node8" href="$nmf_utils_statistics_mohns_rho_8h.html" title="Definition for the nmfUtilsStatisticsMohnsRho class." alt="" coords="215,453,433,480"/>
+<area shape="rect" id="node9" href="$nmf_utils_statistics_averaging_8h.html" title="Definition for the nmfUtilsStatisticsAveraging class." alt="" coords="419,304,634,331"/>
+<area shape="rect" id="node6" href="$nmf_utils_complex_8cpp.html" title="These routines were originally from Complex2.bas." alt="" coords="5,379,168,405"/>
 </map>
