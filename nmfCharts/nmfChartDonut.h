@@ -44,7 +44,6 @@ public:
             std::string &YTitle,
             const std::vector<bool> &GridLines,
             const int Theme);
-signals:
 
 public slots:
     void callback_ExplodeSlice(bool exploded);

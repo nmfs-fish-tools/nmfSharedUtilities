@@ -1,4 +1,3 @@
-// new code
 /**
  *
  * @file nmfDatabase.h
@@ -105,12 +104,12 @@ nmfDatabase::nmfSetDatabase(std::string newDatabaseName)
     }
 }
 
-std::string
-nmfDatabase::nmfLastError()
-{
-    QSqlDatabase db = QSqlDatabase::database();
-    return db.lastError().text().toStdString();
-}
+//std::string
+//nmfDatabase::nmfLastError()
+//{
+//    QSqlDatabase db = QSqlDatabase::database();
+//    return db.lastError().text().toStdString();
+//}
 
 
 bool
@@ -272,7 +271,8 @@ nmfDatabase::nmfDeleteRecordsFromTable(std::string table, std::string MSVPAName)
 }
 
 bool
-nmfDatabase::nmfGetInitialData(std::string MSVPAName,
+nmfDatabase::nmfGetInitialData(
+        const std::string& MSVPAName,
             int &NPreds, int &NPrey, int &NOtherFood, int &NOtherPreds,
             int &FirstYear, int &LastYear, int &NSeas, int &NMSVPASpe, int &NYears,
             std::string &FirstYearStr, std::string &LastYearStr)
@@ -303,17 +303,18 @@ nmfDatabase::nmfGetInitialData(std::string MSVPAName,
 
 
 void
-nmfDatabase::nmfGetMSVPAInitData(std::string &MSVPAName,
-   int &MSVPA_FirstYear,
-   int &MSVPA_LastYear,
-   int &MSVPA_NYears,
-   int &MSVPA_NSeasons)
+nmfDatabase::nmfGetMSVPAInitData(
+        const std::string& MSVPAName,
+        int& FirstYear,
+        int& LastYear,
+        int& NYears,
+        int& NSeasons)
 {
     std::map<std::string,int> initMap = nmfQueryInitFields("MSVPAlist", MSVPAName);
-    MSVPA_FirstYear = initMap["FirstYear"];
-    MSVPA_LastYear  = initMap["LastYear"];
-    MSVPA_NYears    = MSVPA_LastYear - MSVPA_FirstYear + 1;
-    MSVPA_NSeasons  = initMap["NSeasons"];
+    FirstYear = initMap["FirstYear"];
+    LastYear  = initMap["LastYear"];
+    NYears    = LastYear - FirstYear + 1;
+    NSeasons  = initMap["NSeasons"];
 } // end getMSVPAInitData
 
 
@@ -394,15 +395,17 @@ void
 nmfDatabase::nmfQueryCatchFields(
         const std::string &table,
         const int &speciesIndex,
-        const std::string FirstCatchAgeStr,
-        const std::string LastCatchAgeStr,
-        const std::string OrderByStr,
+        const std::string& FirstCatchAgeStr,
+        const std::string& LastCatchAgeStr,
+        const std::string& OrderByStr,
         boost::numeric::ublas::matrix<double> &Catch)
 {
     int k=0;
     std::vector<std::string> fields = {"Catch"};
-    std::string queryStr = "SELECT Catch FROM " + table + " WHERE SpeIndex = " + std::to_string(speciesIndex) +
-                           " AND Age >= " + FirstCatchAgeStr + " and Age <= " + LastCatchAgeStr + OrderByStr;
+    std::string queryStr = "SELECT Catch FROM " + table +
+            " WHERE SpeIndex = " + std::to_string(speciesIndex) +
+            " AND Age >= " + FirstCatchAgeStr +
+            " and Age <= " + LastCatchAgeStr + OrderByStr;
     std::map< std::string, std::vector<std::string> > dataMap;
     dataMap = nmfQueryDatabase(queryStr, fields, nmfConstants::nullAsZero);
 
@@ -452,8 +455,8 @@ std::map<std::string, int>
 nmfDatabase::nmfQueryInitFields(const std::string &table, const std::string &MSVPAName)
 {
     std::vector<std::string> fields = {"FirstYear", "LastYear", "NSeasons", "GrowthModel"};
-    std::string queryStr = "SELECT FirstYear,LastYear,NSeasons,GrowthModel FROM " + table + " WHERE MSVPAName='" +
-                           MSVPAName + "'";
+    std::string queryStr = "SELECT FirstYear,LastYear,NSeasons,GrowthModel FROM " +
+            table + " WHERE MSVPAName='" + MSVPAName + "'";
     std::map< std::string, std::vector<std::string> > dataMap;
     std::map< std::string, int> retMap;
     std::string field;
@@ -629,7 +632,7 @@ nmfDatabase::nmfQueryForecastWeightAtAgeData(
         const std::string &species,
         const int &Year,
         const int &Nage,
-        const int &i,
+        const int &index,
         boost::numeric::ublas::matrix<double> &WtAtAge)
 {
     std::string queryStr;
@@ -646,7 +649,7 @@ nmfDatabase::nmfQueryForecastWeightAtAgeData(
             "  AND Season = 0 ORDER By Age";
     dataMap = nmfQueryDatabase(queryStr, fields);
     for (int j=0; j<Nage; ++j) {
-        WtAtAge(i,j) = std::stod(dataMap["InitWt"][j]);
+        WtAtAge(index,j) = std::stod(dataMap["InitWt"][j]);
     }
 
 } // end nmfQueryForecastWeightAtAgeData
@@ -686,16 +689,16 @@ nmfDatabase::nmfQueryWeightAtAgeData(
 
 void
 nmfDatabase::nmfQueryForecastMortalityData(
-        const std::string &MSVPAName,
-        const std::string &ForecastName,
-        const std::string &ScenarioName,
-        const std::string &species,
-        const int &Year,
-        const int &Nage,
-        const int &i,
-        boost::numeric::ublas::matrix<double> &FatAge,
-        boost::numeric::ublas::matrix<double> &M1atAge,
-        boost::numeric::ublas::matrix<double> &M2atAge)
+        const std::string& MSVPAName,
+        const std::string& ForecastName,
+        const std::string& ScenarioName,
+        const std::string& Species,
+        const int& Year,
+        const int& Nage,
+        const int& index,
+        boost::numeric::ublas::matrix<double>& FatAge,
+        boost::numeric::ublas::matrix<double>& M1atAge,
+        boost::numeric::ublas::matrix<double>& M2atAge)
 {
     std::string M2Str;
     std::string queryStr;
@@ -706,15 +709,15 @@ nmfDatabase::nmfQueryForecastMortalityData(
     queryStr = "SELECT Year, Age, Sum(SeasF) as F, Sum(SeasM2) as M2, Sum(SeasM1) as M1  FROM ForeOutput WHERE MSVPAname = '" + MSVPAName +
             "' AND ForeName = '" + ForecastName +
             "' AND Scenario = '" + ScenarioName +
-            "' AND SpeName = '" + species +
+            "' AND SpeName = '"  + Species +
             "' AND Year = " + std::to_string(Year) +
             "  GROUP BY Year, Age";
     dataMap = nmfQueryDatabase(queryStr, fields);
     for (int j=0; j<Nage; ++j) {
-        FatAge(i,j)  = std::stod(dataMap["F"][j]);
-        M1atAge(i,j) = std::stod(dataMap["M1"][j]);
+        FatAge(index,j)  = std::stod(dataMap["F"][j]);
+        M1atAge(index,j) = std::stod(dataMap["M1"][j]);
         M2Str = dataMap["M2"][j];
-        M2atAge(i,j) = M2Str.empty() ? 0 : std::stod(M2Str);
+        M2atAge(index,j) = M2Str.empty() ? 0 : std::stod(M2Str);
     }
 
 } // end nmfQueryForecastMortalityData
@@ -722,14 +725,14 @@ nmfDatabase::nmfQueryForecastMortalityData(
 
 void
 nmfDatabase::nmfQueryMortalityData(
-        const std::string &MSVPAName,
-        const int &i,
-        const int &Year,
-        const int &Nage,
-        const std::string &species,
-        boost::numeric::ublas::matrix<double> &FatAge,
-        boost::numeric::ublas::matrix<double> &M1atAge,
-        boost::numeric::ublas::matrix<double> &M2atAge)
+        const std::string& MSVPAName,
+        const int& index,
+        const int& Year,
+        const int& Nage,
+        const std::string& species,
+        boost::numeric::ublas::matrix<double>& FatAge,
+        boost::numeric::ublas::matrix<double>& M1atAge,
+        boost::numeric::ublas::matrix<double>& M2atAge)
 {
     std::string M2Str;
     std::string queryStr;
@@ -741,14 +744,12 @@ nmfDatabase::nmfQueryMortalityData(
             "' AND SpeName = '" + species +
             "' AND Year = " + std::to_string(Year) +
             " GROUP BY Age";
-//std::cout << queryStr << std::endl;
-
     dataMap = nmfQueryDatabase(queryStr, fields);
     for (int j=0; j<Nage; ++j) {
-        FatAge(i,j)  = std::stod(dataMap["F"][j]);
-        M1atAge(i,j) = std::stod(dataMap["M1"][j]);
+        FatAge(index,j)  = std::stod(dataMap["F"][j]);
+        M1atAge(index,j) = std::stod(dataMap["M1"][j]);
         M2Str = dataMap["M2"][j];
-        M2atAge(i,j) = M2Str.empty() ? 0 : std::stod(M2Str);
+        M2atAge(index,j) = M2Str.empty() ? 0 : std::stod(M2Str);
     }
 
 } // end nmfQueryWeightAtAgeData
@@ -862,8 +863,9 @@ nmfDatabase::nmfQueryAgeCatchData(
 
     // I need to get catches to calculate a weighted average FullF
     fields = {"Age","Catch"};
-    queryStr = "SELECT Age,Catch FROM SpeCatch WHERE SpeName = '" + species + "' " +
-            " AND Year = " + std::to_string(Year) +
+    queryStr = "SELECT Age,Catch FROM SpeCatch WHERE SpeName = '" +
+            species +
+            "' AND Year = " + std::to_string(Year) +
             " ORDER BY Age";
     dataMap = nmfQueryDatabase(queryStr, fields);
     size_t NumRecords = dataMap["Age"].size();
@@ -912,10 +914,10 @@ nmfDatabase::nmfQueryNaturalMortalityData(
 
 void
 nmfDatabase::nmfQueryMaturityData(
-        const int &i,
+        const int &index,
         const int &Year,
         const int &Nage,
-        const std::string &species,
+        const std::string &Species,
         boost::numeric::ublas::matrix<double> &Pmature)
 {
     std::string queryStr;
@@ -923,13 +925,12 @@ nmfDatabase::nmfQueryMaturityData(
     std::vector<std::string> fields;
 
     fields = {"PMature"};
-    queryStr = "SELECT PMature FROM SpeMaturity WHERE SpeName = '" + species + "' " +
+    queryStr = "SELECT PMature FROM SpeMaturity WHERE SpeName = '" + Species + "' " +
             " AND Year = " + std::to_string(Year) +
             " ORDER BY Age";
-//std::cout << queryStr << std::endl;
     dataMap = nmfQueryDatabase(queryStr, fields);
     for (int j=0; j<Nage; ++j) {
-        Pmature(i,j) = std::stod(dataMap["PMature"][j]);
+        Pmature(index,j) = std::stod(dataMap["PMature"][j]);
     }
 
 } // end nmfQueryMaturityData
@@ -940,8 +941,8 @@ nmfDatabase::nmfQueryForecastPreyList(
         const std::string &MSVPAName,
         const std::string &ForecastName,
         const std::string &ScenarioName,
-        const std::string &Species,
-        const bool includePredAge,
+        const std::string &PredatorSpecies,
+        const bool& includePredAge,
         const std::string &ageStr,
         const std::string &seasonStr,
         QStringList &PreyList)
@@ -956,10 +957,11 @@ nmfDatabase::nmfQueryForecastPreyList(
     }
 
     fields = {"PreyName"};
-    queryStr = "SELECT DISTINCT PreyName FROM ForeSuitPreyBiomass WHERE MSVPAname = '" + MSVPAName + "'" +
+    queryStr = "SELECT DISTINCT PreyName FROM ForeSuitPreyBiomass WHERE MSVPAname = '" +
+            MSVPAName + "'" +
             " AND ForeName = '" + ForecastName + "'" +
             " AND Scenario = '" + ScenarioName + "'" +
-            " AND PredName = '" + Species + "'" +
+            " AND PredName = '" + PredatorSpecies + "'" +
             predAgeClause + seasonStr +
             " ORDER BY PreyName";
     dataMap = nmfQueryDatabase(queryStr, fields);
@@ -972,13 +974,13 @@ nmfDatabase::nmfQueryForecastPreyList(
 
 void
 nmfDatabase::nmfQueryMsvpaPreyList(
-        std::string selectedSpeciesAgeSizeClass,
-        std::string selectedSpecies,
-        std::string MSVPAName,
-        std::string &PredAge,
-        int &NPrey,
-        QStringList &PreyList,
-        bool includedPredAge)
+        const std::string& selectedPredator,
+        const std::string& MSVPAName,
+        const bool& includedPredAge,
+        std::string& selectedSpeciesAgeSizeClass,
+        std::string& PredAge,
+        int& NPrey,
+        QStringList& PreyList)
 {
     std::string queryStr;
     std::map<std::string, std::vector<std::string> > dataMap;
@@ -997,7 +999,7 @@ nmfDatabase::nmfQueryMsvpaPreyList(
         predAgeClause = " and PredAge = " + PredAge;
     }
 
-    queryStr = "SELECT DISTINCT PreyName FROM MSVPASuitPreyBiomass WHERE PredName='" + selectedSpecies +
+    queryStr = "SELECT DISTINCT PreyName FROM MSVPASuitPreyBiomass WHERE PredName='" + selectedPredator +
             "' and MSVPAName='" + MSVPAName + "'" +
             predAgeClause + " ORDER by PreyName";
 
@@ -1010,12 +1012,12 @@ nmfDatabase::nmfQueryMsvpaPreyList(
 } // end nmfQueryMsvpaPreyList
 
 
-void
-nmfDatabase::nmfDeleteConnection()
-{
-    QSqlDatabase db = QSqlDatabase::database();
-    db.removeDatabase(db.connectionName());
-}
+//void
+//nmfDatabase::nmfDeleteConnection()
+//{
+//    QSqlDatabase db = QSqlDatabase::database();
+//    db.removeDatabase(db.connectionName());
+//}
 
 void
 nmfDatabase::nmfSetConnectionByName(QString name)
@@ -1026,11 +1028,7 @@ nmfDatabase::nmfSetConnectionByName(QString name)
 
 // -------------------------- MSSPM -----------------------
 
-/*
- *
- * Create a map of Scenario names and Forecast Labels that belong to each Scenario.
- *
- */
+
 void
 nmfDatabase::createScenarioMap(
         const std::string& ProjectName,
@@ -1119,7 +1117,7 @@ nmfDatabase::updateAllModelsInProject(
     std::string queryStr;
     std::string HarvestForm;
     std::string ObsBiomassType;
-    std::string whereClause = "ProjectName = '" + projectName + "'";
+    std::string whereClause = "";
     QString msg;
 
     // Get information about the current model
@@ -1461,7 +1459,7 @@ nmfDatabase::exportDatabase(QWidget*     widget,
 bool
 nmfDatabase::getSpeciesData(
         nmfLogger*   logger,
-        std::string  species,
+        const std::string&  species,
         int&         MinAge,
         int&         MaxAge,
         int&         FirstYear,
@@ -1478,7 +1476,7 @@ nmfDatabase::getSpeciesData(
     // Get species data
     fields     = {"SpeName","MinAge","MaxAge","FirstYear","LastYear","MinLength","MaxLength","NumLengthBins"};
     queryStr   = "SELECT SpeName,MinAge,MaxAge,FirstYear,LastYear,MinLength,MaxLength,NumLengthBins FROM " +
-                  nmfConstantsMSSPM::TableSpecies +
+                  nmfConstantsMSCAA::TableSpecies +
                  " WHERE SpeName = '" + species + "'";
     dataMap    = nmfQueryDatabase(queryStr, fields);
     if (dataMap["SpeName"].size() == 0) {
@@ -1498,7 +1496,65 @@ nmfDatabase::getSpeciesData(
     return true;
 }
 
-bool nmfDatabase::getAllSpecies(
+bool nmfDatabase::getGuilds(
+        nmfLogger*  logger,
+        std::vector<std::string>& guilds)
+{
+    int NumRecords;
+    std::string msg;
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+
+    guilds.clear();
+
+    // Get species data
+    fields     = {"GuildName"};
+    queryStr   = "SELECT GuildName FROM " + nmfConstantsMSSPM::TableGuilds;
+    dataMap    = nmfQueryDatabase(queryStr, fields);
+    NumRecords = dataMap["GuildName"].size();
+    if (NumRecords == 0) {
+        msg = "nmfDatabase::getAllGuilds: No records found";
+        logger->logMsg(nmfConstants::Error,msg);
+        return false;
+    }
+    for (int i=0; i<NumRecords; ++i) {
+        guilds.push_back(dataMap["GuildName"][i]);
+    }
+    return true;
+}
+
+bool
+nmfDatabase::getGuilds(
+        nmfLogger* logger,
+        int &NumGuilds,
+        QStringList &GuildList)
+{
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+
+    GuildList.clear();
+
+    fields   = {"GuildName"};
+    queryStr = "SELECT GuildName from " +
+                nmfConstantsMSSPM::TableGuilds +
+               " ORDER BY GuildName";
+    dataMap  = nmfQueryDatabase(queryStr, fields);
+    NumGuilds = dataMap["GuildName"].size();
+    if (NumGuilds == 0) {
+        logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::getGuilds: No guilds found in table Guilds");
+        return false;
+    }
+
+    for (int guild=0; guild<NumGuilds; ++guild) {
+        GuildList << QString::fromStdString(dataMap["GuildName"][guild]);
+    }
+
+    return true;
+}
+
+bool nmfDatabase::getSpecies(
         nmfLogger*  logger,
         std::vector<std::string>& species)
 {
@@ -1526,31 +1582,33 @@ bool nmfDatabase::getAllSpecies(
     return true;
 }
 
-bool nmfDatabase::getAllGuilds(
-        nmfLogger*  logger,
-        std::vector<std::string>& guilds)
+bool
+nmfDatabase::getSpecies(
+        nmfLogger* logger,
+        int &NumSpecies,
+        QStringList &SpeciesList)
 {
-    int NumRecords;
-    std::string msg;
     std::vector<std::string> fields;
     std::map<std::string, std::vector<std::string> > dataMap;
     std::string queryStr;
 
-    guilds.clear();
+    SpeciesList.clear();
 
-    // Get species data
-    fields     = {"GuildName"};
-    queryStr   = "SELECT GuildName FROM " + nmfConstantsMSSPM::TableGuilds;
-    dataMap    = nmfQueryDatabase(queryStr, fields);
-    NumRecords = dataMap["GuildName"].size();
-    if (NumRecords == 0) {
-        msg = "nmfDatabase::getAllGuilds: No records found";
-        logger->logMsg(nmfConstants::Error,msg);
+    fields   = {"SpeName"};
+    queryStr = "SELECT SpeName from " +
+                nmfConstantsMSSPM::TableSpecies +
+               " ORDER BY SpeName";
+    dataMap  = nmfQueryDatabase(queryStr, fields);
+    NumSpecies = dataMap["SpeName"].size();
+    if (NumSpecies == 0) {
+        logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::getSpecies: No species found in table Species");
         return false;
     }
-    for (int i=0; i<NumRecords; ++i) {
-        guilds.push_back(dataMap["GuildName"][i]);
+
+    for (int species=0; species<NumSpecies; ++species) {
+        SpeciesList << QString::fromStdString(dataMap["SpeName"][species]);
     }
+
     return true;
 }
 
@@ -1857,7 +1915,7 @@ nmfDatabase::getForecastInfo(
     if (dataMap["ForecastName"].size() != 0) {
         RunLength          = std::stoi(dataMap["RunLength"][0]);
         StartForecastYear  = std::stoi(dataMap["StartYear"][0]);
-        // EndYear         = std::stoi(dataMap["EndYear"][0]);
+     // EndYear            = std::stoi(dataMap["EndYear"][0]);
         Algorithm          = dataMap["Algorithm"][0];
         Minimizer          = dataMap["Minimizer"][0];
         ObjectiveCriterion = dataMap["ObjectiveCriterion"][0];
@@ -2016,29 +2074,25 @@ nmfDatabase::getForecastBiomassMonteCarlo(
 
 
 bool
-nmfDatabase::getForecastMonteCarloParameters(
+nmfDatabase::getForecastMonteCarloHoverData(
         QWidget*             widget,
         nmfLogger*           logger,
         const std::string&   Species,
         const std::string&   ProjectName,
         const std::string&   ModelName,
         const std::string&   ForecastName,
-        std::string&         Algorithm,
-        std::string&         Minimizer,
-        std::string&         ObjectiveCriterion,
-        std::string&         Scaling,
+        const std::string&   Algorithm,
+        const std::string&   Minimizer,
+        const std::string&   ObjectiveCriterion,
+        const std::string&   Scaling,
         QStringList&         HoverData)
 {
     std::vector<std::string> fields;
     std::map<std::string, std::vector<std::string> > dataMap;
     std::string queryStr;
     std::string TableName = nmfConstantsMSSPM::TableForecastMonteCarloParameters;
-    double val1;
-    double val2;
-    double val3;
-    QString str1;
-    QString str2;
-    QString str3;
+    double  val1,val2,val3;
+    QString str1,str2,str3;
 
     fields     = {"ProjectName","ModelName","ForecastName","RunNum","Algorithm","Minimizer","ObjectiveCriterion","Scaling",
                   "SpeName","GrowthRate","CarryingCapacity","Harvest"};
@@ -2060,7 +2114,6 @@ nmfDatabase::getForecastMonteCarloParameters(
         logger->logMsg(nmfConstants::Error, queryStr);
         return false;
     }
-
     for (int i=0;i<NumRecords;++i) {
         val1 = std::stod(dataMap["GrowthRate"][i])*100.0;
         val2 = std::stod(dataMap["CarryingCapacity"][i])*100.0;
@@ -2070,7 +2123,6 @@ nmfDatabase::getForecastMonteCarloParameters(
         str3 = QString{"%1%"}.arg(val3,4,'f',1);
         HoverData << "( " + str1 + ", " + str2 + ", " + str3 + " )"; // Ex
     }
-
     return true;
 }
 
@@ -2172,43 +2224,32 @@ nmfDatabase::getForecastHarvest(
     return true;
 }
 
-double
-nmfDatabase::checkForValues(
-            const int& index,
-            const int& numValues,
-            const std::vector<double>& vec)
-{
-    double retv = 0;
-    if (int(vec.size()) >= numValues) {
-        retv = vec[index];
-    }
-    return retv;
-}
+
 
 bool
 nmfDatabase::updateForecastMonteCarloParameters(
-        QWidget*             widget,
-        nmfLogger*           logger,
-        const std::string&   ProjectName,
-        const std::string&   ModelName,
-        const std::string&   ForecastName,
-        std::string&         Algorithm,
-        std::string&         Minimizer,
-        std::string&         ObjectiveCriterion,
-        std::string&         Scaling,
-        QStringList&         Species,
-        int&                 RunNumber,
-        std::vector<double>& GrowthRandomValues,
-        std::vector<double>& CarryingCapacityRandomValues,
-        std::vector<double>& CatchabilityRandomValues,
-        std::vector<double>& ExponentRandomValues,
-        std::vector<double>& CompetitionAlphaRandomValues,
-        std::vector<double>& CompetitionBetaSpeciesRandomValues,
-        std::vector<double>& CompetitionBetaGuildsRandomValues,
-        std::vector<double>& CompetitionBetaGuildsGuildsRandomValues,
-        std::vector<double>& PredationRandomValues,
-        std::vector<double>& HandlingRandomValues,
-        std::vector<double>& HarvestRandomValues)
+        QWidget*                   widget,
+        nmfLogger*                 logger,
+        const std::string&         ProjectName,
+        const std::string&         ModelName,
+        const std::string&         ForecastName,
+        const std::string&         Algorithm,
+        const std::string&         Minimizer,
+        const std::string&         ObjectiveCriterion,
+        const std::string&         Scaling,
+        const QStringList&         Species,
+        const int&                 RunNumber,
+        const std::vector<double>& GrowthRandomValues,
+        const std::vector<double>& CarryingCapacityRandomValues,
+        const std::vector<double>& CatchabilityRandomValues,
+        const std::vector<double>& ExponentRandomValues,
+        const std::vector<double>& CompetitionAlphaRandomValues,
+        const std::vector<double>& CompetitionBetaSpeciesRandomValues,
+        const std::vector<double>& CompetitionBetaGuildsRandomValues,
+        const std::vector<double>& CompetitionBetaGuildsGuildsRandomValues,
+        const std::vector<double>& PredationRandomValues,
+        const std::vector<double>& HandlingRandomValues,
+        const std::vector<double>& HarvestRandomValues)
 {
     std::string saveCmd;
     std::string deleteCmd;
@@ -2385,10 +2426,10 @@ nmfDatabase::saveApplicationTable(
 
 bool
 nmfDatabase::loadVector(
+        nmfLogger* Logger,
         const std::vector<std::map<std::string, std::vector<std::string> > >& dataMaps,
         const int& NumRows,
-        std::vector<double>& vec,
-        nmfLogger* Logger)
+        std::vector<double>& vec)
 {
     int m=0;
     bool retv = true;
@@ -2418,11 +2459,11 @@ nmfDatabase::loadVector(
 
 bool
 nmfDatabase::loadMatrix(
+        nmfLogger* Logger,
         const std::vector<std::map<std::string, std::vector<std::string> > >& dataMaps,
         const int& NumRows,
         const int& NumCols,
-        boost::numeric::ublas::matrix<double>& matrix,
-        nmfLogger* Logger)
+        boost::numeric::ublas::matrix<double>& matrix)
 {
     int m=0;
     bool retv = true;
@@ -2553,7 +2594,7 @@ nmfDatabase::getPredationData(const std::string& PredationForm,
                    "' ORDER BY SpeciesA,SpeciesB ";
         dataMaps[i] = nmfQueryDatabase(queryStr, fields);
     }
-    ok = loadMatrix(dataMaps,NumSpecies,NumSpecies,Rho,Logger);
+    ok = loadMatrix(Logger,dataMaps,NumSpecies,NumSpecies,Rho);
     if (! ok) {
         return false;
     }
@@ -2568,7 +2609,7 @@ nmfDatabase::getPredationData(const std::string& PredationForm,
                        "' ORDER BY SpeciesA,SpeciesB ";
             dataMaps[i] = nmfQueryDatabase(queryStr, fields);
         }
-        ok = loadMatrix(dataMaps,NumSpecies,NumSpecies,Handling,Logger);
+        ok = loadMatrix(Logger,dataMaps,NumSpecies,NumSpecies,Handling);
         if (! ok) {
             return false;
         }
@@ -2585,7 +2626,7 @@ nmfDatabase::getPredationData(const std::string& PredationForm,
                        "' ORDER BY SpeName ";
             dataMaps[i] = nmfQueryDatabase(queryStr, fields);
         }
-        ok = loadVector(dataMaps,NumSpecies,Exponent,Logger);
+        ok = loadVector(Logger,dataMaps,NumSpecies,Exponent);
         if (! ok) {
             return false;
         }
@@ -2634,7 +2675,7 @@ nmfDatabase::getCompetitionData(const std::string& CompetitionType,
                        "' ORDER BY SpeciesA,SpeciesB ";
             dataMaps[i] = nmfQueryDatabase(queryStr, fields);
         }
-        ok = loadMatrix(dataMaps,NumSpecies,NumSpecies,CompetitionAlpha,Logger);
+        ok = loadMatrix(Logger,dataMaps,NumSpecies,NumSpecies,CompetitionAlpha);
         if (! ok) {
             retv = false;
         }
@@ -2651,7 +2692,7 @@ nmfDatabase::getCompetitionData(const std::string& CompetitionType,
                        "' ORDER BY SpeciesA,SpeciesB ";
             dataMaps[i] = nmfQueryDatabase(queryStr, fields);
         }
-        ok = loadMatrix(dataMaps,NumSpecies,NumSpecies,CompetitionBetaSpecies,Logger);
+        ok = loadMatrix(Logger,dataMaps,NumSpecies,NumSpecies,CompetitionBetaSpecies);
         if (! ok) {
             retv = false;
         }
@@ -2666,7 +2707,7 @@ nmfDatabase::getCompetitionData(const std::string& CompetitionType,
                        "' ORDER BY Guild,SpeName ";
             dataMaps[i] = nmfQueryDatabase(queryStr, fields);
         }
-        ok = loadMatrix(dataMaps,NumSpecies,NumGuilds,CompetitionBetaGuild,Logger);
+        ok = loadMatrix(Logger,dataMaps,NumSpecies,NumGuilds,CompetitionBetaGuild);
         if (! ok) {
             retv = false;
         }
@@ -2683,7 +2724,7 @@ nmfDatabase::getCompetitionData(const std::string& CompetitionType,
                        "' ORDER BY GuildA,GuildB ";
             dataMaps[i] = nmfQueryDatabase(queryStr, fields);
         }
-        ok = loadMatrix(dataMaps,NumGuilds,NumGuilds,CompetitionBetaGuildGuild,Logger);
+        ok = loadMatrix(Logger,dataMaps,NumGuilds,NumGuilds,CompetitionBetaGuildGuild);
         if (! ok) {
             retv = false;
         }
@@ -2693,12 +2734,12 @@ nmfDatabase::getCompetitionData(const std::string& CompetitionType,
 }
 
 bool
-nmfDatabase::getSpeciesInitialData(int& NumSpecies,
+nmfDatabase::getSpeciesInitialData(nmfLogger* Logger,
+                                   int& NumSpecies,
                                    QStringList& SpeciesList,
                                    std::vector<double>& InitBiomass,
                                    std::vector<double>& GrowthRate,
-                                   std::vector<double>& SpeciesK,
-                                   nmfLogger* Logger)
+                                   std::vector<double>& SpeciesK)
 {
     std::vector<std::string> fields;
     std::map<std::string, std::vector<std::string> > dataMap;
@@ -2761,15 +2802,15 @@ nmfDatabase::clearTable(nmfLogger* Logger,
 }
 
 bool
-nmfDatabase::getModelFormData(std::string& GrowthForm,
+nmfDatabase::getModelFormData(nmfLogger*   Logger,
+                              const std::string& ProjectName,
+                              const std::string& ModelName,
+                              std::string& GrowthForm,
                               std::string& HarvestForm,
                               std::string& CompetitionForm,
                               std::string& PredationForm,
                               int&         RunLength,
-                              int&         InitialYear,
-                              nmfLogger*   Logger,
-                              const std::string& ProjectName,
-                              const std::string& ModelName)
+                              int&         InitialYear)
 {
     std::vector<std::string> fields;
     std::map<std::string, std::vector<std::string> > dataMap,dataMapMin,dataMapMax;
@@ -2891,65 +2932,6 @@ nmfDatabase::loadEstimatedVectorParameters(
     cmbox->blockSignals(false);
 }
 
-bool
-nmfDatabase::getGuilds(
-        nmfLogger* logger,
-        int &NumGuilds,
-        QStringList &GuildList)
-{
-    std::vector<std::string> fields;
-    std::map<std::string, std::vector<std::string> > dataMap;
-    std::string queryStr;
-
-    GuildList.clear();
-
-    fields   = {"GuildName"};
-    queryStr = "SELECT GuildName from " +
-                nmfConstantsMSSPM::TableGuilds +
-               " ORDER BY GuildName";
-    dataMap  = nmfQueryDatabase(queryStr, fields);
-    NumGuilds = dataMap["GuildName"].size();
-    if (NumGuilds == 0) {
-        logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::getGuilds: No guilds found in table Guilds");
-        return false;
-    }
-
-    for (int guild=0; guild<NumGuilds; ++guild) {
-        GuildList << QString::fromStdString(dataMap["GuildName"][guild]);
-    }
-
-    return true;
-}
-
-bool
-nmfDatabase::getSpecies(
-        nmfLogger* logger,
-        int &NumSpecies,
-        QStringList &SpeciesList)
-{
-    std::vector<std::string> fields;
-    std::map<std::string, std::vector<std::string> > dataMap;
-    std::string queryStr;
-
-    SpeciesList.clear();
-
-    fields   = {"SpeName"};
-    queryStr = "SELECT SpeName from " +
-                nmfConstantsMSSPM::TableSpecies +
-               " ORDER BY SpeName";
-    dataMap  = nmfQueryDatabase(queryStr, fields);
-    NumSpecies = dataMap["SpeName"].size();
-    if (NumSpecies == 0) {
-        logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::getSpecies: No species found in table Species");
-        return false;
-    }
-
-    for (int species=0; species<NumSpecies; ++species) {
-        SpeciesList << QString::fromStdString(dataMap["SpeName"][species]);
-    }
-
-    return true;
-}
 
 
 bool
@@ -3031,82 +3013,6 @@ nmfDatabase::getHarvestFormData(
     return true;
 }
 
-
-bool
-nmfDatabase::getHarvestData(const std::string& HarvestType,
-                            nmfLogger* Logger,
-                            const std::string& ProjectName,
-                            const std::string& ModelName,
-                            const int& NumSpecies,
-                            const int& RunLength,
-                            boost::numeric::ublas::matrix<double>& Catch,
-                            boost::numeric::ublas::matrix<double>& Effort,
-                            boost::numeric::ublas::matrix<double>& Exploitation,
-                            std::vector<double>& Catchability)
-{
-    bool retv = true;
-    int m;
-    int NumRecords;
-    std::vector<std::string> fields;
-    std::map<std::string, std::vector<std::string> > dataMap;
-    std::string queryStr;
-    std::string msg;
-    std::string HarvestTypePrefix = "harvest";
-
-    // Because type could be: "Effort (qE)" or "Exploitation (F)"
-    HarvestTypePrefix += QString::fromStdString(HarvestType).toLower().split(" ")[0].toStdString();
-
-    fields   = {"ProjectName","ModelName","SpeName","Year","Value"};
-    queryStr = "SELECT ProjectName,ModelName,SpeName,Year,Value FROM " +
-                HarvestTypePrefix +
-               " WHERE ProjectName = '" + ProjectName +
-               "' AND ModelName = '"    + ModelName +
-               "' ORDER BY SpeName,Year ";
-    dataMap  = nmfQueryDatabase(queryStr, fields);
-    NumRecords = dataMap["SpeName"].size();
-    if (NumSpecies*RunLength != NumRecords) {
-        msg = "\nnmfDatabase::getHarvestData: NumSpecies*RunLength (" + std::to_string(NumSpecies) +
-                "x" + std::to_string(RunLength) + ") != NumRecords (" +
-                std::to_string(NumRecords) + ")";
-        Logger->logMsg(nmfConstants::Error,msg);
-        retv = false;
-    } else {
-        m = 0;
-        for (int species=0; species<NumSpecies; ++species) {
-            for (int year=0; year<RunLength; ++year) {
-                if (HarvestTypePrefix == "Catch") {
-                    Catch(year,species) = std::stod(dataMap["Value"][m++]);
-                } else if (HarvestTypePrefix == "Effort") {
-                    Effort(year,species) = std::stod(dataMap["Value"][m++]);
-                } else if (HarvestTypePrefix == "Exploitation") {
-                    Exploitation(year,species) = std::stod(dataMap["Value"][m++]);
-                }
-            }
-        }
-    }
-
-    if (HarvestTypePrefix == "Effort") {
-        fields   = {"SpeName","Catchability"};
-        queryStr = "SELECT SpeName,Catchability FROM " +
-                    nmfConstantsMSSPM::TableSpecies +
-                    " ORDER BY SpeName ";
-        dataMap  = nmfQueryDatabase(queryStr, fields);
-        NumRecords = dataMap["SpeName"].size();
-        if (NumSpecies != NumRecords) {
-            msg = "\nnmfDatabase::getHarvestData: NumSpecies (" + std::to_string(NumSpecies) +
-                    ") != NumRecords (" + std::to_string(NumRecords) + ")";
-            Logger->logMsg(nmfConstants::Error,msg);
-            retv = false;
-        } else {
-            m = 0;
-            for (int species=0; species<NumSpecies; ++species) {
-                    Catchability.push_back(std::stod(dataMap["Catchability"][m++]));
-            }
-        }
-    }
-
-    return retv;
-}
 
 bool
 nmfDatabase::getEstimatedBiomass(
@@ -3205,6 +3111,82 @@ nmfDatabase::getEstimatedParameter(
 }
 
 bool
+nmfDatabase::getHarvestData(const std::string& HarvestType,
+                            nmfLogger* Logger,
+                            const std::string& ProjectName,
+                            const std::string& ModelName,
+                            const int& NumSpecies,
+                            const int& RunLength,
+                            boost::numeric::ublas::matrix<double>& Catch,
+                            boost::numeric::ublas::matrix<double>& Effort,
+                            boost::numeric::ublas::matrix<double>& Exploitation,
+                            std::vector<double>& Catchability)
+{
+    bool retv = true;
+    int m;
+    int NumRecords;
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+    std::string msg;
+    std::string HarvestTypePrefix = "harvest";
+
+    // Because type could be: "Effort (qE)" or "Exploitation (F)"
+    HarvestTypePrefix += QString::fromStdString(HarvestType).toLower().split(" ")[0].toStdString();
+
+    fields   = {"ProjectName","ModelName","SpeName","Year","Value"};
+    queryStr = "SELECT ProjectName,ModelName,SpeName,Year,Value FROM " +
+                HarvestTypePrefix +
+               " WHERE ProjectName = '" + ProjectName +
+               "' AND ModelName = '"    + ModelName +
+               "' ORDER BY SpeName,Year ";
+    dataMap  = nmfQueryDatabase(queryStr, fields);
+    NumRecords = dataMap["SpeName"].size();
+    if (NumSpecies*RunLength != NumRecords) {
+        msg = "\nnmfDatabase::getHarvestData: NumSpecies*RunLength (" + std::to_string(NumSpecies) +
+                "x" + std::to_string(RunLength) + ") != NumRecords (" +
+                std::to_string(NumRecords) + ")";
+        Logger->logMsg(nmfConstants::Error,msg);
+        retv = false;
+    } else {
+        m = 0;
+        for (int species=0; species<NumSpecies; ++species) {
+            for (int year=0; year<RunLength; ++year) {
+                if (HarvestTypePrefix == "Catch") {
+                    Catch(year,species) = std::stod(dataMap["Value"][m++]);
+                } else if (HarvestTypePrefix == "Effort") {
+                    Effort(year,species) = std::stod(dataMap["Value"][m++]);
+                } else if (HarvestTypePrefix == "Exploitation") {
+                    Exploitation(year,species) = std::stod(dataMap["Value"][m++]);
+                }
+            }
+        }
+    }
+
+    if (HarvestTypePrefix == "Effort") {
+        fields   = {"SpeName","Catchability"};
+        queryStr = "SELECT SpeName,Catchability FROM " +
+                    nmfConstantsMSSPM::TableSpecies +
+                    " ORDER BY SpeName ";
+        dataMap  = nmfQueryDatabase(queryStr, fields);
+        NumRecords = dataMap["SpeName"].size();
+        if (NumSpecies != NumRecords) {
+            msg = "\nnmfDatabase::getHarvestData: NumSpecies (" + std::to_string(NumSpecies) +
+                    ") != NumRecords (" + std::to_string(NumRecords) + ")";
+            Logger->logMsg(nmfConstants::Error,msg);
+            retv = false;
+        } else {
+            m = 0;
+            for (int species=0; species<NumSpecies; ++species) {
+                    Catchability.push_back(std::stod(dataMap["Catchability"][m++]));
+            }
+        }
+    }
+
+    return retv;
+}
+
+bool
 nmfDatabase::getHarvestData(
         QWidget* parent,
         nmfLogger* logger,
@@ -3264,4 +3246,17 @@ nmfDatabase::getHarvestData(
     }
 
     return true;
+}
+
+double
+nmfDatabase::checkForValues(
+            const int& index,
+            const int& numValues,
+            const std::vector<double>& vec)
+{
+    double retv = 0;
+    if (int(vec.size()) >= numValues) {
+        retv = vec[index];
+    }
+    return retv;
 }

@@ -39,6 +39,8 @@ namespace nmfConstantsMSCAA
     const std::string  OutputDataDir                  = "outputData";
     const std::string  OutputImagesDir                = "outputImages";
 
+    const std::string TableSpecies                    = QString::fromStdString("Species").toLower().toStdString();
+
      const std::vector<std::string> ColLabelsEstimations = {
          "aAge1ph", // aAge1 estimation phase
          "aFtph",   // aFt estimation phase

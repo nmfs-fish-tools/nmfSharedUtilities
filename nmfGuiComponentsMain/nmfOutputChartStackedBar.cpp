@@ -327,13 +327,14 @@ void nmfOutputChartStackedBar::redrawChart(
             firstYear = MSVPA_FirstYear;
             nYears = MSVPA_NYears;
             // First need to get a list of prey names and a count of prey for the predator.
-            databasePtr->nmfQueryMsvpaPreyList(  selectedSpeciesAgeSizeClass,
-                                                 selectedSpecies,
-                                                 MSVPAName,
-                                                 PredAgeStr,
-                                                 NPrey,
-                                                 colLabels,
-                                                 false);
+            databasePtr->nmfQueryMsvpaPreyList(
+                        selectedSpecies,
+                        MSVPAName,
+                        false,
+                        selectedSpeciesAgeSizeClass,
+                        PredAgeStr,
+                        NPrey,
+                        colLabels);
             queryStr = "SELECT Year, Sum(SuitPreyBiomass) AS TotFA FROM MSVPASuitPreyBiomass WHERE MSVPAname = '" + MSVPAName + "'" +
                        " AND PredName = '" + PredName + "'" +
                          PredAgeStr + seasonStr +
@@ -526,8 +527,14 @@ void nmfOutputChartStackedBar::redrawChart(
                     "' and SpeName='" + selectedSpecies + "'";
             dataMap = databasePtr->nmfQueryDatabase(queryStr, fields);
             Nage = std::stoi(dataMap["NumAges"][0]);
-            databasePtr->nmfQueryMsvpaPreyList(selectedSpeciesAgeSizeClass, selectedSpecies, MSVPAName,
-                                               PredAge, NPrey, colLabels, false);
+            databasePtr->nmfQueryMsvpaPreyList(
+                        selectedSpecies,
+                        MSVPAName,
+                        false,
+                        selectedSpeciesAgeSizeClass,
+                        PredAge,
+                        NPrey,
+                        colLabels);
 
             nmfUtils::initialize(ChartData, Nage, NPrey);
             nmfUtils::initialize(GridData,  Nage, NPrey);
@@ -698,8 +705,14 @@ void nmfOutputChartStackedBar::redrawChart(
 
         if (theModelName == "MSVPA") {
 
-            databasePtr->nmfQueryMsvpaPreyList(selectedSpeciesAgeSizeClass, selectedSpecies, MSVPAName,
-                                              PredAge, NPrey, colLabels, true);
+            databasePtr->nmfQueryMsvpaPreyList(
+                        selectedSpecies,
+                        MSVPAName,
+                        true,
+                        selectedSpeciesAgeSizeClass,
+                        PredAge,
+                        NPrey,
+                        colLabels);
 
             nmfUtils::initialize(ChartData, MSVPA_NYears, NPrey);
             nmfUtils::initialize(GridData,  MSVPA_NYears, NPrey);
@@ -770,8 +783,12 @@ void nmfOutputChartStackedBar::redrawChart(
 
         if (theModelName == "MSVPA") {
 
-            databasePtr->nmfQueryMsvpaPreyList(selectedSpeciesAgeSizeClass, selectedSpecies, MSVPAName,
-                                               PredAge, NPrey, colLabels, true);
+            databasePtr->nmfQueryMsvpaPreyList(
+                        selectedSpecies,
+                        MSVPAName,
+                        true,
+                        selectedSpeciesAgeSizeClass,
+                        PredAge, NPrey, colLabels);
 
             nmfUtils::initialize(ChartData, MSVPA_NSeasons, NPrey);
             nmfUtils::initialize(GridData,  MSVPA_NSeasons, NPrey);
@@ -844,8 +861,11 @@ void nmfOutputChartStackedBar::redrawChart(
             selectedSeason.erase(0,selectedSeason.find(" "));
             int season = std::stoi(selectedSeason)-1;
 
-            databasePtr->nmfQueryMsvpaPreyList(selectedSpeciesAgeSizeClass, selectedSpecies, MSVPAName,
-                                               PredAge, NPrey, colLabels, true);
+            databasePtr->nmfQueryMsvpaPreyList(
+                        selectedSpecies,
+                        MSVPAName, true,
+                        selectedSpeciesAgeSizeClass,
+                        PredAge, NPrey, colLabels);
 
             nmfUtils::initialize(ChartData, MSVPA_NYears, NPrey);
             nmfUtils::initialize(GridData,  MSVPA_NYears, NPrey);

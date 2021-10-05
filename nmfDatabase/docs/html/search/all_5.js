@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['readme_16',['README',['../md__r_e_a_d_m_e.html',1,'']]],
-  ['restorecsvfile_17',['RestoreCSVFile',['../classnmf_database.html#ac15b526660ab3cf231e1860c02bfbbfa',1,'nmfDatabase']]]
+  ['importdatabase_37',['importDatabase',['../classnmf_database.html#afa82f3cede3d12c690bbe700458ab520',1,'nmfDatabase']]],
+  ['isarelativebiomassmodel_38',['isARelativeBiomassModel',['../classnmf_database.html#a57c9e3be4a1f56819dbce7a06b31be0e',1,'nmfDatabase']]]
 ];

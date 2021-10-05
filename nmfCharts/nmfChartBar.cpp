@@ -11,17 +11,17 @@ nmfChartBar::nmfChartBar()
 void
 nmfChartBar::populateChart(
         QChart *chart,
-        const std::string &type,
-        double& maxYVal,
-        const boost::numeric::ublas::matrix<double> &ChartData,
-        const QStringList &RowLabels,
-        const QStringList &ColumnLabels,
-        std::string &MainTitle,
-        std::string &XTitle,
-        std::string &YTitle,
+        const std::string& type,
+        const double& maxYVal,
+        const boost::numeric::ublas::matrix<double>& ChartData,
+        const QStringList& RowLabels,
+        const QStringList& ColumnLabels,
+        const std::string& MainTitle,
+        const std::string& XTitle,
+        const std::string& YTitle,
         const bool& areDataPercentages,
-        const std::vector<bool> &GridLines,
-        const int Theme)
+        const std::vector<bool>& GridLines,
+        const int& Theme)
 {
     QBarSet    *newSet = NULL;
     QBarSeries *series = NULL;

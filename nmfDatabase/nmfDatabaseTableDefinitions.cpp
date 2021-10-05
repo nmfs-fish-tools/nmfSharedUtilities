@@ -9,15 +9,27 @@
 /**
  * @mainpage Overview
  *
- * @section MySQL Table Definitions
+ * @section MySQL Database API
  *
- * This file contains all of the MySQL table definitions that this
- * program uses.  The methods below are called via a function map
- * and describe how each table is formatted in the database.
+ * The files in this project contain MySQL database methods. These routines
+ * allow the user to access the appropriate MySQL database and extract the
+ * desired data.
  *
  * @section Background
  *
- * This is some background.
+ * This API assumes the user is interacting with a MySQL database. If the database
+ * type should change, the user would just need to re-write the methods in this
+ * project. The calling code shouldn't need to change.
+ *
+ * The MySQL relational database was chosen as it's open source and cross platform. There
+ * are, however, slight differences with running MySQL on Windows vs Linux. One such difference
+ * is that the database table name are case insensitive on Window and hence appear as all
+ * lowercase on Windows. Database tables may use mixed case on Linux.
+ *
+ * N.B. If you're exporting a database from Linux to Windows, that will work fine. However, if you're
+ * exporting a database from Windows to Linux, the table names will import into Linux as all lowercase
+ * and if the code is expecting mixed case table names, you'll get errors. I suggest always to use
+ * lowercase table names.
  *
  */
 //#define DEBUG 1

@@ -69,7 +69,7 @@ nmfAbundance::nmfAbundance(
     }
 
     // Get all the species names
-    m_databasePtr->getAllSpecies(m_logger,allSpecies);
+    m_databasePtr->getSpecies(m_logger,allSpecies);
 
     // Initialize weight, initial abundance, consumption, and maturity
     for (std::string species : allSpecies) {
@@ -929,7 +929,7 @@ std::cout << "nmfAbundance::getData start" << std::endl;
     std::map<std::string,std::vector<double> > zeta;
     boost::numeric::ublas::matrix<double> predationMatrix;
 
-    m_databasePtr->getAllSpecies(m_logger,AllSpecies);
+    m_databasePtr->getSpecies(m_logger,AllSpecies);
     NumSpecies = AllSpecies.size();
 
     Boost3DArrayDouble Biomass(boost::extents[NumSpecies][nmfConstants::MaxNumberAges][nmfConstants::MaxNumberYears]);

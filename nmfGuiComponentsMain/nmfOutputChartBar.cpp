@@ -331,6 +331,7 @@ void nmfOutputChartBar::getChartData(
     std::vector<std::string> fields,fields2;
     std::string field;
     std::size_t found;
+    std::string nullStr = "";
     boost::numeric::ublas::matrix<double> CatchData;
     boost::numeric::ublas::matrix<double> tempData;
     QStringList PreyList;
@@ -767,8 +768,8 @@ std::cout << "qf2: " << queryStr << std::endl;
             firstYear = FirstYear;
 
             // First need to get a list of prey names and a count of prey for the predator.
-            databasePtr->nmfQueryMsvpaPreyList( "", selectedSpecies, MSVPAName, predAgeStr,
-                                                NPrey, PreyList, false);
+            databasePtr->nmfQueryMsvpaPreyList(selectedSpecies,MSVPAName,false,nullStr,
+                                               predAgeStr,NPrey, PreyList);
             queryStr = "SELECT Year, PreyName, Sum(BMConsumed) as TotCons FROM MSVPASuitPreyBiomass WHERE MSVPAname = '" + MSVPAName + "'" +
                        " AND PredName = '" + selectedSpecies + "'" +
                           seasonStr + predAgeStr +
