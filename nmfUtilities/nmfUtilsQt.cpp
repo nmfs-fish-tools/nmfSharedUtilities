@@ -1770,36 +1770,43 @@ saveTimeSeries(QTabWidget* parentTabWidget,
     return retv;
 }
 
+
 void transposeModel(QTableView* tv)
 {
     QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(tv->model());
     int numRows = smodel->rowCount();
     int numCols = smodel->columnCount();
-    QStandardItemModel* transposedModel = new QStandardItemModel(numRows, numCols);
     QString value;
     QStandardItem* item;
     QModelIndex index;
-    QStringList species = {};
+    std::vector< std::vector<QString> > tmpStringMatrix;
+    std::vector<QString> tmpStringVector;
 
     // Can only take the transpose of a square matrix
     if (smodel->rowCount() != smodel->columnCount()) {
         return;
     }
 
+    // Get model data
     for (int i=0; i<smodel->rowCount(); ++i) {
-        species << smodel->verticalHeaderItem(i)->text();
+        tmpStringVector.clear();
         for (int j=0; j<smodel->columnCount(); ++j) {
             index = smodel->index(i,j);
-//          value = QString::number(index.data().toDouble());
             value = index.data().toString();
-            item  = new QStandardItem(value);
+            tmpStringVector.push_back(value);
+        }
+        tmpStringMatrix.push_back(tmpStringVector);
+    }
+
+    // Put model data, in transpose order, back into model
+    for (int i=0; i<numRows; ++i) {
+        tmpStringVector = tmpStringMatrix[i];
+        for (int j=0; j<numCols; ++j) {
+            item  = new QStandardItem(tmpStringVector[j]);
             item->setTextAlignment(Qt::AlignCenter);
-            transposedModel->setItem(j,i,item);
+            smodel->setItem(j,i,item);
         }
     }
-    transposedModel->setHorizontalHeaderLabels(species);
-    transposedModel->setVerticalHeaderLabels(species);
-    tv->setModel(transposedModel);
 }
 
 void checkForAndReplaceInvalidCharacters(QString &stringValue)

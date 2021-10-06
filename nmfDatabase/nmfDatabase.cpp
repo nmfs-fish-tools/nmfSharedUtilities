@@ -1870,7 +1870,8 @@ nmfDatabase::getTimeSeriesData(
         errorMsg += "table " + ModifiedTableName + " does not equal number of Species*(RunLength+1) (";
         errorMsg += std::to_string(NumSpecies) + "*" + std::to_string((RunLength+1)) + "=";
         errorMsg += std::to_string(NumSpecies*(RunLength+1)) + ") records";
-        errorMsg += "\n" + queryStr;
+        Logger->logMsg(nmfConstants::Error,errorMsg);
+        errorMsg  = queryStr;
         Logger->logMsg(nmfConstants::Error,errorMsg);
         msg = "\nMissing or unsaved data.\n\nPlease populate and resave table: " + QString::fromStdString(ModifiedTableName) + "\n";
         QMessageBox::critical(Widget, "Error", msg, QMessageBox::Ok);
