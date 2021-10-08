@@ -524,10 +524,10 @@ void calculateSSResiduals(const int& NumSpeciesOrGuilds,
 }
 
 bool calculateSSDeviations(const int& NumSpeciesOrGuilds,
-                          const int& RunLength,
-                          const std::vector<double>& Estimated,
-                          const std::vector<double>& Means,
-                          std::vector<double>& SSDeviations)
+                           const int& RunLength,
+                           const std::vector<double>& Estimated,
+                           const std::vector<double>& Means,
+                           std::vector<double>& SSDeviations)
 {
     int m = 0;
     double sum = 0;

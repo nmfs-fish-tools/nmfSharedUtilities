@@ -277,11 +277,23 @@ convertVectorToMatrix(std::vector<double>& vec)
  */
 double getRandomNumber(int seedValue, double lowerLimit, double upperLimit)
 {
-    unsigned RandomSeed = nmfUtilsQt::getCurrentTime().currentMSecsSinceEpoch();
-    unsigned Seed = (seedValue < 0) ? RandomSeed : seedValue;
-    std::uniform_real_distribution<double> dist(lowerLimit,upperLimit);
-    std::mt19937_64 rng(Seed);
-    return dist(rng);
+//    unsigned RandomSeed = nmfUtilsQt::getCurrentTime().currentMSecsSinceEpoch();
+//    unsigned Seed = (seedValue < 0) ? RandomSeed : seedValue;
+//    std::uniform_real_distribution<double> dist(lowerLimit,upperLimit);
+//    std::mt19937_64 rng(Seed);
+//    return dist(rng);
+
+    double retv = 0;
+    double span = upperLimit - lowerLimit;
+
+    if (seedValue < 0) { // stochastic
+        retv = span*QRandomGenerator::global()->generateDouble() - 0.5*span;
+    } else {             // deterministic
+        QRandomGenerator randomGenerator(seedValue);
+        retv = span*randomGenerator.generateDouble() - 0.5*span;
+    }
+
+    return retv;
 }
 
 bool isNearlyZero(const double& value)

@@ -6,6 +6,7 @@
  */
 
 #include "nmfUtilsComplex.h"
+#include "nmfConstants.h"
 
 namespace nmfUtilsComplex {
 
@@ -27,7 +28,7 @@ void Complex(int NDim,
     // Generate random numbers between 0 and 1 and fill into R matrix
     for (int i = 1; i <= K; ++i) {
         for (int j = 1; j <= NDim; ++j) {
-            R(i,j) = nmfUtils::getRandomNumber(-1,0.0,1.0);
+            R(i,j) = nmfUtils::getRandomNumber(nmfConstants::RandomSeed,0.0,1.0);
         }
     }
 

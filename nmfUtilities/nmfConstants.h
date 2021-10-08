@@ -70,6 +70,7 @@ namespace nmfConstants
     const int    MinNumForecastYears     =  3;
     const int    MaxNumForecastYears     = 20;
     const int    MaxPathLength           = 1000;
+    const int    RandomSeed              = -1;
     const bool   RearrangeTitle          = true;
     const bool   DontRearrangeTitle      = false;
     const bool   Clear                   = true;

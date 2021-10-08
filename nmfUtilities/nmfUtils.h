@@ -43,6 +43,7 @@
 #include <vector>
 
 #include <QDir>
+#include <QRandomGenerator>
 
 #include "nmfUtilsQt.h"
 #include "nmfStructsQt.h"

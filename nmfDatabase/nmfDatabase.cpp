@@ -1828,6 +1828,7 @@ nmfDatabase::getTimeSeriesData(
 {
     int m=0;
     int NumRecords;
+    int NumYears = RunLength+1; // +1 because there's a 0 year
     std::vector<std::string> fields;
     std::map<std::string, std::vector<std::string> > dataMap;
     std::string queryStr;
@@ -1835,7 +1836,7 @@ nmfDatabase::getTimeSeriesData(
     std::string ModifiedTableName = "";
     QString msg;
 
-    nmfUtils::initialize(TableData,RunLength+1,NumSpecies); // +1 because there's a 0 year
+    nmfUtils::initialize(TableData,NumYears,NumSpecies);
 
     // Load data
     if (ForecastName == "") {
@@ -1880,7 +1881,8 @@ nmfDatabase::getTimeSeriesData(
 
     for (int species=0; species<NumSpecies; ++species) {
         for (int time=0; time<=RunLength; ++time) {
-            TableData(time,species) = std::stod(dataMap["Value"][m++]);
+            //TableData(time,species) = std::stod(dataMap["Value"][m++]);
+            TableData(time,species) = QString::fromStdString(dataMap["Value"][m++]).toDouble();
         }
     }
 
@@ -2811,15 +2813,16 @@ nmfDatabase::getModelFormData(nmfLogger*   Logger,
                               std::string& CompetitionForm,
                               std::string& PredationForm,
                               int&         RunLength,
-                              int&         InitialYear)
+                              int&         InitialYear,
+                              bool&        isBiomassAbsolute)
 {
     std::vector<std::string> fields;
     std::map<std::string, std::vector<std::string> > dataMap,dataMapMin,dataMapMax;
     std::string queryStr;
 
     // Find model forms
-    fields     = {"GrowthForm","HarvestForm","WithinGuildCompetitionForm","PredationForm","RunLength","StartYear"};
-    queryStr   = "SELECT GrowthForm,HarvestForm,WithinGuildCompetitionForm,PredationForm,RunLength,StartYear FROM " +
+    fields     = {"GrowthForm","HarvestForm","WithinGuildCompetitionForm","PredationForm","RunLength","StartYear","ObsBiomassType"};
+    queryStr   = "SELECT GrowthForm,HarvestForm,WithinGuildCompetitionForm,PredationForm,RunLength,StartYear,ObsBiomassType FROM " +
                   nmfConstantsMSSPM::TableModels +
                  " WHERE ProjectName = '" + ProjectName +
                  "' AND ModelName = '"    + ModelName   + "'";
@@ -2829,12 +2832,13 @@ nmfDatabase::getModelFormData(nmfLogger*   Logger,
         Logger->logMsg(nmfConstants::Error,msg);
         return false;
     }
-    GrowthForm      = dataMap["GrowthForm"][0];
-    HarvestForm     = dataMap["HarvestForm"][0];
-    CompetitionForm = dataMap["WithinGuildCompetitionForm"][0];
-    PredationForm   = dataMap["PredationForm"][0];
-    RunLength       = std::stoi(dataMap["RunLength"][0]);
-    InitialYear     = std::stoi(dataMap["StartYear"][0]);
+    GrowthForm        = dataMap["GrowthForm"][0];
+    HarvestForm       = dataMap["HarvestForm"][0];
+    CompetitionForm   = dataMap["WithinGuildCompetitionForm"][0];
+    PredationForm     = dataMap["PredationForm"][0];
+    RunLength         = std::stoi(dataMap["RunLength"][0]);
+    InitialYear       = std::stoi(dataMap["StartYear"][0]);
+    isBiomassAbsolute = (dataMap["ObsBiomassType"][0] == "Absolute");
 
     return true;
 }
@@ -3014,6 +3018,32 @@ nmfDatabase::getHarvestFormData(
     return true;
 }
 
+bool
+nmfDatabase::getSurveyQData(
+        nmfLogger* logger,
+        std::vector<double>& SurveyQ)
+{
+    int NumRecords;
+    std::vector<std::string> fields;
+    std::string queryStr;
+    std::map<std::string, std::vector<std::string> > dataMap;
+
+    // Get needed data from Models table
+    fields     = {"SurveyQ"};
+    queryStr   = "SELECT SurveyQ FROM " +
+                  nmfConstantsMSSPM::TableSpecies;
+    dataMap    = nmfQueryDatabase(queryStr, fields);
+    NumRecords = dataMap["SurveyQ"].size();
+    if (NumRecords == 0) {
+        logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::getSurveyQData: No records found in table: species");
+        return false;
+    }
+    for (int i=0; i<NumRecords; ++i) {
+        SurveyQ.push_back(std::stod(dataMap["SurveyQ"][i]));
+    }
+
+    return true;
+}
 
 bool
 nmfDatabase::getEstimatedBiomass(
@@ -3131,13 +3161,14 @@ nmfDatabase::getHarvestData(const std::string& HarvestType,
     std::string queryStr;
     std::string msg;
     std::string HarvestTypePrefix = "harvest";
+    std::string HarvestTableName;
 
     // Because type could be: "Effort (qE)" or "Exploitation (F)"
-    HarvestTypePrefix += QString::fromStdString(HarvestType).toLower().split(" ")[0].toStdString();
+    HarvestTableName = HarvestTypePrefix + QString::fromStdString(HarvestType).toLower().split(" ")[0].toStdString();
 
     fields   = {"ProjectName","ModelName","SpeName","Year","Value"};
     queryStr = "SELECT ProjectName,ModelName,SpeName,Year,Value FROM " +
-                HarvestTypePrefix +
+                HarvestTableName +
                " WHERE ProjectName = '" + ProjectName +
                "' AND ModelName = '"    + ModelName +
                "' ORDER BY SpeName,Year ";
@@ -3153,18 +3184,18 @@ nmfDatabase::getHarvestData(const std::string& HarvestType,
         m = 0;
         for (int species=0; species<NumSpecies; ++species) {
             for (int year=0; year<RunLength; ++year) {
-                if (HarvestTypePrefix == "Catch") {
+                if (HarvestTableName == nmfConstantsMSSPM::TableHarvestCatch) {
                     Catch(year,species) = std::stod(dataMap["Value"][m++]);
-                } else if (HarvestTypePrefix == "Effort") {
+                } else if (HarvestTableName == nmfConstantsMSSPM::TableHarvestEffort) {
                     Effort(year,species) = std::stod(dataMap["Value"][m++]);
-                } else if (HarvestTypePrefix == "Exploitation") {
+                } else if (HarvestTableName == nmfConstantsMSSPM::TableHarvestExploitation) {
                     Exploitation(year,species) = std::stod(dataMap["Value"][m++]);
                 }
             }
         }
     }
 
-    if (HarvestTypePrefix == "Effort") {
+    if (HarvestTableName == "Effort") {
         fields   = {"SpeName","Catchability"};
         queryStr = "SELECT SpeName,Catchability FROM " +
                     nmfConstantsMSSPM::TableSpecies +

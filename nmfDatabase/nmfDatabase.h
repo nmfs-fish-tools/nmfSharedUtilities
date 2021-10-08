@@ -594,7 +594,8 @@ public:
                           std::string& CompetitionForm,
                           std::string& PredationForm,
                           int&         RunLength,
-                          int&         InitialYear);
+                          int&         InitialYear,
+                          bool&        isBiomassAbsolute);
     /**
      * @brief Sends back mortality data (for MSCAA)
      * @param logger : logger pointer used to log any error messages
@@ -698,6 +699,15 @@ public:
      * @return Species index corresponding to passed in species name
      */
     int getSpeciesIndex(std::string SpeciesName);
+    /**
+     * @brief getSurveyQData : Gets the Survey Q data from the models table
+     * @param Logger : logger pointer to log any error messages
+     * @param SurveyQ : vector of Survey Q data
+     * @return true if no errors, false otherwise
+     */
+    bool getSurveyQData(
+            nmfLogger* Logger,
+            std::vector<double>& SurveyQ);
     /**
      * @brief Creates and returns a species name to index map (MSVPA)
      * @param SpeciesToIndexMap : the species to index map
