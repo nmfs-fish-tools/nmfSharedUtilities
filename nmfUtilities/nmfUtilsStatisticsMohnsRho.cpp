@@ -100,8 +100,8 @@ nmfUtilsStatisticsMohnsRho::loadEstData(
     m_ParameterMap[nmfConstantsMSSPM::ParameterNameSurveyQ]                   = m_EstSurveyQ;
     m_ParameterMap[nmfConstantsMSSPM::ParameterNameCompetitionAlpha]          = m_EstCompetitionAlpha;
     m_ParameterMap[nmfConstantsMSSPM::ParameterNameCompetitionBetaSpecies]    = m_EstCompetitionBetaSpecies;
-    m_ParameterMap[nmfConstantsMSSPM::ParameterNameCompetitionBetaGuild]      = m_EstCompetitionBetaGuilds;
-    m_ParameterMap[nmfConstantsMSSPM::ParameterNameCompetitionBetaGuildGuild] = m_EstCompetitionBetaGuildsGuilds;
+    m_ParameterMap[nmfConstantsMSSPM::ParameterNameCompetitionBetaGuilds]      = m_EstCompetitionBetaGuilds;
+    m_ParameterMap[nmfConstantsMSSPM::ParameterNameCompetitionBetaGuildsGuilds] = m_EstCompetitionBetaGuildsGuilds;
     m_ParameterMap[nmfConstantsMSSPM::ParameterNamePredationRho]              = m_EstPredationRho;
     m_ParameterMap[nmfConstantsMSSPM::ParameterNamePredationHandling]         = m_EstPredationHandling;
     m_ParameterMap[nmfConstantsMSSPM::ParameterNamePredationExponent]         = m_EstPredationExponent;

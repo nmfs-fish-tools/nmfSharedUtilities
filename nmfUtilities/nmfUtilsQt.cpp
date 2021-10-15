@@ -2095,9 +2095,8 @@ std::cout << "nmfUtilsQt::loadMultiRunData: Loading multi run file: " << dataStr
 }
 
 void
-reloadDataStruct(
-        nmfStructsQt::ModelDataStruct& dataStruct,
-        const QString& MultiRunLine)
+reloadDataStruct(nmfStructsQt::ModelDataStruct& dataStruct,
+                 const QString& MultiRunLine)
 {
     QStringList parts = MultiRunLine.split(",");
 //std::cout << "num parts: " << parts.size() << std::endl;

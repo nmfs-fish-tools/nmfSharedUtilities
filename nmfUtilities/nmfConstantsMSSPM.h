@@ -194,18 +194,18 @@ namespace nmfConstantsMSSPM
      const QString      HarvestEffort                  = "Effort (qE)";
      const QString      HarvestExploitation            = "Exploitation Rate (Harvest/Bc)";
 
-     const QString      ParameterNameInitialBiomass            = "Initial Absolute Biomass";
-     const QString      ParameterNameSurveyQ                   = "SurveyQ";
-     const QString      ParameterNameGrowthRate                = "Growth Rate";
-     const QString      ParameterNameCarryingCapacity          = "Carrying Capacity";
-     const QString      ParameterNameCatchability              = "Catchability";
-     const QString      ParameterNameCompetitionAlpha          = "Alpha";
-     const QString      ParameterNameCompetitionBetaSpecies    = "Beta SpeciesSpecies";
-     const QString      ParameterNameCompetitionBetaGuild      = "Beta GuildSpecies";
-     const QString      ParameterNameCompetitionBetaGuildGuild = "Beta GuildGuild";
-     const QString      ParameterNamePredationRho              = "Predation Effect";
-     const QString      ParameterNamePredationHandling         = "Handling Time";
-     const QString      ParameterNamePredationExponent         = "Predation Exponent";
+     const QString      ParameterNameInitialBiomass              = "Initial Absolute Biomass";
+     const QString      ParameterNameSurveyQ                     = "SurveyQ";
+     const QString      ParameterNameGrowthRate                  = "Growth Rate";
+     const QString      ParameterNameCarryingCapacity            = "Carrying Capacity";
+     const QString      ParameterNameCatchability                = "Catchability";
+     const QString      ParameterNameCompetitionAlpha            = "Competition Alpha";
+     const QString      ParameterNameCompetitionBetaSpecies      = "Competition Beta Species";
+     const QString      ParameterNameCompetitionBetaGuilds       = "Competition Beta Guilds";
+     const QString      ParameterNameCompetitionBetaGuildsGuilds = "Competition Beta GuildsGuilds";
+     const QString      ParameterNamePredationRho                = "Predation Rho";
+     const QString      ParameterNamePredationHandling           = "Predation Handling";
+     const QString      ParameterNamePredationExponent           = "Predation Exponent";
 
      const QString      SectionSetup                           = "Setup";
      const QString      SectionEstimation                      = "Estimation Data Input";
@@ -315,7 +315,14 @@ namespace nmfConstantsMSSPM
          {"Mohn's Rho (Initial Absolute Biomass)",
           "Mohn's Rho (Growth Rate)",
           "Mohn's Rho (Carrying Capacity)",
-          "Mohn's Rho (Predation Effect)",
+          "Mohn's Rho (Competition Alpha)",
+          "Mohn's Rho (Competition Beta Species)",
+          "Mohn's Rho (Competition Beta Guilds)",
+          "Mohn's Rho (Competition Beta GuildsGuilds)",
+          "Mohn's Rho (Predation Rho)",
+          "Mohn's Rho (Predation Handling)",
+          "Mohn's Rho (Predation Exponent)",
+          "Mohn's Rho (SurveyQ)",
           "Mohn's Rho (Estimated Biomass)"};
 
      const QStringList VectorParameterNames =
