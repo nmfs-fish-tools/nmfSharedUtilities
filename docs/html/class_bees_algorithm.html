@@ -71,12 +71,15 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a16ae0598b4b407fed415cd052cddb61c"><td class="memItemLeft" align="right" valign="top"><a id="a16ae0598b4b407fed415cd052cddb61c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BeesAlgorithm</b> (const <a class="el" href="struct_data___struct.html">Data_Struct</a> &amp;m_BeeStruct, const bool &amp;verbose)</td></tr>
-<tr class="separator:a16ae0598b4b407fed415cd052cddb61c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a400620d0f8c4e0c05ae55cbbeadd503b"><td class="memItemLeft" align="right" valign="top"><a id="a400620d0f8c4e0c05ae55cbbeadd503b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>initializeParameterRangesAndPatchSizes</b> ()</td></tr>
-<tr class="separator:a400620d0f8c4e0c05ae55cbbeadd503b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a3fb02a867f2a93cfc9ae322a2db72a"><td class="memItemLeft" align="right" valign="top"><a id="a3a3fb02a867f2a93cfc9ae322a2db72a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>BeesAlgorithm</b> (<a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> BeeStruct, const bool &amp;verbose)</td></tr>
+<tr class="separator:a3a3fb02a867f2a93cfc9ae322a2db72a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aabae8f188e35ed1ad0a4437147660b"><td class="memItemLeft" align="right" valign="top"><a id="a6aabae8f188e35ed1ad0a4437147660b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setSeed</b> (long seed)</td></tr>
+<tr class="separator:a6aabae8f188e35ed1ad0a4437147660b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42cfb6508487bb036b64892437a53111"><td class="memItemLeft" align="right" valign="top"><a id="a42cfb6508487bb036b64892437a53111"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>initializeParameterRangesAndPatchSizes</b> (<a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;theBeeStruct)</td></tr>
+<tr class="separator:a42cfb6508487bb036b64892437a53111"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66ef4cd92b4584b2765d18027b04a795"><td class="memItemLeft" align="right" valign="top"><a id="a66ef4cd92b4584b2765d18027b04a795"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>calculateActualNumEstParameters</b> ()</td></tr>
 <tr class="separator:a66ef4cd92b4584b2765d18027b04a795"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -92,9 +95,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>extractHarvestParamet
 <tr class="memitem:a08d345707ad65245c4f88b2677786d30"><td class="memItemLeft" align="right" valign="top"><a id="a08d345707ad65245c4f88b2677786d30"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>extractInitBiomass</b> (const std::vector&lt; double &gt; &amp;parameters, int &amp;startPos, std::vector&lt; double &gt; &amp;initBiomass)</td></tr>
 <tr class="separator:a08d345707ad65245c4f88b2677786d30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca390bde5cae3f56ce009c375fa10ec8"><td class="memItemLeft" align="right" valign="top"><a id="aca390bde5cae3f56ce009c375fa10ec8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>extractCompetitionParameters</b> (const std::vector&lt; double &gt; &amp;parameters, int &amp;startPos, boost::numeric::ublas::matrix&lt; double &gt; &amp;alpha, boost::numeric::ublas::matrix&lt; double &gt; &amp;betaSpecies, boost::numeric::ublas::matrix&lt; double &gt; &amp;betaGuilds)</td></tr>
-<tr class="separator:aca390bde5cae3f56ce009c375fa10ec8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a968b0d3ca7e152a3707e67b31241a9"><td class="memItemLeft" align="right" valign="top"><a id="a0a968b0d3ca7e152a3707e67b31241a9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>extractCompetitionParameters</b> (const std::vector&lt; double &gt; &amp;parameters, int &amp;startPos, boost::numeric::ublas::matrix&lt; double &gt; &amp;alpha, boost::numeric::ublas::matrix&lt; double &gt; &amp;betaSpecies, boost::numeric::ublas::matrix&lt; double &gt; &amp;betaGuilds, boost::numeric::ublas::matrix&lt; double &gt; &amp;betaGuildsGuilds)</td></tr>
+<tr class="separator:a0a968b0d3ca7e152a3707e67b31241a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8dac743356bac3180b6679d4867014b3"><td class="memItemLeft" align="right" valign="top"><a id="a8dac743356bac3180b6679d4867014b3"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>extractPredationParameters</b> (const std::vector&lt; double &gt; &amp;parameters, int &amp;startPos, boost::numeric::ublas::matrix&lt; double &gt; &amp;predation)</td></tr>
 <tr class="separator:a8dac743356bac3180b6679d4867014b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -104,6 +107,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>extractHandlingParame
 <tr class="memitem:a8c6c34ce51d85d1659a5e2f607a08977"><td class="memItemLeft" align="right" valign="top"><a id="a8c6c34ce51d85d1659a5e2f607a08977"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>extractExponentParameters</b> (const std::vector&lt; double &gt; &amp;parameters, int &amp;startPos, std::vector&lt; double &gt; &amp;exponents)</td></tr>
 <tr class="separator:a8c6c34ce51d85d1659a5e2f607a08977"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe30c0d22ca40a91dbdd1cfa40e36026"><td class="memItemLeft" align="right" valign="top"><a id="afe30c0d22ca40a91dbdd1cfa40e36026"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>extractSurveyQParameters</b> (const std::vector&lt; double &gt; &amp;parameters, int &amp;startPos, std::vector&lt; double &gt; &amp;surveyQ)</td></tr>
+<tr class="separator:afe30c0d22ca40a91dbdd1cfa40e36026"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d01347ee86a0df7c36129a16f50cda8"><td class="memItemLeft" align="right" valign="top"><a id="a0d01347ee86a0df7c36129a16f50cda8"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>evaluateObjectiveFunction</b> (const std::vector&lt; double &gt; &amp;parameters)</td></tr>
 <tr class="separator:a0d01347ee86a0df7c36129a16f50cda8"><td class="memSeparator" colspan="2">&#160;</td></tr>

@@ -41,6 +41,7 @@
 #include <QBarSeries>
 #include <QtCharts/QChart>
 #include <QClipboard>
+#include <QComboBox>
 #include <QDate>
 #include <QDateTime>
 #include <QDebug>
@@ -57,6 +58,7 @@
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QMimeData>
+#include <QModelIndex>
 #include <QModelIndexList>
 #include <QProcess>
 #include <QProgressDialog>
@@ -389,6 +391,18 @@ namespace nmfUtilsQt {
      */
     bool fileExists(QString filenameWithPath);
     /**
+     * @brief Sends back the Covariate Values for all species for the given year and parameter
+     * @param NLoptDataStruct : struct containing necessary data
+     * @param numYears : number of years of covariates
+     * @param parameterName : name of parameter
+     * @param covariateMatrix : matrix of covariate values by year and species
+     */
+    void getCovariates(
+            nmfStructsQt::ModelDataStruct& NLoptDataStruct,
+            const int& numYears,
+            const std::string& parameterName,
+            boost::numeric::ublas::matrix<double>& covariateMatrix);
+    /**
      * @brief Gets the name of the current tab
      * @param tabWidget : tab widget containing the tab in question
      * @return Returns the name of the current tab
@@ -413,6 +427,20 @@ namespace nmfUtilsQt {
      */
     bool isAnError(std::string errorMsg);
     /**
+     * @brief Loads the CSV File into a table of combo boxes
+     * @param parentTabWidget : parent widget
+     * @param tableView : table view containing combo box widgets
+     * @param inputDataPath : default path where .csv file is to be saved
+     * @param inputFilename : CSV filename if default is not desired
+     * @param errorMsg : error message passed back
+     * @return : true if successful, false otherwise
+     */
+    bool loadCSVFileComboBoxes(QTabWidget* parentTabWidget,
+                               QTableView* tableView,
+                               const QString& inputDataPath,
+                               const QString& inputFilename,
+                               QString& errorMsg);
+    /**
      * @brief Load a non time series .csv file into a QTableView
      * @param parentTabWidget : parent tab containing the QTableView object
      * @param tableView : QTableView that will contain the .csv data
@@ -429,6 +457,24 @@ namespace nmfUtilsQt {
                                     const QString& inputFilename,
                                     QList<QString>& SpeciesGuilds,
                                     QString& errorMsg);
+    /**
+     * @brief Loads the CSV file into the passed tableview's model
+     * @param logger : pointer to logger object
+     * @param projectDir : directory where application files are written to
+     * @param fileType : type of csv file (used as a check, so the user knows they're opening the correct type of file)
+     * @param table : qtableview containing data to be written out
+     * @param filename : if queryFilename = false, then this is the filename to be used; otherwise the method will query the user
+     * @param numRows : number of rows read from file
+     * @param numSignificantDigits : number of significant digits to use in displayed numbers
+     * @return Returns true if load was successful, else false
+     */
+    bool loadModelFromCSVFile(nmfLogger* logger,
+                              std::string projectDir,
+                              std::string fileType,
+                              QTableView* table,
+                              QString filename,
+                              int& numRows,
+                              int& numSignificantDigits);
     /**
      * @brief Loads all of the multi-run file data into a vector of QStrings
      * @param DataStruct : struct containing all run parameters
@@ -530,23 +576,19 @@ namespace nmfUtilsQt {
     int rename(QString fileIn,
                QString fileOut);
     /**
-     * @brief Loads the CSV file into the passed tableview's model
-     * @param logger : pointer to logger object
-     * @param projectDir : directory where application files are written to
-     * @param fileType : type of csv file (used as a check, so the user knows they're opening the correct type of file)
-     * @param table : qtableview containing data to be written out
-     * @param filename : if queryFilename = false, then this is the filename to be used; otherwise the method will query the user
-     * @param numRows : number of rows read from file
-     * @param numSignificantDigits : number of significant digits to use in displayed numbers
-     * @return Returns true if load was successful, else false
+     * @brief Saves the table consisting of all QComboBoxes to a .csv file
+     * @param parentTabWidget : parent widget
+     * @param tableView : QTableView containing all of the combo boxes
+     * @param smodel : model in tableView
+     * @param inputDataPath : default path where .csv file is to be saved
+     * @param outputFilename : name of the output filename with path
+     * @return true if successful, false otherwise
      */
-    bool loadModelFromCSVFile(nmfLogger* logger,
-                              std::string projectDir,
-                              std::string fileType,
-                              QTableView* table,
-                              QString filename,
-                              int& numRows,
-                              int& numSignificantDigits);
+    bool saveCSVFileComboBoxes(QTabWidget* parentTabWidget,
+                          QTableView* tableView,
+                          QStandardItemModel* smodel,
+                          QString& inputDataPath,
+                          QString& outputFilename);
     /**
      * @brief Saves the data in the passed model to the appropriate directory and file
      * @param projectDir : directory where application files are written to

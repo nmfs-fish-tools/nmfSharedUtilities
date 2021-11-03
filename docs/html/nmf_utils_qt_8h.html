@@ -87,20 +87,27 @@ $(function() {
 <code>#include &lt;QBarSeries&gt;</code><br />
 <code>#include &lt;QtCharts/QChart&gt;</code><br />
 <code>#include &lt;QClipboard&gt;</code><br />
+<code>#include &lt;QComboBox&gt;</code><br />
 <code>#include &lt;QDate&gt;</code><br />
+<code>#include &lt;QDateTime&gt;</code><br />
 <code>#include &lt;QDebug&gt;</code><br />
 <code>#include &lt;QDir&gt;</code><br />
+<code>#include &lt;QEventLoop&gt;</code><br />
 <code>#include &lt;QFile&gt;</code><br />
 <code>#include &lt;QFileDialog&gt;</code><br />
 <code>#include &lt;QGridLayout&gt;</code><br />
 <code>#include &lt;QInputDialog&gt;</code><br />
+<code>#include &lt;QItemSelectionModel&gt;</code><br />
 <code>#include &lt;QLabel&gt;</code><br />
 <code>#include &lt;QLineEdit&gt;</code><br />
 <code>#include &lt;QLineSeries&gt;</code><br />
 <code>#include &lt;QMainWindow&gt;</code><br />
 <code>#include &lt;QMessageBox&gt;</code><br />
 <code>#include &lt;QMimeData&gt;</code><br />
+<code>#include &lt;QModelIndex&gt;</code><br />
+<code>#include &lt;QModelIndexList&gt;</code><br />
 <code>#include &lt;QProcess&gt;</code><br />
+<code>#include &lt;QProgressDialog&gt;</code><br />
 <code>#include &lt;QPushButton&gt;</code><br />
 <code>#include &lt;QScrollBar&gt;</code><br />
 <code>#include &lt;QSettings&gt;</code><br />
@@ -113,9 +120,11 @@ $(function() {
 <code>#include &lt;QTabWidget&gt;</code><br />
 <code>#include &lt;QTextEdit&gt;</code><br />
 <code>#include &lt;QTextStream&gt;</code><br />
+<code>#include &lt;QTimer&gt;</code><br />
 <code>#include &lt;QTreeWidgetItem&gt;</code><br />
 <code>#include &lt;QValueAxis&gt;</code><br />
 <code>#include &quot;<a class="el" href="nmf_utils_8h_source.html">nmfUtils.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="nmf_structs_qt_8h_source.html">nmfStructsQt.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="nmf_constants_m_s_c_a_a_8h_source.html">nmfConstantsMSCAA.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="nmf_constants_m_s_s_p_m_8h_source.html">nmfConstantsMSSPM.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="nmf_constants_m_s_v_p_a_8h_source.html">nmfConstantsMSVPA.h</a>&quot;</code><br />
@@ -124,82 +133,40 @@ $(function() {
 <code>#include &lt;boost/numeric/ublas/io.hpp&gt;</code><br />
 <code>#include &lt;boost/multi_array.hpp&gt;</code><br />
 <code>#include &lt;boost/version.hpp&gt;</code><br />
-<code>#include &lt;boost/filesystem.hpp&gt;</code><br />
-</div><div class="textblock"><div class="dynheader">
-Include dependency graph for nmfUtilsQt.h:</div>
-<div class="dyncontent">
-<div class="center"><img src="nmf_utils_qt_8h__incl.png" border="0" usemap="#nmf_utilities_2nmf_utils_qt_8h" alt=""/></div>
-<map name="nmf_utilities_2nmf_utils_qt_8h" id="nmf_utilities_2nmf_utils_qt_8h">
-<area shape="rect" title="Definition for Qt widgets and functions that operate on widgets." alt="" coords="2328,5,2514,32"/>
-<area shape="rect" title=" " alt="" coords="3970,244,4050,271"/>
-<area shape="rect" title=" " alt="" coords="3546,162,3619,189"/>
-<area shape="rect" title=" " alt="" coords="3644,162,3702,189"/>
-<area shape="rect" title=" " alt="" coords="3559,244,3622,271"/>
-<area shape="rect" title=" " alt="" coords="130,80,235,107"/>
-<area shape="rect" title=" " alt="" coords="258,80,400,107"/>
-<area shape="rect" title=" " alt="" coords="424,80,519,107"/>
-<area shape="rect" title=" " alt="" coords="544,80,672,107"/>
-<area shape="rect" title=" " alt="" coords="696,80,791,107"/>
-<area shape="rect" title=" " alt="" coords="815,80,878,107"/>
-<area shape="rect" title=" " alt="" coords="902,80,977,107"/>
-<area shape="rect" title=" " alt="" coords="1001,80,1052,107"/>
-<area shape="rect" title=" " alt="" coords="1076,80,1131,107"/>
-<area shape="rect" title=" " alt="" coords="1155,80,1252,107"/>
-<area shape="rect" title=" " alt="" coords="1276,80,1379,107"/>
-<area shape="rect" title=" " alt="" coords="1404,80,1510,107"/>
-<area shape="rect" title=" " alt="" coords="1534,80,1601,107"/>
-<area shape="rect" title=" " alt="" coords="1626,80,1710,107"/>
-<area shape="rect" title=" " alt="" coords="1734,80,1833,107"/>
-<area shape="rect" title=" " alt="" coords="1858,80,1974,107"/>
-<area shape="rect" title=" " alt="" coords="1998,80,2113,107"/>
-<area shape="rect" title=" " alt="" coords="2138,80,2238,107"/>
-<area shape="rect" title=" " alt="" coords="2261,80,2344,107"/>
-<area shape="rect" title=" " alt="" coords="2368,80,2474,107"/>
-<area shape="rect" title=" " alt="" coords="2498,80,2589,107"/>
-<area shape="rect" title=" " alt="" coords="2613,80,2698,107"/>
-<area shape="rect" title=" " alt="" coords="2722,80,2829,107"/>
-<area shape="rect" title=" " alt="" coords="2854,80,2999,107"/>
-<area shape="rect" title=" " alt="" coords="3024,80,3184,107"/>
-<area shape="rect" title=" " alt="" coords="3208,80,3279,107"/>
-<area shape="rect" title=" " alt="" coords="3304,80,3402,107"/>
-<area shape="rect" title=" " alt="" coords="3426,80,3538,107"/>
-<area shape="rect" title=" " alt="" coords="3562,80,3662,107"/>
-<area shape="rect" title=" " alt="" coords="3686,80,3770,107"/>
-<area shape="rect" title=" " alt="" coords="3794,80,3901,107"/>
-<area shape="rect" title=" " alt="" coords="3926,80,4060,107"/>
-<area shape="rect" title=" " alt="" coords="4085,80,4181,107"/>
-<area shape="rect" href="nmf_utils_8h.html" title="Definition for common typedefs and structs (i.e., non&#45;graphical)" alt="" coords="4306,80,4397,107"/>
-<area shape="rect" href="nmf_constants_m_s_v_p_a_8h.html" title="Definition for constants used in MSVPA_X2 tool." alt="" coords="3777,162,3948,189"/>
-<area shape="rect" title=" " alt="" coords="4196,155,4350,196"/>
-<area shape="rect" title=" " alt="" coords="4374,155,4529,196"/>
-<area shape="rect" title=" " alt="" coords="4553,162,4716,189"/>
-<area shape="rect" title=" " alt="" coords="4740,162,4899,189"/>
-<area shape="rect" href="nmf_constants_m_s_c_a_a_8h.html" title="Definition for constants used in MSCAA tool." alt="" coords="4923,162,5095,189"/>
-<area shape="rect" href="nmf_constants_m_s_s_p_m_8h.html" title="Definition for constants used in MSSPM tool." alt="" coords="3160,162,3333,189"/>
-<area shape="rect" href="nmf_constants_donut_8h.html" title="Definition for constants used in Donut tool." alt="" coords="3358,162,3522,189"/>
-<area shape="rect" title=" " alt="" coords="5170,80,5309,107"/>
-<area shape="rect" title=" " alt="" coords="3972,162,4038,189"/>
-<area shape="rect" title=" " alt="" coords="4062,162,4121,189"/>
-</map>
-</div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="nmf_utils_qt_8h__dep__incl.png" border="0" usemap="#nmf_utilities_2nmf_utils_qt_8hdep" alt=""/></div>
 <map name="nmf_utilities_2nmf_utils_qt_8hdep" id="nmf_utilities_2nmf_utils_qt_8hdep">
-<area shape="rect" title="Definition for Qt widgets and functions that operate on widgets." alt="" coords="642,5,829,32"/>
-<area shape="rect" href="nmf_chart_bar_8h_source.html" title=" " alt="" coords="5,80,193,107"/>
-<area shape="rect" href="nmf_progress_widget_8h.html" title="This file contains the definition for the Progress Chart dock widget." alt="" coords="218,80,453,107"/>
-<area shape="rect" href="nmf_viewer_widget_8h.html" title="GUI definition for the Image Viewer set of widgets." alt="" coords="476,80,699,107"/>
-<area shape="rect" href="nmf_database_8h.html" title="This file contains the database API implementation (currently implemented for MySQL)." alt="" coords="895,80,1109,107"/>
-<area shape="rect" href="nmf_database_8cpp.html" title="This file contains the NMFS DatabaseAPI implementation." alt="" coords="349,162,578,189"/>
-<area shape="rect" href="nmf_abundance_8h_source.html" title=" " alt="" coords="602,162,829,189"/>
-<area shape="rect" href="nmf_database_connect_dialog_8h_source.html" title=" " alt="" coords="1434,155,1645,196"/>
-<area shape="rect" href="nmf_data_8h.html" title="This file contains the NMFS Data class definition." alt="" coords="903,162,1101,189"/>
-<area shape="rect" href="nmf_output_chart_bar_8h_source.html" title=" " alt="" coords="1058,244,1242,285"/>
-<area shape="rect" href="nmf_output_chart_base_8h_source.html" title=" " alt="" coords="1175,155,1359,196"/>
-<area shape="rect" href="nmf_output_chart_line_8h_source.html" title=" " alt="" coords="1291,244,1475,285"/>
-<area shape="rect" href="nmf_output_chart_stacked_bar_8h_source.html" title=" " alt="" coords="795,244,1009,285"/>
+<area shape="rect" title="Definition for Qt widgets and functions that operate on widgets." alt="" coords="2299,5,2486,32"/>
+<area shape="rect" href="_bees_algorithm_8h_source.html" title=" " alt="" coords="387,355,617,382"/>
+<area shape="rect" href="nmf_chart_bar_8h_source.html" title=" " alt="" coords="2649,87,2838,114"/>
+<area shape="rect" href="nmf_chart_line_8h_source.html" title=" " alt="" coords="2862,87,3057,114"/>
+<area shape="rect" href="nmf_chart_line_with_scatter_8h_source.html" title=" " alt="" coords="3081,80,3293,121"/>
+<area shape="rect" href="nmf_progress_widget_8h.html" title="This file contains the definition for the Progress Chart dock widget." alt="" coords="46,177,281,203"/>
+<area shape="rect" href="nmf_viewer_widget_8h.html" title="GUI definition for the Image Viewer set of widgets." alt="" coords="3317,87,3540,114"/>
+<area shape="rect" href="nmf_database_8h.html" title="This file contains the database API implementation (currently implemented for MySQL)." alt="" coords="2359,87,2573,114"/>
+<area shape="rect" href="nmf_database_8cpp.html" title="This file contains the NMFS DatabaseAPI implementation." alt="" coords="1954,177,2183,203"/>
+<area shape="rect" href="nmf_abundance_8h_source.html" title=" " alt="" coords="2207,177,2434,203"/>
+<area shape="rect" href="nmf_database_connect_dialog_8h_source.html" title=" " alt="" coords="3039,169,3250,211"/>
+<area shape="rect" href="nmf_utils_8h.html" title="Definition for common typedefs and structs (i.e., non&#45;graphical)" alt="" coords="1169,87,1339,114"/>
+<area shape="rect" href="nmf_data_8h.html" title="This file contains the NMFS Data class definition." alt="" coords="2508,177,2707,203"/>
+<area shape="rect" href="nmf_output_chart_bar_8h_source.html" title=" " alt="" coords="2379,259,2563,300"/>
+<area shape="rect" href="nmf_output_chart_base_8h_source.html" title=" " alt="" coords="2781,169,2965,211"/>
+<area shape="rect" href="nmf_output_chart_line_8h_source.html" title=" " alt="" coords="2851,259,3035,300"/>
+<area shape="rect" href="nmf_output_chart_stacked_bar_8h_source.html" title=" " alt="" coords="2611,259,2827,300"/>
+<area shape="rect" href="_bee_8h_source.html" title=" " alt="" coords="47,266,205,293"/>
+<area shape="rect" href="nmf_log_widget_8h_source.html" title=" " alt="" coords="821,177,1023,203"/>
+<area shape="rect" href="nmf_output_chart3_d_8h_source.html" title=" " alt="" coords="1047,169,1231,211"/>
+<area shape="rect" href="nmf_competition_form_8h_source.html" title=" " alt="" coords="281,259,486,300"/>
+<area shape="rect" href="nmf_growth_form_8h_source.html" title=" " alt="" coords="511,266,728,293"/>
+<area shape="rect" href="nmf_harvest_form_8h_source.html" title=" " alt="" coords="753,266,974,293"/>
+<area shape="rect" href="nmf_predation_form_8h_source.html" title=" " alt="" coords="998,266,1230,293"/>
+<area shape="rect" href="nmf_utils_complex_8h.html" title="These routines were originally from Complex2.bas." alt="" coords="1255,177,1485,203"/>
+<area shape="rect" href="nmf_utils_statistics_8h.html" title="This header file defines multi&#45;species statistical utility functions." alt="" coords="1255,266,1485,293"/>
+<area shape="rect" href="nmf_utils_statistics_mohns_rho_8h.html" title="Definition for the nmfUtilsStatisticsMohnsRho class." alt="" coords="1471,348,1690,389"/>
+<area shape="rect" href="nmf_utils_statistics_averaging_8h.html" title="Definition for the nmfUtilsStatisticsAveraging class." alt="" coords="1559,169,1778,211"/>
+<area shape="rect" href="nmf_utils_complex_8cpp.html" title="These routines were originally from Complex2.bas." alt="" coords="1509,266,1753,293"/>
 </map>
 </div>
 </div>
@@ -209,6 +176,9 @@ This graph shows which files directly or indirectly include this file:</div>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_file_viewer.html">nmfFileViewer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class creates a dialog that contains a text edit widget displaying the contents of the passed filename. The dialog also includes a font combo button which allows the user to change the font size of the displayed text. There's an OK button to close the dialog.  <a href="classnmf_file_viewer.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_tool_tip.html">nmfToolTip</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class is used to create custom tooltips.  <a href="classnmf_tool_tip.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
@@ -249,6 +219,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a10ca273199708a36838a7d6f17331e2d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a10ca273199708a36838a7d6f17331e2d">nmfUtilsQt::calculateMultiColumnWidth</a> (QTableView *tableview, const int &amp;firstCol, const int &amp;lastCol)</td></tr>
 <tr class="memdesc:a10ca273199708a36838a7d6f17331e2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the sum of the widths of the column range.  <a href="namespacenmf_utils_qt.html#a10ca273199708a36838a7d6f17331e2d">More...</a><br /></td></tr>
 <tr class="separator:a10ca273199708a36838a7d6f17331e2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a937e6d1039ccef764ff66131fb7783bf"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a937e6d1039ccef764ff66131fb7783bf">nmfUtilsQt::checkAndCalculateWithSignificantDigits</a> (const double &amp;value, const int &amp;numSignificantDigits, const int &amp;numDecimalPlaces)</td></tr>
+<tr class="memdesc:a937e6d1039ccef764ff66131fb7783bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks and calculates the passed value to the appropriate number of significant digits.  <a href="namespacenmf_utils_qt.html#a937e6d1039ccef764ff66131fb7783bf">More...</a><br /></td></tr>
+<tr class="separator:a937e6d1039ccef764ff66131fb7783bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15fa99a654817287b4b644a07b081b40"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a15fa99a654817287b4b644a07b081b40">nmfUtilsQt::checkForAndCreateDirectories</a> (std::string dir, std::string dataDir, std::string logDir)</td></tr>
 <tr class="memdesc:a15fa99a654817287b4b644a07b081b40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the passed directories if they don't already exist.  <a href="namespacenmf_utils_qt.html#a15fa99a654817287b4b644a07b081b40">More...</a><br /></td></tr>
 <tr class="separator:a15fa99a654817287b4b644a07b081b40"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -285,33 +258,57 @@ Functions</h2></td></tr>
 <tr class="memitem:a8bf5614651a5a2bcbab56ac9e74bd35c"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a8bf5614651a5a2bcbab56ac9e74bd35c">nmfUtilsQt::deselectAll</a> (QTableView *tableView)</td></tr>
 <tr class="memdesc:a8bf5614651a5a2bcbab56ac9e74bd35c"><td class="mdescLeft">&#160;</td><td class="mdescRight">deselects all cells in the passed tableView  <a href="namespacenmf_utils_qt.html#a8bf5614651a5a2bcbab56ac9e74bd35c">More...</a><br /></td></tr>
 <tr class="separator:a8bf5614651a5a2bcbab56ac9e74bd35c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dd6943d815bf17fc004341d1405e9df"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a3dd6943d815bf17fc004341d1405e9df">nmfUtilsQt::equalizeQStringLengths</a> (QString &amp;string1, QString &amp;string2)</td></tr>
-<tr class="memdesc:a3dd6943d815bf17fc004341d1405e9df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Equalizes the lengths of the 2 passed strings by padding the shorter with spaces at the beginning of the string.  <a href="namespacenmf_utils_qt.html#a3dd6943d815bf17fc004341d1405e9df">More...</a><br /></td></tr>
-<tr class="separator:a3dd6943d815bf17fc004341d1405e9df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e902bcdd9dbd6b99aeb0aa621e95c8c"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a9e902bcdd9dbd6b99aeb0aa621e95c8c">nmfUtilsQt::elapsedTime</a> (QDateTime startTime)</td></tr>
+<tr class="memdesc:a9e902bcdd9dbd6b99aeb0aa621e95c8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the time elapsed between the passed startTime and the currentTime.  <a href="namespacenmf_utils_qt.html#a9e902bcdd9dbd6b99aeb0aa621e95c8c">More...</a><br /></td></tr>
+<tr class="separator:a9e902bcdd9dbd6b99aeb0aa621e95c8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a761c0268c4fb141008bd235eeecbd13c"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a761c0268c4fb141008bd235eeecbd13c">nmfUtilsQt::elapsedTimeCondensed</a> (QDateTime startTime)</td></tr>
+<tr class="memdesc:a761c0268c4fb141008bd235eeecbd13c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the time elapsed between the passed startTime and the currentTime and displays it in a condensed format.  <a href="namespacenmf_utils_qt.html#a761c0268c4fb141008bd235eeecbd13c">More...</a><br /></td></tr>
+<tr class="separator:a761c0268c4fb141008bd235eeecbd13c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0cdec5731392c6b3530d4dcd77c24843"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a0cdec5731392c6b3530d4dcd77c24843">nmfUtilsQt::emptyField</a> (QStringList fields)</td></tr>
 <tr class="memdesc:a0cdec5731392c6b3530d4dcd77c24843"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests if field is empty or not.  <a href="namespacenmf_utils_qt.html#a0cdec5731392c6b3530d4dcd77c24843">More...</a><br /></td></tr>
 <tr class="separator:a0cdec5731392c6b3530d4dcd77c24843"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dd6943d815bf17fc004341d1405e9df"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a3dd6943d815bf17fc004341d1405e9df">nmfUtilsQt::equalizeQStringLengths</a> (QString &amp;string1, QString &amp;string2)</td></tr>
+<tr class="memdesc:a3dd6943d815bf17fc004341d1405e9df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Equalizes the lengths of the 2 passed strings by padding the shorter with spaces at the beginning of the string.  <a href="namespacenmf_utils_qt.html#a3dd6943d815bf17fc004341d1405e9df">More...</a><br /></td></tr>
+<tr class="separator:a3dd6943d815bf17fc004341d1405e9df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a217735a158df428b111d43cffa4684db"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a217735a158df428b111d43cffa4684db">nmfUtilsQt::extractTag</a> (const QString filename, QString &amp;tag)</td></tr>
+<tr class="memdesc:a217735a158df428b111d43cffa4684db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the embedded tag from the passed filename.  <a href="namespacenmf_utils_qt.html#a217735a158df428b111d43cffa4684db">More...</a><br /></td></tr>
+<tr class="separator:a217735a158df428b111d43cffa4684db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88eb5a73f154e01b0ef5d275906dcc47"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a88eb5a73f154e01b0ef5d275906dcc47">nmfUtilsQt::fileExists</a> (QString filenameWithPath)</td></tr>
 <tr class="memdesc:a88eb5a73f154e01b0ef5d275906dcc47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks to see if the passed in filename exists.  <a href="namespacenmf_utils_qt.html#a88eb5a73f154e01b0ef5d275906dcc47">More...</a><br /></td></tr>
 <tr class="separator:a88eb5a73f154e01b0ef5d275906dcc47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a942f58f57e8857f9efa04431cdaa7c77"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a942f58f57e8857f9efa04431cdaa7c77">nmfUtilsQt::getCovariates</a> (<a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;NLoptDataStruct, const int &amp;timeIndex, const std::string &amp;parameterName, std::vector&lt; double &gt; &amp;covariateValues)</td></tr>
+<tr class="memdesc:a942f58f57e8857f9efa04431cdaa7c77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back the Covariate Values for all species for the given year and parameter.  <a href="namespacenmf_utils_qt.html#a942f58f57e8857f9efa04431cdaa7c77">More...</a><br /></td></tr>
+<tr class="separator:a942f58f57e8857f9efa04431cdaa7c77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea1c506cd62ccf21a0d8dc3c8e5e1cf6"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#aea1c506cd62ccf21a0d8dc3c8e5e1cf6">nmfUtilsQt::getCurrentTabName</a> (QTabWidget *tabWidget)</td></tr>
 <tr class="memdesc:aea1c506cd62ccf21a0d8dc3c8e5e1cf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the name of the current tab.  <a href="namespacenmf_utils_qt.html#aea1c506cd62ccf21a0d8dc3c8e5e1cf6">More...</a><br /></td></tr>
 <tr class="separator:aea1c506cd62ccf21a0d8dc3c8e5e1cf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a328e823ca921ea5838ab824ac6765576"><td class="memItemLeft" align="right" valign="top">QDateTime&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a328e823ca921ea5838ab824ac6765576">nmfUtilsQt::getCurrentTime</a> ()</td></tr>
+<tr class="memdesc:a328e823ca921ea5838ab824ac6765576"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current time.  <a href="namespacenmf_utils_qt.html#a328e823ca921ea5838ab824ac6765576">More...</a><br /></td></tr>
+<tr class="separator:a328e823ca921ea5838ab824ac6765576"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c838cb5b372e4f06d76faa0cd0cfbb0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a0c838cb5b372e4f06d76faa0cd0cfbb0">nmfUtilsQt::getTabIndex</a> (QTabWidget *tabWidget, QString tabName)</td></tr>
 <tr class="memdesc:a0c838cb5b372e4f06d76faa0cd0cfbb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the index value for the names tab.  <a href="namespacenmf_utils_qt.html#a0c838cb5b372e4f06d76faa0cd0cfbb0">More...</a><br /></td></tr>
 <tr class="separator:a0c838cb5b372e4f06d76faa0cd0cfbb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79cb045897a2a250cf95ad8ff330613b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a79cb045897a2a250cf95ad8ff330613b">nmfUtilsQt::isAnError</a> (std::string errorMsg)</td></tr>
 <tr class="memdesc:a79cb045897a2a250cf95ad8ff330613b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine if the passed string is an error message.  <a href="namespacenmf_utils_qt.html#a79cb045897a2a250cf95ad8ff330613b">More...</a><br /></td></tr>
 <tr class="separator:a79cb045897a2a250cf95ad8ff330613b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb998e4c70e4e80be4c42074c7fcf440"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#abb998e4c70e4e80be4c42074c7fcf440">nmfUtilsQt::loadCSVFileComboBoxes</a> (QTabWidget *parentTabWidget, QTableView *tableView, const QString &amp;inputDataPath, const QString &amp;inputFilename, QString &amp;errorMsg)</td></tr>
+<tr class="memdesc:abb998e4c70e4e80be4c42074c7fcf440"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the CSV File into a table of combo boxes.  <a href="namespacenmf_utils_qt.html#abb998e4c70e4e80be4c42074c7fcf440">More...</a><br /></td></tr>
+<tr class="separator:abb998e4c70e4e80be4c42074c7fcf440"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71a3da7fcdedd84c27cf7f6f1fa62ab6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a71a3da7fcdedd84c27cf7f6f1fa62ab6">nmfUtilsQt::loadGuildsSpeciesTableview</a> (QTabWidget *parentTabWidget, QTableView *tableView, const QString &amp;type, const QString &amp;inputDataPath, const QString &amp;inputFilename, QList&lt; QString &gt; &amp;SpeciesGuilds, QString &amp;errorMsg)</td></tr>
 <tr class="memdesc:a71a3da7fcdedd84c27cf7f6f1fa62ab6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a non time series .csv file into a QTableView.  <a href="namespacenmf_utils_qt.html#a71a3da7fcdedd84c27cf7f6f1fa62ab6">More...</a><br /></td></tr>
 <tr class="separator:a71a3da7fcdedd84c27cf7f6f1fa62ab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae52b342207664ccc5136b64665c5f0ca"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#ae52b342207664ccc5136b64665c5f0ca">nmfUtilsQt::loadModelFromCSVFile</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, std::string projectDir, std::string fileType, QTableView *table, QString filename, int &amp;numRows, int &amp;numSignificantDigits)</td></tr>
+<tr class="memdesc:ae52b342207664ccc5136b64665c5f0ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the CSV file into the passed tableview's model.  <a href="namespacenmf_utils_qt.html#ae52b342207664ccc5136b64665c5f0ca">More...</a><br /></td></tr>
+<tr class="separator:ae52b342207664ccc5136b64665c5f0ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79b9c903664e1ce9477deba17ee5028a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a79b9c903664e1ce9477deba17ee5028a">nmfUtilsQt::loadMultiRunData</a> (const <a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;DataStruct, std::vector&lt; QString &gt; &amp;MultiRunLines, int &amp;TotalIndividualRuns)</td></tr>
+<tr class="memdesc:a79b9c903664e1ce9477deba17ee5028a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads all of the multi-run file data into a vector of QStrings.  <a href="namespacenmf_utils_qt.html#a79b9c903664e1ce9477deba17ee5028a">More...</a><br /></td></tr>
+<tr class="separator:a79b9c903664e1ce9477deba17ee5028a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3650fb32ef1ab23988e316845acf3cd5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a3650fb32ef1ab23988e316845acf3cd5">nmfUtilsQt::loadTableWidgetData</a> (QTabWidget *parentTabWidget, QTableWidget *tableWidget, const QString &amp;inputDataPath, const QStringList &amp;guildValues, QString &amp;errorMsg)</td></tr>
 <tr class="memdesc:a3650fb32ef1ab23988e316845acf3cd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load data from a .csv file into a QTableWidget.  <a href="namespacenmf_utils_qt.html#a3650fb32ef1ab23988e316845acf3cd5">More...</a><br /></td></tr>
 <tr class="separator:a3650fb32ef1ab23988e316845acf3cd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea7ea97fb7e131d83c6ec823d485ce89"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#aea7ea97fb7e131d83c6ec823d485ce89">nmfUtilsQt::loadTimeSeries</a> (QTabWidget *parentTabWidget, QTableView *tableView, const QString &amp;inputDataPath, const QString &amp;inputFilename, const bool &amp;firstLineReadOnly, QString &amp;errorMsg)</td></tr>
-<tr class="memdesc:aea7ea97fb7e131d83c6ec823d485ce89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a time series .csv file into a QTableView.  <a href="namespacenmf_utils_qt.html#aea7ea97fb7e131d83c6ec823d485ce89">More...</a><br /></td></tr>
-<tr class="separator:aea7ea97fb7e131d83c6ec823d485ce89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37fdbe6c158ecddfd30a34d1060b55f7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a37fdbe6c158ecddfd30a34d1060b55f7">nmfUtilsQt::loadTimeSeries</a> (QTabWidget *parentTabWidget, QTableView *tableView, const QString &amp;inputDataPath, const QString &amp;inputFilename, const bool &amp;firstLineReadOnly, const bool &amp;scientificNotation, std::pair&lt; int, int &gt; &amp;nonZeroCell, QString &amp;errorMsg)</td></tr>
+<tr class="memdesc:a37fdbe6c158ecddfd30a34d1060b55f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a time series .csv file into a QTableView.  <a href="namespacenmf_utils_qt.html#a37fdbe6c158ecddfd30a34d1060b55f7">More...</a><br /></td></tr>
+<tr class="separator:a37fdbe6c158ecddfd30a34d1060b55f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aafce4f1107a07be8f43e90bdf2518c98"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#aafce4f1107a07be8f43e90bdf2518c98">nmfUtilsQt::modelCopy</a> (QStandardItemModel *originalModel, QStandardItemModel *copyModel)</td></tr>
 <tr class="memdesc:aafce4f1107a07be8f43e90bdf2518c98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the contents of the first model into the second model.  <a href="namespacenmf_utils_qt.html#aafce4f1107a07be8f43e90bdf2518c98">More...</a><br /></td></tr>
 <tr class="separator:aafce4f1107a07be8f43e90bdf2518c98"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -324,15 +321,21 @@ Functions</h2></td></tr>
 <tr class="memitem:a94ac428bca538a837ad204f0e9b5ac04"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a94ac428bca538a837ad204f0e9b5ac04">nmfUtilsQt::pasteAll</a> (QApplication *qtApp, QTableView *tableView)</td></tr>
 <tr class="memdesc:a94ac428bca538a837ad204f0e9b5ac04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pastes the first cell of whatever is in the clipboard to every cell in the tableView and then deselects the tableView.  <a href="namespacenmf_utils_qt.html#a94ac428bca538a837ad204f0e9b5ac04">More...</a><br /></td></tr>
 <tr class="separator:a94ac428bca538a837ad204f0e9b5ac04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f33ae243a5ae1884b2e4261b1dc382e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a2f33ae243a5ae1884b2e4261b1dc382e">nmfUtilsQt::reloadDataStruct</a> (<a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;dataStruct, const QString &amp;MultiRunLine)</td></tr>
+<tr class="memdesc:a2f33ae243a5ae1884b2e4261b1dc382e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reloads the passed dataStruct with the passed line from the multi-run line file.  <a href="namespacenmf_utils_qt.html#a2f33ae243a5ae1884b2e4261b1dc382e">More...</a><br /></td></tr>
+<tr class="separator:a2f33ae243a5ae1884b2e4261b1dc382e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a741f31eeae5a15f711cb728beafb509b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a741f31eeae5a15f711cb728beafb509b">nmfUtilsQt::removeSettingsFile</a> ()</td></tr>
 <tr class="memdesc:a741f31eeae5a15f711cb728beafb509b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the Qt settings file from the file system. Useful for resetting the application GUI in case it disappears (i.e., in case some bad GUI settings are saved)  <a href="namespacenmf_utils_qt.html#a741f31eeae5a15f711cb728beafb509b">More...</a><br /></td></tr>
 <tr class="separator:a741f31eeae5a15f711cb728beafb509b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4326678543b25866ed2fdfe6fe87a051"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a4326678543b25866ed2fdfe6fe87a051">nmfUtilsQt::rename</a> (QString fileIn, QString fileOut)</td></tr>
 <tr class="memdesc:a4326678543b25866ed2fdfe6fe87a051"><td class="mdescLeft">&#160;</td><td class="mdescRight">Effectively does a file rename...but not quite. It copies the first to the second and then removes the first. I did this as the std:rename function didn't work on Windows...and a system() mv command caused a shell to pop up briefly over the UI.  <a href="namespacenmf_utils_qt.html#a4326678543b25866ed2fdfe6fe87a051">More...</a><br /></td></tr>
 <tr class="separator:a4326678543b25866ed2fdfe6fe87a051"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac47e06c5ccb74f228199347fb206a292"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#ac47e06c5ccb74f228199347fb206a292">nmfUtilsQt::saveModelToCSVFile</a> (std::string projectDir, std::string tabName, QTableView *table)</td></tr>
-<tr class="memdesc:ac47e06c5ccb74f228199347fb206a292"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the data in the passed model to the appropriate directory and file.  <a href="namespacenmf_utils_qt.html#ac47e06c5ccb74f228199347fb206a292">More...</a><br /></td></tr>
-<tr class="separator:ac47e06c5ccb74f228199347fb206a292"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02e264ce2c31e0b996e9e1b3cd0ae815"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a02e264ce2c31e0b996e9e1b3cd0ae815">nmfUtilsQt::saveCSVFileComboBoxes</a> (QTabWidget *parentTabWidget, QTableView *tableView, QStandardItemModel *smodel, QString &amp;inputDataPath, QString &amp;outputFilename)</td></tr>
+<tr class="memdesc:a02e264ce2c31e0b996e9e1b3cd0ae815"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the table consisting of all QComboBoxes to a .csv file.  <a href="namespacenmf_utils_qt.html#a02e264ce2c31e0b996e9e1b3cd0ae815">More...</a><br /></td></tr>
+<tr class="separator:a02e264ce2c31e0b996e9e1b3cd0ae815"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f0ea1682bfa5a0fdbaa0bb1f7585594"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a4f0ea1682bfa5a0fdbaa0bb1f7585594">nmfUtilsQt::saveModelToCSVFile</a> (std::string projectDir, std::string fileType, std::string tabName, QTableView *table, bool queryFilename, bool removeCommas, QString theFilename, bool verboseOn)</td></tr>
+<tr class="memdesc:a4f0ea1682bfa5a0fdbaa0bb1f7585594"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the data in the passed model to the appropriate directory and file.  <a href="namespacenmf_utils_qt.html#a4f0ea1682bfa5a0fdbaa0bb1f7585594">More...</a><br /></td></tr>
+<tr class="separator:a4f0ea1682bfa5a0fdbaa0bb1f7585594"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fdd30fa0738fd0d4702de4a7efb07c3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a1fdd30fa0738fd0d4702de4a7efb07c3">nmfUtilsQt::saveGuildsTableView</a> (QTabWidget *parentTabWidget, QStandardItemModel *smodel, QString &amp;inputDataPath, QString &amp;outputFilename, QList&lt; QString &gt; &amp;GuildName, QList&lt; QString &gt; &amp;GrowthRate, QList&lt; QString &gt; &amp;GuildK)</td></tr>
 <tr class="memdesc:a1fdd30fa0738fd0d4702de4a7efb07c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the data in the passed non time series but a table view model to a csv file in the passed directory.  <a href="namespacenmf_utils_qt.html#a1fdd30fa0738fd0d4702de4a7efb07c3">More...</a><br /></td></tr>
 <tr class="separator:a1fdd30fa0738fd0d4702de4a7efb07c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -360,39 +363,66 @@ Functions</h2></td></tr>
 <tr class="memitem:abc1f187a62652c7e14228bbef42ea2bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#abc1f187a62652c7e14228bbef42ea2bb">nmfUtilsQt::setAxisX</a> (QChart *chart, QValueAxis *axisX, QLineSeries *series)</td></tr>
 <tr class="memdesc:abc1f187a62652c7e14228bbef42ea2bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to reset an X axis (the original Qt call was deprecated)  <a href="namespacenmf_utils_qt.html#abc1f187a62652c7e14228bbef42ea2bb">More...</a><br /></td></tr>
 <tr class="separator:abc1f187a62652c7e14228bbef42ea2bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fd4957c9b83254a1b57ca602edba3cd"><td class="memItemLeft" align="right" valign="top"><a id="a6fd4957c9b83254a1b57ca602edba3cd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsQt::setAxisX</b> (QChart *chart, QBarCategoryAxis *axisX, QStackedBarSeries *series)</td></tr>
+<tr class="memitem:a6fd4957c9b83254a1b57ca602edba3cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a6fd4957c9b83254a1b57ca602edba3cd">nmfUtilsQt::setAxisX</a> (QChart *chart, QBarCategoryAxis *axisX, QStackedBarSeries *series)</td></tr>
+<tr class="memdesc:a6fd4957c9b83254a1b57ca602edba3cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to reset an X axis (the original Qt call was deprecated)  <a href="namespacenmf_utils_qt.html#a6fd4957c9b83254a1b57ca602edba3cd">More...</a><br /></td></tr>
 <tr class="separator:a6fd4957c9b83254a1b57ca602edba3cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c0336dc1cd49e148fe82684840d3f72"><td class="memItemLeft" align="right" valign="top"><a id="a7c0336dc1cd49e148fe82684840d3f72"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsQt::setAxisX</b> (QChart *chart, QBarCategoryAxis *axisX, QBarSeries *series)</td></tr>
+<tr class="memitem:a7c0336dc1cd49e148fe82684840d3f72"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a7c0336dc1cd49e148fe82684840d3f72">nmfUtilsQt::setAxisX</a> (QChart *chart, QBarCategoryAxis *axisX, QBarSeries *series)</td></tr>
+<tr class="memdesc:a7c0336dc1cd49e148fe82684840d3f72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to reset an X axis (the original Qt call was deprecated)  <a href="namespacenmf_utils_qt.html#a7c0336dc1cd49e148fe82684840d3f72">More...</a><br /></td></tr>
 <tr class="separator:a7c0336dc1cd49e148fe82684840d3f72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae438a08b64322bf5506bff7672543a00"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#ae438a08b64322bf5506bff7672543a00">nmfUtilsQt::setAxisY</a> (QChart *chart, QValueAxis *axisY, QLineSeries *series)</td></tr>
 <tr class="memdesc:ae438a08b64322bf5506bff7672543a00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to reset a Y axis (the original Qt call was deprecated)  <a href="namespacenmf_utils_qt.html#ae438a08b64322bf5506bff7672543a00">More...</a><br /></td></tr>
 <tr class="separator:ae438a08b64322bf5506bff7672543a00"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1261b29e0fd97d90497043f1e339b9f"><td class="memItemLeft" align="right" valign="top"><a id="ac1261b29e0fd97d90497043f1e339b9f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsQt::setAxisY</b> (QChart *chart, QValueAxis *axisY, QStackedBarSeries *series)</td></tr>
+<tr class="memitem:ac1261b29e0fd97d90497043f1e339b9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#ac1261b29e0fd97d90497043f1e339b9f">nmfUtilsQt::setAxisY</a> (QChart *chart, QValueAxis *axisY, QStackedBarSeries *series)</td></tr>
+<tr class="memdesc:ac1261b29e0fd97d90497043f1e339b9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to reset a Y axis (the original Qt call was deprecated)  <a href="namespacenmf_utils_qt.html#ac1261b29e0fd97d90497043f1e339b9f">More...</a><br /></td></tr>
 <tr class="separator:ac1261b29e0fd97d90497043f1e339b9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a2bdcc62a0d8196ec5390adee6d0913"><td class="memItemLeft" align="right" valign="top"><a id="a5a2bdcc62a0d8196ec5390adee6d0913"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsQt::setAxisY</b> (QChart *chart, QValueAxis *axisY, QBarSeries *series)</td></tr>
+<tr class="memitem:a5a2bdcc62a0d8196ec5390adee6d0913"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a5a2bdcc62a0d8196ec5390adee6d0913">nmfUtilsQt::setAxisY</a> (QChart *chart, QValueAxis *axisY, QBarSeries *series)</td></tr>
+<tr class="memdesc:a5a2bdcc62a0d8196ec5390adee6d0913"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to reset a Y axis (the original Qt call was deprecated)  <a href="namespacenmf_utils_qt.html#a5a2bdcc62a0d8196ec5390adee6d0913">More...</a><br /></td></tr>
 <tr class="separator:a5a2bdcc62a0d8196ec5390adee6d0913"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fb01485bb78c290bd713f1ccb8a76c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a9fb01485bb78c290bd713f1ccb8a76c6">nmfUtilsQt::setBackgroundLineEdit</a> (QLineEdit *lineEdit, const QString &amp;backgroundStyleSheet)</td></tr>
+<tr class="memdesc:a9fb01485bb78c290bd713f1ccb8a76c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the background color of a QLineEdit widget.  <a href="namespacenmf_utils_qt.html#a9fb01485bb78c290bd713f1ccb8a76c6">More...</a><br /></td></tr>
+<tr class="separator:a9fb01485bb78c290bd713f1ccb8a76c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a563a020d3037a2b47e519a39d39ef21c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a563a020d3037a2b47e519a39d39ef21c">nmfUtilsQt::setMinMax</a> (const double &amp;pct, QTableView *tableView, QTableView *tableView1, QTableView *tableView2)</td></tr>
+<tr class="memdesc:a563a020d3037a2b47e519a39d39ef21c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the min max range tables using the passed in pct value.  <a href="namespacenmf_utils_qt.html#a563a020d3037a2b47e519a39d39ef21c">More...</a><br /></td></tr>
+<tr class="separator:a563a020d3037a2b47e519a39d39ef21c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c868457c8d0d536f04b6c68ff80cf7b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a0c868457c8d0d536f04b6c68ff80cf7b">nmfUtilsQt::setMinMaxOnSelections</a> (const double &amp;pct, QTableView *tableView0, QTableView *tableView1, QTableView *tableView2)</td></tr>
+<tr class="memdesc:a0c868457c8d0d536f04b6c68ff80cf7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the min max range on only the selected cells using the passed in pct value.  <a href="namespacenmf_utils_qt.html#a0c868457c8d0d536f04b6c68ff80cf7b">More...</a><br /></td></tr>
+<tr class="separator:a0c868457c8d0d536f04b6c68ff80cf7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73ea4e3a2a7c54bc216e25d8cb1d5e37"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a73ea4e3a2a7c54bc216e25d8cb1d5e37">nmfUtilsQt::showAboutWidget</a> (QWidget *parent, const QString &amp;name, const QString &amp;operatingSystem, const QString &amp;version, const QString &amp;specialAcknowledgement, const QString &amp;appMsg)</td></tr>
 <tr class="memdesc:a73ea4e3a2a7c54bc216e25d8cb1d5e37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show the About dialog for the application.  <a href="namespacenmf_utils_qt.html#a73ea4e3a2a7c54bc216e25d8cb1d5e37">More...</a><br /></td></tr>
 <tr class="separator:a73ea4e3a2a7c54bc216e25d8cb1d5e37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aacca3b11b577f30eabf2caa444075332"><td class="memItemLeft" align="right" valign="top"><a id="aacca3b11b577f30eabf2caa444075332"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsQt::switchFileExtensions</b> (QString &amp;filename, const QString &amp;newExt, const QStringList &amp;oldExts)</td></tr>
+<tr class="memitem:aacca3b11b577f30eabf2caa444075332"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#aacca3b11b577f30eabf2caa444075332">nmfUtilsQt::switchFileExtensions</a> (QString &amp;filename, const QString &amp;newExt, const QStringList &amp;oldExts)</td></tr>
+<tr class="memdesc:aacca3b11b577f30eabf2caa444075332"><td class="mdescLeft">&#160;</td><td class="mdescRight">Useful for changing .jpg,.png to .csv.  <a href="namespacenmf_utils_qt.html#aacca3b11b577f30eabf2caa444075332">More...</a><br /></td></tr>
 <tr class="separator:aacca3b11b577f30eabf2caa444075332"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f8b9e15be6fa26c973460765ee6711f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a5f8b9e15be6fa26c973460765ee6711f">nmfUtilsQt::thereAreSelections</a> (QTableView *tableView1, QTableView *tableView2)</td></tr>
+<tr class="memdesc:a5f8b9e15be6fa26c973460765ee6711f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience method to see if anything in either table has been selected.  <a href="namespacenmf_utils_qt.html#a5f8b9e15be6fa26c973460765ee6711f">More...</a><br /></td></tr>
+<tr class="separator:a5f8b9e15be6fa26c973460765ee6711f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61ab38316e9940d8a6586ba5a4498ab8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a61ab38316e9940d8a6586ba5a4498ab8">nmfUtilsQt::transposeModel</a> (QTableView *tv)</td></tr>
+<tr class="memdesc:a61ab38316e9940d8a6586ba5a4498ab8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience method to take the transpose of a model.  <a href="namespacenmf_utils_qt.html#a61ab38316e9940d8a6586ba5a4498ab8">More...</a><br /></td></tr>
+<tr class="separator:a61ab38316e9940d8a6586ba5a4498ab8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3e652cd8a173e82d65e97b96f5283ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#ad3e652cd8a173e82d65e97b96f5283ae">nmfUtilsQt::updateProgressDlg</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, QProgressDialog *dlg, const std::string &amp;msg, int &amp;pInc)</td></tr>
+<tr class="memdesc:ad3e652cd8a173e82d65e97b96f5283ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the passed QProgressDialog widget.  <a href="namespacenmf_utils_qt.html#ad3e652cd8a173e82d65e97b96f5283ae">More...</a><br /></td></tr>
+<tr class="separator:ad3e652cd8a173e82d65e97b96f5283ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a4f614b507fbec160ece494b444ee1272"><td class="memItemLeft" align="right" valign="top"><a id="a4f614b507fbec160ece494b444ee1272"></a>
-const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a4f614b507fbec160ece494b444ee1272">nmfUtilsQt::ReadOnlyLineEditBgColor</a> = &quot;QLineEdit { background: rgb(247,247,247);}&quot;</td></tr>
-<tr class="memdesc:a4f614b507fbec160ece494b444ee1272"><td class="mdescLeft">&#160;</td><td class="mdescRight">Background color specification for a read only line edit widget. <br /></td></tr>
-<tr class="separator:a4f614b507fbec160ece494b444ee1272"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a762943daa35f3bdf2f97953c95e68db8"><td class="memItemLeft" align="right" valign="top"><a id="a762943daa35f3bdf2f97953c95e68db8"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a762943daa35f3bdf2f97953c95e68db8">nmfUtilsQt::ReadOnlyLineEditBgColorLight</a> = &quot;QLineEdit {background: rgb(240,240,240);}&quot;</td></tr>
+<tr class="memdesc:a762943daa35f3bdf2f97953c95e68db8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Background color specification for a read only line edit widget. <br /></td></tr>
+<tr class="separator:a762943daa35f3bdf2f97953c95e68db8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a468246bf570353a83a4e2de965ac1bb7"><td class="memItemLeft" align="right" valign="top"><a id="a468246bf570353a83a4e2de965ac1bb7"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsQt::ReadOnlyLineEditBgColorDark</b> = &quot;QLineEdit {background: rgb(110,110,110);}&quot;</td></tr>
+<tr class="separator:a468246bf570353a83a4e2de965ac1bb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Definition for Qt widgets and functions that operate on widgets. </p>
 <dl class="section date"><dt>Date</dt><dd>Jul 26, 2017</dd></dl>
-<p>This file contains common Qt widgets and functions that operate on Qt widgets as used by the MultiSpecies applications. </p>
+<p>This file contains common Qt widgets and functions that operate on Qt widgets as used by the MultiSpecies applications.</p>
+<dl class="section copyright"><dt>Copyright</dt><dd>Public Domain Notice<br  />
+ National Oceanic And Atmospheric Administration<br  />
+<br  />
+ This software is a "United States Government Work" under the terms of the United States Copyright Act. It was written as part of the author's official duties as a United States Government employee/contractor and thus cannot be copyrighted. This software is freely available to the public for use. The National Oceanic And Atmospheric Administration and the U.S. Government have not placed any restriction on its use or reproduction. Although all reasonable efforts have been taken to ensure the accuracy and reliability of the software and data, the National Oceanic And Atmospheric Administration and the U.S. Government do not and cannot warrant the performance or results that may be obtained by using this software or data. The National Oceanic And Atmospheric Administration and the U.S. Government disclaim all warranties, express or implied, including warranties of performance, merchantability or fitness for any particular purpose.<br  />
+<br  />
+ Please cite the author(s) in any work or product based on this material. </dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

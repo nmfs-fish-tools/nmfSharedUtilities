@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['data_5fstruct_209',['Data_Struct',['../struct_data___struct.html',1,'']]]
+  ['estimaterunbox_308',['EstimateRunBox',['../structnmf_structs_qt_1_1_estimate_run_box.html',1,'nmfStructsQt']]]
 ];

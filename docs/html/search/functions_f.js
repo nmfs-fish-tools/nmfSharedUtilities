@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['updatechart_405',['updateChart',['../classnmf_chart_movable_line.html#ade65265c74ef9be4c43f29dcbbe697ec',1,'nmfChartMovableLine']]],
-  ['updatescreenshotviewer_406',['updateScreenShotViewer',['../classnmf_viewer_widget.html#ae3a914b165a1778a8521f605486d6008',1,'nmfViewerWidget']]]
+  ['thereareselections_601',['thereAreSelections',['../namespacenmf_utils_qt.html#a5f8b9e15be6fa26c973460765ee6711f',1,'nmfUtilsQt']]],
+  ['transposemodel_602',['transposeModel',['../namespacenmf_utils_qt.html#a61ab38316e9940d8a6586ba5a4498ab8',1,'nmfUtilsQt']]]
 ];

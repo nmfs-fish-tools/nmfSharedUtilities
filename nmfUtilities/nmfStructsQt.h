@@ -281,6 +281,7 @@ struct ModelDataStruct {
     std::string ObjectiveCriterion;
     std::string ScalingAlgorithm;
 
+    std::vector<std::string>              SpeciesNames;
     std::map<int,std::vector<int> >       GuildSpecies; // List of species numbers that make up guild num
     std::vector<int>                      GuildNum;     // Specifies which species are members of which guilds
     boost::numeric::ublas::matrix<double> ObservedBiomassBySpecies;
@@ -320,6 +321,16 @@ struct ModelDataStruct {
     std::vector<double>                   PredationExponentMin;
     std::vector<double>                   PredationExponentMax;
     std::vector<double>                   Parameters;
+
+    std::map<std::string,std::string>          CovariateAssignment;
+    std::map<std::string,std::vector<double> > CovariateMap;
+//    boost::numeric::ublas::vector<double> CovariateInitBiomass;
+//    boost::numeric::ublas::vector<double> CovariateGrowthRate;
+//    boost::numeric::ublas::vector<double> CovariateCarryingCapacity;
+//    boost::numeric::ublas::vector<double> CovariateCatchability;
+//    boost::numeric::ublas::vector<double> CovariateSurveyQ;
+//    std::vector<double>                   CovariatePredationExponent;
+
 //  boost::numeric::ublas::matrix<double> OutputBiomass;
 
     std::vector<EstimateRunBox> EstimateRunBoxes;

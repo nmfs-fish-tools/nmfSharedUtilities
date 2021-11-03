@@ -161,18 +161,24 @@ Functions</h2></td></tr>
 <tr class="memitem:a10ca273199708a36838a7d6f17331e2d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a10ca273199708a36838a7d6f17331e2d">calculateMultiColumnWidth</a> (QTableView *tableview, const int &amp;firstCol, const int &amp;lastCol)</td></tr>
 <tr class="memdesc:a10ca273199708a36838a7d6f17331e2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the sum of the widths of the column range.  <a href="namespacenmf_utils_qt.html#a10ca273199708a36838a7d6f17331e2d">More...</a><br /></td></tr>
 <tr class="separator:a10ca273199708a36838a7d6f17331e2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac47e06c5ccb74f228199347fb206a292"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#ac47e06c5ccb74f228199347fb206a292">saveModelToCSVFile</a> (std::string projectDir, std::string tabName, QTableView *table)</td></tr>
-<tr class="memdesc:ac47e06c5ccb74f228199347fb206a292"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the data in the passed model to the appropriate directory and file.  <a href="namespacenmf_utils_qt.html#ac47e06c5ccb74f228199347fb206a292">More...</a><br /></td></tr>
-<tr class="separator:ac47e06c5ccb74f228199347fb206a292"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae52b342207664ccc5136b64665c5f0ca"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#ae52b342207664ccc5136b64665c5f0ca">loadModelFromCSVFile</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, std::string projectDir, std::string fileType, QTableView *table, QString filename, int &amp;numRows, int &amp;numSignificantDigits)</td></tr>
+<tr class="memdesc:ae52b342207664ccc5136b64665c5f0ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the CSV file into the passed tableview's model.  <a href="namespacenmf_utils_qt.html#ae52b342207664ccc5136b64665c5f0ca">More...</a><br /></td></tr>
+<tr class="separator:ae52b342207664ccc5136b64665c5f0ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f0ea1682bfa5a0fdbaa0bb1f7585594"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a4f0ea1682bfa5a0fdbaa0bb1f7585594">saveModelToCSVFile</a> (std::string projectDir, std::string fileType, std::string tabName, QTableView *table, bool queryFilename, bool removeCommas, QString theFilename, bool verboseOn)</td></tr>
+<tr class="memdesc:a4f0ea1682bfa5a0fdbaa0bb1f7585594"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the data in the passed model to the appropriate directory and file.  <a href="namespacenmf_utils_qt.html#a4f0ea1682bfa5a0fdbaa0bb1f7585594">More...</a><br /></td></tr>
+<tr class="separator:a4f0ea1682bfa5a0fdbaa0bb1f7585594"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3650fb32ef1ab23988e316845acf3cd5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a3650fb32ef1ab23988e316845acf3cd5">loadTableWidgetData</a> (QTabWidget *parentTabWidget, QTableWidget *tableWidget, const QString &amp;inputDataPath, const QStringList &amp;guildValues, QString &amp;errorMsg)</td></tr>
 <tr class="memdesc:a3650fb32ef1ab23988e316845acf3cd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load data from a .csv file into a QTableWidget.  <a href="namespacenmf_utils_qt.html#a3650fb32ef1ab23988e316845acf3cd5">More...</a><br /></td></tr>
 <tr class="separator:a3650fb32ef1ab23988e316845acf3cd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71a3da7fcdedd84c27cf7f6f1fa62ab6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a71a3da7fcdedd84c27cf7f6f1fa62ab6">loadGuildsSpeciesTableview</a> (QTabWidget *parentTabWidget, QTableView *tableView, const QString &amp;type, const QString &amp;inputDataPath, const QString &amp;inputFilename, QList&lt; QString &gt; &amp;SpeciesGuilds, QString &amp;errorMsg)</td></tr>
 <tr class="memdesc:a71a3da7fcdedd84c27cf7f6f1fa62ab6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a non time series .csv file into a QTableView.  <a href="namespacenmf_utils_qt.html#a71a3da7fcdedd84c27cf7f6f1fa62ab6">More...</a><br /></td></tr>
 <tr class="separator:a71a3da7fcdedd84c27cf7f6f1fa62ab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea7ea97fb7e131d83c6ec823d485ce89"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#aea7ea97fb7e131d83c6ec823d485ce89">loadTimeSeries</a> (QTabWidget *parentTabWidget, QTableView *tableView, const QString &amp;inputDataPath, const QString &amp;inputFilename, const bool &amp;firstLineReadOnly, QString &amp;errorMsg)</td></tr>
-<tr class="memdesc:aea7ea97fb7e131d83c6ec823d485ce89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a time series .csv file into a QTableView.  <a href="namespacenmf_utils_qt.html#aea7ea97fb7e131d83c6ec823d485ce89">More...</a><br /></td></tr>
-<tr class="separator:aea7ea97fb7e131d83c6ec823d485ce89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb998e4c70e4e80be4c42074c7fcf440"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#abb998e4c70e4e80be4c42074c7fcf440">loadCSVFileComboBoxes</a> (QTabWidget *parentTabWidget, QTableView *tableView, const QString &amp;inputDataPath, const QString &amp;inputFilename, QString &amp;errorMsg)</td></tr>
+<tr class="memdesc:abb998e4c70e4e80be4c42074c7fcf440"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the CSV File into a table of combo boxes.  <a href="namespacenmf_utils_qt.html#abb998e4c70e4e80be4c42074c7fcf440">More...</a><br /></td></tr>
+<tr class="separator:abb998e4c70e4e80be4c42074c7fcf440"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37fdbe6c158ecddfd30a34d1060b55f7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a37fdbe6c158ecddfd30a34d1060b55f7">loadTimeSeries</a> (QTabWidget *parentTabWidget, QTableView *tableView, const QString &amp;inputDataPath, const QString &amp;inputFilename, const bool &amp;firstLineReadOnly, const bool &amp;scientificNotation, std::pair&lt; int, int &gt; &amp;nonZeroCell, QString &amp;errorMsg)</td></tr>
+<tr class="memdesc:a37fdbe6c158ecddfd30a34d1060b55f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a time series .csv file into a QTableView.  <a href="namespacenmf_utils_qt.html#a37fdbe6c158ecddfd30a34d1060b55f7">More...</a><br /></td></tr>
+<tr class="separator:a37fdbe6c158ecddfd30a34d1060b55f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88a7290840c8f1ed4c13682b280c319c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a88a7290840c8f1ed4c13682b280c319c">saveTableWidgetData</a> (QTabWidget *parentTabWidget, QTableWidget *tableWidget, QString &amp;inputDataPath, const QString &amp;outputFilename)</td></tr>
 <tr class="memdesc:a88a7290840c8f1ed4c13682b280c319c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save the passed QTableWidget data to a .csv file.  <a href="namespacenmf_utils_qt.html#a88a7290840c8f1ed4c13682b280c319c">More...</a><br /></td></tr>
 <tr class="separator:a88a7290840c8f1ed4c13682b280c319c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -185,11 +191,20 @@ Functions</h2></td></tr>
 <tr class="memitem:ac77d78798ca92ce65de8afccfa212db3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#ac77d78798ca92ce65de8afccfa212db3">saveTimeSeries</a> (QTabWidget *parentTabWidget, QStandardItemModel *smodel, QString &amp;inputDataPath, QString &amp;outputFilename)</td></tr>
 <tr class="memdesc:ac77d78798ca92ce65de8afccfa212db3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the data in the passed model to a csv file in the passed directory.  <a href="namespacenmf_utils_qt.html#ac77d78798ca92ce65de8afccfa212db3">More...</a><br /></td></tr>
 <tr class="separator:ac77d78798ca92ce65de8afccfa212db3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02e264ce2c31e0b996e9e1b3cd0ae815"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a02e264ce2c31e0b996e9e1b3cd0ae815">saveCSVFileComboBoxes</a> (QTabWidget *parentTabWidget, QTableView *tableView, QStandardItemModel *smodel, QString &amp;inputDataPath, QString &amp;outputFilename)</td></tr>
+<tr class="memdesc:a02e264ce2c31e0b996e9e1b3cd0ae815"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the table consisting of all QComboBoxes to a .csv file.  <a href="namespacenmf_utils_qt.html#a02e264ce2c31e0b996e9e1b3cd0ae815">More...</a><br /></td></tr>
+<tr class="separator:a02e264ce2c31e0b996e9e1b3cd0ae815"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61ab38316e9940d8a6586ba5a4498ab8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a61ab38316e9940d8a6586ba5a4498ab8">transposeModel</a> (QTableView *tv)</td></tr>
+<tr class="memdesc:a61ab38316e9940d8a6586ba5a4498ab8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience method to take the transpose of a model.  <a href="namespacenmf_utils_qt.html#a61ab38316e9940d8a6586ba5a4498ab8">More...</a><br /></td></tr>
+<tr class="separator:a61ab38316e9940d8a6586ba5a4498ab8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35f68a447343a380c47bfa1d31b948f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a35f68a447343a380c47bfa1d31b948f1">checkForAndReplaceInvalidCharacters</a> (QString &amp;stringValue)</td></tr>
 <tr class="memdesc:a35f68a447343a380c47bfa1d31b948f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes any non-alphanumeric characters and replaces any space characters with an underscore character.  <a href="namespacenmf_utils_qt.html#a35f68a447343a380c47bfa1d31b948f1">More...</a><br /></td></tr>
 <tr class="separator:a35f68a447343a380c47bfa1d31b948f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aacca3b11b577f30eabf2caa444075332"><td class="memItemLeft" align="right" valign="top"><a id="aacca3b11b577f30eabf2caa444075332"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>switchFileExtensions</b> (QString &amp;filename, const QString &amp;newExt, const QStringList &amp;oldExts)</td></tr>
+<tr class="memitem:a217735a158df428b111d43cffa4684db"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a217735a158df428b111d43cffa4684db">extractTag</a> (const QString filename, QString &amp;tag)</td></tr>
+<tr class="memdesc:a217735a158df428b111d43cffa4684db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the embedded tag from the passed filename.  <a href="namespacenmf_utils_qt.html#a217735a158df428b111d43cffa4684db">More...</a><br /></td></tr>
+<tr class="separator:a217735a158df428b111d43cffa4684db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacca3b11b577f30eabf2caa444075332"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#aacca3b11b577f30eabf2caa444075332">switchFileExtensions</a> (QString &amp;filename, const QString &amp;newExt, const QStringList &amp;oldExts)</td></tr>
+<tr class="memdesc:aacca3b11b577f30eabf2caa444075332"><td class="mdescLeft">&#160;</td><td class="mdescRight">Useful for changing .jpg,.png to .csv.  <a href="namespacenmf_utils_qt.html#aacca3b11b577f30eabf2caa444075332">More...</a><br /></td></tr>
 <tr class="separator:aacca3b11b577f30eabf2caa444075332"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17fb680c38ed1698bda70e0cfbbec187"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a17fb680c38ed1698bda70e0cfbbec187">clearTableView</a> (const QList&lt; QTableView * &gt; &amp;tables)</td></tr>
 <tr class="memdesc:a17fb680c38ed1698bda70e0cfbbec187"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the entire tableView of all the passed tableViews.  <a href="namespacenmf_utils_qt.html#a17fb680c38ed1698bda70e0cfbbec187">More...</a><br /></td></tr>
@@ -209,28 +224,67 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>switchFileExtensions<
 <tr class="memitem:ae438a08b64322bf5506bff7672543a00"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#ae438a08b64322bf5506bff7672543a00">setAxisY</a> (QChart *chart, QValueAxis *axisY, QLineSeries *series)</td></tr>
 <tr class="memdesc:ae438a08b64322bf5506bff7672543a00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to reset a Y axis (the original Qt call was deprecated)  <a href="namespacenmf_utils_qt.html#ae438a08b64322bf5506bff7672543a00">More...</a><br /></td></tr>
 <tr class="separator:ae438a08b64322bf5506bff7672543a00"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fd4957c9b83254a1b57ca602edba3cd"><td class="memItemLeft" align="right" valign="top"><a id="a6fd4957c9b83254a1b57ca602edba3cd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setAxisX</b> (QChart *chart, QBarCategoryAxis *axisX, QStackedBarSeries *series)</td></tr>
+<tr class="memitem:a6fd4957c9b83254a1b57ca602edba3cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a6fd4957c9b83254a1b57ca602edba3cd">setAxisX</a> (QChart *chart, QBarCategoryAxis *axisX, QStackedBarSeries *series)</td></tr>
+<tr class="memdesc:a6fd4957c9b83254a1b57ca602edba3cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to reset an X axis (the original Qt call was deprecated)  <a href="namespacenmf_utils_qt.html#a6fd4957c9b83254a1b57ca602edba3cd">More...</a><br /></td></tr>
 <tr class="separator:a6fd4957c9b83254a1b57ca602edba3cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c0336dc1cd49e148fe82684840d3f72"><td class="memItemLeft" align="right" valign="top"><a id="a7c0336dc1cd49e148fe82684840d3f72"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setAxisX</b> (QChart *chart, QBarCategoryAxis *axisX, QBarSeries *series)</td></tr>
+<tr class="memitem:a7c0336dc1cd49e148fe82684840d3f72"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a7c0336dc1cd49e148fe82684840d3f72">setAxisX</a> (QChart *chart, QBarCategoryAxis *axisX, QBarSeries *series)</td></tr>
+<tr class="memdesc:a7c0336dc1cd49e148fe82684840d3f72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to reset an X axis (the original Qt call was deprecated)  <a href="namespacenmf_utils_qt.html#a7c0336dc1cd49e148fe82684840d3f72">More...</a><br /></td></tr>
 <tr class="separator:a7c0336dc1cd49e148fe82684840d3f72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1261b29e0fd97d90497043f1e339b9f"><td class="memItemLeft" align="right" valign="top"><a id="ac1261b29e0fd97d90497043f1e339b9f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setAxisY</b> (QChart *chart, QValueAxis *axisY, QStackedBarSeries *series)</td></tr>
+<tr class="memitem:ac1261b29e0fd97d90497043f1e339b9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#ac1261b29e0fd97d90497043f1e339b9f">setAxisY</a> (QChart *chart, QValueAxis *axisY, QStackedBarSeries *series)</td></tr>
+<tr class="memdesc:ac1261b29e0fd97d90497043f1e339b9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to reset a Y axis (the original Qt call was deprecated)  <a href="namespacenmf_utils_qt.html#ac1261b29e0fd97d90497043f1e339b9f">More...</a><br /></td></tr>
 <tr class="separator:ac1261b29e0fd97d90497043f1e339b9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a2bdcc62a0d8196ec5390adee6d0913"><td class="memItemLeft" align="right" valign="top"><a id="a5a2bdcc62a0d8196ec5390adee6d0913"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setAxisY</b> (QChart *chart, QValueAxis *axisY, QBarSeries *series)</td></tr>
+<tr class="memitem:a5a2bdcc62a0d8196ec5390adee6d0913"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a5a2bdcc62a0d8196ec5390adee6d0913">setAxisY</a> (QChart *chart, QValueAxis *axisY, QBarSeries *series)</td></tr>
+<tr class="memdesc:a5a2bdcc62a0d8196ec5390adee6d0913"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to reset a Y axis (the original Qt call was deprecated)  <a href="namespacenmf_utils_qt.html#a5a2bdcc62a0d8196ec5390adee6d0913">More...</a><br /></td></tr>
 <tr class="separator:a5a2bdcc62a0d8196ec5390adee6d0913"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f8b9e15be6fa26c973460765ee6711f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a5f8b9e15be6fa26c973460765ee6711f">thereAreSelections</a> (QTableView *tableView1, QTableView *tableView2)</td></tr>
+<tr class="memdesc:a5f8b9e15be6fa26c973460765ee6711f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience method to see if anything in either table has been selected.  <a href="namespacenmf_utils_qt.html#a5f8b9e15be6fa26c973460765ee6711f">More...</a><br /></td></tr>
+<tr class="separator:a5f8b9e15be6fa26c973460765ee6711f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c868457c8d0d536f04b6c68ff80cf7b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a0c868457c8d0d536f04b6c68ff80cf7b">setMinMaxOnSelections</a> (const double &amp;pct, QTableView *tableView0, QTableView *tableView1, QTableView *tableView2)</td></tr>
+<tr class="memdesc:a0c868457c8d0d536f04b6c68ff80cf7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the min max range on only the selected cells using the passed in pct value.  <a href="namespacenmf_utils_qt.html#a0c868457c8d0d536f04b6c68ff80cf7b">More...</a><br /></td></tr>
+<tr class="separator:a0c868457c8d0d536f04b6c68ff80cf7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a563a020d3037a2b47e519a39d39ef21c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a563a020d3037a2b47e519a39d39ef21c">setMinMax</a> (const double &amp;pct, QTableView *tableView, QTableView *tableView1, QTableView *tableView2)</td></tr>
+<tr class="memdesc:a563a020d3037a2b47e519a39d39ef21c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the min max range tables using the passed in pct value.  <a href="namespacenmf_utils_qt.html#a563a020d3037a2b47e519a39d39ef21c">More...</a><br /></td></tr>
+<tr class="separator:a563a020d3037a2b47e519a39d39ef21c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aafce4f1107a07be8f43e90bdf2518c98"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#aafce4f1107a07be8f43e90bdf2518c98">modelCopy</a> (QStandardItemModel *originalModel, QStandardItemModel *copyModel)</td></tr>
 <tr class="memdesc:aafce4f1107a07be8f43e90bdf2518c98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the contents of the first model into the second model.  <a href="namespacenmf_utils_qt.html#aafce4f1107a07be8f43e90bdf2518c98">More...</a><br /></td></tr>
 <tr class="separator:aafce4f1107a07be8f43e90bdf2518c98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79b9c903664e1ce9477deba17ee5028a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a79b9c903664e1ce9477deba17ee5028a">loadMultiRunData</a> (const <a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;DataStruct, std::vector&lt; QString &gt; &amp;MultiRunLines, int &amp;TotalIndividualRuns)</td></tr>
+<tr class="memdesc:a79b9c903664e1ce9477deba17ee5028a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads all of the multi-run file data into a vector of QStrings.  <a href="namespacenmf_utils_qt.html#a79b9c903664e1ce9477deba17ee5028a">More...</a><br /></td></tr>
+<tr class="separator:a79b9c903664e1ce9477deba17ee5028a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f33ae243a5ae1884b2e4261b1dc382e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a2f33ae243a5ae1884b2e4261b1dc382e">reloadDataStruct</a> (<a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;dataStruct, const QString &amp;MultiRunLine)</td></tr>
+<tr class="memdesc:a2f33ae243a5ae1884b2e4261b1dc382e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reloads the passed dataStruct with the passed line from the multi-run line file.  <a href="namespacenmf_utils_qt.html#a2f33ae243a5ae1884b2e4261b1dc382e">More...</a><br /></td></tr>
+<tr class="separator:a2f33ae243a5ae1884b2e4261b1dc382e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a328e823ca921ea5838ab824ac6765576"><td class="memItemLeft" align="right" valign="top">QDateTime&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a328e823ca921ea5838ab824ac6765576">getCurrentTime</a> ()</td></tr>
+<tr class="memdesc:a328e823ca921ea5838ab824ac6765576"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current time.  <a href="namespacenmf_utils_qt.html#a328e823ca921ea5838ab824ac6765576">More...</a><br /></td></tr>
+<tr class="separator:a328e823ca921ea5838ab824ac6765576"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e902bcdd9dbd6b99aeb0aa621e95c8c"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a9e902bcdd9dbd6b99aeb0aa621e95c8c">elapsedTime</a> (QDateTime startTime)</td></tr>
+<tr class="memdesc:a9e902bcdd9dbd6b99aeb0aa621e95c8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the time elapsed between the passed startTime and the currentTime.  <a href="namespacenmf_utils_qt.html#a9e902bcdd9dbd6b99aeb0aa621e95c8c">More...</a><br /></td></tr>
+<tr class="separator:a9e902bcdd9dbd6b99aeb0aa621e95c8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a761c0268c4fb141008bd235eeecbd13c"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a761c0268c4fb141008bd235eeecbd13c">elapsedTimeCondensed</a> (QDateTime startTime)</td></tr>
+<tr class="memdesc:a761c0268c4fb141008bd235eeecbd13c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the time elapsed between the passed startTime and the currentTime and displays it in a condensed format.  <a href="namespacenmf_utils_qt.html#a761c0268c4fb141008bd235eeecbd13c">More...</a><br /></td></tr>
+<tr class="separator:a761c0268c4fb141008bd235eeecbd13c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3e652cd8a173e82d65e97b96f5283ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#ad3e652cd8a173e82d65e97b96f5283ae">updateProgressDlg</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, QProgressDialog *dlg, const std::string &amp;msg, int &amp;pInc)</td></tr>
+<tr class="memdesc:ad3e652cd8a173e82d65e97b96f5283ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the passed QProgressDialog widget.  <a href="namespacenmf_utils_qt.html#ad3e652cd8a173e82d65e97b96f5283ae">More...</a><br /></td></tr>
+<tr class="separator:ad3e652cd8a173e82d65e97b96f5283ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fb01485bb78c290bd713f1ccb8a76c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a9fb01485bb78c290bd713f1ccb8a76c6">setBackgroundLineEdit</a> (QLineEdit *lineEdit, const QString &amp;backgroundStyleSheet)</td></tr>
+<tr class="memdesc:a9fb01485bb78c290bd713f1ccb8a76c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the background color of a QLineEdit widget.  <a href="namespacenmf_utils_qt.html#a9fb01485bb78c290bd713f1ccb8a76c6">More...</a><br /></td></tr>
+<tr class="separator:a9fb01485bb78c290bd713f1ccb8a76c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a937e6d1039ccef764ff66131fb7783bf"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a937e6d1039ccef764ff66131fb7783bf">checkAndCalculateWithSignificantDigits</a> (const double &amp;value, const int &amp;numSignificantDigits, const int &amp;numDecimalPlaces)</td></tr>
+<tr class="memdesc:a937e6d1039ccef764ff66131fb7783bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks and calculates the passed value to the appropriate number of significant digits.  <a href="namespacenmf_utils_qt.html#a937e6d1039ccef764ff66131fb7783bf">More...</a><br /></td></tr>
+<tr class="separator:a937e6d1039ccef764ff66131fb7783bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a942f58f57e8857f9efa04431cdaa7c77"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a942f58f57e8857f9efa04431cdaa7c77">getCovariates</a> (<a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;NLoptDataStruct, const int &amp;timeIndex, const std::string &amp;parameterName, std::vector&lt; double &gt; &amp;covariateValues)</td></tr>
+<tr class="memdesc:a942f58f57e8857f9efa04431cdaa7c77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back the Covariate Values for all species for the given year and parameter.  <a href="namespacenmf_utils_qt.html#a942f58f57e8857f9efa04431cdaa7c77">More...</a><br /></td></tr>
+<tr class="separator:a942f58f57e8857f9efa04431cdaa7c77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a4f614b507fbec160ece494b444ee1272"><td class="memItemLeft" align="right" valign="top"><a id="a4f614b507fbec160ece494b444ee1272"></a>
-const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a4f614b507fbec160ece494b444ee1272">ReadOnlyLineEditBgColor</a> = &quot;QLineEdit { background: rgb(247,247,247);}&quot;</td></tr>
-<tr class="memdesc:a4f614b507fbec160ece494b444ee1272"><td class="mdescLeft">&#160;</td><td class="mdescRight">Background color specification for a read only line edit widget. <br /></td></tr>
-<tr class="separator:a4f614b507fbec160ece494b444ee1272"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a762943daa35f3bdf2f97953c95e68db8"><td class="memItemLeft" align="right" valign="top"><a id="a762943daa35f3bdf2f97953c95e68db8"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a762943daa35f3bdf2f97953c95e68db8">ReadOnlyLineEditBgColorLight</a> = &quot;QLineEdit {background: rgb(240,240,240);}&quot;</td></tr>
+<tr class="memdesc:a762943daa35f3bdf2f97953c95e68db8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Background color specification for a read only line edit widget. <br /></td></tr>
+<tr class="separator:a762943daa35f3bdf2f97953c95e68db8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a468246bf570353a83a4e2de965ac1bb7"><td class="memItemLeft" align="right" valign="top"><a id="a468246bf570353a83a4e2de965ac1bb7"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLineEditBgColorDark</b> = &quot;QLineEdit {background: rgb(110,110,110);}&quot;</td></tr>
+<tr class="separator:a468246bf570353a83a4e2de965ac1bb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Namespace containing Qt utility functions. </p>
@@ -487,6 +541,51 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="a937e6d1039ccef764ff66131fb7783bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a937e6d1039ccef764ff66131fb7783bf">&#9670;&nbsp;</a></span>checkAndCalculateWithSignificantDigits()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString nmfUtilsQt::checkAndCalculateWithSignificantDigits </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numSignificantDigits</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numDecimalPlaces</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks and calculates the passed value to the appropriate number of significant digits. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>: value to be converted using significant digits </td></tr>
+    <tr><td class="paramname">numSignificantDigits</td><td>: number of significant digits </td></tr>
+    <tr><td class="paramname">numDecimalPlaces</td><td>: number of decimal places to use as default if the significant digits toggle is turned off; if this value is negative, it means to use EE notation </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the encoded qstring with significant digits </dd></dl>
 
 </div>
 </div>
@@ -918,6 +1017,60 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 
 </div>
 </div>
+<a id="a9e902bcdd9dbd6b99aeb0aa621e95c8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e902bcdd9dbd6b99aeb0aa621e95c8c">&#9670;&nbsp;</a></span>elapsedTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string nmfUtilsQt::elapsedTime </td>
+          <td>(</td>
+          <td class="paramtype">QDateTime&#160;</td>
+          <td class="paramname"><em>startTime</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculates the time elapsed between the passed startTime and the currentTime. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">startTime</td><td>: The start time with which to calculate the elapsed time </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of hours, minutes, or seconds that have elapsed (in a string format) </dd></dl>
+
+</div>
+</div>
+<a id="a761c0268c4fb141008bd235eeecbd13c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a761c0268c4fb141008bd235eeecbd13c">&#9670;&nbsp;</a></span>elapsedTimeCondensed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string nmfUtilsQt::elapsedTimeCondensed </td>
+          <td>(</td>
+          <td class="paramtype">QDateTime&#160;</td>
+          <td class="paramname"><em>startTime</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculates the time elapsed between the passed startTime and the currentTime and displays it in a condensed format. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">startTime</td><td>: The start time with which to calculate the elapsed time </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A string represent the time passed in format: hh:mm:ss </dd></dl>
+
+</div>
+</div>
 <a id="a0cdec5731392c6b3530d4dcd77c24843"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0cdec5731392c6b3530d4dcd77c24843">&#9670;&nbsp;</a></span>emptyField()</h2>
 
@@ -976,6 +1129,44 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 
 </div>
 </div>
+<a id="a217735a158df428b111d43cffa4684db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a217735a158df428b111d43cffa4684db">&#9670;&nbsp;</a></span>extractTag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfUtilsQt::extractTag </td>
+          <td>(</td>
+          <td class="paramtype">const QString&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString &amp;&#160;</td>
+          <td class="paramname"><em>tag</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Extracts the embedded tag from the passed filename. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>: name of file to extract tag from </td></tr>
+    <tr><td class="paramname">tag</td><td>: descriptor tag embedded in filename </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Boolean : true - success, false - failure </dd></dl>
+
+</div>
+</div>
 <a id="a88eb5a73f154e01b0ef5d275906dcc47"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a88eb5a73f154e01b0ef5d275906dcc47">&#9670;&nbsp;</a></span>fileExists()</h2>
 
@@ -1003,6 +1194,57 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 
 </div>
 </div>
+<a id="a942f58f57e8857f9efa04431cdaa7c77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a942f58f57e8857f9efa04431cdaa7c77">&#9670;&nbsp;</a></span>getCovariates()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::getCovariates </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;&#160;</td>
+          <td class="paramname"><em>NLoptDataStruct</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>timeIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>covariateValues</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sends back the Covariate Values for all species for the given year and parameter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">NLoptDataStruct</td><td>: struct containing necessary data </td></tr>
+    <tr><td class="paramname">timeIndex</td><td>: index of year (i.e., 1st year is 0, 2nd year is 1...) </td></tr>
+    <tr><td class="paramname">parameterName</td><td>: name of parameter </td></tr>
+    <tr><td class="paramname">covariateValues</td><td>: vector of covariate values indexed by time (starting with 0 for start year) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aea1c506cd62ccf21a0d8dc3c8e5e1cf6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aea1c506cd62ccf21a0d8dc3c8e5e1cf6">&#9670;&nbsp;</a></span>getCurrentTabName()</h2>
 
@@ -1027,6 +1269,26 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns the name of the current tab </dd></dl>
+
+</div>
+</div>
+<a id="a328e823ca921ea5838ab824ac6765576"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a328e823ca921ea5838ab824ac6765576">&#9670;&nbsp;</a></span>getCurrentTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QDateTime nmfUtilsQt::getCurrentTime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the current time. </p>
+<dl class="section return"><dt>Returns</dt><dd>the current time </dd></dl>
 
 </div>
 </div>
@@ -1092,6 +1354,65 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if errorMsg represents an error, False if it does not </dd></dl>
+
+</div>
+</div>
+<a id="abb998e4c70e4e80be4c42074c7fcf440"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb998e4c70e4e80be4c42074c7fcf440">&#9670;&nbsp;</a></span>loadCSVFileComboBoxes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfUtilsQt::loadCSVFileComboBoxes </td>
+          <td>(</td>
+          <td class="paramtype">QTabWidget *&#160;</td>
+          <td class="paramname"><em>parentTabWidget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tableView</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>inputDataPath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>inputFilename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString &amp;&#160;</td>
+          <td class="paramname"><em>errorMsg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Loads the CSV File into a table of combo boxes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parentTabWidget</td><td>: parent widget </td></tr>
+    <tr><td class="paramname">tableView</td><td>: table view containing combo box widgets </td></tr>
+    <tr><td class="paramname">inputDataPath</td><td>: default path where .csv file is to be saved </td></tr>
+    <tr><td class="paramname">inputFilename</td><td>: CSV filename if default is not desired </td></tr>
+    <tr><td class="paramname">errorMsg</td><td>: error message passed back </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>: true if successful, false otherwise </dd></dl>
 
 </div>
 </div>
@@ -1167,6 +1488,124 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 
 </div>
 </div>
+<a id="ae52b342207664ccc5136b64665c5f0ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae52b342207664ccc5136b64665c5f0ca">&#9670;&nbsp;</a></span>loadModelFromCSVFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfUtilsQt::loadModelFromCSVFile </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classnmf_logger.html">nmfLogger</a> *&#160;</td>
+          <td class="paramname"><em>logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>projectDir</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>fileType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>numRows</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>numSignificantDigits</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Loads the CSV file into the passed tableview's model. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">logger</td><td>: pointer to logger object </td></tr>
+    <tr><td class="paramname">projectDir</td><td>: directory where application files are written to </td></tr>
+    <tr><td class="paramname">fileType</td><td>: type of csv file (used as a check, so the user knows they're opening the correct type of file) </td></tr>
+    <tr><td class="paramname">table</td><td>: qtableview containing data to be written out </td></tr>
+    <tr><td class="paramname">filename</td><td>: if queryFilename = false, then this is the filename to be used; otherwise the method will query the user </td></tr>
+    <tr><td class="paramname">numRows</td><td>: number of rows read from file </td></tr>
+    <tr><td class="paramname">numSignificantDigits</td><td>: number of significant digits to use in displayed numbers </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns true if load was successful, else false </dd></dl>
+
+</div>
+</div>
+<a id="a79b9c903664e1ce9477deba17ee5028a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79b9c903664e1ce9477deba17ee5028a">&#9670;&nbsp;</a></span>loadMultiRunData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfUtilsQt::loadMultiRunData </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;&#160;</td>
+          <td class="paramname"><em>DataStruct</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; QString &gt; &amp;&#160;</td>
+          <td class="paramname"><em>MultiRunLines</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>TotalIndividualRuns</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Loads all of the multi-run file data into a vector of QStrings. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">DataStruct</td><td>: struct containing all run parameters </td></tr>
+    <tr><td class="paramname">MultiRunLines</td><td>: contents of multi-run file </td></tr>
+    <tr><td class="paramname">TotalIndividualRuns</td><td>: total number of individual runs </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if a successful load, false otherwise </dd></dl>
+
+</div>
+</div>
 <a id="a3650fb32ef1ab23988e316845acf3cd5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3650fb32ef1ab23988e316845acf3cd5">&#9670;&nbsp;</a></span>loadTableWidgetData()</h2>
 
@@ -1226,8 +1665,8 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 
 </div>
 </div>
-<a id="aea7ea97fb7e131d83c6ec823d485ce89"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea7ea97fb7e131d83c6ec823d485ce89">&#9670;&nbsp;</a></span>loadTimeSeries()</h2>
+<a id="a37fdbe6c158ecddfd30a34d1060b55f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37fdbe6c158ecddfd30a34d1060b55f7">&#9670;&nbsp;</a></span>loadTimeSeries()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1265,6 +1704,18 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>scientificNotation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::pair&lt; int, int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>nonZeroCell</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">QString &amp;&#160;</td>
           <td class="paramname"><em>errorMsg</em>&#160;</td>
         </tr>
@@ -1284,6 +1735,8 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
     <tr><td class="paramname">inputDataPath</td><td>: default path for the input .csv file </td></tr>
     <tr><td class="paramname">inputFilename</td><td>: CSV filename if default is not desired </td></tr>
     <tr><td class="paramname">firstLineReadOnly</td><td>: boolean to make the first line of the table read-only with gray background </td></tr>
+    <tr><td class="paramname">scientificNotation</td><td>: boolean to display data using scientific notation </td></tr>
+    <tr><td class="paramname">nonZeroCell</td><td>: row,col of first non-zero cell; used to set the pct range spin box where appropriate </td></tr>
     <tr><td class="paramname">errorMsg</td><td>: error message produced during the load </td></tr>
   </table>
   </dd>
@@ -1443,6 +1896,43 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 
 </div>
 </div>
+<a id="a2f33ae243a5ae1884b2e4261b1dc382e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f33ae243a5ae1884b2e4261b1dc382e">&#9670;&nbsp;</a></span>reloadDataStruct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::reloadDataStruct </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;&#160;</td>
+          <td class="paramname"><em>dataStruct</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>MultiRunLine</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reloads the passed dataStruct with the passed line from the multi-run line file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dataStruct</td><td>: the data struct to reload </td></tr>
+    <tr><td class="paramname">MultiRunLine</td><td>: a line from the multi-run line file </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a741f31eeae5a15f711cb728beafb509b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a741f31eeae5a15f711cb728beafb509b">&#9670;&nbsp;</a></span>removeSettingsFile()</h2>
 
@@ -1498,6 +1988,65 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 1 if rename was successful, -1 if not successful </dd></dl>
+
+</div>
+</div>
+<a id="a02e264ce2c31e0b996e9e1b3cd0ae815"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02e264ce2c31e0b996e9e1b3cd0ae815">&#9670;&nbsp;</a></span>saveCSVFileComboBoxes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfUtilsQt::saveCSVFileComboBoxes </td>
+          <td>(</td>
+          <td class="paramtype">QTabWidget *&#160;</td>
+          <td class="paramname"><em>parentTabWidget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tableView</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QStandardItemModel *&#160;</td>
+          <td class="paramname"><em>smodel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString &amp;&#160;</td>
+          <td class="paramname"><em>inputDataPath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString &amp;&#160;</td>
+          <td class="paramname"><em>outputFilename</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Saves the table consisting of all QComboBoxes to a .csv file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parentTabWidget</td><td>: parent widget </td></tr>
+    <tr><td class="paramname">tableView</td><td>: QTableView containing all of the combo boxes </td></tr>
+    <tr><td class="paramname">smodel</td><td>: model in tableView </td></tr>
+    <tr><td class="paramname">inputDataPath</td><td>: default path where .csv file is to be saved </td></tr>
+    <tr><td class="paramname">outputFilename</td><td>: name of the output filename with path </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if successful, false otherwise </dd></dl>
 
 </div>
 </div>
@@ -1574,8 +2123,8 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 
 </div>
 </div>
-<a id="ac47e06c5ccb74f228199347fb206a292"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac47e06c5ccb74f228199347fb206a292">&#9670;&nbsp;</a></span>saveModelToCSVFile()</h2>
+<a id="a4f0ea1682bfa5a0fdbaa0bb1f7585594"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f0ea1682bfa5a0fdbaa0bb1f7585594">&#9670;&nbsp;</a></span>saveModelToCSVFile()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1590,13 +2139,43 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>fileType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>tabName</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">QTableView *&#160;</td>
-          <td class="paramname"><em>table</em>&#160;</td>
+          <td class="paramname"><em>table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>queryFilename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>removeCommas</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>theFilename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>verboseOn</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1610,8 +2189,13 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">projectDir</td><td>: directory where application files are written to </td></tr>
+    <tr><td class="paramname">fileType</td><td>: type of csv file (needed as a check so user can't open incorrect type of csv file) </td></tr>
     <tr><td class="paramname">tabName</td><td>: name of the tab whose data is to be written out; method uses it to determine what to name the vertical headers </td></tr>
     <tr><td class="paramname">table</td><td>: qtableview containing data to be written out </td></tr>
+    <tr><td class="paramname">queryFilename</td><td>: true if method should query user for filename, false otherwise </td></tr>
+    <tr><td class="paramname">removeCommas</td><td>: if true, commas will be removed from cell items </td></tr>
+    <tr><td class="paramname">theFilename</td><td>: if queryFilename = false, then this is the filename to be used; otherwise the method will query the user </td></tr>
+    <tr><td class="paramname">verboseOn</td><td>: switch which if true will show popups, else won't show popups </td></tr>
   </table>
   </dd>
 </dl>
@@ -1988,8 +2572,96 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 
 </div>
 </div>
+<a id="a7c0336dc1cd49e148fe82684840d3f72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c0336dc1cd49e148fe82684840d3f72">&#9670;&nbsp;</a></span>setAxisX() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::setAxisX </td>
+          <td>(</td>
+          <td class="paramtype">QChart *&#160;</td>
+          <td class="paramname"><em>chart</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QBarCategoryAxis *&#160;</td>
+          <td class="paramname"><em>axisX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QBarSeries *&#160;</td>
+          <td class="paramname"><em>series</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convenience function to reset an X axis (the original Qt call was deprecated) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">chart</td><td>: the chart on which the axis is to be placed </td></tr>
+    <tr><td class="paramname">axisX</td><td>: the new axis with which to replace the old one </td></tr>
+    <tr><td class="paramname">series</td><td>: the QBarSeries to which the axis refers </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6fd4957c9b83254a1b57ca602edba3cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fd4957c9b83254a1b57ca602edba3cd">&#9670;&nbsp;</a></span>setAxisX() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::setAxisX </td>
+          <td>(</td>
+          <td class="paramtype">QChart *&#160;</td>
+          <td class="paramname"><em>chart</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QBarCategoryAxis *&#160;</td>
+          <td class="paramname"><em>axisX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QStackedBarSeries *&#160;</td>
+          <td class="paramname"><em>series</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convenience function to reset an X axis (the original Qt call was deprecated) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">chart</td><td>: the chart on which the axis is to be placed </td></tr>
+    <tr><td class="paramname">axisX</td><td>: the new axis with which to replace the old one </td></tr>
+    <tr><td class="paramname">series</td><td>: the QStackedBarSeries to which the axis refers </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="abc1f187a62652c7e14228bbef42ea2bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abc1f187a62652c7e14228bbef42ea2bb">&#9670;&nbsp;</a></span>setAxisX()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abc1f187a62652c7e14228bbef42ea2bb">&#9670;&nbsp;</a></span>setAxisX() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2025,7 +2697,51 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
   <table class="params">
     <tr><td class="paramname">chart</td><td>: the chart on which the axis is to be placed </td></tr>
     <tr><td class="paramname">axisX</td><td>: the new axis with which to replace the old one </td></tr>
-    <tr><td class="paramname">series</td><td>: the series to which the axis refers </td></tr>
+    <tr><td class="paramname">series</td><td>: the QLineSeries to which the axis refers </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5a2bdcc62a0d8196ec5390adee6d0913"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a2bdcc62a0d8196ec5390adee6d0913">&#9670;&nbsp;</a></span>setAxisY() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::setAxisY </td>
+          <td>(</td>
+          <td class="paramtype">QChart *&#160;</td>
+          <td class="paramname"><em>chart</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QValueAxis *&#160;</td>
+          <td class="paramname"><em>axisY</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QBarSeries *&#160;</td>
+          <td class="paramname"><em>series</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convenience function to reset a Y axis (the original Qt call was deprecated) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">chart</td><td>: the chart on which the axis is to be placed </td></tr>
+    <tr><td class="paramname">axisX</td><td>: the new axis with which to replace the old one </td></tr>
+    <tr><td class="paramname">series</td><td>: the QBarSeries to which the axis refers </td></tr>
   </table>
   </dd>
 </dl>
@@ -2033,7 +2749,7 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 </div>
 </div>
 <a id="ae438a08b64322bf5506bff7672543a00"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae438a08b64322bf5506bff7672543a00">&#9670;&nbsp;</a></span>setAxisY()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae438a08b64322bf5506bff7672543a00">&#9670;&nbsp;</a></span>setAxisY() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2069,7 +2785,190 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
   <table class="params">
     <tr><td class="paramname">chart</td><td>: the chart on which the axis is to be placed </td></tr>
     <tr><td class="paramname">axisX</td><td>: the new axis with which to replace the old one </td></tr>
-    <tr><td class="paramname">series</td><td>: the series to which the axis refers </td></tr>
+    <tr><td class="paramname">series</td><td>: the QLineSeries to which the axis refers </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac1261b29e0fd97d90497043f1e339b9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1261b29e0fd97d90497043f1e339b9f">&#9670;&nbsp;</a></span>setAxisY() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::setAxisY </td>
+          <td>(</td>
+          <td class="paramtype">QChart *&#160;</td>
+          <td class="paramname"><em>chart</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QValueAxis *&#160;</td>
+          <td class="paramname"><em>axisY</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QStackedBarSeries *&#160;</td>
+          <td class="paramname"><em>series</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convenience function to reset a Y axis (the original Qt call was deprecated) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">chart</td><td>: the chart on which the axis is to be placed </td></tr>
+    <tr><td class="paramname">axisX</td><td>: the new axis with which to replace the old one </td></tr>
+    <tr><td class="paramname">series</td><td>: the QStackedBarSeries to which the axis refers </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9fb01485bb78c290bd713f1ccb8a76c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fb01485bb78c290bd713f1ccb8a76c6">&#9670;&nbsp;</a></span>setBackgroundLineEdit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::setBackgroundLineEdit </td>
+          <td>(</td>
+          <td class="paramtype">QLineEdit *&#160;</td>
+          <td class="paramname"><em>lineEdit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>backgroundStyleSheet</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the background color of a QLineEdit widget. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lineEdit</td><td>: QLineEdit widget whose background is to be changed </td></tr>
+    <tr><td class="paramname">backgroundStyleSheet</td><td>: new style sheet for the passed in QLineEdit </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a563a020d3037a2b47e519a39d39ef21c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a563a020d3037a2b47e519a39d39ef21c">&#9670;&nbsp;</a></span>setMinMax()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::setMinMax </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>pct</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tableView</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tableView1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tableView2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the min max range tables using the passed in pct value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pct</td><td>: percent value to create the min and max range tables </td></tr>
+    <tr><td class="paramname">tableView</td><td>: initial table </td></tr>
+    <tr><td class="paramname">tableView1</td><td>: minimum table </td></tr>
+    <tr><td class="paramname">tableView2</td><td>: maximum table </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0c868457c8d0d536f04b6c68ff80cf7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c868457c8d0d536f04b6c68ff80cf7b">&#9670;&nbsp;</a></span>setMinMaxOnSelections()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::setMinMaxOnSelections </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>pct</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tableView0</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tableView1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tableView2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the min max range on only the selected cells using the passed in pct value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pct</td><td>: percent value to create the min and max range tables </td></tr>
+    <tr><td class="paramname">tableView0</td><td>: initial table </td></tr>
+    <tr><td class="paramname">tableView1</td><td>: minimum table </td></tr>
+    <tr><td class="paramname">tableView2</td><td>: maximum table </td></tr>
   </table>
   </dd>
 </dl>
@@ -2135,6 +3034,165 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
     <tr><td class="paramname">version</td><td>: version of the application </td></tr>
     <tr><td class="paramname">specialAcknowledgement</td><td>: special acknowledgement section </td></tr>
     <tr><td class="paramname">appMsg</td><td>: main application message (created in calling routine); lists all toolkits, versions, and links for more information </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aacca3b11b577f30eabf2caa444075332"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacca3b11b577f30eabf2caa444075332">&#9670;&nbsp;</a></span>switchFileExtensions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::switchFileExtensions </td>
+          <td>(</td>
+          <td class="paramtype">QString &amp;&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>newExt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QStringList &amp;&#160;</td>
+          <td class="paramname"><em>oldExts</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Useful for changing .jpg,.png to .csv. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>: file name on which to modify the extension </td></tr>
+    <tr><td class="paramname">newExt</td><td>: the new file name extension </td></tr>
+    <tr><td class="paramname">oldExts</td><td>: list of old file name extensions to check for and change if found </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5f8b9e15be6fa26c973460765ee6711f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f8b9e15be6fa26c973460765ee6711f">&#9670;&nbsp;</a></span>thereAreSelections()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfUtilsQt::thereAreSelections </td>
+          <td>(</td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tableView1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tableView2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convenience method to see if anything in either table has been selected. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tableView1</td><td>: one tableview to check for selection </td></tr>
+    <tr><td class="paramname">tableView2</td><td>: another tableview to check for selection </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns true if a selection in either tableview has been found, else false </dd></dl>
+
+</div>
+</div>
+<a id="a61ab38316e9940d8a6586ba5a4498ab8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61ab38316e9940d8a6586ba5a4498ab8">&#9670;&nbsp;</a></span>transposeModel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::transposeModel </td>
+          <td>(</td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tv</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convenience method to take the transpose of a model. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tv</td><td>: tableview widget whose model to transpose </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad3e652cd8a173e82d65e97b96f5283ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3e652cd8a173e82d65e97b96f5283ae">&#9670;&nbsp;</a></span>updateProgressDlg()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::updateProgressDlg </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classnmf_logger.html">nmfLogger</a> *&#160;</td>
+          <td class="paramname"><em>logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QProgressDialog *&#160;</td>
+          <td class="paramname"><em>dlg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>msg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>pInc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates the passed QProgressDialog widget. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">logger</td><td>: application logger </td></tr>
+    <tr><td class="paramname">dlg</td><td>: QProgressDialog widget </td></tr>
+    <tr><td class="paramname">msg</td><td>: message to display on QProgressDialog widget </td></tr>
+    <tr><td class="paramname">pInc</td><td>: QProgressDialog increment </td></tr>
   </table>
   </dd>
 </dl>

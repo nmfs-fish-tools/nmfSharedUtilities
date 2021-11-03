@@ -231,7 +231,7 @@ namespace nmfConstantsMSSPM
      const std::string TableCompetitionBetaSpeciesMax          = QString::fromStdString("CompetitionBetaSpeciesMax").toLower().toStdString();
      const std::string TableCompetitionBetaSpeciesMin          = QString::fromStdString("CompetitionBetaSpeciesMin").toLower().toStdString();
      const std::string TableCovariate                          = QString::fromStdString("Covariate").toLower().toStdString();
-     const std::string TableCovariateTS                        = QString::fromStdString("CovariateTS").toLower().toStdString();
+     const std::string TableCovariateAssignment                = QString::fromStdString("CovariateAssignment").toLower().toStdString();
      const std::string TableDiagnosticCarryingCapacity         = QString::fromStdString("DiagnosticCarryingCapacity").toLower().toStdString();
      const std::string TableDiagnosticCatchability             = QString::fromStdString("DiagnosticCatchability").toLower().toStdString();
      const std::string TableDiagnosticGrowthRate               = QString::fromStdString("DiagnosticGrowthRate").toLower().toStdString();

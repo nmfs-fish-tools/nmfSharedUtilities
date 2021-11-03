@@ -551,9 +551,21 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     std::vector<double> growthRate;
     std::vector<double> carryingCapacity;
     std::vector<double> guildCarryingCapacity;
-    std::vector<double> exponent;
-    std::vector<double> catchabilityRate;
+    std::vector<double> predationExponent;
+    std::vector<double> catchability;
     std::vector<double> surveyQ;
+    boost::numeric::ublas::matrix<double> initBiomassCovariate;
+    boost::numeric::ublas::matrix<double> growthRateCovariate;
+    boost::numeric::ublas::matrix<double> carryingCapacityCovariate;
+    boost::numeric::ublas::matrix<double> surveyQCovariate;
+    boost::numeric::ublas::matrix<double> catchabilityCovariate;
+    boost::numeric::ublas::matrix<double> predationRhoCovariate;
+    boost::numeric::ublas::matrix<double> predationHandlingCovariate;
+    boost::numeric::ublas::matrix<double> predationExponentCovariate;
+    boost::numeric::ublas::matrix<double> competitionAlphaCovariate;
+    boost::numeric::ublas::matrix<double> competitionBetaSpeciesCovariate;
+    boost::numeric::ublas::matrix<double> competitionBetaGuildSpeciesCovariate;
+    boost::numeric::ublas::matrix<double> competitionBetaGuildGuildCovariate;
     boost::numeric::ublas::matrix<double> estBiomassSpecies;
     boost::numeric::ublas::matrix<double> estBiomassGuilds;
     boost::numeric::ublas::matrix<double> estBiomassRescaled;
@@ -563,8 +575,8 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     boost::numeric::ublas::matrix<double> competitionBetaSpecies;
     boost::numeric::ublas::matrix<double> competitionBetaGuilds;
     boost::numeric::ublas::matrix<double> competitionBetaGuildsGuilds;
-    boost::numeric::ublas::matrix<double> predation;
-    boost::numeric::ublas::matrix<double> handling;
+    boost::numeric::ublas::matrix<double> predationRho;
+    boost::numeric::ublas::matrix<double> predationHandling;
     nmfUtils::initialize(estBiomassSpecies,                   NumYears,           NumSpeciesOrGuilds);
     nmfUtils::initialize(estBiomassGuilds,                    NumYears,           NumGuilds);
     nmfUtils::initialize(estBiomassRescaled,                  NumYears,           NumSpeciesOrGuilds);
@@ -573,8 +585,21 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     nmfUtils::initialize(competitionBetaSpecies,              NumSpecies,         NumSpecies);
     nmfUtils::initialize(competitionBetaGuilds,               NumSpeciesOrGuilds, NumGuilds);
     nmfUtils::initialize(competitionBetaGuildsGuilds,         NumGuilds,          NumGuilds);
-    nmfUtils::initialize(predation,                           NumSpeciesOrGuilds, NumSpeciesOrGuilds);
-    nmfUtils::initialize(handling,                            NumSpeciesOrGuilds, NumSpeciesOrGuilds);
+    nmfUtils::initialize(predationRho,                        NumSpeciesOrGuilds, NumSpeciesOrGuilds);
+    nmfUtils::initialize(predationHandling,                   NumSpeciesOrGuilds, NumSpeciesOrGuilds);
+
+    nmfUtilsQt::getCovariates(m_BeeStruct,NumYears,"InitBiomass",                   initBiomassCovariate);
+    nmfUtilsQt::getCovariates(m_BeeStruct,NumYears,"GrowthRate",                    growthRateCovariate);
+    nmfUtilsQt::getCovariates(m_BeeStruct,NumYears,"CarryingCapacity",              carryingCapacityCovariate);
+    nmfUtilsQt::getCovariates(m_BeeStruct,NumYears,"Catchability",                  catchabilityCovariate);
+    nmfUtilsQt::getCovariates(m_BeeStruct,NumYears,"SurveyQ",                       surveyQCovariate);
+    nmfUtilsQt::getCovariates(m_BeeStruct,NumYears,"PredationRho",                  predationRhoCovariate);
+    nmfUtilsQt::getCovariates(m_BeeStruct,NumYears,"PredationHandling",             predationHandlingCovariate);
+    nmfUtilsQt::getCovariates(m_BeeStruct,NumYears,"PredationExponent",             predationExponentCovariate);
+    nmfUtilsQt::getCovariates(m_BeeStruct,NumYears,"CompetitionAlpha",              competitionAlphaCovariate);
+    nmfUtilsQt::getCovariates(m_BeeStruct,NumYears,"CompetitionBetaSpeciesSpecies", competitionBetaSpeciesCovariate);
+    nmfUtilsQt::getCovariates(m_BeeStruct,NumYears,"CompetitionBetaGuildSpecies",   competitionBetaGuildSpeciesCovariate);
+    nmfUtilsQt::getCovariates(m_BeeStruct,NumYears,"CompetitionBetaGuildGuild",     competitionBetaGuildGuildCovariate);
 
     if (isAggProd) {
         NumSpeciesOrGuilds = NumGuilds;
@@ -591,20 +616,21 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
 //std::cout << "num parameters: " << parameters.size() << std::endl;
     m_GrowthForm->extractParameters(parameters,startPos,growthRate,
                                     carryingCapacity,systemCarryingCapacity);
-    m_HarvestForm->extractParameters(parameters,startPos,catchabilityRate);
+    m_HarvestForm->extractParameters(parameters,startPos,catchability);
     m_CompetitionForm->extractParameters(parameters,startPos,competitionAlpha,
                                          competitionBetaSpecies,competitionBetaGuilds,
                                          competitionBetaGuildsGuilds);
-    m_PredationForm->extractPredationParameters(parameters,startPos,predation);
-    m_PredationForm->extractHandlingParameters(parameters,startPos,handling);
-    m_PredationForm->extractExponentParameters(parameters,startPos,exponent);
+    m_PredationForm->extractPredationParameters(parameters,startPos,predationRho);
+    m_PredationForm->extractHandlingParameters(parameters,startPos,predationHandling);
+    m_PredationForm->extractExponentParameters(parameters,startPos,predationExponent);
     extractSurveyQParameters(parameters,startPos,surveyQ);
 
     // Since we may be estimating SurveyQ, need to divide the Observed Biomass by the SurveyQ
+    double surveyQCovariateCoeff = 1.0; // RSK estimate this later
     for (int species=0; species<int(obsBiomassBySpeciesOrGuilds.size2()); ++species) {
         surveyQVal = surveyQ[species];
         for (int time=0; time<int(obsBiomassBySpeciesOrGuilds.size1()); ++time) {
-            obsBiomassBySpeciesOrGuilds(time,species) /= surveyQVal;
+            obsBiomassBySpeciesOrGuilds(time,species) /= (surveyQVal*(1.0+surveyQCovariateCoeff*surveyQCovariate(time,species)));
         }
     }
 
@@ -646,44 +672,65 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
 
     bool isCheckedInitBiomass = nmfUtils::isEstimateParameterChecked(m_BeeStruct,"InitBiomass");
 
+
+    double initBiomassCoeff = 1.0; // RSK will be estimated eventually
     for (int time=1; time<NumYears; ++time) {
         timeMinus1 = time - 1;
-        for (int i=0; i<NumSpeciesOrGuilds; ++i) {
+        for (int species=0; species<NumSpeciesOrGuilds; ++species) {
             // Find guild that speciesNum is in
-            guildNum = m_GuildNum[i];
+            guildNum = m_GuildNum[species];
 
             if (isCheckedInitBiomass) {
                 if (timeMinus1 == 0) {
-                    estBiomassVal = initBiomass[i];
+                    estBiomassVal = initBiomass[species];
                 } else {
-                    estBiomassVal = estBiomassSpecies(timeMinus1,i);
+                    estBiomassVal = estBiomassSpecies(timeMinus1,species);
                 }
             } else {
-                estBiomassVal = estBiomassSpecies(timeMinus1,i);
+                estBiomassVal = estBiomassSpecies(timeMinus1,species);
+            }
+            if (timeMinus1 == 0) {
+                estBiomassVal *= (1.0+initBiomassCoeff*initBiomassCovariate(timeMinus1,species));
             }
 
-            growthTerm      = m_GrowthForm->evaluate(i,estBiomassVal,
-                                                     growthRate,carryingCapacity);
-            harvestTerm     = m_HarvestForm->evaluate(timeMinus1,i,
-                                                      m_Catch,m_Effort,m_Exploitation,
-                                                      estBiomassVal,catchabilityRate);
+            growthTerm      = m_GrowthForm->evaluate(estBiomassVal,
+                                                     growthRate[species],
+                                                     growthRateCovariate(timeMinus1,species),
+                                                     carryingCapacity[species],
+                                                     carryingCapacityCovariate(timeMinus1,species));
+            harvestTerm     = m_HarvestForm->evaluate(timeMinus1,species,estBiomassVal,
+                                                      m_Catch,
+                                                      m_Effort,
+                                                      m_Exploitation,
+                                                      catchability,
+                                                      catchabilityCovariate);
 //std::cout << "guild cc: " << guildCarryingCapacity[guildNum] << std::endl;
 //std::cout << "system cc: " << systemCarryingCapacity << std::endl;
             competitionTerm = m_CompetitionForm->evaluate(
-                                   timeMinus1,i,estBiomassVal,
-                                   systemCarryingCapacity,
+                                   timeMinus1,species,estBiomassVal,
                                    growthRate,
+                                   growthRateCovariate,
                                    guildCarryingCapacity[guildNum],
-                                   competitionAlpha,
-                                   competitionBetaSpecies,
-                                   competitionBetaGuilds,
-                                   competitionBetaGuildsGuilds,
+                                   systemCarryingCapacity,
                                    estBiomassSpecies,
-                                   estBiomassGuilds);
+                                   estBiomassGuilds,
+                                   competitionAlpha,
+                                   competitionAlphaCovariate,
+                                   competitionBetaSpecies,
+                                   competitionBetaSpeciesCovariate,
+                                   competitionBetaGuilds,
+                                   competitionBetaGuildSpeciesCovariate,
+                                   competitionBetaGuildsGuilds,
+                                   competitionBetaGuildGuildCovariate);
             predationTerm   = m_PredationForm->evaluate(
-                                   timeMinus1,i,
-                                   predation,handling,exponent,
-                                   estBiomassSpecies,estBiomassVal);
+                                   timeMinus1,species,
+                                   estBiomassSpecies,estBiomassVal,
+                                   predationRho,
+                                   predationRhoCovariate,
+                                   predationHandling,
+                                   predationHandlingCovariate,
+                                   predationExponent,
+                                   predationExponentCovariate);
 
             estBiomassVal  += growthTerm - harvestTerm - competitionTerm - predationTerm;
 //std::cout << "estBiomassVal: " << estBiomassVal <<
@@ -699,7 +746,7 @@ if (estBiomassVal < 0) {
 //std::cout << "*** Returning... *** " << std::endl;
                 return m_DefaultFitness;
             }
-            estBiomassSpecies(time,i) = estBiomassVal;
+            estBiomassSpecies(time,species) = estBiomassVal;
 
             // update estBiomassGuilds for next time step
             for (int i=0; i<NumGuilds; ++i) {

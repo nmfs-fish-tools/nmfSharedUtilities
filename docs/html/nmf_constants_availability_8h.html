@@ -67,6 +67,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">nmfConstantsAvailability.h File Reference</div>  </div>
@@ -99,6 +100,12 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnmf_constants_availability_1_1_prey_only_struct.html">nmfConstantsAvailability::PreyOnlyStruct</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Holds all of the data corresponding to a prey only species.  <a href="structnmf_constants_availability_1_1_prey_only_struct.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespacenmf_constants_availability"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_constants_availability.html">nmfConstantsAvailability</a></td></tr>
+<tr class="memdesc:namespacenmf_constants_availability"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constants used in the Availability tool. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
@@ -167,7 +174,7 @@ const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsA
 const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsAvailability::BeginSection_pPrey</b> = &quot;# The order of the prey groups is defined by your functional &quot;</td></tr>
 <tr class="separator:a9e2ccc4adf0225988a4700e91ddf8c34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7f0b8015f4c51c39a5f6dabd202b6b4"><td class="memItemLeft" align="right" valign="top"><a id="ad7f0b8015f4c51c39a5f6dabd202b6b4"></a>
-const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsAvailability::EndSection_pPrey</b> = &quot;## Ontogenetic diet&quot;</td></tr>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsAvailability::EndSection_pPrey</b> = &quot;## Ontogenetic diet preferences&quot;</td></tr>
 <tr class="separator:ad7f0b8015f4c51c39a5f6dabd202b6b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53af6d2f9b0d0e9f7dd3fefaa0282254"><td class="memItemLeft" align="right" valign="top"><a id="a53af6d2f9b0d0e9f7dd3fefaa0282254"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsAvailability::HiddenDir</b> = &quot;.Atlantis_Availability&quot;</td></tr>
@@ -234,47 +241,14 @@ const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConst
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Definition for constants used in Availability tool. </p>
 <dl class="section date"><dt>Date</dt><dd>Jan 14, 2020</dd></dl>
-<p>This file defines constants used in the Availability application program. </p>
-</div><h2 class="groupheader">Variable Documentation</h2>
-<a id="a6ac7f3d7bd1e0fa40b332bbded22de8f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ac7f3d7bd1e0fa40b332bbded22de8f">&#9670;&nbsp;</a></span>AgeStructureValues</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const QStringList nmfConstantsAvailability::AgeStructureValues</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
-<div class="line">        <span class="stringliteral">&quot;Juvenile Only&quot;</span>,<span class="stringliteral">&quot;Adult Only&quot;</span>,<span class="stringliteral">&quot;All Ages&quot;</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="af1bd1e5a88d769b2ccb01776cf7bf747"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af1bd1e5a88d769b2ccb01776cf7bf747">&#9670;&nbsp;</a></span>FunctionalResponseValues</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const QStringList nmfConstantsAvailability::FunctionalResponseValues</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
-<div class="line">        <span class="stringliteral">&quot;Standard Holling Type I&quot;</span>,</div>
-<div class="line">        <span class="stringliteral">&quot;Standard Holling Type II&quot;</span>,</div>
-<div class="line">        <span class="stringliteral">&quot;Standard Holling Type II½&quot;</span>,</div>
-<div class="line">        <span class="stringliteral">&quot;Standard Holling Type III&quot;</span>,</div>
-<div class="line">        <span class="stringliteral">&quot;Modified Holling Type II&quot;</span>,</div>
-<div class="line">        <span class="stringliteral">&quot;Modified Holling Type II½&quot;</span>,</div>
-<div class="line">        <span class="stringliteral">&quot;Modified Holling Type III&quot;</span>}</div>
-</div><!-- fragment -->
-</div>
-</div>
-</div><!-- contents -->
+<p>This file defines constants used in the Availability application program.</p>
+<dl class="section copyright"><dt>Copyright</dt><dd>Public Domain Notice<br  />
+ National Oceanic And Atmospheric Administration<br  />
+<br  />
+ This software is a "United States Government Work" under the terms of the United States Copyright Act. It was written as part of the author's official duties as a United States Government employee/contractor and thus cannot be copyrighted. This software is freely available to the public for use. The National Oceanic And Atmospheric Administration and the U.S. Government have not placed any restriction on its use or reproduction. Although all reasonable efforts have been taken to ensure the accuracy and reliability of the software and data, the National Oceanic And Atmospheric Administration and the U.S. Government do not and cannot warrant the performance or results that may be obtained by using this software or data. The National Oceanic And Atmospheric Administration and the U.S. Government disclaim all warranties, express or implied, including warranties of performance, merchantability or fitness for any particular purpose.<br  />
+<br  />
+ Please cite the author(s) in any work or product based on this material. </dd></dl>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

@@ -1,4 +1,5 @@
 <map id="nmfUtilities/nmfConstants.h" name="nmfUtilities/nmfConstants.h">
-<area shape="rect" id="node1" title="Definition for common constants used in MultiSpecies tools." alt="" coords="17,5,223,32"/>
+<area shape="rect" id="node1" title="Definition for common constants used in MultiSpecies tools." alt="" coords="147,5,354,32"/>
 <area shape="rect" id="node2" href="$nmf_database_8cpp.html" title="This file contains the NMFS DatabaseAPI implementation." alt="" coords="5,80,235,107"/>
+<area shape="rect" id="node3" href="$nmf_utils_complex_8cpp.html" title="These routines were originally from Complex2.bas." alt="" coords="259,80,503,107"/>
 </map>

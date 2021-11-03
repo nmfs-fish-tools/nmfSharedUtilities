@@ -86,67 +86,66 @@ $(function() {
 <code>#include &lt;QPushButton&gt;</code><br />
 <code>#include &lt;QSpacerItem&gt;</code><br />
 <code>#include &lt;QTimer&gt;</code><br />
+<code>#include &lt;QThread&gt;</code><br />
 <code>#include &lt;QVBoxLayout&gt;</code><br />
 <code>#include &quot;<a class="el" href="nmf_logger_8h_source.html">nmfLogger.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="nmf_utils_qt_8h_source.html">nmfUtilsQt.h</a>&quot;</code><br />
-<code>#include &lt;chrono&gt;</code><br />
-<code>#include &lt;thread&gt;</code><br />
 <code>#include &lt;boost/thread/thread.hpp&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for nmfViewerWidget.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="nmf_viewer_widget_8h__incl.png" border="0" usemap="#nmf_charts_2nmf_viewer_widget_8h" alt=""/></div>
 <map name="nmf_charts_2nmf_viewer_widget_8h" id="nmf_charts_2nmf_viewer_widget_8h">
-<area shape="rect" title="GUI definition for the Image Viewer set of widgets." alt="" coords="1834,5,2057,32"/>
-<area shape="rect" title=" " alt="" coords="382,155,487,181"/>
-<area shape="rect" title=" " alt="" coords="1958,80,2061,107"/>
-<area shape="rect" title=" " alt="" coords="512,155,563,181"/>
-<area shape="rect" title=" " alt="" coords="2085,80,2195,107"/>
-<area shape="rect" title=" " alt="" coords="2219,80,2293,107"/>
-<area shape="rect" title=" " alt="" coords="587,155,693,181"/>
-<area shape="rect" title=" " alt="" coords="717,155,784,181"/>
-<area shape="rect" title=" " alt="" coords="808,155,923,181"/>
-<area shape="rect" title=" " alt="" coords="2317,80,2392,107"/>
-<area shape="rect" title=" " alt="" coords="947,155,1053,181"/>
-<area shape="rect" title=" " alt="" coords="1077,155,1184,181"/>
-<area shape="rect" title=" " alt="" coords="2417,80,2487,107"/>
-<area shape="rect" title=" " alt="" coords="2511,80,2622,107"/>
-<area shape="rect" href="nmf_logger_8h.html" title="Definition for the MultiSpecies Logger class." alt="" coords="165,80,267,107"/>
-<area shape="rect" href="nmf_utils_qt_8h.html" title="Definition for Qt widgets and functions that operate on widgets." alt="" coords="1829,80,1934,107"/>
-<area shape="rect" title=" " alt="" coords="2647,80,2713,107"/>
-<area shape="rect" title=" " alt="" coords="2737,80,2801,107"/>
-<area shape="rect" title=" " alt="" coords="2825,80,3004,107"/>
-<area shape="rect" title=" " alt="" coords="277,155,357,181"/>
-<area shape="rect" title=" " alt="" coords="96,155,155,181"/>
-<area shape="rect" title=" " alt="" coords="5,155,72,181"/>
-<area shape="rect" title=" " alt="" coords="179,155,253,181"/>
-<area shape="rect" title=" " alt="" coords="2549,155,2608,181"/>
-<area shape="rect" title=" " alt="" coords="2633,155,2695,181"/>
-<area shape="rect" title=" " alt="" coords="2720,155,2861,181"/>
-<area shape="rect" title=" " alt="" coords="2886,155,2981,181"/>
-<area shape="rect" title=" " alt="" coords="3005,155,3133,181"/>
-<area shape="rect" title=" " alt="" coords="3158,155,3253,181"/>
-<area shape="rect" title=" " alt="" coords="3277,155,3339,181"/>
-<area shape="rect" title=" " alt="" coords="3364,155,3439,181"/>
-<area shape="rect" title=" " alt="" coords="3463,155,3518,181"/>
-<area shape="rect" title=" " alt="" coords="3542,155,3639,181"/>
-<area shape="rect" title=" " alt="" coords="3663,155,3766,181"/>
-<area shape="rect" title=" " alt="" coords="3790,155,3874,181"/>
-<area shape="rect" title=" " alt="" coords="3899,155,3997,181"/>
-<area shape="rect" title=" " alt="" coords="4022,155,4138,181"/>
-<area shape="rect" title=" " alt="" coords="4162,155,4262,181"/>
-<area shape="rect" title=" " alt="" coords="4285,155,4368,181"/>
-<area shape="rect" title=" " alt="" coords="4392,155,4483,181"/>
-<area shape="rect" title=" " alt="" coords="1208,155,1293,181"/>
-<area shape="rect" title=" " alt="" coords="1318,155,1463,181"/>
-<area shape="rect" title=" " alt="" coords="1488,155,1648,181"/>
-<area shape="rect" title=" " alt="" coords="1673,155,1743,181"/>
-<area shape="rect" title=" " alt="" coords="1768,155,1867,181"/>
-<area shape="rect" title=" " alt="" coords="1891,155,2003,181"/>
-<area shape="rect" title=" " alt="" coords="2026,155,2126,181"/>
-<area shape="rect" title=" " alt="" coords="2150,155,2234,181"/>
-<area shape="rect" title=" " alt="" coords="2259,155,2365,181"/>
-<area shape="rect" title=" " alt="" coords="2390,155,2525,181"/>
+<area shape="rect" title="GUI definition for the Image Viewer set of widgets." alt="" coords="1145,5,1367,32"/>
+<area shape="rect" title=" " alt="" coords="381,155,486,181"/>
+<area shape="rect" title=" " alt="" coords="510,155,613,181"/>
+<area shape="rect" title=" " alt="" coords="637,155,688,181"/>
+<area shape="rect" title=" " alt="" coords="2149,80,2259,107"/>
+<area shape="rect" title=" " alt="" coords="2283,80,2357,107"/>
+<area shape="rect" title=" " alt="" coords="712,155,819,181"/>
+<area shape="rect" title=" " alt="" coords="843,155,909,181"/>
+<area shape="rect" title=" " alt="" coords="933,155,1048,181"/>
+<area shape="rect" title=" " alt="" coords="2381,80,2456,107"/>
+<area shape="rect" title=" " alt="" coords="1072,155,1179,181"/>
+<area shape="rect" title=" " alt="" coords="1203,155,1309,181"/>
+<area shape="rect" title=" " alt="" coords="1333,155,1403,181"/>
+<area shape="rect" title=" " alt="" coords="2480,80,2557,107"/>
+<area shape="rect" title=" " alt="" coords="2582,80,2693,107"/>
+<area shape="rect" href="nmf_logger_8h.html" title="Definition for the MultiSpecies Logger class." alt="" coords="167,80,271,107"/>
+<area shape="rect" href="nmf_utils_qt_8h.html" title="Definition for Qt widgets and functions that operate on widgets." alt="" coords="2019,80,2125,107"/>
+<area shape="rect" title=" " alt="" coords="2717,80,2896,107"/>
+<area shape="rect" title=" " alt="" coords="179,155,259,181"/>
+<area shape="rect" title=" " alt="" coords="5,155,64,181"/>
+<area shape="rect" title=" " alt="" coords="88,155,155,181"/>
+<area shape="rect" title=" " alt="" coords="283,155,357,181"/>
+<area shape="rect" title=" " alt="" coords="2000,155,2059,181"/>
+<area shape="rect" title=" " alt="" coords="2083,155,2146,181"/>
+<area shape="rect" title=" " alt="" coords="2171,155,2312,181"/>
+<area shape="rect" title=" " alt="" coords="2337,155,2431,181"/>
+<area shape="rect" title=" " alt="" coords="2456,155,2584,181"/>
+<area shape="rect" title=" " alt="" coords="2609,155,2703,181"/>
+<area shape="rect" title=" " alt="" coords="2727,155,2790,181"/>
+<area shape="rect" title=" " alt="" coords="2814,155,2909,181"/>
+<area shape="rect" title=" " alt="" coords="2933,155,3008,181"/>
+<area shape="rect" title=" " alt="" coords="3033,155,3133,181"/>
+<area shape="rect" title=" " alt="" coords="3157,155,3211,181"/>
+<area shape="rect" title=" " alt="" coords="3236,155,3332,181"/>
+<area shape="rect" title=" " alt="" coords="3357,155,3459,181"/>
+<area shape="rect" title=" " alt="" coords="3484,155,3647,181"/>
+<area shape="rect" title=" " alt="" coords="3671,155,3755,181"/>
+<area shape="rect" title=" " alt="" coords="3780,155,3879,181"/>
+<area shape="rect" title=" " alt="" coords="3903,155,4019,181"/>
+<area shape="rect" title=" " alt="" coords="4043,155,4143,181"/>
+<area shape="rect" title=" " alt="" coords="4167,155,4275,181"/>
+<area shape="rect" title=" " alt="" coords="4300,155,4431,181"/>
+<area shape="rect" title=" " alt="" coords="4455,155,4537,181"/>
+<area shape="rect" title=" " alt="" coords="4561,155,4692,181"/>
+<area shape="rect" title=" " alt="" coords="4716,155,4807,181"/>
+<area shape="rect" title=" " alt="" coords="4831,155,4916,181"/>
+<area shape="rect" title=" " alt="" coords="1427,155,1573,181"/>
+<area shape="rect" title=" " alt="" coords="1597,155,1757,181"/>
+<area shape="rect" title=" " alt="" coords="1782,155,1853,181"/>
+<area shape="rect" title=" " alt="" coords="1877,155,1976,181"/>
 </map>
 </div>
 </div>

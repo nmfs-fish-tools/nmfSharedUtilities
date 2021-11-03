@@ -157,41 +157,55 @@ nmfGrowthForm::extractParameters(
 }
 
 double
-nmfGrowthForm::evaluate(const int &SpeciesNum,
-                        const double &biomassAtTimeT,
-                        const std::vector<double> &growthRate,
-                        const std::vector<double> &carryingCapacity)
+nmfGrowthForm::evaluate(const double &biomassAtTimeT,
+                        const double &growthRate,
+                        const double &growthRateCovariate,
+                        const double &carryingCapacity,
+                        const double &carryingCapacityCovariate)
 {
     if (FunctionMap.find(m_type) == FunctionMap.end()) {
         return 0;
     } else {
-        return (this->*FunctionMap[m_type])(SpeciesNum,biomassAtTimeT,growthRate,carryingCapacity);
+        return (this->*FunctionMap[m_type])(biomassAtTimeT,
+                                            growthRate,growthRateCovariate,
+                                            carryingCapacity,carryingCapacityCovariate);
     }
 }
 
 double
-nmfGrowthForm::NoGrowth(const int &speciesNum,
-                        const double &biomassAtTime,
-                        const std::vector<double> &growthRate,
-                        const std::vector<double> &carryingCapacity)
+nmfGrowthForm::NoGrowth(const double &biomassAtTime,
+                        const double &growthRate,
+                        const double &growthRateCovariate,
+                        const double &carryingCapacity,
+                        const double &carryingCapacityCovariate)
 {
     return 0.0;
 }
 
 double
-nmfGrowthForm::LinearGrowth(const int &speciesNum,
-                            const double &biomassAtTime,
-                            const std::vector<double> &growthRate,
-                            const std::vector<double> &carryingCapacity)
+nmfGrowthForm::LinearGrowth(const double &biomassAtTime,
+                            const double &growthRate,
+                            const double &growthRateCovariate,
+                            const double &carryingCapacity,
+                            const double &carryingCapacityCovariate)
 {
-   return growthRate[speciesNum]*biomassAtTime;
+    double growthRateCovariateCoeff = 1.0; // RSK - estimate this next
+    double growthRateTerm  = growthRate*(1.0 + growthRateCovariateCoeff*growthRateCovariate);
+
+    return growthRateTerm*biomassAtTime;
 }
 
 double
-nmfGrowthForm::LogisticGrowth(const int &speciesNum,
-                              const double &biomassAtTime,
-                              const std::vector<double> &growthRate,
-                              const std::vector<double> &carryingCapacity)
+nmfGrowthForm::LogisticGrowth(const double &biomassAtTime,
+                              const double &growthRate,
+                              const double &growthRateCovariate,
+                              const double &carryingCapacity,
+                              const double &carryingCapacityCovariate)
 {
-    return growthRate[speciesNum]*biomassAtTime * (1.0-biomassAtTime/carryingCapacity[speciesNum]);
+    double growthRateCovariateCoeff       = 1.0; // RSK - estimate this next
+    double carryingCapacityCovariateCoeff = 1.0; // RSK - estimate this next
+    double growthRateTerm       = growthRate      *(1.0 + growthRateCovariateCoeff*growthRateCovariate);
+    double carryingCapacityTerm = carryingCapacity*(1.0 + carryingCapacityCovariateCoeff*carryingCapacityCovariate);
+
+    return (growthRateTerm * biomassAtTime * (1.0-biomassAtTime/(carryingCapacityTerm)));
 }

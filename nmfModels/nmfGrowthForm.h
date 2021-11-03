@@ -25,10 +25,11 @@ private:
     std::string m_Prefix;
 
     std::map<std::string, double(nmfGrowthForm::*)(
-            const int    &speciesNum,
             const double &initBiomass,
-            const std::vector<double> &growthRate,
-            const std::vector<double> &carryingCapacity
+            const double &growthRate,
+            const double &growthRateCovariate,
+            const double &carryingCapacity,
+            const double &carryingCapacityCovariate
     )> FunctionMap;
 
 
@@ -37,10 +38,11 @@ public:
     nmfGrowthForm(std::string theType);
    ~nmfGrowthForm() {};
 
-    double evaluate(const int    &speciesNum,
-                    const double &biomassAtTime,
-                    const std::vector<double> &growthRate,
-                    const std::vector<double> &carryingCapacity);
+    double evaluate(const double &biomassAtTime,
+                    const double &growthRate,
+                    const double &growthRateCovariate,
+                    const double &carryingCapacity,
+                    const double &carryingCapacityCovariate);
     int getNumParameters();
     void setType(std::string newType);
     std::string getType();
@@ -53,18 +55,21 @@ public:
     void loadParameterRanges(
             std::vector<std::pair<double,double> >& parameterRanges,
             const nmfStructsQt::ModelDataStruct& beeStruct);
-    double NoGrowth(const int &speciesNum,
-                    const double &biomassAtTime,
-                    const std::vector<double> &growthRate,
-                    const std::vector<double> &carryingCapacity);
-    double LinearGrowth(const int &speciesNum,
-                        const double &biomassAtTime,
-                        const std::vector<double> &growthRate,
-                        const std::vector<double> &carryingCapacity);
-    double LogisticGrowth(const int &speciesNum,
-                          const double &biomassAtTime,
-                          const std::vector<double> &growthRate,
-                          const std::vector<double> &carryingCapacity);
+    double NoGrowth(const double &biomassAtTime,
+                    const double &growthRate,
+                    const double &growthRateCovariate,
+                    const double &carryingCapacity,
+                    const double &carryingCapacityCovariate);
+    double LinearGrowth(const double &biomassAtTime,
+                        const double &growthRate,
+                        const double &growthRateCovariate,
+                        const double &carryingCapacity,
+                        const double &carryingCapacityCovariate);
+    double LogisticGrowth(const double &biomassAtTime,
+                          const double &growthRate,
+                          const double &growthRateCovariate,
+                          const double &carryingCapacity,
+                          const double &carryingCapacityCovariate);
     void setupFormMaps();
     void setAggProd(bool isAggProd);
     std::string getExpression();

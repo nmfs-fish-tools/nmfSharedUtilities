@@ -27,13 +27,14 @@ private:
     bool m_isAGGPROD;
 
     std::map<std::string, double(nmfHarvestForm::*)(
-            const int    &TimeT,
-            const int    &SpeciesNum,
-            const boost::numeric::ublas::matrix<double> &Catch,
-            const boost::numeric::ublas::matrix<double> &Effort,
-            const boost::numeric::ublas::matrix<double> &Exploitation,
+            const int& time,
+            const int& species,
             const double& biomassAtTime,
-            const std::vector<double>& catchabilityRate
+            const boost::numeric::ublas::matrix<double>& Catch,
+            const boost::numeric::ublas::matrix<double>& Effort,
+            const boost::numeric::ublas::matrix<double>& Exploitation,
+            const std::vector<double>& catchabilityRate,
+            const boost::numeric::ublas::matrix<double>& catchabilityRateCovariate
     )> m_FunctionMap;
 
 
@@ -48,44 +49,59 @@ public:
             const std::vector<double> &parameters,
             int& startPos,
             std::vector<double>& catchabilityRate);
-    double evaluate(const int    &timeMinus1,
-                    const int    &speciesNum,
-                    const boost::numeric::ublas::matrix<double> &Catch,
-                    const boost::numeric::ublas::matrix<double> &Effort,
-                    const boost::numeric::ublas::matrix<double> &Exploitation,
+    double evaluate(const int& time,
+                    const int& species,
                     const double& biomassAtTime,
-                    const std::vector<double>& catchabilityRate);
+                    const boost::numeric::ublas::matrix<double>& Catch,
+                    const boost::numeric::ublas::matrix<double>& Effort,
+                    const boost::numeric::ublas::matrix<double>& Exploitation,
+                    const std::vector<double>& catchabilityRate,
+                    const boost::numeric::ublas::matrix<double>& catchabilityRateCovariate);
     void loadParameterRanges(
                     std::vector<std::pair<double,double> >& parameterRanges,
                     nmfStructsQt::ModelDataStruct& beeStruct);
-    double NoHarvest(const int &timeMinus1,
-                     const int &speciesNum,
-                     const boost::numeric::ublas::matrix<double> &Catch,
-                     const boost::numeric::ublas::matrix<double> &Effort,
-                     const boost::numeric::ublas::matrix<double> &Exploitation,
+    double NoHarvest(const int& time,
+                     const int& species,
                      const double& biomassAtTime,
-                     const std::vector<double>& catchabilityRate);
-    double ExploitationHarvest(const int &timeMinus1,
-                               const int &speciesNum,
-                               const boost::numeric::ublas::matrix<double> &Catch,
-                               const boost::numeric::ublas::matrix<double> &Effort,
-                               const boost::numeric::ublas::matrix<double> &Exploitation,
+                     const boost::numeric::ublas::matrix<double>& Catch,
+                     const boost::numeric::ublas::matrix<double>& Effort,
+                     const boost::numeric::ublas::matrix<double>& Exploitation,
+                     const std::vector<double>& catchabilityRate,
+                     const boost::numeric::ublas::matrix<double>& catchabilityRateCovariate);
+    /**
+     * @brief ExploitationHarvest
+     * @param biomassAtTime
+     * @param Catch
+     * @param Effort : effort matrix; passing matrix because sometimes it may be empty and unused so can't pass the indexed value
+     * @param Exploitation
+     * @param catchabilityRate
+     * @param catchabilityRateCovariate
+     * @return
+     */
+    double ExploitationHarvest(const int& time,
+                               const int& species,
                                const double& biomassAtTime,
-                               const std::vector<double>& catchabilityRate);
-    double CatchHarvest(const int &timeMinus1,
-                        const int &speciesNum,
-                        const boost::numeric::ublas::matrix<double> &Catch,
-                        const boost::numeric::ublas::matrix<double> &Effort,
-                        const boost::numeric::ublas::matrix<double> &Exploitation,
+                               const boost::numeric::ublas::matrix<double>& Catch,
+                               const boost::numeric::ublas::matrix<double>& Effort,
+                               const boost::numeric::ublas::matrix<double>& Exploitation,
+                               const std::vector<double>& catchabilityRate,
+                               const boost::numeric::ublas::matrix<double>& catchabilityRateCovariate);
+    double CatchHarvest(const int& time,
+                        const int& species,
                         const double& biomassAtTime,
-                        const std::vector<double>& catchabilityRate);
-    double EffortHarvest(const int& timeMinus1,
-                         const int& speciesNum,
-                         const boost::numeric::ublas::matrix<double> &Catch,
-                         const boost::numeric::ublas::matrix<double> &Effort,
-                         const boost::numeric::ublas::matrix<double> &Exploitation,
+                        const boost::numeric::ublas::matrix<double>& Catch,
+                        const boost::numeric::ublas::matrix<double>& Effort,
+                        const boost::numeric::ublas::matrix<double>& Exploitation,
+                        const std::vector<double>& catchabilityRate,
+                        const boost::numeric::ublas::matrix<double>& catchabilityRateCovariate);
+    double EffortHarvest(const int& time,
+                         const int& species,
                          const double& biomassAtTime,
-                         const std::vector<double>& catchabilityRate);
+                         const boost::numeric::ublas::matrix<double>& Catch,
+                         const boost::numeric::ublas::matrix<double>& Effort,
+                         const boost::numeric::ublas::matrix<double>& Exploitation,
+                         const std::vector<double>& catchabilityRate,
+                         const boost::numeric::ublas::matrix<double>& catchabilityRateCovariate);
     void setupFormMaps();
     std::string getExpression();
     std::string getKey();

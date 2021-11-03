@@ -66,7 +66,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">nmfConstants.h File Reference</div>  </div>
@@ -77,14 +76,16 @@ $(function() {
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;math.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for nmfConstants.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="nmf_constants_8h__incl.png" border="0" usemap="#nmf_utilities_2nmf_constants_8h" alt=""/></div>
 <map name="nmf_utilities_2nmf_constants_8h" id="nmf_utilities_2nmf_constants_8h">
-<area shape="rect" title="Definition for common constants used in MultiSpecies tools." alt="" coords="5,5,212,32"/>
-<area shape="rect" title=" " alt="" coords="21,80,101,107"/>
-<area shape="rect" title=" " alt="" coords="125,80,188,107"/>
+<area shape="rect" title="Definition for common constants used in MultiSpecies tools." alt="" coords="38,5,245,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,85,107"/>
+<area shape="rect" title=" " alt="" coords="110,80,173,107"/>
+<area shape="rect" title=" " alt="" coords="197,80,265,107"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -92,8 +93,9 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="nmf_constants_8h__dep__incl.png" border="0" usemap="#nmf_utilities_2nmf_constants_8hdep" alt=""/></div>
 <map name="nmf_utilities_2nmf_constants_8hdep" id="nmf_utilities_2nmf_constants_8hdep">
-<area shape="rect" title="Definition for common constants used in MultiSpecies tools." alt="" coords="17,5,223,32"/>
+<area shape="rect" title="Definition for common constants used in MultiSpecies tools." alt="" coords="147,5,354,32"/>
 <area shape="rect" href="nmf_database_8cpp.html" title="This file contains the NMFS DatabaseAPI implementation." alt="" coords="5,80,235,107"/>
+<area shape="rect" href="nmf_utils_complex_8cpp.html" title="These routines were originally from Complex2.bas." alt="" coords="259,80,503,107"/>
 </map>
 </div>
 </div>
@@ -101,280 +103,304 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a40977b086e0aef9ce34d2460b4beae8a"><td class="memItemLeft" align="right" valign="top"><a id="a40977b086e0aef9ce34d2460b4beae8a"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::nullsAsEmptyString</b> = true</td></tr>
-<tr class="separator:a40977b086e0aef9ce34d2460b4beae8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab427df00bf0e9d3852c76d335bfab731"><td class="memItemLeft" align="right" valign="top"><a id="ab427df00bf0e9d3852c76d335bfab731"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::nullAsZero</b> = false</td></tr>
-<tr class="separator:ab427df00bf0e9d3852c76d335bfab731"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01164da8a47bc78c0e70751f85b774ff"><td class="memItemLeft" align="right" valign="top"><a id="a01164da8a47bc78c0e70751f85b774ff"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::RoundOff</b> = true</td></tr>
-<tr class="separator:a01164da8a47bc78c0e70751f85b774ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dfbbec25b998d7eeab6aaf060cff95f"><td class="memItemLeft" align="right" valign="top"><a id="a3dfbbec25b998d7eeab6aaf060cff95f"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::NoSignal</b> = false</td></tr>
-<tr class="separator:a3dfbbec25b998d7eeab6aaf060cff95f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5054f3b94f6a0d97dcf126645f641ee"><td class="memItemLeft" align="right" valign="top"><a id="af5054f3b94f6a0d97dcf126645f641ee"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::RotateLabels</b> = true</td></tr>
-<tr class="separator:af5054f3b94f6a0d97dcf126645f641ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a391ac1f07192d9a4062cd9bbc7f3c282"><td class="memItemLeft" align="right" valign="top"><a id="a391ac1f07192d9a4062cd9bbc7f3c282"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::DontRotateLabels</b> = false</td></tr>
-<tr class="separator:a391ac1f07192d9a4062cd9bbc7f3c282"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8fae13c923482b924afebf005f5cf470"><td class="memItemLeft" align="right" valign="top"><a id="a8fae13c923482b924afebf005f5cf470"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::TYPE_PREDATOR</b> = 0</td></tr>
-<tr class="separator:a8fae13c923482b924afebf005f5cf470"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85557426a10c5141060d7fb1dbae2308"><td class="memItemLeft" align="right" valign="top"><a id="a85557426a10c5141060d7fb1dbae2308"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::TYPE_PREY</b> = 1</td></tr>
-<tr class="separator:a85557426a10c5141060d7fb1dbae2308"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5db00f6fb36bb70a151ba15effa886e1"><td class="memItemLeft" align="right" valign="top"><a id="a5db00f6fb36bb70a151ba15effa886e1"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::TYPE_OTHER_PREDATOR</b> = 3</td></tr>
-<tr class="separator:a5db00f6fb36bb70a151ba15effa886e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1d5f963c1551c9c389a2bad62dc5932"><td class="memItemLeft" align="right" valign="top"><a id="ad1d5f963c1551c9c389a2bad62dc5932"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxNumberLogFiles</b> = 50</td></tr>
-<tr class="separator:ad1d5f963c1551c9c389a2bad62dc5932"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad824bb25f7ac86029c46e99740d18481"><td class="memItemLeft" align="right" valign="top"><a id="ad824bb25f7ac86029c46e99740d18481"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::DefaultReferenceAge</b> = 2</td></tr>
-<tr class="separator:ad824bb25f7ac86029c46e99740d18481"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae54549882f64b8e07a2b0c4c8954069d"><td class="memItemLeft" align="right" valign="top"><a id="ae54549882f64b8e07a2b0c4c8954069d"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MinSliderValue</b> = 0</td></tr>
-<tr class="separator:ae54549882f64b8e07a2b0c4c8954069d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac153d95549a68576d17d04b2e83f08b8"><td class="memItemLeft" align="right" valign="top"><a id="ac153d95549a68576d17d04b2e83f08b8"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxSliderValue</b> = 99</td></tr>
-<tr class="separator:ac153d95549a68576d17d04b2e83f08b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a471a309a2cddd6a0b625555ce6b2b722"><td class="memItemLeft" align="right" valign="top"><a id="a471a309a2cddd6a0b625555ce6b2b722"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxNumberSeasons</b> = 6</td></tr>
-<tr class="separator:a471a309a2cddd6a0b625555ce6b2b722"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c8bf7b7d6e7d97e12583871edcaf988"><td class="memItemLeft" align="right" valign="top"><a id="a2c8bf7b7d6e7d97e12583871edcaf988"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxNumberYears</b> = 100</td></tr>
-<tr class="separator:a2c8bf7b7d6e7d97e12583871edcaf988"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7a0a03e6b58851c96fde81f39a1961c"><td class="memItemLeft" align="right" valign="top"><a id="aa7a0a03e6b58851c96fde81f39a1961c"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxNumberAges</b> = 21</td></tr>
-<tr class="separator:aa7a0a03e6b58851c96fde81f39a1961c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab98c95124e003397a77d1c645abecff8"><td class="memItemLeft" align="right" valign="top"><a id="ab98c95124e003397a77d1c645abecff8"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxNumberSpecies</b> = 12</td></tr>
-<tr class="separator:ab98c95124e003397a77d1c645abecff8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf858f2471c2dcdc493b6c4cf5a12554"><td class="memItemLeft" align="right" valign="top"><a id="aaf858f2471c2dcdc493b6c4cf5a12554"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxNumberOtherPredators</b> = 12</td></tr>
-<tr class="separator:aaf858f2471c2dcdc493b6c4cf5a12554"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2a4a749f5e81a68df135e6fb3f25867"><td class="memItemLeft" align="right" valign="top"><a id="aa2a4a749f5e81a68df135e6fb3f25867"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxNumberPrey</b> = 20</td></tr>
-<tr class="separator:aa2a4a749f5e81a68df135e6fb3f25867"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81a64749348edfd3ef74d87e21f05dfc"><td class="memItemLeft" align="right" valign="top"><a id="a81a64749348edfd3ef74d87e21f05dfc"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxNumberFleets</b> = 6</td></tr>
-<tr class="separator:a81a64749348edfd3ef74d87e21f05dfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd759efba29a7adb481879baf98b7e6d"><td class="memItemLeft" align="right" valign="top"><a id="acd759efba29a7adb481879baf98b7e6d"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxNumberIndices</b> = 100</td></tr>
-<tr class="separator:acd759efba29a7adb481879baf98b7e6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ad617a5df29da5de9105495bb2b315f"><td class="memItemLeft" align="right" valign="top"><a id="a1ad617a5df29da5de9105495bb2b315f"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxNumberSizeCats</b> = 20</td></tr>
-<tr class="separator:a1ad617a5df29da5de9105495bb2b315f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44199c62df730294b7d47705def4b9cf"><td class="memItemLeft" align="right" valign="top"><a id="a44199c62df730294b7d47705def4b9cf"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxTotalSpecies</b> = 50</td></tr>
-<tr class="separator:a44199c62df730294b7d47705def4b9cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1ddc1ee237d3629c7bc917e53ae3714"><td class="memItemLeft" align="right" valign="top"><a id="ab1ddc1ee237d3629c7bc917e53ae3714"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::NumCategoriesForVerticalNotation</b> = 10</td></tr>
-<tr class="separator:ab1ddc1ee237d3629c7bc917e53ae3714"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a937c45900289ec8afc0ece3e4d8d147e"><td class="memItemLeft" align="right" valign="top"><a id="a937c45900289ec8afc0ece3e4d8d147e"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::NumFeedingDataRows</b> = 7</td></tr>
-<tr class="separator:a937c45900289ec8afc0ece3e4d8d147e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1259acbf3c5d997c47284f382c77961d"><td class="memItemLeft" align="right" valign="top"><a id="a1259acbf3c5d997c47284f382c77961d"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MinNumForecastYears</b> = 3</td></tr>
-<tr class="separator:a1259acbf3c5d997c47284f382c77961d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a19e4087e2093d5687f4f599dfc498b"><td class="memItemLeft" align="right" valign="top"><a id="a4a19e4087e2093d5687f4f599dfc498b"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxNumForecastYears</b> = 20</td></tr>
-<tr class="separator:a4a19e4087e2093d5687f4f599dfc498b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a002d3c0c66e677d94df29afad73d284e"><td class="memItemLeft" align="right" valign="top"><a id="a002d3c0c66e677d94df29afad73d284e"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxPathLength</b> = 1000</td></tr>
-<tr class="separator:a002d3c0c66e677d94df29afad73d284e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe2c436e38ceb1b037a5e8b234a85114"><td class="memItemLeft" align="right" valign="top"><a id="abe2c436e38ceb1b037a5e8b234a85114"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::RearrangeTitle</b> = true</td></tr>
-<tr class="separator:abe2c436e38ceb1b037a5e8b234a85114"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a384d856b311494253afc4fd225f6ef91"><td class="memItemLeft" align="right" valign="top"><a id="a384d856b311494253afc4fd225f6ef91"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::DontRearrangeTitle</b> = false</td></tr>
-<tr class="separator:a384d856b311494253afc4fd225f6ef91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa57f6e7163277c0d05b9cba5ad5bed05"><td class="memItemLeft" align="right" valign="top"><a id="aa57f6e7163277c0d05b9cba5ad5bed05"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Clear</b> = true</td></tr>
-<tr class="separator:aa57f6e7163277c0d05b9cba5ad5bed05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abaa81906f1f7e06d8ce191e7a25356e6"><td class="memItemLeft" align="right" valign="top"><a id="abaa81906f1f7e06d8ce191e7a25356e6"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::NoClear</b> = false</td></tr>
-<tr class="separator:abaa81906f1f7e06d8ce191e7a25356e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6640d03525842c0e75ade39014f60855"><td class="memItemLeft" align="right" valign="top"><a id="a6640d03525842c0e75ade39014f60855"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::ShowError</b> = true</td></tr>
-<tr class="separator:a6640d03525842c0e75ade39014f60855"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba4cf21bcdbda89cf69f14b7fb623e84"><td class="memItemLeft" align="right" valign="top"><a id="aba4cf21bcdbda89cf69f14b7fb623e84"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::DontShowError</b> = false</td></tr>
-<tr class="separator:aba4cf21bcdbda89cf69f14b7fb623e84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafac53cc4b4dbafac25e208c662570e6"><td class="memItemLeft" align="right" valign="top"><a id="aafac53cc4b4dbafac25e208c662570e6"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::IsProportion</b> = true</td></tr>
-<tr class="separator:aafac53cc4b4dbafac25e208c662570e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97b7abe8138ee0eeef469700aed1b9e6"><td class="memItemLeft" align="right" valign="top"><a id="a97b7abe8138ee0eeef469700aed1b9e6"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::IsNotProportion</b> = false</td></tr>
-<tr class="separator:a97b7abe8138ee0eeef469700aed1b9e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a412f25e2881f65f2f80e10b474c9cddb"><td class="memItemLeft" align="right" valign="top"><a id="a412f25e2881f65f2f80e10b474c9cddb"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::includeTotalColumn</b> = true</td></tr>
-<tr class="separator:a412f25e2881f65f2f80e10b474c9cddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fa328bab7d78126ceca9be5c9d87937"><td class="memItemLeft" align="right" valign="top"><a id="a6fa328bab7d78126ceca9be5c9d87937"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::dontIncludeTotalColumn</b> = false</td></tr>
-<tr class="separator:a6fa328bab7d78126ceca9be5c9d87937"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e443ebedf15c4111b13415ba9c662aa"><td class="memItemLeft" align="right" valign="top"><a id="a2e443ebedf15c4111b13415ba9c662aa"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::autoFillSegments</b> = true</td></tr>
-<tr class="separator:a2e443ebedf15c4111b13415ba9c662aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a194274a82b7065dca54f00c7fea58669"><td class="memItemLeft" align="right" valign="top"><a id="a194274a82b7065dca54f00c7fea58669"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::dontAutoFillSegments</b> = true</td></tr>
-<tr class="separator:a194274a82b7065dca54f00c7fea58669"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22f096ec50dc6a0f3178af79eb3a5bc6"><td class="memItemLeft" align="right" valign="top"><a id="a22f096ec50dc6a0f3178af79eb3a5bc6"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::FirstYearOnly</b> = true</td></tr>
-<tr class="separator:a22f096ec50dc6a0f3178af79eb3a5bc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1cce8a3613719f33ba762a0240faa7af"><td class="memItemLeft" align="right" valign="top"><a id="a1cce8a3613719f33ba762a0240faa7af"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::AllYears</b> = false</td></tr>
-<tr class="separator:a1cce8a3613719f33ba762a0240faa7af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6239f0191a9429640ceb1cb0ea1ea809"><td class="memItemLeft" align="right" valign="top"><a id="a6239f0191a9429640ceb1cb0ea1ea809"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Checked</b> = true</td></tr>
-<tr class="separator:a6239f0191a9429640ceb1cb0ea1ea809"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a964ea76bb1001eeb0bbea106333fb3b5"><td class="memItemLeft" align="right" valign="top"><a id="a964ea76bb1001eeb0bbea106333fb3b5"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::NotChecked</b> = false</td></tr>
-<tr class="separator:a964ea76bb1001eeb0bbea106333fb3b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a446eeaf95aa61b019edf0699ea465f49"><td class="memItemLeft" align="right" valign="top"><a id="a446eeaf95aa61b019edf0699ea465f49"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::ShowShadow</b> = true</td></tr>
-<tr class="separator:a446eeaf95aa61b019edf0699ea465f49"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afde424e2d9540c8ee21fb94de5efe11e"><td class="memItemLeft" align="right" valign="top"><a id="afde424e2d9540c8ee21fb94de5efe11e"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::DontShowShadow</b> = false</td></tr>
-<tr class="separator:afde424e2d9540c8ee21fb94de5efe11e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ba59089bf60bbcbdb1d86509809c5b3"><td class="memItemLeft" align="right" valign="top"><a id="a7ba59089bf60bbcbdb1d86509809c5b3"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::ReverseAxis</b> = true</td></tr>
-<tr class="separator:a7ba59089bf60bbcbdb1d86509809c5b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4ee05349bab6d7c14bd4521d45213a6"><td class="memItemLeft" align="right" valign="top"><a id="ab4ee05349bab6d7c14bd4521d45213a6"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::DontReverseAxis</b> = false</td></tr>
-<tr class="separator:ab4ee05349bab6d7c14bd4521d45213a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea7dde61be77b2dad44a29c5217a4b55"><td class="memItemLeft" align="right" valign="top"><a id="aea7dde61be77b2dad44a29c5217a4b55"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::ShowLegend</b> = true</td></tr>
-<tr class="separator:aea7dde61be77b2dad44a29c5217a4b55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1782b2ad0a5016b42ff736a8d00cb23"><td class="memItemLeft" align="right" valign="top"><a id="aa1782b2ad0a5016b42ff736a8d00cb23"></a>
-const EXTERN bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::DontShowLegend</b> = false</td></tr>
-<tr class="separator:aa1782b2ad0a5016b42ff736a8d00cb23"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e6dcc5723fbc4763ff959c0a442eecb"><td class="memItemLeft" align="right" valign="top"><a id="a8e6dcc5723fbc4763ff959c0a442eecb"></a>
-const EXTERN double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::KgToLbs</b> = 2.20462</td></tr>
-<tr class="separator:a8e6dcc5723fbc4763ff959c0a442eecb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a740fcf0b7f0aada40880d7efebdb001e"><td class="memItemLeft" align="right" valign="top"><a id="a740fcf0b7f0aada40880d7efebdb001e"></a>
-const EXTERN double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MortalityMax</b> = 5.0</td></tr>
-<tr class="separator:a740fcf0b7f0aada40880d7efebdb001e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac69c218e4069b17f88b681900c4e0363"><td class="memItemLeft" align="right" valign="top"><a id="ac69c218e4069b17f88b681900c4e0363"></a>
-const EXTERN double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MortalityInit</b> = 1.0</td></tr>
-<tr class="separator:ac69c218e4069b17f88b681900c4e0363"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad04fb723fa8d56f7e773dbf40dabf703"><td class="memItemLeft" align="right" valign="top"><a id="ad04fb723fa8d56f7e773dbf40dabf703"></a>
-const EXTERN double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MortalityMin</b> = 0.0</td></tr>
-<tr class="separator:ad04fb723fa8d56f7e773dbf40dabf703"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad116e400ee78a11accec89374d90d1b3"><td class="memItemLeft" align="right" valign="top"><a id="ad116e400ee78a11accec89374d90d1b3"></a>
-const EXTERN double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MortalityInc</b> = 0.01</td></tr>
-<tr class="separator:ad116e400ee78a11accec89374d90d1b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae706eef11fd897ea5b2ef78b5eb0a07d"><td class="memItemLeft" align="right" valign="top"><a id="ae706eef11fd897ea5b2ef78b5eb0a07d"></a>
-const EXTERN double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::TerminalMortalityMin</b> = 0.01</td></tr>
-<tr class="separator:ae706eef11fd897ea5b2ef78b5eb0a07d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10398dffa4d23764d8115764c8c4be77"><td class="memItemLeft" align="right" valign="top"><a id="a10398dffa4d23764d8115764c8c4be77"></a>
-const EXTERN double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::TerminalMortalityMax</b> = 5.0</td></tr>
-<tr class="separator:a10398dffa4d23764d8115764c8c4be77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad02af5f904c7edf785e21772a07ac301"><td class="memItemLeft" align="right" valign="top"><a id="ad02af5f904c7edf785e21772a07ac301"></a>
-const EXTERN double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::DefaultTerminalMortality</b> = 0.5</td></tr>
-<tr class="separator:ad02af5f904c7edf785e21772a07ac301"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4887ca64ff29465485483f49e648e139"><td class="memItemLeft" align="right" valign="top"><a id="a4887ca64ff29465485483f49e648e139"></a>
-const EXTERN double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::DefaultResidualNaturalMortality</b> = 0.25</td></tr>
-<tr class="separator:a4887ca64ff29465485483f49e648e139"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a337dad6a156d6dda601c2305e1fdd0b5"><td class="memItemLeft" align="right" valign="top"><a id="a337dad6a156d6dda601c2305e1fdd0b5"></a>
-const EXTERN double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::DefaultPredationMortality</b> = 0.0</td></tr>
-<tr class="separator:a337dad6a156d6dda601c2305e1fdd0b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67b66484fb1690b549166e0e0755979f"><td class="memItemLeft" align="right" valign="top"><a id="a67b66484fb1690b549166e0e0755979f"></a>
-const EXTERN double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::SelectivityMin</b> = 0.0</td></tr>
-<tr class="separator:a67b66484fb1690b549166e0e0755979f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30be34bb87c344b06c99ae742231d589"><td class="memItemLeft" align="right" valign="top"><a id="a30be34bb87c344b06c99ae742231d589"></a>
-const EXTERN double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::SelectivityMax</b> = 1.0</td></tr>
-<tr class="separator:a30be34bb87c344b06c99ae742231d589"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa340c221da66c063f0cec81577f3ebbe"><td class="memItemLeft" align="right" valign="top"><a id="aa340c221da66c063f0cec81577f3ebbe"></a>
-const EXTERN double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaturityMin</b> = 0.0</td></tr>
-<tr class="separator:aa340c221da66c063f0cec81577f3ebbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a179b08f485a97d197f771706125ad954"><td class="memItemLeft" align="right" valign="top"><a id="a179b08f485a97d197f771706125ad954"></a>
-const EXTERN double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaturityMax</b> = 1.0</td></tr>
-<tr class="separator:a179b08f485a97d197f771706125ad954"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ad46879c7f42094b068de8be70da769"><td class="memItemLeft" align="right" valign="top"><a id="a0ad46879c7f42094b068de8be70da769"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::NoValueInt</b> = -9999</td></tr>
-<tr class="separator:a0ad46879c7f42094b068de8be70da769"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6531bb5db3c4af46231839d1ac9f35ab"><td class="memItemLeft" align="right" valign="top"><a id="a6531bb5db3c4af46231839d1ac9f35ab"></a>
-const EXTERN double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::NoValueDouble</b> = -9999.0</td></tr>
-<tr class="separator:a6531bb5db3c4af46231839d1ac9f35ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0bd82c65ac66ea235d1d1c6e13b9a0c8"><td class="memItemLeft" align="right" valign="top"><a id="a0bd82c65ac66ea235d1d1c6e13b9a0c8"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::ProgressUpdateFrequency</b> = 1000</td></tr>
-<tr class="separator:a0bd82c65ac66ea235d1d1c6e13b9a0c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab64efb2293c838e8c03fbeab104592c8"><td class="memItemLeft" align="right" valign="top"><a id="ab64efb2293c838e8c03fbeab104592c8"></a>
-const EXTERN double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxBiomass</b> = 1e12</td></tr>
-<tr class="separator:ab64efb2293c838e8c03fbeab104592c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41441a0286cc10b17ad7603fdd859807"><td class="memItemLeft" align="right" valign="top"><a id="a41441a0286cc10b17ad7603fdd859807"></a>
-const EXTERN double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::NearlyZero</b> = 0.000001</td></tr>
-<tr class="separator:a41441a0286cc10b17ad7603fdd859807"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a09b4a1b6b47c8a242e4c234b50f77a38"><td class="memItemLeft" align="right" valign="top"><a id="a09b4a1b6b47c8a242e4c234b50f77a38"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Normal</b> = 0</td></tr>
-<tr class="separator:a09b4a1b6b47c8a242e4c234b50f77a38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43a07f7684a337dfc2e768f4f92f4ff3"><td class="memItemLeft" align="right" valign="top"><a id="a43a07f7684a337dfc2e768f4f92f4ff3"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Bold</b> = 1</td></tr>
-<tr class="separator:a43a07f7684a337dfc2e768f4f92f4ff3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b083cd00b1e8824c6c157e89e1eecad"><td class="memItemLeft" align="right" valign="top"><a id="a9b083cd00b1e8824c6c157e89e1eecad"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Warning</b> = 2</td></tr>
-<tr class="separator:a9b083cd00b1e8824c6c157e89e1eecad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7dfc8334f00f5f9abd992dd3b786e759"><td class="memItemLeft" align="right" valign="top"><a id="a7dfc8334f00f5f9abd992dd3b786e759"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Error</b> = 3</td></tr>
-<tr class="separator:a7dfc8334f00f5f9abd992dd3b786e759"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7c593c1917a1a84a7d3fb593a1da836"><td class="memItemLeft" align="right" valign="top"><a id="ad7c593c1917a1a84a7d3fb593a1da836"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Highlight</b> = 4</td></tr>
-<tr class="separator:ad7c593c1917a1a84a7d3fb593a1da836"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab40980878ce6fd1af9bb007bcaf40698"><td class="memItemLeft" align="right" valign="top"><a id="ab40980878ce6fd1af9bb007bcaf40698"></a>
-const EXTERN int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Section</b> = 5</td></tr>
-<tr class="separator:ab40980878ce6fd1af9bb007bcaf40698"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9093d1c312d32ac56c47cce65dddd795"><td class="memItemLeft" align="right" valign="top"><a id="a9093d1c312d32ac56c47cce65dddd795"></a>
-const EXTERN std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::DeepSkyBlue</b> = &quot;#00BFFF&quot;</td></tr>
-<tr class="separator:a9093d1c312d32ac56c47cce65dddd795"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08709f0ab38258e22a4a0517755567d1"><td class="memItemLeft" align="right" valign="top"><a id="a08709f0ab38258e22a4a0517755567d1"></a>
-const EXTERN std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Blue</b> = &quot;#0072B2&quot;</td></tr>
-<tr class="separator:a08709f0ab38258e22a4a0517755567d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab85a001ec2f0f883b770f88e120559d0"><td class="memItemLeft" align="right" valign="top"><a id="ab85a001ec2f0f883b770f88e120559d0"></a>
-const EXTERN std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Orange</b> = &quot;#E69F00&quot;</td></tr>
-<tr class="separator:ab85a001ec2f0f883b770f88e120559d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaca098b1b7a16f6c21169c208a819725"><td class="memItemLeft" align="right" valign="top"><a id="aaca098b1b7a16f6c21169c208a819725"></a>
-const EXTERN std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Black</b> = &quot;#000000&quot;</td></tr>
-<tr class="separator:aaca098b1b7a16f6c21169c208a819725"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4eeaeeb3808ebf7af2e27532086ca281"><td class="memItemLeft" align="right" valign="top"><a id="a4eeaeeb3808ebf7af2e27532086ca281"></a>
-const EXTERN std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::SkyBlue</b> = &quot;#56B4E9&quot;</td></tr>
-<tr class="separator:a4eeaeeb3808ebf7af2e27532086ca281"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21357a05d95a43dad4cb7caef0e60b9f"><td class="memItemLeft" align="right" valign="top"><a id="a21357a05d95a43dad4cb7caef0e60b9f"></a>
-const EXTERN std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Gray</b> = &quot;#C8C8C8&quot;</td></tr>
-<tr class="separator:a21357a05d95a43dad4cb7caef0e60b9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb3e28fbb9f11af3a9c7d756ee5fac81"><td class="memItemLeft" align="right" valign="top"><a id="abb3e28fbb9f11af3a9c7d756ee5fac81"></a>
-const EXTERN std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Red</b> = &quot;#FF0000&quot;</td></tr>
-<tr class="separator:abb3e28fbb9f11af3a9c7d756ee5fac81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa8156ad652944389d8cfb92f28ee2c1"><td class="memItemLeft" align="right" valign="top"><a id="afa8156ad652944389d8cfb92f28ee2c1"></a>
-const EXTERN std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::LineColors</b> = {Blue,Orange,Black,SkyBlue,Gray,Red}</td></tr>
-<tr class="separator:afa8156ad652944389d8cfb92f28ee2c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31c6dd5b63aad8de936755a4d9b3e2f3"><td class="memItemLeft" align="right" valign="top"><a id="a31c6dd5b63aad8de936755a4d9b3e2f3"></a>
-const EXTERN std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::LineColorNames</b> = {&quot;Blue&quot;,&quot;Orange&quot;,&quot;Black&quot;,&quot;Sky Blue&quot;,&quot;Gray&quot;,&quot;Red&quot;}</td></tr>
-<tr class="separator:a31c6dd5b63aad8de936755a4d9b3e2f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a004c0eb8476c7e5a00ffeac81a088305"><td class="memItemLeft" align="right" valign="top"><a id="a004c0eb8476c7e5a00ffeac81a088305"></a>
-const EXTERN std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::ClearWindow</b> = &quot;&quot;</td></tr>
-<tr class="separator:a004c0eb8476c7e5a00ffeac81a088305"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fa00c3e7758bd5b7a437d908a795175"><td class="memItemLeft" align="right" valign="top"><a id="a6fa00c3e7758bd5b7a437d908a795175"></a>
-const EXTERN std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::BlankLine</b> = &quot; &quot;</td></tr>
-<tr class="separator:a6fa00c3e7758bd5b7a437d908a795175"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a255b89b185656898a544ba614977cd4d"><td class="memItemLeft" align="right" valign="top">const EXTERN std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::SurfaceThemes</b></td></tr>
-<tr class="separator:a255b89b185656898a544ba614977cd4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2b5f13173778c3fc96460e1951c3ff1"><td class="memItemLeft" align="right" valign="top"><a id="ab2b5f13173778c3fc96460e1951c3ff1"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::nullsAsEmptyString</b> = true</td></tr>
+<tr class="separator:ab2b5f13173778c3fc96460e1951c3ff1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ddc265ed1a175a79a59bae7d86c2bf0"><td class="memItemLeft" align="right" valign="top"><a id="a0ddc265ed1a175a79a59bae7d86c2bf0"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::nullAsZero</b> = false</td></tr>
+<tr class="separator:a0ddc265ed1a175a79a59bae7d86c2bf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50884657293ab4bae948ecb347bdc0dc"><td class="memItemLeft" align="right" valign="top"><a id="a50884657293ab4bae948ecb347bdc0dc"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::RoundOff</b> = true</td></tr>
+<tr class="separator:a50884657293ab4bae948ecb347bdc0dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1039d13e98b3a48996b4c6e273c48f9"><td class="memItemLeft" align="right" valign="top"><a id="ac1039d13e98b3a48996b4c6e273c48f9"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::NoSignal</b> = false</td></tr>
+<tr class="separator:ac1039d13e98b3a48996b4c6e273c48f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0f474c842bacc2510e8b4237a3372e1"><td class="memItemLeft" align="right" valign="top"><a id="aa0f474c842bacc2510e8b4237a3372e1"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::RotateLabels</b> = true</td></tr>
+<tr class="separator:aa0f474c842bacc2510e8b4237a3372e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8b3fd6598640700de40fb6c4b9fcb4d"><td class="memItemLeft" align="right" valign="top"><a id="aa8b3fd6598640700de40fb6c4b9fcb4d"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::DontRotateLabels</b> = false</td></tr>
+<tr class="separator:aa8b3fd6598640700de40fb6c4b9fcb4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a991b99e168ecf438197b1c7e4195b2fe"><td class="memItemLeft" align="right" valign="top"><a id="a991b99e168ecf438197b1c7e4195b2fe"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::TYPE_PREDATOR</b> = 0</td></tr>
+<tr class="separator:a991b99e168ecf438197b1c7e4195b2fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12d0a6624d1b0c18e3df4732576fd76d"><td class="memItemLeft" align="right" valign="top"><a id="a12d0a6624d1b0c18e3df4732576fd76d"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::TYPE_PREY</b> = 1</td></tr>
+<tr class="separator:a12d0a6624d1b0c18e3df4732576fd76d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4832e8d0a308e8e0e3458b7106b8bf57"><td class="memItemLeft" align="right" valign="top"><a id="a4832e8d0a308e8e0e3458b7106b8bf57"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::TYPE_OTHER_PREDATOR</b> = 3</td></tr>
+<tr class="separator:a4832e8d0a308e8e0e3458b7106b8bf57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed51a0aa21ab7ce24115c5ca181a7c7b"><td class="memItemLeft" align="right" valign="top"><a id="aed51a0aa21ab7ce24115c5ca181a7c7b"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxNumberLogFiles</b> = 50</td></tr>
+<tr class="separator:aed51a0aa21ab7ce24115c5ca181a7c7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23d07ef04d75b7073589616fb2efe88e"><td class="memItemLeft" align="right" valign="top"><a id="a23d07ef04d75b7073589616fb2efe88e"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::DefaultReferenceAge</b> = 2</td></tr>
+<tr class="separator:a23d07ef04d75b7073589616fb2efe88e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42722fdf9656c561d6220b571a2b65f5"><td class="memItemLeft" align="right" valign="top"><a id="a42722fdf9656c561d6220b571a2b65f5"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MinSliderValue</b> = 0</td></tr>
+<tr class="separator:a42722fdf9656c561d6220b571a2b65f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64e2d1bfaf1e23132776dbe7d614e232"><td class="memItemLeft" align="right" valign="top"><a id="a64e2d1bfaf1e23132776dbe7d614e232"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxSliderValue</b> = 99</td></tr>
+<tr class="separator:a64e2d1bfaf1e23132776dbe7d614e232"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6190949f01bbcb1c4a3d1dd2c8d67416"><td class="memItemLeft" align="right" valign="top"><a id="a6190949f01bbcb1c4a3d1dd2c8d67416"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxNumberSeasons</b> = 6</td></tr>
+<tr class="separator:a6190949f01bbcb1c4a3d1dd2c8d67416"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb7e26addf323f50dd07c05bf410f90d"><td class="memItemLeft" align="right" valign="top"><a id="adb7e26addf323f50dd07c05bf410f90d"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxNumberYears</b> = 100</td></tr>
+<tr class="separator:adb7e26addf323f50dd07c05bf410f90d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a933194f6b47ec6b006cb703070311094"><td class="memItemLeft" align="right" valign="top"><a id="a933194f6b47ec6b006cb703070311094"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxNumberAges</b> = 21</td></tr>
+<tr class="separator:a933194f6b47ec6b006cb703070311094"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8f6ebd10c8f995ef40faa412ab83d50"><td class="memItemLeft" align="right" valign="top"><a id="af8f6ebd10c8f995ef40faa412ab83d50"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxNumberSpecies</b> = 12</td></tr>
+<tr class="separator:af8f6ebd10c8f995ef40faa412ab83d50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1029ec0bf68f1e67fb1567b23280f105"><td class="memItemLeft" align="right" valign="top"><a id="a1029ec0bf68f1e67fb1567b23280f105"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxNumberOtherPredators</b> = 12</td></tr>
+<tr class="separator:a1029ec0bf68f1e67fb1567b23280f105"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab21d54c3d5590dbb9565c5937236b47b"><td class="memItemLeft" align="right" valign="top"><a id="ab21d54c3d5590dbb9565c5937236b47b"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxNumberPrey</b> = 20</td></tr>
+<tr class="separator:ab21d54c3d5590dbb9565c5937236b47b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab684e77e2de2fb24c8f38670716c3ed8"><td class="memItemLeft" align="right" valign="top"><a id="ab684e77e2de2fb24c8f38670716c3ed8"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxNumberFleets</b> = 6</td></tr>
+<tr class="separator:ab684e77e2de2fb24c8f38670716c3ed8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ee0b80b20004c4128548b969d08a8f7"><td class="memItemLeft" align="right" valign="top"><a id="a6ee0b80b20004c4128548b969d08a8f7"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxNumberIndices</b> = 100</td></tr>
+<tr class="separator:a6ee0b80b20004c4128548b969d08a8f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b168525865b31c2cbbe78d93afdf398"><td class="memItemLeft" align="right" valign="top"><a id="a8b168525865b31c2cbbe78d93afdf398"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxNumberSizeCats</b> = 20</td></tr>
+<tr class="separator:a8b168525865b31c2cbbe78d93afdf398"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2aaa607669e4d333ddc4fa5cf539656c"><td class="memItemLeft" align="right" valign="top"><a id="a2aaa607669e4d333ddc4fa5cf539656c"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxTotalSpecies</b> = 50</td></tr>
+<tr class="separator:a2aaa607669e4d333ddc4fa5cf539656c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd89303cda0abfa0b733f7d70332d5f8"><td class="memItemLeft" align="right" valign="top"><a id="acd89303cda0abfa0b733f7d70332d5f8"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::NumCategoriesForVerticalNotation</b> = 10</td></tr>
+<tr class="separator:acd89303cda0abfa0b733f7d70332d5f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe3028a3e3c9dd3ee263f103c378930b"><td class="memItemLeft" align="right" valign="top"><a id="abe3028a3e3c9dd3ee263f103c378930b"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::NumFeedingDataRows</b> = 7</td></tr>
+<tr class="separator:abe3028a3e3c9dd3ee263f103c378930b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9791972e20f493b6c7e347e135d17767"><td class="memItemLeft" align="right" valign="top"><a id="a9791972e20f493b6c7e347e135d17767"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MinNumForecastYears</b> = 3</td></tr>
+<tr class="separator:a9791972e20f493b6c7e347e135d17767"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dd32abfc6d10ba0ed280d82c50ba2e9"><td class="memItemLeft" align="right" valign="top"><a id="a7dd32abfc6d10ba0ed280d82c50ba2e9"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxNumForecastYears</b> = 20</td></tr>
+<tr class="separator:a7dd32abfc6d10ba0ed280d82c50ba2e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8f5cc8c54dc213f4209266175cd0797"><td class="memItemLeft" align="right" valign="top"><a id="ad8f5cc8c54dc213f4209266175cd0797"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxPathLength</b> = 1000</td></tr>
+<tr class="separator:ad8f5cc8c54dc213f4209266175cd0797"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8280fd81fcd7d4cf2ffca0a13bdabcb"><td class="memItemLeft" align="right" valign="top"><a id="ab8280fd81fcd7d4cf2ffca0a13bdabcb"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::RandomSeed</b> = -1</td></tr>
+<tr class="separator:ab8280fd81fcd7d4cf2ffca0a13bdabcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1482e3299e94ff47631ebfa14861051f"><td class="memItemLeft" align="right" valign="top"><a id="a1482e3299e94ff47631ebfa14861051f"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::RearrangeTitle</b> = true</td></tr>
+<tr class="separator:a1482e3299e94ff47631ebfa14861051f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03aea987c0b695b12bb36abf088d7376"><td class="memItemLeft" align="right" valign="top"><a id="a03aea987c0b695b12bb36abf088d7376"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::DontRearrangeTitle</b> = false</td></tr>
+<tr class="separator:a03aea987c0b695b12bb36abf088d7376"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a132181a0d4949a0d1f3a536933c7935d"><td class="memItemLeft" align="right" valign="top"><a id="a132181a0d4949a0d1f3a536933c7935d"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Clear</b> = true</td></tr>
+<tr class="separator:a132181a0d4949a0d1f3a536933c7935d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44d78ce3e63aa1562226d3d36bd36c91"><td class="memItemLeft" align="right" valign="top"><a id="a44d78ce3e63aa1562226d3d36bd36c91"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::NoClear</b> = false</td></tr>
+<tr class="separator:a44d78ce3e63aa1562226d3d36bd36c91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa89d2a38c27cea5ba3de9b71c70a7c9f"><td class="memItemLeft" align="right" valign="top"><a id="aa89d2a38c27cea5ba3de9b71c70a7c9f"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::ShowError</b> = true</td></tr>
+<tr class="separator:aa89d2a38c27cea5ba3de9b71c70a7c9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a715b877e13618645d838d80504808abb"><td class="memItemLeft" align="right" valign="top"><a id="a715b877e13618645d838d80504808abb"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::DontShowError</b> = false</td></tr>
+<tr class="separator:a715b877e13618645d838d80504808abb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14ad1a964fd0108a743af6e387ed487c"><td class="memItemLeft" align="right" valign="top"><a id="a14ad1a964fd0108a743af6e387ed487c"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::IsProportion</b> = true</td></tr>
+<tr class="separator:a14ad1a964fd0108a743af6e387ed487c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12d86b83c007df0341dcd68b75ef81c4"><td class="memItemLeft" align="right" valign="top"><a id="a12d86b83c007df0341dcd68b75ef81c4"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::IsNotProportion</b> = false</td></tr>
+<tr class="separator:a12d86b83c007df0341dcd68b75ef81c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38dbcce5c15a1b459433d82d846d4902"><td class="memItemLeft" align="right" valign="top"><a id="a38dbcce5c15a1b459433d82d846d4902"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::includeTotalColumn</b> = true</td></tr>
+<tr class="separator:a38dbcce5c15a1b459433d82d846d4902"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ed05964449f54903d49e4b2fb2a68c5"><td class="memItemLeft" align="right" valign="top"><a id="a2ed05964449f54903d49e4b2fb2a68c5"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::dontIncludeTotalColumn</b> = false</td></tr>
+<tr class="separator:a2ed05964449f54903d49e4b2fb2a68c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae560ea0a51d298fb02a7f72bbb2d4cc8"><td class="memItemLeft" align="right" valign="top"><a id="ae560ea0a51d298fb02a7f72bbb2d4cc8"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::autoFillSegments</b> = true</td></tr>
+<tr class="separator:ae560ea0a51d298fb02a7f72bbb2d4cc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a58725e788658fa0e7eee5963133057"><td class="memItemLeft" align="right" valign="top"><a id="a8a58725e788658fa0e7eee5963133057"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::dontAutoFillSegments</b> = true</td></tr>
+<tr class="separator:a8a58725e788658fa0e7eee5963133057"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80e823aa1142a0e64f44036e0c44df14"><td class="memItemLeft" align="right" valign="top"><a id="a80e823aa1142a0e64f44036e0c44df14"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::FirstYearOnly</b> = true</td></tr>
+<tr class="separator:a80e823aa1142a0e64f44036e0c44df14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4da9f43251359b19f0974daf9e6436c"><td class="memItemLeft" align="right" valign="top"><a id="aa4da9f43251359b19f0974daf9e6436c"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::AllYears</b> = false</td></tr>
+<tr class="separator:aa4da9f43251359b19f0974daf9e6436c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ca264be04d89de8183c9346d6a2012a"><td class="memItemLeft" align="right" valign="top"><a id="a1ca264be04d89de8183c9346d6a2012a"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Checked</b> = true</td></tr>
+<tr class="separator:a1ca264be04d89de8183c9346d6a2012a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b95c785b6faf3ca1e51fc700c92120f"><td class="memItemLeft" align="right" valign="top"><a id="a8b95c785b6faf3ca1e51fc700c92120f"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::NotChecked</b> = false</td></tr>
+<tr class="separator:a8b95c785b6faf3ca1e51fc700c92120f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb74b5a4ce5d2e29b127e371d2d920e1"><td class="memItemLeft" align="right" valign="top"><a id="aeb74b5a4ce5d2e29b127e371d2d920e1"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::ShowShadow</b> = true</td></tr>
+<tr class="separator:aeb74b5a4ce5d2e29b127e371d2d920e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dc31e9ccc2928940a1e9c0931d344ca"><td class="memItemLeft" align="right" valign="top"><a id="a6dc31e9ccc2928940a1e9c0931d344ca"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::DontShowShadow</b> = false</td></tr>
+<tr class="separator:a6dc31e9ccc2928940a1e9c0931d344ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af71b4386b68fb3988080ee2937cd58b7"><td class="memItemLeft" align="right" valign="top"><a id="af71b4386b68fb3988080ee2937cd58b7"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::ReverseAxis</b> = true</td></tr>
+<tr class="separator:af71b4386b68fb3988080ee2937cd58b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee05e05fe9fb94f7ae2051956a680b30"><td class="memItemLeft" align="right" valign="top"><a id="aee05e05fe9fb94f7ae2051956a680b30"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::DontReverseAxis</b> = false</td></tr>
+<tr class="separator:aee05e05fe9fb94f7ae2051956a680b30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f356859c72345d69076c7458d241f35"><td class="memItemLeft" align="right" valign="top"><a id="a5f356859c72345d69076c7458d241f35"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::ShowLegend</b> = true</td></tr>
+<tr class="separator:a5f356859c72345d69076c7458d241f35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ff76ba4c5fe129dee54b17fe260fa0a"><td class="memItemLeft" align="right" valign="top"><a id="a6ff76ba4c5fe129dee54b17fe260fa0a"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::DontShowLegend</b> = false</td></tr>
+<tr class="separator:a6ff76ba4c5fe129dee54b17fe260fa0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada81cec50575b8a45c61d9632014514c"><td class="memItemLeft" align="right" valign="top"><a id="ada81cec50575b8a45c61d9632014514c"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::TimestampWithUnderscore</b> = true</td></tr>
+<tr class="separator:ada81cec50575b8a45c61d9632014514c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7aaf34b2f637417f9f1f4d87fd4d03fd"><td class="memItemLeft" align="right" valign="top"><a id="a7aaf34b2f637417f9f1f4d87fd4d03fd"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::TimestampWithoutUnderscore</b> = false</td></tr>
+<tr class="separator:a7aaf34b2f637417f9f1f4d87fd4d03fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22a01963fed7446bc7080bc77d7b143f"><td class="memItemLeft" align="right" valign="top"><a id="a22a01963fed7446bc7080bc77d7b143f"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::ManuallySetYMinMax</b> = true</td></tr>
+<tr class="separator:a22a01963fed7446bc7080bc77d7b143f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a328ef70f7fb0de86af609f171c08e681"><td class="memItemLeft" align="right" valign="top"><a id="a328ef70f7fb0de86af609f171c08e681"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::DontManuallySetYMinMax</b> = false</td></tr>
+<tr class="separator:a328ef70f7fb0de86af609f171c08e681"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad70294ae44f47c6626d195f06d8fde7b"><td class="memItemLeft" align="right" valign="top"><a id="ad70294ae44f47c6626d195f06d8fde7b"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::KgToLbs</b> = 2.20462</td></tr>
+<tr class="separator:ad70294ae44f47c6626d195f06d8fde7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9963f903ef7db417d97ce0054c95916e"><td class="memItemLeft" align="right" valign="top"><a id="a9963f903ef7db417d97ce0054c95916e"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MortalityMax</b> = 5.0</td></tr>
+<tr class="separator:a9963f903ef7db417d97ce0054c95916e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2f43a54c6ba6fee00a1eb9facec981b"><td class="memItemLeft" align="right" valign="top"><a id="ad2f43a54c6ba6fee00a1eb9facec981b"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MortalityInit</b> = 1.0</td></tr>
+<tr class="separator:ad2f43a54c6ba6fee00a1eb9facec981b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4599568d09bd15dfe70b51b48ed2c5ef"><td class="memItemLeft" align="right" valign="top"><a id="a4599568d09bd15dfe70b51b48ed2c5ef"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MortalityMin</b> = 0.0</td></tr>
+<tr class="separator:a4599568d09bd15dfe70b51b48ed2c5ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88b12eef91834052af2f33909287d333"><td class="memItemLeft" align="right" valign="top"><a id="a88b12eef91834052af2f33909287d333"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MortalityInc</b> = 0.01</td></tr>
+<tr class="separator:a88b12eef91834052af2f33909287d333"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8842263175f535c8a39629c2599301c3"><td class="memItemLeft" align="right" valign="top"><a id="a8842263175f535c8a39629c2599301c3"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::TerminalMortalityMin</b> = 0.01</td></tr>
+<tr class="separator:a8842263175f535c8a39629c2599301c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a089a52b8fa3c0e1870453adac0e8bc2f"><td class="memItemLeft" align="right" valign="top"><a id="a089a52b8fa3c0e1870453adac0e8bc2f"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::TerminalMortalityMax</b> = 5.0</td></tr>
+<tr class="separator:a089a52b8fa3c0e1870453adac0e8bc2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa509ae145de52fb6f65a6ec389d03474"><td class="memItemLeft" align="right" valign="top"><a id="aa509ae145de52fb6f65a6ec389d03474"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::DefaultTerminalMortality</b> = 0.5</td></tr>
+<tr class="separator:aa509ae145de52fb6f65a6ec389d03474"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e048c974d5ac2f65f6e34ce1354edbf"><td class="memItemLeft" align="right" valign="top"><a id="a1e048c974d5ac2f65f6e34ce1354edbf"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::DefaultResidualNaturalMortality</b> = 0.25</td></tr>
+<tr class="separator:a1e048c974d5ac2f65f6e34ce1354edbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5f421f4321c4962a5fabd7d68badc2a"><td class="memItemLeft" align="right" valign="top"><a id="ac5f421f4321c4962a5fabd7d68badc2a"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::DefaultPredationMortality</b> = 0.0</td></tr>
+<tr class="separator:ac5f421f4321c4962a5fabd7d68badc2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad03b05a9a3116a34d2720e63add8720b"><td class="memItemLeft" align="right" valign="top"><a id="ad03b05a9a3116a34d2720e63add8720b"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::SelectivityMin</b> = 0.0</td></tr>
+<tr class="separator:ad03b05a9a3116a34d2720e63add8720b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a7e0b400a2e80b9355bb54a0061546d"><td class="memItemLeft" align="right" valign="top"><a id="a5a7e0b400a2e80b9355bb54a0061546d"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::SelectivityMax</b> = 1.0</td></tr>
+<tr class="separator:a5a7e0b400a2e80b9355bb54a0061546d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08b88eea6277c3246a2344861f6f98e3"><td class="memItemLeft" align="right" valign="top"><a id="a08b88eea6277c3246a2344861f6f98e3"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaturityMin</b> = 0.0</td></tr>
+<tr class="separator:a08b88eea6277c3246a2344861f6f98e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6925656f4b85e9200a20d2c7f4c2ba6f"><td class="memItemLeft" align="right" valign="top"><a id="a6925656f4b85e9200a20d2c7f4c2ba6f"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaturityMax</b> = 1.0</td></tr>
+<tr class="separator:a6925656f4b85e9200a20d2c7f4c2ba6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a219046eda34dd0bda306a958916d5f"><td class="memItemLeft" align="right" valign="top"><a id="a3a219046eda34dd0bda306a958916d5f"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::NoValueInt</b> = -9999</td></tr>
+<tr class="separator:a3a219046eda34dd0bda306a958916d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ef5aa4858bf5a3f627ff02df3b2731a"><td class="memItemLeft" align="right" valign="top"><a id="a1ef5aa4858bf5a3f627ff02df3b2731a"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::NoValueDouble</b> = -9999.0</td></tr>
+<tr class="separator:a1ef5aa4858bf5a3f627ff02df3b2731a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88723b716dbb651f5b6c217befd3780d"><td class="memItemLeft" align="right" valign="top"><a id="a88723b716dbb651f5b6c217befd3780d"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::ProgressUpdateFrequency</b> = 1000</td></tr>
+<tr class="separator:a88723b716dbb651f5b6c217befd3780d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d067fbb40284acfd425760e1e7468bf"><td class="memItemLeft" align="right" valign="top"><a id="a1d067fbb40284acfd425760e1e7468bf"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxBiomass</b> = 1e12</td></tr>
+<tr class="separator:a1d067fbb40284acfd425760e1e7468bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bbf4b53bb82d5321d3888c6e5f6a741"><td class="memItemLeft" align="right" valign="top"><a id="a8bbf4b53bb82d5321d3888c6e5f6a741"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::NearlyZero</b> = 0.000001</td></tr>
+<tr class="separator:a8bbf4b53bb82d5321d3888c6e5f6a741"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8efe1f4a95f909cbf6a59c90cc90fcba"><td class="memItemLeft" align="right" valign="top"><a id="a8efe1f4a95f909cbf6a59c90cc90fcba"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::RAD_to_DEG</b> = (180.0/M_PI)</td></tr>
+<tr class="separator:a8efe1f4a95f909cbf6a59c90cc90fcba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3189f4d4860411b4e360abafe62940a4"><td class="memItemLeft" align="right" valign="top"><a id="a3189f4d4860411b4e360abafe62940a4"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Normal</b> = 0</td></tr>
+<tr class="separator:a3189f4d4860411b4e360abafe62940a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a713c4f3ac95c56b7dd40be76349126e3"><td class="memItemLeft" align="right" valign="top"><a id="a713c4f3ac95c56b7dd40be76349126e3"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Bold</b> = 1</td></tr>
+<tr class="separator:a713c4f3ac95c56b7dd40be76349126e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b5dee09e46f4b26b8ad96c29da95343"><td class="memItemLeft" align="right" valign="top"><a id="a0b5dee09e46f4b26b8ad96c29da95343"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Warning</b> = 2</td></tr>
+<tr class="separator:a0b5dee09e46f4b26b8ad96c29da95343"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a912f60aa2f955bb81b8c955ec0d3a0b4"><td class="memItemLeft" align="right" valign="top"><a id="a912f60aa2f955bb81b8c955ec0d3a0b4"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Error</b> = 3</td></tr>
+<tr class="separator:a912f60aa2f955bb81b8c955ec0d3a0b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b700e2020ea5b2cbf80908952321029"><td class="memItemLeft" align="right" valign="top"><a id="a0b700e2020ea5b2cbf80908952321029"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Highlight</b> = 4</td></tr>
+<tr class="separator:a0b700e2020ea5b2cbf80908952321029"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a709f573e819b08339f10288cd7595819"><td class="memItemLeft" align="right" valign="top"><a id="a709f573e819b08339f10288cd7595819"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Section</b> = 5</td></tr>
+<tr class="separator:a709f573e819b08339f10288cd7595819"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac426815c4637730efd7cb14f1afbd782"><td class="memItemLeft" align="right" valign="top"><a id="ac426815c4637730efd7cb14f1afbd782"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::DeepSkyBlue</b> = &quot;#00BFFF&quot;</td></tr>
+<tr class="separator:ac426815c4637730efd7cb14f1afbd782"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26452da3f864a1c1eb780762c0f30a4a"><td class="memItemLeft" align="right" valign="top"><a id="a26452da3f864a1c1eb780762c0f30a4a"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Blue</b> = &quot;#0072B2&quot;</td></tr>
+<tr class="separator:a26452da3f864a1c1eb780762c0f30a4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e880d6211b457c8b1416bc87de9ca8d"><td class="memItemLeft" align="right" valign="top"><a id="a6e880d6211b457c8b1416bc87de9ca8d"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Orange</b> = &quot;#E69F00&quot;</td></tr>
+<tr class="separator:a6e880d6211b457c8b1416bc87de9ca8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac49617fe24a42054f1638fca020b5c90"><td class="memItemLeft" align="right" valign="top"><a id="ac49617fe24a42054f1638fca020b5c90"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Black</b> = &quot;#000000&quot;</td></tr>
+<tr class="separator:ac49617fe24a42054f1638fca020b5c90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad561bc75fe1de5351a831c5fe8db6e80"><td class="memItemLeft" align="right" valign="top"><a id="ad561bc75fe1de5351a831c5fe8db6e80"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::SkyBlue</b> = &quot;#56B4E9&quot;</td></tr>
+<tr class="separator:ad561bc75fe1de5351a831c5fe8db6e80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75862150c93e8050b9cf808645d7b720"><td class="memItemLeft" align="right" valign="top"><a id="a75862150c93e8050b9cf808645d7b720"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Gray</b> = &quot;#C8C8C8&quot;</td></tr>
+<tr class="separator:a75862150c93e8050b9cf808645d7b720"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac64aec283fe6fd45f3118eb74950eab1"><td class="memItemLeft" align="right" valign="top"><a id="ac64aec283fe6fd45f3118eb74950eab1"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Red</b> = &quot;#FF0000&quot;</td></tr>
+<tr class="separator:ac64aec283fe6fd45f3118eb74950eab1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2612d98662962b7484e2cef5af9a048a"><td class="memItemLeft" align="right" valign="top"><a id="a2612d98662962b7484e2cef5af9a048a"></a>
+const std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::LineColors</b> = {Blue,Orange,Black,SkyBlue,Gray,Red}</td></tr>
+<tr class="separator:a2612d98662962b7484e2cef5af9a048a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afadbfb8713891e7856b7aff8916b1e9e"><td class="memItemLeft" align="right" valign="top"><a id="afadbfb8713891e7856b7aff8916b1e9e"></a>
+const std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::LineColorNames</b> = {&quot;Blue&quot;,&quot;Orange&quot;,&quot;Black&quot;,&quot;Sky Blue&quot;,&quot;Gray&quot;,&quot;Red&quot;}</td></tr>
+<tr class="separator:afadbfb8713891e7856b7aff8916b1e9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3812162c205b9dbe6a798d395e66943c"><td class="memItemLeft" align="right" valign="top"><a id="a3812162c205b9dbe6a798d395e66943c"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::ClearWindow</b> = &quot;&quot;</td></tr>
+<tr class="separator:a3812162c205b9dbe6a798d395e66943c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aceb52a787194d4d7e37978ffe538c46d"><td class="memItemLeft" align="right" valign="top"><a id="aceb52a787194d4d7e37978ffe538c46d"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::BlankLine</b> = &quot; &quot;</td></tr>
+<tr class="separator:aceb52a787194d4d7e37978ffe538c46d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c0d9d943a183b29b774745ae723497d"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::SurfaceThemes</b></td></tr>
+<tr class="separator:a1c0d9d943a183b29b774745ae723497d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Definition for common constants used in MultiSpecies tools. </p>
 <dl class="section date"><dt>Date</dt><dd>Dec 8, 2016</dd></dl>
-<p>This file contains constant declarations used in the MultiSpecies tools using the nmfConstants namespace. </p>
+<p>This file contains constant declarations used in the MultiSpecies tools using the nmfConstants namespace.</p>
+<dl class="section copyright"><dt>Copyright</dt><dd>Public Domain Notice<br  />
+ National Oceanic And Atmospheric Administration<br  />
+<br  />
+ This software is a "United States Government Work" under the terms of the United States Copyright Act. It was written as part of the author's official duties as a United States Government employee/contractor and thus cannot be copyrighted. This software is freely available to the public for use. The National Oceanic And Atmospheric Administration and the U.S. Government have not placed any restriction on its use or reproduction. Although all reasonable efforts have been taken to ensure the accuracy and reliability of the software and data, the National Oceanic And Atmospheric Administration and the U.S. Government do not and cannot warrant the performance or results that may be obtained by using this software or data. The National Oceanic And Atmospheric Administration and the U.S. Government disclaim all warranties, express or implied, including warranties of performance, merchantability or fitness for any particular purpose.<br  />
+<br  />
+ Please cite the author(s) in any work or product based on this material. </dd></dl>
 </div><h2 class="groupheader">Variable Documentation</h2>
-<a id="a255b89b185656898a544ba614977cd4d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a255b89b185656898a544ba614977cd4d">&#9670;&nbsp;</a></span>SurfaceThemes</h2>
+<a id="a1c0d9d943a183b29b774745ae723497d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c0d9d943a183b29b774745ae723497d">&#9670;&nbsp;</a></span>SurfaceThemes</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const EXTERN std::vector&lt;std::string&gt; nmfConstants::SurfaceThemes</td>
+          <td class="memname">const std::vector&lt;std::string&gt; nmfConstants::SurfaceThemes</td>
         </tr>
       </table>
 </div><div class="memdoc">

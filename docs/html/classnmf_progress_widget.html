@@ -92,9 +92,9 @@ Collaboration diagram for nmfProgressWidget:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-slots"></a>
 Public Slots</h2></td></tr>
-<tr class="memitem:a3f7190cb7a8b70ce92600503dd8f5a13"><td class="memItemLeft" align="right" valign="top"><a id="a3f7190cb7a8b70ce92600503dd8f5a13"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>callback_stopPB</b> (bool unused)</td></tr>
-<tr class="separator:a3f7190cb7a8b70ce92600503dd8f5a13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfb8c457ef08bd1a4e1b9e2ed8103aac"><td class="memItemLeft" align="right" valign="top"><a id="acfb8c457ef08bd1a4e1b9e2ed8103aac"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>callback_stopPB</b> ()</td></tr>
+<tr class="separator:acfb8c457ef08bd1a4e1b9e2ed8103aac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af16520926ad36b48b1b6eec579b16bf4"><td class="memItemLeft" align="right" valign="top"><a id="af16520926ad36b48b1b6eec579b16bf4"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>callback_clearPB</b> ()</td></tr>
 <tr class="separator:af16520926ad36b48b1b6eec579b16bf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -134,9 +134,15 @@ Signals</h2></td></tr>
 <tr class="memitem:a6e33cdc9579c9e68d53dd0f021ddd6ee"><td class="memItemLeft" align="right" valign="top"><a id="a6e33cdc9579c9e68d53dd0f021ddd6ee"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>StopTheRun</b> ()</td></tr>
 <tr class="separator:a6e33cdc9579c9e68d53dd0f021ddd6ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab66fed9342e6da3e1e55952212418bad"><td class="memItemLeft" align="right" valign="top"><a id="ab66fed9342e6da3e1e55952212418bad"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>StopTheTimer</b> ()</td></tr>
+<tr class="separator:ab66fed9342e6da3e1e55952212418bad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a6b1411bc330a32695af6aff23fa21a"><td class="memItemLeft" align="right" valign="top"><a id="a4a6b1411bc330a32695af6aff23fa21a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>RedrawValidPointsOnly</b> (bool checked, bool clear)</td></tr>
 <tr class="separator:a4a6b1411bc330a32695af6aff23fa21a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5657045bb11b88412eacf880f9262ed"><td class="memItemLeft" align="right" valign="top"><a id="ae5657045bb11b88412eacf880f9262ed"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>StopAllRuns</b> ()</td></tr>
+<tr class="separator:ae5657045bb11b88412eacf880f9262ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -146,9 +152,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7d62a242779705d77e552699069427c4"><td class="memItemLeft" align="right" valign="top"><a id="a7d62a242779705d77e552699069427c4"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setupConnections</b> ()</td></tr>
 <tr class="separator:a7d62a242779705d77e552699069427c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd2e592f598080e1ed5c0ac544389b14"><td class="memItemLeft" align="right" valign="top"><a id="afd2e592f598080e1ed5c0ac544389b14"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>StopRun</b> ()</td></tr>
-<tr class="separator:afd2e592f598080e1ed5c0ac544389b14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a546a351097647a99717f3a47dd11e88d"><td class="memItemLeft" align="right" valign="top"><a id="a546a351097647a99717f3a47dd11e88d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>writeToStopRunFile</b> ()</td></tr>
+<tr class="separator:a546a351097647a99717f3a47dd11e88d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a328d5459648491b7c87b7787d138f0af"><td class="memItemLeft" align="right" valign="top"><a id="a328d5459648491b7c87b7787d138f0af"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>startRun</b> ()</td></tr>
 <tr class="separator:a328d5459648491b7c87b7787d138f0af"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -161,6 +167,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>startTimer</b> (int d
 <tr class="memitem:ab83854c3279b497f752f577f9690bc02"><td class="memItemLeft" align="right" valign="top"><a id="ab83854c3279b497f752f577f9690bc02"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>stopTimer</b> ()</td></tr>
 <tr class="separator:ab83854c3279b497f752f577f9690bc02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad99951f8f160d3d273e7696a92c4be77"><td class="memItemLeft" align="right" valign="top"><a id="ad99951f8f160d3d273e7696a92c4be77"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>stopAllRuns</b> (bool verboseOn)</td></tr>
+<tr class="separator:ad99951f8f160d3d273e7696a92c4be77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac458ed6fd42682dc5553e750b73676c2"><td class="memItemLeft" align="right" valign="top"><a id="ac458ed6fd42682dc5553e750b73676c2"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>updateChart</b> ()</td></tr>
 <tr class="separator:ac458ed6fd42682dc5553e750b73676c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -239,6 +248,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>clearChart</b> ()</td
 <tr class="memitem:a52e432e760aff498ab5f7760a1114449"><td class="memItemLeft" align="right" valign="top"><a id="a52e432e760aff498ab5f7760a1114449"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>clearChartOnly</b> ()</td></tr>
 <tr class="separator:a52e432e760aff498ab5f7760a1114449"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a085ff48924d13da44b26388451579ca0"><td class="memItemLeft" align="right" valign="top"><a id="a085ff48924d13da44b26388451579ca0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>clearRunBoxes</b> ()</td></tr>
+<tr class="separator:a085ff48924d13da44b26388451579ca0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1db78eb2b5dd56e81e53e023b35f8370"><td class="memItemLeft" align="right" valign="top"><a id="a1db78eb2b5dd56e81e53e023b35f8370"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>shouldYRangeEditsStick</b> (bool state)</td></tr>
 <tr class="separator:a1db78eb2b5dd56e81e53e023b35f8370"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -254,6 +266,21 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>hideLegend</b> ()</td
 <tr class="memitem:acbd00361c359392fe078ef92fb27d063"><td class="memItemLeft" align="right" valign="top"><a id="acbd00361c359392fe078ef92fb27d063"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>showLegend</b> ()</td></tr>
 <tr class="separator:acbd00361c359392fe078ef92fb27d063"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a605ceed7f8ed0ce1b9aa1c8e6ebd04a6"><td class="memItemLeft" align="right" valign="top"><a id="a605ceed7f8ed0ce1b9aa1c8e6ebd04a6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateTime</b> ()</td></tr>
+<tr class="separator:a605ceed7f8ed0ce1b9aa1c8e6ebd04a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea6acba14449c66e1b0f3c7dfa64a5e5"><td class="memItemLeft" align="right" valign="top"><a id="aea6acba14449c66e1b0f3c7dfa64a5e5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>clearTime</b> ()</td></tr>
+<tr class="separator:aea6acba14449c66e1b0f3c7dfa64a5e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1c1ce28d43856074259e8bddcb21eda"><td class="memItemLeft" align="right" valign="top"><a id="ab1c1ce28d43856074259e8bddcb21eda"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getElapsedTime</b> ()</td></tr>
+<tr class="separator:ab1c1ce28d43856074259e8bddcb21eda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb761f355d575a4e56eceecf37ab817a"><td class="memItemLeft" align="right" valign="top"><a id="aeb761f355d575a4e56eceecf37ab817a"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>wasStopped</b> ()</td></tr>
+<tr class="separator:aeb761f355d575a4e56eceecf37ab817a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78035d0bb62c53d9d97653cc3d952abb"><td class="memItemLeft" align="right" valign="top"><a id="a78035d0bb62c53d9d97653cc3d952abb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>clearChartData</b> (std::string filename)</td></tr>
+<tr class="separator:a78035d0bb62c53d9d97653cc3d952abb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -287,12 +314,18 @@ QVBoxLayout *&#160;</td><td class="memItemRight" valign="bottom"><b>vGroupLayt</
 <tr class="memitem:acfbfd6ddf93e0e36ab43ec69333775ce"><td class="memItemLeft" align="right" valign="top"><a id="acfbfd6ddf93e0e36ab43ec69333775ce"></a>
 QHBoxLayout *&#160;</td><td class="memItemRight" valign="bottom"><b>buttonLayt</b></td></tr>
 <tr class="separator:acfbfd6ddf93e0e36ab43ec69333775ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b51eac59db6546dfd331a76ae9e41b0"><td class="memItemLeft" align="right" valign="top"><a id="a7b51eac59db6546dfd331a76ae9e41b0"></a>
+QHBoxLayout *&#160;</td><td class="memItemRight" valign="bottom"><b>timeLayt</b></td></tr>
+<tr class="separator:a7b51eac59db6546dfd331a76ae9e41b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31e3c1886e0e5f1ecb377495f0d2825e"><td class="memItemLeft" align="right" valign="top"><a id="a31e3c1886e0e5f1ecb377495f0d2825e"></a>
 QHBoxLayout *&#160;</td><td class="memItemRight" valign="bottom"><b>pointsLayt</b></td></tr>
 <tr class="separator:a31e3c1886e0e5f1ecb377495f0d2825e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fd9cbc008c104c21af1307e99ef95d8"><td class="memItemLeft" align="right" valign="top"><a id="a8fd9cbc008c104c21af1307e99ef95d8"></a>
 QLabel *&#160;</td><td class="memItemRight" valign="bottom"><b>statusLBL</b></td></tr>
 <tr class="separator:a8fd9cbc008c104c21af1307e99ef95d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2269ec032e0371f815d5d5e21647673d"><td class="memItemLeft" align="right" valign="top"><a id="a2269ec032e0371f815d5d5e21647673d"></a>
+QLabel *&#160;</td><td class="memItemRight" valign="bottom"><b>timeLBL</b></td></tr>
+<tr class="separator:a2269ec032e0371f815d5d5e21647673d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b79506dfd2395c6d49652e77c560faf"><td class="memItemLeft" align="right" valign="top"><a id="a9b79506dfd2395c6d49652e77c560faf"></a>
 QLabel *&#160;</td><td class="memItemRight" valign="bottom"><b>pointLBL</b></td></tr>
 <tr class="separator:a9b79506dfd2395c6d49652e77c560faf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -341,18 +374,21 @@ QPushButton *&#160;</td><td class="memItemRight" valign="bottom"><b>stopPB</b></
 <tr class="memitem:ab5077d429883d9ecac5617ef14c290f7"><td class="memItemLeft" align="right" valign="top"><a id="ab5077d429883d9ecac5617ef14c290f7"></a>
 QPushButton *&#160;</td><td class="memItemRight" valign="bottom"><b>rangeSetPB</b></td></tr>
 <tr class="separator:ab5077d429883d9ecac5617ef14c290f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec37699daa4a5bcdccf0040a068b1428"><td class="memItemLeft" align="right" valign="top"><a id="aec37699daa4a5bcdccf0040a068b1428"></a>
-QTimer *&#160;</td><td class="memItemRight" valign="bottom"><b>timer</b></td></tr>
-<tr class="separator:aec37699daa4a5bcdccf0040a068b1428"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a315d39518f1d0cf93ef055ab794fe7a6"><td class="memItemLeft" align="right" valign="top"><a id="a315d39518f1d0cf93ef055ab794fe7a6"></a>
+QLineEdit *&#160;</td><td class="memItemRight" valign="bottom"><b>timeLE</b></td></tr>
+<tr class="separator:a315d39518f1d0cf93ef055ab794fe7a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c6f6fd098e83a141cbecb9ce8d6b6fa"><td class="memItemLeft" align="right" valign="top"><a id="a8c6f6fd098e83a141cbecb9ce8d6b6fa"></a>
 QLineEdit *&#160;</td><td class="memItemRight" valign="bottom"><b>runLE</b></td></tr>
 <tr class="separator:a8c6f6fd098e83a141cbecb9ce8d6b6fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a072f0f23c8ad9af8e5d274b76b84d64b"><td class="memItemLeft" align="right" valign="top"><a id="a072f0f23c8ad9af8e5d274b76b84d64b"></a>
 QLineEdit *&#160;</td><td class="memItemRight" valign="bottom"><b>subRunLE</b></td></tr>
 <tr class="separator:a072f0f23c8ad9af8e5d274b76b84d64b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adbed8b02be8547bdad2098647c8e8bee"><td class="memItemLeft" align="right" valign="top"><a id="adbed8b02be8547bdad2098647c8e8bee"></a>
-std::chrono::_V2::system_clock::time_point&#160;</td><td class="memItemRight" valign="bottom"><b>m_startTime</b></td></tr>
-<tr class="separator:adbed8b02be8547bdad2098647c8e8bee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc6213b74ffd1c3bd3ba07fc1f214c7e"><td class="memItemLeft" align="right" valign="top"><a id="adc6213b74ffd1c3bd3ba07fc1f214c7e"></a>
+QTimer *&#160;</td><td class="memItemRight" valign="bottom"><b>m_timer</b></td></tr>
+<tr class="separator:adc6213b74ffd1c3bd3ba07fc1f214c7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a380d01afa42119b233ce75906e0a06"><td class="memItemLeft" align="right" valign="top"><a id="a1a380d01afa42119b233ce75906e0a06"></a>
+QDateTime&#160;</td><td class="memItemRight" valign="bottom"><b>m_startTime</b></td></tr>
+<tr class="separator:a1a380d01afa42119b233ce75906e0a06"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a22de76c01ebfdef4ccbbbabb954fb9"><td class="memItemLeft" align="right" valign="top"><a id="a3a22de76c01ebfdef4ccbbbabb954fb9"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>m_maxNumGenerations</b></td></tr>
 <tr class="separator:a3a22de76c01ebfdef4ccbbbabb954fb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -392,6 +428,12 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>m_lastX</b></td></tr>
 <tr class="memitem:aade75267a81c00ad5834ac2483a5df8f"><td class="memItemLeft" align="right" valign="top"><a id="aade75267a81c00ad5834ac2483a5df8f"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>m_RunType</b></td></tr>
 <tr class="separator:aade75267a81c00ad5834ac2483a5df8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ea399d59c03292efaa1cc6afbc17a35"><td class="memItemLeft" align="right" valign="top"><a id="a2ea399d59c03292efaa1cc6afbc17a35"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>m_elapsedTime</b></td></tr>
+<tr class="separator:a2ea399d59c03292efaa1cc6afbc17a35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae886a74c119aac36a4f3fc7f72c875e1"><td class="memItemLeft" align="right" valign="top"><a id="ae886a74c119aac36a4f3fc7f72c875e1"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_wasStopped</b></td></tr>
+<tr class="separator:ae886a74c119aac36a4f3fc7f72c875e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>nmfCharts/<a class="el" href="nmf_progress_widget_8h_source.html">nmfProgressWidget.h</a></li>

@@ -213,47 +213,65 @@ nmfCompetitionForm::loadParameterRanges(
 }
 
 long double
-nmfCompetitionForm::evaluate(const int& TimeMinus1,
-                             const int& SpeciesNum,
-                             const double& BiomassAtTime,
-                             const double& SystemCarryingCapacity,
-                             const std::vector<double>& GrowthRate,
-                             const double& GuildCarryingCapacity,
-                             const boost::numeric::ublas::matrix<double>& EstCompetitionAlpha,
-                             const boost::numeric::ublas::matrix<double>& EstCompetitionBetaSpecies,
-                             const boost::numeric::ublas::matrix<double>& EstCompetitionBetaGuild,
-                             const boost::numeric::ublas::matrix<double>& EstCompetitionBetaGuildGuild,
-                             const boost::numeric::ublas::matrix<double>& EstBiomassSpecies,
-                             const boost::numeric::ublas::matrix<double>& EstBiomassGuild)
+nmfCompetitionForm::evaluate(
+        const int& timeMinus1,
+        const int& speciesOrGuildNum,
+        const double& biomassAtTime,
+        const std::vector<double>& growthRate,
+        const boost::numeric::ublas::matrix<double> &growthRateCovariate,
+        const double& guildCarryingCapacity,
+        const double& systemCarryingCapacity,
+        const boost::numeric::ublas::matrix<double> &EstBiomassSpecies,
+        const boost::numeric::ublas::matrix<double> &EstBiomassGuild,
+        const boost::numeric::ublas::matrix<double> &EstCompetitionAlpha,
+        const boost::numeric::ublas::matrix<double> &CompetitionAlphaCovariate,
+        const boost::numeric::ublas::matrix<double> &EstCompetitionBetaSpecies,
+        const boost::numeric::ublas::matrix<double> &CompetitionBetaSpeciesCovariate,
+        const boost::numeric::ublas::matrix<double> &EstCompetitionBetaGuild,
+        const boost::numeric::ublas::matrix<double> &CompetitionBetaGuildCovariate,
+        const boost::numeric::ublas::matrix<double> &EstCompetitionBetaGuildGuild,
+        const boost::numeric::ublas::matrix<double> &CompetitionBetaGuildGuildCovariate)
 {
     if (m_FunctionMap.find(m_type) == m_FunctionMap.end()) {
         return 0;
     } else {
-        return (this->*m_FunctionMap[m_type])(TimeMinus1,SpeciesNum,BiomassAtTime,
-                                     SystemCarryingCapacity,GrowthRate,
-                                     GuildCarryingCapacity,
-                                     EstCompetitionAlpha,
-                                     EstCompetitionBetaSpecies,
-                                     EstCompetitionBetaGuild,
-                                     EstCompetitionBetaGuildGuild,
-                                     EstBiomassSpecies,
-                                     EstBiomassGuild);
+        return (this->*m_FunctionMap[m_type])(timeMinus1,speciesOrGuildNum,biomassAtTime,
+                                              growthRate,
+                                              growthRateCovariate,
+                                              guildCarryingCapacity,
+                                              systemCarryingCapacity,
+                                              EstBiomassSpecies,
+                                              EstBiomassGuild,
+                                              EstCompetitionAlpha,
+                                              CompetitionAlphaCovariate,
+                                              EstCompetitionBetaSpecies,
+                                              CompetitionBetaSpeciesCovariate,
+                                              EstCompetitionBetaGuild,
+                                              CompetitionBetaGuildCovariate,
+                                              EstCompetitionBetaGuildGuild,
+                                              CompetitionBetaGuildGuildCovariate);
     }
 }
 
 long double
-nmfCompetitionForm::NoCompetition(const int& timeMinus1,
-                                  const int& speciesNum,
-                                  const double& biomassAtTime,
-                                  const double& systemCarryingCapacity,
-                                  const std::vector<double>& growthRate,
-                                  const double& guildCarryingCapacity,
-                                  const boost::numeric::ublas::matrix<double> &EstCompetitionAlpha,
-                                  const boost::numeric::ublas::matrix<double> &EstCompetitionBetaSpecies,
-                                  const boost::numeric::ublas::matrix<double> &EstCompetitionBetaGuild,
-                                  const boost::numeric::ublas::matrix<double> &EstCompetitionBetaGuildGuild,
-                                  const boost::numeric::ublas::matrix<double> &EstBiomassSpecies,
-                                  const boost::numeric::ublas::matrix<double> &EstBiomassGuild)
+nmfCompetitionForm::NoCompetition(
+        const int& timeMinus1,
+        const int& speciesOrGuildNum,
+        const double& biomassAtTime,
+        const std::vector<double>& growthRate,
+        const boost::numeric::ublas::matrix<double> &growthRateCovariate,
+        const double& guildCarryingCapacity,
+        const double& systemCarryingCapacity,
+        const boost::numeric::ublas::matrix<double> &EstBiomassSpecies,
+        const boost::numeric::ublas::matrix<double> &EstBiomassGuild,
+        const boost::numeric::ublas::matrix<double> &EstCompetitionAlpha,
+        const boost::numeric::ublas::matrix<double> &CompetitionAlphaCovariate,
+        const boost::numeric::ublas::matrix<double> &EstCompetitionBetaSpecies,
+        const boost::numeric::ublas::matrix<double> &CompetitionBetaSpeciesCovariate,
+        const boost::numeric::ublas::matrix<double> &EstCompetitionBetaGuild,
+        const boost::numeric::ublas::matrix<double> &CompetitionBetaGuildCovariate,
+        const boost::numeric::ublas::matrix<double> &EstCompetitionBetaGuildGuild,
+        const boost::numeric::ublas::matrix<double> &CompetitionBetaGuildGuildCovariate)
 {
     return 0.0;
 }
@@ -264,23 +282,33 @@ nmfCompetitionForm::NoCompetition(const int& timeMinus1,
  *
  */
 long double
-nmfCompetitionForm::NOKCompetition(const int& timeMinus1,
-                                   const int& speciesNum,
-                                   const double& biomassAtTime,
-                                   const double& systemCarryingCapacity,
-                                   const std::vector<double>& growthRate,
-                                   const double& guildCarryingCapacity,
-                                   const boost::numeric::ublas::matrix<double> &EstCompetitionAlpha,
-                                   const boost::numeric::ublas::matrix<double> &EstCompetitionBetaSpecies,
-                                   const boost::numeric::ublas::matrix<double> &EstCompetitionBetaGuild,
-                                   const boost::numeric::ublas::matrix<double> &EstCompetitionBetaGuildGuild,
-                                   const boost::numeric::ublas::matrix<double> &EstBiomassSpecies,
-                                   const boost::numeric::ublas::matrix<double> &EstBiomassGuild)
+nmfCompetitionForm::NOKCompetition(
+        const int& timeMinus1,
+        const int& species,
+        const double& biomassAtTime,
+        const std::vector<double>& growthRate,
+        const boost::numeric::ublas::matrix<double> &growthRateCovariate,
+        const double& guildCarryingCapacity,
+        const double& systemCarryingCapacity,
+        const boost::numeric::ublas::matrix<double> &EstBiomassSpecies,
+        const boost::numeric::ublas::matrix<double> &EstBiomassGuild,
+        const boost::numeric::ublas::matrix<double> &EstCompetitionAlpha,
+        const boost::numeric::ublas::matrix<double> &CompetitionAlphaCovariate,
+        const boost::numeric::ublas::matrix<double> &EstCompetitionBetaSpecies,
+        const boost::numeric::ublas::matrix<double> &CompetitionBetaSpeciesCovariate,
+        const boost::numeric::ublas::matrix<double> &EstCompetitionBetaGuild,
+        const boost::numeric::ublas::matrix<double> &CompetitionBetaGuildCovariate,
+        const boost::numeric::ublas::matrix<double> &EstCompetitionBetaGuildGuild,
+        const boost::numeric::ublas::matrix<double> &CompetitionBetaGuildGuildCovariate)
 {
     long double competitionSum = 0;
+    double CompetitionAlphaCovariateCoeff = 1.0; // RSK estimate this later
+    double EstCompetitionAlphaTerm;
 
     for (unsigned row=0; row<EstCompetitionAlpha.size2(); ++row) {
-        competitionSum += (long double)(EstCompetitionAlpha(row,speciesNum)) * (long double)(EstBiomassSpecies(timeMinus1,row));
+        EstCompetitionAlphaTerm = EstCompetitionAlpha(row,species) *
+                (1.0 + CompetitionAlphaCovariateCoeff*CompetitionAlphaCovariate(timeMinus1,species));
+        competitionSum += (long double)EstCompetitionAlphaTerm * (long double)EstBiomassSpecies(timeMinus1,row);
     }
 
     return double(biomassAtTime)*double(competitionSum);
@@ -293,17 +321,22 @@ nmfCompetitionForm::NOKCompetition(const int& timeMinus1,
 long double
 nmfCompetitionForm::MSPRODCompetition(
         const int& timeMinus1,
-        const int& speciesNum,
+        const int& species,
         const double& biomassAtTime,
-        const double& systemCarryingCapacity,
         const std::vector<double>& growthRate,
+        const boost::numeric::ublas::matrix<double> &growthRateCovariate,
         const double& guildCarryingCapacity,
-        const boost::numeric::ublas::matrix<double> &EstCompetitionAlpha,
-        const boost::numeric::ublas::matrix<double> &EstCompetitionBetaSpecies,
-        const boost::numeric::ublas::matrix<double> &EstCompetitionBetaGuild,
-        const boost::numeric::ublas::matrix<double> &EstCompetitionBetaGuildGuild,
+        const double& systemCarryingCapacity,
         const boost::numeric::ublas::matrix<double> &EstBiomassSpecies,
-        const boost::numeric::ublas::matrix<double> &EstBiomassGuild)
+        const boost::numeric::ublas::matrix<double> &EstBiomassGuild,
+        const boost::numeric::ublas::matrix<double> &EstCompetitionAlpha,
+        const boost::numeric::ublas::matrix<double> &CompetitionAlphaCovariate,
+        const boost::numeric::ublas::matrix<double> &EstCompetitionBetaSpecies,
+        const boost::numeric::ublas::matrix<double> &CompetitionBetaSpeciesCovariate,
+        const boost::numeric::ublas::matrix<double> &EstCompetitionBetaGuild,
+        const boost::numeric::ublas::matrix<double> &CompetitionBetaGuildCovariate,
+        const boost::numeric::ublas::matrix<double> &EstCompetitionBetaGuildGuild,
+        const boost::numeric::ublas::matrix<double> &CompetitionBetaGuildGuildCovariate)
 {
     unsigned numSpecies = growthRate.size();
     unsigned numGuilds  = EstCompetitionBetaGuild.size2();
@@ -311,6 +344,9 @@ nmfCompetitionForm::MSPRODCompetition(
     double sumOverGuilds  = 0;
     double term1;
     double term2;
+    double growthRateCovariateCoeff = 1.0;             // RSK estimate this later
+    double CompetitionBetaSpeciesCovariateCoeff = 1.0; // RSK estimate this later
+    double CompetitionBetaGuildCovariateCoeff   = 1.0; // RSK estimate this later
 
     if (guildCarryingCapacity == 0) {
         std::cout << "[Error 1] nmfCompetitionForm::MSPRODCompetition: guildCarryingCapacity is 0" << std::endl;
@@ -321,17 +357,24 @@ nmfCompetitionForm::MSPRODCompetition(
         std::cout << "[Error 2] nmfCompetitionForm::MSPRODCompetition: systemCarryingCapacity same as guildCarryingCapacity" << std::endl;
         return 0;
     }
+    double CompetitionBetaSpeciesTerm;
     for (unsigned j=0; j<numSpecies; ++j) {
-        sumOverSpecies += EstCompetitionBetaSpecies(speciesNum,j)*EstBiomassSpecies(timeMinus1,j);
+        CompetitionBetaSpeciesTerm = EstCompetitionBetaSpecies(species,j) *
+                (1.0+CompetitionBetaSpeciesCovariateCoeff*CompetitionBetaSpeciesCovariate(timeMinus1,j));
+        sumOverSpecies += CompetitionBetaSpeciesTerm*EstBiomassSpecies(timeMinus1,j);
     }
+    double CompetitionBetaGuildTerm;
     for (unsigned j=0; j<numGuilds; ++j) {
-        sumOverGuilds += EstCompetitionBetaGuild(speciesNum,j)*EstBiomassGuild(timeMinus1,j);
+        CompetitionBetaGuildTerm = EstCompetitionBetaGuild(species,j) *
+                (1.0+CompetitionBetaGuildCovariateCoeff*CompetitionBetaGuildGuildCovariate(timeMinus1,j));
+        sumOverGuilds += CompetitionBetaGuildTerm*EstBiomassGuild(timeMinus1,j);
     }
 
     term1 = sumOverSpecies/guildCarryingCapacity;
     term2 = sumOverGuilds/(systemCarryingCapacity - guildCarryingCapacity);
 
-    return growthRate[speciesNum]*biomassAtTime*(term1-term2);
+    double growthTerm = growthRate[species]*(1.0+growthRateCovariateCoeff*growthRateCovariate(timeMinus1,species));
+    return growthTerm*biomassAtTime*(term1-term2);
 }
 
 
@@ -343,19 +386,26 @@ nmfCompetitionForm::AGGPRODCompetition(
         const int& timeMinus1,
         const int& speciesOrGuildNum,
         const double& biomassAtTime,
-        const double& systemCarryingCapacity,
         const std::vector<double>& growthRate,
+        const boost::numeric::ublas::matrix<double> &growthRateCovariate,
         const double& guildCarryingCapacity,
-        const boost::numeric::ublas::matrix<double> &EstCompetitionAlpha,
-        const boost::numeric::ublas::matrix<double> &EstCompetitionBetaSpecies,
-        const boost::numeric::ublas::matrix<double> &EstCompetitionBetaGuild,
-        const boost::numeric::ublas::matrix<double> &EstCompetitionBetaGuildGuild,
+        const double& systemCarryingCapacity,
         const boost::numeric::ublas::matrix<double> &EstBiomassSpecies,
-        const boost::numeric::ublas::matrix<double> &EstBiomassGuild)
+        const boost::numeric::ublas::matrix<double> &EstBiomassGuild,
+        const boost::numeric::ublas::matrix<double> &EstCompetitionAlpha,
+        const boost::numeric::ublas::matrix<double> &CompetitionAlphaCovariate,
+        const boost::numeric::ublas::matrix<double> &EstCompetitionBetaSpecies,
+        const boost::numeric::ublas::matrix<double> &CompetitionBetaSpeciesCovariate,
+        const boost::numeric::ublas::matrix<double> &EstCompetitionBetaGuild,
+        const boost::numeric::ublas::matrix<double> &CompetitionBetaGuildCovariate,
+        const boost::numeric::ublas::matrix<double> &EstCompetitionBetaGuildGuild,
+        const boost::numeric::ublas::matrix<double> &CompetitionBetaGuildGuildCovariate)
 {
-    unsigned numGuilds  = EstCompetitionBetaGuild.size2();
-    double sumOverGuilds  = 0;
+    unsigned numGuilds   = EstCompetitionBetaGuild.size2();
+    double sumOverGuilds = 0;
     double term2;
+    double growthRateCovariateCoeff = 1.0; // RSK estimate this later
+    double competitionBetaGuildGuildCovariateCoeff = 1.0; // RSK estimate this later
 
     if (systemCarryingCapacity == guildCarryingCapacity) {
         std::cout << "[Error 1] nmfCompetitionForm::AGGPRODCompetition: systemCarryingCapacity" <<
@@ -363,12 +413,15 @@ nmfCompetitionForm::AGGPRODCompetition(
         return 0;
     }
 
+    double CompetitionBetaGuildGuildTerm;
     for (unsigned j=0; j<numGuilds; ++j) {
-        sumOverGuilds += EstCompetitionBetaGuildGuild(speciesOrGuildNum,j)*
-                         EstBiomassGuild(timeMinus1,j);
+        CompetitionBetaGuildGuildTerm = EstCompetitionBetaGuildGuild(speciesOrGuildNum,j) *
+                (1.0+competitionBetaGuildGuildCovariateCoeff*CompetitionBetaGuildGuildCovariate(timeMinus1,speciesOrGuildNum));
+        sumOverGuilds += CompetitionBetaGuildGuildTerm * EstBiomassGuild(timeMinus1,j);
     }
 
     term2 = sumOverGuilds/(systemCarryingCapacity - guildCarryingCapacity);
 
-    return growthRate[speciesOrGuildNum]*biomassAtTime*term2;
+    double growthRateTerm = growthRate[speciesOrGuildNum]*(1.0+growthRateCovariateCoeff*growthRateCovariate(timeMinus1,speciesOrGuildNum));
+    return growthRateTerm*biomassAtTime*term2;
 }

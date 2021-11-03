@@ -66,6 +66,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">nmfConstantsMSSPM.h File Reference</div>  </div>
@@ -76,14 +77,16 @@ $(function() {
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;QStringList&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for nmfConstantsMSSPM.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="nmf_constants_m_s_s_p_m_8h__incl.png" border="0" usemap="#nmf_utilities_2nmf_constants_m_s_s_p_m_8h" alt=""/></div>
 <map name="nmf_utilities_2nmf_constants_m_s_s_p_m_8h" id="nmf_utilities_2nmf_constants_m_s_s_p_m_8h">
-<area shape="rect" title="Definition for constants used in MSSPM tool." alt="" coords="5,5,200,47"/>
-<area shape="rect" title=" " alt="" coords="15,95,95,121"/>
-<area shape="rect" title=" " alt="" coords="119,95,182,121"/>
+<area shape="rect" title="Definition for constants used in MSSPM tool." alt="" coords="44,5,239,47"/>
+<area shape="rect" title=" " alt="" coords="5,95,85,121"/>
+<area shape="rect" title=" " alt="" coords="110,95,173,121"/>
+<area shape="rect" title=" " alt="" coords="197,95,291,121"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -91,27 +94,47 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="nmf_constants_m_s_s_p_m_8h__dep__incl.png" border="0" usemap="#nmf_utilities_2nmf_constants_m_s_s_p_m_8hdep" alt=""/></div>
 <map name="nmf_utilities_2nmf_constants_m_s_s_p_m_8hdep" id="nmf_utilities_2nmf_constants_m_s_s_p_m_8hdep">
-<area shape="rect" title="Definition for constants used in MSSPM tool." alt="" coords="359,5,553,47"/>
-<area shape="rect" href="_bees_algorithm_8h_source.html" title=" " alt="" coords="194,169,425,196"/>
-<area shape="rect" href="nmf_growth_form_8h_source.html" title=" " alt="" coords="201,95,418,121"/>
-<area shape="rect" href="nmf_utils_qt_8h.html" title="Definition for Qt widgets and functions that operate on widgets." alt="" coords="637,95,824,121"/>
-<area shape="rect" href="nmf_chart_bar_8h_source.html" title=" " alt="" coords="842,169,1030,196"/>
-<area shape="rect" href="nmf_progress_widget_8h.html" title="This file contains the definition for the Progress Chart dock widget." alt="" coords="1055,169,1289,196"/>
-<area shape="rect" href="nmf_viewer_widget_8h.html" title="GUI definition for the Image Viewer set of widgets." alt="" coords="1313,169,1535,196"/>
-<area shape="rect" href="nmf_database_8h.html" title="This file contains the database API implementation (currently implemented for MySQL)." alt="" coords="551,169,766,196"/>
-<area shape="rect" href="nmf_database_8cpp.html" title="This file contains the NMFS DatabaseAPI implementation." alt="" coords="5,251,235,278"/>
-<area shape="rect" href="nmf_abundance_8h_source.html" title=" " alt="" coords="259,251,485,278"/>
-<area shape="rect" href="nmf_database_connect_dialog_8h_source.html" title=" " alt="" coords="1091,244,1301,285"/>
-<area shape="rect" href="nmf_data_8h.html" title="This file contains the NMFS Data class definition." alt="" coords="559,251,758,278"/>
-<area shape="rect" href="nmf_output_chart_bar_8h_source.html" title=" " alt="" coords="715,333,899,375"/>
-<area shape="rect" href="nmf_output_chart_base_8h_source.html" title=" " alt="" coords="832,244,1016,285"/>
-<area shape="rect" href="nmf_output_chart_line_8h_source.html" title=" " alt="" coords="948,333,1132,375"/>
-<area shape="rect" href="nmf_output_chart_stacked_bar_8h_source.html" title=" " alt="" coords="451,333,666,375"/>
+<area shape="rect" title="Definition for constants used in MSSPM tool." alt="" coords="2242,5,2437,47"/>
+<area shape="rect" href="_bees_algorithm_8h_source.html" title=" " alt="" coords="2928,445,3159,471"/>
+<area shape="rect" href="nmf_database_8h.html" title="This file contains the database API implementation (currently implemented for MySQL)." alt="" coords="450,177,664,203"/>
+<area shape="rect" href="nmf_growth_form_8h_source.html" title=" " alt="" coords="2958,266,3175,293"/>
+<area shape="rect" href="nmf_utils_qt_8h.html" title="Definition for Qt widgets and functions that operate on widgets." alt="" coords="1520,95,1706,121"/>
+<area shape="rect" href="nmf_database_8cpp.html" title="This file contains the NMFS DatabaseAPI implementation." alt="" coords="1008,266,1237,293"/>
+<area shape="rect" href="nmf_data_8h.html" title="This file contains the NMFS Data class definition." alt="" coords="40,266,239,293"/>
+<area shape="rect" href="nmf_abundance_8h_source.html" title=" " alt="" coords="757,266,984,293"/>
+<area shape="rect" href="nmf_output_chart_bar_8h_source.html" title=" " alt="" coords="264,348,448,389"/>
+<area shape="rect" href="nmf_output_chart_base_8h_source.html" title=" " alt="" coords="264,259,448,300"/>
+<area shape="rect" href="nmf_output_chart_line_8h_source.html" title=" " alt="" coords="56,348,240,389"/>
+<area shape="rect" href="nmf_output_chart_stacked_bar_8h_source.html" title=" " alt="" coords="472,348,688,389"/>
+<area shape="rect" href="nmf_database_connect_dialog_8h_source.html" title=" " alt="" coords="522,259,733,300"/>
+<area shape="rect" href="nmf_chart_bar_8h_source.html" title=" " alt="" coords="1845,177,2034,203"/>
+<area shape="rect" href="nmf_chart_line_8h_source.html" title=" " alt="" coords="2058,177,2253,203"/>
+<area shape="rect" href="nmf_chart_line_with_scatter_8h_source.html" title=" " alt="" coords="1016,169,1228,211"/>
+<area shape="rect" href="nmf_progress_widget_8h.html" title="This file contains the definition for the Progress Chart dock widget." alt="" coords="1261,266,1496,293"/>
+<area shape="rect" href="nmf_viewer_widget_8h.html" title="GUI definition for the Image Viewer set of widgets." alt="" coords="1252,177,1475,203"/>
+<area shape="rect" href="nmf_utils_8h.html" title="Definition for common typedefs and structs (i.e., non&#45;graphical)" alt="" coords="1650,177,1821,203"/>
+<area shape="rect" href="_bee_8h_source.html" title=" " alt="" coords="2758,355,2916,382"/>
+<area shape="rect" href="nmf_log_widget_8h_source.html" title=" " alt="" coords="1774,266,1975,293"/>
+<area shape="rect" href="nmf_output_chart3_d_8h_source.html" title=" " alt="" coords="2000,259,2184,300"/>
+<area shape="rect" href="nmf_competition_form_8h_source.html" title=" " alt="" coords="2941,348,3146,389"/>
+<area shape="rect" href="nmf_harvest_form_8h_source.html" title=" " alt="" coords="3170,355,3392,382"/>
+<area shape="rect" href="nmf_predation_form_8h_source.html" title=" " alt="" coords="2450,355,2682,382"/>
+<area shape="rect" href="nmf_utils_complex_8h.html" title="These routines were originally from Complex2.bas." alt="" coords="2208,266,2437,293"/>
+<area shape="rect" href="nmf_utils_statistics_8h.html" title="This header file defines multi&#45;species statistical utility functions." alt="" coords="1927,355,2158,382"/>
+<area shape="rect" href="nmf_utils_statistics_mohns_rho_8h.html" title="Definition for the nmfUtilsStatisticsMohnsRho class." alt="" coords="1764,437,1982,479"/>
+<area shape="rect" href="nmf_utils_statistics_averaging_8h.html" title="Definition for the nmfUtilsStatisticsAveraging class." alt="" coords="2461,259,2680,300"/>
+<area shape="rect" href="nmf_utils_complex_8cpp.html" title="These routines were originally from Complex2.bas." alt="" coords="2182,355,2426,382"/>
 </map>
 </div>
 </div>
 <p><a href="nmf_constants_m_s_s_p_m_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespacenmf_constants_m_s_s_p_m"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_constants_m_s_s_p_m.html">nmfConstantsMSSPM</a></td></tr>
+<tr class="memdesc:namespacenmf_constants_m_s_s_p_m"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constants used specifically in the MSSPM application. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a1b95379735b5c7f64f41a7523cbe5b8f"><td class="memItemLeft" align="right" valign="top"><a id="a1b95379735b5c7f64f41a7523cbe5b8f"></a>
@@ -216,6 +239,24 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSP
 <tr class="memitem:ae4ac4547304a16a864e42b2274b5bcd1"><td class="memItemLeft" align="right" valign="top"><a id="ae4ac4547304a16a864e42b2274b5bcd1"></a>
 const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::Column_SpeciesKMax</b> = 17</td></tr>
 <tr class="separator:ae4ac4547304a16a864e42b2274b5bcd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a678b174de0e76a3d28e40c3942519b26"><td class="memItemLeft" align="right" valign="top"><a id="a678b174de0e76a3d28e40c3942519b26"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::Model_Review_Column_rSquared</b> = 1</td></tr>
+<tr class="separator:a678b174de0e76a3d28e40c3942519b26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2551865bdd707a18259e7fe76660756d"><td class="memItemLeft" align="right" valign="top"><a id="a2551865bdd707a18259e7fe76660756d"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::Model_Review_Column_SSResiduals</b> = 2</td></tr>
+<tr class="separator:a2551865bdd707a18259e7fe76660756d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1cd83ed521a60cccf1c885b5679ba37"><td class="memItemLeft" align="right" valign="top"><a id="ac1cd83ed521a60cccf1c885b5679ba37"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::Model_Review_Column_AIC</b> = 3</td></tr>
+<tr class="separator:ac1cd83ed521a60cccf1c885b5679ba37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01d89576a1048cbd73bab641ce48f8ad"><td class="memItemLeft" align="right" valign="top"><a id="a01d89576a1048cbd73bab641ce48f8ad"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::Model_Review_Column_Last_Visible</b> = 13</td></tr>
+<tr class="separator:a01d89576a1048cbd73bab641ce48f8ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2dfd28e355c5f0ec21e059203baa1ec"><td class="memItemLeft" align="right" valign="top"><a id="ac2dfd28e355c5f0ec21e059203baa1ec"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::Query_User_For_Filename</b> = true</td></tr>
+<tr class="separator:ac2dfd28e355c5f0ec21e059203baa1ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadf04db16ab07f3ddf37946326fd2532"><td class="memItemLeft" align="right" valign="top"><a id="aadf04db16ab07f3ddf37946326fd2532"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::Dont_Query_User_For_Filename</b> = false</td></tr>
+<tr class="separator:aadf04db16ab07f3ddf37946326fd2532"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c5096dbe8281784dec0707ad38389fc"><td class="memItemLeft" align="right" valign="top"><a id="a3c5096dbe8281784dec0707ad38389fc"></a>
 const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::NoFishingMortality</b> = -1.0</td></tr>
 <tr class="separator:a3c5096dbe8281784dec0707ad38389fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -249,6 +290,12 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSP
 <tr class="memitem:a5263971a7eb2ab7c237f7262326ca1b0"><td class="memItemLeft" align="right" valign="top"><a id="a5263971a7eb2ab7c237f7262326ca1b0"></a>
 const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::MaxTotalSpecies</b> = 50</td></tr>
 <tr class="separator:a5263971a7eb2ab7c237f7262326ca1b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d35f1fd8f9f837b885f0fb9d2c1258d"><td class="memItemLeft" align="right" valign="top"><a id="a8d35f1fd8f9f837b885f0fb9d2c1258d"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ToolTipDuration</b> = 2000</td></tr>
+<tr class="separator:a8d35f1fd8f9f837b885f0fb9d2c1258d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a176f02867ec298cffae9a14c825a0b71"><td class="memItemLeft" align="right" valign="top"><a id="a176f02867ec298cffae9a14c825a0b71"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ValueToStartEE</b> = 1000000.0</td></tr>
+<tr class="separator:a176f02867ec298cffae9a14c825a0b71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a477f8e6573c5519ccbab656b44117c55"><td class="memItemLeft" align="right" valign="top"><a id="a477f8e6573c5519ccbab656b44117c55"></a>
 const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::RearrangeTitle</b> = true</td></tr>
 <tr class="separator:a477f8e6573c5519ccbab656b44117c55"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -354,6 +401,75 @@ const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSS
 <tr class="memitem:a4f8bd993ee677be98c8d86c024feb2c0"><td class="memItemLeft" align="right" valign="top"><a id="a4f8bd993ee677be98c8d86c024feb2c0"></a>
 const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::DontUpdateSetup</b> = false</td></tr>
 <tr class="separator:a4f8bd993ee677be98c8d86c024feb2c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96c1f956922aa6e29bbdcc478de696ed"><td class="memItemLeft" align="right" valign="top"><a id="a96c1f956922aa6e29bbdcc478de696ed"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::IsAveraged</b> = true</td></tr>
+<tr class="separator:a96c1f956922aa6e29bbdcc478de696ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace77647a797b2ed59200658da6884b5e"><td class="memItemLeft" align="right" valign="top"><a id="ace77647a797b2ed59200658da6884b5e"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::IsNotAveraged</b> = false</td></tr>
+<tr class="separator:ace77647a797b2ed59200658da6884b5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c18f704de830b848a7cbcec7b15a266"><td class="memItemLeft" align="right" valign="top"><a id="a5c18f704de830b848a7cbcec7b15a266"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ScientificNotation</b> = true</td></tr>
+<tr class="separator:a5c18f704de830b848a7cbcec7b15a266"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2e9d9196b0632b08c0bb198dd8a60dc"><td class="memItemLeft" align="right" valign="top"><a id="ae2e9d9196b0632b08c0bb198dd8a60dc"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::FixedNotation</b> = false</td></tr>
+<tr class="separator:ae2e9d9196b0632b08c0bb198dd8a60dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0edb49600a6560764288a867cbdae5e"><td class="memItemLeft" align="right" valign="top"><a id="ae0edb49600a6560764288a867cbdae5e"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::IsEnsemble</b> = true</td></tr>
+<tr class="separator:ae0edb49600a6560764288a867cbdae5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50403555cdf76b9c74443e0927c4a991"><td class="memItemLeft" align="right" valign="top"><a id="a50403555cdf76b9c74443e0927c4a991"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::IsNotEnsemble</b> = false</td></tr>
+<tr class="separator:a50403555cdf76b9c74443e0927c4a991"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4017f1ba0dd72ae48a40aa4e524e1d0"><td class="memItemLeft" align="right" valign="top"><a id="ab4017f1ba0dd72ae48a40aa4e524e1d0"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::IsMonteCarlo</b> = true</td></tr>
+<tr class="separator:ab4017f1ba0dd72ae48a40aa4e524e1d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a704524c8179550159a0d0ee30d1bf886"><td class="memItemLeft" align="right" valign="top"><a id="a704524c8179550159a0d0ee30d1bf886"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::IsNotMonteCarlo</b> = false</td></tr>
+<tr class="separator:a704524c8179550159a0d0ee30d1bf886"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a5dffa638ec779bb88299f7bdbc7f66"><td class="memItemLeft" align="right" valign="top"><a id="a5a5dffa638ec779bb88299f7bdbc7f66"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::PreEstimation</b> = true</td></tr>
+<tr class="separator:a5a5dffa638ec779bb88299f7bdbc7f66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af35464c33f2e5b06146d555923dcc83a"><td class="memItemLeft" align="right" valign="top"><a id="af35464c33f2e5b06146d555923dcc83a"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ShowLegend</b> = true</td></tr>
+<tr class="separator:af35464c33f2e5b06146d555923dcc83a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab77cf48338a0508f6daae54cccb0f480"><td class="memItemLeft" align="right" valign="top"><a id="ab77cf48338a0508f6daae54cccb0f480"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::DontShowLegend</b> = false</td></tr>
+<tr class="separator:ab77cf48338a0508f6daae54cccb0f480"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a0e770641a7d7b94d93c2eae57838dd"><td class="memItemLeft" align="right" valign="top"><a id="a6a0e770641a7d7b94d93c2eae57838dd"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ChartType2d</b> = &quot;2d&quot;</td></tr>
+<tr class="separator:a6a0e770641a7d7b94d93c2eae57838dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7dda5f2a7858bc209462712e186a3ef"><td class="memItemLeft" align="right" valign="top"><a id="af7dda5f2a7858bc209462712e186a3ef"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ChartType3d</b> = &quot;3d&quot;</td></tr>
+<tr class="separator:af7dda5f2a7858bc209462712e186a3ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53d32620c5b856f3f880c18e8d942d24"><td class="memItemLeft" align="right" valign="top"><a id="a53d32620c5b856f3f880c18e8d942d24"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::MultiplyTableByCatchability</b> = true</td></tr>
+<tr class="separator:a53d32620c5b856f3f880c18e8d942d24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e21b3b0a4caf0fd84ee1323a4299317"><td class="memItemLeft" align="right" valign="top"><a id="a1e21b3b0a4caf0fd84ee1323a4299317"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::DontMultiplyTableByCatchability</b> = false</td></tr>
+<tr class="separator:a1e21b3b0a4caf0fd84ee1323a4299317"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a209dfafa1f2108983e507c9cabc1e25d"><td class="memItemLeft" align="right" valign="top"><a id="a209dfafa1f2108983e507c9cabc1e25d"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::MultiplyTableByOutputBiomass</b> = true</td></tr>
+<tr class="separator:a209dfafa1f2108983e507c9cabc1e25d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06323173443a141924e038040f393203"><td class="memItemLeft" align="right" valign="top"><a id="a06323173443a141924e038040f393203"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::DontMultiplyTableByOutputBiomass</b> = false</td></tr>
+<tr class="separator:a06323173443a141924e038040f393203"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3edbcc6f60c2b9f5f8185c1953deabc7"><td class="memItemLeft" align="right" valign="top"><a id="a3edbcc6f60c2b9f5f8185c1953deabc7"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::DivideTableByOutputBiomass</b> = true</td></tr>
+<tr class="separator:a3edbcc6f60c2b9f5f8185c1953deabc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c7ad632afc99ab5586a6c92584c4e0d"><td class="memItemLeft" align="right" valign="top"><a id="a4c7ad632afc99ab5586a6c92584c4e0d"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::DontDivideTableByOutputBiomass</b> = false</td></tr>
+<tr class="separator:a4c7ad632afc99ab5586a6c92584c4e0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b4ecfde578dd558951a81def0669acc"><td class="memItemLeft" align="right" valign="top"><a id="a7b4ecfde578dd558951a81def0669acc"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ReloadAllWidgets</b> = true</td></tr>
+<tr class="separator:a7b4ecfde578dd558951a81def0669acc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af93fd64ff13e9190c686b811c4f08412"><td class="memItemLeft" align="right" valign="top"><a id="af93fd64ff13e9190c686b811c4f08412"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::DontReloadAllWidgets</b> = false</td></tr>
+<tr class="separator:af93fd64ff13e9190c686b811c4f08412"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade59f78ba7bd7e4f8b2d94922732d357"><td class="memItemLeft" align="right" valign="top"><a id="ade59f78ba7bd7e4f8b2d94922732d357"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::RemoveCommas</b> = true</td></tr>
+<tr class="separator:ade59f78ba7bd7e4f8b2d94922732d357"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af13106e67ec3c3de18e24f2b6c6331ce"><td class="memItemLeft" align="right" valign="top"><a id="af13106e67ec3c3de18e24f2b6c6331ce"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::DontRemoveCommas</b> = false</td></tr>
+<tr class="separator:af13106e67ec3c3de18e24f2b6c6331ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a285f6e37e936263a76881f766862ffc6"><td class="memItemLeft" align="right" valign="top"><a id="a285f6e37e936263a76881f766862ffc6"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::HiddenDir</b> = &quot;.MSSPM&quot;</td></tr>
 <tr class="separator:a285f6e37e936263a76881f766862ffc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -405,11 +521,341 @@ const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConst
 <tr class="memitem:ad49f01212097e74096fb0e0665150e9e"><td class="memItemLeft" align="right" valign="top"><a id="ad49f01212097e74096fb0e0665150e9e"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::OutputScenariosDirMMode</b> = &quot;Remora/scenarios&quot;</td></tr>
 <tr class="separator:ad49f01212097e74096fb0e0665150e9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdef73be77ae7f2ff5e1df2fbc8c2dd2"><td class="memItemLeft" align="right" valign="top"><a id="acdef73be77ae7f2ff5e1df2fbc8c2dd2"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::FilenameMultiRun</b> = &quot;MultiRunParameter.csv&quot;</td></tr>
+<tr class="separator:acdef73be77ae7f2ff5e1df2fbc8c2dd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79acd707098d22fb1b5b7be04c5c3822"><td class="memItemLeft" align="right" valign="top"><a id="a79acd707098d22fb1b5b7be04c5c3822"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::FilenameMohnsRhoRun</b> = &quot;MohnsRhoMultiRunParameter.csv&quot;</td></tr>
+<tr class="separator:a79acd707098d22fb1b5b7be04c5c3822"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ede9d62ff313290f3cb669104cba943"><td class="memItemLeft" align="right" valign="top"><a id="a5ede9d62ff313290f3cb669104cba943"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::FilenameModelReview</b> = &quot;ModelReview.csv&quot;</td></tr>
+<tr class="separator:a5ede9d62ff313290f3cb669104cba943"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a487837d77f3133fdb254f5022bd6526f"><td class="memItemLeft" align="right" valign="top"><a id="a487837d77f3133fdb254f5022bd6526f"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::FilenameSummaryModelFit</b> = &quot;SummaryModelFit.csv&quot;</td></tr>
+<tr class="separator:a487837d77f3133fdb254f5022bd6526f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a588dbe8bf3774b41c6fa3ba472e269fd"><td class="memItemLeft" align="right" valign="top"><a id="a588dbe8bf3774b41c6fa3ba472e269fd"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::FilenameSummaryDiagnostic</b> = &quot;SummaryDiagnostic.csv&quot;</td></tr>
+<tr class="separator:a588dbe8bf3774b41c6fa3ba472e269fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad81c6592383887fd6c37e7c9343aa793"><td class="memItemLeft" align="right" valign="top"><a id="ad81c6592383887fd6c37e7c9343aa793"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::FilenameEstimatedParameters</b> = &quot;EstimatedParameters.csv&quot;</td></tr>
+<tr class="separator:ad81c6592383887fd6c37e7c9343aa793"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e65478c489f88e70ae4ff5afb81e867"><td class="memItemLeft" align="right" valign="top"><a id="a5e65478c489f88e70ae4ff5afb81e867"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::OutputChartBiomass</b> = &quot;Biomass vs Time&quot;</td></tr>
+<tr class="separator:a5e65478c489f88e70ae4ff5afb81e867"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74c49f414e77541a9775c7c1b8025528"><td class="memItemLeft" align="right" valign="top"><a id="a74c49f414e77541a9775c7c1b8025528"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::OutputChartHarvest</b> = &quot;Harvest vs Time&quot;</td></tr>
+<tr class="separator:a74c49f414e77541a9775c7c1b8025528"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab30d4f0f284643f6dd372dd5419fe796"><td class="memItemLeft" align="right" valign="top"><a id="ab30d4f0f284643f6dd372dd5419fe796"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::OutputChartExploitation</b> = &quot;Exploitation Rate&quot;</td></tr>
+<tr class="separator:ab30d4f0f284643f6dd372dd5419fe796"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a31b0cca576d2c040d76c9fe00218ef"><td class="memItemLeft" align="right" valign="top"><a id="a4a31b0cca576d2c040d76c9fe00218ef"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::OutputChartExploitationCatchAverageTitle</b> = &quot;Exploitation Rate Ave(C/Bc)&quot;</td></tr>
+<tr class="separator:a4a31b0cca576d2c040d76c9fe00218ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17e1b7a14944154054577266d0d0f3c5"><td class="memItemLeft" align="right" valign="top"><a id="a17e1b7a14944154054577266d0d0f3c5"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::OutputChartExploitationCatchTitle</b> = &quot;Exploitation Rate (C/Bc)&quot;</td></tr>
+<tr class="separator:a17e1b7a14944154054577266d0d0f3c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6335b15a804af6883c9e4ec87fed31f6"><td class="memItemLeft" align="right" valign="top"><a id="a6335b15a804af6883c9e4ec87fed31f6"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::OutputChartExploitationEffortTitle</b> = &quot;Exploitation Rate ((qE)/Bc)&quot;</td></tr>
+<tr class="separator:a6335b15a804af6883c9e4ec87fed31f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1561cd703525e75cc00329cb9b9fd4f1"><td class="memItemLeft" align="right" valign="top"><a id="a1561cd703525e75cc00329cb9b9fd4f1"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::HarvestNone</b> = &quot;Null&quot;</td></tr>
+<tr class="separator:a1561cd703525e75cc00329cb9b9fd4f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b37742a3ebcc0ba084155ccb10f6f81"><td class="memItemLeft" align="right" valign="top"><a id="a1b37742a3ebcc0ba084155ccb10f6f81"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::HarvestCatch</b> = &quot;Catch&quot;</td></tr>
+<tr class="separator:a1b37742a3ebcc0ba084155ccb10f6f81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15381d357b0b944d037906b8d10c8e1f"><td class="memItemLeft" align="right" valign="top"><a id="a15381d357b0b944d037906b8d10c8e1f"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::HarvestEffort</b> = &quot;Effort (qE)&quot;</td></tr>
+<tr class="separator:a15381d357b0b944d037906b8d10c8e1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f87515ce443edd0d6500d6ee01ea3e1"><td class="memItemLeft" align="right" valign="top"><a id="a7f87515ce443edd0d6500d6ee01ea3e1"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::HarvestExploitation</b> = &quot;Exploitation Rate (Harvest/Bc)&quot;</td></tr>
+<tr class="separator:a7f87515ce443edd0d6500d6ee01ea3e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d296d629aa93c3fdfbaae10159ad1d5"><td class="memItemLeft" align="right" valign="top"><a id="a2d296d629aa93c3fdfbaae10159ad1d5"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ParameterNameInitialBiomass</b> = &quot;Initial Absolute Biomass&quot;</td></tr>
+<tr class="separator:a2d296d629aa93c3fdfbaae10159ad1d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab986283f93efcc4254faa353660ce12a"><td class="memItemLeft" align="right" valign="top"><a id="ab986283f93efcc4254faa353660ce12a"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ParameterNameSurveyQ</b> = &quot;SurveyQ&quot;</td></tr>
+<tr class="separator:ab986283f93efcc4254faa353660ce12a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f6391abf575ce8bdc50b26ff37a4a41"><td class="memItemLeft" align="right" valign="top"><a id="a1f6391abf575ce8bdc50b26ff37a4a41"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ParameterNameGrowthRate</b> = &quot;Growth Rate&quot;</td></tr>
+<tr class="separator:a1f6391abf575ce8bdc50b26ff37a4a41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3976cbc193b11915321b154e8a07f95e"><td class="memItemLeft" align="right" valign="top"><a id="a3976cbc193b11915321b154e8a07f95e"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ParameterNameCarryingCapacity</b> = &quot;Carrying Capacity&quot;</td></tr>
+<tr class="separator:a3976cbc193b11915321b154e8a07f95e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e021eef6b64ca5840257608d401c862"><td class="memItemLeft" align="right" valign="top"><a id="a6e021eef6b64ca5840257608d401c862"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ParameterNameCatchability</b> = &quot;Catchability&quot;</td></tr>
+<tr class="separator:a6e021eef6b64ca5840257608d401c862"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae0556ac41b72c165b01812ebd162b94"><td class="memItemLeft" align="right" valign="top"><a id="aae0556ac41b72c165b01812ebd162b94"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ParameterNameCompetitionAlpha</b> = &quot;Competition Alpha&quot;</td></tr>
+<tr class="separator:aae0556ac41b72c165b01812ebd162b94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d9b3473697ddf61e23d07367d737ed8"><td class="memItemLeft" align="right" valign="top"><a id="a2d9b3473697ddf61e23d07367d737ed8"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ParameterNameCompetitionBetaSpecies</b> = &quot;Competition Beta Species&quot;</td></tr>
+<tr class="separator:a2d9b3473697ddf61e23d07367d737ed8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22c8caa157d6486e74269c6963615e8e"><td class="memItemLeft" align="right" valign="top"><a id="a22c8caa157d6486e74269c6963615e8e"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ParameterNameCompetitionBetaGuilds</b> = &quot;Competition Beta Guilds&quot;</td></tr>
+<tr class="separator:a22c8caa157d6486e74269c6963615e8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f517cc9c877e99d38c02de3478ab3ee"><td class="memItemLeft" align="right" valign="top"><a id="a7f517cc9c877e99d38c02de3478ab3ee"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ParameterNameCompetitionBetaGuildsGuilds</b> = &quot;Competition Beta GuildsGuilds&quot;</td></tr>
+<tr class="separator:a7f517cc9c877e99d38c02de3478ab3ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade47174426f4795b24d7d37375d7c710"><td class="memItemLeft" align="right" valign="top"><a id="ade47174426f4795b24d7d37375d7c710"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ParameterNamePredationRho</b> = &quot;Predation Rho&quot;</td></tr>
+<tr class="separator:ade47174426f4795b24d7d37375d7c710"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0b123c4a1a293b3bdd7f4582d66972d"><td class="memItemLeft" align="right" valign="top"><a id="ae0b123c4a1a293b3bdd7f4582d66972d"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ParameterNamePredationHandling</b> = &quot;Predation Handling&quot;</td></tr>
+<tr class="separator:ae0b123c4a1a293b3bdd7f4582d66972d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02f676672fc6d6d1a8847ddf0aae79a7"><td class="memItemLeft" align="right" valign="top"><a id="a02f676672fc6d6d1a8847ddf0aae79a7"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ParameterNamePredationExponent</b> = &quot;Predation Exponent&quot;</td></tr>
+<tr class="separator:a02f676672fc6d6d1a8847ddf0aae79a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8c522892e0c162507acbc7daa1409f2"><td class="memItemLeft" align="right" valign="top"><a id="ab8c522892e0c162507acbc7daa1409f2"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::SectionSetup</b> = &quot;Setup&quot;</td></tr>
+<tr class="separator:ab8c522892e0c162507acbc7daa1409f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68fe1c4f605e12496b0d5b87e4786b23"><td class="memItemLeft" align="right" valign="top"><a id="a68fe1c4f605e12496b0d5b87e4786b23"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::SectionEstimation</b> = &quot;Estimation Data Input&quot;</td></tr>
+<tr class="separator:a68fe1c4f605e12496b0d5b87e4786b23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab924ccd97116514bdc130d9716e9f0ea"><td class="memItemLeft" align="right" valign="top"><a id="ab924ccd97116514bdc130d9716e9f0ea"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::SectionDiagnostic</b> = &quot;Diagnostic Data Input&quot;</td></tr>
+<tr class="separator:ab924ccd97116514bdc130d9716e9f0ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f9e8f5fcad5e4acab5e76eda5361aa1"><td class="memItemLeft" align="right" valign="top"><a id="a3f9e8f5fcad5e4acab5e76eda5361aa1"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::SectionForecast</b> = &quot;Forecast&quot;</td></tr>
+<tr class="separator:a3f9e8f5fcad5e4acab5e76eda5361aa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d463e71dd464c5832e53429062f8b55"><td class="memItemLeft" align="right" valign="top"><a id="a0d463e71dd464c5832e53429062f8b55"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableApplication</b> = QString::fromStdString(&quot;Application&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a0d463e71dd464c5832e53429062f8b55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf581996932e55c4ae4520e047d7ada0"><td class="memItemLeft" align="right" valign="top"><a id="abf581996932e55c4ae4520e047d7ada0"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableBetweenGuildsInteractionCoeff</b> = QString::fromStdString(&quot;BetweenGuildsInteractionCoeff&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:abf581996932e55c4ae4520e047d7ada0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb9ee3af32f0acee3331c235dccf5952"><td class="memItemLeft" align="right" valign="top"><a id="abb9ee3af32f0acee3331c235dccf5952"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableBiomassAbsolute</b> = QString::fromStdString(&quot;BiomassAbsolute&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:abb9ee3af32f0acee3331c235dccf5952"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba053ebf3b6af4c6d2332b35471f99df"><td class="memItemLeft" align="right" valign="top"><a id="aba053ebf3b6af4c6d2332b35471f99df"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableBiomassRelative</b> = QString::fromStdString(&quot;BiomassRelative&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:aba053ebf3b6af4c6d2332b35471f99df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a189007e211876c415ae6d4a5a379eed5"><td class="memItemLeft" align="right" valign="top"><a id="a189007e211876c415ae6d4a5a379eed5"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableBiomassRelativeDividedByEstSurveyQ</b> = QString::fromStdString(&quot;BiomassRelativeDividedByEstSurveyQ&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a189007e211876c415ae6d4a5a379eed5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0027c7e23fe16efcdfe49ea8d51e706"><td class="memItemLeft" align="right" valign="top"><a id="aa0027c7e23fe16efcdfe49ea8d51e706"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableBiomassRelativeScalars</b> = QString::fromStdString(&quot;BiomassRelativeScalars&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:aa0027c7e23fe16efcdfe49ea8d51e706"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8529d3c43c949ecf48fba7b33b102d2"><td class="memItemLeft" align="right" valign="top"><a id="ac8529d3c43c949ecf48fba7b33b102d2"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableCompetitionAlpha</b> = QString::fromStdString(&quot;CompetitionAlpha&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:ac8529d3c43c949ecf48fba7b33b102d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a836dc7d7d353698c55587840f6e0bf90"><td class="memItemLeft" align="right" valign="top"><a id="a836dc7d7d353698c55587840f6e0bf90"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableCompetitionAlphaMax</b> = QString::fromStdString(&quot;CompetitionAlphaMax&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a836dc7d7d353698c55587840f6e0bf90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91af98b5610f19b3f9c5cefe9f8574f7"><td class="memItemLeft" align="right" valign="top"><a id="a91af98b5610f19b3f9c5cefe9f8574f7"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableCompetitionAlphaMin</b> = QString::fromStdString(&quot;CompetitionAlphaMin&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a91af98b5610f19b3f9c5cefe9f8574f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6141fd31ba6bb1cfc0556b518b5ddc96"><td class="memItemLeft" align="right" valign="top"><a id="a6141fd31ba6bb1cfc0556b518b5ddc96"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableCompetitionBetaGuilds</b> = QString::fromStdString(&quot;CompetitionBetaGuilds&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a6141fd31ba6bb1cfc0556b518b5ddc96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b09df8132da9b75a0d17050518a4ded"><td class="memItemLeft" align="right" valign="top"><a id="a4b09df8132da9b75a0d17050518a4ded"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableCompetitionBetaGuildsGuilds</b> = QString::fromStdString(&quot;CompetitionBetaGuildsGuilds&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a4b09df8132da9b75a0d17050518a4ded"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5da39580e6655094e9c59463c05d87c4"><td class="memItemLeft" align="right" valign="top"><a id="a5da39580e6655094e9c59463c05d87c4"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableCompetitionBetaGuildsGuildsMax</b> = QString::fromStdString(&quot;CompetitionBetaGuildsGuildsMax&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a5da39580e6655094e9c59463c05d87c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cf26cbaa5dbd1c8d5ea9d218f8a7877"><td class="memItemLeft" align="right" valign="top"><a id="a1cf26cbaa5dbd1c8d5ea9d218f8a7877"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableCompetitionBetaGuildsGuildsMin</b> = QString::fromStdString(&quot;CompetitionBetaGuildsGuildsMin&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a1cf26cbaa5dbd1c8d5ea9d218f8a7877"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afde80df48639fd30488ca0603a0280ac"><td class="memItemLeft" align="right" valign="top"><a id="afde80df48639fd30488ca0603a0280ac"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableCompetitionBetaGuildsMax</b> = QString::fromStdString(&quot;CompetitionBetaGuildsMax&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:afde80df48639fd30488ca0603a0280ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a05736be5513b447cdc0ec39c45209a"><td class="memItemLeft" align="right" valign="top"><a id="a7a05736be5513b447cdc0ec39c45209a"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableCompetitionBetaGuildsMin</b> = QString::fromStdString(&quot;CompetitionBetaGuildsMin&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a7a05736be5513b447cdc0ec39c45209a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7905a7946185f689c7f3c4fd69eebb6a"><td class="memItemLeft" align="right" valign="top"><a id="a7905a7946185f689c7f3c4fd69eebb6a"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableCompetitionBetaSpecies</b> = QString::fromStdString(&quot;CompetitionBetaSpecies&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a7905a7946185f689c7f3c4fd69eebb6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a212f04d51944d91830f689291d76d6"><td class="memItemLeft" align="right" valign="top"><a id="a1a212f04d51944d91830f689291d76d6"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableCompetitionBetaSpeciesMax</b> = QString::fromStdString(&quot;CompetitionBetaSpeciesMax&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a1a212f04d51944d91830f689291d76d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedb57519af411df367a60dbc487c4b7e"><td class="memItemLeft" align="right" valign="top"><a id="aedb57519af411df367a60dbc487c4b7e"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableCompetitionBetaSpeciesMin</b> = QString::fromStdString(&quot;CompetitionBetaSpeciesMin&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:aedb57519af411df367a60dbc487c4b7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18175a1c9034e0c12d0c529e639b0434"><td class="memItemLeft" align="right" valign="top"><a id="a18175a1c9034e0c12d0c529e639b0434"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableCovariate</b> = QString::fromStdString(&quot;Covariate&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a18175a1c9034e0c12d0c529e639b0434"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a592266408d67378015e16f8e52f014f1"><td class="memItemLeft" align="right" valign="top"><a id="a592266408d67378015e16f8e52f014f1"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableCovariateAssignment</b> = QString::fromStdString(&quot;CovariateAssignment&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a592266408d67378015e16f8e52f014f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40177e298044d09daa678bb685ff2231"><td class="memItemLeft" align="right" valign="top"><a id="a40177e298044d09daa678bb685ff2231"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableDiagnosticCarryingCapacity</b> = QString::fromStdString(&quot;DiagnosticCarryingCapacity&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a40177e298044d09daa678bb685ff2231"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac88d63e8e5873fa6ea768506e961ce56"><td class="memItemLeft" align="right" valign="top"><a id="ac88d63e8e5873fa6ea768506e961ce56"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableDiagnosticCatchability</b> = QString::fromStdString(&quot;DiagnosticCatchability&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:ac88d63e8e5873fa6ea768506e961ce56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aece2d455bffd9664a769eb29ad9f64fd"><td class="memItemLeft" align="right" valign="top"><a id="aece2d455bffd9664a769eb29ad9f64fd"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableDiagnosticGrowthRate</b> = QString::fromStdString(&quot;DiagnosticGrowthRate&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:aece2d455bffd9664a769eb29ad9f64fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af10c44c67d5cc18ad754e128c53f6951"><td class="memItemLeft" align="right" valign="top"><a id="af10c44c67d5cc18ad754e128c53f6951"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableDiagnosticInitBiomass</b> = QString::fromStdString(&quot;DiagnosticInitBiomass&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:af10c44c67d5cc18ad754e128c53f6951"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bfaa238fd985e9f06c1d3c8e14fcce6"><td class="memItemLeft" align="right" valign="top"><a id="a1bfaa238fd985e9f06c1d3c8e14fcce6"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableDiagnosticSurface</b> = QString::fromStdString(&quot;DiagnosticSurface&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a1bfaa238fd985e9f06c1d3c8e14fcce6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52ce226e12bb6d546fedba061b5c8dcd"><td class="memItemLeft" align="right" valign="top"><a id="a52ce226e12bb6d546fedba061b5c8dcd"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableDiagnosticSurveyQ</b> = QString::fromStdString(&quot;DiagnosticSurveyQ&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a52ce226e12bb6d546fedba061b5c8dcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbadf814ff82aecaeb2fdb8707d06ce7"><td class="memItemLeft" align="right" valign="top"><a id="acbadf814ff82aecaeb2fdb8707d06ce7"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableForecastBiomass</b> = QString::fromStdString(&quot;ForecastBiomass&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:acbadf814ff82aecaeb2fdb8707d06ce7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69be875bda817e211d41d11f81558a03"><td class="memItemLeft" align="right" valign="top"><a id="a69be875bda817e211d41d11f81558a03"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableForecastBiomassMonteCarlo</b> = QString::fromStdString(&quot;ForecastBiomassMonteCarlo&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a69be875bda817e211d41d11f81558a03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a363c41d3a3d19111fe2b76222616d0cb"><td class="memItemLeft" align="right" valign="top"><a id="a363c41d3a3d19111fe2b76222616d0cb"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableForecastBiomassMultiScenario</b> = QString::fromStdString(&quot;ForecastBiomassMultiScenario&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a363c41d3a3d19111fe2b76222616d0cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9462da026e9fe4ac581ad99207a97f42"><td class="memItemLeft" align="right" valign="top"><a id="a9462da026e9fe4ac581ad99207a97f42"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableForecastHarvestCatch</b> = QString::fromStdString(&quot;ForecastHarvestCatch&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a9462da026e9fe4ac581ad99207a97f42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5fe57248842e0ac930285dbfeefe299"><td class="memItemLeft" align="right" valign="top"><a id="aa5fe57248842e0ac930285dbfeefe299"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableForecastHarvestEffort</b> = QString::fromStdString(&quot;ForecastHarvestEffort&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:aa5fe57248842e0ac930285dbfeefe299"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad56fb068f126f78ef8100d98ee1fb2d2"><td class="memItemLeft" align="right" valign="top"><a id="ad56fb068f126f78ef8100d98ee1fb2d2"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableForecastHarvestExploitation</b> = QString::fromStdString(&quot;ForecastHarvestExploitation&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:ad56fb068f126f78ef8100d98ee1fb2d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a428616a430ce4f804451e6b85127e79c"><td class="memItemLeft" align="right" valign="top"><a id="a428616a430ce4f804451e6b85127e79c"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableForecastMonteCarloParameters</b> = QString::fromStdString(&quot;ForecastMonteCarloParameters&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a428616a430ce4f804451e6b85127e79c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a364e865b4d1d5372eb3a9555aaed1ef2"><td class="memItemLeft" align="right" valign="top"><a id="a364e865b4d1d5372eb3a9555aaed1ef2"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableForecastUncertainty</b> = QString::fromStdString(&quot;ForecastUncertainty&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a364e865b4d1d5372eb3a9555aaed1ef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb0c0e2e025ec41b5e07ebed8d35615d"><td class="memItemLeft" align="right" valign="top"><a id="adb0c0e2e025ec41b5e07ebed8d35615d"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableForecasts</b> = QString::fromStdString(&quot;Forecasts&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:adb0c0e2e025ec41b5e07ebed8d35615d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8a62267966f7632dce8ea66a07ecc92"><td class="memItemLeft" align="right" valign="top"><a id="aa8a62267966f7632dce8ea66a07ecc92"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableGuilds</b> = QString::fromStdString(&quot;Guilds&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:aa8a62267966f7632dce8ea66a07ecc92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0052cc5de85540a47308afe49f321c8d"><td class="memItemLeft" align="right" valign="top"><a id="a0052cc5de85540a47308afe49f321c8d"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableHarvestCatch</b> = QString::fromStdString(&quot;HarvestCatch&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a0052cc5de85540a47308afe49f321c8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22cce6ab76ea5427fb55f93461b5f11a"><td class="memItemLeft" align="right" valign="top"><a id="a22cce6ab76ea5427fb55f93461b5f11a"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableHarvestEffort</b> = QString::fromStdString(&quot;HarvestEffort&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a22cce6ab76ea5427fb55f93461b5f11a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f257985d6c092652d8de9ad6c488280"><td class="memItemLeft" align="right" valign="top"><a id="a5f257985d6c092652d8de9ad6c488280"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableHarvestExploitation</b> = QString::fromStdString(&quot;HarvestExploitation&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a5f257985d6c092652d8de9ad6c488280"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad376094ab2404df4e10a5f3f4d4aa8d0"><td class="memItemLeft" align="right" valign="top"><a id="ad376094ab2404df4e10a5f3f4d4aa8d0"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableModelReview</b> = QString::fromStdString(&quot;ModelReview&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:ad376094ab2404df4e10a5f3f4d4aa8d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f69326c7ea341847aa7b5bc8df0e856"><td class="memItemLeft" align="right" valign="top"><a id="a1f69326c7ea341847aa7b5bc8df0e856"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableModels</b> = QString::fromStdString(&quot;Models&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a1f69326c7ea341847aa7b5bc8df0e856"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0415825786cab9c0efcd71ec4bf3f148"><td class="memItemLeft" align="right" valign="top"><a id="a0415825786cab9c0efcd71ec4bf3f148"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableOutputBiomass</b> = QString::fromStdString(&quot;OutputBiomass&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a0415825786cab9c0efcd71ec4bf3f148"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad277184f44185c65fa48575501696fca"><td class="memItemLeft" align="right" valign="top"><a id="ad277184f44185c65fa48575501696fca"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableOutputBiomassEnsemble</b> = QString::fromStdString(&quot;OutputBiomassEnsemble&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:ad277184f44185c65fa48575501696fca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61873d742d4dcb9475b4141504c58821"><td class="memItemLeft" align="right" valign="top"><a id="a61873d742d4dcb9475b4141504c58821"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableOutputBiomassMohnsRhoOfEnsembles</b> = QString::fromStdString(&quot;OutputBiomassMohnsRhoOfEnsembles&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a61873d742d4dcb9475b4141504c58821"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ccbec9c03764c7f3edaa41a8437667d"><td class="memItemLeft" align="right" valign="top"><a id="a2ccbec9c03764c7f3edaa41a8437667d"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableOutputCarryingCapacity</b> = QString::fromStdString(&quot;OutputCarryingCapacity&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a2ccbec9c03764c7f3edaa41a8437667d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2e68d30d9e912792d6888304dadb70e"><td class="memItemLeft" align="right" valign="top"><a id="ac2e68d30d9e912792d6888304dadb70e"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableOutputCatchability</b> = QString::fromStdString(&quot;OutputCatchability&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:ac2e68d30d9e912792d6888304dadb70e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6619ab49d76e4659bb46c35f480f2bd8"><td class="memItemLeft" align="right" valign="top"><a id="a6619ab49d76e4659bb46c35f480f2bd8"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableOutputCompetitionAlpha</b> = QString::fromStdString(&quot;OutputCompetitionAlpha&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a6619ab49d76e4659bb46c35f480f2bd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a768a0b05b364747f6a97c8d3aa859792"><td class="memItemLeft" align="right" valign="top"><a id="a768a0b05b364747f6a97c8d3aa859792"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableOutputCompetitionBetaGuilds</b> = QString::fromStdString(&quot;OutputCompetitionBetaGuilds&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a768a0b05b364747f6a97c8d3aa859792"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a9117e65d9ec2f5c8a37d9cff05d5a5"><td class="memItemLeft" align="right" valign="top"><a id="a8a9117e65d9ec2f5c8a37d9cff05d5a5"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableOutputCompetitionBetaGuildsGuilds</b> = QString::fromStdString(&quot;OutputCompetitionBetaGuildsGuilds&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a8a9117e65d9ec2f5c8a37d9cff05d5a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fc6529279c79b009ad8572d3336126e"><td class="memItemLeft" align="right" valign="top"><a id="a5fc6529279c79b009ad8572d3336126e"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableOutputCompetitionBetaSpecies</b> = QString::fromStdString(&quot;OutputCompetitionBetaSpecies&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a5fc6529279c79b009ad8572d3336126e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52d37140568369101eb9c8ded49531fb"><td class="memItemLeft" align="right" valign="top"><a id="a52d37140568369101eb9c8ded49531fb"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableOutputGrowthRate</b> = QString::fromStdString(&quot;OutputGrowthRate&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a52d37140568369101eb9c8ded49531fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0ef092b69d6db5be75ba03829ebe5f6"><td class="memItemLeft" align="right" valign="top"><a id="ad0ef092b69d6db5be75ba03829ebe5f6"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableOutputInitBiomass</b> = QString::fromStdString(&quot;OutputInitBiomass&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:ad0ef092b69d6db5be75ba03829ebe5f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75a81f4b301d9b38173f17a000c23eef"><td class="memItemLeft" align="right" valign="top"><a id="a75a81f4b301d9b38173f17a000c23eef"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableOutputMSY</b> = QString::fromStdString(&quot;OutputMSY&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a75a81f4b301d9b38173f17a000c23eef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a571fac1ab8d5d40fa330206c0b069137"><td class="memItemLeft" align="right" valign="top"><a id="a571fac1ab8d5d40fa330206c0b069137"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableOutputMSYBiomass</b> = QString::fromStdString(&quot;OutputMSYBiomass&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a571fac1ab8d5d40fa330206c0b069137"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af69145964700d0abbddfbbaf4b08b1be"><td class="memItemLeft" align="right" valign="top"><a id="af69145964700d0abbddfbbaf4b08b1be"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableOutputMSYFishing</b> = QString::fromStdString(&quot;OutputMSYFishing&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:af69145964700d0abbddfbbaf4b08b1be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68cc9be4dd4eca30015bdad9dafb5c89"><td class="memItemLeft" align="right" valign="top"><a id="a68cc9be4dd4eca30015bdad9dafb5c89"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableOutputPredationExponent</b> = QString::fromStdString(&quot;OutputPredationExponent&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a68cc9be4dd4eca30015bdad9dafb5c89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75c76176c9db3b1e287bdedba5cdba79"><td class="memItemLeft" align="right" valign="top"><a id="a75c76176c9db3b1e287bdedba5cdba79"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableOutputPredationHandling</b> = QString::fromStdString(&quot;OutputPredationHandling&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a75c76176c9db3b1e287bdedba5cdba79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10aaa3fa93582fb379e1dbc584ca65b2"><td class="memItemLeft" align="right" valign="top"><a id="a10aaa3fa93582fb379e1dbc584ca65b2"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableOutputPredationRho</b> = QString::fromStdString(&quot;OutputPredationRho&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a10aaa3fa93582fb379e1dbc584ca65b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bde097f99cbcec455d69036e47e7a25"><td class="memItemLeft" align="right" valign="top"><a id="a6bde097f99cbcec455d69036e47e7a25"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableOutputSurveyQ</b> = QString::fromStdString(&quot;OutputSurveyQ&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a6bde097f99cbcec455d69036e47e7a25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a094dc831b2f2a4ac536b0d665104cc7a"><td class="memItemLeft" align="right" valign="top"><a id="a094dc831b2f2a4ac536b0d665104cc7a"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TablePredationExponent</b> = QString::fromStdString(&quot;PredationExponent&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a094dc831b2f2a4ac536b0d665104cc7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c7270f0ccb4579ae516d05ddc2cc559"><td class="memItemLeft" align="right" valign="top"><a id="a5c7270f0ccb4579ae516d05ddc2cc559"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TablePredationExponentMax</b> = QString::fromStdString(&quot;PredationExponentMax&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a5c7270f0ccb4579ae516d05ddc2cc559"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27f6d559455dc7e18f3dfde30dcf614a"><td class="memItemLeft" align="right" valign="top"><a id="a27f6d559455dc7e18f3dfde30dcf614a"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TablePredationExponentMin</b> = QString::fromStdString(&quot;PredationExponentMin&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a27f6d559455dc7e18f3dfde30dcf614a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d195b9ac238741dd56999f4fcb51c54"><td class="memItemLeft" align="right" valign="top"><a id="a0d195b9ac238741dd56999f4fcb51c54"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TablePredationHandling</b> = QString::fromStdString(&quot;PredationHandling&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a0d195b9ac238741dd56999f4fcb51c54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a154367c296a6f8ee253d9550ce4f445b"><td class="memItemLeft" align="right" valign="top"><a id="a154367c296a6f8ee253d9550ce4f445b"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TablePredationHandlingMax</b> = QString::fromStdString(&quot;PredationHandlingMax&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a154367c296a6f8ee253d9550ce4f445b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6a1e2680c8df5758ce6263af4537661"><td class="memItemLeft" align="right" valign="top"><a id="ac6a1e2680c8df5758ce6263af4537661"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TablePredationHandlingMin</b> = QString::fromStdString(&quot;PredationHandlingMin&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:ac6a1e2680c8df5758ce6263af4537661"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a177c94710f7fe61c33f682f040833afd"><td class="memItemLeft" align="right" valign="top"><a id="a177c94710f7fe61c33f682f040833afd"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TablePredationRho</b> = QString::fromStdString(&quot;PredationRho&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a177c94710f7fe61c33f682f040833afd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac39b0562130768d290abc929319696e2"><td class="memItemLeft" align="right" valign="top"><a id="ac39b0562130768d290abc929319696e2"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TablePredationRhoMax</b> = QString::fromStdString(&quot;PredationRhoMax&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:ac39b0562130768d290abc929319696e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa94e162af7a3e33bd907861f7734500f"><td class="memItemLeft" align="right" valign="top"><a id="aa94e162af7a3e33bd907861f7734500f"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TablePredationRhoMin</b> = QString::fromStdString(&quot;PredationRhoMin&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:aa94e162af7a3e33bd907861f7734500f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91e409b0ab25a88a04f94bbdf5f1125f"><td class="memItemLeft" align="right" valign="top"><a id="a91e409b0ab25a88a04f94bbdf5f1125f"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableSpatialOverlap</b> = QString::fromStdString(&quot;SpatialOverlap&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a91e409b0ab25a88a04f94bbdf5f1125f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7525590b2cedfb135fc243235bff2c4e"><td class="memItemLeft" align="right" valign="top"><a id="a7525590b2cedfb135fc243235bff2c4e"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableSpecies</b> = QString::fromStdString(&quot;Species&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a7525590b2cedfb135fc243235bff2c4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5d97ee105f6590f914d7d12f520d476"><td class="memItemLeft" align="right" valign="top"><a id="ae5d97ee105f6590f914d7d12f520d476"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableSummaryDiagnostic</b> = QString::fromStdString(&quot;SummaryDiagnostic&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:ae5d97ee105f6590f914d7d12f520d476"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afff54c42d6b34da84d74c5b221e5a652"><td class="memItemLeft" align="right" valign="top"><a id="afff54c42d6b34da84d74c5b221e5a652"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableSummaryModelFit</b> = QString::fromStdString(&quot;SummaryModelFit&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:afff54c42d6b34da84d74c5b221e5a652"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0516229c1f2b5d8686fcbefedf333dc"><td class="memItemLeft" align="right" valign="top">const QStringList&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::SummaryModelFitStatisticNames</b></td></tr>
+<tr class="separator:ae0516229c1f2b5d8686fcbefedf333dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4d357b9c8efc8a7956b510c30c10414"><td class="memItemLeft" align="right" valign="top">const QStringList&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::SummaryModelFitStatisticTooltips</b></td></tr>
+<tr class="separator:af4d357b9c8efc8a7956b510c30c10414"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd7df5ef3de923febf4462d21d040cdf"><td class="memItemLeft" align="right" valign="top">const QStringList&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::SummaryDiagnosticStatisticNames</b></td></tr>
+<tr class="separator:acd7df5ef3de923febf4462d21d040cdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeafde3d1facf259088bcdcb58932275f"><td class="memItemLeft" align="right" valign="top">const QStringList&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::VectorParameterNames</b></td></tr>
+<tr class="separator:aeafde3d1facf259088bcdcb58932275f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70db8d9580612c68e80cf75664ad9d5c"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::EstimateCheckboxNames</b></td></tr>
+<tr class="separator:a70db8d9580612c68e80cf75664ad9d5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab89757be410752ae21ab94bc95def85d"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TablesToClean</b></td></tr>
+<tr class="separator:ab89757be410752ae21ab94bc95def85d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Definition for constants used in MSSPM tool. </p>
 <dl class="section date"><dt>Date</dt><dd>Jan 14, 2020</dd></dl>
-<p>This file defines constants used in the MSSPM application program. </p>
+<p>This file defines constants used in the MSSPM application program.</p>
+<dl class="section copyright"><dt>Copyright</dt><dd>Public Domain Notice<br  />
+ National Oceanic And Atmospheric Administration<br  />
+<br  />
+ This software is a "United States Government Work" under the terms of the United States Copyright Act. It was written as part of the author's official duties as a United States Government employee/contractor and thus cannot be copyrighted. This software is freely available to the public for use. The National Oceanic And Atmospheric Administration and the U.S. Government have not placed any restriction on its use or reproduction. Although all reasonable efforts have been taken to ensure the accuracy and reliability of the software and data, the National Oceanic And Atmospheric Administration and the U.S. Government do not and cannot warrant the performance or results that may be obtained by using this software or data. The National Oceanic And Atmospheric Administration and the U.S. Government disclaim all warranties, express or implied, including warranties of performance, merchantability or fitness for any particular purpose.<br  />
+<br  />
+ Please cite the author(s) in any work or product based on this material. </dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -1424,6 +1424,80 @@ loadGuildsSpeciesTableview(QTabWidget* parentTabWidget,
 }
 
 bool
+loadCSVFileComboBoxes(QTabWidget* parentTabWidget,
+                      QTableView* tableView,
+                      const QString& inputDataPath,
+                      const QString& inputFilename,
+                      QString& errorMsg)
+{
+    QString allLines;
+    QString filename;
+    QStringList lineList;
+    QStringList dataParts;
+    QStringList SpeciesList = {};
+    QStringList ParameterList  = {};
+    QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(tableView->model());
+    errorMsg.clear();
+    QString value;
+    QLocale locale(QLocale::English);
+    QString valueWithComma;
+    QComboBox* cbox;
+    QModelIndex index;
+
+    if (smodel == nullptr) {
+        errorMsg = "Error: No model found in table. Please save initial table data.";
+        return false;
+    }
+
+    filename = (inputFilename.isEmpty()) ?
+                QFileDialog::getOpenFileName(parentTabWidget,
+                   QObject::tr("Select CSV file"), inputDataPath,
+                   QObject::tr("Data Files (*.csv)")) :
+                inputFilename;
+
+    if (! filename.isEmpty()) {
+        QFile file(filename);
+        if (file.open(QIODevice::ReadOnly)) {
+            allLines = file.readAll().trimmed();
+            lineList = allLines.split('\n');
+            int numSpecies    = lineList.count()-1;               // -1 for the top-left
+            int numParameters = lineList[1].split(',').count()-1; // -1 to remove the top-left
+
+            if ((smodel->rowCount()    == numSpecies) &&
+                (smodel->columnCount() == numParameters))
+            {
+                QStringList parameters = lineList[0].split(',');
+                for (int j=1;j<parameters.count();++j) {
+                    ParameterList << parameters[j].replace(",",";");
+                }
+                for (int i=1; i<lineList.count(); ++i) {
+                    dataParts = lineList[i].split(',');
+                    SpeciesList << " " + dataParts[0] + " ";
+                    for (int j=1; j<dataParts.count(); ++j) {
+                        index = smodel->index(i-1,j-1);
+                        cbox  = qobject_cast<QComboBox*>(tableView->indexWidget(index));
+                        cbox->setCurrentText(dataParts[j]);
+                    }
+                }
+                smodel->setVerticalHeaderLabels(SpeciesList);
+                smodel->setHorizontalHeaderLabels(ParameterList);
+                tableView->setModel(smodel);
+                tableView->resizeColumnsToContents();
+            } else {
+                errorMsg = "Error: table size from .csv file (" +
+                        QString::number(numSpecies) + "x" + QString::number(numParameters) +
+                        ") does not equal current size of table (" +
+                        QString::number(smodel->rowCount()) + "x" +
+                        QString::number(smodel->columnCount()) + ")";
+            }
+            file.close();
+        }
+    }
+    return true;
+}
+
+
+bool
 loadTimeSeries(QTabWidget* parentTabWidget,
                QTableView* tableView,
                const QString& inputDataPath,
@@ -1770,6 +1844,62 @@ saveTimeSeries(QTabWidget* parentTabWidget,
     return retv;
 }
 
+bool
+saveCSVFileComboBoxes(QTabWidget* parentTabWidget,
+                      QTableView* tableView,
+                      QStandardItemModel* smodel,
+                      QString& inputDataPath,
+                      QString& outputFilename)
+{
+    bool retv = true;
+    QString filename;
+    QComboBox* cbox;
+    QModelIndex index;
+
+    filename = (outputFilename.isEmpty()) ?
+        QFileDialog::getSaveFileName(parentTabWidget,
+            QObject::tr("Output CSV file"), inputDataPath,
+            QObject::tr("Data Files (*.csv)")) :
+        outputFilename;
+
+    if (! filename.isEmpty()) {
+        // Assure that file has a .csv extension
+        QFileInfo fileInfo(filename);
+        if (fileInfo.suffix().toLower() != "csv") {
+            filename += ".csv";
+        }
+        QFile file(filename);
+        QString value;
+        if (file.open(QIODevice::WriteOnly)) {
+            QTextStream stream(&file);
+            int numRows = smodel->rowCount();
+            int numCols = smodel->columnCount();
+            for (int col=0; col<numCols; ++col) {
+                stream << "," << smodel->headerData(col,Qt::Horizontal).toString().remove(",");
+            }
+            stream << "\n";
+            for (int row=0; row<numRows; ++row) {
+                stream << smodel->headerData(row,Qt::Vertical).toString().trimmed().remove(",");
+                for (int col=0; col<numCols; ++col) {
+                    index = smodel->index(row,col);
+                    cbox  = qobject_cast<QComboBox*>(tableView->indexWidget(index));
+                    value = cbox->currentText();
+                    //          index = cbox->model()->index(0,0);
+                    //          value = cbox->model()->data(index).toString();
+                    stream << "," << value;
+                }
+                stream << "\n";
+            }
+            file.close();
+        }
+
+    } else {
+        retv = false;
+    }
+
+    outputFilename = filename;
+    return retv;
+}
 
 void transposeModel(QTableView* tv)
 {
@@ -2259,6 +2389,36 @@ checkAndCalculateWithSignificantDigits(
     }
 
     return retv;
+}
+
+void
+getCovariates(
+        nmfStructsQt::ModelDataStruct& dataStruct,
+        const int& numYears,
+        const std::string& parameterName,
+        boost::numeric::ublas::matrix<double>& covariateMatrix)
+//      std::vector<double>& covariateValues)
+{
+    int numSpecies = dataStruct.SpeciesNames.size();
+    std::string index;
+    std::string covariateName;
+
+//  covariateValues.clear();
+    nmfUtils::initialize(covariateMatrix, numYears, numSpecies);
+
+    for (int year=0; year<numYears; ++year) {
+        for (int species=0; species<numSpecies; ++species) {
+            index         = dataStruct.SpeciesNames[species]+","+parameterName;
+            covariateName = dataStruct.CovariateAssignment[index];
+            if (covariateName.empty()) {
+//              covariateValues.push_back(0.0);
+                covariateMatrix(year,species) = 0.0;
+            } else {
+                covariateMatrix(year,species) = dataStruct.CovariateMap[covariateName][year];
+//              covariateValues.push_back(dataStruct.CovariateMap[covariateName][timeIndex]);
+            }
+        }
+    }
 }
 
 //bool
