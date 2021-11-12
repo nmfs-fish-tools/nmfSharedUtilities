@@ -1496,6 +1496,78 @@ loadCSVFileComboBoxes(QTabWidget* parentTabWidget,
     return true;
 }
 
+bool
+loadCVSFileCovariate(QTabWidget* parentTabWidget,
+                     QTableView* tableView,
+                     const QString& inputDataPath,
+                     const QString& inputFilename,
+                     QString& errorMsg)
+{
+    Qt::ItemFlags flags;
+    QString allLines;
+    QString filename;
+    QStringList lineList;
+    QStringList dataParts;
+    QStringList VerticalList = {};
+    QStringList HorizontalList  = {};
+    QStandardItem* item;
+    QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(tableView->model());
+    errorMsg.clear();
+    QString value;
+    QLocale locale(QLocale::English);
+    QString valueWithComma;
+
+    if (smodel == nullptr) {
+        errorMsg = "Error: No model found in table. Please save initial table data.";
+        return false;
+    }
+
+    filename = (inputFilename.isEmpty()) ?
+                QFileDialog::getOpenFileName(parentTabWidget,
+                   QObject::tr("Select CSV file"), inputDataPath,
+                   QObject::tr("Data Files (*.csv)")) :
+                inputFilename;
+
+    if (! filename.isEmpty()) {
+        QFile file(filename);
+        if (file.open(QIODevice::ReadOnly)) {
+            allLines = file.readAll().trimmed();
+            lineList = allLines.split('\n');
+            int numRows   = lineList.count()-1; // -1 for the header
+            int numCols = lineList[1].split(',').count()-1; // -1 to remove the year
+
+            QStringList parts = lineList[0].split(',');
+            for (int j=1;j<parts.count();++j) {
+                HorizontalList << parts[j];
+            }
+            for (int i=1; i<=numRows; ++i) {
+                dataParts = lineList[i].split(',');
+                VerticalList << " " + dataParts[0] + " ";
+                for (int j=1; j<numCols; ++j) {
+                    value = dataParts[j];
+                    item  = new QStandardItem();
+                    item->setTextAlignment(Qt::AlignCenter);
+                    if (! value.isEmpty()) {
+                        item->setText(value);
+                    } else {
+                        item->setText("");
+                        setItemEditable(nmfConstantsMSSPM::NotEditable,
+                                        nmfConstantsMSSPM::GrayedIfNotEditable,
+                                        item);
+                    }
+                    smodel->setItem(i-1, j-1,item);
+                }
+            }
+            smodel->setVerticalHeaderLabels(VerticalList);
+            smodel->setHorizontalHeaderLabels(HorizontalList);
+            tableView->setModel(smodel);
+            tableView->resizeColumnsToContents();
+
+            file.close();
+        }
+    }
+    return true;
+}
 
 bool
 loadTimeSeries(QTabWidget* parentTabWidget,
@@ -1565,11 +1637,9 @@ loadTimeSeries(QTabWidget* parentTabWidget,
                         }
                         item->setTextAlignment(Qt::AlignCenter);
                         if (firstLineReadOnly && (i == 1)) {
-                            item->setEditable(false);
-                            item->setBackground(QBrush(QColor(240,240,240)));
-                            flags = item->flags();
-                            flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
-                            item->setFlags(flags);
+                            setItemEditable(nmfConstantsMSSPM::NotEditable,
+                                            nmfConstantsMSSPM::GrayedIfNotEditable,
+                                            item);
                         }
                         smodel->setItem(i-1, j-1, item);
                     }
@@ -1899,6 +1969,23 @@ saveCSVFileComboBoxes(QTabWidget* parentTabWidget,
 
     outputFilename = filename;
     return retv;
+}
+
+void setItemEditable(const bool& editable,
+                     const bool& grayedIfNotEditable,
+                     QStandardItem* item)
+{
+    Qt::ItemFlags flags;
+
+    item->setEditable(editable);
+    if (!editable && grayedIfNotEditable) {
+        item->setBackground(QBrush(QColor(240,240,240)));
+    } else {
+        item->setBackground(QBrush(Qt::white));
+    }
+    flags  = item->flags();
+    flags &= ~(Qt::ItemIsSelectable | Qt::ItemIsEditable); // reset/clear the flag
+    item->setFlags(flags);
 }
 
 void transposeModel(QTableView* tv)

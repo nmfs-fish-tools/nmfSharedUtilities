@@ -427,6 +427,20 @@ namespace nmfUtilsQt {
      */
     bool isAnError(std::string errorMsg);
     /**
+     * @brief Load a time series .csv file into a QTableView
+     * @param parentTabWidget : parent tab containing the QTableView object
+     * @param tableView : QTableView that will contain the .csv data
+     * @param inputDataPath : default path for the input .csv file
+     * @param inputFilename : CSV filename if default is not desired
+     * @param errorMsg : error message produced during the load
+     * @return : Boolean signifying a successful load (true) or an unsuccessful load (false)
+     */
+    bool loadCVSFileCovariate(QTabWidget* parentTabWidget,
+                              QTableView* tableView,
+                              const QString& inputDataPath,
+                              const QString& inputFilename,
+                              QString& errorMsg);
+    /**
      * @brief Loads the CSV File into a table of combo boxes
      * @param parentTabWidget : parent widget
      * @param tableView : table view containing combo box widgets
@@ -777,6 +791,15 @@ namespace nmfUtilsQt {
      */
     void setBackgroundLineEdit(QLineEdit* lineEdit,
                                const QString& backgroundStyleSheet);
+    /**
+     * @brief Sets the item to editable and gives it a gray background if not editable
+     * @param editable : boolean describing if the item is editable
+     * @param grayedIfNotEditable : boolean describing if the item should have a gray background if not editable
+     * @param item : the item whose editable parameters to modify
+     */
+    void setItemEditable(const bool& editable,
+                         const bool& grayedIfNotEditable,
+                         QStandardItem* item);
     /**
      * @brief Sets the min max range tables using the passed in pct value
      * @param pct : percent value to create the min and max range tables
