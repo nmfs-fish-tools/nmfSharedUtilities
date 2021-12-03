@@ -18,10 +18,13 @@ nmfUtilsStatisticsAveraging::clearAveragedData()
 {
     m_AveInitBiomass.clear();
     m_AveGrowthRates.clear();
+    m_AveGrowthRateCovariateCoeffs.clear();
     m_AveCarryingCapacities.clear();
+    m_AveCarryingCapacityCovariateCoeffs.clear();
     m_AveCompetitionAlpha.clear();
     m_AvePredationExponent.clear();
     m_AveCatchability.clear();
+    m_AveCatchabilityCovariateCoeffs.clear();
     m_AveCompetitionBetaSpecies.clear();
     m_AveCompetitionBetaGuilds.clear();
     m_AveCompetitionBetaGuildsGuilds.clear();
@@ -38,9 +41,12 @@ nmfUtilsStatisticsAveraging::clearEstData()
     m_AIC.clear();
     m_EstInitBiomass.clear();
     m_EstGrowthRates.clear();
+    m_EstGrowthRateCovariateCoeffs.clear();
     m_EstCarryingCapacities.clear();
+    m_EstCarryingCapacityCovariateCoeffs.clear();
     m_EstPredationExponent.clear();
     m_EstCatchability.clear();
+    m_EstCatchabilityCovariateCoeffs.clear();
     m_EstSurveyQ.clear();
     m_EstCompetitionAlpha.clear();
     m_EstCompetitionBetaSpecies.clear();
@@ -57,7 +63,11 @@ nmfUtilsStatisticsAveraging::clearTrimmedData()
     m_AIC_trimmed.clear();
     m_EstInitBiomass_trimmed.clear();
     m_EstGrowthRates_trimmed.clear();
+    m_EstGrowthRateCovariateCoeffs_trimmed.clear();
     m_EstCarryingCapacities_trimmed.clear();
+    m_EstCarryingCapacityCovariateCoeffs_trimmed.clear();
+    m_EstCatchability_trimmed.clear();
+    m_EstCatchabilityCovariateCoeffs_trimmed.clear();
     m_EstPredationHandling_trimmed.clear();
     m_EstPredationRho_trimmed.clear();
     m_EstPredationExponent_trimmed.clear();
@@ -78,18 +88,24 @@ nmfUtilsStatisticsAveraging::calculateWeighted(const std::vector<double>& weight
     double sum;
     std::vector<std::vector<double> > aveVector = {m_AveInitBiomass,
                                                    m_AveGrowthRates,
+                                                   m_AveGrowthRateCovariateCoeffs,
                                                    m_AveCarryingCapacities,
+                                                   m_AveCarryingCapacityCovariateCoeffs,
                                                    m_AvePredationExponent,
                                                    m_AveCatchability,
+                                                   m_AveCatchabilityCovariateCoeffs,
                                                    m_AveSurveyQ};
     clearAveragedData();
 
     // Find averages for all vector estimated parameters
     for (std::vector<std::vector<double> > estVector : {m_EstInitBiomass_trimmed,
                                                         m_EstGrowthRates_trimmed,
+                                                        m_EstGrowthRateCovariateCoeffs_trimmed,
                                                         m_EstCarryingCapacities_trimmed,
+                                                        m_EstCarryingCapacityCovariateCoeffs_trimmed,
                                                         m_EstPredationExponent_trimmed,
                                                         m_EstCatchability_trimmed,
+                                                        m_EstCatchabilityCovariateCoeffs_trimmed,
                                                         m_EstSurveyQ_trimmed})
     {
         for (int species=0; species<NumSpecies; ++species) {
@@ -105,12 +121,15 @@ nmfUtilsStatisticsAveraging::calculateWeighted(const std::vector<double>& weight
         }
         ++index;
     }
-    m_AveInitBiomass        = aveVector[0];
-    m_AveGrowthRates        = aveVector[1];
-    m_AveCarryingCapacities = aveVector[2];
-    m_AvePredationExponent  = aveVector[3];
-    m_AveCatchability       = aveVector[4];
-    m_AveSurveyQ            = aveVector[5];
+    m_AveInitBiomass                     = aveVector[0];
+    m_AveGrowthRates                     = aveVector[1];
+    m_AveGrowthRateCovariateCoeffs       = aveVector[2];
+    m_AveCarryingCapacities              = aveVector[3];
+    m_AveCarryingCapacityCovariateCoeffs = aveVector[4];
+    m_AvePredationExponent               = aveVector[5];
+    m_AveCatchability                    = aveVector[6];
+    m_AveCatchabilityCovariateCoeffs     = aveVector[7];
+    m_AveSurveyQ                         = aveVector[8];
 
     // Find averages for all matrix estimated parameters
     index = 0;
@@ -174,20 +193,23 @@ nmfUtilsStatisticsAveraging::createTrimmedStructures(const int& numberOfTopRunsT
     clearTrimmedData();
 
     if (numberOfTopRunsToUse == 100) {
-        m_AIC_trimmed                            = m_AIC;
-        m_EstInitBiomass_trimmed                 = m_EstInitBiomass;
-        m_EstGrowthRates_trimmed                 = m_EstGrowthRates;
-        m_EstCarryingCapacities_trimmed          = m_EstCarryingCapacities;
-        m_EstPredationExponent_trimmed           = m_EstPredationExponent;
-        m_EstCatchability_trimmed                = m_EstCatchability;
-        m_EstSurveyQ_trimmed                     = m_EstSurveyQ;
-        m_EstCompetitionAlpha_trimmed            = m_EstCompetitionAlpha;
-        m_EstCompetitionBetaSpecies_trimmed      = m_EstCompetitionBetaSpecies;
-        m_EstCompetitionBetaGuilds_trimmed       = m_EstCompetitionBetaGuilds;
-        m_EstCompetitionBetaGuildsGuilds_trimmed = m_EstCompetitionBetaGuildsGuilds;
-        m_EstPredationRho_trimmed                = m_EstPredationRho;
-        m_EstPredationHandling_trimmed           = m_EstPredationHandling;
-        m_EstBiomass_trimmed                     = m_EstBiomass;
+        m_AIC_trimmed                                = m_AIC;
+        m_EstInitBiomass_trimmed                     = m_EstInitBiomass;
+        m_EstGrowthRates_trimmed                     = m_EstGrowthRates;
+        m_EstGrowthRateCovariateCoeffs_trimmed       = m_EstGrowthRateCovariateCoeffs;
+        m_EstCarryingCapacities_trimmed              = m_EstCarryingCapacities;
+        m_EstCarryingCapacityCovariateCoeffs_trimmed = m_EstCarryingCapacityCovariateCoeffs;
+        m_EstPredationExponent_trimmed               = m_EstPredationExponent;
+        m_EstCatchability_trimmed                    = m_EstCatchability;
+        m_EstCatchabilityCovariateCoeffs_trimmed     = m_EstCatchabilityCovariateCoeffs;
+        m_EstSurveyQ_trimmed                         = m_EstSurveyQ;
+        m_EstCompetitionAlpha_trimmed                = m_EstCompetitionAlpha;
+        m_EstCompetitionBetaSpecies_trimmed          = m_EstCompetitionBetaSpecies;
+        m_EstCompetitionBetaGuilds_trimmed           = m_EstCompetitionBetaGuilds;
+        m_EstCompetitionBetaGuildsGuilds_trimmed     = m_EstCompetitionBetaGuildsGuilds;
+        m_EstPredationRho_trimmed                    = m_EstPredationRho;
+        m_EstPredationHandling_trimmed               = m_EstPredationHandling;
+        m_EstBiomass_trimmed                         = m_EstBiomass;
     } else {
         int NumRuns_trimmed = numberOfTopRunsToUse;
         if (isPercent) {
@@ -223,9 +245,12 @@ nmfUtilsStatisticsAveraging::createTrimmedStructures(const int& numberOfTopRunsT
             m_AIC_trimmed.push_back(m_AIC[index]);
             m_EstInitBiomass_trimmed.push_back(m_EstInitBiomass[index]);
             m_EstGrowthRates_trimmed.push_back(m_EstGrowthRates[index]);
+            m_EstGrowthRateCovariateCoeffs_trimmed.push_back(m_EstGrowthRateCovariateCoeffs[index]);
             m_EstCarryingCapacities_trimmed.push_back(m_EstCarryingCapacities[index]);
+            m_EstCarryingCapacityCovariateCoeffs_trimmed.push_back(m_EstCarryingCapacityCovariateCoeffs[index]);
             m_EstPredationExponent_trimmed.push_back(m_EstPredationExponent[index]);
             m_EstCatchability_trimmed.push_back(m_EstCatchability[index]);
+            m_EstCatchabilityCovariateCoeffs_trimmed.push_back(m_EstCatchabilityCovariateCoeffs[index]);
             m_EstCompetitionAlpha_trimmed.push_back(m_EstCompetitionAlpha[index]);
             m_EstCompetitionBetaSpecies_trimmed.push_back(m_EstCompetitionBetaSpecies[index]);
             m_EstCompetitionBetaGuilds_trimmed.push_back(m_EstCompetitionBetaGuilds[index]);
@@ -307,9 +332,12 @@ void
 nmfUtilsStatisticsAveraging::getAveData(std::vector<double>& Fitness,
                                         std::vector<double>& AveInitBiomass,
                                         std::vector<double>& AveGrowthRates,
+                                        std::vector<double>& AveGrowthRateCovariateCoeffs,
                                         std::vector<double>& AveCarryingCapacities,
+                                        std::vector<double>& AveCarryingCapacityCovariateCoeffs,
                                         std::vector<double>& AvePredationExponent,
                                         std::vector<double>& AveCatchability,
+                                        std::vector<double>& AveCatchabilityCovariateCoeffs,
                                         std::vector<double>& AveSurveyQ,
                                         boost::numeric::ublas::matrix<double>& AveCompetitionAlpha,
                                         boost::numeric::ublas::matrix<double>& AveCompetitionBetaSpecies,
@@ -319,20 +347,23 @@ nmfUtilsStatisticsAveraging::getAveData(std::vector<double>& Fitness,
                                         boost::numeric::ublas::matrix<double>& AvePredationHandling,
                                         boost::numeric::ublas::matrix<double>& AveBiomass)
 {
-    Fitness                   = m_Fitness;
-    AveInitBiomass            = m_AveInitBiomass;
-    AveGrowthRates            = m_AveGrowthRates;
-    AveCarryingCapacities     = m_AveCarryingCapacities;
-    AvePredationExponent      = m_AvePredationExponent;
-    AveCatchability           = m_AveCatchability;
-    AveCompetitionAlpha       = m_AveCompetitionAlpha;
-    AveCompetitionBetaSpecies = m_AveCompetitionBetaSpecies;
-    AveCompetitionBetaGuilds  = m_AveCompetitionBetaGuilds;
-    AveCompetitionBetaGuildsGuilds = m_AveCompetitionBetaGuildsGuilds;
-    AvePredationRho           = m_AvePredationRho;
-    AvePredationHandling      = m_AvePredationHandling;
-    AveSurveyQ                = m_AveSurveyQ;
-    AveBiomass                = m_AveBiomass;
+    Fitness                            = m_Fitness;
+    AveInitBiomass                     = m_AveInitBiomass;
+    AveGrowthRates                     = m_AveGrowthRates;
+    AveGrowthRateCovariateCoeffs       = m_AveGrowthRateCovariateCoeffs;
+    AveCarryingCapacities              = m_AveCarryingCapacities;
+    AveCarryingCapacityCovariateCoeffs = m_AveCarryingCapacityCovariateCoeffs;
+    AvePredationExponent               = m_AvePredationExponent;
+    AveCatchability                    = m_AveCatchability;
+    AveCatchabilityCovariateCoeffs     = m_AveCatchabilityCovariateCoeffs;
+    AveCompetitionAlpha                = m_AveCompetitionAlpha;
+    AveCompetitionBetaSpecies          = m_AveCompetitionBetaSpecies;
+    AveCompetitionBetaGuilds           = m_AveCompetitionBetaGuilds;
+    AveCompetitionBetaGuildsGuilds     = m_AveCompetitionBetaGuildsGuilds;
+    AvePredationRho                    = m_AvePredationRho;
+    AvePredationHandling               = m_AvePredationHandling;
+    AveSurveyQ                         = m_AveSurveyQ;
+    AveBiomass                         = m_AveBiomass;
 }
 
 void
@@ -341,9 +372,12 @@ nmfUtilsStatisticsAveraging::loadEstData(
         std::vector<double>& AIC,                   // per run, AIC values for all species and for model
         std::vector<double>& EstInitBiomass,        // estimated values for each species
         std::vector<double>& EstGrowthRates,
+        std::vector<double>& EstGrowthRateCovariateCoeffs,
         std::vector<double>& EstCarryingCapacities,
+        std::vector<double>& EstCarryingCapacityCovariateCoeffs,
         std::vector<double>& EstPredationExponent,
         std::vector<double>& EstCatchability,
+        std::vector<double>& EstCatchabilityCovariateCoeffs,
         std::vector<double>& EstSurveyQ,
         boost::numeric::ublas::matrix<double>& EstCompetitionAlpha,
         boost::numeric::ublas::matrix<double>& EstCompetitionBetaSpecies,
@@ -357,9 +391,12 @@ nmfUtilsStatisticsAveraging::loadEstData(
     m_AIC.push_back(AIC.back()); // Store only the last element of AIC (it's the model average over all species for that particular run)
     m_EstInitBiomass.push_back(EstInitBiomass);
     m_EstGrowthRates.push_back(EstGrowthRates);
+    m_EstGrowthRateCovariateCoeffs.push_back(EstGrowthRateCovariateCoeffs);
     m_EstCarryingCapacities.push_back(EstCarryingCapacities);
+    m_EstCarryingCapacityCovariateCoeffs.push_back(EstCarryingCapacityCovariateCoeffs);
     m_EstPredationExponent.push_back(EstPredationExponent);
     m_EstCatchability.push_back(EstCatchability);
+    m_EstCatchabilityCovariateCoeffs.push_back(EstCatchabilityCovariateCoeffs);
     m_EstSurveyQ.push_back(EstSurveyQ);
     m_EstCompetitionAlpha.push_back(EstCompetitionAlpha);
     m_EstCompetitionBetaSpecies.push_back(EstCompetitionBetaSpecies);

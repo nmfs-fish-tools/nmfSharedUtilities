@@ -262,12 +262,15 @@ namespace nmfConstantsMSSPM
      const std::string TableOutputBiomassEnsemble              = QString::fromStdString("OutputBiomassEnsemble").toLower().toStdString();
      const std::string TableOutputBiomassMohnsRhoOfEnsembles   = QString::fromStdString("OutputBiomassMohnsRhoOfEnsembles").toLower().toStdString();
      const std::string TableOutputCarryingCapacity             = QString::fromStdString("OutputCarryingCapacity").toLower().toStdString();
+     const std::string TableOutputCarryingCapacityCovariateCoeffs = QString::fromStdString("OutputCarryingCapacityCovariateCoeffs").toLower().toStdString();
      const std::string TableOutputCatchability                 = QString::fromStdString("OutputCatchability").toLower().toStdString();
+     const std::string TableOutputCatchabilityCovariateCoeffs  = QString::fromStdString("OutputCatchabilityCovariateCoeffs").toLower().toStdString();
      const std::string TableOutputCompetitionAlpha             = QString::fromStdString("OutputCompetitionAlpha").toLower().toStdString();
      const std::string TableOutputCompetitionBetaGuilds        = QString::fromStdString("OutputCompetitionBetaGuilds").toLower().toStdString();
      const std::string TableOutputCompetitionBetaGuildsGuilds  = QString::fromStdString("OutputCompetitionBetaGuildsGuilds").toLower().toStdString();
      const std::string TableOutputCompetitionBetaSpecies       = QString::fromStdString("OutputCompetitionBetaSpecies").toLower().toStdString();
      const std::string TableOutputGrowthRate                   = QString::fromStdString("OutputGrowthRate").toLower().toStdString();
+     const std::string TableOutputGrowthRateCovariateCoeffs    = QString::fromStdString("OutputGrowthRateCovariateCoeffs").toLower().toStdString();
      const std::string TableOutputInitBiomass                  = QString::fromStdString("OutputInitBiomass").toLower().toStdString();
      const std::string TableOutputMSY                          = QString::fromStdString("OutputMSY").toLower().toStdString();
      const std::string TableOutputMSYBiomass                   = QString::fromStdString("OutputMSYBiomass").toLower().toStdString();

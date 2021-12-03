@@ -3,17 +3,17 @@
 
 nmfGrowthForm::nmfGrowthForm(std::string growthType)
 {
-    m_type = growthType;
-    m_parameterRanges.clear();
-    m_numberParameters = 0;
+    m_Type = growthType;
+    m_ParameterRanges.clear();
+    m_NumSpecies = 0;
     m_isAGGPROD = false;
     m_Prefix.clear();
     m_GrowthMap.clear();
     m_GrowthKey.clear();
 
-    FunctionMap["Null"]     = &nmfGrowthForm::NoGrowth;
-    FunctionMap["Linear"]   = &nmfGrowthForm::LinearGrowth;
-    FunctionMap["Logistic"] = &nmfGrowthForm::LogisticGrowth;
+    FunctionMap["Null"]     = &nmfGrowthForm::FunctionMap_Null;
+    FunctionMap["Linear"]   = &nmfGrowthForm::FunctionMap_Linear;
+    FunctionMap["Logistic"] = &nmfGrowthForm::FunctionMap_Logistic;
 
     setupFormMaps();
 }
@@ -46,13 +46,13 @@ nmfGrowthForm::getPrefix()
 std::string
 nmfGrowthForm::getExpression()
 {
-    return m_GrowthMap[m_type];
+    return m_GrowthMap[m_Type];
 }
 
 std::string
 nmfGrowthForm::getKey()
 {
-    return m_GrowthKey[m_type];
+    return m_GrowthKey[m_Type];
 }
 
 void
@@ -66,58 +66,94 @@ nmfGrowthForm::loadParameterRanges(
         std::vector<std::pair<double,double> >& parameterRanges,
         const nmfStructsQt::ModelDataStruct& dataStruct)
 {
+    m_NumSpecies = (int)dataStruct.SpeciesNames.size();
     bool isCheckedGrowthRate       = nmfUtils::isEstimateParameterChecked(dataStruct,"GrowthRate");
     bool isCheckedCarryingCapacity = nmfUtils::isEstimateParameterChecked(dataStruct,"CarryingCapacity");
-
+    std::string speciesName;
+    std::map<std::string,nmfStructsQt::CovariateStruct> covariateCoeffMap;
+    nmfStructsQt::CovariateStruct covariateStruct;
     std::pair<double,double> aPair;
-    m_numberParameters = 0;
+
+    if (m_NumSpecies != (int)dataStruct.GrowthRateMin.size()) {
+        std::cout << "Error nmfGrowthForm::loadParameterRanges: GrowthRateMin size is not the same as NumSpecies" << std::endl;
+        return;
+    }
+    if (m_NumSpecies != (int)dataStruct.CarryingCapacityMin.size()) {
+        std::cout << "Error nmfGrowthForm::loadParameterRanges: CarryingCapacityMin size is not the same as NumSpecies" << std::endl;
+        return;
+    }
 
     // Always load growth rate values
-    for (unsigned species=0; species<dataStruct.GrowthRateMin.size(); ++species) {
+    for (int species=0; species<m_NumSpecies; ++species) {
         if (isCheckedGrowthRate) {
             aPair = std::make_pair(dataStruct.GrowthRateMin[species],
                                    dataStruct.GrowthRateMax[species]);
         } else {
-            aPair = std::make_pair(dataStruct.GrowthRate[species], //-nmfConstantsMSSPM::epsilon,
+            aPair = std::make_pair(dataStruct.GrowthRate[species],  //-nmfConstantsMSSPM::epsilon,
                                    dataStruct.GrowthRate[species]); //+nmfConstantsMSSPM::epsilon);
         }
         parameterRanges.emplace_back(aPair);
-        m_parameterRanges.emplace_back(aPair);
+        m_ParameterRanges.emplace_back(aPair);
     }
-    m_numberParameters += dataStruct.GrowthRateMin.size();
 
-    if (m_type == "Logistic") {
-        for (unsigned species=0; species<dataStruct.CarryingCapacityMin.size(); ++species) {
+    // Always load growth rate covariate values
+    for (int species=0; species<m_NumSpecies; ++species) {
+        speciesName       = dataStruct.SpeciesNames[species];
+        covariateCoeffMap = dataStruct.GrowthRateCovariateCoeff;
+        covariateStruct   = covariateCoeffMap[speciesName];
+        if (isCheckedGrowthRate) {
+            aPair = std::make_pair(covariateStruct.CoeffMinValue,
+                                   covariateStruct.CoeffMaxValue);
+        } else {
+            aPair = std::make_pair(covariateStruct.CoeffValue,
+                                   covariateStruct.CoeffValue);
+        }
+        parameterRanges.emplace_back(aPair);
+        m_ParameterRanges.emplace_back(aPair);
+    }
+
+    if (m_Type == "Logistic") {
+        // Load carrying capacity values
+        for (int species=0; species<m_NumSpecies; ++species) {
             if (isCheckedCarryingCapacity) {
                 aPair = std::make_pair(dataStruct.CarryingCapacityMin[species],
                                        dataStruct.CarryingCapacityMax[species]);
             } else {
-                aPair = std::make_pair(dataStruct.CarryingCapacity[species], //-nmfConstantsMSSPM::epsilon,
+                aPair = std::make_pair(dataStruct.CarryingCapacity[species],  //-nmfConstantsMSSPM::epsilon,
                                        dataStruct.CarryingCapacity[species]); //+nmfConstantsMSSPM::epsilon);
             }
             parameterRanges.emplace_back(aPair);
-            m_parameterRanges.emplace_back(aPair);
+            m_ParameterRanges.emplace_back(aPair);
         }
-        m_numberParameters += dataStruct.CarryingCapacityMin.size();
-    }
-}
 
-int
-nmfGrowthForm::getNumParameters()
-{
-    return m_numberParameters; //m_parameterRanges.size();
+        // Load carrying capacity covariate coefficient values
+        for (int species=0; species<m_NumSpecies; ++species) {
+            speciesName       = dataStruct.SpeciesNames[species];
+            covariateCoeffMap = dataStruct.CarryingCapacityCovariateCoeff;
+            covariateStruct   = covariateCoeffMap[speciesName];
+            if (isCheckedCarryingCapacity) {
+                aPair = std::make_pair(covariateStruct.CoeffMinValue,
+                                       covariateStruct.CoeffMaxValue);
+            } else {
+                aPair = std::make_pair(covariateStruct.CoeffValue,
+                                       covariateStruct.CoeffValue);
+            }
+            parameterRanges.emplace_back(aPair);
+            m_ParameterRanges.emplace_back(aPair);
+        }
+    }
 }
 
 void
 nmfGrowthForm::setType(std::string newType)
 {
-    m_type = newType;
+    m_Type = newType;
 }
 
 std::string
 nmfGrowthForm::getType()
 {
-    return m_type;
+    return m_Type;
 }
 
 void
@@ -125,87 +161,107 @@ nmfGrowthForm::extractParameters(
         const std::vector<double>& parameters,
         int&                       startPos,
         std::vector<double>&       growthRate,
+        std::vector<double>&       growthRateCovariateCoeffs,
         std::vector<double>&       carryingCapacity,
+        std::vector<double>&       carryingCapacityCovariateCoeffs,
         double&                    systemCarryingCapacity)
 {
-    int numGrowthParameters     = getNumParameters()  +startPos;
-    int numHalfGrowthParameters = numGrowthParameters/2+startPos;
     double tempK;
 
     systemCarryingCapacity = 0;
     growthRate.clear();
     carryingCapacity.clear();
 
-    if (m_type == "Linear") {
-        for (int i=startPos; i<numGrowthParameters; ++i) {
+    if (m_Type == "Linear") {
+        for (int i=startPos; i<startPos+m_NumSpecies; ++i) {
             growthRate.emplace_back(parameters[i]);
             carryingCapacity.emplace_back(0);
         }
-    } else if (m_type == "Logistic") {
-        numGrowthParameters     = m_numberParameters  +startPos;
-        numHalfGrowthParameters = m_numberParameters/2+startPos;
-        for (int i=startPos; i<numHalfGrowthParameters; ++i) {
+        startPos += m_NumSpecies;
+        for (int i=startPos; i<startPos+m_NumSpecies; ++i) {
+            growthRateCovariateCoeffs.emplace_back(parameters[i]);
+        }
+        startPos += m_NumSpecies;
+    } else if (m_Type == "Logistic") {
+        for (int i=startPos; i<startPos+m_NumSpecies; ++i) {
             growthRate.emplace_back(parameters[i]);
         }
-        for (int i=numHalfGrowthParameters; i<numGrowthParameters; ++i) {
+        startPos += m_NumSpecies;
+        for (int i=startPos; i<startPos+m_NumSpecies; ++i) {
+            growthRateCovariateCoeffs.emplace_back(parameters[i]);
+        }
+        startPos += m_NumSpecies;
+        for (int i=startPos; i<startPos+m_NumSpecies; ++i) {
             tempK = parameters[i];
             systemCarryingCapacity += tempK;
             carryingCapacity.emplace_back(tempK);
         }
+        startPos += m_NumSpecies;
+        for (int i=startPos; i<startPos+m_NumSpecies; ++i) {
+            carryingCapacityCovariateCoeffs.emplace_back(parameters[i]);
+        }
+        startPos += m_NumSpecies;
     }
-    startPos = numGrowthParameters;
 }
 
 double
-nmfGrowthForm::evaluate(const double &biomassAtTimeT,
-                        const double &growthRate,
-                        const double &growthRateCovariate,
-                        const double &carryingCapacity,
-                        const double &carryingCapacityCovariate)
+nmfGrowthForm::evaluate(const double& biomassAtTimeT,
+                        const double& growthRate,
+                        const double& growthRateCovariateCoeff,
+                        const double& growthRateCovariate,
+                        const double& carryingCapacity,
+                        const double& carryingCapacityCovariateCoeff,
+                        const double& carryingCapacityCovariate)
 {
-    if (FunctionMap.find(m_type) == FunctionMap.end()) {
+    if (FunctionMap.find(m_Type) == FunctionMap.end()) {
         return 0;
     } else {
-        return (this->*FunctionMap[m_type])(biomassAtTimeT,
-                                            growthRate,growthRateCovariate,
-                                            carryingCapacity,carryingCapacityCovariate);
+        return (this->*FunctionMap[m_Type])(biomassAtTimeT,
+                                            growthRate,
+                                            growthRateCovariate,
+                                            growthRateCovariateCoeff,
+                                            carryingCapacity,
+                                            carryingCapacityCovariateCoeff,
+                                            carryingCapacityCovariate);
     }
 }
 
 double
-nmfGrowthForm::NoGrowth(const double &biomassAtTime,
-                        const double &growthRate,
-                        const double &growthRateCovariate,
-                        const double &carryingCapacity,
-                        const double &carryingCapacityCovariate)
+nmfGrowthForm::FunctionMap_Null(const double& biomassAtTime,
+                                const double& growthRate,
+                                const double& growthRateCovariateCoeff,
+                                const double& growthRateCovariate,
+                                const double& carryingCapacity,
+                                const double& carryingCapacityCovariateCoeff,
+                                const double& carryingCapacityCovariate)
 {
     return 0.0;
 }
 
 double
-nmfGrowthForm::LinearGrowth(const double &biomassAtTime,
-                            const double &growthRate,
-                            const double &growthRateCovariate,
-                            const double &carryingCapacity,
-                            const double &carryingCapacityCovariate)
+nmfGrowthForm::FunctionMap_Linear(const double& biomassAtTime,
+                                  const double& growthRate,
+                                  const double& growthRateCovariateCoeff,
+                                  const double& growthRateCovariate,
+                                  const double& carryingCapacity,
+                                  const double& carryingCapacityCovariateCoeff,
+                                  const double& carryingCapacityCovariate)
 {
-    double growthRateCovariateCoeff = 1.0; // RSK - estimate this next
     double growthRateTerm  = growthRate*(1.0 + growthRateCovariateCoeff*growthRateCovariate);
-
     return growthRateTerm*biomassAtTime;
 }
 
 double
-nmfGrowthForm::LogisticGrowth(const double &biomassAtTime,
-                              const double &growthRate,
-                              const double &growthRateCovariate,
-                              const double &carryingCapacity,
-                              const double &carryingCapacityCovariate)
+nmfGrowthForm::FunctionMap_Logistic(const double& biomassAtTime,
+                                    const double& growthRate,
+                                    const double& growthRateCovariateCoeff,
+                                    const double& growthRateCovariate,
+                                    const double& carryingCapacity,
+                                    const double& carryingCapacityCovariateCoeff,
+                                    const double& carryingCapacityCovariate)
 {
-    double growthRateCovariateCoeff       = 1.0; // RSK - estimate this next
-    double carryingCapacityCovariateCoeff = 1.0; // RSK - estimate this next
-    double growthRateTerm       = growthRate      *(1.0 + growthRateCovariateCoeff*growthRateCovariate);
-    double carryingCapacityTerm = carryingCapacity*(1.0 + carryingCapacityCovariateCoeff*carryingCapacityCovariate);
+    double growthRateTerm       = growthRate       * (1.0 + growthRateCovariateCoeff       * growthRateCovariate);
+    double carryingCapacityTerm = carryingCapacity * (1.0 + carryingCapacityCovariateCoeff * carryingCapacityCovariate);
 
     return (growthRateTerm * biomassAtTime * (1.0-biomassAtTime/(carryingCapacityTerm)));
 }

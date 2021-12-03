@@ -451,12 +451,16 @@ void
 BeesAlgorithm::extractGrowthParameters(const std::vector<double>& parameters,
                                        int&                       startPos,
                                        std::vector<double>&       growthRate,
+                                       std::vector<double>&       growthRateCovariateCoeffs,
                                        std::vector<double>&       carryingCapacity,
+                                       std::vector<double>&       carryingCapacityCovariateCoeffs,
                                        double&                    systemCarryingCapacity)
 {
     if ((m_GrowthForm != nullptr)) {
-        m_GrowthForm->extractParameters(parameters,startPos,growthRate,
-                                        carryingCapacity,systemCarryingCapacity);
+        m_GrowthForm->extractParameters(parameters,startPos,
+                                        growthRate,growthRateCovariateCoeffs,
+                                        carryingCapacity,carryingCapacityCovariateCoeffs,
+                                        systemCarryingCapacity);
     }
 }
 
@@ -464,10 +468,12 @@ BeesAlgorithm::extractGrowthParameters(const std::vector<double>& parameters,
 void
 BeesAlgorithm::extractHarvestParameters(const std::vector<double>& parameters,
                                         int& startPos,
-                                        std::vector<double>& catchabilityRate)
+                                        std::vector<double>& catchability,
+                                        std::vector<double>& catchabilityCovariateCoeffs)
 {
     if ((m_HarvestForm != nullptr)) {
-        m_HarvestForm->extractParameters(parameters,startPos,catchabilityRate);
+        m_HarvestForm->extractParameters(parameters,startPos,
+                                         catchability,catchabilityCovariateCoeffs);
     }
 }
 
@@ -549,7 +555,10 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     int NumSpeciesOrGuilds = (isAggProd) ? NumGuilds : NumSpecies;
     std::vector<double> initBiomass;
     std::vector<double> growthRate;
+    std::vector<double> growthRateCovariateCoeffs;
     std::vector<double> carryingCapacity;
+    std::vector<double> carryingCapacityCovariateCoeffs;
+    std::vector<double> catchabilityCovariateCoeffs;
     std::vector<double> guildCarryingCapacity;
     std::vector<double> predationExponent;
     std::vector<double> catchability;
@@ -614,9 +623,12 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     extractInitBiomass(parameters,startPos,initBiomass);
 //std::cout << "start pos: " << startPos << std::endl;
 //std::cout << "num parameters: " << parameters.size() << std::endl;
-    m_GrowthForm->extractParameters(parameters,startPos,growthRate,
-                                    carryingCapacity,systemCarryingCapacity);
-    m_HarvestForm->extractParameters(parameters,startPos,catchability);
+    m_GrowthForm->extractParameters(parameters,startPos,
+                                    growthRate,growthRateCovariateCoeffs,
+                                    carryingCapacity,carryingCapacityCovariateCoeffs,
+                                    systemCarryingCapacity);
+    m_HarvestForm->extractParameters(parameters,startPos,
+                                     catchability,catchabilityCovariateCoeffs);
     m_CompetitionForm->extractParameters(parameters,startPos,competitionAlpha,
                                          competitionBetaSpecies,competitionBetaGuilds,
                                          competitionBetaGuildsGuilds);
@@ -626,7 +638,7 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     extractSurveyQParameters(parameters,startPos,surveyQ);
 
     // Since we may be estimating SurveyQ, need to divide the Observed Biomass by the SurveyQ
-    double surveyQCovariateCoeff = 1.0; // RSK estimate this later
+    double surveyQCovariateCoeff = 0.0; // RSK estimate this later
     for (int species=0; species<int(obsBiomassBySpeciesOrGuilds.size2()); ++species) {
         surveyQVal = surveyQ[species];
         for (int time=0; time<int(obsBiomassBySpeciesOrGuilds.size1()); ++time) {
@@ -656,9 +668,6 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
         }
         guildCarryingCapacity.push_back(guildK);
     }
-
-
-
 
     // Evaluate the objective function for all years and species or guilds and put
     // result in matrix
@@ -695,15 +704,16 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
 
             growthTerm      = m_GrowthForm->evaluate(estBiomassVal,
                                                      growthRate[species],
+                                                     growthRateCovariateCoeffs[species],
                                                      growthRateCovariate(timeMinus1,species),
                                                      carryingCapacity[species],
+                                                     carryingCapacityCovariateCoeffs[species],
                                                      carryingCapacityCovariate(timeMinus1,species));
             harvestTerm     = m_HarvestForm->evaluate(timeMinus1,species,estBiomassVal,
-                                                      m_Catch,
-                                                      m_Effort,
-                                                      m_Exploitation,
-                                                      catchability,
-                                                      catchabilityCovariate);
+                                                      m_Catch,m_Effort,m_Exploitation,
+                                                      catchability[species],
+                                                      catchabilityCovariateCoeffs[species],
+                                                      catchabilityCovariate(timeMinus1,species));
 //std::cout << "guild cc: " << guildCarryingCapacity[guildNum] << std::endl;
 //std::cout << "system cc: " << systemCarryingCapacity << std::endl;
             competitionTerm = m_CompetitionForm->evaluate(

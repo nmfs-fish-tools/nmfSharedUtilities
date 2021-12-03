@@ -246,122 +246,131 @@ $(function() {
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    QString ensembleFilename;</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;};</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; </div>
-<div class="line"><a name="l00235"></a><span class="lineno"><a class="line" href="structnmf_structs_qt_1_1_model_data_struct.html">  235</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structnmf_structs_qt_1_1_model_data_struct.html">ModelDataStruct</a> {</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <span class="keywordtype">bool</span>   isMohnsRho;</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="keywordtype">bool</span>   showDiagnosticChart;</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <span class="keywordtype">bool</span>   useFixedSeedNLopt;</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <span class="keywordtype">bool</span>   useFixedSeedBees;</div>
+<div class="line"><a name="l00230"></a><span class="lineno"><a class="line" href="structnmf_structs_qt_1_1_covariate_struct.html">  230</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structnmf_structs_qt_1_1_covariate_struct.html">CovariateStruct</a> {</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="keywordtype">double</span> CoeffValue;</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <span class="keywordtype">double</span> CoeffMinValue;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    <span class="keywordtype">double</span> CoeffMaxValue;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;};</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
+<div class="line"><a name="l00240"></a><span class="lineno"><a class="line" href="structnmf_structs_qt_1_1_model_data_struct.html">  240</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structnmf_structs_qt_1_1_model_data_struct.html">ModelDataStruct</a> {</div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    <span class="keywordtype">bool</span>   NLoptUseStopVal;</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <span class="keywordtype">bool</span>   NLoptUseStopAfterTime;</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="keywordtype">bool</span>   NLoptUseStopAfterIter;</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    <span class="keywordtype">double</span> NLoptStopVal;</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <span class="keywordtype">int</span>    NLoptStopAfterTime;</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <span class="keywordtype">int</span>    NLoptStopAfterIter;</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <span class="keywordtype">int</span>    NLoptNumberOfRuns;</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160; </div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="keywordtype">int</span>    NumMohnsRhoMultiRuns;</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; </div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    std::string MultiRunSpeciesFilename;</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    std::string MultiRunModelFilename;</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    std::string MultiRunSetupFilename;</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    <span class="keywordtype">int</span>    RunLength;</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    <span class="keywordtype">int</span>    NumSpecies;</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="keywordtype">int</span>    NumGuilds;</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <span class="keywordtype">int</span>    BeesMaxGenerations;</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <span class="keywordtype">int</span>    BeesNumTotal;</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keywordtype">int</span>    BeesNumBestSites;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keywordtype">int</span>    BeesNumEliteSites;</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    <span class="keywordtype">int</span>    BeesNumElite;</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="keywordtype">int</span>    BeesNumOther;</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <span class="keywordtype">float</span>  BeesNeighborhoodSize;</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="keywordtype">int</span>    BeesNumRepetitions;</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <span class="keywordtype">int</span>    GAGenerations;</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    <span class="keywordtype">int</span>    GAConvergence;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    <span class="keywordtype">int</span>         TotalNumberParameters;</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    std::string Benchmark;</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    std::string GrowthForm;</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    std::string HarvestForm;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    std::string CompetitionForm;</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    std::string PredationForm;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    <span class="keywordtype">bool</span>   isMohnsRho;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <span class="keywordtype">bool</span>   showDiagnosticChart;</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="keywordtype">bool</span>   useFixedSeedNLopt;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    <span class="keywordtype">bool</span>   useFixedSeedBees;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <span class="keywordtype">bool</span>   NLoptUseStopVal;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <span class="keywordtype">bool</span>   NLoptUseStopAfterTime;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <span class="keywordtype">bool</span>   NLoptUseStopAfterIter;</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="keywordtype">double</span> NLoptStopVal;</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    <span class="keywordtype">int</span>    NLoptStopAfterTime;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    <span class="keywordtype">int</span>    NLoptStopAfterIter;</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    <span class="keywordtype">int</span>    NLoptNumberOfRuns;</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160; </div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    <span class="keywordtype">int</span>    NumMohnsRhoMultiRuns;</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    std::string MultiRunSpeciesFilename;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    std::string MultiRunModelFilename;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    std::string MultiRunSetupFilename;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <span class="keywordtype">int</span>    RunLength;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keywordtype">int</span>    NumSpecies;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keywordtype">int</span>    NumGuilds;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="keywordtype">int</span>    BeesMaxGenerations;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <span class="keywordtype">int</span>    BeesNumTotal;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="keywordtype">int</span>    BeesNumBestSites;</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="keywordtype">int</span>    BeesNumEliteSites;</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <span class="keywordtype">int</span>    BeesNumElite;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    <span class="keywordtype">int</span>    BeesNumOther;</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <span class="keywordtype">float</span>  BeesNeighborhoodSize;</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    <span class="keywordtype">int</span>    BeesNumRepetitions;</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; </div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <span class="keywordtype">int</span>    GAGenerations;</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    <span class="keywordtype">int</span>    GAConvergence;</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <span class="keywordtype">int</span>         TotalNumberParameters;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    std::string Benchmark;</div>
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    std::string EstimationAlgorithm;</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    std::string MinimizerAlgorithm;</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    std::string ObjectiveCriterion;</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    std::string ScalingAlgorithm;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    std::string GrowthForm;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    std::string HarvestForm;</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    std::string CompetitionForm;</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    std::string PredationForm;</div>
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; </div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    std::vector&lt;std::string&gt;              SpeciesNames;</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    std::map&lt;int,std::vector&lt;int&gt; &gt;       GuildSpecies; <span class="comment">// List of species numbers that make up guild num</span></div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    std::vector&lt;int&gt;                      GuildNum;     <span class="comment">// Specifies which species are members of which guilds</span></div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    boost::numeric::ublas::matrix&lt;double&gt; ObservedBiomassBySpecies;</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    boost::numeric::ublas::matrix&lt;double&gt; ObservedBiomassByGuilds;</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    boost::numeric::ublas::matrix&lt;double&gt; Catch;</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    boost::numeric::ublas::matrix&lt;double&gt; Effort;</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; InitBiomass;</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; InitBiomassMin;</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; InitBiomassMax;</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; GrowthRate;</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; GrowthRateMin;</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; GrowthRateMax;</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; CarryingCapacity;</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; CarryingCapacityMin;</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; CarryingCapacityMax;</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    boost::numeric::ublas::matrix&lt;double&gt; Exploitation;</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; ExploitationRateMin; <span class="comment">// RSK - change this to matrix?</span></div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; ExploitationRateMax; <span class="comment">// RSK - change this to matrix?</span></div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; Catchability;</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; CatchabilityMin;</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; CatchabilityMax;</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; SurveyQ;</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; SurveyQMin;</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; SurveyQMax;</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    std::vector&lt;std::vector&lt;double&gt; &gt;     CompetitionMin;</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    std::vector&lt;std::vector&lt;double&gt; &gt;     CompetitionMax;</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    std::vector&lt;std::vector&lt;double&gt; &gt;     CompetitionBetaSpeciesMin;</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    std::vector&lt;std::vector&lt;double&gt; &gt;     CompetitionBetaSpeciesMax;</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    std::vector&lt;std::vector&lt;double&gt; &gt;     CompetitionBetaGuildsMin;</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    std::vector&lt;std::vector&lt;double&gt; &gt;     CompetitionBetaGuildsMax;</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    std::vector&lt;std::vector&lt;double&gt; &gt;     CompetitionBetaGuildsGuildsMin;</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    std::vector&lt;std::vector&lt;double&gt; &gt;     CompetitionBetaGuildsGuildsMax;</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    std::vector&lt;std::vector&lt;double&gt; &gt;     PredationRhoMin;</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    std::vector&lt;std::vector&lt;double&gt; &gt;     PredationRhoMax;</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    std::vector&lt;std::vector&lt;double&gt; &gt;     PredationHandlingMin;</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    std::vector&lt;std::vector&lt;double&gt; &gt;     PredationHandlingMax;</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    std::vector&lt;double&gt;                   PredationExponentMin;</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    std::vector&lt;double&gt;                   PredationExponentMax;</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    std::vector&lt;double&gt;                   Parameters;</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    std::map&lt;std::string,std::string&gt;          CovariateAssignment;</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    std::map&lt;std::string,std::vector&lt;double&gt; &gt; CovariateMap;</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="comment">//    boost::numeric::ublas::vector&lt;double&gt; CovariateInitBiomass;</span></div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="comment">//    boost::numeric::ublas::vector&lt;double&gt; CovariateGrowthRate;</span></div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="comment">//    boost::numeric::ublas::vector&lt;double&gt; CovariateCarryingCapacity;</span></div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;<span class="comment">//    boost::numeric::ublas::vector&lt;double&gt; CovariateCatchability;</span></div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;<span class="comment">//    boost::numeric::ublas::vector&lt;double&gt; CovariateSurveyQ;</span></div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="comment">//    std::vector&lt;double&gt;                   CovariatePredationExponent;</span></div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160; </div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="comment">//  boost::numeric::ublas::matrix&lt;double&gt; OutputBiomass;</span></div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160; </div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    std::vector&lt;EstimateRunBox&gt; EstimateRunBoxes;</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;};</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160; </div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;}</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    std::string EstimationAlgorithm;</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    std::string MinimizerAlgorithm;</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    std::string ObjectiveCriterion;</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    std::string ScalingAlgorithm;</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160; </div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    std::vector&lt;std::string&gt;              SpeciesNames;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    std::map&lt;int,std::vector&lt;int&gt; &gt;       GuildSpecies; <span class="comment">// List of species numbers that make up guild num</span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    std::vector&lt;int&gt;                      GuildNum;     <span class="comment">// Specifies which species are members of which guilds</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    boost::numeric::ublas::matrix&lt;double&gt; ObservedBiomassBySpecies;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    boost::numeric::ublas::matrix&lt;double&gt; ObservedBiomassByGuilds;</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    boost::numeric::ublas::matrix&lt;double&gt; Catch;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    boost::numeric::ublas::matrix&lt;double&gt; Effort;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; InitBiomass;</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; InitBiomassMin;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; InitBiomassMax;</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; GrowthRate;</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; GrowthRateMin;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; GrowthRateMax;</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; CarryingCapacity;</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; CarryingCapacityMin;</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; CarryingCapacityMax;</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    boost::numeric::ublas::matrix&lt;double&gt; Exploitation;</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; ExploitationRateMin; <span class="comment">// RSK - change this to matrix?</span></div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; ExploitationRateMax; <span class="comment">// RSK - change this to matrix?</span></div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; Catchability;</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; CatchabilityMin;</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; CatchabilityMax;</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; SurveyQ;</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; SurveyQMin;</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    boost::numeric::ublas::vector&lt;double&gt; SurveyQMax;</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    std::vector&lt;std::vector&lt;double&gt; &gt;     CompetitionMin;</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    std::vector&lt;std::vector&lt;double&gt; &gt;     CompetitionMax;</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    std::vector&lt;std::vector&lt;double&gt; &gt;     CompetitionBetaSpeciesMin;</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    std::vector&lt;std::vector&lt;double&gt; &gt;     CompetitionBetaSpeciesMax;</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    std::vector&lt;std::vector&lt;double&gt; &gt;     CompetitionBetaGuildsMin;</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    std::vector&lt;std::vector&lt;double&gt; &gt;     CompetitionBetaGuildsMax;</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    std::vector&lt;std::vector&lt;double&gt; &gt;     CompetitionBetaGuildsGuildsMin;</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    std::vector&lt;std::vector&lt;double&gt; &gt;     CompetitionBetaGuildsGuildsMax;</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    std::vector&lt;std::vector&lt;double&gt; &gt;     PredationRhoMin;</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    std::vector&lt;std::vector&lt;double&gt; &gt;     PredationRhoMax;</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    std::vector&lt;std::vector&lt;double&gt; &gt;     PredationHandlingMin;</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    std::vector&lt;std::vector&lt;double&gt; &gt;     PredationHandlingMax;</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    std::vector&lt;double&gt;                   PredationExponentMin;</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    std::vector&lt;double&gt;                   PredationExponentMax;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    std::vector&lt;double&gt;                   Parameters;</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; </div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    <span class="comment">// Map of covariate name to vector of values</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    std::map&lt;std::string,std::vector&lt;double&gt; &gt;          CovariateMap;</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <span class="comment">// Map of species+&quot;,&quot;+parameterName to covariate name</span></div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    std::map&lt;std::string,std::string&gt;                   CovariateAssignment;</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    <span class="comment">// Map of species to covariate struct for the specific parameter.</span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    <span class="comment">// Each covariate struct contains coefficient name (i.e., parameter name),</span></div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="comment">// and the initial, minimum, and maximum coefficient values.</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    std::map&lt;std::string,CovariateStruct&gt;               GrowthRateCovariateCoeff;</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    std::map&lt;std::string,CovariateStruct&gt;               CarryingCapacityCovariateCoeff;</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    std::map&lt;std::string,CovariateStruct&gt;               CatchabilityCovariateCoeff;</div>
 <div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160; </div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="comment">//  boost::numeric::ublas::matrix&lt;double&gt; OutputBiomass;</span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; </div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    std::vector&lt;EstimateRunBox&gt; EstimateRunBoxes;</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;};</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160; </div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160; </div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;}</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="anamespacenmf_structs_qt_html"><div class="ttname"><a href="namespacenmf_structs_qt.html">nmfStructsQt</a></div><div class="ttdoc">These are common Qt structures and classes.</div><div class="ttdef"><b>Definition:</b> nmfStructsQt.h:65</div></div>
 <div class="ttc" id="astructnmf_structs_qt_1_1_update_data_struct_html"><div class="ttname"><a href="structnmf_structs_qt_1_1_update_data_struct.html">nmfStructsQt::UpdateDataStruct</a></div><div class="ttdoc">The MSVPA data struct.</div><div class="ttdef"><b>Definition:</b> nmfStructsQt.h:138</div></div>
-<div class="ttc" id="astructnmf_structs_qt_1_1_model_data_struct_html"><div class="ttname"><a href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a></div><div class="ttdoc">The data structure used for parameter estimation. It contains the parameter min max limits as well as...</div><div class="ttdef"><b>Definition:</b> nmfStructsQt.h:235</div></div>
+<div class="ttc" id="astructnmf_structs_qt_1_1_model_data_struct_html"><div class="ttname"><a href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a></div><div class="ttdoc">The data structure used for parameter estimation. It contains the parameter min max limits as well as...</div><div class="ttdef"><b>Definition:</b> nmfStructsQt.h:240</div></div>
 <div class="ttc" id="aclassnmf_database_html"><div class="ttname"><a href="classnmf_database.html">nmfDatabase</a></div><div class="ttdoc">Allows user to interact with MySQL database.</div><div class="ttdef"><b>Definition:</b> nmfDatabase.h:79</div></div>
 <div class="ttc" id="aclassnmf_logger_html"><div class="ttname"><a href="classnmf_logger.html">nmfLogger</a></div><div class="ttdoc">This class describes the nmfLogger class for the MultiSpecies tools. It allows the user to save norma...</div><div class="ttdef"><b>Definition:</b> nmfLogger.h:44</div></div>
 <div class="ttc" id="astructnmf_structs_qt_1_1_model_review_struct_html"><div class="ttname"><a href="structnmf_structs_qt_1_1_model_review_struct.html">nmfStructsQt::ModelReviewStruct</a></div><div class="ttdoc">The data structure used for the Model Review table.</div><div class="ttdef"><b>Definition:</b> nmfStructsQt.h:179</div></div>
 <div class="ttc" id="aclassnmf_structs_qt_1_1_chart_save_dlg_html_acfb72a9f47380bfb38ad70075e1ffb1d"><div class="ttname"><a href="classnmf_structs_qt_1_1_chart_save_dlg.html#acfb72a9f47380bfb38ad70075e1ffb1d">nmfStructsQt::ChartSaveDlg::ChartSaveDlg</a></div><div class="ttdeci">ChartSaveDlg(QWidget *parent)</div><div class="ttdoc">Class constructor, builds the dialog allowing the user to save the current chart image.</div><div class="ttdef"><b>Definition:</b> nmfStructsQt.h:81</div></div>
+<div class="ttc" id="astructnmf_structs_qt_1_1_covariate_struct_html"><div class="ttname"><a href="structnmf_structs_qt_1_1_covariate_struct.html">nmfStructsQt::CovariateStruct</a></div><div class="ttdef"><b>Definition:</b> nmfStructsQt.h:230</div></div>
 <div class="ttc" id="anmf_logger_8h_html"><div class="ttname"><a href="nmf_logger_8h.html">nmfLogger.h</a></div><div class="ttdoc">Definition for the MultiSpecies Logger class.</div></div>
 <div class="ttc" id="aclassnmf_structs_qt_1_1_chart_save_dlg_html_a1cc6d5263b4ef8935147491c62aaee76"><div class="ttname"><a href="classnmf_structs_qt_1_1_chart_save_dlg.html#a1cc6d5263b4ef8935147491c62aaee76">nmfStructsQt::ChartSaveDlg::getFilename</a></div><div class="ttdeci">QString getFilename()</div><div class="ttdoc">Gets the filename for the chart image.</div><div class="ttdef"><b>Definition:</b> nmfStructsQt.h:117</div></div>
 <div class="ttc" id="astructnmf_structs_qt_1_1_estimate_run_box_html"><div class="ttname"><a href="structnmf_structs_qt_1_1_estimate_run_box.html">nmfStructsQt::EstimateRunBox</a></div><div class="ttdoc">The data structure that represents the state of each parameter's &quot;Is estimated?&quot; checkbox.</div><div class="ttdef"><b>Definition:</b> nmfStructsQt.h:171</div></div>

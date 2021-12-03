@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <vector>
+#include <QString>
 
 namespace nmfConstantsMSCAA
 {
@@ -39,7 +40,37 @@ namespace nmfConstantsMSCAA
     const std::string  OutputDataDir                  = "outputData";
     const std::string  OutputImagesDir                = "outputImages";
 
-    const std::string TableSpecies                    = QString::fromStdString("Species").toLower().toStdString();
+    const std::string TableAgeLengthKey                = QString::fromStdString("AgeLengthKey").toLower().toStdString();
+    const std::string TableApplication                 = QString::fromStdString("Application").toLower().toStdString();
+    const std::string TableCatchAtLengthFishery        = QString::fromStdString("CatchAtLengthFishery").toLower().toStdString();
+    const std::string TableCatchFishery                = QString::fromStdString("CatchFishery").toLower().toStdString();
+    const std::string TableCatchFisheryProportion      = QString::fromStdString("CatchFisheryProportion").toLower().toStdString();
+    const std::string TableCatchFisheryTotal           = QString::fromStdString("CatchFisheryTotal").toLower().toStdString();
+    const std::string TableCatchSurvey                 = QString::fromStdString("CatchSurvey").toLower().toStdString();
+    const std::string TableCatchSurveyProportion       = QString::fromStdString("CatchSurveyProportion").toLower().toStdString();
+    const std::string TableCatchSurveyTotal            = QString::fromStdString("CatchSurveyTotal").toLower().toStdString();
+    const std::string TableConsumption                 = QString::fromStdString("Consumption").toLower().toStdString();
+    const std::string TableCovariates                  = QString::fromStdString("Covariates").toLower().toStdString();
+    const std::string TableDiet                        = QString::fromStdString("Diet").toLower().toStdString();
+    const std::string TableFleets                      = QString::fromStdString("Fleets").toLower().toStdString();
+    const std::string TableInitialAbundance            = QString::fromStdString("InitialAbundance").toLower().toStdString();
+    const std::string TableMaturity                    = QString::fromStdString("Maturity").toLower().toStdString();
+    const std::string TableMortalityFishing            = QString::fromStdString("MortalityFishing").toLower().toStdString();
+    const std::string TableMortalityNatural            = QString::fromStdString("MortalityNatural").toLower().toStdString();
+    const std::string TablePredatorPreyInteractions    = QString::fromStdString("PredatorPreyInteractions").toLower().toStdString();
+    const std::string TablePredatorPreyInteractionsVec = QString::fromStdString("PredatorPreyInteractionsVec").toLower().toStdString();
+    const std::string TablePredatorPreyPreferredRatio  = QString::fromStdString("PredatorPreyPreferredRatio").toLower().toStdString();
+    const std::string TablePredatorPreyVarianceGTRatio = QString::fromStdString("PredatorPreyVarianceGTRatio").toLower().toStdString();
+    const std::string TablePredatorPreyVarianceLTRatio = QString::fromStdString("PredatorPreyVarianceLTRatio").toLower().toStdString();
+    const std::string TablePredatorPreyVulnerability   = QString::fromStdString("PredatorPreyVulnerability").toLower().toStdString();
+    const std::string TableSimulationParametersSpecies = QString::fromStdString("SimulationParametersSpecies").toLower().toStdString();
+    const std::string TableSimulationParametersYearly  = QString::fromStdString("SimulationParametersYearly").toLower().toStdString();
+    const std::string TableSpecies                     = QString::fromStdString("Species").toLower().toStdString();
+    const std::string TableSurveyMonth                 = QString::fromStdString("SurveyMonth").toLower().toStdString();
+    const std::string TableSurveyWeights               = QString::fromStdString("SurveyWeights").toLower().toStdString();
+    const std::string TableModels                      = QString::fromStdString("Models").toLower().toStdString();
+    const std::string TableWeight                      = QString::fromStdString("Weight").toLower().toStdString();
+
 
      const std::vector<std::string> ColLabelsEstimations = {
          "aAge1ph", // aAge1 estimation phase

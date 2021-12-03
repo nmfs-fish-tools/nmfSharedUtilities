@@ -69,96 +69,112 @@ $(function() {
 <div class="title">nmfGrowthForm.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;utility&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nmf_utils_8h.html">nmfUtils.h</a>&quot;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nmf_constants_m_s_s_p_m_8h.html">nmfConstantsMSSPM.h</a>&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classnmf_growth_form.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="classnmf_growth_form.html">nmfGrowthForm</a> {</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">int</span> m_numberParameters;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    std::string m_type; <span class="comment">// &quot;Null&quot;,&quot;Linear&quot;,&quot;Logistic&quot;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    std::vector&lt;std::pair&lt;double,double&gt; &gt; m_parameterRanges;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    std::map&lt;std::string,std::string&gt; m_GrowthMap;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    std::map&lt;std::string,std::string&gt; m_GrowthKey;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">bool</span> m_isAGGPROD;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    std::string m_Prefix;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    std::map&lt;std::string, double(<a class="code" href="classnmf_growth_form.html">nmfGrowthForm</a>::*)(</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">int</span>    &amp;speciesNum,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;initBiomass,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="keyword">const</span> std::vector&lt;double&gt; &amp;growthRate,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keyword">const</span> std::vector&lt;double&gt; &amp;growthRateCovariates,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <span class="keyword">const</span> std::vector&lt;double&gt; &amp;carryingCapacity,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keyword">const</span> std::vector&lt;double&gt; &amp;carryingCapacityCovariates</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    )&gt; FunctionMap;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="classnmf_growth_form.html">nmfGrowthForm</a>(std::string theType);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;   ~<a class="code" href="classnmf_growth_form.html">nmfGrowthForm</a>() {};</div>
+<a href="nmf_growth_form_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nmf_utils_8h.html">nmfUtils.h</a>&quot;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nmf_constants_m_s_s_p_m_8h.html">nmfConstantsMSSPM.h</a>&quot;</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">double</span> evaluate(<span class="keyword">const</span> <span class="keywordtype">int</span>    &amp;speciesNum,</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;biomassAtTime,</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                    <span class="keyword">const</span> std::vector&lt;double&gt; &amp;growthRate,</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                    <span class="keyword">const</span> std::vector&lt;double&gt; &amp;growthRateCovariates,</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                    <span class="keyword">const</span> std::vector&lt;double&gt; &amp;carryingCapacity,</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                    <span class="keyword">const</span> std::vector&lt;double&gt; &amp;carryingCapacityCovariates);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">int</span> getNumParameters();</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> setType(std::string newType);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    std::string getType();</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">void</span> extractParameters(</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keyword">const</span> std::vector&lt;double&gt;&amp; parameters,</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="keywordtype">int</span>&amp;                       startPos,</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            std::vector&lt;double&gt;&amp;       growthRate,</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            std::vector&lt;double&gt;&amp;       carryingCapacity,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keywordtype">double</span>&amp;                    systemCarryingCapacity);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">void</span> loadParameterRanges(</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            std::vector&lt;std::pair&lt;double,double&gt; &gt;&amp; parameterRanges,</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keyword">const</span> <a class="code" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a>&amp; beeStruct);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">double</span> NoGrowth(<span class="keyword">const</span> <span class="keywordtype">int</span> &amp;speciesNum,</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;biomassAtTime,</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                    <span class="keyword">const</span> std::vector&lt;double&gt; &amp;growthRate,</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                    <span class="keyword">const</span> std::vector&lt;double&gt; &amp;growthRateCovariates,</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                    <span class="keyword">const</span> std::vector&lt;double&gt; &amp;carryingCapacity,</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                    <span class="keyword">const</span> std::vector&lt;double&gt; &amp;carryingCapacityCovariates);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">double</span> LinearGrowth(<span class="keyword">const</span> <span class="keywordtype">int</span> &amp;speciesNum,</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                        <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;biomassAtTime,</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                        <span class="keyword">const</span> std::vector&lt;double&gt; &amp;growthRate,</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                        <span class="keyword">const</span> std::vector&lt;double&gt; &amp;growthRateCovariates,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                        <span class="keyword">const</span> std::vector&lt;double&gt; &amp;carryingCapacity,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                        <span class="keyword">const</span> std::vector&lt;double&gt; &amp;carryingCapacityCovariates);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">double</span> LogisticGrowth(<span class="keyword">const</span> <span class="keywordtype">int</span> &amp;speciesNum,</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                          <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;biomassAtTime,</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                          <span class="keyword">const</span> std::vector&lt;double&gt; &amp;growthRate,</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                          <span class="keyword">const</span> std::vector&lt;double&gt; &amp;growthRateCovariates,</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                          <span class="keyword">const</span> std::vector&lt;double&gt; &amp;carryingCapacity,</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                          <span class="keyword">const</span> std::vector&lt;double&gt; &amp;carryingCapacityCovariates);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">void</span> setupFormMaps();</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">void</span> setAggProd(<span class="keywordtype">bool</span> isAggProd);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    std::string getExpression();</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    std::string getKey();</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    std::string getPrefix();</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;};</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classnmf_growth_form.html">   45</a></span>&#160;<span class="keyword">class </span><a class="code" href="classnmf_growth_form.html">nmfGrowthForm</a> {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">bool</span> m_isAGGPROD;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">int</span> m_NumParameters;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">int</span> m_NumSpecies;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    std::string m_Prefix;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    std::string m_Type; <span class="comment">// &quot;Null&quot;,&quot;Linear&quot;,&quot;Logistic&quot;</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    std::vector&lt;std::pair&lt;double,double&gt; &gt; m_ParameterRanges;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    std::map&lt;std::string,std::string&gt; m_GrowthMap;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    std::map&lt;std::string,std::string&gt; m_GrowthKey;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    std::map&lt;std::string, double(<a class="code" href="classnmf_growth_form.html">nmfGrowthForm</a>::*)(</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; BiomassAtTime,</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstGrowthRate,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstGrowthRateCovariateCoeff,</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; GrowthRateCovariate,</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstCarryingCapacity,</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstCarryingCapacityCovariateCoeff,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; CarryingCapacityCovariate</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    )&gt; FunctionMap;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">void</span> setupFormMaps();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <a class="code" href="classnmf_growth_form.html#ab6f1386da448369e349fcfbad6f13465">nmfGrowthForm</a>(std::string type);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;   ~<a class="code" href="classnmf_growth_form.html">nmfGrowthForm</a>() {};</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classnmf_growth_form.html#aee9baa38e148b0869d738f60fdd8afa8">evaluate</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; BiomassAtTime,</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstGrowthRates,</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstGrowthRateCovariateCoeffs,</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; GrowthRateCovariates,</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstCarryingCapacity,</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstCarryingCapacityCovariateCoeffs,</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; CarryingCapacityCovariates);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_growth_form.html#abc3205bfa3b010bcba2e0bd80dfe381d">extractParameters</a>(</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            <span class="keyword">const</span> std::vector&lt;double&gt;&amp; Parameters,</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            <span class="keywordtype">int</span>&amp; StartPos,</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            std::vector&lt;double&gt;&amp; GrowthRate,</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            std::vector&lt;double&gt;&amp; GrowthRateCovariateCoeff,</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            std::vector&lt;double&gt;&amp; CarryingCapacity,</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            std::vector&lt;double&gt;&amp; CarryingCapacityCovariateCoeff,</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <span class="keywordtype">double</span>&amp; systemCarryingCapacity);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classnmf_growth_form.html#a9449ed4aa9549373b91e7cbfba051995">FunctionMap_Linear</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; BiomassAtTime,</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                              <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstGrowthRates,</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                              <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstGrowthRateCovariateCoeffs,</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                              <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; GrowthRateCovariates,</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                              <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstCarryingCapacity,</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                              <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstCarryingCapacityCovariateCoeffs,</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                              <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; CarryingCapacityCovariates);</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classnmf_growth_form.html#a7988632ca66c0ce7f395998b89c9664f">FunctionMap_Logistic</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; BiomassAtTime,</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                                <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstGrowthRates,</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                                <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstGrowthRateCovariateCoeffs,</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                                <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; GrowthRateCovariates,</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                                <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstCarryingCapacity,</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                                <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstCarryingCapacityCovariateCoeffs,</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                                <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; CarryingCapacityCovariates);</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classnmf_growth_form.html#a0659d939860c3ec05d8276adaa4d7ee8">FunctionMap_Null</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; BiomassAtTime,</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstGrowthRates,</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstGrowthRateCovariateCoeffs,</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; GrowthRateCovariates,</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstCarryingCapacity,</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstCarryingCapacityCovariateCoeffs,</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; CarryingCapacityCovariates);</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    std::string <a class="code" href="classnmf_growth_form.html#a014f9805aca0c7b8f0e0271330dac15a">getExpression</a>();</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    std::string <a class="code" href="classnmf_growth_form.html#af887eb0effef8e59514c19056b5bc560">getKey</a>();</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    std::string <a class="code" href="classnmf_growth_form.html#a96926b2e8174d2540c921bc920164658">getPrefix</a>();</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    std::string <a class="code" href="classnmf_growth_form.html#a866efc29b20db93bacb80349dc017c34">getType</a>();</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_growth_form.html#addb85b78ef7256752d0a88f391d62bbf">loadParameterRanges</a>(</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;            std::vector&lt;std::pair&lt;double,double&gt; &gt;&amp; ParameterRanges,</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;            <span class="keyword">const</span> <a class="code" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a>&amp; DataStruct);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_growth_form.html#aa4ea48028d2fce480c4affe8775d8edd">setAggProd</a>(<span class="keywordtype">bool</span> isAggProd);</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_growth_form.html#a5520759b026b9f6ffe0bbf1e1ce9e81c">setType</a>(std::string newType);</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;};</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassnmf_growth_form_html"><div class="ttname"><a href="classnmf_growth_form.html">nmfGrowthForm</a></div><div class="ttdef"><b>Definition:</b> nmfGrowthForm.h:15</div></div>
-<div class="ttc" id="astructnmf_structs_qt_1_1_model_data_struct_html"><div class="ttname"><a href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a></div><div class="ttdoc">The data structure used for parameter estimation. It contains the parameter min max limits as well as...</div><div class="ttdef"><b>Definition:</b> nmfStructsQt.h:235</div></div>
+<div class="ttc" id="aclassnmf_growth_form_html_a866efc29b20db93bacb80349dc017c34"><div class="ttname"><a href="classnmf_growth_form.html#a866efc29b20db93bacb80349dc017c34">nmfGrowthForm::getType</a></div><div class="ttdeci">std::string getType()</div><div class="ttdoc">Gets the type of growth form selected.</div><div class="ttdef"><b>Definition:</b> nmfGrowthForm.cpp:154</div></div>
+<div class="ttc" id="aclassnmf_growth_form_html_a9449ed4aa9549373b91e7cbfba051995"><div class="ttname"><a href="classnmf_growth_form.html#a9449ed4aa9549373b91e7cbfba051995">nmfGrowthForm::FunctionMap_Linear</a></div><div class="ttdeci">double FunctionMap_Linear(const double &amp;BiomassAtTime, const double &amp;EstGrowthRates, const double &amp;EstGrowthRateCovariateCoeffs, const double &amp;GrowthRateCovariates, const double &amp;EstCarryingCapacity, const double &amp;EstCarryingCapacityCovariateCoeffs, const double &amp;CarryingCapacityCovariates)</div><div class="ttdoc">This function implements the Linear growth rate function.</div><div class="ttdef"><b>Definition:</b> nmfGrowthForm.cpp:242</div></div>
+<div class="ttc" id="aclassnmf_growth_form_html_a0659d939860c3ec05d8276adaa4d7ee8"><div class="ttname"><a href="classnmf_growth_form.html#a0659d939860c3ec05d8276adaa4d7ee8">nmfGrowthForm::FunctionMap_Null</a></div><div class="ttdeci">double FunctionMap_Null(const double &amp;BiomassAtTime, const double &amp;EstGrowthRates, const double &amp;EstGrowthRateCovariateCoeffs, const double &amp;GrowthRateCovariates, const double &amp;EstCarryingCapacity, const double &amp;EstCarryingCapacityCovariateCoeffs, const double &amp;CarryingCapacityCovariates)</div><div class="ttdoc">This function implements the Null growth rate function (i.e., 0)</div><div class="ttdef"><b>Definition:</b> nmfGrowthForm.cpp:230</div></div>
+<div class="ttc" id="aclassnmf_growth_form_html"><div class="ttname"><a href="classnmf_growth_form.html">nmfGrowthForm</a></div><div class="ttdoc">This class contains the logic to calculate the Growth term of the currently selected model.</div><div class="ttdef"><b>Definition:</b> nmfGrowthForm.h:45</div></div>
+<div class="ttc" id="aclassnmf_growth_form_html_abc3205bfa3b010bcba2e0bd80dfe381d"><div class="ttname"><a href="classnmf_growth_form.html#abc3205bfa3b010bcba2e0bd80dfe381d">nmfGrowthForm::extractParameters</a></div><div class="ttdeci">void extractParameters(const std::vector&lt; double &gt; &amp;Parameters, int &amp;StartPos, std::vector&lt; double &gt; &amp;GrowthRate, std::vector&lt; double &gt; &amp;GrowthRateCovariateCoeff, std::vector&lt; double &gt; &amp;CarryingCapacity, std::vector&lt; double &gt; &amp;CarryingCapacityCovariateCoeff, double &amp;systemCarryingCapacity)</div><div class="ttdoc">Unpacks the parameters from the Parameters list and loads them into their respective data structures.</div><div class="ttdef"><b>Definition:</b> nmfGrowthForm.cpp:160</div></div>
+<div class="ttc" id="astructnmf_structs_qt_1_1_model_data_struct_html"><div class="ttname"><a href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a></div><div class="ttdoc">The data structure used for parameter estimation. It contains the parameter min max limits as well as...</div><div class="ttdef"><b>Definition:</b> nmfStructsQt.h:240</div></div>
+<div class="ttc" id="aclassnmf_growth_form_html_a014f9805aca0c7b8f0e0271330dac15a"><div class="ttname"><a href="classnmf_growth_form.html#a014f9805aca0c7b8f0e0271330dac15a">nmfGrowthForm::getExpression</a></div><div class="ttdeci">std::string getExpression()</div><div class="ttdoc">Gets the expression for the selected Growth Form algorithm.</div><div class="ttdef"><b>Definition:</b> nmfGrowthForm.cpp:47</div></div>
+<div class="ttc" id="aclassnmf_growth_form_html_af887eb0effef8e59514c19056b5bc560"><div class="ttname"><a href="classnmf_growth_form.html#af887eb0effef8e59514c19056b5bc560">nmfGrowthForm::getKey</a></div><div class="ttdeci">std::string getKey()</div><div class="ttdoc">Gets the key (i.e., legend) for the selected Growth Form algorithm variables.</div><div class="ttdef"><b>Definition:</b> nmfGrowthForm.cpp:53</div></div>
+<div class="ttc" id="aclassnmf_growth_form_html_addb85b78ef7256752d0a88f391d62bbf"><div class="ttname"><a href="classnmf_growth_form.html#addb85b78ef7256752d0a88f391d62bbf">nmfGrowthForm::loadParameterRanges</a></div><div class="ttdeci">void loadParameterRanges(std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;ParameterRanges, const nmfStructsQt::ModelDataStruct &amp;DataStruct)</div><div class="ttdoc">Loads the parameter ranges structure with data from the model data structure.</div><div class="ttdef"><b>Definition:</b> nmfGrowthForm.cpp:65</div></div>
+<div class="ttc" id="aclassnmf_growth_form_html_a5520759b026b9f6ffe0bbf1e1ce9e81c"><div class="ttname"><a href="classnmf_growth_form.html#a5520759b026b9f6ffe0bbf1e1ce9e81c">nmfGrowthForm::setType</a></div><div class="ttdeci">void setType(std::string newType)</div><div class="ttdoc">Sets the type of growth form algorithm.</div><div class="ttdef"><b>Definition:</b> nmfGrowthForm.cpp:148</div></div>
+<div class="ttc" id="aclassnmf_growth_form_html_aa4ea48028d2fce480c4affe8775d8edd"><div class="ttname"><a href="classnmf_growth_form.html#aa4ea48028d2fce480c4affe8775d8edd">nmfGrowthForm::setAggProd</a></div><div class="ttdeci">void setAggProd(bool isAggProd)</div><div class="ttdoc">Sets the AggProd variable.</div><div class="ttdef"><b>Definition:</b> nmfGrowthForm.cpp:59</div></div>
+<div class="ttc" id="aclassnmf_growth_form_html_aee9baa38e148b0869d738f60fdd8afa8"><div class="ttname"><a href="classnmf_growth_form.html#aee9baa38e148b0869d738f60fdd8afa8">nmfGrowthForm::evaluate</a></div><div class="ttdeci">double evaluate(const double &amp;BiomassAtTime, const double &amp;EstGrowthRates, const double &amp;EstGrowthRateCovariateCoeffs, const double &amp;GrowthRateCovariates, const double &amp;EstCarryingCapacity, const double &amp;EstCarryingCapacityCovariateCoeffs, const double &amp;CarryingCapacityCovariates)</div><div class="ttdoc">This method allows the appropriate function map function to be called such that a series of if....</div><div class="ttdef"><b>Definition:</b> nmfGrowthForm.cpp:208</div></div>
+<div class="ttc" id="aclassnmf_growth_form_html_a96926b2e8174d2540c921bc920164658"><div class="ttname"><a href="classnmf_growth_form.html#a96926b2e8174d2540c921bc920164658">nmfGrowthForm::getPrefix</a></div><div class="ttdeci">std::string getPrefix()</div><div class="ttdoc">Gets the beginning part of the growth formula.</div><div class="ttdef"><b>Definition:</b> nmfGrowthForm.cpp:41</div></div>
 <div class="ttc" id="anmf_constants_m_s_s_p_m_8h_html"><div class="ttname"><a href="nmf_constants_m_s_s_p_m_8h.html">nmfConstantsMSSPM.h</a></div><div class="ttdoc">Definition for constants used in MSSPM tool.</div></div>
+<div class="ttc" id="aclassnmf_growth_form_html_ab6f1386da448369e349fcfbad6f13465"><div class="ttname"><a href="classnmf_growth_form.html#ab6f1386da448369e349fcfbad6f13465">nmfGrowthForm::nmfGrowthForm</a></div><div class="ttdeci">nmfGrowthForm(std::string type)</div><div class="ttdoc">Constructor method for class.</div><div class="ttdef"><b>Definition:</b> nmfGrowthForm.cpp:4</div></div>
+<div class="ttc" id="aclassnmf_growth_form_html_a7988632ca66c0ce7f395998b89c9664f"><div class="ttname"><a href="classnmf_growth_form.html#a7988632ca66c0ce7f395998b89c9664f">nmfGrowthForm::FunctionMap_Logistic</a></div><div class="ttdeci">double FunctionMap_Logistic(const double &amp;BiomassAtTime, const double &amp;EstGrowthRates, const double &amp;EstGrowthRateCovariateCoeffs, const double &amp;GrowthRateCovariates, const double &amp;EstCarryingCapacity, const double &amp;EstCarryingCapacityCovariateCoeffs, const double &amp;CarryingCapacityCovariates)</div><div class="ttdoc">This function implements the Logistic growth rate function.</div><div class="ttdef"><b>Definition:</b> nmfGrowthForm.cpp:255</div></div>
 <div class="ttc" id="anmf_utils_8h_html"><div class="ttname"><a href="nmf_utils_8h.html">nmfUtils.h</a></div><div class="ttdoc">Definition for common typedefs and structs (i.e., non-graphical)</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -2484,13 +2484,11 @@ getCovariates(
         const int& numYears,
         const std::string& parameterName,
         boost::numeric::ublas::matrix<double>& covariateMatrix)
-//      std::vector<double>& covariateValues)
 {
     int numSpecies = dataStruct.SpeciesNames.size();
     std::string index;
     std::string covariateName;
 
-//  covariateValues.clear();
     nmfUtils::initialize(covariateMatrix, numYears, numSpecies);
 
     for (int year=0; year<numYears; ++year) {
@@ -2498,14 +2496,31 @@ getCovariates(
             index         = dataStruct.SpeciesNames[species]+","+parameterName;
             covariateName = dataStruct.CovariateAssignment[index];
             if (covariateName.empty()) {
-//              covariateValues.push_back(0.0);
                 covariateMatrix(year,species) = 0.0;
             } else {
                 covariateMatrix(year,species) = dataStruct.CovariateMap[covariateName][year];
-//              covariateValues.push_back(dataStruct.CovariateMap[covariateName][timeIndex]);
             }
         }
     }
+}
+
+void
+reselectTableViewCells(QTableView* tv,
+                       QModelIndexList indexes)
+{
+    if (indexes.size() > 0) {
+        QItemSelectionModel *selectionModel = tv->selectionModel();
+        for (QModelIndex index : indexes) {
+            selectionModel->select(index,QItemSelectionModel::Select);
+        }
+    }
+}
+
+QModelIndexList
+getSelectedTableViewCells(QTableView* tv)
+{
+    QItemSelectionModel *selectionModel = tv->selectionModel();
+    return selectionModel->selectedIndexes();
 }
 
 //bool

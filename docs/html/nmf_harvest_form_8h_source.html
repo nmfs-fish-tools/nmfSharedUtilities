@@ -69,105 +69,125 @@ $(function() {
 <div class="title">nmfHarvestForm.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;utility&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;boost/numeric/ublas/matrix.hpp&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;boost/numeric/ublas/io.hpp&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;boost/multi_array.hpp&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nmf_utils_8h.html">nmfUtils.h</a>&quot;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classnmf_harvest_form.html">   18</a></span>&#160;<span class="keyword">class </span><a class="code" href="classnmf_harvest_form.html">nmfHarvestForm</a> {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">int</span> m_numParameters;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    std::string m_type; <span class="comment">// &quot;Catch, F, QE&quot;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    std::vector&lt;std::pair&lt;double,double&gt; &gt; m_parameterRanges;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    std::map&lt;std::string,std::string&gt; m_HarvestMap;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    std::map&lt;std::string,std::string&gt; m_HarvestKey;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">bool</span> m_isAGGPROD;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    std::map&lt;std::string, double(<a class="code" href="classnmf_harvest_form.html">nmfHarvestForm</a>::*)(</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">int</span>    &amp;TimeT,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">int</span>    &amp;SpeciesNum,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;Catch,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;Effort,</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;Exploitation,</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; biomassAtTime,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <span class="keyword">const</span> std::vector&lt;double&gt;&amp; catchabilityRate</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    )&gt; m_FunctionMap;</div>
+<a href="nmf_harvest_form_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="classnmf_harvest_form.html">nmfHarvestForm</a>(std::string theType);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;   ~<a class="code" href="classnmf_harvest_form.html">nmfHarvestForm</a>() {};</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &lt;boost/numeric/ublas/matrix.hpp&gt;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &lt;boost/numeric/ublas/io.hpp&gt;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#include &lt;boost/multi_array.hpp&gt;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nmf_utils_8h.html">nmfUtils.h</a>&quot;</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">int</span> getNumParameters();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">void</span> setType(std::string newType);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">void</span> extractParameters(</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <span class="keyword">const</span> std::vector&lt;double&gt; &amp;parameters,</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <span class="keywordtype">int</span>&amp; startPos,</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            std::vector&lt;double&gt;&amp; catchabilityRate);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">double</span> evaluate(<span class="keyword">const</span> <span class="keywordtype">int</span>    &amp;timeMinus1,</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">int</span>    &amp;speciesNum,</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                    <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;Catch,</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                    <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;Effort,</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                    <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;Exploitation,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; biomassAtTime,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                    <span class="keyword">const</span> std::vector&lt;double&gt;&amp; catchabilityRate);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">void</span> loadParameterRanges(</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                    std::vector&lt;std::pair&lt;double,double&gt; &gt;&amp; parameterRanges,</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                    <a class="code" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a>&amp; beeStruct);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">double</span> NoHarvest(<span class="keyword">const</span> <span class="keywordtype">int</span> &amp;timeMinus1,</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                     <span class="keyword">const</span> <span class="keywordtype">int</span> &amp;speciesNum,</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                     <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;Catch,</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                     <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;Effort,</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                     <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;Exploitation,</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                     <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; biomassAtTime,</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                     <span class="keyword">const</span> std::vector&lt;double&gt;&amp; catchabilityRate);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">double</span> ExploitationHarvest(<span class="keyword">const</span> <span class="keywordtype">int</span> &amp;timeMinus1,</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                               <span class="keyword">const</span> <span class="keywordtype">int</span> &amp;speciesNum,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                               <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;Catch,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                               <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;Effort,</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                               <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;Exploitation,</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                               <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; biomassAtTime,</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                               <span class="keyword">const</span> std::vector&lt;double&gt;&amp; catchabilityRate);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">double</span> CatchHarvest(<span class="keyword">const</span> <span class="keywordtype">int</span> &amp;timeMinus1,</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                        <span class="keyword">const</span> <span class="keywordtype">int</span> &amp;speciesNum,</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                        <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;Catch,</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                        <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;Effort,</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                        <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;Exploitation,</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                        <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; biomassAtTime,</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                        <span class="keyword">const</span> std::vector&lt;double&gt;&amp; catchabilityRate);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">double</span> EffortHarvest(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; timeMinus1,</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                         <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; speciesNum,</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                         <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;Catch,</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                         <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;Effort,</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                         <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;Exploitation,</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                         <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; biomassAtTime,</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                         <span class="keyword">const</span> std::vector&lt;double&gt;&amp; catchabilityRate);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordtype">void</span> setupFormMaps();</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    std::string getExpression();</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    std::string getKey();</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordtype">void</span> setAggProd(<span class="keywordtype">bool</span> isAggProd);</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;};</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classnmf_harvest_form.html">   48</a></span>&#160;<span class="keyword">class </span><a class="code" href="classnmf_harvest_form.html">nmfHarvestForm</a> {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">bool</span> m_isAGGPROD;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">int</span> m_NumSpecies;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    std::string m_Type; <span class="comment">//  Catch, Effort, ...</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    std::vector&lt;std::pair&lt;double,double&gt; &gt; m_ParameterRanges;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    std::map&lt;std::string,std::string&gt; m_HarvestMap;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    std::map&lt;std::string,std::string&gt; m_HarvestKey;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    std::map&lt;std::string,double(<a class="code" href="classnmf_harvest_form.html">nmfHarvestForm</a>::*)(</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; TimeMinus1,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; Species,</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; BiomassAtTime,</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; Catch,</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; Effort,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; Exploitation,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstCatchability,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstCatchabilityCovariateCoeff,</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; CatchabilityCovariate</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            )&gt; m_FunctionMap;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">void</span> setupFormMaps();</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="classnmf_harvest_form.html#a6f561e8fad60ba2b75505b266bfa396b">nmfHarvestForm</a>(std::string type);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;   ~<a class="code" href="classnmf_harvest_form.html">nmfHarvestForm</a>() {};</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classnmf_harvest_form.html#a01ddf7c9485123508840a585b8d73aab">evaluate</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; TimeMinus1,</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; Species,</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; BiomassAtTime,</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                    <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; Catch,</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                    <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; Effort,</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                    <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; Exploitation,</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstCatchability,</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstCatchabilityCovariateCoeff,</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; CatchabilityCovariate);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_harvest_form.html#a351dec3016c2d2eab144ac053a7bbf3f">extractParameters</a>(</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <span class="keyword">const</span> std::vector&lt;double&gt;&amp; Parameters,</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            <span class="keywordtype">int</span>&amp; StartPos,</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            std::vector&lt;double&gt;&amp; Catchability,</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            std::vector&lt;double&gt;&amp; CatchabilityCovariateCoeffs);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classnmf_harvest_form.html#a485126aa26f929558531ea5b81bc9ac7">FunctionMap_Catch</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; TimeMinus1,</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                             <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; Species,</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                             <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; BiomassAtTime,</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                             <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; Catch,</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                             <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; Effort,</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                             <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; Exploitation,</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                             <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstCatchability,</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                             <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstCatchabilityCovariateCoeff,</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;                             <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; CatchabilityCovariate);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classnmf_harvest_form.html#a8aca646f6b5a34fb1f54cb70f2bbc861">FunctionMap_Effort</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; TimeMinus1,</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                              <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; Species,</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                              <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; BiomassAtTime,</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                              <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; Catch,</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                              <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; Effort,</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                              <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; Exploitation,</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                              <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstCatchability,</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                              <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstCatchabilityCovariateCoeff,</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                              <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; CatchabilityCovariate);</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classnmf_harvest_form.html#ade4a580625ee4f2680932ff199c4324b">FunctionMap_Exploitation</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; TimeMinus1,</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                                    <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; Species,</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                                    <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; BiomassAtTime,</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                                    <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; Catch,</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                                    <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; Effort,</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                                    <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; Exploitation,</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                                    <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstCatchability,</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                                    <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstCatchabilityCovariateCoeff,</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                                    <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; CatchabilityCovariate);</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classnmf_harvest_form.html#a23f438dcdc5c233560c96da261c3df21">FunctionMap_Null</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; TimeMinus1,</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;                            <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; Species,</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;                            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; BiomassAtTime,</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;                            <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; Catch,</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;                            <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; Effort,</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;                            <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; Exploitation,</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;                            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstCatchability,</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;                            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; EstCatchabilityCovariateCoeff,</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;                            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; CatchabilityCovariate);</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    std::string <a class="code" href="classnmf_harvest_form.html#ae19f2cffcc66fcaea24a9353d056f7ef">getExpression</a>();</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    std::string <a class="code" href="classnmf_harvest_form.html#a971d74e9a44cc0cc48e500f7e789fd78">getKey</a>();</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_harvest_form.html#a38fd09d1810dece7ed06a63a49523cd7">loadParameterRanges</a>(</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;                    std::vector&lt;std::pair&lt;double,double&gt; &gt;&amp; ParameterRanges,</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;                    <a class="code" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a>&amp; DataStruct);</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_harvest_form.html#ac8c32a1df211787c98c009d793861bb9">setAggProd</a>(<span class="keywordtype">bool</span> isAggProd);</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_harvest_form.html#a99cea3ceccb283f6034ab10e56ee3345">setType</a>(std::string newType);</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;};</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="astructnmf_structs_qt_1_1_model_data_struct_html"><div class="ttname"><a href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a></div><div class="ttdoc">The data structure used for parameter estimation. It contains the parameter min max limits as well as...</div><div class="ttdef"><b>Definition:</b> nmfStructsQt.h:235</div></div>
-<div class="ttc" id="aclassnmf_harvest_form_html"><div class="ttname"><a href="classnmf_harvest_form.html">nmfHarvestForm</a></div><div class="ttdef"><b>Definition:</b> nmfHarvestForm.h:18</div></div>
+<div class="ttc" id="aclassnmf_harvest_form_html_ae19f2cffcc66fcaea24a9353d056f7ef"><div class="ttname"><a href="classnmf_harvest_form.html#ae19f2cffcc66fcaea24a9353d056f7ef">nmfHarvestForm::getExpression</a></div><div class="ttdeci">std::string getExpression()</div><div class="ttdoc">Gets the expression for the selected Harvest Form algorithm.</div><div class="ttdef"><b>Definition:</b> nmfHarvestForm.cpp:55</div></div>
+<div class="ttc" id="aclassnmf_harvest_form_html_ac8c32a1df211787c98c009d793861bb9"><div class="ttname"><a href="classnmf_harvest_form.html#ac8c32a1df211787c98c009d793861bb9">nmfHarvestForm::setAggProd</a></div><div class="ttdeci">void setAggProd(bool isAggProd)</div><div class="ttdoc">Sets the AggProd variable.</div><div class="ttdef"><b>Definition:</b> nmfHarvestForm.cpp:29</div></div>
+<div class="ttc" id="aclassnmf_harvest_form_html_a6f561e8fad60ba2b75505b266bfa396b"><div class="ttname"><a href="classnmf_harvest_form.html#a6f561e8fad60ba2b75505b266bfa396b">nmfHarvestForm::nmfHarvestForm</a></div><div class="ttdeci">nmfHarvestForm(std::string type)</div><div class="ttdoc">Constructor method for class.</div><div class="ttdef"><b>Definition:</b> nmfHarvestForm.cpp:4</div></div>
+<div class="ttc" id="astructnmf_structs_qt_1_1_model_data_struct_html"><div class="ttname"><a href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a></div><div class="ttdoc">The data structure used for parameter estimation. It contains the parameter min max limits as well as...</div><div class="ttdef"><b>Definition:</b> nmfStructsQt.h:240</div></div>
+<div class="ttc" id="aclassnmf_harvest_form_html_a485126aa26f929558531ea5b81bc9ac7"><div class="ttname"><a href="classnmf_harvest_form.html#a485126aa26f929558531ea5b81bc9ac7">nmfHarvestForm::FunctionMap_Catch</a></div><div class="ttdeci">double FunctionMap_Catch(const int &amp;TimeMinus1, const int &amp;Species, const double &amp;BiomassAtTime, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Catch, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Effort, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Exploitation, const double &amp;EstCatchability, const double &amp;EstCatchabilityCovariateCoeff, const double &amp;CatchabilityCovariate)</div><div class="ttdoc">This method implements the Catch harvest algorithm.</div><div class="ttdef"><b>Definition:</b> nmfHarvestForm.cpp:189</div></div>
+<div class="ttc" id="aclassnmf_harvest_form_html"><div class="ttname"><a href="classnmf_harvest_form.html">nmfHarvestForm</a></div><div class="ttdoc">This class contains the logic to calculate the Harvest term of the currently selected model.</div><div class="ttdef"><b>Definition:</b> nmfHarvestForm.h:48</div></div>
+<div class="ttc" id="aclassnmf_harvest_form_html_ade4a580625ee4f2680932ff199c4324b"><div class="ttname"><a href="classnmf_harvest_form.html#ade4a580625ee4f2680932ff199c4324b">nmfHarvestForm::FunctionMap_Exploitation</a></div><div class="ttdeci">double FunctionMap_Exploitation(const int &amp;TimeMinus1, const int &amp;Species, const double &amp;BiomassAtTime, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Catch, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Effort, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Exploitation, const double &amp;EstCatchability, const double &amp;EstCatchabilityCovariateCoeff, const double &amp;CatchabilityCovariate)</div><div class="ttdoc">This method implements the Exploitation harvest algorithm.</div><div class="ttdef"><b>Definition:</b> nmfHarvestForm.cpp:220</div></div>
+<div class="ttc" id="aclassnmf_harvest_form_html_a971d74e9a44cc0cc48e500f7e789fd78"><div class="ttname"><a href="classnmf_harvest_form.html#a971d74e9a44cc0cc48e500f7e789fd78">nmfHarvestForm::getKey</a></div><div class="ttdeci">std::string getKey()</div><div class="ttdoc">Gets the key (i.e., legend) for the selected Harvest Form algorithm variables.</div><div class="ttdef"><b>Definition:</b> nmfHarvestForm.cpp:61</div></div>
+<div class="ttc" id="aclassnmf_harvest_form_html_a38fd09d1810dece7ed06a63a49523cd7"><div class="ttname"><a href="classnmf_harvest_form.html#a38fd09d1810dece7ed06a63a49523cd7">nmfHarvestForm::loadParameterRanges</a></div><div class="ttdeci">void loadParameterRanges(std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;ParameterRanges, nmfStructsQt::ModelDataStruct &amp;DataStruct)</div><div class="ttdoc">Loads the parameter ranges structure with data from the model data structure.</div><div class="ttdef"><b>Definition:</b> nmfHarvestForm.cpp:97</div></div>
+<div class="ttc" id="aclassnmf_harvest_form_html_a351dec3016c2d2eab144ac053a7bbf3f"><div class="ttname"><a href="classnmf_harvest_form.html#a351dec3016c2d2eab144ac053a7bbf3f">nmfHarvestForm::extractParameters</a></div><div class="ttdeci">void extractParameters(const std::vector&lt; double &gt; &amp;Parameters, int &amp;StartPos, std::vector&lt; double &gt; &amp;Catchability, std::vector&lt; double &gt; &amp;CatchabilityCovariateCoeffs)</div><div class="ttdoc">Unpacks the parameters from the Parameters list and loads them into their respective data structures.</div><div class="ttdef"><b>Definition:</b> nmfHarvestForm.cpp:67</div></div>
+<div class="ttc" id="aclassnmf_harvest_form_html_a01ddf7c9485123508840a585b8d73aab"><div class="ttname"><a href="classnmf_harvest_form.html#a01ddf7c9485123508840a585b8d73aab">nmfHarvestForm::evaluate</a></div><div class="ttdeci">double evaluate(const int &amp;TimeMinus1, const int &amp;Species, const double &amp;BiomassAtTime, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Catch, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Effort, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Exploitation, const double &amp;EstCatchability, const double &amp;EstCatchabilityCovariateCoeff, const double &amp;CatchabilityCovariate)</div><div class="ttdoc">This method allows the appropriate function map function to be called such that a series of if....</div><div class="ttdef"><b>Definition:</b> nmfHarvestForm.cpp:152</div></div>
+<div class="ttc" id="aclassnmf_harvest_form_html_a99cea3ceccb283f6034ab10e56ee3345"><div class="ttname"><a href="classnmf_harvest_form.html#a99cea3ceccb283f6034ab10e56ee3345">nmfHarvestForm::setType</a></div><div class="ttdeci">void setType(std::string newType)</div><div class="ttdoc">Sets the type of harvest algorithm.</div><div class="ttdef"><b>Definition:</b> nmfHarvestForm.cpp:23</div></div>
+<div class="ttc" id="aclassnmf_harvest_form_html_a23f438dcdc5c233560c96da261c3df21"><div class="ttname"><a href="classnmf_harvest_form.html#a23f438dcdc5c233560c96da261c3df21">nmfHarvestForm::FunctionMap_Null</a></div><div class="ttdeci">double FunctionMap_Null(const int &amp;TimeMinus1, const int &amp;Species, const double &amp;BiomassAtTime, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Catch, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Effort, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Exploitation, const double &amp;EstCatchability, const double &amp;EstCatchabilityCovariateCoeff, const double &amp;CatchabilityCovariate)</div><div class="ttdoc">This method implements the Null harvest algorithm (i.e., 0)</div><div class="ttdef"><b>Definition:</b> nmfHarvestForm.cpp:175</div></div>
+<div class="ttc" id="aclassnmf_harvest_form_html_a8aca646f6b5a34fb1f54cb70f2bbc861"><div class="ttname"><a href="classnmf_harvest_form.html#a8aca646f6b5a34fb1f54cb70f2bbc861">nmfHarvestForm::FunctionMap_Effort</a></div><div class="ttdeci">double FunctionMap_Effort(const int &amp;TimeMinus1, const int &amp;Species, const double &amp;BiomassAtTime, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Catch, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Effort, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Exploitation, const double &amp;EstCatchability, const double &amp;EstCatchabilityCovariateCoeff, const double &amp;CatchabilityCovariate)</div><div class="ttdoc">This method implements the Effort harvest algorithm.</div><div class="ttdef"><b>Definition:</b> nmfHarvestForm.cpp:204</div></div>
 <div class="ttc" id="anmf_utils_8h_html"><div class="ttname"><a href="nmf_utils_8h.html">nmfUtils.h</a></div><div class="ttdoc">Definition for common typedefs and structs (i.e., non-graphical)</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

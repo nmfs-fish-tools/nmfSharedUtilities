@@ -2737,6 +2737,68 @@ nmfDatabase::getCompetitionData(const std::string& CompetitionType,
 }
 
 bool
+nmfDatabase::getSpeciesInitialCovariateData(nmfLogger* Logger,
+                                            std::string& ProjectName,
+                                            std::string& ModelName,
+                                            std::vector<double>& GrowthRateCovariateCoeffs,
+                                            std::vector<double>& CarryingCapacityCovariateCoeffs,
+                                            std::vector<double>& CatchabilityCovariateCoeffs)
+{
+    int NumRecords;
+    int NumSpecies;
+    double covariateInitialValue = 0.0;
+    std::string CoeffName;
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+    std::string tableName = nmfConstantsMSSPM::TableCovariateInitialValuesAndRanges;
+    std::vector<nmfStructsQt::CovariateStruct> covariateRangeVector;
+    QStringList SpeciesList;
+
+    // Get data from database table
+    fields     = {"ProjectName","ModelName","SpeName",
+                  "CoeffName","CoeffMinName","CoeffMaxName",
+                  "CoeffValue","CoeffMinValue","CoeffMaxValue"};
+    queryStr   = "SELECT ProjectName,ModelName,SpeName,CoeffName,CoeffMinName,CoeffMaxName,CoeffValue,CoeffMinValue,CoeffMaxValue FROM " +
+                  tableName +
+                 " WHERE ProjectName = '" + ProjectName +
+                 "' AND ModelName = '"    + ModelName +
+                 "' ORDER BY SpeName ";
+    dataMap    = nmfQueryDatabase(queryStr, fields);
+    NumRecords = dataMap["CoeffName"].size();
+    if (NumRecords == 0) {  // No covariate coefficient data so just fill with 0's
+       getSpecies(Logger,NumSpecies,SpeciesList);
+       for (int i=0; i<NumSpecies; ++i) {
+           GrowthRateCovariateCoeffs.push_back(0);
+           CarryingCapacityCovariateCoeffs.push_back(0);
+           CatchabilityCovariateCoeffs.push_back(0);
+       }
+       return true;
+    }
+
+    GrowthRateCovariateCoeffs.clear();
+    CarryingCapacityCovariateCoeffs.clear();
+    for (int i=0; i<NumRecords; ++i) {
+        CoeffName = dataMap["CoeffName"][i];
+        if (CoeffName == "GrowthRate") {
+            covariateInitialValue = (dataMap["CoeffValue"][i].empty()) ?
+                 0 : QString::fromStdString(dataMap["CoeffValue"][i]).toDouble();
+            GrowthRateCovariateCoeffs.push_back(covariateInitialValue);
+        } else if (CoeffName == "CarryingCapacity") {
+            covariateInitialValue = (dataMap["CoeffValue"][i].empty()) ?
+                 0 : QString::fromStdString(dataMap["CoeffValue"][i]).toDouble();
+            CarryingCapacityCovariateCoeffs.push_back(covariateInitialValue);
+        } else if (CoeffName == "Catchability") {
+            covariateInitialValue = (dataMap["CoeffValue"][i].empty()) ?
+                 0 : QString::fromStdString(dataMap["CoeffValue"][i]).toDouble();
+            CatchabilityCovariateCoeffs.push_back(covariateInitialValue);
+        }
+    }
+
+    return true;
+}
+
+bool
 nmfDatabase::getSpeciesInitialData(nmfLogger* Logger,
                                    int& NumSpecies,
                                    QStringList& SpeciesList,
@@ -3195,7 +3257,7 @@ nmfDatabase::getHarvestData(const std::string& HarvestType,
         }
     }
 
-    if (HarvestTableName == "Effort") {
+    if (HarvestTableName == nmfConstantsMSSPM::TableHarvestEffort) {
         fields   = {"SpeName","Catchability"};
         queryStr = "SELECT SpeName,Catchability FROM " +
                     nmfConstantsMSSPM::TableSpecies +

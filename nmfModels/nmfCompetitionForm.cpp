@@ -3,18 +3,18 @@
 
 nmfCompetitionForm::nmfCompetitionForm(std::string competitionType)
 {
-    m_type             = competitionType;
-    m_numSpecies       = 0;
-    m_numberParameters = 0;
-    m_parameterRanges.clear();
+    m_Type             = competitionType;
+    m_NumSpecies       = 0;
+    m_NumParameters = 0;
+    m_ParameterRanges.clear();
     m_isAGGPROD = false;
     m_CompetitionMap.clear();
     m_CompetitionKey.clear();
 
-    m_FunctionMap["Null"]     = &nmfCompetitionForm::NoCompetition;
-    m_FunctionMap["NO_K"]     = &nmfCompetitionForm::NOKCompetition;
-    m_FunctionMap["MS-PROD"]  = &nmfCompetitionForm::MSPRODCompetition;
-    m_FunctionMap["AGG-PROD"] = &nmfCompetitionForm::AGGPRODCompetition;
+    m_FunctionMap["Null"]     = &nmfCompetitionForm::FunctionMap_Null;
+    m_FunctionMap["NO_K"]     = &nmfCompetitionForm::FunctionMap_NOK;
+    m_FunctionMap["MS-PROD"]  = &nmfCompetitionForm::FunctionMap_MSPROD;
+    m_FunctionMap["AGG-PROD"] = &nmfCompetitionForm::FunctionMap_AGGPROD;
 
     setupFormMaps();
 }
@@ -53,13 +53,13 @@ nmfCompetitionForm::setupFormMaps()
 std::string
 nmfCompetitionForm::getExpression()
 {
-    return m_CompetitionMap[m_type];
+    return m_CompetitionMap[m_Type];
 }
 
 std::string
 nmfCompetitionForm::getKey()
 {
-    return m_CompetitionKey[m_type];
+    return m_CompetitionKey[m_Type];
 }
 
 void
@@ -71,13 +71,13 @@ nmfCompetitionForm::setAggProd(bool isAggProd)
 void
 nmfCompetitionForm::setType(std::string newType)
 {
-    m_type = newType;
+    m_Type = newType;
 }
 
 int
 nmfCompetitionForm::getNumParameters()
 {
-    return m_numberParameters;
+    return m_NumParameters;
 }
 
 void
@@ -90,36 +90,35 @@ nmfCompetitionForm::extractParameters(
         boost::numeric::ublas::matrix<double>& competitionBetaGuildsGuilds)
 
 {
-    if (m_type == "NO_K") {
-        for (int i=0; i<m_numSpecies; ++i) {
-            for (int j=0; j<m_numSpecies; ++j) {
+    if (m_Type == "NO_K") {
+        for (int i=0; i<m_NumSpecies; ++i) {
+            for (int j=0; j<m_NumSpecies; ++j) {
                 competitionAlpha(i,j) = parameters[startPos++];
             }
         }
-    } else if (m_type == "MS-PROD") {
-        for (int i=0; i<m_numSpecies; ++i) {
-            for (int j=0; j<m_numSpecies; ++j) {                
+    } else if (m_Type == "MS-PROD") {
+        for (int i=0; i<m_NumSpecies; ++i) {
+            for (int j=0; j<m_NumSpecies; ++j) {
                 competitionBetaSpecies(i,j) = parameters[startPos++];
 //std::cout << "Extracting MS: " <<   competitionBetaSpecies(i,j) << std::endl;
             }
         }
     }
-    if (m_type == "MS-PROD") {
-        for (int i=0; i<m_numSpecies; ++i) {
-            for (int j=0; j<m_numGuilds; ++j) {
+    if (m_Type == "MS-PROD") {
+        for (int i=0; i<m_NumSpecies; ++i) {
+            for (int j=0; j<m_NumGuilds; ++j) {
                 competitionBetaGuilds(i,j) = parameters[startPos++];
 //std::cout << "Extracting AGG: " <<   competitionBetaGuilds(i,j) << std::endl;
             }
         }
-    } else if (m_type == "AGG-PROD") {
-        for (int i=0; i<m_numGuilds; ++i) {
-            for (int j=0; j<m_numGuilds; ++j) {
+    } else if (m_Type == "AGG-PROD") {
+        for (int i=0; i<m_NumGuilds; ++i) {
+            for (int j=0; j<m_NumGuilds; ++j) {
                 competitionBetaGuildsGuilds(i,j) = parameters[startPos++];
 //std::cout << "Extracting AGG: " <<   competitionBetaGuildsGuilds(i,j) << std::endl;
             }
         }
     }
-
 }
 
 
@@ -135,13 +134,13 @@ nmfCompetitionForm::loadParameterRanges(
     double min;
     std::pair<double,double> aPair;
 
-    if (m_type == "Null")
+    if (m_Type == "Null")
         return;
 
-    m_numSpecies = dataStruct.NumSpecies;
-    m_numGuilds  = dataStruct.NumGuilds;
+    m_NumSpecies = dataStruct.NumSpecies;
+    m_NumGuilds  = dataStruct.NumGuilds;
 
-    if (m_type == "NO_K") {
+    if (m_Type == "NO_K") {
         for (unsigned i=0; i<dataStruct.CompetitionMin.size(); ++i) {
             for (unsigned j=0; j<dataStruct.CompetitionMin[0].size(); ++j) {
                 if (isCheckedAlpha) {
@@ -152,14 +151,14 @@ nmfCompetitionForm::loadParameterRanges(
                     aPair = std::make_pair(min,min);
                 }
                 parameterRanges.emplace_back(aPair);
-                m_parameterRanges.emplace_back(aPair);
+                m_ParameterRanges.emplace_back(aPair);
             }
         }
-        m_numberParameters += dataStruct.CompetitionMin.size() *
+        m_NumParameters += dataStruct.CompetitionMin.size() *
                               dataStruct.CompetitionMin[0].size();
     }
 
-    else if (m_type == "MS-PROD") {
+    else if (m_Type == "MS-PROD") {
         for (unsigned i=0; i<dataStruct.CompetitionBetaSpeciesMin.size(); ++i) {
             for (unsigned j=0; j<dataStruct.CompetitionBetaSpeciesMin[0].size(); ++j) {
                 if (isCheckedBetaSpeciesSpecies) {
@@ -170,10 +169,10 @@ nmfCompetitionForm::loadParameterRanges(
                     aPair = std::make_pair(min,min);
                 }
                 parameterRanges.emplace_back(aPair);
-                m_parameterRanges.emplace_back(aPair);
+                m_ParameterRanges.emplace_back(aPair);
             }
         }
-        m_numberParameters += dataStruct.CompetitionBetaSpeciesMin.size() *
+        m_NumParameters += dataStruct.CompetitionBetaSpeciesMin.size() *
                               dataStruct.CompetitionBetaSpeciesMin[0].size();
 
         for (unsigned i=0; i<dataStruct.CompetitionBetaGuildsMin.size(); ++i) {
@@ -186,14 +185,14 @@ nmfCompetitionForm::loadParameterRanges(
                     aPair = std::make_pair(min,min);
                 }
                 parameterRanges.emplace_back(aPair);
-                m_parameterRanges.emplace_back(aPair);
+                m_ParameterRanges.emplace_back(aPair);
             }
         }
-        m_numberParameters += dataStruct.CompetitionBetaGuildsMin.size() *
+        m_NumParameters += dataStruct.CompetitionBetaGuildsMin.size() *
                               dataStruct.CompetitionBetaGuildsMin[0].size();
     }
 
-    else if (m_type == "AGG-PROD") {
+    else if (m_Type == "AGG-PROD") {
         for (unsigned i=0; i<dataStruct.CompetitionBetaGuildsGuildsMin.size(); ++i) {
             for (unsigned j=0; j<dataStruct.CompetitionBetaGuildsGuildsMin[0].size(); ++j) {
                 if (isCheckedBetaGuildGuild) {
@@ -204,10 +203,10 @@ nmfCompetitionForm::loadParameterRanges(
                     aPair = std::make_pair(min,min);
                 }
                 parameterRanges.emplace_back(aPair);
-                m_parameterRanges.emplace_back(aPair);
+                m_ParameterRanges.emplace_back(aPair);
             }
         }
-        m_numberParameters += dataStruct.CompetitionBetaGuildsGuildsMin.size() *
+        m_NumParameters += dataStruct.CompetitionBetaGuildsGuildsMin.size() *
                               dataStruct.CompetitionBetaGuildsGuildsMin[0].size();
     }
 }
@@ -232,10 +231,10 @@ nmfCompetitionForm::evaluate(
         const boost::numeric::ublas::matrix<double> &EstCompetitionBetaGuildGuild,
         const boost::numeric::ublas::matrix<double> &CompetitionBetaGuildGuildCovariate)
 {
-    if (m_FunctionMap.find(m_type) == m_FunctionMap.end()) {
+    if (m_FunctionMap.find(m_Type) == m_FunctionMap.end()) {
         return 0;
     } else {
-        return (this->*m_FunctionMap[m_type])(timeMinus1,speciesOrGuildNum,biomassAtTime,
+        return (this->*m_FunctionMap[m_Type])(timeMinus1,speciesOrGuildNum,biomassAtTime,
                                               growthRate,
                                               growthRateCovariate,
                                               guildCarryingCapacity,
@@ -254,7 +253,7 @@ nmfCompetitionForm::evaluate(
 }
 
 long double
-nmfCompetitionForm::NoCompetition(
+nmfCompetitionForm::FunctionMap_Null(
         const int& timeMinus1,
         const int& speciesOrGuildNum,
         const double& biomassAtTime,
@@ -276,13 +275,9 @@ nmfCompetitionForm::NoCompetition(
     return 0.0;
 }
 
-/*
- *
- *  B(i,t)[(∑{α(i,j)B(j,t)}]
- *
- */
+
 long double
-nmfCompetitionForm::NOKCompetition(
+nmfCompetitionForm::FunctionMap_NOK(
         const int& timeMinus1,
         const int& species,
         const double& biomassAtTime,
@@ -314,12 +309,8 @@ nmfCompetitionForm::NOKCompetition(
     return double(biomassAtTime)*double(competitionSum);
 }
 
-
-/*
- *  r(i)B(i,t)[(∑β(i,j)B(j,t))/KG - (∑β(i,G)B(G,t))/(K(σ) - K(G))]
- */
 long double
-nmfCompetitionForm::MSPRODCompetition(
+nmfCompetitionForm::FunctionMap_MSPROD(
         const int& timeMinus1,
         const int& species,
         const double& biomassAtTime,
@@ -349,12 +340,12 @@ nmfCompetitionForm::MSPRODCompetition(
     double CompetitionBetaGuildCovariateCoeff   = 1.0; // RSK estimate this later
 
     if (guildCarryingCapacity == 0) {
-        std::cout << "[Error 1] nmfCompetitionForm::MSPRODCompetition: guildCarryingCapacity is 0" << std::endl;
+        std::cout << "[Error 1] nmfCompetitionForm::FunctionMap_MSPROD: guildCarryingCapacity is 0" << std::endl;
         return 0;
     }
 
     if (systemCarryingCapacity == guildCarryingCapacity) {
-        std::cout << "[Error 2] nmfCompetitionForm::MSPRODCompetition: systemCarryingCapacity same as guildCarryingCapacity" << std::endl;
+        std::cout << "[Error 2] nmfCompetitionForm::FunctionMap_MSPROD: systemCarryingCapacity same as guildCarryingCapacity" << std::endl;
         return 0;
     }
     double CompetitionBetaSpeciesTerm;
@@ -377,12 +368,8 @@ nmfCompetitionForm::MSPRODCompetition(
     return growthTerm*biomassAtTime*(term1-term2);
 }
 
-
-/*
- *  r(i)B(i,t)[(∑β(i,G)B(G,t))/(Kσ - KG)]
- */
 long double
-nmfCompetitionForm::AGGPRODCompetition(
+nmfCompetitionForm::FunctionMap_AGGPROD(
         const int& timeMinus1,
         const int& speciesOrGuildNum,
         const double& biomassAtTime,
@@ -408,7 +395,7 @@ nmfCompetitionForm::AGGPRODCompetition(
     double competitionBetaGuildGuildCovariateCoeff = 1.0; // RSK estimate this later
 
     if (systemCarryingCapacity == guildCarryingCapacity) {
-        std::cout << "[Error 1] nmfCompetitionForm::AGGPRODCompetition: systemCarryingCapacity" <<
+        std::cout << "[Error 1] nmfCompetitionForm::FunctionMap_AGGPROD: systemCarryingCapacity" <<
                      " same as guildCarryingCapacity" << std::endl;
         return 0;
     }

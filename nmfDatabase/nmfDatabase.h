@@ -673,6 +673,22 @@ public:
                         float&       MaxLength,
                         int&         NumLengthBins);
     /**
+     * @brief getSpeciesInitialCovariateData
+     * @param Logger : logger pointer to log any error messages
+     * @param ProjectName : name of current project
+     * @param ModelName : name of current model
+     * @param GrowthRateCovariateCoeff : initial values for growth rate covariate coefficients per species
+     * @param CarryingCapacityCovariateCoeff : initial values for carrying capacity covariate coefficients per species
+     * @param CatchabilityCovariateCoeff : initial values for catchability covariate coefficients per species
+     * @return true if no errors reading table data, false otherwise
+     */
+    bool getSpeciesInitialCovariateData(nmfLogger* Logger,
+                                        std::string& ProjectName,
+                                        std::string& ModelName,
+                                        std::vector<double>& GrowthRateCovariateCoeffs,
+                                        std::vector<double>& CarryingCapacityCovariateCoeffs,
+                                        std::vector<double>& CatchabilityCovariateCoeffs);
+    /**
      * @brief Sends back initial data for all species
      * @param Logger : logger pointer to log any error messages
      * @param NumSpecies : number of species found

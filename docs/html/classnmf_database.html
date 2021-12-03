@@ -183,6 +183,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a34aaf13af26158b8175494511ed0b822"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a34aaf13af26158b8175494511ed0b822">getSpeciesData</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;species, int &amp;MinAge, int &amp;MaxAge, int &amp;FirstYear, int &amp;LastYear, float &amp;MinLength, float &amp;MaxLength, int &amp;NumLengthBins)</td></tr>
 <tr class="memdesc:a34aaf13af26158b8175494511ed0b822"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back data about the passed in species (MSCAA)  <a href="classnmf_database.html#a34aaf13af26158b8175494511ed0b822">More...</a><br /></td></tr>
 <tr class="separator:a34aaf13af26158b8175494511ed0b822"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2a7d14d6aa357ee59876d9acbe7ba23"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#ac2a7d14d6aa357ee59876d9acbe7ba23">getSpeciesInitialCovariateData</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *Logger, std::string &amp;ProjectName, std::string &amp;ModelName, std::vector&lt; double &gt; &amp;GrowthRateCovariateCoeffs, std::vector&lt; double &gt; &amp;CarryingCapacityCovariateCoeffs, std::vector&lt; double &gt; &amp;CatchabilityCovariateCoeffs)</td></tr>
+<tr class="memdesc:ac2a7d14d6aa357ee59876d9acbe7ba23"><td class="mdescLeft">&#160;</td><td class="mdescRight">getSpeciesInitialCovariateData  <a href="classnmf_database.html#ac2a7d14d6aa357ee59876d9acbe7ba23">More...</a><br /></td></tr>
+<tr class="separator:ac2a7d14d6aa357ee59876d9acbe7ba23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b388017b28887c35040e5f27c4236a3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a3b388017b28887c35040e5f27c4236a3">getSpeciesInitialData</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *Logger, int &amp;NumSpecies, QStringList &amp;SpeciesList, std::vector&lt; double &gt; &amp;InitBiomass, std::vector&lt; double &gt; &amp;GrowthRate, std::vector&lt; double &gt; &amp;SpeciesK)</td></tr>
 <tr class="memdesc:a3b388017b28887c35040e5f27c4236a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back initial data for all species.  <a href="classnmf_database.html#a3b388017b28887c35040e5f27c4236a3">More...</a><br /></td></tr>
 <tr class="separator:a3b388017b28887c35040e5f27c4236a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2787,6 +2790,72 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Species index corresponding to passed in species name </dd></dl>
+
+</div>
+</div>
+<a id="ac2a7d14d6aa357ee59876d9acbe7ba23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2a7d14d6aa357ee59876d9acbe7ba23">&#9670;&nbsp;</a></span>getSpeciesInitialCovariateData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfDatabase::getSpeciesInitialCovariateData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classnmf_logger.html">nmfLogger</a> *&#160;</td>
+          <td class="paramname"><em>Logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>ProjectName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>ModelName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>GrowthRateCovariateCoeffs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CarryingCapacityCovariateCoeffs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CatchabilityCovariateCoeffs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getSpeciesInitialCovariateData </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Logger</td><td>: logger pointer to log any error messages </td></tr>
+    <tr><td class="paramname">ProjectName</td><td>: name of current project </td></tr>
+    <tr><td class="paramname">ModelName</td><td>: name of current model </td></tr>
+    <tr><td class="paramname">GrowthRateCovariateCoeff</td><td>: initial values for growth rate covariate coefficients per species </td></tr>
+    <tr><td class="paramname">CarryingCapacityCovariateCoeff</td><td>: initial values for carrying capacity covariate coefficients per species </td></tr>
+    <tr><td class="paramname">CatchabilityCovariateCoeff</td><td>: initial values for catchability covariate coefficients per species </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if no errors reading table data, false otherwise </dd></dl>
 
 </div>
 </div>

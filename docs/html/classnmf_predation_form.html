@@ -68,58 +68,841 @@ $(function() {
 <div class="title">nmfPredationForm Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>This class contains the logic to calculate the Predation term of the currently selected model.  
+ <a href="classnmf_predation_form.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="nmf_predation_form_8h_source.html">nmfPredationForm.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0173464ce15fd5219938ae68525a5ee1"><td class="memItemLeft" align="right" valign="top"><a id="a0173464ce15fd5219938ae68525a5ee1"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>nmfPredationForm</b> (std::string theType)</td></tr>
+<tr class="memitem:a0173464ce15fd5219938ae68525a5ee1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_predation_form.html#a0173464ce15fd5219938ae68525a5ee1">nmfPredationForm</a> (std::string theType)</td></tr>
+<tr class="memdesc:a0173464ce15fd5219938ae68525a5ee1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor method for class.  <a href="classnmf_predation_form.html#a0173464ce15fd5219938ae68525a5ee1">More...</a><br /></td></tr>
 <tr class="separator:a0173464ce15fd5219938ae68525a5ee1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9685ea5cbf42650d88d6d2bd824ff698"><td class="memItemLeft" align="right" valign="top"><a id="a9685ea5cbf42650d88d6d2bd824ff698"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getNumParameters</b> ()</td></tr>
-<tr class="separator:a9685ea5cbf42650d88d6d2bd824ff698"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b100fc22068394ae979bc7f4dae4d42"><td class="memItemLeft" align="right" valign="top"><a id="a9b100fc22068394ae979bc7f4dae4d42"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setType</b> (std::string newType)</td></tr>
-<tr class="separator:a9b100fc22068394ae979bc7f4dae4d42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97e25958c5fc9545c52bae69721297f7"><td class="memItemLeft" align="right" valign="top"><a id="a97e25958c5fc9545c52bae69721297f7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>extractPredationParameters</b> (const std::vector&lt; double &gt; &amp;parameters, int &amp;startPos, boost::numeric::ublas::matrix&lt; double &gt; &amp;predation)</td></tr>
-<tr class="separator:a97e25958c5fc9545c52bae69721297f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabdfaf2898052aa6a5bfac22fea7940c"><td class="memItemLeft" align="right" valign="top"><a id="aabdfaf2898052aa6a5bfac22fea7940c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>extractHandlingParameters</b> (const std::vector&lt; double &gt; &amp;parameters, int &amp;startPos, boost::numeric::ublas::matrix&lt; double &gt; &amp;handling)</td></tr>
-<tr class="separator:aabdfaf2898052aa6a5bfac22fea7940c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad901397d61dfcafd0f9714d7ebd56425"><td class="memItemLeft" align="right" valign="top"><a id="ad901397d61dfcafd0f9714d7ebd56425"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>extractExponentParameters</b> (const std::vector&lt; double &gt; &amp;parameters, int &amp;startPos, std::vector&lt; double &gt; &amp;exponents)</td></tr>
-<tr class="separator:ad901397d61dfcafd0f9714d7ebd56425"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acfd97cdf916b97c6a07d6b5a32a6baaa"><td class="memItemLeft" align="right" valign="top"><a id="acfd97cdf916b97c6a07d6b5a32a6baaa"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>loadParameterRanges</b> (std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;parameterRanges, <a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;beeStruct)</td></tr>
-<tr class="separator:acfd97cdf916b97c6a07d6b5a32a6baaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18fa3611a7b1fe597e1f8108274f6a10"><td class="memItemLeft" align="right" valign="top"><a id="a18fa3611a7b1fe597e1f8108274f6a10"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>evaluate</b> (const int &amp;timeMinus1, const int &amp;SpeciesNum, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredation, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstHandling, const std::vector&lt; double &gt; &amp;EstExponent, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstimatedBiomass, const double &amp;EstimatedBiomassTimeMinus1)</td></tr>
-<tr class="separator:a18fa3611a7b1fe597e1f8108274f6a10"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d58e4f5d605285075ef52faac3a60ab"><td class="memItemLeft" align="right" valign="top"><a id="a5d58e4f5d605285075ef52faac3a60ab"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>TypeNullPredation</b> (const int &amp;timeMinus1, const int &amp;SpeciesNum, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredation, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstHandling, const std::vector&lt; double &gt; &amp;EstExponent, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstimatedBiomass, const double &amp;EstimatedBiomassTimeMinus1)</td></tr>
-<tr class="separator:a5d58e4f5d605285075ef52faac3a60ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d4cdd5afa59d96591801b6f039411ba"><td class="memItemLeft" align="right" valign="top"><a id="a1d4cdd5afa59d96591801b6f039411ba"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>TypeIPredation</b> (const int &amp;timeMinus1, const int &amp;SpeciesNum, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredation, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstHandling, const std::vector&lt; double &gt; &amp;EstExponent, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstimatedBiomass, const double &amp;biomassAtTime)</td></tr>
-<tr class="separator:a1d4cdd5afa59d96591801b6f039411ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f6cc82655c086008b59a7ec245b1924"><td class="memItemLeft" align="right" valign="top"><a id="a0f6cc82655c086008b59a7ec245b1924"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>TypeIIPredation</b> (const int &amp;timeMinus1, const int &amp;SpeciesNum, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredation, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstHandling, const std::vector&lt; double &gt; &amp;EstExponent, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstimatedBiomass, const double &amp;EstimatedBiomassTimeMinus1)</td></tr>
-<tr class="separator:a0f6cc82655c086008b59a7ec245b1924"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c134fe9ba332cd47d13772b43f4956e"><td class="memItemLeft" align="right" valign="top"><a id="a0c134fe9ba332cd47d13772b43f4956e"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>TypeIIIPredation</b> (const int &amp;timeMinus1, const int &amp;SpeciesNum, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredation, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstHandling, const std::vector&lt; double &gt; &amp;EstExponent, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstimatedBiomass, const double &amp;EstimatedBiomassTimeMinus1)</td></tr>
-<tr class="separator:a0c134fe9ba332cd47d13772b43f4956e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00b34bc8c65734b159f97a703cdc679f"><td class="memItemLeft" align="right" valign="top"><a id="a00b34bc8c65734b159f97a703cdc679f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setupFormMaps</b> ()</td></tr>
-<tr class="separator:a00b34bc8c65734b159f97a703cdc679f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a349203052f5d4996921b04d11cf2dd8b"><td class="memItemLeft" align="right" valign="top"><a id="a349203052f5d4996921b04d11cf2dd8b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setAggProd</b> (bool isAggProd)</td></tr>
-<tr class="separator:a349203052f5d4996921b04d11cf2dd8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3e079d602d74eca3d316b899af78f8f"><td class="memItemLeft" align="right" valign="top"><a id="ad3e079d602d74eca3d316b899af78f8f"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getExpression</b> ()</td></tr>
+<tr class="memitem:a603ead876b35c585606fc2a59ef7cfd3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_predation_form.html#a603ead876b35c585606fc2a59ef7cfd3">evaluate</a> (const int &amp;TimeMinus1, const int &amp;Species, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstimatedBiomass, const double &amp;EstimatedBiomassAtTimeMinus1, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredationRho, const boost::numeric::ublas::matrix&lt; double &gt; &amp;PredationRhoCovariate, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredationHandling, const boost::numeric::ublas::matrix&lt; double &gt; &amp;PredationHandlingCovariate, const std::vector&lt; double &gt; &amp;EstPredationExponent, const boost::numeric::ublas::matrix&lt; double &gt; &amp;PredationExponentCovariate)</td></tr>
+<tr class="memdesc:a603ead876b35c585606fc2a59ef7cfd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method allows the appropriate function map function to be called such that a series of if...else... statements are not needed.  <a href="classnmf_predation_form.html#a603ead876b35c585606fc2a59ef7cfd3">More...</a><br /></td></tr>
+<tr class="separator:a603ead876b35c585606fc2a59ef7cfd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7464298530bacf79d2ea4bb16518e23"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_predation_form.html#ad7464298530bacf79d2ea4bb16518e23">extractExponentParameters</a> (const std::vector&lt; double &gt; &amp;Parameters, int &amp;StartPos, std::vector&lt; double &gt; &amp;Exponents)</td></tr>
+<tr class="memdesc:ad7464298530bacf79d2ea4bb16518e23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unpacks the Exponent parameters from the Parameters list.  <a href="classnmf_predation_form.html#ad7464298530bacf79d2ea4bb16518e23">More...</a><br /></td></tr>
+<tr class="separator:ad7464298530bacf79d2ea4bb16518e23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6cc888f7ba42917b2469d68c0963b8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_predation_form.html#ab6cc888f7ba42917b2469d68c0963b8f">extractHandlingParameters</a> (const std::vector&lt; double &gt; &amp;Parameters, int &amp;StartPos, boost::numeric::ublas::matrix&lt; double &gt; &amp;Handling)</td></tr>
+<tr class="memdesc:ab6cc888f7ba42917b2469d68c0963b8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unpacks the Handling parameters from the Parameters list.  <a href="classnmf_predation_form.html#ab6cc888f7ba42917b2469d68c0963b8f">More...</a><br /></td></tr>
+<tr class="separator:ab6cc888f7ba42917b2469d68c0963b8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22d13dc9adee76182120a9731e549a12"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_predation_form.html#a22d13dc9adee76182120a9731e549a12">extractPredationParameters</a> (const std::vector&lt; double &gt; &amp;Parameters, int &amp;StartPos, boost::numeric::ublas::matrix&lt; double &gt; &amp;Predation)</td></tr>
+<tr class="memdesc:a22d13dc9adee76182120a9731e549a12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unpacks all of the Predation parameters from the Parameters list.  <a href="classnmf_predation_form.html#a22d13dc9adee76182120a9731e549a12">More...</a><br /></td></tr>
+<tr class="separator:a22d13dc9adee76182120a9731e549a12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3e079d602d74eca3d316b899af78f8f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_predation_form.html#ad3e079d602d74eca3d316b899af78f8f">getExpression</a> ()</td></tr>
+<tr class="memdesc:ad3e079d602d74eca3d316b899af78f8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the expression for the selected Predation Form algorithm.  <a href="classnmf_predation_form.html#ad3e079d602d74eca3d316b899af78f8f">More...</a><br /></td></tr>
 <tr class="separator:ad3e079d602d74eca3d316b899af78f8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf3244d165fd1a2613e4d5b22a1aed12"><td class="memItemLeft" align="right" valign="top"><a id="acf3244d165fd1a2613e4d5b22a1aed12"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getKey</b> ()</td></tr>
+<tr class="memitem:acf3244d165fd1a2613e4d5b22a1aed12"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_predation_form.html#acf3244d165fd1a2613e4d5b22a1aed12">getKey</a> ()</td></tr>
+<tr class="memdesc:acf3244d165fd1a2613e4d5b22a1aed12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the key (i.e., legend) for the selected Predation Form algorithm variables.  <a href="classnmf_predation_form.html#acf3244d165fd1a2613e4d5b22a1aed12">More...</a><br /></td></tr>
 <tr class="separator:acf3244d165fd1a2613e4d5b22a1aed12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9685ea5cbf42650d88d6d2bd824ff698"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_predation_form.html#a9685ea5cbf42650d88d6d2bd824ff698">getNumParameters</a> ()</td></tr>
+<tr class="memdesc:a9685ea5cbf42650d88d6d2bd824ff698"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of parameters in the current Predation Form.  <a href="classnmf_predation_form.html#a9685ea5cbf42650d88d6d2bd824ff698">More...</a><br /></td></tr>
+<tr class="separator:a9685ea5cbf42650d88d6d2bd824ff698"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d13d473c8f798545c3cabf170748467"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_predation_form.html#a6d13d473c8f798545c3cabf170748467">FunctionMap_Null</a> (const int &amp;TimeMinus1, const int &amp;Species, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstimatedBiomass, const double &amp;EstimatedBiomassAtTimeMinus1, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredationRho, const boost::numeric::ublas::matrix&lt; double &gt; &amp;PredationRhoCovariate, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredationHandling, const boost::numeric::ublas::matrix&lt; double &gt; &amp;PredationHandlingCovariate, const std::vector&lt; double &gt; &amp;EstPredationExponent, const boost::numeric::ublas::matrix&lt; double &gt; &amp;PredationExponentCovariate)</td></tr>
+<tr class="memdesc:a6d13d473c8f798545c3cabf170748467"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method implements the Predation Null algorithm (i.e., 0)  <a href="classnmf_predation_form.html#a6d13d473c8f798545c3cabf170748467">More...</a><br /></td></tr>
+<tr class="separator:a6d13d473c8f798545c3cabf170748467"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa6d583c4cbcd46c52aa1e6799e43cbe"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_predation_form.html#aaa6d583c4cbcd46c52aa1e6799e43cbe">FunctionMap_TypeI</a> (const int &amp;TimeMinus1, const int &amp;Species, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstimatedBiomass, const double &amp;EstimatedBiomassAtTimeMinus1, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredationRho, const boost::numeric::ublas::matrix&lt; double &gt; &amp;PredationRhoCovariate, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredationHandling, const boost::numeric::ublas::matrix&lt; double &gt; &amp;PredationHandlingCovariate, const std::vector&lt; double &gt; &amp;EstPredationExponent, const boost::numeric::ublas::matrix&lt; double &gt; &amp;PredationExponentCovariate)</td></tr>
+<tr class="memdesc:aaa6d583c4cbcd46c52aa1e6799e43cbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method implements the Predation Type I algorithm.  <a href="classnmf_predation_form.html#aaa6d583c4cbcd46c52aa1e6799e43cbe">More...</a><br /></td></tr>
+<tr class="separator:aaa6d583c4cbcd46c52aa1e6799e43cbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a537279c6e656e530ef332ad90bfa522a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_predation_form.html#a537279c6e656e530ef332ad90bfa522a">FunctionMap_TypeII</a> (const int &amp;TimeMinus1, const int &amp;Species, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstimatedBiomass, const double &amp;EstimatedBiomassAtTimeMinus1, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredationRho, const boost::numeric::ublas::matrix&lt; double &gt; &amp;PredationRhoCovariate, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredationHandling, const boost::numeric::ublas::matrix&lt; double &gt; &amp;PredationHandlingCovariate, const std::vector&lt; double &gt; &amp;EstPredationExponent, const boost::numeric::ublas::matrix&lt; double &gt; &amp;PredationExponentCovariate)</td></tr>
+<tr class="memdesc:a537279c6e656e530ef332ad90bfa522a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method implements the Predation Type II algorithm.  <a href="classnmf_predation_form.html#a537279c6e656e530ef332ad90bfa522a">More...</a><br /></td></tr>
+<tr class="separator:a537279c6e656e530ef332ad90bfa522a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8e3867b2f16231bd7fdaa54f1916e79"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_predation_form.html#af8e3867b2f16231bd7fdaa54f1916e79">FunctionMap_TypeIII</a> (const int &amp;TimeMinus1, const int &amp;Species, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstimatedBiomass, const double &amp;EstimatedBiomassAtTimeMinus1, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredationRho, const boost::numeric::ublas::matrix&lt; double &gt; &amp;PredationRhoCovariate, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredationHandling, const boost::numeric::ublas::matrix&lt; double &gt; &amp;PredationHandlingCovariate, const std::vector&lt; double &gt; &amp;EstPredationExponent, const boost::numeric::ublas::matrix&lt; double &gt; &amp;PredationExponentCovariate)</td></tr>
+<tr class="memdesc:af8e3867b2f16231bd7fdaa54f1916e79"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method implements the Predation Type III algorithm.  <a href="classnmf_predation_form.html#af8e3867b2f16231bd7fdaa54f1916e79">More...</a><br /></td></tr>
+<tr class="separator:af8e3867b2f16231bd7fdaa54f1916e79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff20e340480ece7c4fb949bd7bcffc48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_predation_form.html#aff20e340480ece7c4fb949bd7bcffc48">loadParameterRanges</a> (std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;ParameterRanges, <a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;DataStruct)</td></tr>
+<tr class="memdesc:aff20e340480ece7c4fb949bd7bcffc48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the parameter ranges structure with data from the model data structure.  <a href="classnmf_predation_form.html#aff20e340480ece7c4fb949bd7bcffc48">More...</a><br /></td></tr>
+<tr class="separator:aff20e340480ece7c4fb949bd7bcffc48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a349203052f5d4996921b04d11cf2dd8b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_predation_form.html#a349203052f5d4996921b04d11cf2dd8b">setAggProd</a> (bool isAggProd)</td></tr>
+<tr class="memdesc:a349203052f5d4996921b04d11cf2dd8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the AggProd variable.  <a href="classnmf_predation_form.html#a349203052f5d4996921b04d11cf2dd8b">More...</a><br /></td></tr>
+<tr class="separator:a349203052f5d4996921b04d11cf2dd8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b100fc22068394ae979bc7f4dae4d42"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_predation_form.html#a9b100fc22068394ae979bc7f4dae4d42">setType</a> (std::string newType)</td></tr>
+<tr class="memdesc:a9b100fc22068394ae979bc7f4dae4d42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the type of harvest algorithm.  <a href="classnmf_predation_form.html#a9b100fc22068394ae979bc7f4dae4d42">More...</a><br /></td></tr>
+<tr class="separator:a9b100fc22068394ae979bc7f4dae4d42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class contains the logic to calculate the Predation term of the currently selected model. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a0173464ce15fd5219938ae68525a5ee1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0173464ce15fd5219938ae68525a5ee1">&#9670;&nbsp;</a></span>nmfPredationForm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nmfPredationForm::nmfPredationForm </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>theType</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor method for class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>: type of predation algorithm to be used </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a603ead876b35c585606fc2a59ef7cfd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a603ead876b35c585606fc2a59ef7cfd3">&#9670;&nbsp;</a></span>evaluate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double nmfPredationForm::evaluate </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>TimeMinus1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>Species</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstimatedBiomass</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstimatedBiomassAtTimeMinus1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstPredationRho</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>PredationRhoCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstPredationHandling</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>PredationHandlingCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstPredationExponent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>PredationExponentCovariate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method allows the appropriate function map function to be called such that a series of if...else... statements are not needed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TimeMinus1</td><td>: one minus the current time </td></tr>
+    <tr><td class="paramname">Species</td><td>: species number </td></tr>
+    <tr><td class="paramname">EstimatedBiomass</td><td>: matrix of estimated biomass </td></tr>
+    <tr><td class="paramname">EstimatedBiomassAtTimeMinus1</td><td>: estimated biomass of current species and time-1 </td></tr>
+    <tr><td class="paramname">EstPredationRho</td><td>: the estimated predation rho parameters </td></tr>
+    <tr><td class="paramname">PredationRhoCovariate</td><td>: the predation rho covariate values </td></tr>
+    <tr><td class="paramname">EstPredationHandling</td><td>: the estimated predation handling parameters </td></tr>
+    <tr><td class="paramname">PredationHandlingCovariate</td><td>: the predation handling covariate values </td></tr>
+    <tr><td class="paramname">EstPredationExponent</td><td>: the estimated predation exponent parameters </td></tr>
+    <tr><td class="paramname">PredationExponentCovariate</td><td>: the predation exponent covariate values </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the Predation value evaluated with the appropriate function map algorithm </dd></dl>
+
+</div>
+</div>
+<a id="ad7464298530bacf79d2ea4bb16518e23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7464298530bacf79d2ea4bb16518e23">&#9670;&nbsp;</a></span>extractExponentParameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfPredationForm::extractExponentParameters </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Parameters</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>StartPos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Exponents</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unpacks the Exponent parameters from the Parameters list. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Parameters</td><td>: vector of all Predation parameter values </td></tr>
+    <tr><td class="paramname">StartPos</td><td>: start position from which to extract parameters </td></tr>
+    <tr><td class="paramname">Exponents</td><td>: Exponent parameters </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab6cc888f7ba42917b2469d68c0963b8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6cc888f7ba42917b2469d68c0963b8f">&#9670;&nbsp;</a></span>extractHandlingParameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfPredationForm::extractHandlingParameters </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Parameters</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>StartPos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Handling</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unpacks the Handling parameters from the Parameters list. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Parameters</td><td>: vector of all Predation parameter values </td></tr>
+    <tr><td class="paramname">StartPos</td><td>: start position from which to extract parameters </td></tr>
+    <tr><td class="paramname">Handling</td><td>: Handling parameters </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a22d13dc9adee76182120a9731e549a12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22d13dc9adee76182120a9731e549a12">&#9670;&nbsp;</a></span>extractPredationParameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfPredationForm::extractPredationParameters </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Parameters</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>StartPos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Predation</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unpacks all of the Predation parameters from the Parameters list. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Parameters</td><td>: vector of all Predation parameter values </td></tr>
+    <tr><td class="paramname">StartPos</td><td>: start position from which to extract parameters </td></tr>
+    <tr><td class="paramname">Predation</td><td>: all Predation parameters </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6d13d473c8f798545c3cabf170748467"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d13d473c8f798545c3cabf170748467">&#9670;&nbsp;</a></span>FunctionMap_Null()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double nmfPredationForm::FunctionMap_Null </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>TimeMinus1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>Species</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstimatedBiomass</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstimatedBiomassAtTimeMinus1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstPredationRho</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>PredationRhoCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstPredationHandling</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>PredationHandlingCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstPredationExponent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>PredationExponentCovariate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method implements the Predation Null algorithm (i.e., 0) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TimeMinus1</td><td>: one minus the current time </td></tr>
+    <tr><td class="paramname">Species</td><td>: species number </td></tr>
+    <tr><td class="paramname">EstimatedBiomass</td><td>: matrix of estimated biomass </td></tr>
+    <tr><td class="paramname">EstimatedBiomassAtTimeMinus1</td><td>: estimated biomass of current species and time-1 </td></tr>
+    <tr><td class="paramname">EstPredationRho</td><td>: the estimated predation rho parameters </td></tr>
+    <tr><td class="paramname">PredationRhoCovariate</td><td>: the predation rho covariate values </td></tr>
+    <tr><td class="paramname">EstPredationHandling</td><td>: the estimated predation handling parameters </td></tr>
+    <tr><td class="paramname">PredationHandlingCovariate</td><td>: the predation handling covariate values </td></tr>
+    <tr><td class="paramname">EstPredationExponent</td><td>: the estimated predation exponent parameters </td></tr>
+    <tr><td class="paramname">PredationExponentCovariate</td><td>: the predation exponent covariate values </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns 0 </dd></dl>
+
+</div>
+</div>
+<a id="aaa6d583c4cbcd46c52aa1e6799e43cbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa6d583c4cbcd46c52aa1e6799e43cbe">&#9670;&nbsp;</a></span>FunctionMap_TypeI()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double nmfPredationForm::FunctionMap_TypeI </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>TimeMinus1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>Species</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstimatedBiomass</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstimatedBiomassAtTimeMinus1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstPredationRho</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>PredationRhoCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstPredationHandling</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>PredationHandlingCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstPredationExponent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>PredationExponentCovariate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method implements the Predation Type I algorithm. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TimeMinus1</td><td>: one minus the current time </td></tr>
+    <tr><td class="paramname">Species</td><td>: species number </td></tr>
+    <tr><td class="paramname">EstimatedBiomass</td><td>: matrix of estimated biomass </td></tr>
+    <tr><td class="paramname">EstimatedBiomassAtTimeMinus1</td><td>: estimated biomass of current species and time-1 </td></tr>
+    <tr><td class="paramname">EstPredationRho</td><td>: the estimated predation rho parameters </td></tr>
+    <tr><td class="paramname">PredationRhoCovariate</td><td>: the predation rho covariate values </td></tr>
+    <tr><td class="paramname">EstPredationHandling</td><td>: the estimated predation handling parameters </td></tr>
+    <tr><td class="paramname">PredationHandlingCovariate</td><td>: the predation handling covariate values </td></tr>
+    <tr><td class="paramname">EstPredationExponent</td><td>: the estimated predation exponent parameters </td></tr>
+    <tr><td class="paramname">PredationExponentCovariate</td><td>: the predation exponent covariate values </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the Predation Type I value </dd></dl>
+
+</div>
+</div>
+<a id="a537279c6e656e530ef332ad90bfa522a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a537279c6e656e530ef332ad90bfa522a">&#9670;&nbsp;</a></span>FunctionMap_TypeII()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double nmfPredationForm::FunctionMap_TypeII </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>TimeMinus1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>Species</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstimatedBiomass</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstimatedBiomassAtTimeMinus1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstPredationRho</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>PredationRhoCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstPredationHandling</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>PredationHandlingCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstPredationExponent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>PredationExponentCovariate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method implements the Predation Type II algorithm. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TimeMinus1</td><td>: one minus the current time </td></tr>
+    <tr><td class="paramname">Species</td><td>: species number </td></tr>
+    <tr><td class="paramname">EstimatedBiomass</td><td>: matrix of estimated biomass </td></tr>
+    <tr><td class="paramname">EstimatedBiomassAtTimeMinus1</td><td>: estimated biomass of current species and time-1 </td></tr>
+    <tr><td class="paramname">EstPredationRho</td><td>: the estimated predation rho parameters </td></tr>
+    <tr><td class="paramname">PredationRhoCovariate</td><td>: the predation rho covariate values </td></tr>
+    <tr><td class="paramname">EstPredationHandling</td><td>: the estimated predation handling parameters </td></tr>
+    <tr><td class="paramname">PredationHandlingCovariate</td><td>: the predation handling covariate values </td></tr>
+    <tr><td class="paramname">EstPredationExponent</td><td>: the estimated predation exponent parameters </td></tr>
+    <tr><td class="paramname">PredationExponentCovariate</td><td>: the predation exponent covariate values </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the Predation Type II value </dd></dl>
+
+</div>
+</div>
+<a id="af8e3867b2f16231bd7fdaa54f1916e79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8e3867b2f16231bd7fdaa54f1916e79">&#9670;&nbsp;</a></span>FunctionMap_TypeIII()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double nmfPredationForm::FunctionMap_TypeIII </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>TimeMinus1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>Species</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstimatedBiomass</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstimatedBiomassAtTimeMinus1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstPredationRho</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>PredationRhoCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstPredationHandling</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>PredationHandlingCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstPredationExponent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>PredationExponentCovariate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method implements the Predation Type III algorithm. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TimeMinus1</td><td>: one minus the current time </td></tr>
+    <tr><td class="paramname">Species</td><td>: species number </td></tr>
+    <tr><td class="paramname">EstimatedBiomass</td><td>: matrix of estimated biomass </td></tr>
+    <tr><td class="paramname">EstimatedBiomassAtTimeMinus1</td><td>: estimated biomass of current species and time-1 </td></tr>
+    <tr><td class="paramname">EstPredationRho</td><td>: the estimated predation rho parameters </td></tr>
+    <tr><td class="paramname">PredationRhoCovariate</td><td>: the predation rho covariate values </td></tr>
+    <tr><td class="paramname">EstPredationHandling</td><td>: the estimated predation handling parameters </td></tr>
+    <tr><td class="paramname">PredationHandlingCovariate</td><td>: the predation handling covariate values </td></tr>
+    <tr><td class="paramname">EstPredationExponent</td><td>: the estimated predation exponent parameters </td></tr>
+    <tr><td class="paramname">PredationExponentCovariate</td><td>: the predation exponent covariate values </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the Predation Type III value </dd></dl>
+
+</div>
+</div>
+<a id="ad3e079d602d74eca3d316b899af78f8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3e079d602d74eca3d316b899af78f8f">&#9670;&nbsp;</a></span>getExpression()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string nmfPredationForm::getExpression </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the expression for the selected Predation Form algorithm. </p>
+<dl class="section return"><dt>Returns</dt><dd>Returns a string representing the formula of the selected Predation Form algorithm </dd></dl>
+
+</div>
+</div>
+<a id="acf3244d165fd1a2613e4d5b22a1aed12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf3244d165fd1a2613e4d5b22a1aed12">&#9670;&nbsp;</a></span>getKey()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string nmfPredationForm::getKey </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the key (i.e., legend) for the selected Predation Form algorithm variables. </p>
+<dl class="section return"><dt>Returns</dt><dd>Returns a string representing a description of the variables used in the selected Predation Form algorithm's formula </dd></dl>
+
+</div>
+</div>
+<a id="a9685ea5cbf42650d88d6d2bd824ff698"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9685ea5cbf42650d88d6d2bd824ff698">&#9670;&nbsp;</a></span>getNumParameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int nmfPredationForm::getNumParameters </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the number of parameters in the current Predation Form. </p>
+<dl class="section return"><dt>Returns</dt><dd>The number of parameters in the current Predation Form </dd></dl>
+
+</div>
+</div>
+<a id="aff20e340480ece7c4fb949bd7bcffc48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff20e340480ece7c4fb949bd7bcffc48">&#9670;&nbsp;</a></span>loadParameterRanges()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfPredationForm::loadParameterRanges </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ParameterRanges</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;&#160;</td>
+          <td class="paramname"><em>DataStruct</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Loads the parameter ranges structure with data from the model data structure. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ParameterRanges</td><td>: parameter ranges </td></tr>
+    <tr><td class="paramname">DataStruct</td><td>: model data structure </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a349203052f5d4996921b04d11cf2dd8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a349203052f5d4996921b04d11cf2dd8b">&#9670;&nbsp;</a></span>setAggProd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfPredationForm::setAggProd </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isAggProd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the AggProd variable. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">isAggProd</td><td>: boolean describing the AggProd status (i.e., true/false) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9b100fc22068394ae979bc7f4dae4d42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b100fc22068394ae979bc7f4dae4d42">&#9670;&nbsp;</a></span>setType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfPredationForm::setType </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>newType</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the type of harvest algorithm. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newType</td><td>: type of harvest algorithm </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>nmfModels/<a class="el" href="nmf_predation_form_8h_source.html">nmfPredationForm.h</a></li>
 <li>nmfModels/nmfPredationForm.cpp</li>

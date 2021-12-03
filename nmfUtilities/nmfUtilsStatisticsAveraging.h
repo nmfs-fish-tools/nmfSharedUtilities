@@ -51,9 +51,12 @@ private:
     std::vector<double> m_AIC; // Not a vector of vectors because we're just using the model AIC value and not the AIC values from each of the species
     std::vector< std::vector<double> > m_EstInitBiomass;
     std::vector< std::vector<double> > m_EstGrowthRates;
+    std::vector< std::vector<double> > m_EstGrowthRateCovariateCoeffs;
     std::vector< std::vector<double> > m_EstCarryingCapacities;
+    std::vector< std::vector<double> > m_EstCarryingCapacityCovariateCoeffs;
     std::vector< std::vector<double> > m_EstPredationExponent;
     std::vector< std::vector<double> > m_EstCatchability;
+    std::vector< std::vector<double> > m_EstCatchabilityCovariateCoeffs;
     std::vector< std::vector<double> > m_EstSurveyQ;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionAlpha;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionBetaSpecies;
@@ -64,9 +67,12 @@ private:
     std::vector< boost::numeric::ublas::matrix<double> > m_EstBiomass;
     std::vector<double> m_AveInitBiomass;
     std::vector<double> m_AveGrowthRates;
+    std::vector<double> m_AveGrowthRateCovariateCoeffs;
     std::vector<double> m_AveCarryingCapacities;
+    std::vector<double> m_AveCarryingCapacityCovariateCoeffs;
     std::vector<double> m_AvePredationExponent;
     std::vector<double> m_AveCatchability;
+    std::vector<double> m_AveCatchabilityCovariateCoeffs;
     std::vector<double> m_AveSurveyQ;
     boost::numeric::ublas::matrix<double> m_AveCompetitionAlpha;
     boost::numeric::ublas::matrix<double> m_AveCompetitionBetaSpecies;
@@ -78,9 +84,12 @@ private:
     std::vector<double> m_AIC_trimmed;
     std::vector< std::vector<double> > m_EstInitBiomass_trimmed;
     std::vector< std::vector<double> > m_EstGrowthRates_trimmed;
+    std::vector< std::vector<double> > m_EstGrowthRateCovariateCoeffs_trimmed;
     std::vector< std::vector<double> > m_EstCarryingCapacities_trimmed;
-    std::vector< std::vector<double> > m_EstPredationExponent_trimmed;
+    std::vector< std::vector<double> > m_EstCarryingCapacityCovariateCoeffs_trimmed;
     std::vector< std::vector<double> > m_EstCatchability_trimmed;
+    std::vector< std::vector<double> > m_EstCatchabilityCovariateCoeffs_trimmed;
+    std::vector< std::vector<double> > m_EstPredationExponent_trimmed;
     std::vector< std::vector<double> > m_EstSurveyQ_trimmed;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionAlpha_trimmed;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionBetaSpecies_trimmed;
@@ -127,9 +136,12 @@ public:
      * @param Fitness : average fitness values vector
      * @param AveInitBiomass : average initial biomass vector
      * @param AveGrowthRates : average growth rate vector
+     * @param AveGrowthRateCovariateCoeffs : average growth rate covariate coefficients vector
      * @param AveCarryingCapacities : average carrying capacities vector
+     * @param AveCarryingCapacityCovariateCoeffs : average carrying capacity covariate coefficients vector
      * @param AvePredationExponent : average predation exponent vector
      * @param AveCatchability : average catchability vector
+     * @param AveCatchabilityCovariateCoeffs : average catchability covariate coefficients vector
      * @param AveSurveyQ : average survey q vector
      * @param AveCompetitionAlpha : average competition alpha matrix
      * @param AveCompetitionBetaSpecies : average competition beta for species matrix
@@ -142,9 +154,12 @@ public:
     void getAveData(std::vector<double>& Fitness,
                     std::vector<double>& AveInitBiomass,
                     std::vector<double>& AveGrowthRates,
+                    std::vector<double>& AveGrowthRateCovariateCoeffs,
                     std::vector<double>& AveCarryingCapacities,
+                    std::vector<double>& AveCarryingCapacityCovariateCoeffs,
                     std::vector<double>& AvePredationExponent,
                     std::vector<double>& AveCatchability,
+                    std::vector<double>& AveCatchabilityCovariateCoeffs,
                     std::vector<double>& AveSurveyQ,
                     boost::numeric::ublas::matrix<double>& AveCompetitionAlpha,
                     boost::numeric::ublas::matrix<double>& AveCompetitionBetaSpecies,
@@ -159,9 +174,12 @@ public:
      * @param AIC : Akaike Information Criterion of estimated values vector
      * @param EstInitBiomass : estimated initial biomass vector
      * @param EstGrowthRates : estimated growth rate vector
+     * @param EstGrowthRateCovariateCoeffs : estimated growth rate covariate coefficient vector
      * @param EstCarryingCapacities : estimated carrying capacities vector
+     * @param EstCarryingCapacityCovariateCoeffs : estimated carrying capacity covariate coefficients vector
      * @param EstPredationExponent : estimated predation exponent vector
      * @param EstCatchability : estimated catchability vector
+     * @param EstCatchabilityCovariateCoeffs : estimated catchability covariate coefficients vector
      * @param EstSurveyQ : estimated survey q vector
      * @param EstCompetitionAlpha : estimated competition alpha matrix
      * @param EstCompetitionBetaSpecies : estimated competition beta species matrix
@@ -175,9 +193,12 @@ public:
                      std::vector<double>& AIC,
                      std::vector<double>& EstInitBiomass,
                      std::vector<double>& EstGrowthRates,
+                     std::vector<double>& EstGrowthRateCovariateCoeffs,
                      std::vector<double>& EstCarryingCapacities,
+                     std::vector<double>& EstCarryingCapacityCovariateCoeffs,
                      std::vector<double>& EstPredationExponent,
                      std::vector<double>& EstCatchability,
+                     std::vector<double>& EstCatchabilityCovariateCoeffs,
                      std::vector<double>& EstSurveyQ,
                      boost::numeric::ublas::matrix<double>& EstCompetitionAlpha,
                      boost::numeric::ublas::matrix<double>& EstCompetitionBetaSpecies,

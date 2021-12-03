@@ -414,6 +414,12 @@ namespace nmfUtilsQt {
      */
     QDateTime getCurrentTime();
     /**
+     * @brief Gets a list of selected tableview cells
+     * @param tv : tableview to find the selected cells of
+     * @return list of indexes of selected cells
+     */
+    QModelIndexList getSelectedTableViewCells(QTableView* tv);
+    /**
      * @brief Get the index value for the names tab
      * @param tabWidget : tab widget containing the tab in question
      * @param tabName : the name of the tab whose index is to be returned
@@ -589,6 +595,13 @@ namespace nmfUtilsQt {
      */
     int rename(QString fileIn,
                QString fileOut);
+    /**
+     * @brief Reselects the passed indexes from within the passed tableview
+     * @param tv : tableview to reselect indexes
+     * @param indexes : indexes to reselect
+     */
+    void reselectTableViewCells(QTableView* tv,
+                                QModelIndexList indexes);
     /**
      * @brief Saves the table consisting of all QComboBoxes to a .csv file
      * @param parentTabWidget : parent widget

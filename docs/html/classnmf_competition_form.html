@@ -68,52 +68,1013 @@ $(function() {
 <div class="title">nmfCompetitionForm Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>This class contains the logic to calculate the Competition term of the currently selected model.  
+ <a href="classnmf_competition_form.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="nmf_competition_form_8h_source.html">nmfCompetitionForm.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3fadd9d59f6f0ba12b5217163ad65d87"><td class="memItemLeft" align="right" valign="top"><a id="a3fadd9d59f6f0ba12b5217163ad65d87"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>nmfCompetitionForm</b> (std::string type)</td></tr>
+<tr class="memitem:a3fadd9d59f6f0ba12b5217163ad65d87"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_competition_form.html#a3fadd9d59f6f0ba12b5217163ad65d87">nmfCompetitionForm</a> (std::string type)</td></tr>
+<tr class="memdesc:a3fadd9d59f6f0ba12b5217163ad65d87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor method for class.  <a href="classnmf_competition_form.html#a3fadd9d59f6f0ba12b5217163ad65d87">More...</a><br /></td></tr>
 <tr class="separator:a3fadd9d59f6f0ba12b5217163ad65d87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a5d09cdf5eb577d4747d2182b46c102"><td class="memItemLeft" align="right" valign="top"><a id="a1a5d09cdf5eb577d4747d2182b46c102"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getNumParameters</b> ()</td></tr>
-<tr class="separator:a1a5d09cdf5eb577d4747d2182b46c102"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1721444947ca33fd6754ee7f6fe4a3a5"><td class="memItemLeft" align="right" valign="top"><a id="a1721444947ca33fd6754ee7f6fe4a3a5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setType</b> (std::string newType)</td></tr>
-<tr class="separator:a1721444947ca33fd6754ee7f6fe4a3a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a081d8a9c2123d467503735d54df9e194"><td class="memItemLeft" align="right" valign="top"><a id="a081d8a9c2123d467503735d54df9e194"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>extractParameters</b> (const std::vector&lt; double &gt; &amp;parameters, int &amp;startPos, boost::numeric::ublas::matrix&lt; double &gt; &amp;competition, boost::numeric::ublas::matrix&lt; double &gt; &amp;competitionBetaSpecies, boost::numeric::ublas::matrix&lt; double &gt; &amp;competitionBetaGuilds, boost::numeric::ublas::matrix&lt; double &gt; &amp;competitionBetaGuildsGuilds)</td></tr>
-<tr class="separator:a081d8a9c2123d467503735d54df9e194"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6241aa4257234e80167f225a3a371231"><td class="memItemLeft" align="right" valign="top"><a id="a6241aa4257234e80167f225a3a371231"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>loadParameterRanges</b> (std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;parameterRanges, <a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;beeStruct)</td></tr>
-<tr class="separator:a6241aa4257234e80167f225a3a371231"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e15835be82fceb4a1cddfe804b97cf9"><td class="memItemLeft" align="right" valign="top"><a id="a6e15835be82fceb4a1cddfe804b97cf9"></a>
-long double&#160;</td><td class="memItemRight" valign="bottom"><b>evaluate</b> (const int &amp;timeMinus1, const int &amp;speciesNum, const double &amp;biomassAtTime, const double &amp;systemCarryingCapacity, const std::vector&lt; double &gt; &amp;growthRate, const double &amp;guildCarryingCapacity, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionAlpha, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaSpecies, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuildGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomassSpecies, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomassGuild)</td></tr>
-<tr class="separator:a6e15835be82fceb4a1cddfe804b97cf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a99326bd07ef09c4c0fa2b1db14744f"><td class="memItemLeft" align="right" valign="top"><a id="a7a99326bd07ef09c4c0fa2b1db14744f"></a>
-long double&#160;</td><td class="memItemRight" valign="bottom"><b>NoCompetition</b> (const int &amp;timeMinus1, const int &amp;speciesNum, const double &amp;biomassAtTime, const double &amp;systemCarryingCapacity, const std::vector&lt; double &gt; &amp;growthRate, const double &amp;guildCarryingCapacity, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionAlpha, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaSpecies, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuildGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomassSpecies, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomassGuild)</td></tr>
-<tr class="separator:a7a99326bd07ef09c4c0fa2b1db14744f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a8511d974e52f9502ea117817203758"><td class="memItemLeft" align="right" valign="top"><a id="a9a8511d974e52f9502ea117817203758"></a>
-long double&#160;</td><td class="memItemRight" valign="bottom"><b>NOKCompetition</b> (const int &amp;timeMinus1, const int &amp;speciesNum, const double &amp;biomassAtTime, const double &amp;systemCarryingCapacity, const std::vector&lt; double &gt; &amp;growthRate, const double &amp;guildCarryingCapacity, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionAlpha, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaSpecies, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuildGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomassSpecies, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomassGuild)</td></tr>
-<tr class="separator:a9a8511d974e52f9502ea117817203758"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a630d783d87514a9aec4395a5eeb92f5b"><td class="memItemLeft" align="right" valign="top"><a id="a630d783d87514a9aec4395a5eeb92f5b"></a>
-long double&#160;</td><td class="memItemRight" valign="bottom"><b>MSPRODCompetition</b> (const int &amp;timeMinus1, const int &amp;speciesNum, const double &amp;biomassAtTime, const double &amp;systemCarryingCapacity, const std::vector&lt; double &gt; &amp;growthRate, const double &amp;guildCarryingCapacity, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionAlpha, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaSpecies, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuildGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomassSpecies, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomassGuild)</td></tr>
-<tr class="separator:a630d783d87514a9aec4395a5eeb92f5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec356253794b98414c9e5e0d3a0f1373"><td class="memItemLeft" align="right" valign="top"><a id="aec356253794b98414c9e5e0d3a0f1373"></a>
-long double&#160;</td><td class="memItemRight" valign="bottom"><b>AGGPRODCompetition</b> (const int &amp;timeMinus1, const int &amp;speciesNum, const double &amp;biomassAtTime, const double &amp;systemCarryingCapacity, const std::vector&lt; double &gt; &amp;growthRate, const double &amp;guildCarryingCapacity, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionAlpha, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaSpecies, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuildGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomassSpecies, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomassGuild)</td></tr>
-<tr class="separator:aec356253794b98414c9e5e0d3a0f1373"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa785b5377fb338d426358c7a7d4182b5"><td class="memItemLeft" align="right" valign="top"><a id="aa785b5377fb338d426358c7a7d4182b5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setupFormMaps</b> ()</td></tr>
-<tr class="separator:aa785b5377fb338d426358c7a7d4182b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d7c1391a6547c2621bfd7e42ada84a0"><td class="memItemLeft" align="right" valign="top"><a id="a2d7c1391a6547c2621bfd7e42ada84a0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setAggProd</b> (bool isAggProd)</td></tr>
-<tr class="separator:a2d7c1391a6547c2621bfd7e42ada84a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ebad5ce1f8578f0bc04daaac979bf38"><td class="memItemLeft" align="right" valign="top"><a id="a1ebad5ce1f8578f0bc04daaac979bf38"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getExpression</b> ()</td></tr>
+<tr class="memitem:a597428ef765585753ab0940ecd4a2852"><td class="memItemLeft" align="right" valign="top">long double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_competition_form.html#a597428ef765585753ab0940ecd4a2852">evaluate</a> (const int &amp;TimeMinus1, const int &amp;SpeciesOrGuildNum, const double &amp;BiomassAtTime, const std::vector&lt; double &gt; &amp;EstGrowthRates, const boost::numeric::ublas::matrix&lt; double &gt; &amp;GrowthRateCovariates, const double &amp;GuildCarryingCapacity, const double &amp;SystemCarryingCapacity, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomassSpecies, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomassGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionAlpha, const boost::numeric::ublas::matrix&lt; double &gt; &amp;CompetitionAlphaCovariate, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaSpecies, const boost::numeric::ublas::matrix&lt; double &gt; &amp;CompetitionBetaSpeciesCovariate, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;CompetitionBetaGuildCovariate, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuildGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;CompetitionBetaGuildGuildCovariate)</td></tr>
+<tr class="memdesc:a597428ef765585753ab0940ecd4a2852"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method allows the appropriate function map function to be called such that a series of if...else... statements are not needed.  <a href="classnmf_competition_form.html#a597428ef765585753ab0940ecd4a2852">More...</a><br /></td></tr>
+<tr class="separator:a597428ef765585753ab0940ecd4a2852"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07065914489f64d9092be054bfc42d85"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_competition_form.html#a07065914489f64d9092be054bfc42d85">extractParameters</a> (const std::vector&lt; double &gt; &amp;Parameters, int &amp;StartPos, boost::numeric::ublas::matrix&lt; double &gt; &amp;CompetitionAlpha, boost::numeric::ublas::matrix&lt; double &gt; &amp;CompetitionBetaSpecies, boost::numeric::ublas::matrix&lt; double &gt; &amp;CompetitionBetaGuilds, boost::numeric::ublas::matrix&lt; double &gt; &amp;CompetitionBetaGuildsGuilds)</td></tr>
+<tr class="memdesc:a07065914489f64d9092be054bfc42d85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unpacks the parameters from the Parameters list and loads them into their respective data structures.  <a href="classnmf_competition_form.html#a07065914489f64d9092be054bfc42d85">More...</a><br /></td></tr>
+<tr class="separator:a07065914489f64d9092be054bfc42d85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e75ba4bcdc7988ccf8217bc8c75e2d7"><td class="memItemLeft" align="right" valign="top">long double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_competition_form.html#a9e75ba4bcdc7988ccf8217bc8c75e2d7">FunctionMap_AGGPROD</a> (const int &amp;TimeMinus1, const int &amp;SpeciesOrGuildNum, const double &amp;BiomassAtTime, const std::vector&lt; double &gt; &amp;EstGrowthRates, const boost::numeric::ublas::matrix&lt; double &gt; &amp;GrowthRateCovariates, const double &amp;GuildCarryingCapacity, const double &amp;SystemCarryingCapacity, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomassSpecies, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomassGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionAlpha, const boost::numeric::ublas::matrix&lt; double &gt; &amp;CompetitionAlphaCovariate, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaSpecies, const boost::numeric::ublas::matrix&lt; double &gt; &amp;CompetitionBetaSpeciesCovariate, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;CompetitionBetaGuildCovariate, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuildGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;CompetitionBetaGuildGuildCovariate)</td></tr>
+<tr class="memdesc:a9e75ba4bcdc7988ccf8217bc8c75e2d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">FunctionMap_NOK : implements the Competition MSPROD functionality according to the formula: r(i)B(i,t)[(∑β(i,G)B(G,t))/(Kσ - KG)].  <a href="classnmf_competition_form.html#a9e75ba4bcdc7988ccf8217bc8c75e2d7">More...</a><br /></td></tr>
+<tr class="separator:a9e75ba4bcdc7988ccf8217bc8c75e2d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97d5f8d30494eb35c0157ad4cdc81c1a"><td class="memItemLeft" align="right" valign="top">long double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_competition_form.html#a97d5f8d30494eb35c0157ad4cdc81c1a">FunctionMap_MSPROD</a> (const int &amp;TimeMinus1, const int &amp;SpeciesOrGuildNum, const double &amp;BiomassAtTime, const std::vector&lt; double &gt; &amp;EstGrowthRates, const boost::numeric::ublas::matrix&lt; double &gt; &amp;GrowthRateCovariates, const double &amp;GuildCarryingCapacity, const double &amp;SystemCarryingCapacity, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomassSpecies, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomassGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionAlpha, const boost::numeric::ublas::matrix&lt; double &gt; &amp;CompetitionAlphaCovariate, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaSpecies, const boost::numeric::ublas::matrix&lt; double &gt; &amp;CompetitionBetaSpeciesCovariate, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;CompetitionBetaGuildCovariate, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuildGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;CompetitionBetaGuildGuildCovariate)</td></tr>
+<tr class="memdesc:a97d5f8d30494eb35c0157ad4cdc81c1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">FunctionMap_NOK : implements the Competition MSPROD functionality according to the formula: r(i)B(i,t)[(∑β(i,j)B(j,t))/KG - (∑β(i,G)B(G,t))/(K(σ) - K(G))].  <a href="classnmf_competition_form.html#a97d5f8d30494eb35c0157ad4cdc81c1a">More...</a><br /></td></tr>
+<tr class="separator:a97d5f8d30494eb35c0157ad4cdc81c1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04c26c69f6b0d5095691f80337894bcf"><td class="memItemLeft" align="right" valign="top">long double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_competition_form.html#a04c26c69f6b0d5095691f80337894bcf">FunctionMap_NOK</a> (const int &amp;TimeMinus1, const int &amp;SpeciesOrGuildNum, const double &amp;BiomassAtTime, const std::vector&lt; double &gt; &amp;EstGrowthRates, const boost::numeric::ublas::matrix&lt; double &gt; &amp;GrowthRateCovariates, const double &amp;GuildCarryingCapacity, const double &amp;SystemCarryingCapacity, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomassSpecies, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomassGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionAlpha, const boost::numeric::ublas::matrix&lt; double &gt; &amp;CompetitionAlphaCovariate, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaSpecies, const boost::numeric::ublas::matrix&lt; double &gt; &amp;CompetitionBetaSpeciesCovariate, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;CompetitionBetaGuildCovariate, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuildGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;CompetitionBetaGuildGuildCovariate)</td></tr>
+<tr class="memdesc:a04c26c69f6b0d5095691f80337894bcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">FunctionMap_NOK : implements the Competition NOK functionality according to the formula: B(i,t)[(∑{α(i,j)B(j,t)}].  <a href="classnmf_competition_form.html#a04c26c69f6b0d5095691f80337894bcf">More...</a><br /></td></tr>
+<tr class="separator:a04c26c69f6b0d5095691f80337894bcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e6295570eaff9fe706f3f9744d552b1"><td class="memItemLeft" align="right" valign="top">long double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_competition_form.html#a0e6295570eaff9fe706f3f9744d552b1">FunctionMap_Null</a> (const int &amp;TimeMinus1, const int &amp;SpeciesOrGuildNum, const double &amp;BiomassAtTime, const std::vector&lt; double &gt; &amp;EstGrowthRates, const boost::numeric::ublas::matrix&lt; double &gt; &amp;GrowthRateCovariates, const double &amp;GuildCarryingCapacity, const double &amp;SystemCarryingCapacity, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomassSpecies, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomassGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionAlpha, const boost::numeric::ublas::matrix&lt; double &gt; &amp;CompetitionAlphaCovariate, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaSpecies, const boost::numeric::ublas::matrix&lt; double &gt; &amp;CompetitionBetaSpeciesCovariate, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;CompetitionBetaGuildCovariate, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuildGuild, const boost::numeric::ublas::matrix&lt; double &gt; &amp;CompetitionBetaGuildGuildCovariate)</td></tr>
+<tr class="memdesc:a0e6295570eaff9fe706f3f9744d552b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">FunctionMap_Null : implements the Competition Null functionality, i.e., returns 0.  <a href="classnmf_competition_form.html#a0e6295570eaff9fe706f3f9744d552b1">More...</a><br /></td></tr>
+<tr class="separator:a0e6295570eaff9fe706f3f9744d552b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ebad5ce1f8578f0bc04daaac979bf38"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_competition_form.html#a1ebad5ce1f8578f0bc04daaac979bf38">getExpression</a> ()</td></tr>
+<tr class="memdesc:a1ebad5ce1f8578f0bc04daaac979bf38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the expression for the selected Competition Form algorithm.  <a href="classnmf_competition_form.html#a1ebad5ce1f8578f0bc04daaac979bf38">More...</a><br /></td></tr>
 <tr class="separator:a1ebad5ce1f8578f0bc04daaac979bf38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d2635e43ad320c96fe32c36bd99da0b"><td class="memItemLeft" align="right" valign="top"><a id="a5d2635e43ad320c96fe32c36bd99da0b"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getKey</b> ()</td></tr>
+<tr class="memitem:a5d2635e43ad320c96fe32c36bd99da0b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_competition_form.html#a5d2635e43ad320c96fe32c36bd99da0b">getKey</a> ()</td></tr>
+<tr class="memdesc:a5d2635e43ad320c96fe32c36bd99da0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the key (i.e., legend) for the selected Competition Form algorithm variables.  <a href="classnmf_competition_form.html#a5d2635e43ad320c96fe32c36bd99da0b">More...</a><br /></td></tr>
 <tr class="separator:a5d2635e43ad320c96fe32c36bd99da0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a5d09cdf5eb577d4747d2182b46c102"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_competition_form.html#a1a5d09cdf5eb577d4747d2182b46c102">getNumParameters</a> ()</td></tr>
+<tr class="memdesc:a1a5d09cdf5eb577d4747d2182b46c102"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of parameters in the selected algorithm. Some parameters may be from a sparsely populated matrix.  <a href="classnmf_competition_form.html#a1a5d09cdf5eb577d4747d2182b46c102">More...</a><br /></td></tr>
+<tr class="separator:a1a5d09cdf5eb577d4747d2182b46c102"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af558bcb8a3bf0956566e17c7a541ff4d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_competition_form.html#af558bcb8a3bf0956566e17c7a541ff4d">loadParameterRanges</a> (std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;ParameterRanges, <a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;DataStruct)</td></tr>
+<tr class="memdesc:af558bcb8a3bf0956566e17c7a541ff4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the parameter ranges structure with data from the model data structure.  <a href="classnmf_competition_form.html#af558bcb8a3bf0956566e17c7a541ff4d">More...</a><br /></td></tr>
+<tr class="separator:af558bcb8a3bf0956566e17c7a541ff4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d7c1391a6547c2621bfd7e42ada84a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_competition_form.html#a2d7c1391a6547c2621bfd7e42ada84a0">setAggProd</a> (bool isAggProd)</td></tr>
+<tr class="memdesc:a2d7c1391a6547c2621bfd7e42ada84a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the AggProd variable.  <a href="classnmf_competition_form.html#a2d7c1391a6547c2621bfd7e42ada84a0">More...</a><br /></td></tr>
+<tr class="separator:a2d7c1391a6547c2621bfd7e42ada84a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1721444947ca33fd6754ee7f6fe4a3a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_competition_form.html#a1721444947ca33fd6754ee7f6fe4a3a5">setType</a> (std::string newType)</td></tr>
+<tr class="memdesc:a1721444947ca33fd6754ee7f6fe4a3a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the type of competition algorithm.  <a href="classnmf_competition_form.html#a1721444947ca33fd6754ee7f6fe4a3a5">More...</a><br /></td></tr>
+<tr class="separator:a1721444947ca33fd6754ee7f6fe4a3a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class contains the logic to calculate the Competition term of the currently selected model. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a3fadd9d59f6f0ba12b5217163ad65d87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fadd9d59f6f0ba12b5217163ad65d87">&#9670;&nbsp;</a></span>nmfCompetitionForm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nmfCompetitionForm::nmfCompetitionForm </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor method for class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>: type of competition algorithm to be used </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a597428ef765585753ab0940ecd4a2852"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a597428ef765585753ab0940ecd4a2852">&#9670;&nbsp;</a></span>evaluate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long double nmfCompetitionForm::evaluate </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>TimeMinus1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>SpeciesOrGuildNum</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>BiomassAtTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstGrowthRates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>GrowthRateCovariates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>GuildCarryingCapacity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>SystemCarryingCapacity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstBiomassSpecies</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstBiomassGuild</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstCompetitionAlpha</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionAlphaCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstCompetitionBetaSpecies</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionBetaSpeciesCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstCompetitionBetaGuild</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionBetaGuildCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstCompetitionBetaGuildGuild</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionBetaGuildGuildCovariate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method allows the appropriate function map function to be called such that a series of if...else... statements are not needed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TimeMinus1</td><td>: one minus the current time </td></tr>
+    <tr><td class="paramname">SpeciesOrGuildNum</td><td>: species number or guild number </td></tr>
+    <tr><td class="paramname">BiomassAtTime</td><td>: biomass at the currrent time </td></tr>
+    <tr><td class="paramname">EstGrowthRates</td><td>: estimated growth rate values </td></tr>
+    <tr><td class="paramname">GrowthRateCovariates</td><td>: growth rate covariate values </td></tr>
+    <tr><td class="paramname">GuildCarryingCapacity</td><td>: guild carrying carrying capacity </td></tr>
+    <tr><td class="paramname">SystemCarryingCapacity</td><td>: system carrying capacity </td></tr>
+    <tr><td class="paramname">EstBiomassSpecies</td><td>: estimated biomass per species </td></tr>
+    <tr><td class="paramname">EstBiomassGuild</td><td>: estimated biomass per guild </td></tr>
+    <tr><td class="paramname">EstCompetitionAlpha</td><td>: estimated competition alpha values </td></tr>
+    <tr><td class="paramname">CompetitionAlphaCovariate</td><td>: competition alpha covariate values </td></tr>
+    <tr><td class="paramname">EstCompetitionBetaSpecies</td><td>: estimated competition beta values </td></tr>
+    <tr><td class="paramname">CompetitionBetaSpeciesCovariate</td><td>: competition beta covariate values </td></tr>
+    <tr><td class="paramname">EstCompetitionBetaGuild</td><td>: estimated competition beta guild values </td></tr>
+    <tr><td class="paramname">CompetitionBetaGuildCovariate</td><td>: competition beta guild covariate values </td></tr>
+    <tr><td class="paramname">EstCompetitionBetaGuildGuild</td><td>: estimated competition beta guild-guild values </td></tr>
+    <tr><td class="paramname">CompetitionBetaGuildGuildCovariate</td><td>: competition beta guild-guild covariate values </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the competition value evaluated with the appropriate function map algorithm </dd></dl>
+
+</div>
+</div>
+<a id="a07065914489f64d9092be054bfc42d85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07065914489f64d9092be054bfc42d85">&#9670;&nbsp;</a></span>extractParameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfCompetitionForm::extractParameters </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Parameters</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>StartPos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionAlpha</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionBetaSpecies</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionBetaGuilds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionBetaGuildsGuilds</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unpacks the parameters from the Parameters list and loads them into their respective data structures. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Parameters</td><td>: vector of all Competition parameter values </td></tr>
+    <tr><td class="paramname">StartPos</td><td>: start position from which to extract parameters </td></tr>
+    <tr><td class="paramname">CompetitionAlpha</td><td>: alpha parameters </td></tr>
+    <tr><td class="paramname">CompetitionBetaSpecies</td><td>: beta species parameters </td></tr>
+    <tr><td class="paramname">CompetitionBetaGuilds</td><td>: beta guild-species parameters </td></tr>
+    <tr><td class="paramname">CompetitionBetaGuildsGuilds</td><td>: beta guild-guild parameters </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9e75ba4bcdc7988ccf8217bc8c75e2d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e75ba4bcdc7988ccf8217bc8c75e2d7">&#9670;&nbsp;</a></span>FunctionMap_AGGPROD()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long double nmfCompetitionForm::FunctionMap_AGGPROD </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>TimeMinus1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>SpeciesOrGuildNum</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>BiomassAtTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstGrowthRates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>GrowthRateCovariates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>GuildCarryingCapacity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>SystemCarryingCapacity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstBiomassSpecies</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstBiomassGuild</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstCompetitionAlpha</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionAlphaCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstCompetitionBetaSpecies</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionBetaSpeciesCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstCompetitionBetaGuild</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionBetaGuildCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstCompetitionBetaGuildGuild</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionBetaGuildGuildCovariate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>FunctionMap_NOK : implements the Competition MSPROD functionality according to the formula: r(i)B(i,t)[(∑β(i,G)B(G,t))/(Kσ - KG)]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TimeMinus1</td><td>: one minus the current time </td></tr>
+    <tr><td class="paramname">SpeciesOrGuildNum</td><td>: species number or guild number </td></tr>
+    <tr><td class="paramname">BiomassAtTime</td><td>: biomass at the currrent time </td></tr>
+    <tr><td class="paramname">EstGrowthRates</td><td>: estimated growth rate values </td></tr>
+    <tr><td class="paramname">GrowthRateCovariates</td><td>: growth rate covariate values </td></tr>
+    <tr><td class="paramname">GuildCarryingCapacity</td><td>: guild carrying carrying capacity </td></tr>
+    <tr><td class="paramname">SystemCarryingCapacity</td><td>: system carrying capacity </td></tr>
+    <tr><td class="paramname">EstBiomassSpecies</td><td>: estimated biomass per species </td></tr>
+    <tr><td class="paramname">EstBiomassGuild</td><td>: estimated biomass per guild </td></tr>
+    <tr><td class="paramname">EstCompetitionAlpha</td><td>: estimated competition alpha values </td></tr>
+    <tr><td class="paramname">CompetitionAlphaCovariate</td><td>: competition alpha covariate values </td></tr>
+    <tr><td class="paramname">EstCompetitionBetaSpecies</td><td>: estimated competition beta values </td></tr>
+    <tr><td class="paramname">CompetitionBetaSpeciesCovariate</td><td>: competition beta covariate values </td></tr>
+    <tr><td class="paramname">EstCompetitionBetaGuild</td><td>: estimated competition beta guild values </td></tr>
+    <tr><td class="paramname">CompetitionBetaGuildCovariate</td><td>: competition beta guild covariate values </td></tr>
+    <tr><td class="paramname">EstCompetitionBetaGuildGuild</td><td>: estimated competition beta guild-guild values </td></tr>
+    <tr><td class="paramname">CompetitionBetaGuildGuildCovariate</td><td>: competition beta guild-guild covariate values </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the competition value evaluated with the AGGPROD algorithm </dd></dl>
+
+</div>
+</div>
+<a id="a97d5f8d30494eb35c0157ad4cdc81c1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97d5f8d30494eb35c0157ad4cdc81c1a">&#9670;&nbsp;</a></span>FunctionMap_MSPROD()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long double nmfCompetitionForm::FunctionMap_MSPROD </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>TimeMinus1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>SpeciesOrGuildNum</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>BiomassAtTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstGrowthRates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>GrowthRateCovariates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>GuildCarryingCapacity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>SystemCarryingCapacity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstBiomassSpecies</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstBiomassGuild</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstCompetitionAlpha</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionAlphaCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstCompetitionBetaSpecies</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionBetaSpeciesCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstCompetitionBetaGuild</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionBetaGuildCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstCompetitionBetaGuildGuild</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionBetaGuildGuildCovariate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>FunctionMap_NOK : implements the Competition MSPROD functionality according to the formula: r(i)B(i,t)[(∑β(i,j)B(j,t))/KG - (∑β(i,G)B(G,t))/(K(σ) - K(G))]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TimeMinus1</td><td>: one minus the current time </td></tr>
+    <tr><td class="paramname">SpeciesOrGuildNum</td><td>: species number or guild number </td></tr>
+    <tr><td class="paramname">BiomassAtTime</td><td>: biomass at the currrent time </td></tr>
+    <tr><td class="paramname">EstGrowthRates</td><td>: estimated growth rate values </td></tr>
+    <tr><td class="paramname">GrowthRateCovariates</td><td>: growth rate covariate values </td></tr>
+    <tr><td class="paramname">GuildCarryingCapacity</td><td>: guild carrying carrying capacity </td></tr>
+    <tr><td class="paramname">SystemCarryingCapacity</td><td>: system carrying capacity </td></tr>
+    <tr><td class="paramname">EstBiomassSpecies</td><td>: estimated biomass per species </td></tr>
+    <tr><td class="paramname">EstBiomassGuild</td><td>: estimated biomass per guild </td></tr>
+    <tr><td class="paramname">EstCompetitionAlpha</td><td>: estimated competition alpha values </td></tr>
+    <tr><td class="paramname">CompetitionAlphaCovariate</td><td>: competition alpha covariate values </td></tr>
+    <tr><td class="paramname">EstCompetitionBetaSpecies</td><td>: estimated competition beta values </td></tr>
+    <tr><td class="paramname">CompetitionBetaSpeciesCovariate</td><td>: competition beta covariate values </td></tr>
+    <tr><td class="paramname">EstCompetitionBetaGuild</td><td>: estimated competition beta guild values </td></tr>
+    <tr><td class="paramname">CompetitionBetaGuildCovariate</td><td>: competition beta guild covariate values </td></tr>
+    <tr><td class="paramname">EstCompetitionBetaGuildGuild</td><td>: estimated competition beta guild-guild values </td></tr>
+    <tr><td class="paramname">CompetitionBetaGuildGuildCovariate</td><td>: competition beta guild-guild covariate values </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the competition value evaluated with the MSPROD algorithm </dd></dl>
+
+</div>
+</div>
+<a id="a04c26c69f6b0d5095691f80337894bcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04c26c69f6b0d5095691f80337894bcf">&#9670;&nbsp;</a></span>FunctionMap_NOK()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long double nmfCompetitionForm::FunctionMap_NOK </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>TimeMinus1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>SpeciesOrGuildNum</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>BiomassAtTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstGrowthRates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>GrowthRateCovariates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>GuildCarryingCapacity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>SystemCarryingCapacity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstBiomassSpecies</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstBiomassGuild</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstCompetitionAlpha</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionAlphaCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstCompetitionBetaSpecies</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionBetaSpeciesCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstCompetitionBetaGuild</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionBetaGuildCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstCompetitionBetaGuildGuild</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionBetaGuildGuildCovariate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>FunctionMap_NOK : implements the Competition NOK functionality according to the formula: B(i,t)[(∑{α(i,j)B(j,t)}]. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TimeMinus1</td><td>: one minus the current time </td></tr>
+    <tr><td class="paramname">SpeciesOrGuildNum</td><td>: species number or guild number </td></tr>
+    <tr><td class="paramname">BiomassAtTime</td><td>: biomass at the currrent time </td></tr>
+    <tr><td class="paramname">EstGrowthRates</td><td>: estimated growth rate values </td></tr>
+    <tr><td class="paramname">GrowthRateCovariates</td><td>: growth rate covariate values </td></tr>
+    <tr><td class="paramname">GuildCarryingCapacity</td><td>: guild carrying carrying capacity </td></tr>
+    <tr><td class="paramname">SystemCarryingCapacity</td><td>: system carrying capacity </td></tr>
+    <tr><td class="paramname">EstBiomassSpecies</td><td>: estimated biomass per species </td></tr>
+    <tr><td class="paramname">EstBiomassGuild</td><td>: estimated biomass per guild </td></tr>
+    <tr><td class="paramname">EstCompetitionAlpha</td><td>: estimated competition alpha values </td></tr>
+    <tr><td class="paramname">CompetitionAlphaCovariate</td><td>: competition alpha covariate values </td></tr>
+    <tr><td class="paramname">EstCompetitionBetaSpecies</td><td>: estimated competition beta values </td></tr>
+    <tr><td class="paramname">CompetitionBetaSpeciesCovariate</td><td>: competition beta covariate values </td></tr>
+    <tr><td class="paramname">EstCompetitionBetaGuild</td><td>: estimated competition beta guild values </td></tr>
+    <tr><td class="paramname">CompetitionBetaGuildCovariate</td><td>: competition beta guild covariate values </td></tr>
+    <tr><td class="paramname">EstCompetitionBetaGuildGuild</td><td>: estimated competition beta guild-guild values </td></tr>
+    <tr><td class="paramname">CompetitionBetaGuildGuildCovariate</td><td>: competition beta guild-guild covariate values </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the competition value evaluated with the NOK algorithm </dd></dl>
+
+</div>
+</div>
+<a id="a0e6295570eaff9fe706f3f9744d552b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e6295570eaff9fe706f3f9744d552b1">&#9670;&nbsp;</a></span>FunctionMap_Null()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long double nmfCompetitionForm::FunctionMap_Null </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>TimeMinus1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>SpeciesOrGuildNum</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>BiomassAtTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstGrowthRates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>GrowthRateCovariates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>GuildCarryingCapacity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>SystemCarryingCapacity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstBiomassSpecies</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstBiomassGuild</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstCompetitionAlpha</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionAlphaCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstCompetitionBetaSpecies</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionBetaSpeciesCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstCompetitionBetaGuild</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionBetaGuildCovariate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstCompetitionBetaGuildGuild</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionBetaGuildGuildCovariate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>FunctionMap_Null : implements the Competition Null functionality, i.e., returns 0. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TimeMinus1</td><td>: one minus the current time </td></tr>
+    <tr><td class="paramname">SpeciesOrGuildNum</td><td>: species number or guild number </td></tr>
+    <tr><td class="paramname">BiomassAtTime</td><td>: biomass at the currrent time </td></tr>
+    <tr><td class="paramname">EstGrowthRates</td><td>: estimated growth rate values </td></tr>
+    <tr><td class="paramname">GrowthRateCovariates</td><td>: growth rate covariate values </td></tr>
+    <tr><td class="paramname">GuildCarryingCapacity</td><td>: guild carrying carrying capacity </td></tr>
+    <tr><td class="paramname">SystemCarryingCapacity</td><td>: system carrying capacity </td></tr>
+    <tr><td class="paramname">EstBiomassSpecies</td><td>: estimated biomass per species </td></tr>
+    <tr><td class="paramname">EstBiomassGuild</td><td>: estimated biomass per guild </td></tr>
+    <tr><td class="paramname">EstCompetitionAlpha</td><td>: estimated competition alpha values </td></tr>
+    <tr><td class="paramname">CompetitionAlphaCovariate</td><td>: competition alpha covariate values </td></tr>
+    <tr><td class="paramname">EstCompetitionBetaSpecies</td><td>: estimated competition beta values </td></tr>
+    <tr><td class="paramname">CompetitionBetaSpeciesCovariate</td><td>: competition beta covariate values </td></tr>
+    <tr><td class="paramname">EstCompetitionBetaGuild</td><td>: estimated competition beta guild values </td></tr>
+    <tr><td class="paramname">CompetitionBetaGuildCovariate</td><td>: competition beta guild covariate values </td></tr>
+    <tr><td class="paramname">EstCompetitionBetaGuildGuild</td><td>: estimated competition beta guild-guild values </td></tr>
+    <tr><td class="paramname">CompetitionBetaGuildGuildCovariate</td><td>: competition beta guild-guild covariate values </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns 0 </dd></dl>
+
+</div>
+</div>
+<a id="a1ebad5ce1f8578f0bc04daaac979bf38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ebad5ce1f8578f0bc04daaac979bf38">&#9670;&nbsp;</a></span>getExpression()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string nmfCompetitionForm::getExpression </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the expression for the selected Competition Form algorithm. </p>
+<dl class="section return"><dt>Returns</dt><dd>Returns a string representing the formula of the selected Competition Form algorithm </dd></dl>
+
+</div>
+</div>
+<a id="a5d2635e43ad320c96fe32c36bd99da0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d2635e43ad320c96fe32c36bd99da0b">&#9670;&nbsp;</a></span>getKey()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string nmfCompetitionForm::getKey </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the key (i.e., legend) for the selected Competition Form algorithm variables. </p>
+<dl class="section return"><dt>Returns</dt><dd>Returns a string representing a description of the variables used in the selected Competition Form algorithm's formula </dd></dl>
+
+</div>
+</div>
+<a id="a1a5d09cdf5eb577d4747d2182b46c102"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a5d09cdf5eb577d4747d2182b46c102">&#9670;&nbsp;</a></span>getNumParameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int nmfCompetitionForm::getNumParameters </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the number of parameters in the selected algorithm. Some parameters may be from a sparsely populated matrix. </p>
+<dl class="section return"><dt>Returns</dt><dd>Number of parameters in selected algorithm </dd></dl>
+
+</div>
+</div>
+<a id="af558bcb8a3bf0956566e17c7a541ff4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af558bcb8a3bf0956566e17c7a541ff4d">&#9670;&nbsp;</a></span>loadParameterRanges()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfCompetitionForm::loadParameterRanges </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ParameterRanges</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;&#160;</td>
+          <td class="paramname"><em>DataStruct</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Loads the parameter ranges structure with data from the model data structure. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ParameterRanges</td><td>: parameter ranges </td></tr>
+    <tr><td class="paramname">DataStruct</td><td>: model data structure </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2d7c1391a6547c2621bfd7e42ada84a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d7c1391a6547c2621bfd7e42ada84a0">&#9670;&nbsp;</a></span>setAggProd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfCompetitionForm::setAggProd </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isAggProd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the AggProd variable. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">isAggProd</td><td>: boolean describing the AggProd status (i.e., true/false) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1721444947ca33fd6754ee7f6fe4a3a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1721444947ca33fd6754ee7f6fe4a3a5">&#9670;&nbsp;</a></span>setType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfCompetitionForm::setType </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>newType</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the type of competition algorithm. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newType</td><td>: type of competition algorithm </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>nmfModels/<a class="el" href="nmf_competition_form_8h_source.html">nmfCompetitionForm.h</a></li>
 <li>nmfModels/nmfCompetitionForm.cpp</li>

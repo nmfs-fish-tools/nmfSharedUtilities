@@ -227,6 +227,11 @@ struct ModelReviewStruct {
     QString ensembleFilename;
 };
 
+struct CovariateStruct {
+    double CoeffValue;
+    double CoeffMinValue;
+    double CoeffMaxValue;
+};
 
 /**
  * @brief The data structure used for parameter estimation. It contains the parameter
@@ -306,6 +311,7 @@ struct ModelDataStruct {
     boost::numeric::ublas::vector<double> SurveyQ;
     boost::numeric::ublas::vector<double> SurveyQMin;
     boost::numeric::ublas::vector<double> SurveyQMax;
+
     std::vector<std::vector<double> >     CompetitionMin;
     std::vector<std::vector<double> >     CompetitionMax;
     std::vector<std::vector<double> >     CompetitionBetaSpeciesMin;
@@ -322,14 +328,16 @@ struct ModelDataStruct {
     std::vector<double>                   PredationExponentMax;
     std::vector<double>                   Parameters;
 
-    std::map<std::string,std::string>          CovariateAssignment;
-    std::map<std::string,std::vector<double> > CovariateMap;
-//    boost::numeric::ublas::vector<double> CovariateInitBiomass;
-//    boost::numeric::ublas::vector<double> CovariateGrowthRate;
-//    boost::numeric::ublas::vector<double> CovariateCarryingCapacity;
-//    boost::numeric::ublas::vector<double> CovariateCatchability;
-//    boost::numeric::ublas::vector<double> CovariateSurveyQ;
-//    std::vector<double>                   CovariatePredationExponent;
+    // Map of covariate name to vector of values
+    std::map<std::string,std::vector<double> >          CovariateMap;
+    // Map of species+","+parameterName to covariate name
+    std::map<std::string,std::string>                   CovariateAssignment;
+    // Map of species to covariate struct for the specific parameter.
+    // Each covariate struct contains coefficient name (i.e., parameter name),
+    // and the initial, minimum, and maximum coefficient values.
+    std::map<std::string,CovariateStruct>               GrowthRateCovariateCoeff;
+    std::map<std::string,CovariateStruct>               CarryingCapacityCovariateCoeff;
+    std::map<std::string,CovariateStruct>               CatchabilityCovariateCoeff;
 
 //  boost::numeric::ublas::matrix<double> OutputBiomass;
 

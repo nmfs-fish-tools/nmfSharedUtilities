@@ -49,7 +49,7 @@ private:
     boost::numeric::ublas::matrix<double>  m_Exploitation;
     std::vector<std::pair<double,double> > m_ParameterRanges;
     std::vector<double>                    m_PatchSizes;
-    nmfStructsQt::ModelDataStruct              m_BeeStruct;
+    nmfStructsQt::ModelDataStruct          m_BeeStruct;
     std::unique_ptr<nmfGrowthForm>         m_GrowthForm;
     std::unique_ptr<nmfHarvestForm>        m_HarvestForm;
     std::unique_ptr<nmfCompetitionForm>    m_CompetitionForm;
@@ -107,13 +107,16 @@ public:
                             int &subRunNum,
                             std::string& errorMsg);
     void extractGrowthParameters(const std::vector<double>& parameters,
-                                       int&                 startPos,
-                                       std::vector<double>& growthRate,
-                                       std::vector<double>& carryingCapacity,
-                                       double& systemCarryingCapacity);
+                                 int& startPos,
+                                 std::vector<double>& growthRate,
+                                 std::vector<double>& growthRateCovariateCoeff,
+                                 std::vector<double>& carryingCapacity,
+                                 std::vector<double>& carryingCapacityCovariateCoeffs,
+                                 double& systemCarryingCapacity);
     void extractHarvestParameters(const std::vector<double>& parameters,
                                   int& startPos,
-                                  std::vector<double>& catchabilityRate);
+                                  std::vector<double>& catchability,
+                                  std::vector<double>& catchabilityCovariateCoeffs);
     void extractInitBiomass(const std::vector<double>& parameters,
                             int&                       startPos,
                             std::vector<double>&       initBiomass);

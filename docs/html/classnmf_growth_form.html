@@ -68,55 +68,616 @@ $(function() {
 <div class="title">nmfGrowthForm Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>This class contains the logic to calculate the Growth term of the currently selected model.  
+ <a href="classnmf_growth_form.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="nmf_growth_form_8h_source.html">nmfGrowthForm.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab7120e2579a2c6d87abc6e8d435fed20"><td class="memItemLeft" align="right" valign="top"><a id="ab7120e2579a2c6d87abc6e8d435fed20"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>nmfGrowthForm</b> (std::string theType)</td></tr>
-<tr class="separator:ab7120e2579a2c6d87abc6e8d435fed20"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af375e42186cca0676ac3280646c2f6e6"><td class="memItemLeft" align="right" valign="top"><a id="af375e42186cca0676ac3280646c2f6e6"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>evaluate</b> (const int &amp;speciesNum, const double &amp;biomassAtTime, const std::vector&lt; double &gt; &amp;growthRate, const std::vector&lt; double &gt; &amp;growthRateCovariates, const std::vector&lt; double &gt; &amp;carryingCapacity, const std::vector&lt; double &gt; &amp;carryingCapacityCovariates)</td></tr>
-<tr class="separator:af375e42186cca0676ac3280646c2f6e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adfc94ea1696df928f56314df65ba837a"><td class="memItemLeft" align="right" valign="top"><a id="adfc94ea1696df928f56314df65ba837a"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getNumParameters</b> ()</td></tr>
-<tr class="separator:adfc94ea1696df928f56314df65ba837a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5520759b026b9f6ffe0bbf1e1ce9e81c"><td class="memItemLeft" align="right" valign="top"><a id="a5520759b026b9f6ffe0bbf1e1ce9e81c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setType</b> (std::string newType)</td></tr>
-<tr class="separator:a5520759b026b9f6ffe0bbf1e1ce9e81c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a866efc29b20db93bacb80349dc017c34"><td class="memItemLeft" align="right" valign="top"><a id="a866efc29b20db93bacb80349dc017c34"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getType</b> ()</td></tr>
-<tr class="separator:a866efc29b20db93bacb80349dc017c34"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8b37ed7c15019b1e045927e43ab756f"><td class="memItemLeft" align="right" valign="top"><a id="aa8b37ed7c15019b1e045927e43ab756f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>extractParameters</b> (const std::vector&lt; double &gt; &amp;parameters, int &amp;startPos, std::vector&lt; double &gt; &amp;growthRate, std::vector&lt; double &gt; &amp;carryingCapacity, double &amp;systemCarryingCapacity)</td></tr>
-<tr class="separator:aa8b37ed7c15019b1e045927e43ab756f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b8777c6b6dc5c525f7e98bb8bb11fb0"><td class="memItemLeft" align="right" valign="top"><a id="a2b8777c6b6dc5c525f7e98bb8bb11fb0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>loadParameterRanges</b> (std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;parameterRanges, const <a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;beeStruct)</td></tr>
-<tr class="separator:a2b8777c6b6dc5c525f7e98bb8bb11fb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a811370afa53ec751f01743aa9a3ff740"><td class="memItemLeft" align="right" valign="top"><a id="a811370afa53ec751f01743aa9a3ff740"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>NoGrowth</b> (const int &amp;speciesNum, const double &amp;biomassAtTime, const std::vector&lt; double &gt; &amp;growthRate, const std::vector&lt; double &gt; &amp;growthRateCovariates, const std::vector&lt; double &gt; &amp;carryingCapacity, const std::vector&lt; double &gt; &amp;carryingCapacityCovariates)</td></tr>
-<tr class="separator:a811370afa53ec751f01743aa9a3ff740"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acca326418f440b178d1456ec3fdcdc39"><td class="memItemLeft" align="right" valign="top"><a id="acca326418f440b178d1456ec3fdcdc39"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>LinearGrowth</b> (const int &amp;speciesNum, const double &amp;biomassAtTime, const std::vector&lt; double &gt; &amp;growthRate, const std::vector&lt; double &gt; &amp;growthRateCovariates, const std::vector&lt; double &gt; &amp;carryingCapacity, const std::vector&lt; double &gt; &amp;carryingCapacityCovariates)</td></tr>
-<tr class="separator:acca326418f440b178d1456ec3fdcdc39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4a2c3e056bd1504a2a9021cea5ad297"><td class="memItemLeft" align="right" valign="top"><a id="ae4a2c3e056bd1504a2a9021cea5ad297"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>LogisticGrowth</b> (const int &amp;speciesNum, const double &amp;biomassAtTime, const std::vector&lt; double &gt; &amp;growthRate, const std::vector&lt; double &gt; &amp;growthRateCovariates, const std::vector&lt; double &gt; &amp;carryingCapacity, const std::vector&lt; double &gt; &amp;carryingCapacityCovariates)</td></tr>
-<tr class="separator:ae4a2c3e056bd1504a2a9021cea5ad297"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ae728369011cecb93a7a854ea3adb60"><td class="memItemLeft" align="right" valign="top"><a id="a7ae728369011cecb93a7a854ea3adb60"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setupFormMaps</b> ()</td></tr>
-<tr class="separator:a7ae728369011cecb93a7a854ea3adb60"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4ea48028d2fce480c4affe8775d8edd"><td class="memItemLeft" align="right" valign="top"><a id="aa4ea48028d2fce480c4affe8775d8edd"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setAggProd</b> (bool isAggProd)</td></tr>
-<tr class="separator:aa4ea48028d2fce480c4affe8775d8edd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a014f9805aca0c7b8f0e0271330dac15a"><td class="memItemLeft" align="right" valign="top"><a id="a014f9805aca0c7b8f0e0271330dac15a"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getExpression</b> ()</td></tr>
+<tr class="memitem:ab6f1386da448369e349fcfbad6f13465"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_growth_form.html#ab6f1386da448369e349fcfbad6f13465">nmfGrowthForm</a> (std::string type)</td></tr>
+<tr class="memdesc:ab6f1386da448369e349fcfbad6f13465"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor method for class.  <a href="classnmf_growth_form.html#ab6f1386da448369e349fcfbad6f13465">More...</a><br /></td></tr>
+<tr class="separator:ab6f1386da448369e349fcfbad6f13465"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee9baa38e148b0869d738f60fdd8afa8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_growth_form.html#aee9baa38e148b0869d738f60fdd8afa8">evaluate</a> (const double &amp;BiomassAtTime, const double &amp;EstGrowthRates, const double &amp;EstGrowthRateCovariateCoeffs, const double &amp;GrowthRateCovariates, const double &amp;EstCarryingCapacity, const double &amp;EstCarryingCapacityCovariateCoeffs, const double &amp;CarryingCapacityCovariates)</td></tr>
+<tr class="memdesc:aee9baa38e148b0869d738f60fdd8afa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method allows the appropriate function map function to be called such that a series of if...else... statements are not needed.  <a href="classnmf_growth_form.html#aee9baa38e148b0869d738f60fdd8afa8">More...</a><br /></td></tr>
+<tr class="separator:aee9baa38e148b0869d738f60fdd8afa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc3205bfa3b010bcba2e0bd80dfe381d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_growth_form.html#abc3205bfa3b010bcba2e0bd80dfe381d">extractParameters</a> (const std::vector&lt; double &gt; &amp;Parameters, int &amp;StartPos, std::vector&lt; double &gt; &amp;GrowthRate, std::vector&lt; double &gt; &amp;GrowthRateCovariateCoeff, std::vector&lt; double &gt; &amp;CarryingCapacity, std::vector&lt; double &gt; &amp;CarryingCapacityCovariateCoeff, double &amp;systemCarryingCapacity)</td></tr>
+<tr class="memdesc:abc3205bfa3b010bcba2e0bd80dfe381d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unpacks the parameters from the Parameters list and loads them into their respective data structures.  <a href="classnmf_growth_form.html#abc3205bfa3b010bcba2e0bd80dfe381d">More...</a><br /></td></tr>
+<tr class="separator:abc3205bfa3b010bcba2e0bd80dfe381d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9449ed4aa9549373b91e7cbfba051995"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_growth_form.html#a9449ed4aa9549373b91e7cbfba051995">FunctionMap_Linear</a> (const double &amp;BiomassAtTime, const double &amp;EstGrowthRates, const double &amp;EstGrowthRateCovariateCoeffs, const double &amp;GrowthRateCovariates, const double &amp;EstCarryingCapacity, const double &amp;EstCarryingCapacityCovariateCoeffs, const double &amp;CarryingCapacityCovariates)</td></tr>
+<tr class="memdesc:a9449ed4aa9549373b91e7cbfba051995"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function implements the Linear growth rate function.  <a href="classnmf_growth_form.html#a9449ed4aa9549373b91e7cbfba051995">More...</a><br /></td></tr>
+<tr class="separator:a9449ed4aa9549373b91e7cbfba051995"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7988632ca66c0ce7f395998b89c9664f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_growth_form.html#a7988632ca66c0ce7f395998b89c9664f">FunctionMap_Logistic</a> (const double &amp;BiomassAtTime, const double &amp;EstGrowthRates, const double &amp;EstGrowthRateCovariateCoeffs, const double &amp;GrowthRateCovariates, const double &amp;EstCarryingCapacity, const double &amp;EstCarryingCapacityCovariateCoeffs, const double &amp;CarryingCapacityCovariates)</td></tr>
+<tr class="memdesc:a7988632ca66c0ce7f395998b89c9664f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function implements the Logistic growth rate function.  <a href="classnmf_growth_form.html#a7988632ca66c0ce7f395998b89c9664f">More...</a><br /></td></tr>
+<tr class="separator:a7988632ca66c0ce7f395998b89c9664f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0659d939860c3ec05d8276adaa4d7ee8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_growth_form.html#a0659d939860c3ec05d8276adaa4d7ee8">FunctionMap_Null</a> (const double &amp;BiomassAtTime, const double &amp;EstGrowthRates, const double &amp;EstGrowthRateCovariateCoeffs, const double &amp;GrowthRateCovariates, const double &amp;EstCarryingCapacity, const double &amp;EstCarryingCapacityCovariateCoeffs, const double &amp;CarryingCapacityCovariates)</td></tr>
+<tr class="memdesc:a0659d939860c3ec05d8276adaa4d7ee8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function implements the Null growth rate function (i.e., 0)  <a href="classnmf_growth_form.html#a0659d939860c3ec05d8276adaa4d7ee8">More...</a><br /></td></tr>
+<tr class="separator:a0659d939860c3ec05d8276adaa4d7ee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a014f9805aca0c7b8f0e0271330dac15a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_growth_form.html#a014f9805aca0c7b8f0e0271330dac15a">getExpression</a> ()</td></tr>
+<tr class="memdesc:a014f9805aca0c7b8f0e0271330dac15a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the expression for the selected Growth Form algorithm.  <a href="classnmf_growth_form.html#a014f9805aca0c7b8f0e0271330dac15a">More...</a><br /></td></tr>
 <tr class="separator:a014f9805aca0c7b8f0e0271330dac15a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af887eb0effef8e59514c19056b5bc560"><td class="memItemLeft" align="right" valign="top"><a id="af887eb0effef8e59514c19056b5bc560"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getKey</b> ()</td></tr>
+<tr class="memitem:af887eb0effef8e59514c19056b5bc560"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_growth_form.html#af887eb0effef8e59514c19056b5bc560">getKey</a> ()</td></tr>
+<tr class="memdesc:af887eb0effef8e59514c19056b5bc560"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the key (i.e., legend) for the selected Growth Form algorithm variables.  <a href="classnmf_growth_form.html#af887eb0effef8e59514c19056b5bc560">More...</a><br /></td></tr>
 <tr class="separator:af887eb0effef8e59514c19056b5bc560"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96926b2e8174d2540c921bc920164658"><td class="memItemLeft" align="right" valign="top"><a id="a96926b2e8174d2540c921bc920164658"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getPrefix</b> ()</td></tr>
+<tr class="memitem:a96926b2e8174d2540c921bc920164658"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_growth_form.html#a96926b2e8174d2540c921bc920164658">getPrefix</a> ()</td></tr>
+<tr class="memdesc:a96926b2e8174d2540c921bc920164658"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the beginning part of the growth formula.  <a href="classnmf_growth_form.html#a96926b2e8174d2540c921bc920164658">More...</a><br /></td></tr>
 <tr class="separator:a96926b2e8174d2540c921bc920164658"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a866efc29b20db93bacb80349dc017c34"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_growth_form.html#a866efc29b20db93bacb80349dc017c34">getType</a> ()</td></tr>
+<tr class="memdesc:a866efc29b20db93bacb80349dc017c34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the type of growth form selected.  <a href="classnmf_growth_form.html#a866efc29b20db93bacb80349dc017c34">More...</a><br /></td></tr>
+<tr class="separator:a866efc29b20db93bacb80349dc017c34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addb85b78ef7256752d0a88f391d62bbf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_growth_form.html#addb85b78ef7256752d0a88f391d62bbf">loadParameterRanges</a> (std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;ParameterRanges, const <a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;DataStruct)</td></tr>
+<tr class="memdesc:addb85b78ef7256752d0a88f391d62bbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the parameter ranges structure with data from the model data structure.  <a href="classnmf_growth_form.html#addb85b78ef7256752d0a88f391d62bbf">More...</a><br /></td></tr>
+<tr class="separator:addb85b78ef7256752d0a88f391d62bbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4ea48028d2fce480c4affe8775d8edd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_growth_form.html#aa4ea48028d2fce480c4affe8775d8edd">setAggProd</a> (bool isAggProd)</td></tr>
+<tr class="memdesc:aa4ea48028d2fce480c4affe8775d8edd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the AggProd variable.  <a href="classnmf_growth_form.html#aa4ea48028d2fce480c4affe8775d8edd">More...</a><br /></td></tr>
+<tr class="separator:aa4ea48028d2fce480c4affe8775d8edd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5520759b026b9f6ffe0bbf1e1ce9e81c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_growth_form.html#a5520759b026b9f6ffe0bbf1e1ce9e81c">setType</a> (std::string newType)</td></tr>
+<tr class="memdesc:a5520759b026b9f6ffe0bbf1e1ce9e81c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the type of growth form algorithm.  <a href="classnmf_growth_form.html#a5520759b026b9f6ffe0bbf1e1ce9e81c">More...</a><br /></td></tr>
+<tr class="separator:a5520759b026b9f6ffe0bbf1e1ce9e81c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class contains the logic to calculate the Growth term of the currently selected model. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ab6f1386da448369e349fcfbad6f13465"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6f1386da448369e349fcfbad6f13465">&#9670;&nbsp;</a></span>nmfGrowthForm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nmfGrowthForm::nmfGrowthForm </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor method for class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>: type of growth algorithm to be used </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aee9baa38e148b0869d738f60fdd8afa8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee9baa38e148b0869d738f60fdd8afa8">&#9670;&nbsp;</a></span>evaluate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double nmfGrowthForm::evaluate </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>BiomassAtTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstGrowthRates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstGrowthRateCovariateCoeffs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>GrowthRateCovariates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstCarryingCapacity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstCarryingCapacityCovariateCoeffs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>CarryingCapacityCovariates</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method allows the appropriate function map function to be called such that a series of if...else... statements are not needed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">BiomassAtTime</td><td>: biomass at the currrent time </td></tr>
+    <tr><td class="paramname">EstGrowthRates</td><td>: estimated growth rate values </td></tr>
+    <tr><td class="paramname">EstGrowthRateCovariateCoeffs</td><td>: estimated growth rate covariate coefficient values </td></tr>
+    <tr><td class="paramname">GrowthRateCovariates</td><td>: growth rate covariate values </td></tr>
+    <tr><td class="paramname">EstCarryingCapacity</td><td>: estimated carrying capacity values </td></tr>
+    <tr><td class="paramname">EstCarryingCapacityCovariateCoeffs</td><td>: estimated carrying capacity covariate coefficient values </td></tr>
+    <tr><td class="paramname">CarryingCapacityCovariates</td><td>: carrying capacity covariate values </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the growth value evaluated with the appropriate function map algorithm </dd></dl>
+
+</div>
+</div>
+<a id="abc3205bfa3b010bcba2e0bd80dfe381d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc3205bfa3b010bcba2e0bd80dfe381d">&#9670;&nbsp;</a></span>extractParameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfGrowthForm::extractParameters </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Parameters</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>StartPos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>GrowthRate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>GrowthRateCovariateCoeff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CarryingCapacity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CarryingCapacityCovariateCoeff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>systemCarryingCapacity</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unpacks the parameters from the Parameters list and loads them into their respective data structures. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Parameters</td><td>: vector of all Growth parameter values </td></tr>
+    <tr><td class="paramname">StartPos</td><td>: start position from which to extract parameters </td></tr>
+    <tr><td class="paramname">GrowthRate</td><td>: growth rate parameters </td></tr>
+    <tr><td class="paramname">GrowthRateCovariateCoeff</td><td>: growth rate covariate coefficient parameters </td></tr>
+    <tr><td class="paramname">CarryingCapacity</td><td>: carrying capacity parameters </td></tr>
+    <tr><td class="paramname">CarryingCapacityCovariateCoeff</td><td>: carrying capacity covariate coefficient parameters </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9449ed4aa9549373b91e7cbfba051995"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9449ed4aa9549373b91e7cbfba051995">&#9670;&nbsp;</a></span>FunctionMap_Linear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double nmfGrowthForm::FunctionMap_Linear </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>BiomassAtTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstGrowthRates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstGrowthRateCovariateCoeffs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>GrowthRateCovariates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstCarryingCapacity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstCarryingCapacityCovariateCoeffs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>CarryingCapacityCovariates</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function implements the Linear growth rate function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">BiomassAtTime</td><td>: biomass at the currrent time </td></tr>
+    <tr><td class="paramname">EstGrowthRates</td><td>: estimated growth rate values </td></tr>
+    <tr><td class="paramname">EstGrowthRateCovariateCoeffs</td><td>: estimated growth rate covariate coefficient values </td></tr>
+    <tr><td class="paramname">GrowthRateCovariates</td><td>: growth rate covariate values </td></tr>
+    <tr><td class="paramname">EstCarryingCapacity</td><td>: estimated carrying capacity values </td></tr>
+    <tr><td class="paramname">EstCarryingCapacityCovariateCoeffs</td><td>: estimated carrying capacity covariate coefficient values </td></tr>
+    <tr><td class="paramname">CarryingCapacityCovariates</td><td>: carrying capacity covariate values </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the Linear growth rate function </dd></dl>
+
+</div>
+</div>
+<a id="a7988632ca66c0ce7f395998b89c9664f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7988632ca66c0ce7f395998b89c9664f">&#9670;&nbsp;</a></span>FunctionMap_Logistic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double nmfGrowthForm::FunctionMap_Logistic </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>BiomassAtTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstGrowthRates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstGrowthRateCovariateCoeffs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>GrowthRateCovariates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstCarryingCapacity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstCarryingCapacityCovariateCoeffs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>CarryingCapacityCovariates</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function implements the Logistic growth rate function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">BiomassAtTime</td><td>: biomass at the currrent time </td></tr>
+    <tr><td class="paramname">EstGrowthRates</td><td>: estimated growth rate values </td></tr>
+    <tr><td class="paramname">EstGrowthRateCovariateCoeffs</td><td>: estimated growth rate covariate coefficient values </td></tr>
+    <tr><td class="paramname">GrowthRateCovariates</td><td>: growth rate covariate values </td></tr>
+    <tr><td class="paramname">EstCarryingCapacity</td><td>: estimated carrying capacity values </td></tr>
+    <tr><td class="paramname">EstCarryingCapacityCovariateCoeffs</td><td>: estimated carrying capacity covariate coefficient values </td></tr>
+    <tr><td class="paramname">CarryingCapacityCovariates</td><td>: carrying capacity covariate values </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the Logistic growth rate function </dd></dl>
+
+</div>
+</div>
+<a id="a0659d939860c3ec05d8276adaa4d7ee8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0659d939860c3ec05d8276adaa4d7ee8">&#9670;&nbsp;</a></span>FunctionMap_Null()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double nmfGrowthForm::FunctionMap_Null </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>BiomassAtTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstGrowthRates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstGrowthRateCovariateCoeffs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>GrowthRateCovariates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstCarryingCapacity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstCarryingCapacityCovariateCoeffs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>CarryingCapacityCovariates</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function implements the Null growth rate function (i.e., 0) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">BiomassAtTime</td><td>: biomass at the currrent time </td></tr>
+    <tr><td class="paramname">EstGrowthRates</td><td>: estimated growth rate values </td></tr>
+    <tr><td class="paramname">EstGrowthRateCovariateCoeffs</td><td>: estimated growth rate covariate coefficient values </td></tr>
+    <tr><td class="paramname">GrowthRateCovariates</td><td>: growth rate covariate values </td></tr>
+    <tr><td class="paramname">EstCarryingCapacity</td><td>: estimated carrying capacity values </td></tr>
+    <tr><td class="paramname">EstCarryingCapacityCovariateCoeffs</td><td>: estimated carrying capacity covariate coefficient values </td></tr>
+    <tr><td class="paramname">CarryingCapacityCovariates</td><td>: carrying capacity covariate values </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns 0 </dd></dl>
+
+</div>
+</div>
+<a id="a014f9805aca0c7b8f0e0271330dac15a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a014f9805aca0c7b8f0e0271330dac15a">&#9670;&nbsp;</a></span>getExpression()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string nmfGrowthForm::getExpression </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the expression for the selected Growth Form algorithm. </p>
+<dl class="section return"><dt>Returns</dt><dd>Returns a string representing the formula of the selected Growth Form algorithm </dd></dl>
+
+</div>
+</div>
+<a id="af887eb0effef8e59514c19056b5bc560"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af887eb0effef8e59514c19056b5bc560">&#9670;&nbsp;</a></span>getKey()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string nmfGrowthForm::getKey </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the key (i.e., legend) for the selected Growth Form algorithm variables. </p>
+<dl class="section return"><dt>Returns</dt><dd>Returns a string representing a description of the variables used in the selected Growth Form algorithm's formula </dd></dl>
+
+</div>
+</div>
+<a id="a96926b2e8174d2540c921bc920164658"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96926b2e8174d2540c921bc920164658">&#9670;&nbsp;</a></span>getPrefix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string nmfGrowthForm::getPrefix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the beginning part of the growth formula. </p>
+<dl class="section return"><dt>Returns</dt><dd>Returns the string containing the beginning part of the growth formula </dd></dl>
+
+</div>
+</div>
+<a id="a866efc29b20db93bacb80349dc017c34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a866efc29b20db93bacb80349dc017c34">&#9670;&nbsp;</a></span>getType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string nmfGrowthForm::getType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the type of growth form selected. </p>
+<dl class="section return"><dt>Returns</dt><dd>Returns the string representing the type of growth form selected </dd></dl>
+
+</div>
+</div>
+<a id="addb85b78ef7256752d0a88f391d62bbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addb85b78ef7256752d0a88f391d62bbf">&#9670;&nbsp;</a></span>loadParameterRanges()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfGrowthForm::loadParameterRanges </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ParameterRanges</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;&#160;</td>
+          <td class="paramname"><em>DataStruct</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Loads the parameter ranges structure with data from the model data structure. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ParameterRanges</td><td>: parameter ranges </td></tr>
+    <tr><td class="paramname">DataStruct</td><td>: model data structure </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa4ea48028d2fce480c4affe8775d8edd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4ea48028d2fce480c4affe8775d8edd">&#9670;&nbsp;</a></span>setAggProd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfGrowthForm::setAggProd </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isAggProd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the AggProd variable. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">isAggProd</td><td>: boolean describing the AggProd status (i.e., true/false) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5520759b026b9f6ffe0bbf1e1ce9e81c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5520759b026b9f6ffe0bbf1e1ce9e81c">&#9670;&nbsp;</a></span>setType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfGrowthForm::setType </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>newType</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the type of growth form algorithm. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newType</td><td>: type of growth form algorithm </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>nmfModels/<a class="el" href="nmf_growth_form_8h_source.html">nmfGrowthForm.h</a></li>
 <li>nmfModels/nmfGrowthForm.cpp</li>

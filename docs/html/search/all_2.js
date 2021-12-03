@@ -47,6 +47,7 @@ var searchData=
   ['complex_56',['Complex',['../namespacenmf_utils_complex.html#a020003d2bfbc31c5e2dcf6fca573dc8a',1,'nmfUtilsComplex']]],
   ['convertvectortostrlist_57',['convertVectorToStrList',['../namespacenmf_utils_qt.html#a8e17736e37e25786accbcb7369b35075',1,'nmfUtilsQt']]],
   ['copy_58',['copy',['../namespacenmf_utils_qt.html#a2eb8e6bf7028d738f153eb615deef3b9',1,'nmfUtilsQt']]],
-  ['createscenariomap_59',['createScenarioMap',['../classnmf_database.html#abb9bbd669088074cac928720c4cd7b70',1,'nmfDatabase']]],
-  ['createsettings_60',['createSettings',['../namespacenmf_utils_qt.html#a845638068d5f079ab339d5c94c944dec',1,'nmfUtilsQt']]]
+  ['covariatestruct_59',['CovariateStruct',['../structnmf_structs_qt_1_1_covariate_struct.html',1,'nmfStructsQt']]],
+  ['createscenariomap_60',['createScenarioMap',['../classnmf_database.html#abb9bbd669088074cac928720c4cd7b70',1,'nmfDatabase']]],
+  ['createsettings_61',['createSettings',['../namespacenmf_utils_qt.html#a845638068d5f079ab339d5c94c944dec',1,'nmfUtilsQt']]]
 ];

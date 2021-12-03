@@ -68,52 +68,696 @@ $(function() {
 <div class="title">nmfHarvestForm Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>This class contains the logic to calculate the Harvest term of the currently selected model.  
+ <a href="classnmf_harvest_form.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="nmf_harvest_form_8h_source.html">nmfHarvestForm.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abf06be5468e4046bbfad647838710d56"><td class="memItemLeft" align="right" valign="top"><a id="abf06be5468e4046bbfad647838710d56"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>nmfHarvestForm</b> (std::string theType)</td></tr>
-<tr class="separator:abf06be5468e4046bbfad647838710d56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83a051ffee6f0c229e7c5a7eeb3a364a"><td class="memItemLeft" align="right" valign="top"><a id="a83a051ffee6f0c229e7c5a7eeb3a364a"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getNumParameters</b> ()</td></tr>
-<tr class="separator:a83a051ffee6f0c229e7c5a7eeb3a364a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99cea3ceccb283f6034ab10e56ee3345"><td class="memItemLeft" align="right" valign="top"><a id="a99cea3ceccb283f6034ab10e56ee3345"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setType</b> (std::string newType)</td></tr>
-<tr class="separator:a99cea3ceccb283f6034ab10e56ee3345"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae207efb4758bec0830db8cd9b2160df4"><td class="memItemLeft" align="right" valign="top"><a id="ae207efb4758bec0830db8cd9b2160df4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>extractParameters</b> (const std::vector&lt; double &gt; &amp;parameters, int &amp;startPos, std::vector&lt; double &gt; &amp;catchabilityRate)</td></tr>
-<tr class="separator:ae207efb4758bec0830db8cd9b2160df4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafc3c25c4c05f6eb13054b6b95ab5948"><td class="memItemLeft" align="right" valign="top"><a id="aafc3c25c4c05f6eb13054b6b95ab5948"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>evaluate</b> (const int &amp;timeMinus1, const int &amp;speciesNum, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Catch, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Effort, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Exploitation, const double &amp;biomassAtTime, const std::vector&lt; double &gt; &amp;catchabilityRate)</td></tr>
-<tr class="separator:aafc3c25c4c05f6eb13054b6b95ab5948"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aadc0a142b9810f86261d4efd84ff3587"><td class="memItemLeft" align="right" valign="top"><a id="aadc0a142b9810f86261d4efd84ff3587"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>loadParameterRanges</b> (std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;parameterRanges, <a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;beeStruct)</td></tr>
-<tr class="separator:aadc0a142b9810f86261d4efd84ff3587"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8df56dc307be79945d3ee6c6e11d3d3"><td class="memItemLeft" align="right" valign="top"><a id="ad8df56dc307be79945d3ee6c6e11d3d3"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>NoHarvest</b> (const int &amp;timeMinus1, const int &amp;speciesNum, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Catch, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Effort, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Exploitation, const double &amp;biomassAtTime, const std::vector&lt; double &gt; &amp;catchabilityRate)</td></tr>
-<tr class="separator:ad8df56dc307be79945d3ee6c6e11d3d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1fbab09986f138d44fa33935472f170"><td class="memItemLeft" align="right" valign="top"><a id="ac1fbab09986f138d44fa33935472f170"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>ExploitationHarvest</b> (const int &amp;timeMinus1, const int &amp;speciesNum, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Catch, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Effort, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Exploitation, const double &amp;biomassAtTime, const std::vector&lt; double &gt; &amp;catchabilityRate)</td></tr>
-<tr class="separator:ac1fbab09986f138d44fa33935472f170"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a452470f7046e5fee0c62c168972953ea"><td class="memItemLeft" align="right" valign="top"><a id="a452470f7046e5fee0c62c168972953ea"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>CatchHarvest</b> (const int &amp;timeMinus1, const int &amp;speciesNum, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Catch, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Effort, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Exploitation, const double &amp;biomassAtTime, const std::vector&lt; double &gt; &amp;catchabilityRate)</td></tr>
-<tr class="separator:a452470f7046e5fee0c62c168972953ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e7a6101ee4b0dd3f93ccca56f1f1cd2"><td class="memItemLeft" align="right" valign="top"><a id="a8e7a6101ee4b0dd3f93ccca56f1f1cd2"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>EffortHarvest</b> (const int &amp;timeMinus1, const int &amp;speciesNum, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Catch, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Effort, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Exploitation, const double &amp;biomassAtTime, const std::vector&lt; double &gt; &amp;catchabilityRate)</td></tr>
-<tr class="separator:a8e7a6101ee4b0dd3f93ccca56f1f1cd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9115d8d2b3ce073d24a5e91c268c2248"><td class="memItemLeft" align="right" valign="top"><a id="a9115d8d2b3ce073d24a5e91c268c2248"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setupFormMaps</b> ()</td></tr>
-<tr class="separator:a9115d8d2b3ce073d24a5e91c268c2248"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae19f2cffcc66fcaea24a9353d056f7ef"><td class="memItemLeft" align="right" valign="top"><a id="ae19f2cffcc66fcaea24a9353d056f7ef"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getExpression</b> ()</td></tr>
+<tr class="memitem:a6f561e8fad60ba2b75505b266bfa396b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_harvest_form.html#a6f561e8fad60ba2b75505b266bfa396b">nmfHarvestForm</a> (std::string type)</td></tr>
+<tr class="memdesc:a6f561e8fad60ba2b75505b266bfa396b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor method for class.  <a href="classnmf_harvest_form.html#a6f561e8fad60ba2b75505b266bfa396b">More...</a><br /></td></tr>
+<tr class="separator:a6f561e8fad60ba2b75505b266bfa396b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01ddf7c9485123508840a585b8d73aab"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_harvest_form.html#a01ddf7c9485123508840a585b8d73aab">evaluate</a> (const int &amp;TimeMinus1, const int &amp;Species, const double &amp;BiomassAtTime, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Catch, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Effort, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Exploitation, const double &amp;EstCatchability, const double &amp;EstCatchabilityCovariateCoeff, const double &amp;CatchabilityCovariate)</td></tr>
+<tr class="memdesc:a01ddf7c9485123508840a585b8d73aab"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method allows the appropriate function map function to be called such that a series of if...else... statements are not needed.  <a href="classnmf_harvest_form.html#a01ddf7c9485123508840a585b8d73aab">More...</a><br /></td></tr>
+<tr class="separator:a01ddf7c9485123508840a585b8d73aab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a351dec3016c2d2eab144ac053a7bbf3f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_harvest_form.html#a351dec3016c2d2eab144ac053a7bbf3f">extractParameters</a> (const std::vector&lt; double &gt; &amp;Parameters, int &amp;StartPos, std::vector&lt; double &gt; &amp;Catchability, std::vector&lt; double &gt; &amp;CatchabilityCovariateCoeffs)</td></tr>
+<tr class="memdesc:a351dec3016c2d2eab144ac053a7bbf3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unpacks the parameters from the Parameters list and loads them into their respective data structures.  <a href="classnmf_harvest_form.html#a351dec3016c2d2eab144ac053a7bbf3f">More...</a><br /></td></tr>
+<tr class="separator:a351dec3016c2d2eab144ac053a7bbf3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a485126aa26f929558531ea5b81bc9ac7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_harvest_form.html#a485126aa26f929558531ea5b81bc9ac7">FunctionMap_Catch</a> (const int &amp;TimeMinus1, const int &amp;Species, const double &amp;BiomassAtTime, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Catch, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Effort, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Exploitation, const double &amp;EstCatchability, const double &amp;EstCatchabilityCovariateCoeff, const double &amp;CatchabilityCovariate)</td></tr>
+<tr class="memdesc:a485126aa26f929558531ea5b81bc9ac7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method implements the Catch harvest algorithm.  <a href="classnmf_harvest_form.html#a485126aa26f929558531ea5b81bc9ac7">More...</a><br /></td></tr>
+<tr class="separator:a485126aa26f929558531ea5b81bc9ac7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8aca646f6b5a34fb1f54cb70f2bbc861"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_harvest_form.html#a8aca646f6b5a34fb1f54cb70f2bbc861">FunctionMap_Effort</a> (const int &amp;TimeMinus1, const int &amp;Species, const double &amp;BiomassAtTime, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Catch, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Effort, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Exploitation, const double &amp;EstCatchability, const double &amp;EstCatchabilityCovariateCoeff, const double &amp;CatchabilityCovariate)</td></tr>
+<tr class="memdesc:a8aca646f6b5a34fb1f54cb70f2bbc861"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method implements the Effort harvest algorithm.  <a href="classnmf_harvest_form.html#a8aca646f6b5a34fb1f54cb70f2bbc861">More...</a><br /></td></tr>
+<tr class="separator:a8aca646f6b5a34fb1f54cb70f2bbc861"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade4a580625ee4f2680932ff199c4324b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_harvest_form.html#ade4a580625ee4f2680932ff199c4324b">FunctionMap_Exploitation</a> (const int &amp;TimeMinus1, const int &amp;Species, const double &amp;BiomassAtTime, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Catch, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Effort, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Exploitation, const double &amp;EstCatchability, const double &amp;EstCatchabilityCovariateCoeff, const double &amp;CatchabilityCovariate)</td></tr>
+<tr class="memdesc:ade4a580625ee4f2680932ff199c4324b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method implements the Exploitation harvest algorithm.  <a href="classnmf_harvest_form.html#ade4a580625ee4f2680932ff199c4324b">More...</a><br /></td></tr>
+<tr class="separator:ade4a580625ee4f2680932ff199c4324b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23f438dcdc5c233560c96da261c3df21"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_harvest_form.html#a23f438dcdc5c233560c96da261c3df21">FunctionMap_Null</a> (const int &amp;TimeMinus1, const int &amp;Species, const double &amp;BiomassAtTime, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Catch, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Effort, const boost::numeric::ublas::matrix&lt; double &gt; &amp;Exploitation, const double &amp;EstCatchability, const double &amp;EstCatchabilityCovariateCoeff, const double &amp;CatchabilityCovariate)</td></tr>
+<tr class="memdesc:a23f438dcdc5c233560c96da261c3df21"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method implements the Null harvest algorithm (i.e., 0)  <a href="classnmf_harvest_form.html#a23f438dcdc5c233560c96da261c3df21">More...</a><br /></td></tr>
+<tr class="separator:a23f438dcdc5c233560c96da261c3df21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae19f2cffcc66fcaea24a9353d056f7ef"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_harvest_form.html#ae19f2cffcc66fcaea24a9353d056f7ef">getExpression</a> ()</td></tr>
+<tr class="memdesc:ae19f2cffcc66fcaea24a9353d056f7ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the expression for the selected Harvest Form algorithm.  <a href="classnmf_harvest_form.html#ae19f2cffcc66fcaea24a9353d056f7ef">More...</a><br /></td></tr>
 <tr class="separator:ae19f2cffcc66fcaea24a9353d056f7ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a971d74e9a44cc0cc48e500f7e789fd78"><td class="memItemLeft" align="right" valign="top"><a id="a971d74e9a44cc0cc48e500f7e789fd78"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getKey</b> ()</td></tr>
+<tr class="memitem:a971d74e9a44cc0cc48e500f7e789fd78"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_harvest_form.html#a971d74e9a44cc0cc48e500f7e789fd78">getKey</a> ()</td></tr>
+<tr class="memdesc:a971d74e9a44cc0cc48e500f7e789fd78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the key (i.e., legend) for the selected Harvest Form algorithm variables.  <a href="classnmf_harvest_form.html#a971d74e9a44cc0cc48e500f7e789fd78">More...</a><br /></td></tr>
 <tr class="separator:a971d74e9a44cc0cc48e500f7e789fd78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8c32a1df211787c98c009d793861bb9"><td class="memItemLeft" align="right" valign="top"><a id="ac8c32a1df211787c98c009d793861bb9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setAggProd</b> (bool isAggProd)</td></tr>
+<tr class="memitem:a38fd09d1810dece7ed06a63a49523cd7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_harvest_form.html#a38fd09d1810dece7ed06a63a49523cd7">loadParameterRanges</a> (std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;ParameterRanges, <a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;DataStruct)</td></tr>
+<tr class="memdesc:a38fd09d1810dece7ed06a63a49523cd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the parameter ranges structure with data from the model data structure.  <a href="classnmf_harvest_form.html#a38fd09d1810dece7ed06a63a49523cd7">More...</a><br /></td></tr>
+<tr class="separator:a38fd09d1810dece7ed06a63a49523cd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8c32a1df211787c98c009d793861bb9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_harvest_form.html#ac8c32a1df211787c98c009d793861bb9">setAggProd</a> (bool isAggProd)</td></tr>
+<tr class="memdesc:ac8c32a1df211787c98c009d793861bb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the AggProd variable.  <a href="classnmf_harvest_form.html#ac8c32a1df211787c98c009d793861bb9">More...</a><br /></td></tr>
 <tr class="separator:ac8c32a1df211787c98c009d793861bb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99cea3ceccb283f6034ab10e56ee3345"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_harvest_form.html#a99cea3ceccb283f6034ab10e56ee3345">setType</a> (std::string newType)</td></tr>
+<tr class="memdesc:a99cea3ceccb283f6034ab10e56ee3345"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the type of harvest algorithm.  <a href="classnmf_harvest_form.html#a99cea3ceccb283f6034ab10e56ee3345">More...</a><br /></td></tr>
+<tr class="separator:a99cea3ceccb283f6034ab10e56ee3345"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class contains the logic to calculate the Harvest term of the currently selected model. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a6f561e8fad60ba2b75505b266bfa396b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f561e8fad60ba2b75505b266bfa396b">&#9670;&nbsp;</a></span>nmfHarvestForm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nmfHarvestForm::nmfHarvestForm </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor method for class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>: type of harvest algorithm to be used </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a01ddf7c9485123508840a585b8d73aab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01ddf7c9485123508840a585b8d73aab">&#9670;&nbsp;</a></span>evaluate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double nmfHarvestForm::evaluate </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>TimeMinus1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>Species</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>BiomassAtTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Catch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Effort</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Exploitation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstCatchability</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstCatchabilityCovariateCoeff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>CatchabilityCovariate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method allows the appropriate function map function to be called such that a series of if...else... statements are not needed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TimeMinus1</td><td>: one minus the current time </td></tr>
+    <tr><td class="paramname">Species</td><td>: species number </td></tr>
+    <tr><td class="paramname">BiomassAtTime</td><td>: biomass at the currrent time </td></tr>
+    <tr><td class="paramname">Catch</td><td>: the Catch matrix (rows are years, columns are species) </td></tr>
+    <tr><td class="paramname">Effort</td><td>: the Effort matrix (rows are years, columns are species), N.B. Am passing a matrix because sometimes it may be empty and unused so can't pass the indexed value </td></tr>
+    <tr><td class="paramname">Exploitation</td><td>: the Exploitation matrix (rows are years, columns are species) </td></tr>
+    <tr><td class="paramname">EstCatchability</td><td>: the estimated catchability parameters </td></tr>
+    <tr><td class="paramname">EstCatchabilityCovariateCoeff</td><td>: the estimated catchability covariate coefficients </td></tr>
+    <tr><td class="paramname">CatchabilityCovariate</td><td>: the catchability covariate values </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the harvest value evaluated with the appropriate function map algorithm </dd></dl>
+
+</div>
+</div>
+<a id="a351dec3016c2d2eab144ac053a7bbf3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a351dec3016c2d2eab144ac053a7bbf3f">&#9670;&nbsp;</a></span>extractParameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfHarvestForm::extractParameters </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Parameters</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>StartPos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Catchability</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CatchabilityCovariateCoeffs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unpacks the parameters from the Parameters list and loads them into their respective data structures. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Parameters</td><td>: vector of all Harvest parameter values </td></tr>
+    <tr><td class="paramname">StartPos</td><td>: start position from which to extract parameters </td></tr>
+    <tr><td class="paramname">Catchability</td><td>: catchability parameters </td></tr>
+    <tr><td class="paramname">CatchabilityCovariateCoeffs</td><td>: catchability covariate coefficient parameters </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a485126aa26f929558531ea5b81bc9ac7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a485126aa26f929558531ea5b81bc9ac7">&#9670;&nbsp;</a></span>FunctionMap_Catch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double nmfHarvestForm::FunctionMap_Catch </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>TimeMinus1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>Species</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>BiomassAtTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Catch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Effort</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Exploitation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstCatchability</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstCatchabilityCovariateCoeff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>CatchabilityCovariate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method implements the Catch harvest algorithm. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TimeMinus1</td><td>: one minus the current time </td></tr>
+    <tr><td class="paramname">Species</td><td>: species number </td></tr>
+    <tr><td class="paramname">BiomassAtTime</td><td>: biomass at the currrent time </td></tr>
+    <tr><td class="paramname">Catch</td><td>: the Catch matrix (rows are years, columns are species) </td></tr>
+    <tr><td class="paramname">Effort</td><td>: the Effort matrix (rows are years, columns are species), N.B. Am passing a matrix because sometimes it may be empty and unused so can't pass the indexed value </td></tr>
+    <tr><td class="paramname">Exploitation</td><td>: the Exploitation matrix (rows are years, columns are species) </td></tr>
+    <tr><td class="paramname">EstCatchability</td><td>: the estimated catchability parameters </td></tr>
+    <tr><td class="paramname">EstCatchabilityCovariateCoeff</td><td>: the estimated catchability covariate coefficients </td></tr>
+    <tr><td class="paramname">CatchabilityCovariate</td><td>: the catchability covariate values </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the harvest value evaluated with the Catch algorithm </dd></dl>
+
+</div>
+</div>
+<a id="a8aca646f6b5a34fb1f54cb70f2bbc861"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8aca646f6b5a34fb1f54cb70f2bbc861">&#9670;&nbsp;</a></span>FunctionMap_Effort()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double nmfHarvestForm::FunctionMap_Effort </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>TimeMinus1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>Species</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>BiomassAtTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Catch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Effort</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Exploitation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstCatchability</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstCatchabilityCovariateCoeff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>CatchabilityCovariate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method implements the Effort harvest algorithm. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TimeMinus1</td><td>: one minus the current time </td></tr>
+    <tr><td class="paramname">Species</td><td>: species number </td></tr>
+    <tr><td class="paramname">BiomassAtTime</td><td>: biomass at the currrent time </td></tr>
+    <tr><td class="paramname">Catch</td><td>: the Catch matrix (rows are years, columns are species) </td></tr>
+    <tr><td class="paramname">Effort</td><td>: the Effort matrix (rows are years, columns are species), N.B. Am passing a matrix because sometimes it may be empty and unused so can't pass the indexed value </td></tr>
+    <tr><td class="paramname">Exploitation</td><td>: the Exploitation matrix (rows are years, columns are species) </td></tr>
+    <tr><td class="paramname">EstCatchability</td><td>: the estimated catchability parameters </td></tr>
+    <tr><td class="paramname">EstCatchabilityCovariateCoeff</td><td>: the estimated catchability covariate coefficients </td></tr>
+    <tr><td class="paramname">CatchabilityCovariate</td><td>: the catchability covariate values </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the harvest value evaluated with the Effort algorithm </dd></dl>
+
+</div>
+</div>
+<a id="ade4a580625ee4f2680932ff199c4324b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade4a580625ee4f2680932ff199c4324b">&#9670;&nbsp;</a></span>FunctionMap_Exploitation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double nmfHarvestForm::FunctionMap_Exploitation </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>TimeMinus1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>Species</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>BiomassAtTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Catch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Effort</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Exploitation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstCatchability</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstCatchabilityCovariateCoeff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>CatchabilityCovariate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method implements the Exploitation harvest algorithm. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TimeMinus1</td><td>: one minus the current time </td></tr>
+    <tr><td class="paramname">Species</td><td>: species number </td></tr>
+    <tr><td class="paramname">BiomassAtTime</td><td>: biomass at the currrent time </td></tr>
+    <tr><td class="paramname">Catch</td><td>: the Catch matrix (rows are years, columns are species) </td></tr>
+    <tr><td class="paramname">Effort</td><td>: the Effort matrix (rows are years, columns are species), N.B. Am passing a matrix because sometimes it may be empty and unused so can't pass the indexed value </td></tr>
+    <tr><td class="paramname">Exploitation</td><td>: the Exploitation matrix (rows are years, columns are species) </td></tr>
+    <tr><td class="paramname">EstCatchability</td><td>: the estimated catchability parameters </td></tr>
+    <tr><td class="paramname">EstCatchabilityCovariateCoeff</td><td>: the estimated catchability covariate coefficients </td></tr>
+    <tr><td class="paramname">CatchabilityCovariate</td><td>: the catchability covariate values </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the harvest value evaluated with the Exploitation algorithm </dd></dl>
+
+</div>
+</div>
+<a id="a23f438dcdc5c233560c96da261c3df21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23f438dcdc5c233560c96da261c3df21">&#9670;&nbsp;</a></span>FunctionMap_Null()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double nmfHarvestForm::FunctionMap_Null </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>TimeMinus1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>Species</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>BiomassAtTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Catch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Effort</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Exploitation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstCatchability</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>EstCatchabilityCovariateCoeff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>CatchabilityCovariate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method implements the Null harvest algorithm (i.e., 0) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TimeMinus1</td><td>: one minus the current time </td></tr>
+    <tr><td class="paramname">Species</td><td>: species number </td></tr>
+    <tr><td class="paramname">BiomassAtTime</td><td>: biomass at the currrent time </td></tr>
+    <tr><td class="paramname">Catch</td><td>: the Catch matrix (rows are years, columns are species) </td></tr>
+    <tr><td class="paramname">Effort</td><td>: the Effort matrix (rows are years, columns are species), N.B. Am passing a matrix because sometimes it may be empty and unused so can't pass the indexed value </td></tr>
+    <tr><td class="paramname">Exploitation</td><td>: the Exploitation matrix (rows are years, columns are species) </td></tr>
+    <tr><td class="paramname">EstCatchability</td><td>: the estimated catchability parameters </td></tr>
+    <tr><td class="paramname">EstCatchabilityCovariateCoeff</td><td>: the estimated catchability covariate coefficients </td></tr>
+    <tr><td class="paramname">CatchabilityCovariate</td><td>: the catchability covariate values </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns 0 </dd></dl>
+
+</div>
+</div>
+<a id="ae19f2cffcc66fcaea24a9353d056f7ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae19f2cffcc66fcaea24a9353d056f7ef">&#9670;&nbsp;</a></span>getExpression()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string nmfHarvestForm::getExpression </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the expression for the selected Harvest Form algorithm. </p>
+<dl class="section return"><dt>Returns</dt><dd>Returns a string representing the formula of the selected Harvest Form algorithm </dd></dl>
+
+</div>
+</div>
+<a id="a971d74e9a44cc0cc48e500f7e789fd78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a971d74e9a44cc0cc48e500f7e789fd78">&#9670;&nbsp;</a></span>getKey()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string nmfHarvestForm::getKey </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the key (i.e., legend) for the selected Harvest Form algorithm variables. </p>
+<dl class="section return"><dt>Returns</dt><dd>Returns a string representing a description of the variables used in the selected Harvest Form algorithm's formula </dd></dl>
+
+</div>
+</div>
+<a id="a38fd09d1810dece7ed06a63a49523cd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38fd09d1810dece7ed06a63a49523cd7">&#9670;&nbsp;</a></span>loadParameterRanges()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfHarvestForm::loadParameterRanges </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ParameterRanges</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;&#160;</td>
+          <td class="paramname"><em>DataStruct</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Loads the parameter ranges structure with data from the model data structure. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ParameterRanges</td><td>: parameter ranges </td></tr>
+    <tr><td class="paramname">DataStruct</td><td>: model data structure </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac8c32a1df211787c98c009d793861bb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8c32a1df211787c98c009d793861bb9">&#9670;&nbsp;</a></span>setAggProd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfHarvestForm::setAggProd </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isAggProd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the AggProd variable. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">isAggProd</td><td>: boolean describing the AggProd status (i.e., true/false) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a99cea3ceccb283f6034ab10e56ee3345"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99cea3ceccb283f6034ab10e56ee3345">&#9670;&nbsp;</a></span>setType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfHarvestForm::setType </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>newType</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the type of harvest algorithm. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newType</td><td>: type of harvest algorithm </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>nmfModels/<a class="el" href="nmf_harvest_form_8h_source.html">nmfHarvestForm.h</a></li>
 <li>nmfModels/nmfHarvestForm.cpp</li>
