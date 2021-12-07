@@ -48,46 +48,46 @@ nmfDatabase::nmfDatabase() {
 //  db = QSqlDatabase::addDatabase("QMYSQL");
 //  db = QSqlDatabase::addDatabase("QSQLITE");
 
-    m_FunctionMap["Application"]          = createApplication;          //  0 of 39
-    m_FunctionMap["ForeEnergyDens"]       = createForeEnergyDens;       //  1 of 39
-    m_FunctionMap["ForeOutput"]           = createForeOutput;           //  2 of 39
-    m_FunctionMap["ForePredGrowth"]       = createForePredGrowth;       //  3 of 39
-    m_FunctionMap["ForePredVonB"]         = createForePredVonB;         //  4 of 39
-    m_FunctionMap["ForeSRQ"]              = createForeSRQ;              //  5 of 39
-    m_FunctionMap["ForeSRR"]              = createForeSRR;              //  6 of 39
-    m_FunctionMap["ForeSuitPreyBiomass"]  = createForeSuitPreyBiomass;  //  7 of 39
-    m_FunctionMap["Forecasts"]            = createForecasts;            //  8 of 39
-    m_FunctionMap["MSVPAEnergyDens"]      = createMSVPAEnergyDens;      //  9 of 39
-    m_FunctionMap["MSVPAOthPrey"]         = createMSVPAOthPrey;         // 10 of 39
-    m_FunctionMap["MSVPAOthPreyAnn"]      = createMSVPAOthPreyAnn;      // 11 of 39
-    m_FunctionMap["MSVPASeasBiomass"]     = createMSVPASeasBiomass;     // 12 of 39
-    m_FunctionMap["MSVPASeasInfo"]        = createMSVPASeasInfo;        // 13 of 39
-    m_FunctionMap["MSVPASizePref"]        = createMSVPASizePref;        // 14 of 39
-    m_FunctionMap["MSVPASpaceO"]          = createMSVPASpaceO;          // 15 of 39
-    m_FunctionMap["MSVPAStomCont"]        = createMSVPAStomCont;        // 16 of 39
-    m_FunctionMap["MSVPASuitPreyBiomass"] = createMSVPASuitPreyBiomass; // 17 of 39
-    m_FunctionMap["MSVPAlist"]            = createMSVPAlist;            // 18 of 39
-    m_FunctionMap["MSVPAprefs"]           = createMSVPAprefs;           // 19 of 39
-    m_FunctionMap["MSVPAspecies"]         = createMSVPAspecies;         // 20 of 39
-    m_FunctionMap["OthPredSizeData"]      = createOthPredSizeData;      // 21 of 39
-    m_FunctionMap["OtherPredBM"]          = createOtherPredBM;          // 22 of 39
-    m_FunctionMap["OtherPredSpecies"]     = createOtherPredSpecies;     // 23 of 39
-    m_FunctionMap["SSVPAAgeM"]            = createSSVPAAgeM;            // 24 of 39
-    m_FunctionMap["ScenarioF"]            = createScenarioF;            // 25 of 39
-    m_FunctionMap["ScenarioOthPred"]      = createScenarioOthPred;      // 26 of 39
-    m_FunctionMap["ScenarioOthPrey"]      = createScenarioOthPrey;      // 27 of 39
-    m_FunctionMap["ScenarioRec"]          = createScenarioRec;          // 28 of 39
-    m_FunctionMap["Scenarios"]            = createScenarios;            // 29 of 39
-    m_FunctionMap["SpeCatch"]             = createSpeCatch;             // 30 of 39
-    m_FunctionMap["SpeMaturity"]          = createSpeMaturity;          // 31 of 39
-    m_FunctionMap["SpeSSVPA"]             = createSpeSSVPA;             // 32 of 39
-    m_FunctionMap["SpeSize"]              = createSpeSize;              // 33 of 39
-    m_FunctionMap["SpeTuneCatch"]         = createSpeTuneCatch;         // 34 of 39
-    m_FunctionMap["SpeTuneEffort"]        = createSpeTuneEffort;        // 35 of 39
-    m_FunctionMap["SpeWeight"]            = createSpeWeight;            // 36 of 39
-    m_FunctionMap["SpeXSAData"]           = createSpeXSAData;           // 37 of 39
-    m_FunctionMap["SpeXSAIndices"]        = createSpeXSAIndices;        // 38 of 39
-    m_FunctionMap["Species"]              = createSpecies;              // 39 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableApplication]          = createApplication;          //  0 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableForeEnergyDens]       = createForeEnergyDens;       //  1 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableForeOutput]           = createForeOutput;           //  2 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableForePredGrowth]       = createForePredGrowth;       //  3 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableForePredVonB]         = createForePredVonB;         //  4 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableForeSRQ]              = createForeSRQ;              //  5 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableForeSRR]              = createForeSRR;              //  6 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableForeSuitPreyBiomass]  = createForeSuitPreyBiomass;  //  7 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableForecasts]            = createForecasts;            //  8 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableMSVPAEnergyDens]      = createMSVPAEnergyDens;      //  9 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableMSVPAOthPrey]         = createMSVPAOthPrey;         // 10 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableMSVPAOthPreyAnn]      = createMSVPAOthPreyAnn;      // 11 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableMSVPASeasBiomass]     = createMSVPASeasBiomass;     // 12 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableMSVPASeasInfo]        = createMSVPASeasInfo;        // 13 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableMSVPASizePref]        = createMSVPASizePref;        // 14 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableMSVPASpaceO]          = createMSVPASpaceO;          // 15 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableMSVPAStomCont]        = createMSVPAStomCont;        // 16 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableMSVPASuitPreyBiomass] = createMSVPASuitPreyBiomass; // 17 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableMSVPAlist]            = createMSVPAlist;            // 18 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableMSVPAprefs]           = createMSVPAprefs;           // 19 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableMSVPAspecies]         = createMSVPAspecies;         // 20 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableOthPredSizeData]      = createOthPredSizeData;      // 21 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableOtherPredBM]          = createOtherPredBM;          // 22 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableOtherPredSpecies]     = createOtherPredSpecies;     // 23 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableSSVPAAgeM]            = createSSVPAAgeM;            // 24 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableScenarioF]            = createScenarioF;            // 25 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableScenarioOthPred]      = createScenarioOthPred;      // 26 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableScenarioOthPrey]      = createScenarioOthPrey;      // 27 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableScenarioRec]          = createScenarioRec;          // 28 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableScenarios]            = createScenarios;            // 29 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableSpeCatch]             = createSpeCatch;             // 30 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableSpeMaturity]          = createSpeMaturity;          // 31 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableSpeSSVPA]             = createSpeSSVPA;             // 32 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableSpeSize]              = createSpeSize;              // 33 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableSpeTuneCatch]         = createSpeTuneCatch;         // 34 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableSpeTuneEffort]        = createSpeTuneEffort;        // 35 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableSpeWeight]            = createSpeWeight;            // 36 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableSpeXSAData]           = createSpeXSAData;           // 37 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableSpeXSAIndices]        = createSpeXSAIndices;        // 38 of 39
+    m_FunctionMap[nmfConstantsMSVPA::TableSpecies]              = createSpecies;              // 39 of 39
 }
 
 void
@@ -283,8 +283,8 @@ nmfDatabase::nmfGetInitialData(
     std::map<std::string, std::vector<std::string> > dataMap;
 
     fields = {"MSVPAName","NSpe","NPreyOnly","NOther","NOtherPred","FirstYear","LastYear","NSeasons"};
-    queryStr = "SELECT MSVPAName,NSpe,NPreyOnly,NOther,NOtherPred,FirstYear,LastYear,NSeasons FROM MSVPAlist WHERE MSVPAName = '"
-                + MSVPAName + "'";
+    queryStr = "SELECT MSVPAName,NSpe,NPreyOnly,NOther,NOtherPred,FirstYear,LastYear,NSeasons FROM " +
+                nmfConstantsMSVPA::TableMSVPAlist + " WHERE MSVPAName = '" + MSVPAName + "'";
     dataMap = nmfQueryDatabase(queryStr, fields, nmfConstants::nullAsZero);
     NPreds       = std::stoi(dataMap["NSpe"][0]);
     NPrey        = std::stoi(dataMap["NPreyOnly"][0]);
@@ -310,7 +310,7 @@ nmfDatabase::nmfGetMSVPAInitData(
         int& NYears,
         int& NSeasons)
 {
-    std::map<std::string,int> initMap = nmfQueryInitFields("MSVPAlist", MSVPAName);
+    std::map<std::string,int> initMap = nmfQueryInitFields(nmfConstantsMSVPA::TableMSVPAlist, MSVPAName);
     FirstYear = initMap["FirstYear"];
     LastYear  = initMap["LastYear"];
     NYears    = LastYear - FirstYear + 1;
@@ -327,7 +327,7 @@ nmfDatabase::getSpeciesToIndexMap(std::map<std::string,int> &SpeciesToIndexMap)
 
     // Get list of all Species
     fields   = {"SpeName","SpeIndex"};
-    queryStr = "SELECT Spename,SpeIndex FROM Species";
+    queryStr = "SELECT Spename,SpeIndex FROM " + nmfConstantsMSVPA::TableSpecies;
     dataMap  = nmfQueryDatabase(queryStr, fields);
     for (unsigned int i=0; i< dataMap["SpeName"].size(); ++i) {
         SpeciesToIndexMap[dataMap["SpeName"][i]] = std::stoi(dataMap["SpeIndex"][i]);
@@ -423,8 +423,9 @@ nmfDatabase::getSpeciesIndex(std::string SpeciesName)
     int retv = -1;
 
     std::vector<std::string> fields = {"SpeIndex", "SpeName"};
-    std::string queryStr = "SELECT SpeIndex,SpeName FROM Species WHERE SpeName = '" +
-                           SpeciesName + "'";
+    std::string queryStr = "SELECT SpeIndex,SpeName FROM " +
+                            nmfConstantsMSVPA::TableSpecies +
+                           " WHERE SpeName = '" + SpeciesName + "'";
     std::map< std::string, std::vector<std::string> > dataMap;
     dataMap = nmfQueryDatabase(queryStr, fields, nmfConstants::nullAsZero);
     if (dataMap.size() > 0) {
@@ -641,12 +642,14 @@ nmfDatabase::nmfQueryForecastWeightAtAgeData(
 
     // Get Wt At Age...wts at beginning of year
     fields = {"Year","Age","InitWt"};
-    queryStr = "SELECT Year, Age, InitWt FROM ForeOutput WHERE MSVPAname = '" + MSVPAName +
-            "' AND ForeName = '" + ForecastName +
-            "' AND Scenario = '" + ScenarioName +
-            "' AND SpeName = '" + species +
-            "' AND Year = " + std::to_string(Year) +
-            "  AND Season = 0 ORDER By Age";
+    queryStr = "SELECT Year, Age, InitWt FROM " +
+                nmfConstantsMSVPA::TableForeOutput +
+               " WHERE MSVPAname = '" + MSVPAName +
+               "' AND ForeName = '" + ForecastName +
+               "' AND Scenario = '" + ScenarioName +
+               "' AND SpeName = '" + species +
+               "' AND Year = " + std::to_string(Year) +
+               "  AND Season = 0 ORDER By Age";
     dataMap = nmfQueryDatabase(queryStr, fields);
     for (int j=0; j<Nage; ++j) {
         WtAtAge(index,j) = std::stod(dataMap["InitWt"][j]);
@@ -671,10 +674,12 @@ nmfDatabase::nmfQueryWeightAtAgeData(
 
     // Get Wt at Age
     fields = {"Value"};
-    queryStr = "SELECT Value FROM SpeWeight WHERE SpeName = '" + species + "' " +
-            " AND Year = " + std::to_string(Year) +
-            " AND Variable = 'Weight' " +
-            " ORDER BY Age";
+    queryStr = "SELECT Value FROM " +
+                nmfConstantsMSVPA::TableSpeWeight +
+               " WHERE SpeName = '" + species + "' " +
+               " AND Year = " + std::to_string(Year) +
+               " AND Variable = 'Weight' " +
+               " ORDER BY Age";
     dataMap = nmfQueryDatabase(queryStr, fields);
     if (dataMap.size() > 0) {
         retv = true;
@@ -706,12 +711,14 @@ nmfDatabase::nmfQueryForecastMortalityData(
     std::vector<std::string> fields;
 
     fields = {"Year","Age","F","M2","M1"};
-    queryStr = "SELECT Year, Age, Sum(SeasF) as F, Sum(SeasM2) as M2, Sum(SeasM1) as M1  FROM ForeOutput WHERE MSVPAname = '" + MSVPAName +
-            "' AND ForeName = '" + ForecastName +
-            "' AND Scenario = '" + ScenarioName +
-            "' AND SpeName = '"  + Species +
-            "' AND Year = " + std::to_string(Year) +
-            "  GROUP BY Year, Age";
+    queryStr = "SELECT Year, Age, Sum(SeasF) as F, Sum(SeasM2) as M2, Sum(SeasM1) as M1 FROM " +
+                nmfConstantsMSVPA::TableForeOutput +
+               " WHERE MSVPAname = '" + MSVPAName +
+               "' AND ForeName = '" + ForecastName +
+               "' AND Scenario = '" + ScenarioName +
+               "' AND SpeName = '"  + Species +
+               "' AND Year = " + std::to_string(Year) +
+               "  GROUP BY Year, Age";
     dataMap = nmfQueryDatabase(queryStr, fields);
     for (int j=0; j<Nage; ++j) {
         FatAge(index,j)  = std::stod(dataMap["F"][j]);
@@ -740,10 +747,12 @@ nmfDatabase::nmfQueryMortalityData(
     std::vector<std::string> fields;
 
     fields = {"Age","F","M2","M1"};
-    queryStr = "SELECT Age, Sum(SeasF) as F, Sum(SeasM2) as M2, Sum(SeasM1) as M1 FROM MSVPASeasBiomass WHERE MSVPAName = '" + MSVPAName +
-            "' AND SpeName = '" + species +
-            "' AND Year = " + std::to_string(Year) +
-            " GROUP BY Age";
+    queryStr = "SELECT Age, Sum(SeasF) as F, Sum(SeasM2) as M2, Sum(SeasM1) as M1 FROM " +
+                nmfConstantsMSVPA::TableMSVPASeasBiomass +
+               " WHERE MSVPAName = '" + MSVPAName +
+               "' AND SpeName = '" + species +
+               "' AND Year = " + std::to_string(Year) +
+               " GROUP BY Age";
     dataMap = nmfQueryDatabase(queryStr, fields);
     for (int j=0; j<Nage; ++j) {
         FatAge(index,j)  = std::stod(dataMap["F"][j]);
@@ -832,12 +841,14 @@ nmfDatabase::nmfQueryForecastAgeCatchData(
 
     // Need to get catches to calculate a weighted average FullF
     fields = {"Year","Age","Catch"};
-    queryStr = "SELECT Year, Age, Sum(SeasCatch) as Catch FROM ForeOutput WHERE MSVPAname = '" + MSVPAName +
-            "' AND ForeName = '" + ForecastName +
-            "' AND Scenario = '" + ScenarioName +
-            "' AND SpeName = '" + species +
-            "' AND Year = " + std::to_string(Year) +
-            "  GROUP BY Year, Age";
+    queryStr = "SELECT Year, Age, Sum(SeasCatch) as Catch FROM " +
+                nmfConstantsMSVPA::TableForeOutput +
+               " WHERE MSVPAname = '" + MSVPAName +
+               "' AND ForeName = '" + ForecastName +
+               "' AND Scenario = '" + ScenarioName +
+               "' AND SpeName = '" + species +
+               "' AND Year = " + std::to_string(Year) +
+               "  GROUP BY Year, Age";
     dataMap = nmfQueryDatabase(queryStr, fields);
     for (unsigned int j=0; j<=(unsigned int)Nage; ++j) {
         if (j < dataMap["Year"].size()) {
@@ -863,10 +874,10 @@ nmfDatabase::nmfQueryAgeCatchData(
 
     // I need to get catches to calculate a weighted average FullF
     fields = {"Age","Catch"};
-    queryStr = "SELECT Age,Catch FROM SpeCatch WHERE SpeName = '" +
-            species +
-            "' AND Year = " + std::to_string(Year) +
-            " ORDER BY Age";
+    queryStr = "SELECT Age,Catch FROM " + nmfConstantsMSVPA::TableSpeCatch +
+               " WHERE SpeName = '" + species +
+               "' AND Year = " + std::to_string(Year) +
+               " ORDER BY Age";
     dataMap = nmfQueryDatabase(queryStr, fields);
     size_t NumRecords = dataMap["Age"].size();
     unsigned int m = 0;
@@ -898,7 +909,8 @@ nmfDatabase::nmfQueryNaturalMortalityData(
     int m;
 
     fields   = {"AgeM1","AgeM2"};
-    queryStr = "SELECT AgeM1,AgeM2 FROM SSVPAAgeM WHERE SpeIndex = " + std::to_string(SpeciesIndex) +
+    queryStr = "SELECT AgeM1,AgeM2 FROM " + nmfConstantsMSVPA::TableSSVPAAgeM +
+               " WHERE SpeIndex = " + std::to_string(SpeciesIndex) +
                " AND SSVPAIndex = " + std::to_string(SSVPAIndex);
     dataMap  = nmfQueryDatabase(queryStr, fields);
     m = 0;
@@ -925,9 +937,10 @@ nmfDatabase::nmfQueryMaturityData(
     std::vector<std::string> fields;
 
     fields = {"PMature"};
-    queryStr = "SELECT PMature FROM SpeMaturity WHERE SpeName = '" + Species + "' " +
-            " AND Year = " + std::to_string(Year) +
-            " ORDER BY Age";
+    queryStr = "SELECT PMature FROM " + nmfConstantsMSVPA::TableSpeMaturity +
+               " WHERE SpeName = '" + Species + "' " +
+               " AND Year = " + std::to_string(Year) +
+               " ORDER BY Age";
     dataMap = nmfQueryDatabase(queryStr, fields);
     for (int j=0; j<Nage; ++j) {
         Pmature(index,j) = std::stod(dataMap["PMature"][j]);
@@ -957,13 +970,14 @@ nmfDatabase::nmfQueryForecastPreyList(
     }
 
     fields = {"PreyName"};
-    queryStr = "SELECT DISTINCT PreyName FROM ForeSuitPreyBiomass WHERE MSVPAname = '" +
-            MSVPAName + "'" +
-            " AND ForeName = '" + ForecastName + "'" +
-            " AND Scenario = '" + ScenarioName + "'" +
-            " AND PredName = '" + PredatorSpecies + "'" +
-            predAgeClause + seasonStr +
-            " ORDER BY PreyName";
+    queryStr = "SELECT DISTINCT PreyName FROM " +
+                nmfConstantsMSVPA::TableForeSuitPreyBiomass +
+               " WHERE MSVPAname = '" + MSVPAName + "'" +
+               " AND ForeName = '" + ForecastName + "'" +
+               " AND Scenario = '" + ScenarioName + "'" +
+               " AND PredName = '" + PredatorSpecies + "'" +
+                predAgeClause + seasonStr +
+               " ORDER BY PreyName";
     dataMap = nmfQueryDatabase(queryStr, fields);
 
     for (unsigned int i = 0; i < dataMap["PreyName"].size(); ++i) {
@@ -999,10 +1013,11 @@ nmfDatabase::nmfQueryMsvpaPreyList(
         predAgeClause = " and PredAge = " + PredAge;
     }
 
-    queryStr = "SELECT DISTINCT PreyName FROM MSVPASuitPreyBiomass WHERE PredName='" + selectedPredator +
-            "' and MSVPAName='" + MSVPAName + "'" +
-            predAgeClause + " ORDER by PreyName";
-
+    queryStr = "SELECT DISTINCT PreyName FROM " +
+                nmfConstantsMSVPA::TableMSVPASuitPreyBiomass +
+               " WHERE PredName='" + selectedPredator +
+               "' and MSVPAName='" + MSVPAName + "'" +
+                predAgeClause + " ORDER by PreyName";
     dataMap = nmfQueryDatabase(queryStr, fields);
     NPrey = dataMap["PreyName"].size();
     for (int i=0; i<NPrey; ++i) {
@@ -1537,7 +1552,7 @@ nmfDatabase::getGuilds(
     GuildList.clear();
 
     fields   = {"GuildName"};
-    queryStr = "SELECT GuildName from " +
+    queryStr = "SELECT GuildName FROM " +
                 nmfConstantsMSSPM::TableGuilds +
                " ORDER BY GuildName";
     dataMap  = nmfQueryDatabase(queryStr, fields);
@@ -1595,7 +1610,7 @@ nmfDatabase::getSpecies(
     SpeciesList.clear();
 
     fields   = {"SpeName"};
-    queryStr = "SELECT SpeName from " +
+    queryStr = "SELECT SpeName FROM " +
                 nmfConstantsMSSPM::TableSpecies +
                " ORDER BY SpeName";
     dataMap  = nmfQueryDatabase(queryStr, fields);

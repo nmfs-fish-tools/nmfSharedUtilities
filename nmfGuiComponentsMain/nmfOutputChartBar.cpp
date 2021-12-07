@@ -543,43 +543,43 @@ void nmfOutputChartBar::getChartData(
         if (theModelName == "MSVPA") {
 
             getChartDataOfPredationMortalityByPredator(
-                  databasePtr,
-                   MSVPAName,
-                  "MSVPA",
-                  "",
-                  "",
-                  "MSVPASuitPreyBiomass",
-                  "MSVPASeasBiomass",
-                   ageStr,
-                   seasonStr,
-                   FirstYear,
-                   NYears,
-                   selectedSpecies,
-                   SpeAge,
-                   LegendNames,
-                   categories,
-                   ChartData);
+                        databasePtr,
+                        MSVPAName,
+                        "MSVPA",
+                        "",
+                        "",
+                        nmfConstantsMSVPA::TableMSVPASuitPreyBiomass,
+                        nmfConstantsMSVPA::TableMSVPASeasBiomass,
+                        ageStr,
+                        seasonStr,
+                        FirstYear,
+                        NYears,
+                        selectedSpecies,
+                        SpeAge,
+                        LegendNames,
+                        categories,
+                        ChartData);
 
 
         } else if (theModelName == "Forecast") { // M2 by predator species.
 
             getChartDataOfPredationMortalityByPredator(
-                  databasePtr,
-                   MSVPAName,
-                  "Forecast",
-                   ForecastName,
-                   ScenarioName,
-                  "ForeSuitPreyBiomass",
-                  "ForeOutput",
-                   ageStr,
-                   seasonStr,
-                   Forecast_FirstYear,
-                   Forecast_NYears,
-                   selectedSpecies,
-                   SpeAge,
-                   LegendNames,
-                   categories,
-                   ChartData);
+                        databasePtr,
+                        MSVPAName,
+                        "Forecast",
+                        ForecastName,
+                        ScenarioName,
+                        nmfConstantsMSVPA::TableForeSuitPreyBiomass,
+                        nmfConstantsMSVPA::TableForeOutput,
+                        ageStr,
+                        seasonStr,
+                        Forecast_FirstYear,
+                        Forecast_NYears,
+                        selectedSpecies,
+                        SpeAge,
+                        LegendNames,
+                        categories,
+                        ChartData);
 
         } // end if (theModelName == "Forecast")
 
@@ -1695,7 +1695,7 @@ void nmfOutputChartBar::redrawChart(
 
     // Find number of years and seasons
     std::map<std::string,int> initMap =
-            databasePtr->nmfQueryInitFields("MSVPAlist", MSVPAName);
+            databasePtr->nmfQueryInitFields(nmfConstantsMSVPA::TableMSVPAlist, MSVPAName);
     //int FirstYear = initMap["FirstYear"];
     int LastYear  = initMap["LastYear"];
     int NYears    = LastYear - FirstYear + 1;

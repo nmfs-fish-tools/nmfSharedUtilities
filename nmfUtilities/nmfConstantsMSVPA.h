@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <vector>
+#include <QString>
 
 namespace nmfConstantsMSVPA
 {
@@ -56,151 +57,192 @@ namespace nmfConstantsMSVPA
     const std::string  OutputDataDir                  = "outputData";
     const std::string  OutputImagesDir                = "outputImages";
 
+    const std::string TableApplication          = QString::fromStdString("Application").toLower().toStdString();
+    const std::string TableForeEnergyDens       = QString::fromStdString("ForeEnergyDens").toLower().toStdString();
+    const std::string TableForeOutput           = QString::fromStdString("ForeOutput").toLower().toStdString();
+    const std::string TableForePredGrowth       = QString::fromStdString("ForePredGrowth").toLower().toStdString();
+    const std::string TableForePredVonB         = QString::fromStdString("ForePredVonB").toLower().toStdString();
+    const std::string TableForeSRQ              = QString::fromStdString("ForeSRQ").toLower().toStdString();
+    const std::string TableForeSRR              = QString::fromStdString("ForeSRR").toLower().toStdString();
+    const std::string TableForeSuitPreyBiomass  = QString::fromStdString("ForeSuitPreyBiomass").toLower().toStdString();
+    const std::string TableForecasts            = QString::fromStdString("Forecasts").toLower().toStdString();
+    const std::string TableMSVPAEnergyDens      = QString::fromStdString("MSVPAEnergyDens").toLower().toStdString();
+    const std::string TableMSVPAOthPrey         = QString::fromStdString("MSVPAOthPrey").toLower().toStdString();
+    const std::string TableMSVPAOthPreyAnn      = QString::fromStdString("MSVPAOthPreyAnn").toLower().toStdString();
+    const std::string TableMSVPASeasBiomass     = QString::fromStdString("MSVPASeasBiomass").toLower().toStdString();
+    const std::string TableMSVPASeasInfo        = QString::fromStdString("MSVPASeasInfo").toLower().toStdString();
+    const std::string TableMSVPASizePref        = QString::fromStdString("MSVPASizePref").toLower().toStdString();
+    const std::string TableMSVPASpaceO          = QString::fromStdString("MSVPASpaceO").toLower().toStdString();
+    const std::string TableMSVPAStomCont        = QString::fromStdString("MSVPAStomCont").toLower().toStdString();
+    const std::string TableMSVPASuitPreyBiomass = QString::fromStdString("MSVPASuitPreyBiomass").toLower().toStdString();
+    const std::string TableMSVPAlist            = QString::fromStdString("MSVPAlist").toLower().toStdString();
+    const std::string TableMSVPAprefs           = QString::fromStdString("MSVPAprefs").toLower().toStdString();
+    const std::string TableMSVPAspecies         = QString::fromStdString("MSVPAspecies").toLower().toStdString();
+    const std::string TableOthPredSizeData      = QString::fromStdString("OthPredSizeData").toLower().toStdString();
+    const std::string TableOtherPredBM          = QString::fromStdString("OtherPredBM").toLower().toStdString();
+    const std::string TableOtherPredSpecies     = QString::fromStdString("OtherPredSpecies").toLower().toStdString();
+    const std::string TableSSVPAAgeM            = QString::fromStdString("SSVPAAgeM").toLower().toStdString();
+    const std::string TableScenarioF            = QString::fromStdString("ScenarioF").toLower().toStdString();
+    const std::string TableScenarioOthPred      = QString::fromStdString("ScenarioOthPred").toLower().toStdString();
+    const std::string TableScenarioOthPrey      = QString::fromStdString("ScenarioOthPrey").toLower().toStdString();
+    const std::string TableScenarioRec          = QString::fromStdString("ScenarioRec").toLower().toStdString();
+    const std::string TableScenarios            = QString::fromStdString("Scenarios").toLower().toStdString();
+    const std::string TableSpeCatch             = QString::fromStdString("SpeCatch").toLower().toStdString();
+    const std::string TableSpeMaturity          = QString::fromStdString("SpeMaturity").toLower().toStdString();
+    const std::string TableSpeSSVPA             = QString::fromStdString("SpeSSVPA").toLower().toStdString();
+    const std::string TableSpeSize              = QString::fromStdString("SpeSize").toLower().toStdString();
+    const std::string TableSpeTuneCatch         = QString::fromStdString("SpeTuneCatch").toLower().toStdString();
+    const std::string TableSpeTuneEffort        = QString::fromStdString("SpeTuneEffort").toLower().toStdString();
+    const std::string TableSpeWeight            = QString::fromStdString("SpeWeight").toLower().toStdString();
+    const std::string TableSpeXSAData           = QString::fromStdString("SpeXSAData").toLower().toStdString();
+    const std::string TableSpeXSAIndices        = QString::fromStdString("SpeXSAIndices").toLower().toStdString();
+    const std::string TableSpecies              = QString::fromStdString("Species").toLower().toStdString();
+
      const std::vector<std::string> AllTables = {
-         "Application",
-         "ForeEnergyDens",
-         "ForeOutput",
-         "ForePredGrowth",
-         "ForePredVonB",
-         "ForeSRQ",
-         "ForeSRR",
-         "ForeSuitPreyBiomass",
-         "Forecasts",
-         "MSVPAEnergyDens",
-         "MSVPAOthPrey",
-         "MSVPAOthPreyAnn",
-         "MSVPASeasBiomass",
-         "MSVPASeasInfo",
-         "MSVPASizePref",
-         "MSVPASpaceO",
-         "MSVPAStomCont",
-         "MSVPASuitPreyBiomass",
-         "MSVPAlist",
-         "MSVPAprefs",
-         "MSVPAspecies",
-         "OthPredSizeData",
-         "OtherPredBM",
-         "OtherPredSpecies",
-         "SSVPAAgeM",
-         "ScenarioF",
-         "ScenarioOthPred",
-         "ScenarioOthPrey",
-         "ScenarioRec",
-         "Scenarios",
-         "SpeCatch",
-         "SpeMaturity",
-         "SpeSSVPA",
-         "SpeSize",
-         "SpeTuneCatch",
-         "SpeTuneEffort",
-         "SpeWeight",
-         "SpeXSAData",
-         "SpeXSAIndices",
-         "Species"
+         TableApplication,
+         TableForeEnergyDens,
+         TableForeOutput,
+         TableForePredGrowth,
+         TableForePredVonB,
+         TableForeSRQ,
+         TableForeSRR,
+         TableForeSuitPreyBiomass,
+         TableForecasts,
+         TableMSVPAEnergyDens,
+         TableMSVPAOthPrey,
+         TableMSVPAOthPreyAnn,
+         TableMSVPASeasBiomass,
+         TableMSVPASeasInfo,
+         TableMSVPASizePref,
+         TableMSVPASpaceO,
+         TableMSVPAStomCont,
+         TableMSVPASuitPreyBiomass,
+         TableMSVPAlist,
+         TableMSVPAprefs,
+         TableMSVPAspecies,
+         TableOthPredSizeData,
+         TableOtherPredBM,
+         TableOtherPredSpecies,
+         TableSSVPAAgeM,
+         TableScenarioF,
+         TableScenarioOthPred,
+         TableScenarioOthPrey,
+         TableScenarioRec,
+         TableScenarios,
+         TableSpeCatch,
+         TableSpeMaturity,
+         TableSpeSSVPA,
+         TableSpeSize,
+         TableSpeTuneCatch,
+         TableSpeTuneEffort,
+         TableSpeWeight,
+         TableSpeXSAData,
+         TableSpeXSAIndices,
+         TableSpecies
      };
 
      const std::vector<std::string> AllNonSpeciesTables = {
-         "Application",
-         "ForeEnergyDens",
-         "ForeOutput",
-         "ForePredGrowth",
-         "ForePredVonB",
-         "ForeSRQ",
-         "ForeSRR",
-         "ForeSuitPreyBiomass",
-         "Forecasts",
-         "MSVPAEnergyDens",
-         "MSVPAOthPrey",
-         "MSVPAOthPreyAnn",
-         "MSVPASeasBiomass",
-         "MSVPASeasInfo",
-         "MSVPASizePref",
-         "MSVPASpaceO",
-         "MSVPAStomCont",
-         "MSVPASuitPreyBiomass",
-         "MSVPAlist",
-         "MSVPAprefs",
-         "MSVPAspecies",
-         "OthPredSizeData",
-         "OtherPredBM",
-         "SSVPAAgeM",
-         "ScenarioF",
-         "ScenarioOthPred",
-         "ScenarioOthPrey",
-         "ScenarioRec",
-         "Scenarios",
-         "SpeCatch",
-         "SpeMaturity",
-         "SpeSSVPA",
-         "SpeSize",
-         "SpeTuneCatch",
-         "SpeTuneEffort",
-         "SpeWeight",
-         "SpeXSAData",
-         "SpeXSAIndices"
+         TableApplication,
+         TableForeEnergyDens,
+         TableForeOutput,
+         TableForePredGrowth,
+         TableForePredVonB,
+         TableForeSRQ,
+         TableForeSRR,
+         TableForeSuitPreyBiomass,
+         TableForecasts,
+         TableMSVPAEnergyDens,
+         TableMSVPAOthPrey,
+         TableMSVPAOthPreyAnn,
+         TableMSVPASeasBiomass,
+         TableMSVPASeasInfo,
+         TableMSVPASizePref,
+         TableMSVPASpaceO,
+         TableMSVPAStomCont,
+         TableMSVPASuitPreyBiomass,
+         TableMSVPAlist,
+         TableMSVPAprefs,
+         TableMSVPAspecies,
+         TableOthPredSizeData,
+         TableOtherPredBM,
+         TableSSVPAAgeM,
+         TableScenarioF,
+         TableScenarioOthPred,
+         TableScenarioOthPrey,
+         TableScenarioRec,
+         TableScenarios,
+         TableSpeCatch,
+         TableSpeMaturity,
+         TableSpeSSVPA,
+         TableSpeSize,
+         TableSpeTuneCatch,
+         TableSpeTuneEffort,
+         TableSpeWeight,
+         TableSpeXSAData,
+         TableSpeXSAIndices
      };
 
      const std::vector<std::string> SSVPANonSpeciesTables = {
-         "OthPredSizeData",
-         "OtherPredBM",
-         "SSVPAAgeM",
-         "SpeCatch",
-         "SpeMaturity",
-         "SpeSSVPA",
-         "SpeSize",
-         "SpeTuneCatch",
-         "SpeTuneEffort",
-         "SpeWeight",
-         "SpeXSAData",
-         "SpeXSAIndices"
+         TableOthPredSizeData,
+         TableOtherPredBM,
+         TableSSVPAAgeM,
+         TableSpeCatch,
+         TableSpeMaturity,
+         TableSpeSSVPA,
+         TableSpeSize,
+         TableSpeTuneCatch,
+         TableSpeTuneEffort,
+         TableSpeWeight,
+         TableSpeXSAData,
+         TableSpeXSAIndices
      };
 
      const std::vector<std::string> SSVPATables = {
-         "OthPredSizeData",
-         "OtherPredBM",
-         "OtherPredSpecies",
-         "SSVPAAgeM",
-         "SpeCatch",
-         "SpeMaturity",
-         "SpeSSVPA",
-         "SpeSize",
-         "SpeTuneCatch",
-         "SpeTuneEffort",
-         "SpeWeight",
-         "SpeXSAData",
-         "SpeXSAIndices",
-         "Species"
+         TableOthPredSizeData,
+         TableOtherPredBM,
+         TableOtherPredSpecies,
+         TableSSVPAAgeM,
+         TableSpeCatch,
+         TableSpeMaturity,
+         TableSpeSSVPA,
+         TableSpeSize,
+         TableSpeTuneCatch,
+         TableSpeTuneEffort,
+         TableSpeWeight,
+         TableSpeXSAData,
+         TableSpeXSAIndices,
+         TableSpecies
      };
 
      const std::vector<std::string> MSVPATables = {
-         "MSVPAEnergyDens",
-         "MSVPAOthPrey",
-         "MSVPAOthPreyAnn",
-         "MSVPASeasBiomass",
-         "MSVPASeasInfo",
-         "MSVPASizePref",
-         "MSVPASpaceO",
-         "MSVPAStomCont",
-         "MSVPASuitPreyBiomass",
-         "MSVPAlist",
-         "MSVPAprefs",
-         "MSVPAspecies"
+         TableMSVPAEnergyDens,
+         TableMSVPAOthPrey,
+         TableMSVPAOthPreyAnn,
+         TableMSVPASeasBiomass,
+         TableMSVPASeasInfo,
+         TableMSVPASizePref,
+         TableMSVPASpaceO,
+         TableMSVPAStomCont,
+         TableMSVPASuitPreyBiomass,
+         TableMSVPAlist,
+         TableMSVPAprefs,
+         TableMSVPAspecies
      };
 
      const std::vector<std::string> ForecastTables = {
-         "Forecasts",
-         "ForeEnergyDens",
-         "ForeOutput",
-         "ForePredGrowth",
-         "ForeSuitPreyBiomass",
-         "ForeSRR",
-         "ForeSRQ",
-         "ForePredVonB",
-         "Scenarios",
-         "ScenarioF",
-         "ScenarioOthPred",
-         "ScenarioOthPrey",
-         "ScenarioRec"
+         TableForecasts,
+         TableForeEnergyDens,
+         TableForeOutput,
+         TableForePredGrowth,
+         TableForeSuitPreyBiomass,
+         TableForeSRR,
+         TableForeSRQ,
+         TableForePredVonB,
+         TableScenarios,
+         TableScenarioF,
+         TableScenarioOthPred,
+         TableScenarioOthPrey,
+         TableScenarioRec
      };
 
      const std::vector<std::string> DefaultVPATypes = {

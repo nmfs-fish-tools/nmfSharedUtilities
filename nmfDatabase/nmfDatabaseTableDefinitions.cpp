@@ -50,7 +50,7 @@
 
 void nmfDatabase::checkForTableAndCreate(QString table)
 {
-    if (m_FunctionMap.find(table) == m_FunctionMap.end()) {
+    if (m_FunctionMap.find(table.toStdString()) == m_FunctionMap.end()) {
 
         std::cout << "Warning: \"" << table.toStdString() << "\" not found in nmfDatabase::FunctionMap" << std::endl;
 
@@ -58,7 +58,7 @@ void nmfDatabase::checkForTableAndCreate(QString table)
         std::string errorMsg;
         QString qcmd;
 
-        m_FunctionMap[table](table,qcmd);
+        m_FunctionMap[table.toStdString()](table.toStdString(),qcmd);
 
         errorMsg = nmfUpdateDatabase(qcmd.toStdString());
         if (nmfUtilsQt::isAnError(errorMsg)) {
@@ -69,18 +69,18 @@ void nmfDatabase::checkForTableAndCreate(QString table)
 } // checkForTableAndCreate
 
 void
-nmfDatabase::createApplication(QString &table, QString &qcmd)
+nmfDatabase::createApplication(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(Name  VARCHAR(255) NOT NULL,";
     qcmd += " PRIMARY KEY (Name))";
 
 } // end createApplication
 
 void
-nmfDatabase::createForeEnergyDens(QString &table, QString &qcmd)
+nmfDatabase::createForeEnergyDens(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName  VARCHAR(255) NOT NULL,";
     qcmd += " ForeName   VARCHAR(255) NOT NULL,";
     qcmd += " SpeName    VARCHAR(255),";
@@ -96,9 +96,9 @@ nmfDatabase::createForeEnergyDens(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createForeOutput(QString &table, QString &qcmd)
+nmfDatabase::createForeOutput(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName       VARCHAR(255) NOT NULL,";
     qcmd += " ForeName        VARCHAR(255) NOT NULL,";
     qcmd += " Scenario        VARCHAR(255) NOT NULL,";
@@ -129,9 +129,9 @@ nmfDatabase::createForeOutput(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createForePredGrowth(QString &table, QString &qcmd)
+nmfDatabase::createForePredGrowth(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName VARCHAR(255) NOT NULL,";
     qcmd += " ForeName  VARCHAR(255) NOT NULL,";
     qcmd += " PredName  VARCHAR(255),";
@@ -153,9 +153,9 @@ nmfDatabase::createForePredGrowth(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createForePredVonB(QString &table, QString &qcmd)
+nmfDatabase::createForePredVonB(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName VARCHAR(255) NOT NULL,";
     qcmd += " ForeName  VARCHAR(255) NOT NULL,";
     qcmd += " PredName  VARCHAR(255) NOT NULL,";
@@ -172,9 +172,9 @@ nmfDatabase::createForePredVonB(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createForeSRQ(QString &table, QString &qcmd)
+nmfDatabase::createForeSRQ(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName VARCHAR(255) NOT NULL,";
     qcmd += " ForeName  VARCHAR(255) NOT NULL,";
     qcmd += " SpeName   VARCHAR(255),";
@@ -191,9 +191,9 @@ nmfDatabase::createForeSRQ(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createForeSRR(QString &table, QString &qcmd)
+nmfDatabase::createForeSRR(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName   VARCHAR(255) NOT NULL,";
     qcmd += " ForeName    VARCHAR(255) NOT NULL,";
     qcmd += " SpeName     VARCHAR(255),";
@@ -209,9 +209,9 @@ nmfDatabase::createForeSRR(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createForeSuitPreyBiomass(QString &table, QString &qcmd)
+nmfDatabase::createForeSuitPreyBiomass(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName       VARCHAR(255) NOT NULL,";
     qcmd += " ForeName        VARCHAR(100) NOT NULL,";
     qcmd += " Scenario        VARCHAR(100) NOT NULL,";
@@ -231,9 +231,9 @@ nmfDatabase::createForeSuitPreyBiomass(QString &table, QString &qcmd)
 } // end createForeSuitPreyBiomass
 
 void
-nmfDatabase::createForecasts(QString &table, QString &qcmd)
+nmfDatabase::createForecasts(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName VARCHAR(255) NOT NULL,";
     qcmd += " ForeName  VARCHAR(255) NOT NULL,";
     qcmd += " InitYear  int(11),";
@@ -243,9 +243,9 @@ nmfDatabase::createForecasts(QString &table, QString &qcmd)
 
 } // end createForecasts
 void
-nmfDatabase::createMSVPAEnergyDens(QString &table, QString &qcmd)
+nmfDatabase::createMSVPAEnergyDens(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName  VARCHAR(255) NOT NULL,";
     qcmd += " SpeName    VARCHAR(255),";
     qcmd += " SpeType    int(11),";
@@ -260,9 +260,9 @@ nmfDatabase::createMSVPAEnergyDens(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createMSVPAOthPrey(QString &table, QString &qcmd)
+nmfDatabase::createMSVPAOthPrey(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName   VARCHAR(255) NOT NULL,";
     qcmd += " OthPreyName VARCHAR(255) NOT NULL,";
     qcmd += " MinSize     double,";
@@ -275,9 +275,9 @@ nmfDatabase::createMSVPAOthPrey(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createMSVPAOthPreyAnn(QString &table, QString &qcmd)
+nmfDatabase::createMSVPAOthPreyAnn(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName   VARCHAR(255) NOT NULL,";
     qcmd += " OthPreyName VARCHAR(255) NOT NULL,";
     qcmd += " Year        int(11)      NOT NULL,";
@@ -289,9 +289,9 @@ nmfDatabase::createMSVPAOthPreyAnn(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createMSVPASeasBiomass(QString &table, QString &qcmd)
+nmfDatabase::createMSVPASeasBiomass(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName     VARCHAR(255) NOT NULL,";
     qcmd += " SpeName       VARCHAR(255) NOT NULL,";
     qcmd += " Season        int(11)      NOT NULL,";
@@ -315,9 +315,9 @@ nmfDatabase::createMSVPASeasBiomass(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createMSVPASeasInfo(QString &table, QString &qcmd)
+nmfDatabase::createMSVPASeasInfo(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName VARCHAR(255) NOT NULL,";
     qcmd += " Year      int(11)      NOT NULL,";
     qcmd += " Season    int(11)      NOT NULL,";
@@ -329,9 +329,9 @@ nmfDatabase::createMSVPASeasInfo(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createMSVPASizePref(QString &table, QString &qcmd)
+nmfDatabase::createMSVPASizePref(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName VARCHAR(255) NOT NULL,";
     qcmd += " SpeIndex  int(11)      NOT NULL,";
     qcmd += " SpeName   VARCHAR(255),";
@@ -346,9 +346,9 @@ nmfDatabase::createMSVPASizePref(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createMSVPASpaceO(QString &table, QString &qcmd)
+nmfDatabase::createMSVPASpaceO(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName VARCHAR(255) NOT NULL,";
     qcmd += " Season    int(11)      NOT NULL,";
     qcmd += " SpeIndex  int(11),";
@@ -364,9 +364,9 @@ nmfDatabase::createMSVPASpaceO(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createMSVPAStomCont(QString &table, QString &qcmd)
+nmfDatabase::createMSVPAStomCont(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName   VARCHAR(255) NOT NULL,";
     qcmd += " SpeIndex    int(11)      NOT NULL,";
     qcmd += " SpeType     int(11)      NOT NULL,";
@@ -380,9 +380,9 @@ nmfDatabase::createMSVPAStomCont(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createMSVPASuitPreyBiomass(QString &table, QString &qcmd)
+nmfDatabase::createMSVPASuitPreyBiomass(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName       VARCHAR(255) NOT NULL,";
     qcmd += " PredName        VARCHAR(255) NOT NULL,";
     qcmd += " PredAge         int(11)      NOT NULL,";
@@ -399,9 +399,9 @@ nmfDatabase::createMSVPASuitPreyBiomass(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createMSVPAlist(QString &table, QString &qcmd)
+nmfDatabase::createMSVPAlist(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName   VARCHAR(255) NOT NULL,";
     qcmd += " NSpe        int(11),";
     qcmd += " NPreyOnly   int(11),";
@@ -419,9 +419,9 @@ nmfDatabase::createMSVPAlist(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createMSVPAprefs(QString &table, QString &qcmd)
+nmfDatabase::createMSVPAprefs(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName VARCHAR(255) NOT NULL,";
     qcmd += " SpeIndex  int(11),";
     qcmd += " SpeType   int(11),";
@@ -436,9 +436,9 @@ nmfDatabase::createMSVPAprefs(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createMSVPAspecies(QString &table, QString &qcmd)
+nmfDatabase::createMSVPAspecies(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName  VARCHAR(255) NOT NULL,";
     qcmd += " SpeName    VARCHAR(255) NOT NULL,";
     qcmd += " SpeIndex   int(11),";
@@ -453,9 +453,9 @@ nmfDatabase::createMSVPAspecies(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createOthPredSizeData(QString &table, QString &qcmd)
+nmfDatabase::createOthPredSizeData(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(SpeIndex     int(11) NOT NULL,";
     qcmd += " SpeName      VARCHAR(255),";
     qcmd += " SizeCat      int(11) NOT NULL,";
@@ -471,9 +471,9 @@ nmfDatabase::createOthPredSizeData(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createOtherPredBM(QString &table, QString &qcmd)
+nmfDatabase::createOtherPredBM(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(SpeIndex int(11) NOT NULL,";
     qcmd += " SpeName VARCHAR(255),";
     qcmd += " Year int(11) NOT NULL,";
@@ -484,9 +484,9 @@ nmfDatabase::createOtherPredBM(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createOtherPredSpecies(QString &table, QString &qcmd)
+nmfDatabase::createOtherPredSpecies(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(SpeIndex      int(11) NOT NULL,";
     qcmd += " SpeName       VARCHAR(255),";
     qcmd += " FirstYear     int(11),";
@@ -506,9 +506,9 @@ nmfDatabase::createOtherPredSpecies(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createSSVPAAgeM(QString &table, QString &qcmd)
+nmfDatabase::createSSVPAAgeM(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(SpeIndex   int(11) NOT NULL,";
     qcmd += " SSVPAIndex int(11) NOT NULL,";
     qcmd += " SSVPAName  VARCHAR(255),";
@@ -521,9 +521,9 @@ nmfDatabase::createSSVPAAgeM(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createScenarioF(QString &table, QString &qcmd)
+nmfDatabase::createScenarioF(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName VARCHAR(255) NOT NULL,";
     qcmd += " ForeName  VARCHAR(75)  NOT NULL,";
     qcmd += " Scenario  VARCHAR(75)  NOT NULL,";
@@ -539,9 +539,9 @@ nmfDatabase::createScenarioF(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createScenarioOthPred(QString &table, QString &qcmd)
+nmfDatabase::createScenarioOthPred(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName VARCHAR(255) NOT NULL,";
     qcmd += " ForeName  VARCHAR(100) NOT NULL,";
     qcmd += " Scenario  VARCHAR(100) NOT NULL,";
@@ -557,9 +557,9 @@ nmfDatabase::createScenarioOthPred(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createScenarioOthPrey(QString &table, QString &qcmd)
+nmfDatabase::createScenarioOthPrey(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName VARCHAR(255) NOT NULL,";
     qcmd += " ForeName  VARCHAR(255) NOT NULL,";
     qcmd += " Scenario  VARCHAR(255) NOT NULL,";
@@ -574,9 +574,9 @@ nmfDatabase::createScenarioOthPrey(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createScenarioRec(QString &table, QString &qcmd)
+nmfDatabase::createScenarioRec(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName   VARCHAR(255) NOT NULL,";
     qcmd += " ForeName    VARCHAR(100) NOT NULL,";
     qcmd += " Scenario    VARCHAR(100) NOT NULL,";
@@ -591,9 +591,9 @@ nmfDatabase::createScenarioRec(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createScenarios(QString &table, QString &qcmd)
+nmfDatabase::createScenarios(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(MSVPAName  VARCHAR(255) NOT NULL,";
     qcmd += " ForeName   VARCHAR(255) NOT NULL,";
     qcmd += " Scenario   VARCHAR(255) NOT NULL,";
@@ -608,9 +608,9 @@ nmfDatabase::createScenarios(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createSpeCatch(QString &table, QString &qcmd)
+nmfDatabase::createSpeCatch(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(SpeIndex int(11) NOT NULL,";
     qcmd += " SpeName  VARCHAR(255),";
     qcmd += " Year     int(11) NOT NULL,";
@@ -621,9 +621,9 @@ nmfDatabase::createSpeCatch(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createSpeMaturity(QString &table, QString &qcmd)
+nmfDatabase::createSpeMaturity(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(SpeIndex int(11) NOT NULL,";
     qcmd += " SpeName  VARCHAR(255),";
     qcmd += " Year     int(11) NOT NULL,";
@@ -634,9 +634,9 @@ nmfDatabase::createSpeMaturity(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createSpeSSVPA(QString &table, QString &qcmd)
+nmfDatabase::createSpeSSVPA(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(SpeIndex       int(11) NOT NULL,";
     qcmd += " SSVPAName      VARCHAR(255) NOT NULL,";
     qcmd += " SSVPAIndex     int(11) NOT NULL,";
@@ -666,9 +666,9 @@ nmfDatabase::createSpeSSVPA(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createSpeSize(QString &table, QString &qcmd)
+nmfDatabase::createSpeSize(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(SpeIndex int(11) NOT NULL,";
     qcmd += " SpeName VARCHAR(255),";
     qcmd += " Year int(11) NOT NULL,";
@@ -680,9 +680,9 @@ nmfDatabase::createSpeSize(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createSpeTuneCatch(QString &table, QString &qcmd)
+nmfDatabase::createSpeTuneCatch(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(SpeName    VARCHAR(255),";
     qcmd += " SpeIndex   int(11) NOT NULL,";
     qcmd += " SSVPAName  VARCHAR(255) NOT NULL,";
@@ -695,9 +695,9 @@ nmfDatabase::createSpeTuneCatch(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createSpeTuneEffort(QString &table, QString &qcmd)
+nmfDatabase::createSpeTuneEffort(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(SpeName    VARCHAR(255),";
     qcmd += " SpeIndex   int(11) NOT NULL,";
     qcmd += " SSVPAName  VARCHAR(255) NOT NULL,";
@@ -709,9 +709,9 @@ nmfDatabase::createSpeTuneEffort(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createSpeWeight(QString &table, QString &qcmd)
+nmfDatabase::createSpeWeight(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(SpeIndex int(11) NOT NULL,";
     qcmd += " SpeName VARCHAR(255),";
     qcmd += " Year int(11) NOT NULL,";
@@ -723,9 +723,9 @@ nmfDatabase::createSpeWeight(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createSpeXSAData(QString &table, QString &qcmd)
+nmfDatabase::createSpeXSAData(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(SpeIndex  int(11) NOT NULL,";
     qcmd += " SSVPAName VARCHAR(255) NOT NULL,";
     qcmd += " `Index`   int(11) NOT NULL,";
@@ -737,9 +737,9 @@ nmfDatabase::createSpeXSAData(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createSpeXSAIndices(QString &table, QString &qcmd)
+nmfDatabase::createSpeXSAIndices(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(SpeIndex  int(11) NOT NULL,";
     qcmd += " SSVPAName VARCHAR(255) NOT NULL,";
     qcmd += " `Index`   int(11) NOT NULL,";
@@ -751,9 +751,9 @@ nmfDatabase::createSpeXSAIndices(QString &table, QString &qcmd)
 
 
 void
-nmfDatabase::createSpecies(QString &table, QString &qcmd)
+nmfDatabase::createSpecies(const std::string table, QString &qcmd)
 {
-    qcmd  = "CREATE TABLE IF NOT EXISTS " + table;
+    qcmd  = "CREATE TABLE IF NOT EXISTS " + QString::fromStdString(table);
     qcmd += "(SpeIndex      int(11) NOT NULL,";
     qcmd += " SpeName       VARCHAR(255),";
     qcmd += " MaxAge        int(11),";

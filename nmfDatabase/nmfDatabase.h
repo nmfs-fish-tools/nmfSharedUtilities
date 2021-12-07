@@ -80,8 +80,8 @@ class nmfDatabase {
 
 private:
     QString m_dbName;
-    std::map<QString, void(*)(
-            QString &table,
+    std::map<const std::string, void(*)(
+            const std::string table,
             QString &cmd
             )> m_FunctionMap;
 
@@ -1304,46 +1304,46 @@ public:
     // The following are all of the create-if-table-doesn't-exist functions.
     // Made the following static for use in a function map.
     // TBD Make these not static in next version of MSVPA.
-    static void createApplication(QString &table, QString &qcmd);
-    static void createForeEnergyDens(QString &table, QString &qcmd);
-    static void createForeOutput(QString &table, QString &qcmd);
-    static void createForePredGrowth(QString &table, QString &qcmd);
-    static void createForePredVonB(QString &table, QString &qcmd);
-    static void createForeSRQ(QString &table, QString &qcmd);
-    static void createForeSRR(QString &table, QString &qcmd);
-    static void createForeSuitPreyBiomass(QString &table, QString &qcmd);
-    static void createForecasts(QString &table, QString &qcmd);
-    static void createMSVPAEnergyDens(QString &table, QString &qcmd);
-    static void createMSVPAOthPrey(QString &table, QString &qcmd);
-    static void createMSVPAOthPreyAnn(QString &table, QString &qcmd);
-    static void createMSVPASeasBiomass(QString &table, QString &qcmd);
-    static void createMSVPASeasInfo(QString &table, QString &qcmd);
-    static void createMSVPASizePref(QString &table, QString &qcmd);
-    static void createMSVPASpaceO(QString &table, QString &qcmd);
-    static void createMSVPAStomCont(QString &table, QString &qcmd);
-    static void createMSVPASuitPreyBiomass(QString &table, QString &qcmd);
-    static void createMSVPAlist(QString &table, QString &qcmd);
-    static void createMSVPAprefs(QString &table, QString &qcmd);
-    static void createMSVPAspecies(QString &table, QString &qcmd);
-    static void createOthPredSizeData(QString &table, QString &cmd);
-    static void createOtherPredBM(QString &table, QString &cmd);
-    static void createOtherPredSpecies(QString &table, QString &qcmd);
-    static void createSSVPAAgeM(QString &table, QString &qcmd);
-    static void createScenarioF(QString &table, QString &qcmd);
-    static void createScenarioOthPred(QString &table, QString &qcmd);
-    static void createScenarioOthPrey(QString &table, QString &qcmd);
-    static void createScenarioRec(QString &table, QString &qcmd);
-    static void createScenarios(QString &table, QString &qcmd);
-    static void createSpeCatch(QString &table, QString &qcmd);
-    static void createSpeMaturity(QString &table, QString &qcmd);
-    static void createSpeSSVPA(QString &table, QString &qcmd);
-    static void createSpeSize(QString &table, QString &qcmd);
-    static void createSpeTuneCatch(QString &table, QString &qcmd);
-    static void createSpeTuneEffort(QString &table, QString &qcmd);
-    static void createSpeWeight(QString &table, QString &qcmd);
-    static void createSpeXSAData(QString &table, QString &qcmd);
-    static void createSpeXSAIndices(QString &table, QString &qcmd);
-    static void createSpecies(QString &table, QString &qcmd);
+    static void createApplication(const std::string table, QString &qcmd);
+    static void createForeEnergyDens(const std::string table, QString &qcmd);
+    static void createForeOutput(const std::string table, QString &qcmd);
+    static void createForePredGrowth(const std::string table, QString &qcmd);
+    static void createForePredVonB(const std::string table, QString &qcmd);
+    static void createForeSRQ(const std::string table, QString &qcmd);
+    static void createForeSRR(const std::string table, QString &qcmd);
+    static void createForeSuitPreyBiomass(const std::string table, QString &qcmd);
+    static void createForecasts(const std::string table, QString &qcmd);
+    static void createMSVPAEnergyDens(const std::string table, QString &qcmd);
+    static void createMSVPAOthPrey(const std::string table, QString &qcmd);
+    static void createMSVPAOthPreyAnn(const std::string table, QString &qcmd);
+    static void createMSVPASeasBiomass(const std::string table, QString &qcmd);
+    static void createMSVPASeasInfo(const std::string table, QString &qcmd);
+    static void createMSVPASizePref(const std::string table, QString &qcmd);
+    static void createMSVPASpaceO(const std::string table, QString &qcmd);
+    static void createMSVPAStomCont(const std::string table, QString &qcmd);
+    static void createMSVPASuitPreyBiomass(const std::string table, QString &qcmd);
+    static void createMSVPAlist(const std::string table, QString &qcmd);
+    static void createMSVPAprefs(const std::string table, QString &qcmd);
+    static void createMSVPAspecies(const std::string table, QString &qcmd);
+    static void createOthPredSizeData(const std::string table, QString &cmd);
+    static void createOtherPredBM(const std::string table, QString &cmd);
+    static void createOtherPredSpecies(const std::string table, QString &qcmd);
+    static void createSSVPAAgeM(const std::string table, QString &qcmd);
+    static void createScenarioF(const std::string table, QString &qcmd);
+    static void createScenarioOthPred(const std::string table, QString &qcmd);
+    static void createScenarioOthPrey(const std::string table, QString &qcmd);
+    static void createScenarioRec(const std::string table, QString &qcmd);
+    static void createScenarios(const std::string table, QString &qcmd);
+    static void createSpeCatch(const std::string table, QString &qcmd);
+    static void createSpeMaturity(const std::string table, QString &qcmd);
+    static void createSpeSSVPA(const std::string table, QString &qcmd);
+    static void createSpeSize(const std::string table, QString &qcmd);
+    static void createSpeTuneCatch(const std::string table, QString &qcmd);
+    static void createSpeTuneEffort(const std::string table, QString &qcmd);
+    static void createSpeWeight(const std::string table, QString &qcmd);
+    static void createSpeXSAData(const std::string table, QString &qcmd);
+    static void createSpeXSAIndices(const std::string table, QString &qcmd);
+    static void createSpecies(const std::string table, QString &qcmd);
 
 };
 
