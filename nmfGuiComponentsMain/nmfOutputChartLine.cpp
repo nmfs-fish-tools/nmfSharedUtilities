@@ -567,7 +567,8 @@ nmfOutputChartLine::getMSVPASpecies(
 
     // Load all msvpa species and ages
     fields = {"SpeName"};
-    queryStr = "SELECT SpeName FROM MSVPAspecies WHERE MSVPAname = '" + MSVPAName + "'" +
+    queryStr = "SELECT SpeName FROM " + nmfConstantsMSVPA::TableMSVPAspecies +
+               " WHERE MSVPAname = '" + MSVPAName + "'" +
                " AND (Type = 0 or Type = 1)";
     dataMap = databasePtr->nmfQueryDatabase(queryStr, fields);
     NMSVPASpecies = dataMap["SpeName"].size();
@@ -593,7 +594,8 @@ nmfOutputChartLine::getMSVPASpeciesNamesAges(
 
     for (int i=0; i<NMSVPASpe; ++i) {
         fields2 = {"MaxAge"};
-        queryStr2 = "SELECT MaxAge FROM Species WHERE SpeName = '" + MSVPASpeList(i) + "'";
+        queryStr2 = "SELECT MaxAge FROM " + nmfConstantsMSVPA::TableSpecies +
+                    " WHERE SpeName = '" + MSVPASpeList(i) + "'";
         dataMap2 = databasePtr->nmfQueryDatabase(queryStr2, fields2);
         MSVPASpeAge.push_back( std::stoi(dataMap2["MaxAge"][0]) );
     }
@@ -618,7 +620,8 @@ nmfOutputChartLine::getMaturity(
     // Get Maturity data....RSK possibly make this an nmfDatabase function
     for (int i = 0; i < NMSVPASpe; ++i) {
         fields = {"PMature"};
-        queryStr = "SELECT PMature FROM SpeMaturity WHERE SpeName = '" + MSVPASpeList(i) + "'" +
+        queryStr = "SELECT PMature FROM " + nmfConstantsMSVPA::TableSpeMaturity +
+                   " WHERE SpeName = '" + MSVPASpeList(i) + "'" +
                    " AND Year = " + std::to_string(FirstYear) +
                    " ORDER By Age";
         dataMap = databasePtr->nmfQueryDatabase(queryStr, fields);
@@ -685,12 +688,14 @@ nmfOutputChartLine::Forecast_MultispeciesPopulations_TotalBiomass(
     for (int i = 0; i < NMSVPASpe; ++i) {
         colLabels << QString::fromStdString(MSVPASpeList(i));
         fields = {"Year","Biomass"};
-        queryStr = "SELECT Year, Sum(InitBiomass) AS Biomass FROM ForeOutput WHERE MSVPAname = '" + MSVPAName + "'" +
-                " AND ForeName = '" + ForecastName + "'" +
-                " AND Scenario = '" + ScenarioName + "'" +
-                " AND SpeName = '" + MSVPASpeList(i) + "'" +
-                  seasonStr +
-                " GROUP By Year";
+        queryStr = "SELECT Year, Sum(InitBiomass) AS Biomass FROM " +
+                    nmfConstantsMSVPA::TableForeOutput +
+                   " WHERE MSVPAname = '" + MSVPAName + "'" +
+                   " AND ForeName = '" + ForecastName + "'" +
+                   " AND Scenario = '" + ScenarioName + "'" +
+                   " AND SpeName = '" + MSVPASpeList(i) + "'" +
+                    seasonStr +
+                   " GROUP By Year";
         dataMap = databasePtr->nmfQueryDatabase(queryStr, fields);
 
         for (int j = 0; j < Forecast_NYears; ++j) {
@@ -762,12 +767,13 @@ void nmfOutputChartLine::Forecast_MultispeciesPopulations_TotalAbundance(
     for (int i = 0; i < NMSVPASpe; ++i) {
         colLabels << QString::fromStdString(MSVPASpeList(i));
         fields = {"Year","Abundance"};
-        queryStr = "SELECT Year, Sum(InitAbund) AS Abundance FROM ForeOutput WHERE MSVPAname = '" + MSVPAName + "'" +
-                " AND ForeName = '" + ForecastName + "'" +
-                " AND Scenario = '" + ScenarioName + "'" +
-                " AND SpeName = '" + MSVPASpeList(i) + "'" +
-                  seasonStr +
-                " GROUP By Year";
+        queryStr = "SELECT Year, Sum(InitAbund) AS Abundance FROM " +
+                    nmfConstantsMSVPA::TableForeOutput +
+                   " WHERE MSVPAname = '" + MSVPAName + "'" +
+                   " AND ForeName = '" + ForecastName + "'" +
+                   " AND Scenario = '" + ScenarioName + "'" +
+                   " AND SpeName = '" + MSVPASpeList(i) + "'" +
+                    seasonStr + " GROUP By Year";
         dataMap = databasePtr->nmfQueryDatabase(queryStr, fields);
 
         for (int j = 0; j <  Forecast_NYears; ++j) {
@@ -841,12 +847,14 @@ void nmfOutputChartLine::Forecast_MultispeciesPopulations_Age1PlusBiomass(
         colLabels << QString::fromStdString(MSVPASpeList(i));
 
         fields = {"Year","Biomass"};
-        queryStr = "SELECT Year, Sum(InitBiomass) AS Biomass FROM ForeOutput WHERE MSVPAname = '" + MSVPAName + "'" +
-                " AND ForeName = '" + ForecastName + "'" +
-                " AND Scenario = '" + ScenarioName + "'" +
-                " AND SpeName = '" + MSVPASpeList(i) + "'" +
-                  seasonStr +
-                " AND Age >= 1 GROUP By Year";
+        queryStr = "SELECT Year, Sum(InitBiomass) AS Biomass FROM " +
+                     nmfConstantsMSVPA::TableForeOutput +
+                   " WHERE MSVPAname = '" + MSVPAName + "'" +
+                   " AND ForeName = '" + ForecastName + "'" +
+                   " AND Scenario = '" + ScenarioName + "'" +
+                   " AND SpeName = '" + MSVPASpeList(i) + "'" +
+                    seasonStr +
+                   " AND Age >= 1 GROUP By Year";
         dataMap = databasePtr->nmfQueryDatabase(queryStr, fields);
 
         for (int j = 0; j <  Forecast_NYears; ++j) {
@@ -920,12 +928,14 @@ void nmfOutputChartLine::Forecast_MultispeciesPopulations_Age1PlusAbundance(
         colLabels << QString::fromStdString(MSVPASpeList(i));
 
         fields = {"Year","Abundance"};
-        queryStr = "SELECT Year, Sum(InitAbund) AS Abundance FROM ForeOutput WHERE MSVPAname = '" + MSVPAName + "'" +
-                " AND ForeName = '" + ForecastName + "'" +
-                " AND Scenario = '" + ScenarioName + "'" +
-                " AND SpeName = '" + MSVPASpeList(i) + "'" +
-                  seasonStr +
-                " AND Age >= 1 GROUP By Year";
+        queryStr = "SELECT Year, Sum(InitAbund) AS Abundance FROM " +
+                     nmfConstantsMSVPA::TableForeOutput +
+                   " WHERE MSVPAname = '" + MSVPAName + "'" +
+                   " AND ForeName = '" + ForecastName + "'" +
+                   " AND Scenario = '" + ScenarioName + "'" +
+                   " AND SpeName = '" + MSVPASpeList(i) + "'" +
+                    seasonStr +
+                   " AND Age >= 1 GROUP By Year";
         dataMap = databasePtr->nmfQueryDatabase(queryStr, fields);
 
         for (int j = 0; j <  Forecast_NYears; ++j) {
@@ -1002,12 +1012,14 @@ void nmfOutputChartLine::Forecast_MultispeciesPopulations_SpawningStockBiomass(
 
         fields = {"Year","Age","Biomass"};
 
-        queryStr = "SELECT Year, Age, Sum(InitBiomass) AS Biomass FROM ForeOutput WHERE MSVPAname = '" + MSVPAName + "'" +
-                " AND ForeName = '" + ForecastName + "'" +
-                " AND Scenario = '" + ScenarioName + "'" +
-                " AND SpeName = '"  + MSVPASpeList(i) + "'" +
-                seasonStr +
-                " GROUP By Year, Age";
+        queryStr = "SELECT Year, Age, Sum(InitBiomass) AS Biomass FROM " +
+                    nmfConstantsMSVPA::TableForeOutput +
+                   " WHERE MSVPAname = '" + MSVPAName + "'" +
+                   " AND ForeName = '" + ForecastName + "'" +
+                   " AND Scenario = '" + ScenarioName + "'" +
+                   " AND SpeName = '"  + MSVPASpeList(i) + "'" +
+                   seasonStr +
+                   " GROUP By Year, Age";
         dataMap = databasePtr->nmfQueryDatabase(queryStr, fields);
 
         m = 0;
@@ -1048,7 +1060,8 @@ nmfOutputChartLine::getYAxisUnits(nmfDatabase* databasePtr,
 
     // Find units
     fields = {"WtUnits"};
-    queryStr = "SELECT WtUnits FROM Species WHERE SpeName = '" + selectedSpecies + "' ";
+    queryStr = "SELECT WtUnits FROM " + nmfConstantsMSVPA::TableSpecies +
+               " WHERE SpeName = '" + selectedSpecies + "' ";
     dataMap = databasePtr->nmfQueryDatabase(queryStr, fields);
 
     double units = std::stod(dataMap["WtUnits"][0]);
@@ -2609,10 +2622,12 @@ nmfOutputChartLine::MSVPA_MultispeciesPopulations_TotalBiomass(
     for (int i = 0; i < NMSVPASpe; ++i) {
         colLabels << QString::fromStdString(MSVPASpeList(i));
         fields = {"Year","Biomass"};
-        queryStr = "SELECT Year, Sum(" + abundVariable + ") AS Biomass FROM MSVPASeasBiomass WHERE MSVPAname = '" + MSVPAName + "'" +
-                " AND SpeName = '" + MSVPASpeList(i) + "'" +
-                  seasonStr +
-                " GROUP By Year";
+        queryStr = "SELECT Year, Sum(" + abundVariable + ") AS Biomass FROM " +
+                     nmfConstantsMSVPA::TableMSVPASeasBiomass +
+                   " WHERE MSVPAname = '" + MSVPAName + "'" +
+                   " AND SpeName = '" + MSVPASpeList(i) + "'" +
+                    seasonStr +
+                   " GROUP By Year";
         dataMap = databasePtr->nmfQueryDatabase(queryStr, fields);
         for (int j = 0; j < NumYears; ++j) {
             if (i == 0) {
@@ -2692,10 +2707,12 @@ void nmfOutputChartLine::MSVPA_MultispeciesPopulations_TotalAbundance(
     for (int i = 0; i < NMSVPASpe; ++i) {
         colLabels << QString::fromStdString(MSVPASpeList(i));
         fields = {"Year","Abundance"};
-        queryStr = "SELECT Year, Sum(" + abundVariable + ") AS Abundance FROM MSVPASeasBiomass WHERE MSVPAname = '" + MSVPAName + "'" +
-                " AND SpeName = '" + MSVPASpeList(i) + "'" +
-                  seasonStr +
-                " GROUP By Year";
+        queryStr = "SELECT Year, Sum(" + abundVariable + ") AS Abundance FROM " +
+                     nmfConstantsMSVPA::TableMSVPASeasBiomass +
+                   " WHERE MSVPAname = '" + MSVPAName + "'" +
+                   " AND SpeName = '" + MSVPASpeList(i) + "'" +
+                    seasonStr +
+                   " GROUP By Year";
         dataMap = databasePtr->nmfQueryDatabase(queryStr, fields);
 
         for (int j = 0; j <  NumYears; ++j) {
@@ -2777,7 +2794,9 @@ void nmfOutputChartLine::MSVPA_MultispeciesPopulations_Age1PlusBiomass(
         colLabels << QString::fromStdString(MSVPASpeList(i));
 
         fields = {"Year","Biomass"};
-        queryStr = "SELECT Year, Sum(" + abundVariable + ") AS Biomass FROM MSVPASeasBiomass WHERE MSVPAname = '" + MSVPAName + "'" +
+        queryStr = "SELECT Year, Sum(" + abundVariable + ") AS Biomass FROM " +
+                     nmfConstantsMSVPA::TableMSVPASeasBiomass +
+                   " WHERE MSVPAname = '" + MSVPAName + "'" +
                    " AND SpeName = '" + MSVPASpeList(i) + "'" +
                      seasonStr +
                    " AND Age >= 1 GROUP By Year";
@@ -2863,10 +2882,12 @@ void nmfOutputChartLine::MSVPA_MultispeciesPopulations_Age1PlusAbundance(
         colLabels << QString::fromStdString(MSVPASpeList(i));
 
         fields = {"Year","Abundance"};
-        queryStr = "SELECT Year, Sum(" + abundVariable + ") AS Abundance FROM MSVPASeasBiomass WHERE MSVPAname = '" + MSVPAName + "'" +
-                " AND SpeName = '" + MSVPASpeList(i) + "'" +
-                  seasonStr +
-                " AND Age >= 1 GROUP By Year";
+        queryStr = "SELECT Year, Sum(" + abundVariable + ") AS Abundance FROM " +
+                    nmfConstantsMSVPA::TableMSVPASeasBiomass +
+                   " WHERE MSVPAname = '" + MSVPAName + "'" +
+                   " AND SpeName = '" + MSVPASpeList(i) + "'" +
+                    seasonStr +
+                   " AND Age >= 1 GROUP By Year";
         dataMap = databasePtr->nmfQueryDatabase(queryStr, fields);
 
         for (int j = 0; j <  NumYears; ++j) {
@@ -2949,10 +2970,12 @@ void nmfOutputChartLine::MSVPA_MultispeciesPopulations_SpawningStockBiomass(
         colLabels << QString::fromStdString(MSVPASpeList(i));
 
         fields = {"Year","Age","Biomass"};
-        queryStr = "SELECT Year, Age, Sum(" + abundVariable + ") AS Biomass FROM MSVPASeasBiomass WHERE MSVPAname = '" + MSVPAName + "'" +
-                " AND SpeName = '"  + MSVPASpeList(i) + "'" +
-                  seasonStr +
-                " GROUP By Year, Age";
+        queryStr = "SELECT Year, Age, Sum(" + abundVariable + ") AS Biomass FROM " +
+                    nmfConstantsMSVPA::TableMSVPASeasBiomass +
+                   " WHERE MSVPAname = '" + MSVPAName + "'" +
+                   " AND SpeName = '"  + MSVPASpeList(i) + "'" +
+                     seasonStr +
+                   " GROUP By Year, Age";
         dataMap = databasePtr->nmfQueryDatabase(queryStr, fields);
 
         m = 0;
