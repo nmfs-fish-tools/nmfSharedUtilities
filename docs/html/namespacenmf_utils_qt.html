@@ -281,6 +281,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a60383b9f64e385e8ddaa7afd4aca817b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a60383b9f64e385e8ddaa7afd4aca817b">getCovariates</a> (<a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;NLoptDataStruct, const int &amp;numYears, const std::string &amp;parameterName, boost::numeric::ublas::matrix&lt; double &gt; &amp;covariateMatrix)</td></tr>
 <tr class="memdesc:a60383b9f64e385e8ddaa7afd4aca817b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back the Covariate Values for all species for the given year and parameter.  <a href="namespacenmf_utils_qt.html#a60383b9f64e385e8ddaa7afd4aca817b">More...</a><br /></td></tr>
 <tr class="separator:a60383b9f64e385e8ddaa7afd4aca817b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe56c19cb8cd59dbf3d6278bf816fb16"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#abe56c19cb8cd59dbf3d6278bf816fb16">reselectTableViewCells</a> (QTableView *tv, QModelIndexList indexes)</td></tr>
+<tr class="memdesc:abe56c19cb8cd59dbf3d6278bf816fb16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reselects the passed indexes from within the passed tableview.  <a href="namespacenmf_utils_qt.html#abe56c19cb8cd59dbf3d6278bf816fb16">More...</a><br /></td></tr>
+<tr class="separator:abe56c19cb8cd59dbf3d6278bf816fb16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7257537712ae66d36e7f4854f54dec86"><td class="memItemLeft" align="right" valign="top">QModelIndexList&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a7257537712ae66d36e7f4854f54dec86">getSelectedTableViewCells</a> (QTableView *tv)</td></tr>
+<tr class="memdesc:a7257537712ae66d36e7f4854f54dec86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a list of selected tableview cells.  <a href="namespacenmf_utils_qt.html#a7257537712ae66d36e7f4854f54dec86">More...</a><br /></td></tr>
+<tr class="separator:a7257537712ae66d36e7f4854f54dec86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -1298,6 +1304,33 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
 
 </div>
 </div>
+<a id="a7257537712ae66d36e7f4854f54dec86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7257537712ae66d36e7f4854f54dec86">&#9670;&nbsp;</a></span>getSelectedTableViewCells()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QModelIndexList nmfUtilsQt::getSelectedTableViewCells </td>
+          <td>(</td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tv</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets a list of selected tableview cells. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tv</td><td>: tableview to find the selected cells of </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>list of indexes of selected cells </dd></dl>
+
+</div>
+</div>
 <a id="a0c838cb5b372e4f06d76faa0cd0cfbb0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0c838cb5b372e4f06d76faa0cd0cfbb0">&#9670;&nbsp;</a></span>getTabIndex()</h2>
 
@@ -2053,6 +2086,43 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns 1 if rename was successful, -1 if not successful </dd></dl>
+
+</div>
+</div>
+<a id="abe56c19cb8cd59dbf3d6278bf816fb16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe56c19cb8cd59dbf3d6278bf816fb16">&#9670;&nbsp;</a></span>reselectTableViewCells()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::reselectTableViewCells </td>
+          <td>(</td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QModelIndexList&#160;</td>
+          <td class="paramname"><em>indexes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reselects the passed indexes from within the passed tableview. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tv</td><td>: tableview to reselect indexes </td></tr>
+    <tr><td class="paramname">indexes</td><td>: indexes to reselect </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

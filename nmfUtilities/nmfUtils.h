@@ -152,6 +152,20 @@ namespace nmfUtils {
     void append(std::vector<double>& newVec,
                 std::vector<double>& currentVec);
     /**
+     * @brief applies the appropriate covariate logic to the covariate values
+     * @param logger : application logger to which to post error messages
+     * @param covariateAlgorithmType : type of covariate algorithm to be used
+     * @param parameter : estimated parameter which the covariate operations are applied to
+     * @param covariateCoeff : the covariate coefficient value
+     * @param covariateValue : the covariate value entered by the user
+     * @return the value of the parameter with the covariate applied
+     */
+    double applyCovariate(nmfLogger *logger,
+                          const std::string& covariateAlgorithmType,
+                          const double& parameter,
+                          const double& covariateCoeff,
+                          const double& covariateValue);
+    /**
      * @brief Checks that there's at least one item in the passed table's field
      * @param logger : application logger to which to post error messages
      * @param table : table being checked

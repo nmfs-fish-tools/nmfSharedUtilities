@@ -199,6 +199,17 @@ public:
             std::string& CompetitionForm,
             const bool&  showPopupError);
     /**
+     * @brief Gets the last saved covariate type for the current project name and model name
+     * @param logger : logger pointer used to log any errors
+     * @param ProjectName : name of project
+     * @param ModelName : name of model
+     * @return Returns the last saved covariate type
+     */
+    std::string getCovariateAlgorithmType(
+            nmfLogger* logger,
+            const std::string& ProjectName,
+            const std::string& ModelName);
+    /**
      * @brief Gets all the guilds in the current project
      * @param logger : logger pointer used to log any error messages
      * @param guilds : vector of guilds in the current project

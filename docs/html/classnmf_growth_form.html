@@ -79,21 +79,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab6f1386da448369e349fcfbad6f13465"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_growth_form.html#ab6f1386da448369e349fcfbad6f13465">nmfGrowthForm</a> (std::string type)</td></tr>
 <tr class="memdesc:ab6f1386da448369e349fcfbad6f13465"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor method for class.  <a href="classnmf_growth_form.html#ab6f1386da448369e349fcfbad6f13465">More...</a><br /></td></tr>
 <tr class="separator:ab6f1386da448369e349fcfbad6f13465"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee9baa38e148b0869d738f60fdd8afa8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_growth_form.html#aee9baa38e148b0869d738f60fdd8afa8">evaluate</a> (const double &amp;BiomassAtTime, const double &amp;EstGrowthRates, const double &amp;EstGrowthRateCovariateCoeffs, const double &amp;GrowthRateCovariates, const double &amp;EstCarryingCapacity, const double &amp;EstCarryingCapacityCovariateCoeffs, const double &amp;CarryingCapacityCovariates)</td></tr>
-<tr class="memdesc:aee9baa38e148b0869d738f60fdd8afa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method allows the appropriate function map function to be called such that a series of if...else... statements are not needed.  <a href="classnmf_growth_form.html#aee9baa38e148b0869d738f60fdd8afa8">More...</a><br /></td></tr>
-<tr class="separator:aee9baa38e148b0869d738f60fdd8afa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a0fd8887993b1486ecde2f3489e7ad1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_growth_form.html#a4a0fd8887993b1486ecde2f3489e7ad1">evaluate</a> (const std::string &amp;CovariateAlgorithmType, const double &amp;BiomassAtTime, const double &amp;EstGrowthRates, const double &amp;EstGrowthRateCovariateCoeffs, const double &amp;GrowthRateCovariates, const double &amp;EstCarryingCapacity, const double &amp;EstCarryingCapacityCovariateCoeffs, const double &amp;CarryingCapacityCovariates)</td></tr>
+<tr class="memdesc:a4a0fd8887993b1486ecde2f3489e7ad1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method allows the appropriate function map function to be called such that a series of if...else... statements are not needed.  <a href="classnmf_growth_form.html#a4a0fd8887993b1486ecde2f3489e7ad1">More...</a><br /></td></tr>
+<tr class="separator:a4a0fd8887993b1486ecde2f3489e7ad1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc3205bfa3b010bcba2e0bd80dfe381d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_growth_form.html#abc3205bfa3b010bcba2e0bd80dfe381d">extractParameters</a> (const std::vector&lt; double &gt; &amp;Parameters, int &amp;StartPos, std::vector&lt; double &gt; &amp;GrowthRate, std::vector&lt; double &gt; &amp;GrowthRateCovariateCoeff, std::vector&lt; double &gt; &amp;CarryingCapacity, std::vector&lt; double &gt; &amp;CarryingCapacityCovariateCoeff, double &amp;systemCarryingCapacity)</td></tr>
 <tr class="memdesc:abc3205bfa3b010bcba2e0bd80dfe381d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unpacks the parameters from the Parameters list and loads them into their respective data structures.  <a href="classnmf_growth_form.html#abc3205bfa3b010bcba2e0bd80dfe381d">More...</a><br /></td></tr>
 <tr class="separator:abc3205bfa3b010bcba2e0bd80dfe381d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9449ed4aa9549373b91e7cbfba051995"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_growth_form.html#a9449ed4aa9549373b91e7cbfba051995">FunctionMap_Linear</a> (const double &amp;BiomassAtTime, const double &amp;EstGrowthRates, const double &amp;EstGrowthRateCovariateCoeffs, const double &amp;GrowthRateCovariates, const double &amp;EstCarryingCapacity, const double &amp;EstCarryingCapacityCovariateCoeffs, const double &amp;CarryingCapacityCovariates)</td></tr>
-<tr class="memdesc:a9449ed4aa9549373b91e7cbfba051995"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function implements the Linear growth rate function.  <a href="classnmf_growth_form.html#a9449ed4aa9549373b91e7cbfba051995">More...</a><br /></td></tr>
-<tr class="separator:a9449ed4aa9549373b91e7cbfba051995"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7988632ca66c0ce7f395998b89c9664f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_growth_form.html#a7988632ca66c0ce7f395998b89c9664f">FunctionMap_Logistic</a> (const double &amp;BiomassAtTime, const double &amp;EstGrowthRates, const double &amp;EstGrowthRateCovariateCoeffs, const double &amp;GrowthRateCovariates, const double &amp;EstCarryingCapacity, const double &amp;EstCarryingCapacityCovariateCoeffs, const double &amp;CarryingCapacityCovariates)</td></tr>
-<tr class="memdesc:a7988632ca66c0ce7f395998b89c9664f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function implements the Logistic growth rate function.  <a href="classnmf_growth_form.html#a7988632ca66c0ce7f395998b89c9664f">More...</a><br /></td></tr>
-<tr class="separator:a7988632ca66c0ce7f395998b89c9664f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0659d939860c3ec05d8276adaa4d7ee8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_growth_form.html#a0659d939860c3ec05d8276adaa4d7ee8">FunctionMap_Null</a> (const double &amp;BiomassAtTime, const double &amp;EstGrowthRates, const double &amp;EstGrowthRateCovariateCoeffs, const double &amp;GrowthRateCovariates, const double &amp;EstCarryingCapacity, const double &amp;EstCarryingCapacityCovariateCoeffs, const double &amp;CarryingCapacityCovariates)</td></tr>
-<tr class="memdesc:a0659d939860c3ec05d8276adaa4d7ee8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function implements the Null growth rate function (i.e., 0)  <a href="classnmf_growth_form.html#a0659d939860c3ec05d8276adaa4d7ee8">More...</a><br /></td></tr>
-<tr class="separator:a0659d939860c3ec05d8276adaa4d7ee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36e847fc8635f54c2d80159b77f6360b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_growth_form.html#a36e847fc8635f54c2d80159b77f6360b">FunctionMap_Linear</a> (const std::string &amp;CovariateAlgorithmType, const double &amp;BiomassAtTime, const double &amp;EstGrowthRates, const double &amp;EstGrowthRateCovariateCoeffs, const double &amp;GrowthRateCovariates, const double &amp;EstCarryingCapacity, const double &amp;EstCarryingCapacityCovariateCoeffs, const double &amp;CarryingCapacityCovariates)</td></tr>
+<tr class="memdesc:a36e847fc8635f54c2d80159b77f6360b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function implements the Linear growth rate function.  <a href="classnmf_growth_form.html#a36e847fc8635f54c2d80159b77f6360b">More...</a><br /></td></tr>
+<tr class="separator:a36e847fc8635f54c2d80159b77f6360b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac62ed2eaae29424138d0fb8d9234da21"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_growth_form.html#ac62ed2eaae29424138d0fb8d9234da21">FunctionMap_Logistic</a> (const std::string &amp;CovariateAlgorithmType, const double &amp;BiomassAtTime, const double &amp;EstGrowthRates, const double &amp;EstGrowthRateCovariateCoeffs, const double &amp;GrowthRateCovariates, const double &amp;EstCarryingCapacity, const double &amp;EstCarryingCapacityCovariateCoeffs, const double &amp;CarryingCapacityCovariates)</td></tr>
+<tr class="memdesc:ac62ed2eaae29424138d0fb8d9234da21"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function implements the Logistic growth rate function.  <a href="classnmf_growth_form.html#ac62ed2eaae29424138d0fb8d9234da21">More...</a><br /></td></tr>
+<tr class="separator:ac62ed2eaae29424138d0fb8d9234da21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade16be4c5d74006011a4664eaa0d7f31"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_growth_form.html#ade16be4c5d74006011a4664eaa0d7f31">FunctionMap_Null</a> (const std::string &amp;CovariateAlgorithmType, const double &amp;BiomassAtTime, const double &amp;EstGrowthRates, const double &amp;EstGrowthRateCovariateCoeffs, const double &amp;GrowthRateCovariates, const double &amp;EstCarryingCapacity, const double &amp;EstCarryingCapacityCovariateCoeffs, const double &amp;CarryingCapacityCovariates)</td></tr>
+<tr class="memdesc:ade16be4c5d74006011a4664eaa0d7f31"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function implements the Null growth rate function (i.e., 0)  <a href="classnmf_growth_form.html#ade16be4c5d74006011a4664eaa0d7f31">More...</a><br /></td></tr>
+<tr class="separator:ade16be4c5d74006011a4664eaa0d7f31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a014f9805aca0c7b8f0e0271330dac15a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_growth_form.html#a014f9805aca0c7b8f0e0271330dac15a">getExpression</a> ()</td></tr>
 <tr class="memdesc:a014f9805aca0c7b8f0e0271330dac15a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the expression for the selected Growth Form algorithm.  <a href="classnmf_growth_form.html#a014f9805aca0c7b8f0e0271330dac15a">More...</a><br /></td></tr>
 <tr class="separator:a014f9805aca0c7b8f0e0271330dac15a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,8 +146,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aee9baa38e148b0869d738f60fdd8afa8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee9baa38e148b0869d738f60fdd8afa8">&#9670;&nbsp;</a></span>evaluate()</h2>
+<a id="a4a0fd8887993b1486ecde2f3489e7ad1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a0fd8887993b1486ecde2f3489e7ad1">&#9670;&nbsp;</a></span>evaluate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -155,6 +155,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">double nmfGrowthForm::evaluate </td>
           <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>CovariateAlgorithmType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>BiomassAtTime</em>, </td>
         </tr>
@@ -205,6 +211,7 @@ Public Member Functions</h2></td></tr>
 <p>This method allows the appropriate function map function to be called such that a series of if...else... statements are not needed. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">CovariateAlgorithmType</td><td>: the covariate algorithm type to use for subsequent covariate calculations </td></tr>
     <tr><td class="paramname">BiomassAtTime</td><td>: biomass at the currrent time </td></tr>
     <tr><td class="paramname">EstGrowthRates</td><td>: estimated growth rate values </td></tr>
     <tr><td class="paramname">EstGrowthRateCovariateCoeffs</td><td>: estimated growth rate covariate coefficient values </td></tr>
@@ -290,8 +297,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a9449ed4aa9549373b91e7cbfba051995"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9449ed4aa9549373b91e7cbfba051995">&#9670;&nbsp;</a></span>FunctionMap_Linear()</h2>
+<a id="a36e847fc8635f54c2d80159b77f6360b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36e847fc8635f54c2d80159b77f6360b">&#9670;&nbsp;</a></span>FunctionMap_Linear()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -299,6 +306,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">double nmfGrowthForm::FunctionMap_Linear </td>
           <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>CovariateAlgorithmType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>BiomassAtTime</em>, </td>
         </tr>
@@ -349,6 +362,7 @@ Public Member Functions</h2></td></tr>
 <p>This function implements the Linear growth rate function. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">CovariateAlgorithmType</td><td>: the covariate algorithm type to use for subsequent covariate calculations </td></tr>
     <tr><td class="paramname">BiomassAtTime</td><td>: biomass at the currrent time </td></tr>
     <tr><td class="paramname">EstGrowthRates</td><td>: estimated growth rate values </td></tr>
     <tr><td class="paramname">EstGrowthRateCovariateCoeffs</td><td>: estimated growth rate covariate coefficient values </td></tr>
@@ -363,8 +377,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a7988632ca66c0ce7f395998b89c9664f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7988632ca66c0ce7f395998b89c9664f">&#9670;&nbsp;</a></span>FunctionMap_Logistic()</h2>
+<a id="ac62ed2eaae29424138d0fb8d9234da21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac62ed2eaae29424138d0fb8d9234da21">&#9670;&nbsp;</a></span>FunctionMap_Logistic()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -372,6 +386,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">double nmfGrowthForm::FunctionMap_Logistic </td>
           <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>CovariateAlgorithmType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>BiomassAtTime</em>, </td>
         </tr>
@@ -422,6 +442,7 @@ Public Member Functions</h2></td></tr>
 <p>This function implements the Logistic growth rate function. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">CovariateAlgorithmType</td><td>: the covariate algorithm type to use for subsequent covariate calculations </td></tr>
     <tr><td class="paramname">BiomassAtTime</td><td>: biomass at the currrent time </td></tr>
     <tr><td class="paramname">EstGrowthRates</td><td>: estimated growth rate values </td></tr>
     <tr><td class="paramname">EstGrowthRateCovariateCoeffs</td><td>: estimated growth rate covariate coefficient values </td></tr>
@@ -436,8 +457,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a0659d939860c3ec05d8276adaa4d7ee8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0659d939860c3ec05d8276adaa4d7ee8">&#9670;&nbsp;</a></span>FunctionMap_Null()</h2>
+<a id="ade16be4c5d74006011a4664eaa0d7f31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade16be4c5d74006011a4664eaa0d7f31">&#9670;&nbsp;</a></span>FunctionMap_Null()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -445,6 +466,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">double nmfGrowthForm::FunctionMap_Null </td>
           <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>CovariateAlgorithmType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>BiomassAtTime</em>, </td>
         </tr>
@@ -495,6 +522,7 @@ Public Member Functions</h2></td></tr>
 <p>This function implements the Null growth rate function (i.e., 0) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">CovariateAlgorithmType</td><td>: the covariate algorithm type to use for subsequent covariate calculations </td></tr>
     <tr><td class="paramname">BiomassAtTime</td><td>: biomass at the currrent time </td></tr>
     <tr><td class="paramname">EstGrowthRates</td><td>: estimated growth rate values </td></tr>
     <tr><td class="paramname">EstGrowthRateCovariateCoeffs</td><td>: estimated growth rate covariate coefficient values </td></tr>

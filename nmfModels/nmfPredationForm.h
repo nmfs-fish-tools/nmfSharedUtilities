@@ -59,6 +59,7 @@ private:
     std::map<std::string,std::string> m_PredationKey;
 
     std::map<std::string, double(nmfPredationForm::*)(
+            const std::string& covariateAlgorithmType,
             const int& TimeMinus1,
             const int& Species,
             const boost::numeric::ublas::matrix<double>& EstimatedBiomass,
@@ -84,6 +85,7 @@ public:
     /**
      * @brief This method allows the appropriate function map function to be called such that a series of if...else...
      * statements are not needed
+     * @param CovariateAlgorithmType : the covariate algorithm type to use for subsequent covariate calculations
      * @param TimeMinus1 : one minus the current time
      * @param Species : species number
      * @param EstimatedBiomass : matrix of estimated biomass
@@ -96,7 +98,8 @@ public:
      * @param PredationExponentCovariate : the predation exponent covariate values
      * @return Returns the Predation value evaluated with the appropriate function map algorithm
      */
-    double evaluate(const int& TimeMinus1,
+    double evaluate(const std::string& covariateAlgorithmType,
+                    const int& TimeMinus1,
                     const int& Species,
                     const boost::numeric::ublas::matrix<double>& EstimatedBiomass,
                     const double& EstimatedBiomassAtTimeMinus1,
@@ -154,6 +157,7 @@ public:
     int getNumParameters();
     /**
      * @brief This method implements the Predation Null algorithm (i.e., 0)
+     * @param CovariateAlgorithmType : the covariate algorithm type to use for subsequent covariate calculations
      * @param TimeMinus1 : one minus the current time
      * @param Species : species number
      * @param EstimatedBiomass : matrix of estimated biomass
@@ -166,7 +170,8 @@ public:
      * @param PredationExponentCovariate : the predation exponent covariate values
      * @return Returns 0
      */
-    double FunctionMap_Null(const int& TimeMinus1,
+    double FunctionMap_Null(const std::string& covariateAlgorithmType,
+                            const int& TimeMinus1,
                             const int& Species,
                             const boost::numeric::ublas::matrix<double>& EstimatedBiomass,
                             const double& EstimatedBiomassAtTimeMinus1,
@@ -178,6 +183,7 @@ public:
                             const boost::numeric::ublas::matrix<double>& PredationExponentCovariate);
     /**
      * @brief This method implements the Predation Type I algorithm
+     * @param CovariateAlgorithmType : the covariate algorithm type to use for subsequent covariate calculations
      * @param TimeMinus1 : one minus the current time
      * @param Species : species number
      * @param EstimatedBiomass : matrix of estimated biomass
@@ -190,7 +196,8 @@ public:
      * @param PredationExponentCovariate : the predation exponent covariate values
      * @return Returns the Predation Type I value
      */
-    double FunctionMap_TypeI(const int& TimeMinus1,
+    double FunctionMap_TypeI(const std::string& covariateAlgorithmType,
+                             const int& TimeMinus1,
                              const int& Species,
                              const boost::numeric::ublas::matrix<double>& EstimatedBiomass,
                              const double& EstimatedBiomassAtTimeMinus1,
@@ -202,6 +209,7 @@ public:
                              const boost::numeric::ublas::matrix<double>& PredationExponentCovariate);
     /**
      * @brief This method implements the Predation Type II algorithm
+     * @param CovariateAlgorithmType : the covariate algorithm type to use for subsequent covariate calculations
      * @param TimeMinus1 : one minus the current time
      * @param Species : species number
      * @param EstimatedBiomass : matrix of estimated biomass
@@ -214,7 +222,8 @@ public:
      * @param PredationExponentCovariate : the predation exponent covariate values
      * @return Returns the Predation Type II value
      */
-    double FunctionMap_TypeII(const int& TimeMinus1,
+    double FunctionMap_TypeII(const std::string& covariateAlgorithmType,
+                              const int& TimeMinus1,
                               const int& Species,
                               const boost::numeric::ublas::matrix<double>& EstimatedBiomass,
                               const double& EstimatedBiomassAtTimeMinus1,
@@ -226,6 +235,7 @@ public:
                               const boost::numeric::ublas::matrix<double>& PredationExponentCovariate);
     /**
      * @brief This method implements the Predation Type III algorithm
+     * @param CovariateAlgorithmType : the covariate algorithm type to use for subsequent covariate calculations
      * @param TimeMinus1 : one minus the current time
      * @param Species : species number
      * @param EstimatedBiomass : matrix of estimated biomass
@@ -238,7 +248,8 @@ public:
      * @param PredationExponentCovariate : the predation exponent covariate values
      * @return Returns the Predation Type III value
      */
-    double FunctionMap_TypeIII(const int& TimeMinus1,
+    double FunctionMap_TypeIII(const std::string& covariateAlgorithmType,
+                               const int& TimeMinus1,
                                const int& Species,
                                const boost::numeric::ublas::matrix<double>& EstimatedBiomass,
                                const double& EstimatedBiomassAtTimeMinus1,

@@ -56,6 +56,7 @@ private:
     std::map<std::string,std::string> m_HarvestKey;
 
     std::map<std::string,double(nmfHarvestForm::*)(
+            const std::string& CovariateAlgorithmType,
             const int& TimeMinus1,
             const int& Species,
             const double& BiomassAtTime,
@@ -80,6 +81,7 @@ public:
     /**
      * @brief This method allows the appropriate function map function to be called such that a series of if...else...
      * statements are not needed
+     * @param CovariateAlgorithmType : the covariate algorithm type to use for subsequent covariate calculations
      * @param TimeMinus1 : one minus the current time
      * @param Species : species number
      * @param BiomassAtTime : biomass at the currrent time
@@ -92,7 +94,8 @@ public:
      * @param CatchabilityCovariate : the catchability covariate values
      * @return Returns the harvest value evaluated with the appropriate function map algorithm
      */
-    double evaluate(const int& TimeMinus1,
+    double evaluate(const std::string& CovariateAlgorithmType,
+                    const int& TimeMinus1,
                     const int& Species,
                     const double& BiomassAtTime,
                     const boost::numeric::ublas::matrix<double>& Catch,
@@ -115,6 +118,7 @@ public:
             std::vector<double>& CatchabilityCovariateCoeffs);
     /**
      * @brief This method implements the Catch harvest algorithm
+     * @param CovariateAlgorithmType : the covariate algorithm type to use for subsequent covariate calculations
      * @param TimeMinus1 : one minus the current time
      * @param Species : species number
      * @param BiomassAtTime : biomass at the currrent time
@@ -127,7 +131,8 @@ public:
      * @param CatchabilityCovariate : the catchability covariate values
      * @return Returns the harvest value evaluated with the Catch algorithm
      */
-    double FunctionMap_Catch(const int& TimeMinus1,
+    double FunctionMap_Catch(const std::string& CovariateAlgorithmType,
+                             const int& TimeMinus1,
                              const int& Species,
                              const double& BiomassAtTime,
                              const boost::numeric::ublas::matrix<double>& Catch,
@@ -138,6 +143,7 @@ public:
                              const double& CatchabilityCovariate);
     /**
      * @brief This method implements the Effort harvest algorithm
+     * @param CovariateAlgorithmType : the covariate algorithm type to use for subsequent covariate calculations
      * @param TimeMinus1 : one minus the current time
      * @param Species : species number
      * @param BiomassAtTime : biomass at the currrent time
@@ -150,7 +156,8 @@ public:
      * @param CatchabilityCovariate : the catchability covariate values
      * @return Returns the harvest value evaluated with the Effort algorithm
      */
-    double FunctionMap_Effort(const int& TimeMinus1,
+    double FunctionMap_Effort(const std::string& CovariateAlgorithmType,
+                              const int& TimeMinus1,
                               const int& Species,
                               const double& BiomassAtTime,
                               const boost::numeric::ublas::matrix<double>& Catch,
@@ -161,6 +168,7 @@ public:
                               const double& CatchabilityCovariate);
     /**
      * @brief This method implements the Exploitation harvest algorithm
+     * @param CovariateAlgorithmType : the covariate algorithm type to use for subsequent covariate calculations
      * @param TimeMinus1 : one minus the current time
      * @param Species : species number
      * @param BiomassAtTime : biomass at the currrent time
@@ -173,7 +181,8 @@ public:
      * @param CatchabilityCovariate : the catchability covariate values
      * @return Returns the harvest value evaluated with the Exploitation algorithm
      */
-    double FunctionMap_Exploitation(const int& TimeMinus1,
+    double FunctionMap_Exploitation(const std::string& CovariateAlgorithmType,
+                                    const int& TimeMinus1,
                                     const int& Species,
                                     const double& BiomassAtTime,
                                     const boost::numeric::ublas::matrix<double>& Catch,
@@ -184,6 +193,7 @@ public:
                                     const double& CatchabilityCovariate);
     /**
      * @brief This method implements the Null harvest algorithm (i.e., 0)
+     * @param CovariateAlgorithmType : the covariate algorithm type to use for subsequent covariate calculations
      * @param TimeMinus1 : one minus the current time
      * @param Species : species number
      * @param BiomassAtTime : biomass at the currrent time
@@ -196,7 +206,8 @@ public:
      * @param CatchabilityCovariate : the catchability covariate values
      * @return Returns 0
      */
-    double FunctionMap_Null(const int& TimeMinus1,
+    double FunctionMap_Null(const std::string& CovariateAlgorithmType,
+                            const int& TimeMinus1,
                             const int& Species,
                             const double& BiomassAtTime,
                             const boost::numeric::ublas::matrix<double>& Catch,

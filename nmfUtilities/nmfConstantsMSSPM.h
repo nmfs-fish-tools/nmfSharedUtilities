@@ -216,6 +216,9 @@ namespace nmfConstantsMSSPM
      const QString      SectionDiagnostic                      = "Diagnostic Data Input";
      const QString      SectionForecast                        = "Forecast";
 
+     const std::string Linear                                  = "Linear";
+     const std::string Exponential                             = "Exponential";
+
      const std::string TableApplication                        = QString::fromStdString("Application").toLower().toStdString();
      const std::string TableBetweenGuildsInteractionCoeff      = QString::fromStdString("BetweenGuildsInteractionCoeff").toLower().toStdString();
      const std::string TableBiomassAbsolute                    = QString::fromStdString("BiomassAbsolute").toLower().toStdString();

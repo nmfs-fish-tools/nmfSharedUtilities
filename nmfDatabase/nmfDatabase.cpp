@@ -3357,6 +3357,36 @@ nmfDatabase::getHarvestData(
     return true;
 }
 
+std::string
+nmfDatabase::getCovariateAlgorithmType(
+        nmfLogger* logger,
+        const std::string& projectName,
+        const std::string& modelName)
+{
+    int NumRecords;
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+    std::string covariateAlgorithmType = "";
+
+    fields   = {"CovariateAlgorithmType"};
+    queryStr = "SELECT CovariateAlgorithmType FROM " +
+                nmfConstantsMSSPM::TableModels +
+                " WHERE ProjectName = '" + projectName +
+                "' AND ModelName = '" + modelName + "'";
+    dataMap  = nmfQueryDatabase(queryStr, fields);
+    NumRecords = dataMap["CovariateAlgorithmType"].size();
+    if (NumRecords == 1) {
+        covariateAlgorithmType = dataMap["CovariateAlgorithmType"][0];
+    } else {
+        if (logger != nullptr) {
+            logger->logMsg(nmfConstants::Error,"nmfDatabase::getCovariateAlgorithmType: Found incorrect number of records (i.e., not equal to 1)");
+        }
+    }
+
+    return covariateAlgorithmType;
+}
+
 double
 nmfDatabase::checkForValues(
             const int& index,

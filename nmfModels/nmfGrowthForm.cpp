@@ -66,13 +66,14 @@ nmfGrowthForm::loadParameterRanges(
         std::vector<std::pair<double,double> >& parameterRanges,
         const nmfStructsQt::ModelDataStruct& dataStruct)
 {
-    m_NumSpecies = (int)dataStruct.SpeciesNames.size();
     bool isCheckedGrowthRate       = nmfUtils::isEstimateParameterChecked(dataStruct,"GrowthRate");
     bool isCheckedCarryingCapacity = nmfUtils::isEstimateParameterChecked(dataStruct,"CarryingCapacity");
     std::string speciesName;
     std::map<std::string,nmfStructsQt::CovariateStruct> covariateCoeffMap;
     nmfStructsQt::CovariateStruct covariateStruct;
     std::pair<double,double> aPair;
+
+    m_NumSpecies = (int)dataStruct.SpeciesNames.size();
 
     if (m_NumSpecies != (int)dataStruct.GrowthRateMin.size()) {
         std::cout << "Error nmfGrowthForm::loadParameterRanges: GrowthRateMin size is not the same as NumSpecies" << std::endl;
@@ -205,7 +206,8 @@ nmfGrowthForm::extractParameters(
 }
 
 double
-nmfGrowthForm::evaluate(const double& biomassAtTimeT,
+nmfGrowthForm::evaluate(const std::string& covariateAlgorithmType,
+                        const double& biomassAtTimeT,
                         const double& growthRate,
                         const double& growthRateCovariateCoeff,
                         const double& growthRateCovariate,
@@ -216,7 +218,8 @@ nmfGrowthForm::evaluate(const double& biomassAtTimeT,
     if (FunctionMap.find(m_Type) == FunctionMap.end()) {
         return 0;
     } else {
-        return (this->*FunctionMap[m_Type])(biomassAtTimeT,
+        return (this->*FunctionMap[m_Type])(covariateAlgorithmType,
+                                            biomassAtTimeT,
                                             growthRate,
                                             growthRateCovariate,
                                             growthRateCovariateCoeff,
@@ -227,7 +230,8 @@ nmfGrowthForm::evaluate(const double& biomassAtTimeT,
 }
 
 double
-nmfGrowthForm::FunctionMap_Null(const double& biomassAtTime,
+nmfGrowthForm::FunctionMap_Null(const std::string& covariateAlgorithmType,
+                                const double& biomassAtTime,
                                 const double& growthRate,
                                 const double& growthRateCovariateCoeff,
                                 const double& growthRateCovariate,
@@ -239,7 +243,8 @@ nmfGrowthForm::FunctionMap_Null(const double& biomassAtTime,
 }
 
 double
-nmfGrowthForm::FunctionMap_Linear(const double& biomassAtTime,
+nmfGrowthForm::FunctionMap_Linear(const std::string& covariateAlgorithmType,
+                                  const double& biomassAtTime,
                                   const double& growthRate,
                                   const double& growthRateCovariateCoeff,
                                   const double& growthRateCovariate,
@@ -247,12 +252,17 @@ nmfGrowthForm::FunctionMap_Linear(const double& biomassAtTime,
                                   const double& carryingCapacityCovariateCoeff,
                                   const double& carryingCapacityCovariate)
 {
-    double growthRateTerm  = growthRate*(1.0 + growthRateCovariateCoeff*growthRateCovariate);
+//  double growthRateTerm = growthRate*(1.0+growthRateCovariateCoeff*growthRateCovariate);
+    double growthRateTerm = nmfUtils::applyCovariate(nullptr,
+                covariateAlgorithmType,growthRate,
+                growthRateCovariateCoeff,growthRateCovariate);
+
     return growthRateTerm*biomassAtTime;
 }
 
 double
-nmfGrowthForm::FunctionMap_Logistic(const double& biomassAtTime,
+nmfGrowthForm::FunctionMap_Logistic(const std::string& covariateAlgorithmType,
+                                    const double& biomassAtTime,
                                     const double& growthRate,
                                     const double& growthRateCovariateCoeff,
                                     const double& growthRateCovariate,
@@ -260,8 +270,15 @@ nmfGrowthForm::FunctionMap_Logistic(const double& biomassAtTime,
                                     const double& carryingCapacityCovariateCoeff,
                                     const double& carryingCapacityCovariate)
 {
-    double growthRateTerm       = growthRate       * (1.0 + growthRateCovariateCoeff       * growthRateCovariate);
-    double carryingCapacityTerm = carryingCapacity * (1.0 + carryingCapacityCovariateCoeff * carryingCapacityCovariate);
+//  double growthRateTerm       = growthRate       * (1.0+growthRateCovariateCoeff       * growthRateCovariate);
+//  double carryingCapacityTerm = carryingCapacity * (1.0+carryingCapacityCovariateCoeff * carryingCapacityCovariate);
+
+    double growthRateTerm = nmfUtils::applyCovariate(nullptr,
+                covariateAlgorithmType,growthRate,
+                growthRateCovariateCoeff,growthRateCovariate);
+    double carryingCapacityTerm = nmfUtils::applyCovariate(nullptr,
+                covariateAlgorithmType,carryingCapacity,
+                carryingCapacityCovariateCoeff,carryingCapacityCovariate);
 
     return (growthRateTerm * biomassAtTime * (1.0-biomassAtTime/(carryingCapacityTerm)));
 }

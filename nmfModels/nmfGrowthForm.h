@@ -55,6 +55,7 @@ private:
     std::map<std::string,std::string> m_GrowthKey;
 
     std::map<std::string, double(nmfGrowthForm::*)(
+            const std::string& CovariateAlgorithmType,
             const double& BiomassAtTime,
             const double& EstGrowthRate,
             const double& EstGrowthRateCovariateCoeff,
@@ -77,6 +78,7 @@ public:
     /**
      * @brief This method allows the appropriate function map function to be called such that a series of if...else...
      * statements are not needed
+     * @param CovariateAlgorithmType : the covariate algorithm type to use for subsequent covariate calculations
      * @param BiomassAtTime : biomass at the currrent time
      * @param EstGrowthRates : estimated growth rate values
      * @param EstGrowthRateCovariateCoeffs : estimated growth rate covariate coefficient values
@@ -86,7 +88,8 @@ public:
      * @param CarryingCapacityCovariates : carrying capacity covariate values
      * @return Returns the growth value evaluated with the appropriate function map algorithm
      */
-    double evaluate(const double& BiomassAtTime,
+    double evaluate(const std::string& CovariateAlgorithmType,
+                    const double& BiomassAtTime,
                     const double& EstGrowthRates,
                     const double& EstGrowthRateCovariateCoeffs,
                     const double& GrowthRateCovariates,
@@ -112,6 +115,7 @@ public:
             double& systemCarryingCapacity);
     /**
      * @brief This function implements the Linear growth rate function
+     * @param CovariateAlgorithmType : the covariate algorithm type to use for subsequent covariate calculations
      * @param BiomassAtTime : biomass at the currrent time
      * @param EstGrowthRates : estimated growth rate values
      * @param EstGrowthRateCovariateCoeffs : estimated growth rate covariate coefficient values
@@ -121,7 +125,8 @@ public:
      * @param CarryingCapacityCovariates : carrying capacity covariate values
      * @return Returns the Linear growth rate function
      */
-    double FunctionMap_Linear(const double& BiomassAtTime,
+    double FunctionMap_Linear(const std::string& CovariateAlgorithmType,
+                              const double& BiomassAtTime,
                               const double& EstGrowthRates,
                               const double& EstGrowthRateCovariateCoeffs,
                               const double& GrowthRateCovariates,
@@ -130,6 +135,7 @@ public:
                               const double& CarryingCapacityCovariates);
     /**
      * @brief This function implements the Logistic growth rate function
+     * @param CovariateAlgorithmType : the covariate algorithm type to use for subsequent covariate calculations
      * @param BiomassAtTime : biomass at the currrent time
      * @param EstGrowthRates : estimated growth rate values
      * @param EstGrowthRateCovariateCoeffs : estimated growth rate covariate coefficient values
@@ -139,7 +145,8 @@ public:
      * @param CarryingCapacityCovariates : carrying capacity covariate values
      * @return Returns the Logistic growth rate function
      */
-    double FunctionMap_Logistic(const double& BiomassAtTime,
+    double FunctionMap_Logistic(const std::string& CovariateAlgorithmType,
+                                const double& BiomassAtTime,
                                 const double& EstGrowthRates,
                                 const double& EstGrowthRateCovariateCoeffs,
                                 const double& GrowthRateCovariates,
@@ -148,6 +155,7 @@ public:
                                 const double& CarryingCapacityCovariates);
     /**
      * @brief This function implements the Null growth rate function (i.e., 0)
+     * @param CovariateAlgorithmType : the covariate algorithm type to use for subsequent covariate calculations
      * @param BiomassAtTime : biomass at the currrent time
      * @param EstGrowthRates : estimated growth rate values
      * @param EstGrowthRateCovariateCoeffs : estimated growth rate covariate coefficient values
@@ -157,7 +165,8 @@ public:
      * @param CarryingCapacityCovariates : carrying capacity covariate values
      * @return Returns 0
      */
-    double FunctionMap_Null(const double& BiomassAtTime,
+    double FunctionMap_Null(const std::string& CovariateAlgorithmType,
+                            const double& BiomassAtTime,
                             const double& EstGrowthRates,
                             const double& EstGrowthRateCovariateCoeffs,
                             const double& GrowthRateCovariates,

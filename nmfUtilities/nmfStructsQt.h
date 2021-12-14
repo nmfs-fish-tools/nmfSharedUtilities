@@ -286,6 +286,8 @@ struct ModelDataStruct {
     std::string ObjectiveCriterion;
     std::string ScalingAlgorithm;
 
+    std::string CovariateAlgorithmType;
+
     std::vector<std::string>              SpeciesNames;
     std::map<int,std::vector<int> >       GuildSpecies; // List of species numbers that make up guild num
     std::vector<int>                      GuildNum;     // Specifies which species are members of which guilds

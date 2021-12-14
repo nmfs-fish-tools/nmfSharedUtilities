@@ -111,6 +111,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a454b5b43c3ac708aa1a712e17b645674"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a454b5b43c3ac708aa1a712e17b645674">getAlgorithmIdentifiers</a> (QWidget *widget, <a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, std::string &amp;Algorithm, std::string &amp;Minimizer, std::string &amp;ObjectiveCriterion, std::string &amp;Scaling, std::string &amp;CompetitionForm, const bool &amp;showPopupError)</td></tr>
 <tr class="memdesc:a454b5b43c3ac708aa1a712e17b645674"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the identifying information for the current estimation algorithm selected.  <a href="classnmf_database.html#a454b5b43c3ac708aa1a712e17b645674">More...</a><br /></td></tr>
 <tr class="separator:a454b5b43c3ac708aa1a712e17b645674"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fb6edf3388529b231e64e1217b75927"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a9fb6edf3388529b231e64e1217b75927">getCovariateAlgorithmType</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;ProjectName, const std::string &amp;ModelName)</td></tr>
+<tr class="memdesc:a9fb6edf3388529b231e64e1217b75927"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the last saved covariate type for the current project name and model name.  <a href="classnmf_database.html#a9fb6edf3388529b231e64e1217b75927">More...</a><br /></td></tr>
+<tr class="separator:a9fb6edf3388529b231e64e1217b75927"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a1a05895333ec2eaf65620634801151"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a3a1a05895333ec2eaf65620634801151">getGuilds</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, std::vector&lt; std::string &gt; &amp;guilds)</td></tr>
 <tr class="memdesc:a3a1a05895333ec2eaf65620634801151"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets all the guilds in the current project.  <a href="classnmf_database.html#a3a1a05895333ec2eaf65620634801151">More...</a><br /></td></tr>
 <tr class="separator:a3a1a05895333ec2eaf65620634801151"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -325,126 +328,126 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aea278ced21fdde1e2476a472e156c861"><td class="memItemLeft" align="right" valign="top"><a id="aea278ced21fdde1e2476a472e156c861"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createApplication</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:aea278ced21fdde1e2476a472e156c861"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af05296f25349d270a15479c06da1c15d"><td class="memItemLeft" align="right" valign="top"><a id="af05296f25349d270a15479c06da1c15d"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createForeEnergyDens</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:af05296f25349d270a15479c06da1c15d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a205a353aad95e6c380a655770ed6302e"><td class="memItemLeft" align="right" valign="top"><a id="a205a353aad95e6c380a655770ed6302e"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createForeOutput</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a205a353aad95e6c380a655770ed6302e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f2b581facdd4b67fad18a2b7ec200b2"><td class="memItemLeft" align="right" valign="top"><a id="a8f2b581facdd4b67fad18a2b7ec200b2"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createForePredGrowth</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a8f2b581facdd4b67fad18a2b7ec200b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af23919953809ea26e878b14b05f6c1d9"><td class="memItemLeft" align="right" valign="top"><a id="af23919953809ea26e878b14b05f6c1d9"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createForePredVonB</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:af23919953809ea26e878b14b05f6c1d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af55ae04cb7261c1d5d68f9cd64ea9a14"><td class="memItemLeft" align="right" valign="top"><a id="af55ae04cb7261c1d5d68f9cd64ea9a14"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createForeSRQ</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:af55ae04cb7261c1d5d68f9cd64ea9a14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33d66d0c0c6ddc4009fad1bc1dbb5960"><td class="memItemLeft" align="right" valign="top"><a id="a33d66d0c0c6ddc4009fad1bc1dbb5960"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createForeSRR</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a33d66d0c0c6ddc4009fad1bc1dbb5960"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ad7110b49eec58b29e014d5b596864f"><td class="memItemLeft" align="right" valign="top"><a id="a6ad7110b49eec58b29e014d5b596864f"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createForeSuitPreyBiomass</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a6ad7110b49eec58b29e014d5b596864f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a79acb6f1c0dec453f1447aa1069c25"><td class="memItemLeft" align="right" valign="top"><a id="a6a79acb6f1c0dec453f1447aa1069c25"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createForecasts</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a6a79acb6f1c0dec453f1447aa1069c25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ec9d08a1c9f942e922f430e8cf890b2"><td class="memItemLeft" align="right" valign="top"><a id="a5ec9d08a1c9f942e922f430e8cf890b2"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createMSVPAEnergyDens</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a5ec9d08a1c9f942e922f430e8cf890b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33fd1767e6793e16f6b61778b90fc768"><td class="memItemLeft" align="right" valign="top"><a id="a33fd1767e6793e16f6b61778b90fc768"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createMSVPAOthPrey</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a33fd1767e6793e16f6b61778b90fc768"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c7ab826f10ea07be60b68c11a0c4479"><td class="memItemLeft" align="right" valign="top"><a id="a0c7ab826f10ea07be60b68c11a0c4479"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createMSVPAOthPreyAnn</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a0c7ab826f10ea07be60b68c11a0c4479"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02dff1b417f6d4f06cabd361315fc6fc"><td class="memItemLeft" align="right" valign="top"><a id="a02dff1b417f6d4f06cabd361315fc6fc"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createMSVPASeasBiomass</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a02dff1b417f6d4f06cabd361315fc6fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af141cae7a4dc484bf434fac55dab48e3"><td class="memItemLeft" align="right" valign="top"><a id="af141cae7a4dc484bf434fac55dab48e3"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createMSVPASeasInfo</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:af141cae7a4dc484bf434fac55dab48e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af45e14d71bc1a755cc5de6455bfdfef8"><td class="memItemLeft" align="right" valign="top"><a id="af45e14d71bc1a755cc5de6455bfdfef8"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createMSVPASizePref</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:af45e14d71bc1a755cc5de6455bfdfef8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0d21691fe7c98072bbc6c9c99afb032"><td class="memItemLeft" align="right" valign="top"><a id="ad0d21691fe7c98072bbc6c9c99afb032"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createMSVPASpaceO</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:ad0d21691fe7c98072bbc6c9c99afb032"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56179adf551ce23af9f8cdc282f9d2d6"><td class="memItemLeft" align="right" valign="top"><a id="a56179adf551ce23af9f8cdc282f9d2d6"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createMSVPAStomCont</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a56179adf551ce23af9f8cdc282f9d2d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b30056174ad730f8f58c12ec21a2d0b"><td class="memItemLeft" align="right" valign="top"><a id="a8b30056174ad730f8f58c12ec21a2d0b"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createMSVPASuitPreyBiomass</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a8b30056174ad730f8f58c12ec21a2d0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7dc077c1ae07610786c4c4070bf76f7"><td class="memItemLeft" align="right" valign="top"><a id="af7dc077c1ae07610786c4c4070bf76f7"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createMSVPAlist</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:af7dc077c1ae07610786c4c4070bf76f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91383e89e663edbcfece0a5626d68816"><td class="memItemLeft" align="right" valign="top"><a id="a91383e89e663edbcfece0a5626d68816"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createMSVPAprefs</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a91383e89e663edbcfece0a5626d68816"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68f4ca0998a76d98c6f2fa5c3ad418dc"><td class="memItemLeft" align="right" valign="top"><a id="a68f4ca0998a76d98c6f2fa5c3ad418dc"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createMSVPAspecies</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a68f4ca0998a76d98c6f2fa5c3ad418dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af785f8a67dbc269b0c0055da012a9f56"><td class="memItemLeft" align="right" valign="top"><a id="af785f8a67dbc269b0c0055da012a9f56"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createOthPredSizeData</b> (QString &amp;table, QString &amp;cmd)</td></tr>
-<tr class="separator:af785f8a67dbc269b0c0055da012a9f56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62f21cce3b2ede025dcc2d2a0c1a6ec8"><td class="memItemLeft" align="right" valign="top"><a id="a62f21cce3b2ede025dcc2d2a0c1a6ec8"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createOtherPredBM</b> (QString &amp;table, QString &amp;cmd)</td></tr>
-<tr class="separator:a62f21cce3b2ede025dcc2d2a0c1a6ec8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15ead849d007ccbd57af9fcf5898ae1a"><td class="memItemLeft" align="right" valign="top"><a id="a15ead849d007ccbd57af9fcf5898ae1a"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createOtherPredSpecies</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a15ead849d007ccbd57af9fcf5898ae1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0b9289e38d05396b45af500161d7fb2"><td class="memItemLeft" align="right" valign="top"><a id="ae0b9289e38d05396b45af500161d7fb2"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSSVPAAgeM</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:ae0b9289e38d05396b45af500161d7fb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42a04f761d590efe19dcfb9471ff866b"><td class="memItemLeft" align="right" valign="top"><a id="a42a04f761d590efe19dcfb9471ff866b"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createScenarioF</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a42a04f761d590efe19dcfb9471ff866b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af773f16a09f1770dfbdacd9b1948f08b"><td class="memItemLeft" align="right" valign="top"><a id="af773f16a09f1770dfbdacd9b1948f08b"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createScenarioOthPred</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:af773f16a09f1770dfbdacd9b1948f08b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a879ca8807baa733fe619956ab97716e6"><td class="memItemLeft" align="right" valign="top"><a id="a879ca8807baa733fe619956ab97716e6"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createScenarioOthPrey</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a879ca8807baa733fe619956ab97716e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abfe6ec55c85df22792d2959fff7ea1ae"><td class="memItemLeft" align="right" valign="top"><a id="abfe6ec55c85df22792d2959fff7ea1ae"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createScenarioRec</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:abfe6ec55c85df22792d2959fff7ea1ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3963cb5028b11dd331bb57ed78db8bad"><td class="memItemLeft" align="right" valign="top"><a id="a3963cb5028b11dd331bb57ed78db8bad"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createScenarios</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a3963cb5028b11dd331bb57ed78db8bad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06b5c1169b1aa7d8fd3fe71b84eaf187"><td class="memItemLeft" align="right" valign="top"><a id="a06b5c1169b1aa7d8fd3fe71b84eaf187"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpeCatch</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a06b5c1169b1aa7d8fd3fe71b84eaf187"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abbf03575ba96e5605c5143a9b8294ace"><td class="memItemLeft" align="right" valign="top"><a id="abbf03575ba96e5605c5143a9b8294ace"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpeMaturity</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:abbf03575ba96e5605c5143a9b8294ace"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36dfd022c2b2f0018054aa27ec6d33b9"><td class="memItemLeft" align="right" valign="top"><a id="a36dfd022c2b2f0018054aa27ec6d33b9"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpeSSVPA</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a36dfd022c2b2f0018054aa27ec6d33b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b0ba7737cd4e0f0a0b1aeeac18a7fe4"><td class="memItemLeft" align="right" valign="top"><a id="a2b0ba7737cd4e0f0a0b1aeeac18a7fe4"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpeSize</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a2b0ba7737cd4e0f0a0b1aeeac18a7fe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f81b26e7e1543d4299797a8a03dba18"><td class="memItemLeft" align="right" valign="top"><a id="a0f81b26e7e1543d4299797a8a03dba18"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpeTuneCatch</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a0f81b26e7e1543d4299797a8a03dba18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0677916c5bf9bd04e50884582c484ad5"><td class="memItemLeft" align="right" valign="top"><a id="a0677916c5bf9bd04e50884582c484ad5"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpeTuneEffort</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a0677916c5bf9bd04e50884582c484ad5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6eb56e843186e45b16918692f3056e45"><td class="memItemLeft" align="right" valign="top"><a id="a6eb56e843186e45b16918692f3056e45"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpeWeight</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a6eb56e843186e45b16918692f3056e45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae487b4c7140c68e6a405399af48461ba"><td class="memItemLeft" align="right" valign="top"><a id="ae487b4c7140c68e6a405399af48461ba"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpeXSAData</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:ae487b4c7140c68e6a405399af48461ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e1c28235d28253b2e9c0b77b17f58a2"><td class="memItemLeft" align="right" valign="top"><a id="a1e1c28235d28253b2e9c0b77b17f58a2"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpeXSAIndices</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a1e1c28235d28253b2e9c0b77b17f58a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7aeb5ab71c81c441c851fc26894da006"><td class="memItemLeft" align="right" valign="top"><a id="a7aeb5ab71c81c441c851fc26894da006"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies</b> (QString &amp;table, QString &amp;qcmd)</td></tr>
-<tr class="separator:a7aeb5ab71c81c441c851fc26894da006"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7da8eab98973aef79e7926f898368cb7"><td class="memItemLeft" align="right" valign="top"><a id="a7da8eab98973aef79e7926f898368cb7"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createApplication</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:a7da8eab98973aef79e7926f898368cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56904463beab2f965225f0bca844bf12"><td class="memItemLeft" align="right" valign="top"><a id="a56904463beab2f965225f0bca844bf12"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createForeEnergyDens</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:a56904463beab2f965225f0bca844bf12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addc6efd40cff32a638787c9b8b742e6a"><td class="memItemLeft" align="right" valign="top"><a id="addc6efd40cff32a638787c9b8b742e6a"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createForeOutput</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:addc6efd40cff32a638787c9b8b742e6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a810989d73b10fa2cc6846f0338a967b5"><td class="memItemLeft" align="right" valign="top"><a id="a810989d73b10fa2cc6846f0338a967b5"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createForePredGrowth</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:a810989d73b10fa2cc6846f0338a967b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f75ed9a1799716517321b4b7b5586f9"><td class="memItemLeft" align="right" valign="top"><a id="a9f75ed9a1799716517321b4b7b5586f9"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createForePredVonB</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:a9f75ed9a1799716517321b4b7b5586f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21c8114140dfc89d2d5f0a51222b2ed8"><td class="memItemLeft" align="right" valign="top"><a id="a21c8114140dfc89d2d5f0a51222b2ed8"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createForeSRQ</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:a21c8114140dfc89d2d5f0a51222b2ed8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0eb5a16af382cb95509732f5e17d722d"><td class="memItemLeft" align="right" valign="top"><a id="a0eb5a16af382cb95509732f5e17d722d"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createForeSRR</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:a0eb5a16af382cb95509732f5e17d722d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa138923ff526b1d960e9d174f26ca7d8"><td class="memItemLeft" align="right" valign="top"><a id="aa138923ff526b1d960e9d174f26ca7d8"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createForeSuitPreyBiomass</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:aa138923ff526b1d960e9d174f26ca7d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef85e096fae85e7df63d467d01bfa22b"><td class="memItemLeft" align="right" valign="top"><a id="aef85e096fae85e7df63d467d01bfa22b"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createForecasts</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:aef85e096fae85e7df63d467d01bfa22b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac23a3e433d64e5fb3956ab036fa0054a"><td class="memItemLeft" align="right" valign="top"><a id="ac23a3e433d64e5fb3956ab036fa0054a"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createMSVPAEnergyDens</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:ac23a3e433d64e5fb3956ab036fa0054a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b12cbcc1ba67c6e89c4723003c3e284"><td class="memItemLeft" align="right" valign="top"><a id="a8b12cbcc1ba67c6e89c4723003c3e284"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createMSVPAOthPrey</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:a8b12cbcc1ba67c6e89c4723003c3e284"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad6a3c77bdb755bb72e666913696ba62"><td class="memItemLeft" align="right" valign="top"><a id="aad6a3c77bdb755bb72e666913696ba62"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createMSVPAOthPreyAnn</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:aad6a3c77bdb755bb72e666913696ba62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f8f30fed56a590915b477ff92d75f5d"><td class="memItemLeft" align="right" valign="top"><a id="a4f8f30fed56a590915b477ff92d75f5d"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createMSVPASeasBiomass</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:a4f8f30fed56a590915b477ff92d75f5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4fb37202f0b8fa393e83d70e48cccb4"><td class="memItemLeft" align="right" valign="top"><a id="ac4fb37202f0b8fa393e83d70e48cccb4"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createMSVPASeasInfo</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:ac4fb37202f0b8fa393e83d70e48cccb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e787fa7c39b3498b3654b2924c103b4"><td class="memItemLeft" align="right" valign="top"><a id="a1e787fa7c39b3498b3654b2924c103b4"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createMSVPASizePref</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:a1e787fa7c39b3498b3654b2924c103b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9350f7afe91f18a5c47a5759076b434c"><td class="memItemLeft" align="right" valign="top"><a id="a9350f7afe91f18a5c47a5759076b434c"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createMSVPASpaceO</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:a9350f7afe91f18a5c47a5759076b434c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7120a59e966aa28f9aa49545f68a382c"><td class="memItemLeft" align="right" valign="top"><a id="a7120a59e966aa28f9aa49545f68a382c"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createMSVPAStomCont</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:a7120a59e966aa28f9aa49545f68a382c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5f327c2c28492ba834c3e49f921c5d7"><td class="memItemLeft" align="right" valign="top"><a id="ae5f327c2c28492ba834c3e49f921c5d7"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createMSVPASuitPreyBiomass</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:ae5f327c2c28492ba834c3e49f921c5d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72de5fb8d86a8ebfdb2ff7aafe70355e"><td class="memItemLeft" align="right" valign="top"><a id="a72de5fb8d86a8ebfdb2ff7aafe70355e"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createMSVPAlist</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:a72de5fb8d86a8ebfdb2ff7aafe70355e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fe1da283d661d1da58f0e04bd7f5c89"><td class="memItemLeft" align="right" valign="top"><a id="a7fe1da283d661d1da58f0e04bd7f5c89"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createMSVPAprefs</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:a7fe1da283d661d1da58f0e04bd7f5c89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a158cc010ed1a7d4845852dfaf1e4411f"><td class="memItemLeft" align="right" valign="top"><a id="a158cc010ed1a7d4845852dfaf1e4411f"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createMSVPAspecies</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:a158cc010ed1a7d4845852dfaf1e4411f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbd27dfc9ada474b7c53cca8a9d15107"><td class="memItemLeft" align="right" valign="top"><a id="acbd27dfc9ada474b7c53cca8a9d15107"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createOthPredSizeData</b> (const std::string table, QString &amp;cmd)</td></tr>
+<tr class="separator:acbd27dfc9ada474b7c53cca8a9d15107"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abda736c098878ffd8541eec88a60b684"><td class="memItemLeft" align="right" valign="top"><a id="abda736c098878ffd8541eec88a60b684"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createOtherPredBM</b> (const std::string table, QString &amp;cmd)</td></tr>
+<tr class="separator:abda736c098878ffd8541eec88a60b684"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2de910f588bfca5331edd08d58f842e3"><td class="memItemLeft" align="right" valign="top"><a id="a2de910f588bfca5331edd08d58f842e3"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createOtherPredSpecies</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:a2de910f588bfca5331edd08d58f842e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb925ed0a3af5836d0539d9f4097ef9c"><td class="memItemLeft" align="right" valign="top"><a id="adb925ed0a3af5836d0539d9f4097ef9c"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSSVPAAgeM</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:adb925ed0a3af5836d0539d9f4097ef9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ae525f393783da84754dd4e33e376e3"><td class="memItemLeft" align="right" valign="top"><a id="a8ae525f393783da84754dd4e33e376e3"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createScenarioF</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:a8ae525f393783da84754dd4e33e376e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a982a1cceeff3a3242a849321c85d2340"><td class="memItemLeft" align="right" valign="top"><a id="a982a1cceeff3a3242a849321c85d2340"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createScenarioOthPred</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:a982a1cceeff3a3242a849321c85d2340"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff465ee27764e539065d94833234798d"><td class="memItemLeft" align="right" valign="top"><a id="aff465ee27764e539065d94833234798d"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createScenarioOthPrey</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:aff465ee27764e539065d94833234798d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2dbdec7419beb671fc44fc2ac6cc18e"><td class="memItemLeft" align="right" valign="top"><a id="ad2dbdec7419beb671fc44fc2ac6cc18e"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createScenarioRec</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:ad2dbdec7419beb671fc44fc2ac6cc18e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a649ed40fc87af46f9b61b126b981d9ed"><td class="memItemLeft" align="right" valign="top"><a id="a649ed40fc87af46f9b61b126b981d9ed"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createScenarios</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:a649ed40fc87af46f9b61b126b981d9ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca7b0eb42ae9bfcc9d23bc0fef777171"><td class="memItemLeft" align="right" valign="top"><a id="aca7b0eb42ae9bfcc9d23bc0fef777171"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpeCatch</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:aca7b0eb42ae9bfcc9d23bc0fef777171"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7768e56e805a42c5f41993a0035e2c7"><td class="memItemLeft" align="right" valign="top"><a id="ad7768e56e805a42c5f41993a0035e2c7"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpeMaturity</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:ad7768e56e805a42c5f41993a0035e2c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3e5fab15ea7e13e58827961f97c0015"><td class="memItemLeft" align="right" valign="top"><a id="af3e5fab15ea7e13e58827961f97c0015"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpeSSVPA</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:af3e5fab15ea7e13e58827961f97c0015"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af962d42d3bb7ee1625c21d580a9c65ed"><td class="memItemLeft" align="right" valign="top"><a id="af962d42d3bb7ee1625c21d580a9c65ed"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpeSize</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:af962d42d3bb7ee1625c21d580a9c65ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93748dc6044efaf1c2a61ef9815434a1"><td class="memItemLeft" align="right" valign="top"><a id="a93748dc6044efaf1c2a61ef9815434a1"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpeTuneCatch</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:a93748dc6044efaf1c2a61ef9815434a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1af21f1b7ac0da60204f30825fad88c1"><td class="memItemLeft" align="right" valign="top"><a id="a1af21f1b7ac0da60204f30825fad88c1"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpeTuneEffort</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:a1af21f1b7ac0da60204f30825fad88c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa78040c0311238e502fa27e683e5d23e"><td class="memItemLeft" align="right" valign="top"><a id="aa78040c0311238e502fa27e683e5d23e"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpeWeight</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:aa78040c0311238e502fa27e683e5d23e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bda75bfd98651c3bcd5c38cb04fa506"><td class="memItemLeft" align="right" valign="top"><a id="a1bda75bfd98651c3bcd5c38cb04fa506"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpeXSAData</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:a1bda75bfd98651c3bcd5c38cb04fa506"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a684741a8352d501f723d64b462c31105"><td class="memItemLeft" align="right" valign="top"><a id="a684741a8352d501f723d64b462c31105"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpeXSAIndices</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:a684741a8352d501f723d64b462c31105"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad62801041c162ee8b4c28fde43a388d5"><td class="memItemLeft" align="right" valign="top"><a id="ad62801041c162ee8b4c28fde43a388d5"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies</b> (const std::string table, QString &amp;qcmd)</td></tr>
+<tr class="separator:ad62801041c162ee8b4c28fde43a388d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Allows user to interact with MySQL database. </p>
@@ -1017,6 +1020,51 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if competition data were successfully read from the database </dd></dl>
+
+</div>
+</div>
+<a id="a9fb6edf3388529b231e64e1217b75927"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fb6edf3388529b231e64e1217b75927">&#9670;&nbsp;</a></span>getCovariateAlgorithmType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string nmfDatabase::getCovariateAlgorithmType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classnmf_logger.html">nmfLogger</a> *&#160;</td>
+          <td class="paramname"><em>logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>ProjectName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>ModelName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the last saved covariate type for the current project name and model name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">logger</td><td>: logger pointer used to log any errors </td></tr>
+    <tr><td class="paramname">ProjectName</td><td>: name of project </td></tr>
+    <tr><td class="paramname">ModelName</td><td>: name of model </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the last saved covariate type </dd></dl>
 
 </div>
 </div>

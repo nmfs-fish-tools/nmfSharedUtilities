@@ -76,14 +76,16 @@ $(function() {
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;QString&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for nmfConstantsMSCAA.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="nmf_constants_m_s_c_a_a_8h__incl.png" border="0" usemap="#nmf_utilities_2nmf_constants_m_s_c_a_a_8h" alt=""/></div>
 <map name="nmf_utilities_2nmf_constants_m_s_c_a_a_8h" id="nmf_utilities_2nmf_constants_m_s_c_a_a_8h">
-<area shape="rect" title="Definition for constants used in MSCAA tool." alt="" coords="5,5,200,47"/>
-<area shape="rect" title=" " alt="" coords="15,95,95,121"/>
-<area shape="rect" title=" " alt="" coords="119,95,182,121"/>
+<area shape="rect" title="Definition for constants used in MSCAA tool." alt="" coords="44,5,239,47"/>
+<area shape="rect" title=" " alt="" coords="5,95,85,121"/>
+<area shape="rect" title=" " alt="" coords="110,95,173,121"/>
+<area shape="rect" title=" " alt="" coords="197,95,267,121"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -200,9 +202,96 @@ const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConst
 <tr class="memitem:a750eb3fe43c4d6b8f215776e76d7a67b"><td class="memItemLeft" align="right" valign="top"><a id="a750eb3fe43c4d6b8f215776e76d7a67b"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::OutputImagesDir</b> = &quot;outputImages&quot;</td></tr>
 <tr class="separator:a750eb3fe43c4d6b8f215776e76d7a67b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a283322e51cdc18f8dc85f001568c32ed"><td class="memItemLeft" align="right" valign="top"><a id="a283322e51cdc18f8dc85f001568c32ed"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TableAgeLengthKey</b> = QString::fromStdString(&quot;AgeLengthKey&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a283322e51cdc18f8dc85f001568c32ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acab45e2101c21155f96900f99a298586"><td class="memItemLeft" align="right" valign="top"><a id="acab45e2101c21155f96900f99a298586"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TableApplication</b> = QString::fromStdString(&quot;Application&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:acab45e2101c21155f96900f99a298586"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab2012b9f033f4d9078b4b5357ec86b5"><td class="memItemLeft" align="right" valign="top"><a id="aab2012b9f033f4d9078b4b5357ec86b5"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TableCatchAtLengthFishery</b> = QString::fromStdString(&quot;CatchAtLengthFishery&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:aab2012b9f033f4d9078b4b5357ec86b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19b95d471e4d1aefcac486afa319bb4c"><td class="memItemLeft" align="right" valign="top"><a id="a19b95d471e4d1aefcac486afa319bb4c"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TableCatchFishery</b> = QString::fromStdString(&quot;CatchFishery&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a19b95d471e4d1aefcac486afa319bb4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2f8060b58391e4651d05a5ef02e6576"><td class="memItemLeft" align="right" valign="top"><a id="aa2f8060b58391e4651d05a5ef02e6576"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TableCatchFisheryProportion</b> = QString::fromStdString(&quot;CatchFisheryProportion&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:aa2f8060b58391e4651d05a5ef02e6576"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9aeffa3317dc3e94d8608972d37f80b2"><td class="memItemLeft" align="right" valign="top"><a id="a9aeffa3317dc3e94d8608972d37f80b2"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TableCatchFisheryTotal</b> = QString::fromStdString(&quot;CatchFisheryTotal&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a9aeffa3317dc3e94d8608972d37f80b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21a3487e91d1130482a298260beb722c"><td class="memItemLeft" align="right" valign="top"><a id="a21a3487e91d1130482a298260beb722c"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TableCatchSurvey</b> = QString::fromStdString(&quot;CatchSurvey&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a21a3487e91d1130482a298260beb722c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00df8b46cd16957ae35b14a0c3f8de19"><td class="memItemLeft" align="right" valign="top"><a id="a00df8b46cd16957ae35b14a0c3f8de19"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TableCatchSurveyProportion</b> = QString::fromStdString(&quot;CatchSurveyProportion&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a00df8b46cd16957ae35b14a0c3f8de19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9f2f2ab3f18e138fceab5cdc9edddd6"><td class="memItemLeft" align="right" valign="top"><a id="ad9f2f2ab3f18e138fceab5cdc9edddd6"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TableCatchSurveyTotal</b> = QString::fromStdString(&quot;CatchSurveyTotal&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:ad9f2f2ab3f18e138fceab5cdc9edddd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adacbfe8e55d5b2efd09547d9c75488f4"><td class="memItemLeft" align="right" valign="top"><a id="adacbfe8e55d5b2efd09547d9c75488f4"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TableConsumption</b> = QString::fromStdString(&quot;Consumption&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:adacbfe8e55d5b2efd09547d9c75488f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94b1e35954ea10539a8483aa76a6adb5"><td class="memItemLeft" align="right" valign="top"><a id="a94b1e35954ea10539a8483aa76a6adb5"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TableCovariates</b> = QString::fromStdString(&quot;Covariates&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a94b1e35954ea10539a8483aa76a6adb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6175e4bc880576e6b9a6874717c38a88"><td class="memItemLeft" align="right" valign="top"><a id="a6175e4bc880576e6b9a6874717c38a88"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TableDiet</b> = QString::fromStdString(&quot;Diet&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a6175e4bc880576e6b9a6874717c38a88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae169b33cbe35563a6c57c261925cb3e2"><td class="memItemLeft" align="right" valign="top"><a id="ae169b33cbe35563a6c57c261925cb3e2"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TableFleets</b> = QString::fromStdString(&quot;Fleets&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:ae169b33cbe35563a6c57c261925cb3e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ec9fabdeb3318715e5fb286a18d6b88"><td class="memItemLeft" align="right" valign="top"><a id="a9ec9fabdeb3318715e5fb286a18d6b88"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TableInitialAbundance</b> = QString::fromStdString(&quot;InitialAbundance&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a9ec9fabdeb3318715e5fb286a18d6b88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59911801b3e5dda76162d839b28af00e"><td class="memItemLeft" align="right" valign="top"><a id="a59911801b3e5dda76162d839b28af00e"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TableMaturity</b> = QString::fromStdString(&quot;Maturity&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a59911801b3e5dda76162d839b28af00e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c35f99d5529c9e33b8af1d5c15c1387"><td class="memItemLeft" align="right" valign="top"><a id="a9c35f99d5529c9e33b8af1d5c15c1387"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TableMortalityFishing</b> = QString::fromStdString(&quot;MortalityFishing&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a9c35f99d5529c9e33b8af1d5c15c1387"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73c381b77a5c35858bfd667b20b880a4"><td class="memItemLeft" align="right" valign="top"><a id="a73c381b77a5c35858bfd667b20b880a4"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TableMortalityNatural</b> = QString::fromStdString(&quot;MortalityNatural&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a73c381b77a5c35858bfd667b20b880a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab36ecb83c6668060150a048286d50f47"><td class="memItemLeft" align="right" valign="top"><a id="ab36ecb83c6668060150a048286d50f47"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TablePredatorPreyInteractions</b> = QString::fromStdString(&quot;PredatorPreyInteractions&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:ab36ecb83c6668060150a048286d50f47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a082c9765f6f95e1f5ebb538678916b4f"><td class="memItemLeft" align="right" valign="top"><a id="a082c9765f6f95e1f5ebb538678916b4f"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TablePredatorPreyInteractionsVec</b> = QString::fromStdString(&quot;PredatorPreyInteractionsVec&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a082c9765f6f95e1f5ebb538678916b4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6b50b52acedcfc8371158d6dde089cc"><td class="memItemLeft" align="right" valign="top"><a id="ad6b50b52acedcfc8371158d6dde089cc"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TablePredatorPreyPreferredRatio</b> = QString::fromStdString(&quot;PredatorPreyPreferredRatio&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:ad6b50b52acedcfc8371158d6dde089cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa90f1935f2e9cb63cbe8d0cf51aa855f"><td class="memItemLeft" align="right" valign="top"><a id="aa90f1935f2e9cb63cbe8d0cf51aa855f"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TablePredatorPreyVarianceGTRatio</b> = QString::fromStdString(&quot;PredatorPreyVarianceGTRatio&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:aa90f1935f2e9cb63cbe8d0cf51aa855f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe83077f99db26ecacdb172cd406854b"><td class="memItemLeft" align="right" valign="top"><a id="afe83077f99db26ecacdb172cd406854b"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TablePredatorPreyVarianceLTRatio</b> = QString::fromStdString(&quot;PredatorPreyVarianceLTRatio&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:afe83077f99db26ecacdb172cd406854b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12fdc4a95672580b1f3b0606db3f77c3"><td class="memItemLeft" align="right" valign="top"><a id="a12fdc4a95672580b1f3b0606db3f77c3"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TablePredatorPreyVulnerability</b> = QString::fromStdString(&quot;PredatorPreyVulnerability&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a12fdc4a95672580b1f3b0606db3f77c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab93ce0bc9efa588cd3b17d14062ea553"><td class="memItemLeft" align="right" valign="top"><a id="ab93ce0bc9efa588cd3b17d14062ea553"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TableSimulationParametersSpecies</b> = QString::fromStdString(&quot;SimulationParametersSpecies&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:ab93ce0bc9efa588cd3b17d14062ea553"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f60de9ef5286017e6bebfcc160d574f"><td class="memItemLeft" align="right" valign="top"><a id="a3f60de9ef5286017e6bebfcc160d574f"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TableSimulationParametersYearly</b> = QString::fromStdString(&quot;SimulationParametersYearly&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a3f60de9ef5286017e6bebfcc160d574f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67e86b53bce68be71099c06e04561319"><td class="memItemLeft" align="right" valign="top"><a id="a67e86b53bce68be71099c06e04561319"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TableSpecies</b> = QString::fromStdString(&quot;Species&quot;).toLower().toStdString()</td></tr>
 <tr class="separator:a67e86b53bce68be71099c06e04561319"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38b26f9b2f148cd346919dd2493359c2"><td class="memItemLeft" align="right" valign="top"><a id="a38b26f9b2f148cd346919dd2493359c2"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TableSurveyMonth</b> = QString::fromStdString(&quot;SurveyMonth&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a38b26f9b2f148cd346919dd2493359c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac613e7a85683b3dfd97a122851e2ed5c"><td class="memItemLeft" align="right" valign="top"><a id="ac613e7a85683b3dfd97a122851e2ed5c"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TableSurveyWeights</b> = QString::fromStdString(&quot;SurveyWeights&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:ac613e7a85683b3dfd97a122851e2ed5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afad03e256640a92674cc541226dafdc2"><td class="memItemLeft" align="right" valign="top"><a id="afad03e256640a92674cc541226dafdc2"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TableModels</b> = QString::fromStdString(&quot;Models&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:afad03e256640a92674cc541226dafdc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a999e6d4f7ec37faac63ca09e43a412eb"><td class="memItemLeft" align="right" valign="top"><a id="a999e6d4f7ec37faac63ca09e43a412eb"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::TableWeight</b> = QString::fromStdString(&quot;Weight&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a999e6d4f7ec37faac63ca09e43a412eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0868879b869eeccd50837507ee5eb508"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::ColLabelsEstimations</b></td></tr>
 <tr class="separator:a0868879b869eeccd50837507ee5eb508"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c67508ecae802ec5d986556996a8e81"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSCAA::ColLabelsWeightings</b></td></tr>

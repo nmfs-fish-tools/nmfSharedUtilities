@@ -229,6 +229,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a15f4c161da6c63a282b48bad4b62c83f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtils::append</b> (std::vector&lt; double &gt; &amp;newVec, std::vector&lt; double &gt; &amp;currentVec)</td></tr>
 <tr class="memdesc:a15f4c161da6c63a282b48bad4b62c83f"><td class="mdescLeft">&#160;</td><td class="mdescRight">appends the new vector to the current vector  <a href="nmf_utils_8cpp.html#a15f4c161da6c63a282b48bad4b62c83f">More...</a><br /></td></tr>
 <tr class="separator:a15f4c161da6c63a282b48bad4b62c83f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3a40fac519b3563f3222ce83cd42b0d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtils::applyCovariate</b> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;covariateAlgorithmType, const double &amp;parameter, const double &amp;covariateCoeff, const double &amp;covariateValue)</td></tr>
+<tr class="memdesc:ac3a40fac519b3563f3222ce83cd42b0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">applies the appropriate covariate logic to the covariate values  <a href="nmf_utils_8cpp.html#ac3a40fac519b3563f3222ce83cd42b0d">More...</a><br /></td></tr>
+<tr class="separator:ac3a40fac519b3563f3222ce83cd42b0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a434751dd815f7e8613b4f118a3c57de6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtils::checkForError</b> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, std::string table, std::string field, std::map&lt; std::string, std::vector&lt; std::string &gt; &gt; &amp;dataMap, std::string queryStr)</td></tr>
 <tr class="memdesc:a434751dd815f7e8613b4f118a3c57de6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks that there's at least one item in the passed table's field.  <a href="nmf_utils_8cpp.html#a434751dd815f7e8613b4f118a3c57de6">More...</a><br /></td></tr>
 <tr class="separator:a434751dd815f7e8613b4f118a3c57de6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -420,6 +423,65 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtils::reset</b> (
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="ac3a40fac519b3563f3222ce83cd42b0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3a40fac519b3563f3222ce83cd42b0d">&#9670;&nbsp;</a></span>applyCovariate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double nmfUtils::applyCovariate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classnmf_logger.html">nmfLogger</a> *&#160;</td>
+          <td class="paramname"><em>logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>covariateAlgorithmType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>parameter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>covariateCoeff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>covariateValue</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>applies the appropriate covariate logic to the covariate values </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">logger</td><td>: application logger to which to post error messages </td></tr>
+    <tr><td class="paramname">covariateAlgorithmType</td><td>: type of covariate algorithm to be used </td></tr>
+    <tr><td class="paramname">parameter</td><td>: estimated parameter which the covariate operations are applied to </td></tr>
+    <tr><td class="paramname">covariateCoeff</td><td>: the covariate coefficient value </td></tr>
+    <tr><td class="paramname">covariateValue</td><td>: the covariate value entered by the user </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the value of the parameter with the covariate applied </dd></dl>
 
 </div>
 </div>

@@ -178,118 +178,123 @@ $(function() {
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="keyword">namespace </span>nmfUtils {</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordtype">void</span> append(std::vector&lt;double&gt;&amp; newVec,</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                std::vector&lt;double&gt;&amp; currentVec);</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keywordtype">bool</span> checkForError(<a class="code" href="classnmf_logger.html">nmfLogger</a> *logger,</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                       std::string table,</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                       std::string field,</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                       std::map&lt;std::string, std::vector&lt;std::string&gt; &gt; &amp;dataMap,</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                       std::string queryStr);</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00175"></a><span class="lineno"><a class="line" href="nmf_utils_8h.html#a4fe66d37295e08788f2abfcbc23e6ace">  175</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="nmf_utils_8h.html#a4fe66d37295e08788f2abfcbc23e6ace">clamp</a>(T &amp;value, <span class="keywordtype">double</span> lower, <span class="keywordtype">double</span> upper)</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    {</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        value = (value &lt;= lower) ? lower : (value &gt;= upper) ? upper : value;</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    }</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keywordtype">double</span> convertCatchUnitsToValue(std::string catchUnits);</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="keywordtype">double</span> convertSizeUnitsToValue(std::string sizeUnits);</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    std::string convertToScientificNotation(<span class="keywordtype">double</span> val);</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    boost::numeric::ublas::matrix&lt;double&gt;</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        convertVectorToMatrix(std::vector&lt;double&gt;&amp; vec);</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keywordtype">double</span> convertWeightUnitsToValue(std::string weightUnits);</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    <span class="keywordtype">void</span> copyFile(std::string fileA, std::string fileB);</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <span class="keywordtype">void</span> getFilesWithExt(std::string path,</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;                         std::string ext,</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                         QStringList&amp; filesToCopy);</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="keywordtype">double</span> getMatrixMax(boost::numeric::ublas::matrix&lt;double&gt; &amp;mat,</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                        <span class="keywordtype">bool</span> roundOff);</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="keywordtype">double</span> getMatrixSum(<span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;mat);</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    std::string getOS();</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    <span class="keywordtype">double</span> getRandomNumber(<span class="keywordtype">int</span> seed,</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;                           <span class="keywordtype">double</span> lowerLimit,</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                           <span class="keywordtype">double</span> upperLimit);</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keywordtype">double</span> getVectorSum(<span class="keyword">const</span> boost::numeric::ublas::vector&lt;double&gt; &amp;vec);</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="keywordtype">void</span> initialize(std::vector&lt;double&gt;&amp; vec, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numValues);</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <span class="keywordtype">void</span> initialize(boost::numeric::ublas::vector&lt;std::string&gt;&amp; vec,</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; nrows);</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    <span class="keywordtype">void</span> initialize(boost::numeric::ublas::vector&lt;int&gt;&amp; vec,</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; nrows);</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keywordtype">void</span> initialize(boost::numeric::ublas::vector&lt;double&gt;&amp; vec,</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keywordtype">double</span> applyCovariate(<a class="code" href="classnmf_logger.html">nmfLogger</a> *logger,</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                          <span class="keyword">const</span> std::string&amp; covariateAlgorithmType,</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                          <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; parameter,</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                          <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; covariateCoeff,</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                          <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; covariateValue);</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <span class="keywordtype">bool</span> checkForError(<a class="code" href="classnmf_logger.html">nmfLogger</a> *logger,</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                       std::string table,</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                       std::string field,</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                       std::map&lt;std::string, std::vector&lt;std::string&gt; &gt; &amp;dataMap,</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                       std::string queryStr);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00189"></a><span class="lineno"><a class="line" href="nmf_utils_8h.html#a4fe66d37295e08788f2abfcbc23e6ace">  189</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="nmf_utils_8h.html#a4fe66d37295e08788f2abfcbc23e6ace">clamp</a>(T &amp;value, <span class="keywordtype">double</span> lower, <span class="keywordtype">double</span> upper)</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    {</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        value = (value &lt;= lower) ? lower : (value &gt;= upper) ? upper : value;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    }</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="keywordtype">double</span> convertCatchUnitsToValue(std::string catchUnits);</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keywordtype">double</span> convertSizeUnitsToValue(std::string sizeUnits);</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    std::string convertToScientificNotation(<span class="keywordtype">double</span> val);</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    boost::numeric::ublas::matrix&lt;double&gt;</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        convertVectorToMatrix(std::vector&lt;double&gt;&amp; vec);</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <span class="keywordtype">double</span> convertWeightUnitsToValue(std::string weightUnits);</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <span class="keywordtype">void</span> copyFile(std::string fileA, std::string fileB);</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="keywordtype">void</span> getFilesWithExt(std::string path,</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                         std::string ext,</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                         QStringList&amp; filesToCopy);</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    <span class="keywordtype">double</span> getMatrixMax(boost::numeric::ublas::matrix&lt;double&gt; &amp;mat,</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;                        <span class="keywordtype">bool</span> roundOff);</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    <span class="keywordtype">double</span> getMatrixSum(<span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;mat);</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    std::string getOS();</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="keywordtype">double</span> getRandomNumber(<span class="keywordtype">int</span> seed,</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;                           <span class="keywordtype">double</span> lowerLimit,</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;                           <span class="keywordtype">double</span> upperLimit);</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    <span class="keywordtype">double</span> getVectorSum(<span class="keyword">const</span> boost::numeric::ublas::vector&lt;double&gt; &amp;vec);</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    <span class="keywordtype">void</span> initialize(std::vector&lt;double&gt;&amp; vec, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numValues);</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keywordtype">void</span> initialize(boost::numeric::ublas::vector&lt;std::string&gt;&amp; vec,</div>
 <div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; nrows);</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    <span class="keywordtype">void</span> initialize(boost::numeric::ublas::matrix&lt;int&gt;&amp; mat,</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; nrows,</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; ncols);</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    <span class="keywordtype">void</span> initialize(boost::numeric::ublas::matrix&lt;double&gt;&amp; mat,</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; nrows,</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; ncols);</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    <span class="keywordtype">void</span> initialize(Boost3DArrayDouble&amp; array3d);</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    <span class="keywordtype">void</span> initialize(Boost4DArrayDouble&amp; array4d);</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    <span class="keywordtype">void</span> initialize(Boost5DArrayDouble&amp; array5d);</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; </div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    <span class="keywordtype">bool</span> invertMatrix(</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;            boost::numeric::ublas::matrix&lt;double&gt;&amp; matrix,</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;            boost::numeric::ublas::matrix&lt;double&gt;&amp; inverseMatrix);</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    <span class="keywordtype">bool</span> isEstimateParameterChecked(</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;            <span class="keyword">const</span> <a class="code" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a>&amp; dataStruct,</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;            <span class="keyword">const</span> std::string&amp; ParameterName);</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    <span class="keywordtype">bool</span> isWholeNumber(<span class="keywordtype">double</span> value);</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    <span class="keywordtype">bool</span> isNearlyZero(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; value);</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    <span class="keywordtype">bool</span> isOSWindows();</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    <span class="keywordtype">bool</span> isStopped(std::string&amp; runName,</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;                   std::string&amp; msg1,</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;                   std::string&amp; msg2,</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;                   std::string&amp; stopRunFile,</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;                   std::string&amp; state);</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    <span class="keywordtype">void</span> print3DArray(<span class="keyword">const</span> std::string&amp; name,</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;                      <span class="keyword">const</span> std::vector&lt;int&gt;&amp; dimensions,</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;                      <span class="keyword">const</span> Boost3DArrayDouble&amp; array,</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;                      <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; width,</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;                      <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; precision);</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    <span class="keywordtype">void</span> print4DArray(<span class="keyword">const</span> std::string&amp; name,</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;                      <span class="keyword">const</span> std::vector&lt;int&gt;&amp; dimensions,</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;                      <span class="keyword">const</span> Boost4DArrayDouble&amp; array);</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    <span class="keywordtype">void</span> printError(<span class="keyword">const</span> std::string msg,</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;                    <span class="keyword">const</span> std::string errorMsg);</div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;    <span class="keywordtype">void</span> printMap(<span class="keyword">const</span> std::string name,</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;                  <span class="keyword">const</span> std::map&lt;std::string, std::vector&lt;std::string&gt; &gt;&amp; dataMap);</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;    <span class="keywordtype">void</span> printMapPair(<span class="keyword">const</span> std::pair&lt;std::string, std::vector&lt;std::string&gt; &gt;&amp; pair);</div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;    <span class="keywordtype">void</span> printMatrix(<span class="keyword">const</span> std::string&amp; name,</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;                     <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; mat,</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;                     <span class="keyword">const</span> <span class="keywordtype">int</span> width,</div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;                     <span class="keyword">const</span> <span class="keywordtype">int</span> precision);</div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;    <span class="keywordtype">void</span> printMsg(std::string msg);</div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00437"></a><span class="lineno"><a class="line" href="nmf_utils_8h.html#a6a82ead7575e6d3ebc9427b383e68e42">  437</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="nmf_utils_8h.html#a6a82ead7575e6d3ebc9427b383e68e42">printValue</a>(std::string name,</div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;                    T value,</div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">int</span> width,</div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">int</span> precision)</div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;    {</div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;        std::cout &lt;&lt; name &lt;&lt; <span class="stringliteral">&quot;: &quot;</span></div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;                  &lt;&lt; std::setw(width)</div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;                  &lt;&lt; std::setprecision(precision)</div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;                  &lt;&lt; value &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;    }</div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;    <span class="keywordtype">void</span> printVector(<span class="keyword">const</span> std::string&amp; name,</div>
-<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;                     <span class="keyword">const</span> std::vector&lt;std::string&gt;&amp; vec);</div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;    <span class="keywordtype">void</span> printVector(<span class="keyword">const</span> std::string&amp; name,</div>
-<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;                     <span class="keyword">const</span> boost::numeric::ublas::vector&lt;double&gt;&amp; vec);</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    <span class="keywordtype">void</span> initialize(boost::numeric::ublas::vector&lt;int&gt;&amp; vec,</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; nrows);</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    <span class="keywordtype">void</span> initialize(boost::numeric::ublas::vector&lt;double&gt;&amp; vec,</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; nrows);</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    <span class="keywordtype">void</span> initialize(boost::numeric::ublas::matrix&lt;int&gt;&amp; mat,</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; nrows,</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; ncols);</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    <span class="keywordtype">void</span> initialize(boost::numeric::ublas::matrix&lt;double&gt;&amp; mat,</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; nrows,</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; ncols);</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <span class="keywordtype">void</span> initialize(Boost3DArrayDouble&amp; array3d);</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    <span class="keywordtype">void</span> initialize(Boost4DArrayDouble&amp; array4d);</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    <span class="keywordtype">void</span> initialize(Boost5DArrayDouble&amp; array5d);</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160; </div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <span class="keywordtype">bool</span> invertMatrix(</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;            boost::numeric::ublas::matrix&lt;double&gt;&amp; matrix,</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;            boost::numeric::ublas::matrix&lt;double&gt;&amp; inverseMatrix);</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    <span class="keywordtype">bool</span> isEstimateParameterChecked(</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;            <span class="keyword">const</span> <a class="code" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a>&amp; dataStruct,</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;            <span class="keyword">const</span> std::string&amp; ParameterName);</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    <span class="keywordtype">bool</span> isWholeNumber(<span class="keywordtype">double</span> value);</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    <span class="keywordtype">bool</span> isNearlyZero(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; value);</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    <span class="keywordtype">bool</span> isOSWindows();</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    <span class="keywordtype">bool</span> isStopped(std::string&amp; runName,</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;                   std::string&amp; msg1,</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;                   std::string&amp; msg2,</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;                   std::string&amp; stopRunFile,</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;                   std::string&amp; state);</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;    <span class="keywordtype">void</span> print3DArray(<span class="keyword">const</span> std::string&amp; name,</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;                      <span class="keyword">const</span> std::vector&lt;int&gt;&amp; dimensions,</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;                      <span class="keyword">const</span> Boost3DArrayDouble&amp; array,</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;                      <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; width,</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;                      <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; precision);</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;    <span class="keywordtype">void</span> print4DArray(<span class="keyword">const</span> std::string&amp; name,</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;                      <span class="keyword">const</span> std::vector&lt;int&gt;&amp; dimensions,</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;                      <span class="keyword">const</span> Boost4DArrayDouble&amp; array);</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    <span class="keywordtype">void</span> printError(<span class="keyword">const</span> std::string msg,</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;                    <span class="keyword">const</span> std::string errorMsg);</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;    <span class="keywordtype">void</span> printMap(<span class="keyword">const</span> std::string name,</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;                  <span class="keyword">const</span> std::map&lt;std::string, std::vector&lt;std::string&gt; &gt;&amp; dataMap);</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;    <span class="keywordtype">void</span> printMapPair(<span class="keyword">const</span> std::pair&lt;std::string, std::vector&lt;std::string&gt; &gt;&amp; pair);</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;    <span class="keywordtype">void</span> printMatrix(<span class="keyword">const</span> std::string&amp; name,</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;                     <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; mat,</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;                     <span class="keyword">const</span> <span class="keywordtype">int</span> width,</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;                     <span class="keyword">const</span> <span class="keywordtype">int</span> precision);</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;    <span class="keywordtype">void</span> printMsg(std::string msg);</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00451"></a><span class="lineno"><a class="line" href="nmf_utils_8h.html#a6a82ead7575e6d3ebc9427b383e68e42">  451</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="nmf_utils_8h.html#a6a82ead7575e6d3ebc9427b383e68e42">printValue</a>(std::string name,</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;                    T value,</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">int</span> width,</div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">int</span> precision)</div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;    {</div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;        std::cout &lt;&lt; name &lt;&lt; <span class="stringliteral">&quot;: &quot;</span></div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;                  &lt;&lt; std::setw(width)</div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;                  &lt;&lt; std::setprecision(precision)</div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;                  &lt;&lt; value &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;    }</div>
 <div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;    <span class="keywordtype">void</span> printVector(<span class="keyword">const</span> std::string&amp; name,</div>
-<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;                     <span class="keyword">const</span> boost::numeric::ublas::vector&lt;std::string&gt;&amp; vec);</div>
-<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;    <span class="keywordtype">void</span> readTableDescriptions(std::string tableName,</div>
-<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;                               std::map&lt;std::string,std::string&gt;&amp; tableDescription);</div>
-<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;    <span class="keywordtype">void</span> readTableNames(std::map&lt;std::string,std::vector&lt;std::string&gt; &gt;* TableNames);</div>
-<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;    <span class="keywordtype">void</span> rescaleMatrixLog(boost::numeric::ublas::matrix&lt;double&gt;&amp; matrix);</div>
-<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;    <span class="keywordtype">void</span> rescaleMatrixMinMax(boost::numeric::ublas::matrix&lt;double&gt;&amp; matrix);</div>
-<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160; </div>
-<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;    <span class="keywordtype">void</span> reset(boost::numeric::ublas::matrix&lt;double&gt;&amp; mat,</div>
-<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;               <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; resetValue);</div>
-<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;    <span class="keywordtype">double</span> round(<span class="keywordtype">double</span> number,</div>
-<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;                 <span class="keywordtype">int</span> decimalPlaces);</div>
-<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;    <span class="keywordtype">void</span> split(std::string main,</div>
-<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;               std::string delim,</div>
-<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;               std::string&amp; str1,</div>
-<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;               std::string&amp; str2);</div>
-<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;}</div>
-<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160; </div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;                     <span class="keyword">const</span> std::vector&lt;std::string&gt;&amp; vec);</div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;    <span class="keywordtype">void</span> printVector(<span class="keyword">const</span> std::string&amp; name,</div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;                     <span class="keyword">const</span> boost::numeric::ublas::vector&lt;double&gt;&amp; vec);</div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;    <span class="keywordtype">void</span> printVector(<span class="keyword">const</span> std::string&amp; name,</div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;                     <span class="keyword">const</span> boost::numeric::ublas::vector&lt;std::string&gt;&amp; vec);</div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;    <span class="keywordtype">void</span> readTableDescriptions(std::string tableName,</div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;                               std::map&lt;std::string,std::string&gt;&amp; tableDescription);</div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;    <span class="keywordtype">void</span> readTableNames(std::map&lt;std::string,std::vector&lt;std::string&gt; &gt;* TableNames);</div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;    <span class="keywordtype">void</span> rescaleMatrixLog(boost::numeric::ublas::matrix&lt;double&gt;&amp; matrix);</div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;    <span class="keywordtype">void</span> rescaleMatrixMinMax(boost::numeric::ublas::matrix&lt;double&gt;&amp; matrix);</div>
+<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160; </div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;    <span class="keywordtype">void</span> reset(boost::numeric::ublas::matrix&lt;double&gt;&amp; mat,</div>
+<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;               <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; resetValue);</div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;    <span class="keywordtype">double</span> round(<span class="keywordtype">double</span> number,</div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;                 <span class="keywordtype">int</span> decimalPlaces);</div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;    <span class="keywordtype">void</span> split(std::string main,</div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;               std::string delim,</div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;               std::string&amp; str1,</div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;               std::string&amp; str2);</div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;}</div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="anmf_utils_8h_html_a4fe66d37295e08788f2abfcbc23e6ace"><div class="ttname"><a href="nmf_utils_8h.html#a4fe66d37295e08788f2abfcbc23e6ace">nmfUtils::clamp</a></div><div class="ttdeci">void clamp(T &amp;value, double lower, double upper)</div><div class="ttdoc">Template function used to clamp a value to a high and low value.</div><div class="ttdef"><b>Definition:</b> nmfUtils.h:175</div></div>
+<div class="ttc" id="anmf_utils_8h_html_a4fe66d37295e08788f2abfcbc23e6ace"><div class="ttname"><a href="nmf_utils_8h.html#a4fe66d37295e08788f2abfcbc23e6ace">nmfUtils::clamp</a></div><div class="ttdeci">void clamp(T &amp;value, double lower, double upper)</div><div class="ttdoc">Template function used to clamp a value to a high and low value.</div><div class="ttdef"><b>Definition:</b> nmfUtils.h:189</div></div>
 <div class="ttc" id="astructnmf_structs_qt_1_1_model_data_struct_html"><div class="ttname"><a href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a></div><div class="ttdoc">The data structure used for parameter estimation. It contains the parameter min max limits as well as...</div><div class="ttdef"><b>Definition:</b> nmfStructsQt.h:240</div></div>
 <div class="ttc" id="astruct_stat_struct_html"><div class="ttname"><a href="struct_stat_struct.html">StatStruct</a></div><div class="ttdoc">This structure contains data needed for the summary statitics tables.</div><div class="ttdef"><b>Definition:</b> nmfUtils.h:73</div></div>
 <div class="ttc" id="astruct_model_data_html"><div class="ttname"><a href="struct_model_data.html">ModelData</a></div><div class="ttdoc">Structure contains all of the parameters in a particular Model.</div><div class="ttdef"><b>Definition:</b> nmfUtils.h:92</div></div>
@@ -297,7 +302,7 @@ $(function() {
 <div class="ttc" id="aclassnmf_logger_html"><div class="ttname"><a href="classnmf_logger.html">nmfLogger</a></div><div class="ttdoc">This class describes the nmfLogger class for the MultiSpecies tools. It allows the user to save norma...</div><div class="ttdef"><b>Definition:</b> nmfLogger.h:44</div></div>
 <div class="ttc" id="anmf_constants_m_s_v_p_a_8h_html"><div class="ttname"><a href="nmf_constants_m_s_v_p_a_8h.html">nmfConstantsMSVPA.h</a></div><div class="ttdoc">Definition for constants used in MSVPA_X2 tool.</div></div>
 <div class="ttc" id="astruct_scenarios_html"><div class="ttname"><a href="struct_scenarios.html">Scenarios</a></div><div class="ttdoc">The MSVPA Scenarios data structure.</div><div class="ttdef"><b>Definition:</b> nmfUtils.h:136</div></div>
-<div class="ttc" id="anmf_utils_8h_html_a6a82ead7575e6d3ebc9427b383e68e42"><div class="ttname"><a href="nmf_utils_8h.html#a6a82ead7575e6d3ebc9427b383e68e42">nmfUtils::printValue</a></div><div class="ttdeci">void printValue(std::string name, T value, const int width, const int precision)</div><div class="ttdoc">Template function used to print out value of any type of variable passed to it.</div><div class="ttdef"><b>Definition:</b> nmfUtils.h:437</div></div>
+<div class="ttc" id="anmf_utils_8h_html_a6a82ead7575e6d3ebc9427b383e68e42"><div class="ttname"><a href="nmf_utils_8h.html#a6a82ead7575e6d3ebc9427b383e68e42">nmfUtils::printValue</a></div><div class="ttdeci">void printValue(std::string name, T value, const int width, const int precision)</div><div class="ttdoc">Template function used to print out value of any type of variable passed to it.</div><div class="ttdef"><b>Definition:</b> nmfUtils.h:451</div></div>
 <div class="ttc" id="anmf_logger_8h_html"><div class="ttname"><a href="nmf_logger_8h.html">nmfLogger.h</a></div><div class="ttdoc">Definition for the MultiSpecies Logger class.</div></div>
 <div class="ttc" id="anmf_utils_qt_8h_html"><div class="ttname"><a href="nmf_utils_qt_8h.html">nmfUtilsQt.h</a></div><div class="ttdoc">Definition for Qt widgets and functions that operate on widgets.</div></div>
 <!-- start footer part -->

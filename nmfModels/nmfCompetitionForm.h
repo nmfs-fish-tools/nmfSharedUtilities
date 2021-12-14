@@ -52,12 +52,14 @@ private:
     int m_NumParameters;
     int m_NumSpecies;
     int m_NumGuilds;
+    std::string m_CovariateAlgorithmType;
     std::string m_Type; // "Null","NO_K",...
     std::vector<std::pair<double,double> > m_ParameterRanges;
     std::map<std::string,std::string> m_CompetitionMap;
     std::map<std::string,std::string> m_CompetitionKey;
 
     std::map<std::string, long double(nmfCompetitionForm::*)(
+            const std::string& CovariateAlgorithmType,
             const int& TimeMinus1,
             const int& SpeciesOrGuildNum,
             const double& BiomassAtTime,
@@ -90,6 +92,7 @@ public:
     /**
      * @brief This method allows the appropriate function map function to be called such that a series of if...else...
      * statements are not needed
+     * @param CovariateAlgorithmType : the covariate algorithm type to use for subsequent covariate calculations
      * @param TimeMinus1 : one minus the current time
      * @param SpeciesOrGuildNum : species number or guild number
      * @param BiomassAtTime : biomass at the currrent time
@@ -110,6 +113,7 @@ public:
      * @return Returns the competition value evaluated with the appropriate function map algorithm
      */
     long double evaluate(
+            const std::string& CovariateAlgorithmType,
             const int& TimeMinus1,
             const int& SpeciesOrGuildNum,
             const double& BiomassAtTime,
@@ -146,6 +150,7 @@ public:
     /**
      * @brief FunctionMap_NOK : implements the Competition MSPROD functionality according to the
      * formula:  r(i)B(i,t)[(∑β(i,G)B(G,t))/(Kσ - KG)]
+     * @param CovariateAlgorithmType : the covariate algorithm type to use for subsequent covariate calculations
      * @param TimeMinus1 : one minus the current time
      * @param SpeciesOrGuildNum : species number or guild number
      * @param BiomassAtTime : biomass at the currrent time
@@ -166,6 +171,7 @@ public:
      * @return Returns the competition value evaluated with the AGGPROD algorithm
      */
     long double FunctionMap_AGGPROD(
+            const std::string& CovariateAlgorithmType,
             const int& TimeMinus1,
             const int& SpeciesOrGuildNum,
             const double& BiomassAtTime,
@@ -186,6 +192,7 @@ public:
     /**
      * @brief FunctionMap_NOK : implements the Competition MSPROD functionality according to the
      * formula:  r(i)B(i,t)[(∑β(i,j)B(j,t))/KG - (∑β(i,G)B(G,t))/(K(σ) - K(G))]
+     * @param CovariateAlgorithmType : the covariate algorithm type to use for subsequent covariate calculations
      * @param TimeMinus1 : one minus the current time
      * @param SpeciesOrGuildNum : species number or guild number
      * @param BiomassAtTime : biomass at the currrent time
@@ -206,6 +213,7 @@ public:
      * @return Returns the competition value evaluated with the MSPROD algorithm
      */
     long double FunctionMap_MSPROD(
+            const std::string& CovariateAlgorithmType,
             const int& TimeMinus1,
             const int& SpeciesOrGuildNum,
             const double& BiomassAtTime,
@@ -226,6 +234,7 @@ public:
     /**
      * @brief FunctionMap_NOK : implements the Competition NOK functionality according to the
      * formula:  B(i,t)[(∑{α(i,j)B(j,t)}]
+     * @param CovariateAlgorithmType : the covariate algorithm type to use for subsequent covariate calculations
      * @param TimeMinus1 : one minus the current time
      * @param SpeciesOrGuildNum : species number or guild number
      * @param BiomassAtTime : biomass at the currrent time
@@ -246,6 +255,7 @@ public:
      * @return Returns the competition value evaluated with the NOK algorithm
      */
     long double FunctionMap_NOK(
+            const std::string& CovariateAlgorithmType,
             const int& TimeMinus1,
             const int& SpeciesOrGuildNum,
             const double& BiomassAtTime,
@@ -265,6 +275,7 @@ public:
             const boost::numeric::ublas::matrix<double> &CompetitionBetaGuildGuildCovariate);
     /**
      * @brief FunctionMap_Null : implements the Competition Null functionality, i.e., returns 0
+     * @param CovariateAlgorithmType : the covariate algorithm type to use for subsequent covariate calculations
      * @param TimeMinus1 : one minus the current time
      * @param SpeciesOrGuildNum : species number or guild number
      * @param BiomassAtTime : biomass at the currrent time
@@ -285,6 +296,7 @@ public:
      * @return Returns 0
      */
     long double FunctionMap_Null(
+            const std::string& CovariateAlgorithmType,
             const int& TimeMinus1,
             const int& SpeciesOrGuildNum,
             const double& BiomassAtTime,

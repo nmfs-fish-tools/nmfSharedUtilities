@@ -149,7 +149,8 @@ nmfHarvestForm::loadParameterRanges(
 
 
 double
-nmfHarvestForm::evaluate(const int& timeMinus1,
+nmfHarvestForm::evaluate(const std::string& covariateAlgorithmType,
+                         const int& timeMinus1,
                          const int& species,
                          const double& biomassAtTime,
                          const boost::numeric::ublas::matrix<double>& Catch,
@@ -163,6 +164,7 @@ nmfHarvestForm::evaluate(const int& timeMinus1,
         return 0;
     } else {
         return (this->*m_FunctionMap[m_Type])(
+                    covariateAlgorithmType,
                     timeMinus1,species,biomassAtTime,
                     Catch,Effort,Exploitation,
                     catchability,catchabilityCovariateCoeff,
@@ -172,60 +174,68 @@ nmfHarvestForm::evaluate(const int& timeMinus1,
 
 
 double
-nmfHarvestForm::FunctionMap_Null(const int& timeMinus1,
-                          const int& species,
-                          const double& biomassAtTime,
-                          const boost::numeric::ublas::matrix<double>& Catch,
-                          const boost::numeric::ublas::matrix<double>& Effort,
-                          const boost::numeric::ublas::matrix<double>& Exploitation,
-                          const double& catchability,
-                          const double& catchabilityCovariateCoeff,
-                          const double& catchabilityCovariate)
+nmfHarvestForm::FunctionMap_Null(const std::string& covariateAlgorithmType,
+                                 const int& timeMinus1,
+                                 const int& species,
+                                 const double& biomassAtTime,
+                                 const boost::numeric::ublas::matrix<double>& Catch,
+                                 const boost::numeric::ublas::matrix<double>& Effort,
+                                 const boost::numeric::ublas::matrix<double>& Exploitation,
+                                 const double& catchability,
+                                 const double& catchabilityCovariateCoeff,
+                                 const double& catchabilityCovariate)
 {
     return 0.0;
 }
 
 double
-nmfHarvestForm::FunctionMap_Catch(const int& timeMinus1,
-                             const int& species,
-                             const double& biomassAtTime,
-                             const boost::numeric::ublas::matrix<double>& Catch,
-                             const boost::numeric::ublas::matrix<double>& Effort,
-                             const boost::numeric::ublas::matrix<double>& Exploitation,
-                             const double& catchability,
-                             const double& catchabilityCovariateCoeff,
-                             const double& catchabilityCovariate)
+nmfHarvestForm::FunctionMap_Catch(const std::string& covariateAlgorithmType,
+                                  const int& timeMinus1,
+                                  const int& species,
+                                  const double& biomassAtTime,
+                                  const boost::numeric::ublas::matrix<double>& Catch,
+                                  const boost::numeric::ublas::matrix<double>& Effort,
+                                  const boost::numeric::ublas::matrix<double>& Exploitation,
+                                  const double& catchability,
+                                  const double& catchabilityCovariateCoeff,
+                                  const double& catchabilityCovariate)
 {
-   return Catch(timeMinus1,species);
+    return Catch(timeMinus1,species);
 }
 
 
 double
-nmfHarvestForm::FunctionMap_Effort(const int& timeMinus1,
-                              const int& species,
-                              const double& biomassAtTime,
-                              const boost::numeric::ublas::matrix<double>& Catch,
-                              const boost::numeric::ublas::matrix<double>& Effort,
-                              const boost::numeric::ublas::matrix<double>& Exploitation,
-                              const double& catchability,
-                              const double& catchabilityCovariateCoeff,
-                              const double& catchabilityCovariate)
+nmfHarvestForm::FunctionMap_Effort(const std::string& covariateAlgorithmType,
+                                   const int& timeMinus1,
+                                   const int& species,
+                                   const double& biomassAtTime,
+                                   const boost::numeric::ublas::matrix<double>& Catch,
+                                   const boost::numeric::ublas::matrix<double>& Effort,
+                                   const boost::numeric::ublas::matrix<double>& Exploitation,
+                                   const double& catchability,
+                                   const double& catchabilityCovariateCoeff,
+                                   const double& catchabilityCovariate)
 {
-    double catchabilityFactor = catchability*(1.0+catchabilityCovariateCoeff*catchabilityCovariate);
+//  double catchabilityFactor = catchability*(1.0+catchabilityCovariateCoeff*catchabilityCovariate);
+    double catchabilityFactor = nmfUtils::applyCovariate(nullptr,
+                       covariateAlgorithmType,catchability,
+                       catchabilityCovariateCoeff,catchabilityCovariate);
+
     return (catchabilityFactor*Effort(timeMinus1,species)*biomassAtTime);
 }
 
 
 double
-nmfHarvestForm::FunctionMap_Exploitation(const int& timeMinus1,
-                                    const int& species,
-                                    const double& biomassAtTime,
-                                    const boost::numeric::ublas::matrix<double>& Catch,
-                                    const boost::numeric::ublas::matrix<double>& Effort,
-                                    const boost::numeric::ublas::matrix<double>& Exploitation,
-                                    const double& catchability,
-                                    const double& catchabilityCovariateCoeff,
-                                    const double& catchabilityCovariate)
+nmfHarvestForm::FunctionMap_Exploitation(const std::string& covariateAlgorithmType,
+                                         const int& timeMinus1,
+                                         const int& species,
+                                         const double& biomassAtTime,
+                                         const boost::numeric::ublas::matrix<double>& Catch,
+                                         const boost::numeric::ublas::matrix<double>& Effort,
+                                         const boost::numeric::ublas::matrix<double>& Exploitation,
+                                         const double& catchability,
+                                         const double& catchabilityCovariateCoeff,
+                                         const double& catchabilityCovariate)
 {
-   return Exploitation(timeMinus1,species)*biomassAtTime;
+    return Exploitation(timeMinus1,species)*biomassAtTime;
 }
