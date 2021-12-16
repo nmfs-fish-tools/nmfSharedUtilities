@@ -3368,6 +3368,7 @@ nmfDatabase::getCovariateAlgorithmType(
     std::map<std::string, std::vector<std::string> > dataMap;
     std::string queryStr;
     std::string covariateAlgorithmType = "";
+    std::string msg;
 
     fields   = {"CovariateAlgorithmType"};
     queryStr = "SELECT CovariateAlgorithmType FROM " +
@@ -3380,7 +3381,10 @@ nmfDatabase::getCovariateAlgorithmType(
         covariateAlgorithmType = dataMap["CovariateAlgorithmType"][0];
     } else {
         if (logger != nullptr) {
-            logger->logMsg(nmfConstants::Error,"nmfDatabase::getCovariateAlgorithmType: Found incorrect number of records (i.e., not equal to 1)");
+            msg = "nmfDatabase::getCovariateAlgorithmType: Found number of records = " +
+                   QString::number(NumRecords).toStdString();
+            logger->logMsg(nmfConstants::Error,msg);
+            logger->logMsg(nmfConstants::Error,queryStr);
         }
     }
 
