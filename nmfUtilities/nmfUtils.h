@@ -209,6 +209,26 @@ namespace nmfUtils {
      */
     std::string convertToScientificNotation(double val);
     /**
+     * @brief Formats a vector of double values into a table format
+     * @param label : label for values
+     * @param values : the vector values
+     * @param includeTotal : boolean to include the total or not
+     * @return returns the formatted string
+     */
+    std::string convertValues1DToOutputStr(
+            const std::string& label,
+            const std::vector<double> &values,
+            const bool& includeTotal);
+    /**
+     * @brief Formats a matrix of double values into a table format
+     * @param label : label for values
+     * @param matrix : the matrix of values
+     * @return returns the formatted string
+     */
+    std::string convertValues2DToOutputStr(
+            const std::string& label,
+            const boost::numeric::ublas::matrix<double> &matrix);
+    /**
      * @brief Converts a vector to a one dimensional matrix
      * @param vec : vector to convert
      * @return one-dimensional matrix

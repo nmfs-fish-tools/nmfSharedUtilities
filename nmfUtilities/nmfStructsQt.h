@@ -178,6 +178,10 @@ struct EstimateRunBox {
  */
 struct ModelReviewStruct {
     QString ModelName;
+    QString ObjectiveCriterion;
+    QString EstimationAlgorithm;
+    QString MinimizerAlgorithm;
+    QString ScalingAlgorithm;
     QString setToDeterministicBees;
     int     maxGenerations;
     int     numBees;

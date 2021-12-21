@@ -269,6 +269,53 @@ convertVectorToMatrix(std::vector<double>& vec)
     return matrix;
 }
 
+std::string
+convertValues1DToOutputStr(const std::string& label,
+                           const std::vector<double> &Values,
+                           const bool& includeTotal)
+{
+    double val;
+    double totalVal = 0;
+    std::string bestFitnessStr = "";
+
+    bestFitnessStr += "<br>"+label;
+    bestFitnessStr += "<table>";
+    bestFitnessStr += "<tr>";
+    for (unsigned i=0; i<Values.size(); ++i) {
+        val = Values[i];
+        bestFitnessStr += "<td> "+convertToScientificNotation(val) + "</td>";
+        totalVal += val;
+    }
+    bestFitnessStr += "</tr>";
+    bestFitnessStr += "</table>";
+    if (includeTotal) {
+        bestFitnessStr += "<br>Total " + label + "<br>" +
+                convertToScientificNotation(totalVal) + "<br>";
+    }
+
+    return bestFitnessStr;
+}
+
+std::string convertValues2DToOutputStr(const std::string& label,
+                                       const boost::numeric::ublas::matrix<double> &matrix)
+{
+    std::string bestFitnessStr = "";
+
+    bestFitnessStr += "<br>"+label;
+    bestFitnessStr += "<table>";
+
+    for (unsigned i=0; i<matrix.size1(); ++i) {
+        bestFitnessStr += "<tr>";
+        for (unsigned j=0; j<matrix.size2(); ++j) {
+            bestFitnessStr += "<td> " + convertToScientificNotation(matrix(i,j)) + "</td>";
+        }
+        bestFitnessStr += "</tr>";
+    }
+
+    bestFitnessStr += "</table>";
+
+    return bestFitnessStr;
+}
 
 /*
  * Returns a random number between the passed limits: [lowerLimit,upperLimit)

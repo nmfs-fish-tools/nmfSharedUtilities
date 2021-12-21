@@ -248,6 +248,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ae92f32582c01b3df8c20a20e4fc9f15b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtils::convertToScientificNotation</b> (double val)</td></tr>
 <tr class="memdesc:ae92f32582c01b3df8c20a20e4fc9f15b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the passed value to a scientific notation formatted string.  <a href="nmf_utils_8cpp.html#ae92f32582c01b3df8c20a20e4fc9f15b">More...</a><br /></td></tr>
 <tr class="separator:ae92f32582c01b3df8c20a20e4fc9f15b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab88977361fbe3d9dff8b1879d36fbc9a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtils::convertValues1DToOutputStr</b> (const std::string &amp;label, const std::vector&lt; double &gt; &amp;values, const bool &amp;includeTotal)</td></tr>
+<tr class="memdesc:ab88977361fbe3d9dff8b1879d36fbc9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a vector of double values into a table format.  <a href="nmf_utils_8cpp.html#ab88977361fbe3d9dff8b1879d36fbc9a">More...</a><br /></td></tr>
+<tr class="separator:ab88977361fbe3d9dff8b1879d36fbc9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa92647879b97ed36284dec8d41aeaace"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtils::convertValues2DToOutputStr</b> (const std::string &amp;label, const boost::numeric::ublas::matrix&lt; double &gt; &amp;matrix)</td></tr>
+<tr class="memdesc:aa92647879b97ed36284dec8d41aeaace"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a matrix of double values into a table format.  <a href="nmf_utils_8cpp.html#aa92647879b97ed36284dec8d41aeaace">More...</a><br /></td></tr>
+<tr class="separator:aa92647879b97ed36284dec8d41aeaace"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa192b33d70448f4f3650261abce9f190"><td class="memItemLeft" align="right" valign="top">boost::numeric::ublas::matrix&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtils::convertVectorToMatrix</b> (std::vector&lt; double &gt; &amp;vec)</td></tr>
 <tr class="memdesc:aa192b33d70448f4f3650261abce9f190"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a vector to a one dimensional matrix.  <a href="nmf_utils_8cpp.html#aa192b33d70448f4f3650261abce9f190">More...</a><br /></td></tr>
 <tr class="separator:aa192b33d70448f4f3650261abce9f190"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -668,6 +674,89 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>String representing the passed in value in scientific notation </dd></dl>
+
+</div>
+</div>
+<a id="ab88977361fbe3d9dff8b1879d36fbc9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab88977361fbe3d9dff8b1879d36fbc9a">&#9670;&nbsp;</a></span>convertValues1DToOutputStr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string nmfUtils::convertValues1DToOutputStr </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>label</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>values</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>includeTotal</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Formats a vector of double values into a table format. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">label</td><td>: label for values </td></tr>
+    <tr><td class="paramname">values</td><td>: the vector values </td></tr>
+    <tr><td class="paramname">includeTotal</td><td>: boolean to include the total or not </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>returns the formatted string </dd></dl>
+
+</div>
+</div>
+<a id="aa92647879b97ed36284dec8d41aeaace"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa92647879b97ed36284dec8d41aeaace">&#9670;&nbsp;</a></span>convertValues2DToOutputStr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string nmfUtils::convertValues2DToOutputStr </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>label</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>matrix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Formats a matrix of double values into a table format. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">label</td><td>: label for values </td></tr>
+    <tr><td class="paramname">matrix</td><td>: the matrix of values </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>returns the formatted string </dd></dl>
 
 </div>
 </div>

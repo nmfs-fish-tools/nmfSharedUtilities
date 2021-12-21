@@ -623,8 +623,6 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
 //std::cout << "num params: " << parameters.size() << std::endl;
     // Load the parameters into their respective data structures for use in the objective function.
     extractInitBiomass(parameters,startPos,initBiomass);
-//std::cout << "start pos: " << startPos << std::endl;
-//std::cout << "num parameters: " << parameters.size() << std::endl;
     m_GrowthForm->extractParameters(parameters,startPos,
                                     growthRate,growthRateCovariateCoeffs,
                                     carryingCapacity,carryingCapacityCovariateCoeffs,

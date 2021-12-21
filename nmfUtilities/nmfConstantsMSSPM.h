@@ -155,8 +155,6 @@ namespace nmfConstantsMSSPM
      const bool   DontMultiplyTableByOutputBiomass = false;
      const bool   DivideTableByOutputBiomass       = true;
      const bool   DontDivideTableByOutputBiomass   = false;
-     const bool   ReloadAllWidgets                 = true;
-     const bool   DontReloadAllWidgets             = false;
      const bool   RemoveCommas                     = true;
      const bool   DontRemoveCommas                 = false;
      const bool   Editable                         = true;
