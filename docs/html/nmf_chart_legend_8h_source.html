@@ -69,58 +69,61 @@ $(function() {
 <div class="title">nmfChartLegend.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef NMFCHARTLEGEND_H</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define NMFCHARTLEGEND_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QChart&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QLabel&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QLegend&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QLegendMarker&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;QLine&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;QLineSeries&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;QScatterSeries&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;QString&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;QStringList&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;QToolTip&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;QValueAxis&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;boost/numeric/ublas/matrix.hpp&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;boost/numeric/ublas/io.hpp&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;boost/algorithm/string/trim.hpp&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;boost/algorithm/string.hpp&gt;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;boost/range/algorithm_ext/erase.hpp&gt;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;QT_CHARTS_USE_NAMESPACE</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classnmf_chart_legend.html">   27</a></span>&#160;<span class="keyword">class </span><a class="code" href="classnmf_chart_legend.html">nmfChartLegend</a> : <span class="keyword">public</span> QObject</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    Q_OBJECT</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">int</span>                       m_maxNumMarkers;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    QChart*                   m_chart;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    std::map&lt;QString,QString&gt; m_tooltips;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    std::vector&lt;QString&gt;      m_markerColors;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="classnmf_chart_legend.html">nmfChartLegend</a>(QChart *chart);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classnmf_chart_legend.html">nmfChartLegend</a>() {}</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> setToolTips(std::vector&lt;QString&gt;&amp; markerColors);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> setConnections();</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">public</span> slots:</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">void</span> callback_hoveredLegend(<span class="keywordtype">bool</span> hovered);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;};</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif // NMFCHARTLEGEND_H</span></div>
+<a href="nmf_chart_legend_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#ifndef NMFCHARTLEGEND_H</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#define NMFCHARTLEGEND_H</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;QChart&gt;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;QLabel&gt;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;QLegend&gt;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &lt;QLegendMarker&gt;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &lt;QLine&gt;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &lt;QLineSeries&gt;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &lt;QScatterSeries&gt;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#include &lt;QString&gt;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#include &lt;QStringList&gt;</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#include &lt;QToolTip&gt;</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#include &lt;QValueAxis&gt;</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#include &lt;boost/numeric/ublas/matrix.hpp&gt;</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#include &lt;boost/numeric/ublas/io.hpp&gt;</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#include &lt;boost/algorithm/string/trim.hpp&gt;</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#include &lt;boost/algorithm/string.hpp&gt;</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#include &lt;boost/range/algorithm_ext/erase.hpp&gt;</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;QT_CHARTS_USE_NAMESPACE</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classnmf_chart_legend.html">   59</a></span>&#160;<span class="keyword">class </span><a class="code" href="classnmf_chart_legend.html">nmfChartLegend</a> : <span class="keyword">public</span> QObject</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">int</span>                       m_maxNumMarkers;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    QChart*                   m_chart;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    std::map&lt;QString,QString&gt; m_tooltips;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    std::vector&lt;QString&gt;      m_markerColors;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <a class="code" href="classnmf_chart_legend.html#aae94c53469d1d7a70b83b2392114d348">nmfChartLegend</a>(QChart *chart);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classnmf_chart_legend.html">nmfChartLegend</a>() {}</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_chart_legend.html#ab43d99647410cb3b1ec47b2f0d382364">setToolTips</a>(std::vector&lt;QString&gt;&amp; markerColors);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_chart_legend.html#a4564247785eb7c4e8f09a6a8a82ec19e">setupConnections</a>();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_chart_legend.html#a2e3d83a2482a617d3b8e7c6651e88e1f">callback_hoveredLegend</a>(<span class="keywordtype">bool</span> hovered);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;};</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">#endif // NMFCHARTLEGEND_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassnmf_chart_legend_html"><div class="ttname"><a href="classnmf_chart_legend.html">nmfChartLegend</a></div><div class="ttdef"><b>Definition:</b> nmfChartLegend.h:27</div></div>
+<div class="ttc" id="aclassnmf_chart_legend_html_aae94c53469d1d7a70b83b2392114d348"><div class="ttname"><a href="classnmf_chart_legend.html#aae94c53469d1d7a70b83b2392114d348">nmfChartLegend::nmfChartLegend</a></div><div class="ttdeci">nmfChartLegend(QChart *chart)</div><div class="ttdoc">nmfChartLegend constructor</div><div class="ttdef"><b>Definition:</b> nmfChartLegend.cpp:7</div></div>
+<div class="ttc" id="aclassnmf_chart_legend_html_a4564247785eb7c4e8f09a6a8a82ec19e"><div class="ttname"><a href="classnmf_chart_legend.html#a4564247785eb7c4e8f09a6a8a82ec19e">nmfChartLegend::setupConnections</a></div><div class="ttdeci">void setupConnections()</div><div class="ttdoc">Sets up the class signal/slot connections.</div><div class="ttdef"><b>Definition:</b> nmfChartLegend.cpp:16</div></div>
+<div class="ttc" id="aclassnmf_chart_legend_html_a2e3d83a2482a617d3b8e7c6651e88e1f"><div class="ttname"><a href="classnmf_chart_legend.html#a2e3d83a2482a617d3b8e7c6651e88e1f">nmfChartLegend::callback_hoveredLegend</a></div><div class="ttdeci">void callback_hoveredLegend(bool hovered)</div><div class="ttdoc">Callback invoked when the user hovers over a marker.</div><div class="ttdef"><b>Definition:</b> nmfChartLegend.cpp:38</div></div>
+<div class="ttc" id="aclassnmf_chart_legend_html_ab43d99647410cb3b1ec47b2f0d382364"><div class="ttname"><a href="classnmf_chart_legend.html#ab43d99647410cb3b1ec47b2f0d382364">nmfChartLegend::setToolTips</a></div><div class="ttdeci">void setToolTips(std::vector&lt; QString &gt; &amp;markerColors)</div><div class="ttdoc">sets the tool tip messages</div><div class="ttdef"><b>Definition:</b> nmfChartLegend.cpp:31</div></div>
+<div class="ttc" id="aclassnmf_chart_legend_html"><div class="ttname"><a href="classnmf_chart_legend.html">nmfChartLegend</a></div><div class="ttdoc">The nmfChartLegend class for a custom legend.</div><div class="ttdef"><b>Definition:</b> nmfChartLegend.h:59</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

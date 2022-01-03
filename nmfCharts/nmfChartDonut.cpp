@@ -56,7 +56,8 @@ nmfChartDonut::populateChart(
                 slice->setLabel(parts[0].trimmed()+" - "+QString::number(value,'f',1)+"%");
             }
 
-            connect(slice, &QPieSlice::hovered, this, &nmfChartDonut::callback_ExplodeSlice);
+            connect(slice, &QPieSlice::hovered,
+                    this,  &nmfChartDonut::callback_explodeSlice);
             series->append(slice);
         }
 
@@ -100,7 +101,7 @@ nmfChartDonut::populateChart(
 }
 
 void
-nmfChartDonut::callback_ExplodeSlice(bool exploded)
+nmfChartDonut::callback_explodeSlice(bool exploded)
 {
     QPieSlice *slice = qobject_cast<QPieSlice *>(sender());
 //    slice->setExploded(exploded);

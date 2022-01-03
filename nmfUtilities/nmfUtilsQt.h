@@ -184,8 +184,8 @@ namespace nmfUtilsQt {
     /**
      * @brief Background color specification for a read only line edit widget
      */
-//  const QString ReadOnlyLineEditBgColor     = "QLineEdit { background: rgb(250,240,230);}";
-//  const QString ReadOnlyLineEditBgColorDark = "QLineEdit {background: rgb(103,110,113);}";
+//  const QString ReadOnlyLineEditBgColor      = "QLineEdit {background: rgb(250,240,230);}";
+//  const QString ReadOnlyLineEditBgColorDark  = "QLineEdit {background: rgb(103,110,113);}";
     const QString ReadOnlyLineEditBgColorLight = "QLineEdit {background: rgb(240,240,240);}";
     const QString ReadOnlyLineEditBgColorDark  = "QLineEdit {background: rgb(110,110,110);}";
     /**

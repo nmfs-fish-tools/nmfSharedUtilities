@@ -69,12 +69,17 @@ $(function() {
 <div class="title">nmfChartLine Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The class creates a line chart. The user can specify multiple lines worth of data for display.  
+ <a href="classnmf_chart_line.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="nmf_chart_line_8h_source.html">nmfChartLine.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for nmfChartLine:</div>
 <div class="dyncontent">
 <div class="center"><img src="classnmf_chart_line__inherit__graph.png" border="0" usemap="#nmf_chart_line_inherit__map" alt="Inheritance graph"/></div>
 <map name="nmf_chart_line_inherit__map" id="nmf_chart_line_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,80,116,107"/>
+<area shape="rect" title="The class creates a line chart. The user can specify multiple lines worth of data for display." alt="" coords="5,80,116,107"/>
 <area shape="rect" title=" " alt="" coords="23,5,98,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -83,29 +88,285 @@ Collaboration diagram for nmfChartLine:</div>
 <div class="dyncontent">
 <div class="center"><img src="classnmf_chart_line__coll__graph.png" border="0" usemap="#nmf_chart_line_coll__map" alt="Collaboration graph"/></div>
 <map name="nmf_chart_line_coll__map" id="nmf_chart_line_coll__map">
-<area shape="rect" title=" " alt="" coords="5,80,116,107"/>
+<area shape="rect" title="The class creates a line chart. The user can specify multiple lines worth of data for display." alt="" coords="5,80,116,107"/>
 <area shape="rect" title=" " alt="" coords="23,5,98,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-slots"></a>
 Public Slots</h2></td></tr>
-<tr class="memitem:a03527273074a08150e8a5fad0b178ea4"><td class="memItemLeft" align="right" valign="top"><a id="a03527273074a08150e8a5fad0b178ea4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>callback_hoveredLine</b> (const QPointF &amp;point, bool hovered)</td></tr>
+<tr class="memitem:a03527273074a08150e8a5fad0b178ea4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_chart_line.html#a03527273074a08150e8a5fad0b178ea4">callback_hoveredLine</a> (const QPointF &amp;point, bool hovered)</td></tr>
+<tr class="memdesc:a03527273074a08150e8a5fad0b178ea4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback invoked if user hovers over a line.  <a href="classnmf_chart_line.html#a03527273074a08150e8a5fad0b178ea4">More...</a><br /></td></tr>
 <tr class="separator:a03527273074a08150e8a5fad0b178ea4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91855e361c070403986efc9174847cbe"><td class="memItemLeft" align="right" valign="top"><a id="a91855e361c070403986efc9174847cbe"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>callback_HideTooltip</b> ()</td></tr>
-<tr class="separator:a91855e361c070403986efc9174847cbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e85b8a02ae0d2709928558614895875"><td class="memItemLeft" align="right" valign="top"><a id="a9e85b8a02ae0d2709928558614895875"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_chart_line.html#a9e85b8a02ae0d2709928558614895875">callback_hideTooltip</a> ()</td></tr>
+<tr class="memdesc:a9e85b8a02ae0d2709928558614895875"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback invoked to hide tooltip after a single shot timeout. <br /></td></tr>
+<tr class="separator:a9e85b8a02ae0d2709928558614895875"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab510045ce62a4eaec3f254db200e6b91"><td class="memItemLeft" align="right" valign="top"><a id="ab510045ce62a4eaec3f254db200e6b91"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>populateChart</b> (QChart *chart, std::string &amp;type, const std::string &amp;style, const bool &amp;ShowFirstPoint, const bool &amp;ShowLegend, const double &amp;XOffset, const bool &amp;XAxisIsInteger, const double &amp;YMinVal, const double &amp;YMaxVal, const bool &amp;LeaveGapsWhereNegative, const boost::numeric::ublas::matrix&lt; double &gt; &amp;YAxisData, const QStringList &amp;RowLabels, const QStringList &amp;ColumnLabels, const QStringList &amp;HoverLabels, std::string &amp;MainTitle, std::string &amp;XTitle, std::string &amp;YTitle, const std::vector&lt; bool &gt; &amp;GridLines, const int &amp;Theme, const QColor &amp;LineColor, const std::string &amp;LineColorName, const double &amp;XInc)</td></tr>
-<tr class="separator:ab510045ce62a4eaec3f254db200e6b91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb76f3a9f0f970676a36f13b221dba42"><td class="memItemLeft" align="right" valign="top"><a id="aeb76f3a9f0f970676a36f13b221dba42"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> (QChart *chart)</td></tr>
+<tr class="memitem:a82bb26beb6ed33d0e96177dd0b46d98b"><td class="memItemLeft" align="right" valign="top"><a id="a82bb26beb6ed33d0e96177dd0b46d98b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_chart_line.html#a82bb26beb6ed33d0e96177dd0b46d98b">nmfChartLine</a> ()</td></tr>
+<tr class="memdesc:a82bb26beb6ed33d0e96177dd0b46d98b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classnmf_chart_line.html" title="The class creates a line chart. The user can specify multiple lines worth of data for display.">nmfChartLine</a> constructor for multi-line chart widget <br /></td></tr>
+<tr class="separator:a82bb26beb6ed33d0e96177dd0b46d98b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18b45a910bc1e312f62b8fc33a8cb383"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_chart_line.html#a18b45a910bc1e312f62b8fc33a8cb383">populateChart</a> (QChart *chart, std::string &amp;type, const std::string &amp;lineStyle, const bool &amp;showFirstPoint, const bool &amp;showLegend, const double &amp;xOffset, const bool &amp;xAxisIsInteger, const double &amp;yMinVal, const double &amp;yMaxVal, const bool &amp;leaveGapsWhereNegative, const boost::numeric::ublas::matrix&lt; double &gt; &amp;lineData, const QStringList &amp;rowLabels, const QStringList &amp;columnLabels, const QStringList &amp;hoverLabels, std::string &amp;mainTitle, std::string &amp;xTitle, std::string &amp;yTitle, const std::vector&lt; bool &gt; &amp;gridLines, const int &amp;theme, const QColor &amp;lineColor, const std::string &amp;lineColorName, const double &amp;xInc)</td></tr>
+<tr class="memdesc:a18b45a910bc1e312f62b8fc33a8cb383"><td class="mdescLeft">&#160;</td><td class="mdescRight">populates (and draws) the chart with all of the data necessary  <a href="classnmf_chart_line.html#a18b45a910bc1e312f62b8fc33a8cb383">More...</a><br /></td></tr>
+<tr class="separator:a18b45a910bc1e312f62b8fc33a8cb383"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb76f3a9f0f970676a36f13b221dba42"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_chart_line.html#aeb76f3a9f0f970676a36f13b221dba42">clear</a> (QChart *chart)</td></tr>
+<tr class="memdesc:aeb76f3a9f0f970676a36f13b221dba42"><td class="mdescLeft">&#160;</td><td class="mdescRight">clears all series from the passed chart  <a href="classnmf_chart_line.html#aeb76f3a9f0f970676a36f13b221dba42">More...</a><br /></td></tr>
 <tr class="separator:aeb76f3a9f0f970676a36f13b221dba42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The class creates a line chart. The user can specify multiple lines worth of data for display. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a03527273074a08150e8a5fad0b178ea4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03527273074a08150e8a5fad0b178ea4">&#9670;&nbsp;</a></span>callback_hoveredLine</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfChartLine::callback_hoveredLine </td>
+          <td>(</td>
+          <td class="paramtype">const QPointF &amp;&#160;</td>
+          <td class="paramname"><em>point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>hovered</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Callback invoked if user hovers over a line. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">point</td><td>: point at which hovering takes place </td></tr>
+    <tr><td class="paramname">hovered</td><td>: boolean signifying if user is hovering over a line </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aeb76f3a9f0f970676a36f13b221dba42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb76f3a9f0f970676a36f13b221dba42">&#9670;&nbsp;</a></span>clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfChartLine::clear </td>
+          <td>(</td>
+          <td class="paramtype">QChart *&#160;</td>
+          <td class="paramname"><em>chart</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>clears all series from the passed chart </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">chart</td><td>: point to QChart object to clear </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a18b45a910bc1e312f62b8fc33a8cb383"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18b45a910bc1e312f62b8fc33a8cb383">&#9670;&nbsp;</a></span>populateChart()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfChartLine::populateChart </td>
+          <td>(</td>
+          <td class="paramtype">QChart *&#160;</td>
+          <td class="paramname"><em>chart</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>lineStyle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>showFirstPoint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>showLegend</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>xOffset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>xAxisIsInteger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>yMinVal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>yMaxVal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>leaveGapsWhereNegative</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>lineData</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QStringList &amp;&#160;</td>
+          <td class="paramname"><em>rowLabels</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QStringList &amp;&#160;</td>
+          <td class="paramname"><em>columnLabels</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QStringList &amp;&#160;</td>
+          <td class="paramname"><em>hoverLabels</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>mainTitle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>xTitle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>yTitle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; bool &gt; &amp;&#160;</td>
+          <td class="paramname"><em>gridLines</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>theme</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QColor &amp;&#160;</td>
+          <td class="paramname"><em>lineColor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>lineColorName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>xInc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>populates (and draws) the chart with all of the data necessary </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">chart</td><td>: pointer to QChart </td></tr>
+    <tr><td class="paramname">type</td><td>: type of line chart </td></tr>
+    <tr><td class="paramname">lineStyle</td><td>: style of line (i.e., DottedLine, DashedLine) </td></tr>
+    <tr><td class="paramname">showFirstPoint</td><td>: boolean signifying if the first point should be shown </td></tr>
+    <tr><td class="paramname">showLegend</td><td>: boolean to specify the visibility of the legend </td></tr>
+    <tr><td class="paramname">xOffset</td><td>: the x offset that should be applied to the data series </td></tr>
+    <tr><td class="paramname">xAxisIsInteger</td><td>: boolean signifying if the values along the x-axis should be integers </td></tr>
+    <tr><td class="paramname">yMinVal</td><td>: minimum y value </td></tr>
+    <tr><td class="paramname">yMaxVal</td><td>: maximum y value </td></tr>
+    <tr><td class="paramname">leaveGapsWhereNegative</td><td></td></tr>
+    <tr><td class="paramname">lineData</td><td>: matrix containing the line data </td></tr>
+    <tr><td class="paramname">rowLabels</td><td>: labels along the x-axis </td></tr>
+    <tr><td class="paramname">columnLabels</td><td>: labels along the y-axis </td></tr>
+    <tr><td class="paramname">hoverLabels</td><td>: labels for line tooltips </td></tr>
+    <tr><td class="paramname">mainTitle</td><td>: the main title for the chart </td></tr>
+    <tr><td class="paramname">xTitle</td><td>: the x-axis label </td></tr>
+    <tr><td class="paramname">yTitle</td><td>: the y-axis label </td></tr>
+    <tr><td class="paramname">gridLines</td><td>: vector of booleans designating if the gridlines should be visible </td></tr>
+    <tr><td class="paramname">theme</td><td>: color theme for the chart </td></tr>
+    <tr><td class="paramname">lineColor</td><td>: the line color designation </td></tr>
+    <tr><td class="paramname">lineColorName</td><td>: the name of the line color to be used as a tooltip </td></tr>
+    <tr><td class="paramname">xInc</td><td>: increment along the x-axis </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>nmfCharts/<a class="el" href="nmf_chart_line_8h_source.html">nmfChartLine.h</a></li>
 <li>nmfCharts/nmfChartLine.cpp</li>

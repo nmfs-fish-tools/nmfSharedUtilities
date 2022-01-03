@@ -69,69 +69,78 @@ $(function() {
 <div class="title">nmfDatabaseConnectDialog.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nmf_database_8h.html">nmfDatabase.h</a>&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QCheckBox&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QComboBox&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QMainWindow&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;QTableWidget&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;QLabel&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;QLineEdit&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;QMessageBox&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;QObject&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;QPushButton&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;QVBoxLayout&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nmf_utils_qt_8h.html">nmfUtilsQt.h</a>&quot;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nmf_constants_m_s_c_a_a_8h.html">nmfConstantsMSCAA.h</a>&quot;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classnmf_database_connect_dialog.html">   19</a></span>&#160;<span class="keyword">class </span><a class="code" href="classnmf_database_connect_dialog.html">nmfDatabaseConnectDialog</a>: <span class="keyword">public</span> QDialog</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    Q_OBJECT</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classnmf_database_connect_dialog.html">nmfDatabaseConnectDialog</a>(QMainWindow*       mainWindow  = 0,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                                      <span class="keyword">const</span> std::string&amp; settingsDir = <span class="stringliteral">&quot;&quot;</span>,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                                      <a class="code" href="classnmf_database.html">nmfDatabase</a>*       databasePtr = 0);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">bool</span>         m_openOKBool;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    std::string  m_settingsDir;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    std::string  m_username;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    std::string  m_password;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    QMainWindow* m_mainWin;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="classnmf_database.html">nmfDatabase</a>* m_databasePtr;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">bool</span> openOK();</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> SaveSettings();</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    std::string getUsername();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    std::string getPassword();</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classnmf_database_connect_dialog.html">nmfDatabaseConnectDialog</a>() {}</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">public</span> slots:</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> callback_connectToDatabase();</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">void</span> callback_resetGUI();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> callback_resetSettings();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;};</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">namespace </span>nmfDatabaseUtils {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">bool</span> menu_connectToDatabase(QMainWindow* mainWin,</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                                std::string settingsDir,</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                                <a class="code" href="classnmf_database.html">nmfDatabase</a>* databasePtr,</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                                std::string&amp; username,</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                                std::string&amp; password);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<a href="nmf_database_connect_dialog_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nmf_database_8h.html">nmfDatabase.h</a>&quot;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nmf_constants_m_s_c_a_a_8h.html">nmfConstantsMSCAA.h</a>&quot;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nmf_utils_qt_8h.html">nmfUtilsQt.h</a>&quot;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &lt;QCheckBox&gt;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &lt;QComboBox&gt;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &lt;QLabel&gt;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &lt;QLineEdit&gt;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#include &lt;QMainWindow&gt;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#include &lt;QMessageBox&gt;</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#include &lt;QObject&gt;</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#include &lt;QPushButton&gt;</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#include &lt;QTableWidget&gt;</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#include &lt;QVBoxLayout&gt;</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classnmf_database_connect_dialog.html">   52</a></span>&#160;<span class="keyword">class </span><a class="code" href="classnmf_database_connect_dialog.html">nmfDatabaseConnectDialog</a>: <span class="keyword">public</span> QDialog</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classnmf_database_connect_dialog.html#accf055591a4cc48113e2b7c9707204c7">nmfDatabaseConnectDialog</a>(QMainWindow*       mainWindow  = 0,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                                      <span class="keyword">const</span> std::string&amp; settingsDir = <span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                                      <a class="code" href="classnmf_database.html">nmfDatabase</a>*       databasePtr = 0);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classnmf_database_connect_dialog.html">nmfDatabaseConnectDialog</a>() {}</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">bool</span>         m_openOKBool;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    std::string  m_settingsDir;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    std::string  m_username;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    std::string  m_password;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    QMainWindow* m_mainWin;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <a class="code" href="classnmf_database.html">nmfDatabase</a>* m_databasePtr;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    std::string <a class="code" href="classnmf_database_connect_dialog.html#ad01f6a4b39779c1208f6bbc6afc8bee3">getUsername</a>();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    std::string <a class="code" href="classnmf_database_connect_dialog.html#a3d56ffc6e8bbb1c497592e1210559e7f">getPassword</a>();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classnmf_database_connect_dialog.html#a1ba271492771905045a1b9756f47c8b1">openOK</a>();</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_database_connect_dialog.html#af346d0b408e63f33a6dde9f352293b2a">saveSettings</a>();</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_database_connect_dialog.html#abfb8dff1a91969be45f946bcb4a6c01d">callback_connectToDatabase</a>();</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_database_connect_dialog.html#a2a7ddd9eacb8b1fa4c71bc25476f5189">callback_resetGUI</a>();</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_database_connect_dialog.html#a38e7f6876f6516391d7a72f0bbc84d37">callback_resetSettings</a>();</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;};</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacenmf_database_utils.html">nmfDatabaseUtils</a> {</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="namespacenmf_database_utils.html#a635ac0bcaf459ab6159b7daa5b24be73">menu_connectToDatabase</a>(QMainWindow* mainWin,</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                                std::string settingsDir,</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                                <a class="code" href="classnmf_database.html">nmfDatabase</a>* databasePtr,</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                                std::string&amp; username,</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                                std::string&amp; password);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;}</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassnmf_database_connect_dialog_html"><div class="ttname"><a href="classnmf_database_connect_dialog.html">nmfDatabaseConnectDialog</a></div><div class="ttdef"><b>Definition:</b> nmfDatabaseConnectDialog.h:19</div></div>
+<div class="ttc" id="aclassnmf_database_connect_dialog_html_accf055591a4cc48113e2b7c9707204c7"><div class="ttname"><a href="classnmf_database_connect_dialog.html#accf055591a4cc48113e2b7c9707204c7">nmfDatabaseConnectDialog::nmfDatabaseConnectDialog</a></div><div class="ttdeci">nmfDatabaseConnectDialog(QMainWindow *mainWindow=0, const std::string &amp;settingsDir=&quot;&quot;, nmfDatabase *databasePtr=0)</div><div class="ttdoc">nmfDatabaseConnectDialog class constructor</div><div class="ttdef"><b>Definition:</b> nmfDatabaseConnectDialog.cpp:6</div></div>
+<div class="ttc" id="aclassnmf_database_connect_dialog_html_a2a7ddd9eacb8b1fa4c71bc25476f5189"><div class="ttname"><a href="classnmf_database_connect_dialog.html#a2a7ddd9eacb8b1fa4c71bc25476f5189">nmfDatabaseConnectDialog::callback_resetGUI</a></div><div class="ttdeci">void callback_resetGUI()</div><div class="ttdoc">Callback invoked when the user clicks the Reset GUI button. This button is needed since it's possible...</div><div class="ttdef"><b>Definition:</b> nmfDatabaseConnectDialog.cpp:158</div></div>
+<div class="ttc" id="aclassnmf_database_connect_dialog_html_ad01f6a4b39779c1208f6bbc6afc8bee3"><div class="ttname"><a href="classnmf_database_connect_dialog.html#ad01f6a4b39779c1208f6bbc6afc8bee3">nmfDatabaseConnectDialog::getUsername</a></div><div class="ttdeci">std::string getUsername()</div><div class="ttdoc">Gets the current user name.</div><div class="ttdef"><b>Definition:</b> nmfDatabaseConnectDialog.cpp:95</div></div>
+<div class="ttc" id="aclassnmf_database_connect_dialog_html"><div class="ttname"><a href="classnmf_database_connect_dialog.html">nmfDatabaseConnectDialog</a></div><div class="ttdoc">The nmfDatabaseConnectDialog class which prompts the user with a GUI for database login information.</div><div class="ttdef"><b>Definition:</b> nmfDatabaseConnectDialog.h:52</div></div>
+<div class="ttc" id="aclassnmf_database_connect_dialog_html_a3d56ffc6e8bbb1c497592e1210559e7f"><div class="ttname"><a href="classnmf_database_connect_dialog.html#a3d56ffc6e8bbb1c497592e1210559e7f">nmfDatabaseConnectDialog::getPassword</a></div><div class="ttdeci">std::string getPassword()</div><div class="ttdoc">Gets the current password.</div><div class="ttdef"><b>Definition:</b> nmfDatabaseConnectDialog.cpp:89</div></div>
+<div class="ttc" id="anamespacenmf_database_utils_html"><div class="ttname"><a href="namespacenmf_database_utils.html">nmfDatabaseUtils</a></div><div class="ttdoc">This namespace contains the connect to database function.</div><div class="ttdef"><b>Definition:</b> nmfDatabaseConnectDialog.cpp:192</div></div>
+<div class="ttc" id="aclassnmf_database_connect_dialog_html_a38e7f6876f6516391d7a72f0bbc84d37"><div class="ttname"><a href="classnmf_database_connect_dialog.html#a38e7f6876f6516391d7a72f0bbc84d37">nmfDatabaseConnectDialog::callback_resetSettings</a></div><div class="ttdeci">void callback_resetSettings()</div><div class="ttdoc">Callback invoked when the user clicks the Reset Settings button. This button is useful if a bad UI se...</div><div class="ttdef"><b>Definition:</b> nmfDatabaseConnectDialog.cpp:173</div></div>
 <div class="ttc" id="aclassnmf_database_html"><div class="ttname"><a href="classnmf_database.html">nmfDatabase</a></div><div class="ttdoc">Allows user to interact with MySQL database.</div><div class="ttdef"><b>Definition:</b> nmfDatabase.h:79</div></div>
+<div class="ttc" id="aclassnmf_database_connect_dialog_html_af346d0b408e63f33a6dde9f352293b2a"><div class="ttname"><a href="classnmf_database_connect_dialog.html#af346d0b408e63f33a6dde9f352293b2a">nmfDatabaseConnectDialog::saveSettings</a></div><div class="ttdeci">void saveSettings()</div><div class="ttdoc">Save current Qt settings.</div><div class="ttdef"><b>Definition:</b> nmfDatabaseConnectDialog.cpp:107</div></div>
 <div class="ttc" id="anmf_constants_m_s_c_a_a_8h_html"><div class="ttname"><a href="nmf_constants_m_s_c_a_a_8h.html">nmfConstantsMSCAA.h</a></div><div class="ttdoc">Definition for constants used in MSCAA tool.</div></div>
 <div class="ttc" id="anmf_database_8h_html"><div class="ttname"><a href="nmf_database_8h.html">nmfDatabase.h</a></div><div class="ttdoc">This file contains the database API implementation (currently implemented for MySQL).</div></div>
+<div class="ttc" id="aclassnmf_database_connect_dialog_html_abfb8dff1a91969be45f946bcb4a6c01d"><div class="ttname"><a href="classnmf_database_connect_dialog.html#abfb8dff1a91969be45f946bcb4a6c01d">nmfDatabaseConnectDialog::callback_connectToDatabase</a></div><div class="ttdeci">void callback_connectToDatabase()</div><div class="ttdoc">Callback invoked when the user clicks the OK button to connect to the database.</div><div class="ttdef"><b>Definition:</b> nmfDatabaseConnectDialog.cpp:119</div></div>
+<div class="ttc" id="anamespacenmf_database_utils_html_a635ac0bcaf459ab6159b7daa5b24be73"><div class="ttname"><a href="namespacenmf_database_utils.html#a635ac0bcaf459ab6159b7daa5b24be73">nmfDatabaseUtils::menu_connectToDatabase</a></div><div class="ttdeci">bool menu_connectToDatabase(QMainWindow *mainWin, std::string settingsDir, nmfDatabase *databasePtr, std::string &amp;username, std::string &amp;password)</div><div class="ttdoc">raises the Connect to Database GUI</div><div class="ttdef"><b>Definition:</b> nmfDatabaseConnectDialog.cpp:194</div></div>
+<div class="ttc" id="aclassnmf_database_connect_dialog_html_a1ba271492771905045a1b9756f47c8b1"><div class="ttname"><a href="classnmf_database_connect_dialog.html#a1ba271492771905045a1b9756f47c8b1">nmfDatabaseConnectDialog::openOK</a></div><div class="ttdeci">bool openOK()</div><div class="ttdoc">Boolean describing if the database has been opened successfully.</div><div class="ttdef"><b>Definition:</b> nmfDatabaseConnectDialog.cpp:101</div></div>
 <div class="ttc" id="anmf_utils_qt_8h_html"><div class="ttname"><a href="nmf_utils_qt_8h.html">nmfUtilsQt.h</a></div><div class="ttdoc">Definition for Qt widgets and functions that operate on widgets.</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

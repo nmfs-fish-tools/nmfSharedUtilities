@@ -19,7 +19,6 @@ nmfDatabaseConnectDialog::nmfDatabaseConnectDialog(QMainWindow*       parent,
 
     QVBoxLayout *vLayout          = new QVBoxLayout();
     QHBoxLayout *hLayout          = new QHBoxLayout();
-    // QHBoxLayout *passwordLayt     = new QHBoxLayout();
     QLabel      *hostNameLBL      = new QLabel("Host name:");
     QLabel      *userNameLBL      = new QLabel("Database user name:");
     QLabel      *passwordLBL      = new QLabel("Database password:");
@@ -28,7 +27,6 @@ nmfDatabaseConnectDialog::nmfDatabaseConnectDialog(QMainWindow*       parent,
     QLineEdit   *userNameLE       = new QLineEdit();
     QLineEdit   *passwordLE       = new QLineEdit();
     QLineEdit   *sessionLE        = new QLineEdit();
-    //m_passwordCB                  = new QCheckBox();
     QPushButton *okDatabasePB     = new QPushButton("OK");
     QPushButton *cancelDatabasePB = new QPushButton("Cancel");
     QPushButton *resetGUIPB       = new QPushButton("Reset GUI");
@@ -47,8 +45,6 @@ nmfDatabaseConnectDialog::nmfDatabaseConnectDialog(QMainWindow*       parent,
     resetSettingsPB->setStatusTip("Remove Settings file. (Useful if App won't start.)");
     sessionLE->setToolTip("This (optional) comment appears at the beginning of this session's log file.");
     sessionLE->setStatusTip("This (optional) comment appears at the beginning of this session's log file.");
-    //m_passwordCB->setToolTip("Remember password");
-    //m_passwordCB->setStatusTip("Remember password");
     hostNameLE->setClearButtonEnabled(true);
     userNameLE->setClearButtonEnabled(true);
     passwordLE->setClearButtonEnabled(true);
@@ -63,9 +59,6 @@ nmfDatabaseConnectDialog::nmfDatabaseConnectDialog(QMainWindow*       parent,
     vLayout->addWidget(userNameLBL);
     vLayout->addWidget(userNameLE );
     vLayout->addWidget(passwordLBL);
-    //passwordLayt->addWidget(passwordLE);
-    //passwordLayt->addWidget(m_passwordCB);
-    //vLayout->addLayout(passwordLayt);
     vLayout->addWidget(passwordLE);
     vLayout->addWidget(sessionLBL); // the comment is available after the first log message has already printed
     vLayout->addWidget(sessionLE);
@@ -92,18 +85,41 @@ nmfDatabaseConnectDialog::nmfDatabaseConnectDialog(QMainWindow*       parent,
     passwordLE->setFocus();
 }
 
-//bool
-//nmfDatabaseConnectDialog::rememberPassword()
-//{
-//    return m_passwordCB->isChecked();
-//}
+std::string
+nmfDatabaseConnectDialog::getPassword()
+{
+    return m_password;
+}
+
+std::string
+nmfDatabaseConnectDialog::getUsername()
+{
+    return m_username;
+}
+
+bool
+nmfDatabaseConnectDialog::openOK()
+{
+    return m_openOKBool;
+}
+
+void
+nmfDatabaseConnectDialog::saveSettings()
+{
+    QSettings* settings = nmfUtilsQt::createSettings(m_settingsDir,QApplication::applicationName());
+
+    settings->beginGroup("MainWindow");
+    settings->setValue("pos", m_mainWin->pos());
+    settings->endGroup();
+
+    delete settings;
+}
 
 void
 nmfDatabaseConnectDialog::callback_connectToDatabase()
 {
   std::cout << "callback_connectToDatabase" << std::endl;
   std::string errorMsg;
-
   std::string msg;
   QPushButton *ok_btn    = qobject_cast<QPushButton *>(QObject::sender());
   QDialog     *dlg       = qobject_cast<QDialog *>(ok_btn->parent());
@@ -135,26 +151,7 @@ nmfDatabaseConnectDialog::callback_connectToDatabase()
 std::cout << "nmfDatabaseConnectDialog::callback_connectToDatabase: before close" << std::endl;
       close();
 std::cout << "nmfDatabaseConnectDialog::callback_connectToDatabase: after close" << std::endl;
-
   }
-}
-
-std::string
-nmfDatabaseConnectDialog::getUsername()
-{
-    return m_username;
-}
-
-std::string
-nmfDatabaseConnectDialog::getPassword()
-{
-    return m_password;
-}
-
-bool
-nmfDatabaseConnectDialog::openOK()
-{
-    return m_openOKBool;
 }
 
 void
@@ -168,7 +165,7 @@ nmfDatabaseConnectDialog::callback_resetGUI()
                                   QMessageBox::Yes);
     if (reply == QMessageBox::Yes) {
         m_mainWin->move(QPoint(0,0));
-        SaveSettings();
+        saveSettings();
     }
 }
 
@@ -191,35 +188,23 @@ nmfDatabaseConnectDialog::callback_resetSettings()
 }
 
 
-void
-nmfDatabaseConnectDialog::SaveSettings()
-{
-    QSettings* settings = nmfUtilsQt::createSettings(m_settingsDir,QApplication::applicationName());
-
-    settings->beginGroup("MainWindow");
-    settings->setValue("pos", m_mainWin->pos());
-    settings->endGroup();
-
-    delete settings;
-}
 
 namespace nmfDatabaseUtils {
 
+    bool menu_connectToDatabase(QMainWindow* mainWin,
+                                std::string settingsDir,
+                                nmfDatabase* databasePtr,
+                                std::string& username,
+                                std::string& password)
+    {
+        nmfDatabaseConnectDialog* dlg = new nmfDatabaseConnectDialog(
+                    mainWin,settingsDir,databasePtr);
+        dlg->exec();
+        username = dlg->getUsername();
+        password = dlg->getPassword();
 
-bool menu_connectToDatabase(QMainWindow* mainWin,
-                            std::string settingsDir,
-                            nmfDatabase* databasePtr,
-                            std::string& username,
-                            std::string& password)
-{
-    nmfDatabaseConnectDialog* dlg = new nmfDatabaseConnectDialog(
-                mainWin,settingsDir,databasePtr);
-    dlg->exec();
-    username = dlg->getUsername();
-    password = dlg->getPassword();
-
-    return dlg->openOK();
-}
+        return dlg->openOK();
+    }
 
 
 }

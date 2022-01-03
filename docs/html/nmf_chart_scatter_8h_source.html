@@ -69,60 +69,58 @@ $(function() {
 <div class="title">nmfChartScatter.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef NMFCHARTSCATTER_H</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define NMFCHARTSCATTER_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QChart&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QLine&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QLineSeries&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;QScatterSeries&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;QString&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;QStringList&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;QValueAxis&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;boost/numeric/ublas/matrix.hpp&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;boost/numeric/ublas/io.hpp&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;boost/algorithm/string/trim.hpp&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;boost/algorithm/string.hpp&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;boost/range/algorithm_ext/erase.hpp&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;QT_CHARTS_USE_NAMESPACE</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classnmf_chart_scatter.html">   24</a></span>&#160;<span class="keyword">class </span><a class="code" href="classnmf_chart_scatter.html">nmfChartScatter</a> : <span class="keyword">public</span> QObject</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    Q_OBJECT</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="classnmf_chart_scatter.html">nmfChartScatter</a>();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classnmf_chart_scatter.html">nmfChartScatter</a>() {}</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> populateChart(</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            QChart  *chart,</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            std::string &amp;type,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;ShowFirstPoint,</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;ChartData,</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keyword">const</span> QColor &amp;Color,</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keyword">const</span> QStringList &amp;RowLabels,</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <span class="keyword">const</span> QStringList &amp;ColumnLabels,</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            std::string &amp;MainTitle,</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            std::string &amp;XTitle,</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            std::string &amp;YTitle,</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            <span class="keyword">const</span> std::vector&lt;bool&gt; &amp;GridLines,</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">int</span> Theme);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;signals:</div>
+<a href="nmf_chart_scatter_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#ifndef NMFCHARTSCATTER_H</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#define NMFCHARTSCATTER_H</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;QChart&gt;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;QLine&gt;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;QLineSeries&gt;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &lt;QScatterSeries&gt;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &lt;QString&gt;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &lt;QStringList&gt;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &lt;QValueAxis&gt;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#include &lt;boost/numeric/ublas/matrix.hpp&gt;</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#include &lt;boost/numeric/ublas/io.hpp&gt;</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#include &lt;boost/algorithm/string/trim.hpp&gt;</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#include &lt;boost/algorithm/string.hpp&gt;</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#include &lt;boost/range/algorithm_ext/erase.hpp&gt;</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;};</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;QT_CHARTS_USE_NAMESPACE</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif // NMFCHARTSCATTER_H</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classnmf_chart_scatter.html">   53</a></span>&#160;<span class="keyword">class </span><a class="code" href="classnmf_chart_scatter.html">nmfChartScatter</a> : <span class="keyword">public</span> QObject</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;{</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <a class="code" href="classnmf_chart_scatter.html#a04e6396640dd59731be817ee01a8b4ad">nmfChartScatter</a>();</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classnmf_chart_scatter.html">nmfChartScatter</a>() {}</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_chart_scatter.html#a7a79c9c2fa34d6232e916c57af774f1c">populateChart</a>(</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            QChart *chart,</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            std::string &amp;type,</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;showFirstPoint,</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;chartData,</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <span class="keyword">const</span> QColor &amp;color,</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            <span class="keyword">const</span> QStringList &amp;rowLabels,</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            <span class="keyword">const</span> QStringList &amp;columnLabels,</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            std::string &amp;mainTitle,</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            std::string &amp;xTitle,</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            std::string &amp;yTitle,</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            <span class="keyword">const</span> std::vector&lt;bool&gt; &amp;gridLines,</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">int</span> theme);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;};</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassnmf_chart_scatter_html"><div class="ttname"><a href="classnmf_chart_scatter.html">nmfChartScatter</a></div><div class="ttdef"><b>Definition:</b> nmfChartScatter.h:24</div></div>
+<div class="ttc" id="aclassnmf_chart_scatter_html_a7a79c9c2fa34d6232e916c57af774f1c"><div class="ttname"><a href="classnmf_chart_scatter.html#a7a79c9c2fa34d6232e916c57af774f1c">nmfChartScatter::populateChart</a></div><div class="ttdeci">void populateChart(QChart *chart, std::string &amp;type, const bool &amp;showFirstPoint, const boost::numeric::ublas::matrix&lt; double &gt; &amp;chartData, const QColor &amp;color, const QStringList &amp;rowLabels, const QStringList &amp;columnLabels, std::string &amp;mainTitle, std::string &amp;xTitle, std::string &amp;yTitle, const std::vector&lt; bool &gt; &amp;gridLines, const int theme)</div><div class="ttdoc">populates (and draws) the chart with all of the data necessary</div><div class="ttdef"><b>Definition:</b> nmfChartScatter.cpp:11</div></div>
+<div class="ttc" id="aclassnmf_chart_scatter_html"><div class="ttname"><a href="classnmf_chart_scatter.html">nmfChartScatter</a></div><div class="ttdef"><b>Definition:</b> nmfChartScatter.h:53</div></div>
+<div class="ttc" id="aclassnmf_chart_scatter_html_a04e6396640dd59731be817ee01a8b4ad"><div class="ttname"><a href="classnmf_chart_scatter.html#a04e6396640dd59731be817ee01a8b4ad">nmfChartScatter::nmfChartScatter</a></div><div class="ttdeci">nmfChartScatter()</div><div class="ttdoc">nmfChartScatter constructor that defines a 2d scatter diagram</div><div class="ttdef"><b>Definition:</b> nmfChartScatter.cpp:5</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

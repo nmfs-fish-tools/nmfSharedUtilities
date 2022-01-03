@@ -142,7 +142,9 @@ struct Scenarios {
     std::string Name;
 };
 
-
+/**
+ * @brief General purpose utility functions that might be used in all tools
+ */
 namespace nmfUtils {
     /**
      * @brief appends the new vector to the current vector
@@ -353,7 +355,6 @@ namespace nmfUtils {
      * @param array5d : 5d array to initialize
      */
     void initialize(Boost5DArrayDouble& array5d);
-
     /**
      * @brief Finds the inverse of the passed matrix. (In order for an inverse to be found, the determinant of the matrix must not be 0.)
      * @param matrix : matrix whose inverse is desired
@@ -522,7 +523,11 @@ namespace nmfUtils {
      * @param matrix : the matrix to rescale
      */
     void rescaleMatrixMinMax(boost::numeric::ublas::matrix<double>& matrix);
-
+    /**
+     * @brief Sets the passed matrix values to the passed resetValue
+     * @param mat : matrix to reset
+     * @param resetValue : value with which to reset the matrix
+     */
     void reset(boost::numeric::ublas::matrix<double>& mat,
                const double& resetValue);
     /**

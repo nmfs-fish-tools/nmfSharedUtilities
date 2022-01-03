@@ -1,5 +1,5 @@
 <map id="nmfDatabaseConnectDialog" name="nmfDatabaseConnectDialog">
-<area shape="rect" id="node1" title=" " alt="" coords="5,95,211,121"/>
+<area shape="rect" id="node1" title="The nmfDatabaseConnectDialog class which prompts the user with a GUI for database login information." alt="" coords="5,95,211,121"/>
 <area shape="rect" id="node2" title=" " alt="" coords="12,5,87,32"/>
 <area shape="rect" id="node3" href="$classnmf_database.html" title="Allows user to interact with MySQL database." alt="" coords="111,5,222,32"/>
 </map>

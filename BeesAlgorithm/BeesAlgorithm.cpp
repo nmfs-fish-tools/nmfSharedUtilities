@@ -1020,19 +1020,19 @@ std::cout << "Found initial bees." << std::endl;
 
         unused = 0;
         genNum = currentGeneration - 1;
-        WriteCurrentLoopFile(MSSPMName,
+        writeCurrentLoopFile(MSSPMName,
                      genNum,
                      bestFitness,
                      unused);
 
-        if (StoppedByUser()) {
+        if (stoppedByUser()) {
             std::cout << "BeesAlgorithm StoppedByUser" << std::endl;
             done = true;
         }
 
     }
     ++genNum;
-    WriteCurrentLoopFile(MSSPMName,
+    writeCurrentLoopFile(MSSPMName,
                  genNum,
                  bestFitness,
                  unused);
@@ -1050,7 +1050,7 @@ BeesAlgorithm::isABetterFitness(double& bestFitnessInPopulation,
 }
 
 bool
-BeesAlgorithm::StoppedByUser()
+BeesAlgorithm::stoppedByUser()
 {
     std::string cmd;
     std::ifstream inputFile(nmfConstantsMSSPM::MSSPMStopRunFile);
@@ -1063,7 +1063,7 @@ BeesAlgorithm::StoppedByUser()
 }
 
 void
-BeesAlgorithm::WriteCurrentLoopFile(std::string &MSSPMName,
+BeesAlgorithm::writeCurrentLoopFile(std::string &MSSPMName,
                                    int         &NumGens,
                                    double      &BestFitness,
                                    int         &NumGensSinceBestFit)

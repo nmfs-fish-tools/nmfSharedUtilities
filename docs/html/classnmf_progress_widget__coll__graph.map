@@ -1,4 +1,4 @@
 <map id="nmfProgressWidget" name="nmfProgressWidget">
-<area shape="rect" id="node1" title=" " alt="" coords="5,80,156,107"/>
+<area shape="rect" id="node1" title="The progress GUI that shows the user the status of the current run." alt="" coords="5,80,156,107"/>
 <area shape="rect" id="node2" title=" " alt="" coords="43,5,118,32"/>
 </map>

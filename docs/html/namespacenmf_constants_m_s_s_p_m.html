@@ -199,6 +199,9 @@ const double&#160;</td><td class="memItemRight" valign="bottom"><b>NoFishingMort
 <tr class="memitem:acd7c9a6bbae521855b559c506cdc3e06"><td class="memItemLeft" align="right" valign="top"><a id="acd7c9a6bbae521855b559c506cdc3e06"></a>
 const double&#160;</td><td class="memItemRight" valign="bottom"><b>MaxOutOfBounds</b> = 9999999.0</td></tr>
 <tr class="separator:acd7c9a6bbae521855b559c506cdc3e06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fa2bf183501d5a41dc519afbadd85fe"><td class="memItemLeft" align="right" valign="top"><a id="a7fa2bf183501d5a41dc519afbadd85fe"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>MaxValidProgressYValue</b> = 90000.0</td></tr>
+<tr class="separator:a7fa2bf183501d5a41dc519afbadd85fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3e05b069ac811a887ca7828ae204e1c"><td class="memItemLeft" align="right" valign="top"><a id="ad3e05b069ac811a887ca7828ae204e1c"></a>
 const bool&#160;</td><td class="memItemRight" valign="bottom"><b>RotateLabels</b> = true</td></tr>
 <tr class="separator:ad3e05b069ac811a887ca7828ae204e1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -927,35 +930,35 @@ const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>TableSum
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">=</div>
-<div class="line">        {<span class="stringliteral">&quot;BiomassAbsolute&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;BiomassRelative&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;BiomassRelativeDividedByEstSurveyQ&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;BiomassRelativeScalars&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;CompetitionAlpha&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;CompetitionAlphaMax&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;CompetitionAlphaMin&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;CompetitionBetaGuilds&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;CompetitionBetaGuildsGuilds&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;CompetitionBetaGuildsGuildsMax&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;CompetitionBetaGuildsGuildsMin&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;CompetitionBetaGuildsMax&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;CompetitionBetaGuildsMin&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;CompetitionBetaSpecies&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;CompetitionBetaSpeciesMax&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;CompetitionBetaSpeciesMin&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;HarvestCatch&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;HarvestEffort&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;HarvestExploitation&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;Models&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;PredationExponent&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;PredationExponentMax&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;PredationExponentMin&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;PredationHandling&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;PredationHandlingMax&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;PredationHandlingMin&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;PredationRho&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;PredationRhoMax&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;PredationRhoMin&quot;</span>}</div>
+<div class="line">        {TableBiomassAbsolute,</div>
+<div class="line">         TableBiomassAbsolute,</div>
+<div class="line">         TableBiomassRelativeDividedByEstSurveyQ,</div>
+<div class="line">         TableBiomassRelativeScalars,</div>
+<div class="line">         TableCompetitionAlpha,</div>
+<div class="line">         TableCompetitionAlphaMax,</div>
+<div class="line">         TableCompetitionAlphaMin,</div>
+<div class="line">         TableCompetitionBetaGuilds,</div>
+<div class="line">         TableCompetitionBetaGuildsGuilds,</div>
+<div class="line">         TableCompetitionBetaGuildsGuildsMax,</div>
+<div class="line">         TableCompetitionBetaGuildsGuildsMin,</div>
+<div class="line">         TableCompetitionBetaGuildsMax,</div>
+<div class="line">         TableCompetitionBetaGuildsMin,</div>
+<div class="line">         TableCompetitionBetaSpecies,</div>
+<div class="line">         TableCompetitionBetaSpeciesMax,</div>
+<div class="line">         TableCompetitionBetaSpeciesMin,</div>
+<div class="line">         TableHarvestCatch,</div>
+<div class="line">         TableHarvestEffort,</div>
+<div class="line">         TableHarvestExploitation,</div>
+<div class="line">         TableModels,</div>
+<div class="line">         TablePredationExponent,</div>
+<div class="line">         TablePredationExponentMax,</div>
+<div class="line">         TablePredationExponentMin,</div>
+<div class="line">         TablePredationHandling,</div>
+<div class="line">         TablePredationHandlingMax,</div>
+<div class="line">         TablePredationHandlingMin,</div>
+<div class="line">         TablePredationRho,</div>
+<div class="line">         TablePredationRhoMax,</div>
+<div class="line">         TablePredationRhoMin}</div>
 </div><!-- fragment -->
 </div>
 </div>

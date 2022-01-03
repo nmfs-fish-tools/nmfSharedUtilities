@@ -83,13 +83,12 @@ namespace nmfConstantsMSSPM
      const int    Model_Review_Column_SSResiduals  =  2;
      const int    Model_Review_Column_AIC          =  3;
      const int    Model_Review_Column_Last_Visible = 13;
-     const bool   Query_User_For_Filename = true;
+     const bool   Query_User_For_Filename      = true;
      const bool   Dont_Query_User_For_Filename = false;
-
-//     const double epsilon               = 0.0; // 0.001;
-
+//   const double epsilon              = 0.0; // 0.001;
      const double NoFishingMortality   = -1.0;
      const double MaxOutOfBounds       = 9999999.0;
+     const double MaxValidProgressYValue = 90000.0;
      const bool   RotateLabels         = true;
      const bool   DontRotateLabels     = false;
      const int    MaxNumberLogFiles    =  50;
@@ -356,35 +355,35 @@ namespace nmfConstantsMSSPM
           "SurveyQ"};
 
      const std::vector<std::string> TablesToClean =
-        {"BiomassAbsolute",
-         "BiomassRelative",
-         "BiomassRelativeDividedByEstSurveyQ",
-         "BiomassRelativeScalars",
-         "CompetitionAlpha",
-         "CompetitionAlphaMax",
-         "CompetitionAlphaMin",
-         "CompetitionBetaGuilds",
-         "CompetitionBetaGuildsGuilds",
-         "CompetitionBetaGuildsGuildsMax",
-         "CompetitionBetaGuildsGuildsMin",
-         "CompetitionBetaGuildsMax",
-         "CompetitionBetaGuildsMin",
-         "CompetitionBetaSpecies",
-         "CompetitionBetaSpeciesMax",
-         "CompetitionBetaSpeciesMin",
-         "HarvestCatch",
-         "HarvestEffort",
-         "HarvestExploitation",
-         "Models",
-         "PredationExponent",
-         "PredationExponentMax",
-         "PredationExponentMin",
-         "PredationHandling",
-         "PredationHandlingMax",
-         "PredationHandlingMin",
-         "PredationRho",
-         "PredationRhoMax",
-         "PredationRhoMin"};
+        {TableBiomassAbsolute,
+         TableBiomassAbsolute,
+         TableBiomassRelativeDividedByEstSurveyQ,
+         TableBiomassRelativeScalars,
+         TableCompetitionAlpha,
+         TableCompetitionAlphaMax,
+         TableCompetitionAlphaMin,
+         TableCompetitionBetaGuilds,
+         TableCompetitionBetaGuildsGuilds,
+         TableCompetitionBetaGuildsGuildsMax,
+         TableCompetitionBetaGuildsGuildsMin,
+         TableCompetitionBetaGuildsMax,
+         TableCompetitionBetaGuildsMin,
+         TableCompetitionBetaSpecies,
+         TableCompetitionBetaSpeciesMax,
+         TableCompetitionBetaSpeciesMin,
+         TableHarvestCatch,
+         TableHarvestEffort,
+         TableHarvestExploitation,
+         TableModels,
+         TablePredationExponent,
+         TablePredationExponentMax,
+         TablePredationExponentMin,
+         TablePredationHandling,
+         TablePredationHandlingMax,
+         TablePredationHandlingMin,
+         TablePredationRho,
+         TablePredationRhoMax,
+         TablePredationRhoMin};
 }
 
 

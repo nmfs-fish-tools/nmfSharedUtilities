@@ -22,7 +22,7 @@ void
 nmfChartLine::populateChart(
         QChart*            chart,
         std::string&       type,
-        const std::string& style,
+        const std::string& lineStyle,
         const bool&        ShowFirstPoint,
         const bool&        ShowLegend,
         const double&      XOffset,
@@ -30,7 +30,7 @@ nmfChartLine::populateChart(
         const double&      YMinVal,
         const double&      YMaxVal,
         const bool&        LeaveGapsWhereNegative,
-        const boost::numeric::ublas::matrix<double> &YAxisData,
+        const boost::numeric::ublas::matrix<double> &lineData,
         const QStringList& RowLabels,
         const QStringList& ColumnLabels,
         const QStringList& HoverLabels,
@@ -51,7 +51,7 @@ nmfChartLine::populateChart(
     double yVal;
     QString lineColorName = QString::fromStdString(LineColorName);
     QString hoverLabel;
-    int NumXValues = YAxisData.size1();
+    int NumXValues = lineData.size1();
 
     // Set main title
     QFont mainTitleFont = chart->titleFont();
@@ -76,9 +76,9 @@ nmfChartLine::populateChart(
           series->setPen(pen);
 
         // Load Data
-        for (unsigned i=0; i<YAxisData.size2(); ++i) {
-                series->append(YAxisData(0,i),
-                               YAxisData(1,i));
+        for (unsigned i=0; i<lineData.size2(); ++i) {
+                series->append(lineData(0,i),
+                               lineData(1,i));
         }
 
         chart->addSeries(series);
@@ -87,7 +87,7 @@ nmfChartLine::populateChart(
     } else if (type == "Line") {
 
         // Load data into series and then add series to the chart
-        for (unsigned line=0; line<YAxisData.size2(); ++line) {
+        for (unsigned line=0; line<lineData.size2(); ++line) {
             series = new QLineSeries();
             hoverLabel = (unsigned(HoverLabels.size()) <= line) ? "" : HoverLabels[line];
             if (hoverLabel.isEmpty()) {
@@ -110,9 +110,9 @@ nmfChartLine::populateChart(
                 pen.setColor(QColor(QString::fromStdString(nmfConstants::LineColors[line%nmfConstants::LineColors.size()])));
             }
             pen.setWidth(2);
-            if (style == "DottedLine") {
+            if (lineStyle == "DottedLine") {
                 pen.setStyle(Qt::DotLine);
-            } else if (style == "DashedLine") {
+            } else if (lineStyle == "DashedLine") {
                 pen.setStyle(Qt::DashLine);
             } else {
                 pen.setStyle(Qt::SolidLine);
@@ -120,7 +120,7 @@ nmfChartLine::populateChart(
             series->setPen(pen);
 
             for (int j=XStartVal-XOffset; j<NumXValues; ++j) {
-                yVal = YAxisData(j,line);
+                yVal = lineData(j,line);
                 if (yVal != nmfConstants::NoValueDouble) {
                     series->append(XOffset+j*XInc,yVal);
                 }
@@ -219,7 +219,7 @@ nmfChartLine::callback_hoveredLine(const QPointF& point, bool hovered)
         m_CustomToolTip->move(pos.x(),pos.y()-20);
         m_CustomToolTip->setLabel(tooltip);
         m_CustomToolTip->show();
-        QTimer::singleShot(nmfConstantsMSSPM::ToolTipDuration, this, SLOT(callback_HideTooltip()));
+        QTimer::singleShot(nmfConstantsMSSPM::ToolTipDuration, this, SLOT(callback_hideTooltip()));
 
         // The following line doesn't keep the tooltip on for 5 seconds...just 1 second.
         // Could be a QT bug. As a workaround, I created a custom tooltip (m_CustomToolTip) and
@@ -233,7 +233,7 @@ nmfChartLine::callback_hoveredLine(const QPointF& point, bool hovered)
 }
 
 void
-nmfChartLine::callback_HideTooltip()
+nmfChartLine::callback_hideTooltip()
 {
     // QToolTip::hideText();
     m_CustomToolTip->hide();

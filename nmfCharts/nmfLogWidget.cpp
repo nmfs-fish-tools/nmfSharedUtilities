@@ -1,25 +1,15 @@
 
-//============================================================================
-// Name        : nmfLogWidget.cpp
-// Author      : Ron Klasky
-// Version     :
-// Copyright   : NOAA - National Marine Fisheries Service
-// Description : Widget containing logic for Log Dock Widget
-//============================================================================
-
 #include "nmfLogWidget.h"
 #include "nmfConstants.h"
 
 #include <QtCharts/QChartView>
 #include <QtCharts/QChart>
 
-
 QT_CHARTS_USE_NAMESPACE
 
 nmfLogWidget::nmfLogWidget(nmfLogger *theLogger,
                            std::string theLogDir)
 {
-
     m_logger = theLogger;
     m_logDir = theLogDir;
 
@@ -48,10 +38,10 @@ nmfLogWidget::nmfLogWidget(nmfLogger *theLogger,
     vGroupLayt->addWidget(refreshPB);
 
     // Set connections
-    connect(refreshPB, SIGNAL(clicked(bool)),
-            this,      SLOT(callback_refreshPB(bool)));
-    connect(browsePB,  SIGNAL(clicked(bool)),
-            this,      SLOT(callback_browsePB(bool)));
+    connect(refreshPB, SIGNAL(clicked()),
+            this,      SLOT(callback_refreshPB()));
+    connect(browsePB,  SIGNAL(clicked()),
+            this,      SLOT(callback_browsePB()));
 
     // Set defaults
     controlsGB->setLayout(vGroupLayt);
@@ -65,36 +55,6 @@ nmfLogWidget::~nmfLogWidget() {
 
 }
 
-
-void
-nmfLogWidget::callback_browsePB(bool unused)
-{
-    QString LogFile = QFileDialog::getOpenFileName(logTE,
-        tr("Load Log File"),
-        QString::fromStdString(m_logDir),
-        tr("*.log"));
-    if (LogFile.isEmpty())
-        return;
-    QFile file(LogFile);
-    QFileInfo fileInfo(file.fileName());
-
-    loadLogFile(LogFile);
-    filenameLBL->setText("File Name:  " + fileInfo.fileName());
-
-
-} // end callback_browsePB
-
-void
-nmfLogWidget::callback_refreshPB(bool unused)
-{
-    QString filename = QString::fromStdString(m_logger->getLogFile());
-    QFile file(filename);
-    QFileInfo fileInfo(file.fileName());
-
-    loadLogFile(filename);
-    filenameLBL->setText("File Name:  " + fileInfo.fileName());
-
-} // end callback_refreshPB
 
 void
 nmfLogWidget::loadLogFile(QString filename)
@@ -151,6 +111,34 @@ nmfLogWidget::loadLogFile(QString filename)
     // Scroll to bottom of text edit
     logTE->verticalScrollBar()->setValue(logTE->verticalScrollBar()->maximum());
 
-
 } // end loadLogFile
 
+
+void
+nmfLogWidget::callback_browsePB()
+{
+    QString LogFile = QFileDialog::getOpenFileName(logTE,
+        tr("Load Log File"),
+        QString::fromStdString(m_logDir),
+        tr("*.log"));
+    if (LogFile.isEmpty())
+        return;
+    QFile file(LogFile);
+    QFileInfo fileInfo(file.fileName());
+
+    loadLogFile(LogFile);
+    filenameLBL->setText("File Name:  " + fileInfo.fileName());
+
+} // end callback_browsePB
+
+void
+nmfLogWidget::callback_refreshPB()
+{
+    QString filename = QString::fromStdString(m_logger->getLogFile());
+    QFile file(filename);
+    QFileInfo fileInfo(file.fileName());
+
+    loadLogFile(filename);
+    filenameLBL->setText("File Name:  " + fileInfo.fileName());
+
+} // end callback_refreshPB

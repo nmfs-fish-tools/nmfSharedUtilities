@@ -70,12 +70,17 @@ $(function() {
 <div class="title">nmfDatabaseConnectDialog Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The <a class="el" href="classnmf_database_connect_dialog.html" title="The nmfDatabaseConnectDialog class which prompts the user with a GUI for database login information.">nmfDatabaseConnectDialog</a> class which prompts the user with a GUI for database login information.  
+ <a href="classnmf_database_connect_dialog.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="nmf_database_connect_dialog_8h_source.html">nmfDatabaseConnectDialog.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for nmfDatabaseConnectDialog:</div>
 <div class="dyncontent">
 <div class="center"><img src="classnmf_database_connect_dialog__inherit__graph.png" border="0" usemap="#nmf_database_connect_dialog_inherit__map" alt="Inheritance graph"/></div>
 <map name="nmf_database_connect_dialog_inherit__map" id="nmf_database_connect_dialog_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,80,211,107"/>
+<area shape="rect" title="The nmfDatabaseConnectDialog class which prompts the user with a GUI for database login information." alt="" coords="5,80,211,107"/>
 <area shape="rect" title=" " alt="" coords="71,5,145,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
@@ -84,7 +89,7 @@ Collaboration diagram for nmfDatabaseConnectDialog:</div>
 <div class="dyncontent">
 <div class="center"><img src="classnmf_database_connect_dialog__coll__graph.png" border="0" usemap="#nmf_database_connect_dialog_coll__map" alt="Collaboration graph"/></div>
 <map name="nmf_database_connect_dialog_coll__map" id="nmf_database_connect_dialog_coll__map">
-<area shape="rect" title=" " alt="" coords="5,95,211,121"/>
+<area shape="rect" title="The nmfDatabaseConnectDialog class which prompts the user with a GUI for database login information." alt="" coords="5,95,211,121"/>
 <area shape="rect" title=" " alt="" coords="12,5,87,32"/>
 <area shape="rect" href="classnmf_database.html" title="Allows user to interact with MySQL database." alt="" coords="111,5,222,32"/>
 </map>
@@ -93,32 +98,36 @@ Collaboration diagram for nmfDatabaseConnectDialog:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-slots"></a>
 Public Slots</h2></td></tr>
 <tr class="memitem:abfb8dff1a91969be45f946bcb4a6c01d"><td class="memItemLeft" align="right" valign="top"><a id="abfb8dff1a91969be45f946bcb4a6c01d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>callback_connectToDatabase</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database_connect_dialog.html#abfb8dff1a91969be45f946bcb4a6c01d">callback_connectToDatabase</a> ()</td></tr>
+<tr class="memdesc:abfb8dff1a91969be45f946bcb4a6c01d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback invoked when the user clicks the OK button to connect to the database. <br /></td></tr>
 <tr class="separator:abfb8dff1a91969be45f946bcb4a6c01d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a7ddd9eacb8b1fa4c71bc25476f5189"><td class="memItemLeft" align="right" valign="top"><a id="a2a7ddd9eacb8b1fa4c71bc25476f5189"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>callback_resetGUI</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database_connect_dialog.html#a2a7ddd9eacb8b1fa4c71bc25476f5189">callback_resetGUI</a> ()</td></tr>
+<tr class="memdesc:a2a7ddd9eacb8b1fa4c71bc25476f5189"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback invoked when the user clicks the Reset GUI button. This button is needed since it's possible that the GUI may be "stuck" offscreen if 2 monitors are used and then only 1 monitor is used. <br /></td></tr>
 <tr class="separator:a2a7ddd9eacb8b1fa4c71bc25476f5189"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a38e7f6876f6516391d7a72f0bbc84d37"><td class="memItemLeft" align="right" valign="top"><a id="a38e7f6876f6516391d7a72f0bbc84d37"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>callback_resetSettings</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database_connect_dialog.html#a38e7f6876f6516391d7a72f0bbc84d37">callback_resetSettings</a> ()</td></tr>
+<tr class="memdesc:a38e7f6876f6516391d7a72f0bbc84d37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback invoked when the user clicks the Reset Settings button. This button is useful if a bad UI setting has somehow been saved. <br /></td></tr>
 <tr class="separator:a38e7f6876f6516391d7a72f0bbc84d37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:accf055591a4cc48113e2b7c9707204c7"><td class="memItemLeft" align="right" valign="top"><a id="accf055591a4cc48113e2b7c9707204c7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>nmfDatabaseConnectDialog</b> (QMainWindow *mainWindow=0, const std::string &amp;settingsDir=&quot;&quot;, <a class="el" href="classnmf_database.html">nmfDatabase</a> *databasePtr=0)</td></tr>
+<tr class="memitem:accf055591a4cc48113e2b7c9707204c7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database_connect_dialog.html#accf055591a4cc48113e2b7c9707204c7">nmfDatabaseConnectDialog</a> (QMainWindow *mainWindow=0, const std::string &amp;settingsDir=&quot;&quot;, <a class="el" href="classnmf_database.html">nmfDatabase</a> *databasePtr=0)</td></tr>
+<tr class="memdesc:accf055591a4cc48113e2b7c9707204c7"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classnmf_database_connect_dialog.html" title="The nmfDatabaseConnectDialog class which prompts the user with a GUI for database login information.">nmfDatabaseConnectDialog</a> class constructor  <a href="classnmf_database_connect_dialog.html#accf055591a4cc48113e2b7c9707204c7">More...</a><br /></td></tr>
 <tr class="separator:accf055591a4cc48113e2b7c9707204c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ba271492771905045a1b9756f47c8b1"><td class="memItemLeft" align="right" valign="top"><a id="a1ba271492771905045a1b9756f47c8b1"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>openOK</b> ()</td></tr>
-<tr class="separator:a1ba271492771905045a1b9756f47c8b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34cc0ee39c226807605d40891db88845"><td class="memItemLeft" align="right" valign="top"><a id="a34cc0ee39c226807605d40891db88845"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SaveSettings</b> ()</td></tr>
-<tr class="separator:a34cc0ee39c226807605d40891db88845"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad01f6a4b39779c1208f6bbc6afc8bee3"><td class="memItemLeft" align="right" valign="top"><a id="ad01f6a4b39779c1208f6bbc6afc8bee3"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getUsername</b> ()</td></tr>
+<tr class="memitem:ad01f6a4b39779c1208f6bbc6afc8bee3"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database_connect_dialog.html#ad01f6a4b39779c1208f6bbc6afc8bee3">getUsername</a> ()</td></tr>
+<tr class="memdesc:ad01f6a4b39779c1208f6bbc6afc8bee3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current user name.  <a href="classnmf_database_connect_dialog.html#ad01f6a4b39779c1208f6bbc6afc8bee3">More...</a><br /></td></tr>
 <tr class="separator:ad01f6a4b39779c1208f6bbc6afc8bee3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d56ffc6e8bbb1c497592e1210559e7f"><td class="memItemLeft" align="right" valign="top"><a id="a3d56ffc6e8bbb1c497592e1210559e7f"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getPassword</b> ()</td></tr>
+<tr class="memitem:a3d56ffc6e8bbb1c497592e1210559e7f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database_connect_dialog.html#a3d56ffc6e8bbb1c497592e1210559e7f">getPassword</a> ()</td></tr>
+<tr class="memdesc:a3d56ffc6e8bbb1c497592e1210559e7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current password.  <a href="classnmf_database_connect_dialog.html#a3d56ffc6e8bbb1c497592e1210559e7f">More...</a><br /></td></tr>
 <tr class="separator:a3d56ffc6e8bbb1c497592e1210559e7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ba271492771905045a1b9756f47c8b1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database_connect_dialog.html#a1ba271492771905045a1b9756f47c8b1">openOK</a> ()</td></tr>
+<tr class="memdesc:a1ba271492771905045a1b9756f47c8b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boolean describing if the database has been opened successfully.  <a href="classnmf_database_connect_dialog.html#a1ba271492771905045a1b9756f47c8b1">More...</a><br /></td></tr>
+<tr class="separator:a1ba271492771905045a1b9756f47c8b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af346d0b408e63f33a6dde9f352293b2a"><td class="memItemLeft" align="right" valign="top"><a id="af346d0b408e63f33a6dde9f352293b2a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database_connect_dialog.html#af346d0b408e63f33a6dde9f352293b2a">saveSettings</a> ()</td></tr>
+<tr class="memdesc:af346d0b408e63f33a6dde9f352293b2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save current Qt settings. <br /></td></tr>
+<tr class="separator:af346d0b408e63f33a6dde9f352293b2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -141,6 +150,122 @@ QMainWindow *&#160;</td><td class="memItemRight" valign="bottom"><b>m_mainWin</b
 <a class="el" href="classnmf_database.html">nmfDatabase</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_databasePtr</b></td></tr>
 <tr class="separator:a619de054bcbb11eae867c27ebd700110"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="classnmf_database_connect_dialog.html" title="The nmfDatabaseConnectDialog class which prompts the user with a GUI for database login information.">nmfDatabaseConnectDialog</a> class which prompts the user with a GUI for database login information. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="accf055591a4cc48113e2b7c9707204c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accf055591a4cc48113e2b7c9707204c7">&#9670;&nbsp;</a></span>nmfDatabaseConnectDialog()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">nmfDatabaseConnectDialog::nmfDatabaseConnectDialog </td>
+          <td>(</td>
+          <td class="paramtype">QMainWindow *&#160;</td>
+          <td class="paramname"><em>mainWindow</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>settingsDir</em> = <code>&quot;&quot;</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classnmf_database.html">nmfDatabase</a> *&#160;</td>
+          <td class="paramname"><em>databasePtr</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classnmf_database_connect_dialog.html" title="The nmfDatabaseConnectDialog class which prompts the user with a GUI for database login information.">nmfDatabaseConnectDialog</a> class constructor </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mainWindow</td><td>: the main GUI window over which to display this dialog </td></tr>
+    <tr><td class="paramname">settingsDir</td><td>: Qt settings directory </td></tr>
+    <tr><td class="paramname">databasePtr</td><td>: database library pointer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a3d56ffc6e8bbb1c497592e1210559e7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d56ffc6e8bbb1c497592e1210559e7f">&#9670;&nbsp;</a></span>getPassword()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string nmfDatabaseConnectDialog::getPassword </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the current password. </p>
+<dl class="section return"><dt>Returns</dt><dd>the password entered by the user </dd></dl>
+
+</div>
+</div>
+<a id="ad01f6a4b39779c1208f6bbc6afc8bee3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad01f6a4b39779c1208f6bbc6afc8bee3">&#9670;&nbsp;</a></span>getUsername()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string nmfDatabaseConnectDialog::getUsername </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the current user name. </p>
+<dl class="section return"><dt>Returns</dt><dd>the user name entered by the user </dd></dl>
+
+</div>
+</div>
+<a id="a1ba271492771905045a1b9756f47c8b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ba271492771905045a1b9756f47c8b1">&#9670;&nbsp;</a></span>openOK()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfDatabaseConnectDialog::openOK </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Boolean describing if the database has been opened successfully. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if database opened ok, false otherwise </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>nmfGuiDialogs/<a class="el" href="nmf_database_connect_dialog_8h_source.html">nmfDatabaseConnectDialog.h</a></li>
 <li>nmfGuiDialogs/nmfDatabaseConnectDialog.cpp</li>

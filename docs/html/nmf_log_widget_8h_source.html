@@ -69,70 +69,74 @@ $(function() {
 <div class="title">nmfLogWidget.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#ifndef NMFLOGWIDGET_H</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define NMFLOGWIDGET_H</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;QtCharts/QChartView&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;QtCharts/QChart&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;QDockWidget&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;QFile&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;QFileDialog&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;QFileInfo&gt;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;QGroupBox&gt;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;QHBoxLayout&gt;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;QVBoxLayout&gt;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;QLabel&gt;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;QPushButton&gt;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;QMessageBox&gt;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;QScrollBar&gt;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;QSpacerItem&gt;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;QTextEdit&gt;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &lt;QTextStream&gt;</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nmf_utils_8h.html">nmfUtils.h</a>&quot;</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nmf_logger_8h.html">nmfLogger.h</a>&quot;</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;QT_CHARTS_USE_NAMESPACE</div>
+<a href="nmf_log_widget_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#ifndef NMFLOGWIDGET_H</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#define NMFLOGWIDGET_H</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classnmf_log_widget.html">   36</a></span>&#160;<span class="keyword">class </span><a class="code" href="classnmf_log_widget.html">nmfLogWidget</a> : <span class="keyword">public</span> QObject</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;QtCharts/QChartView&gt;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &lt;QtCharts/QChart&gt;</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    Q_OBJECT</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="classnmf_logger.html">nmfLogger</a>*  m_logger;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    std::string m_logDir;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    QLabel      *filenameLBL;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    QTextEdit   *logTE;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    QGroupBox   *controlsGB;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    QHBoxLayout *hMainLayt;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    QVBoxLayout *vMainLayt;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    QVBoxLayout *vGroupLayt;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    QPushButton *browsePB;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    QPushButton *refreshPB;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="classnmf_log_widget.html">nmfLogWidget</a>(<a class="code" href="classnmf_logger.html">nmfLogger</a>*  logger,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                 std::string logDir);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;   ~<a class="code" href="classnmf_log_widget.html">nmfLogWidget</a>();</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> loadLogFile(QString filename);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">public</span> Q_SLOTS:</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">void</span> callback_refreshPB(<span class="keywordtype">bool</span> unused);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> callback_browsePB(<span class="keywordtype">bool</span> unused);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;};</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &lt;QDockWidget&gt;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &lt;QFile&gt;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#include &lt;QFileDialog&gt;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#include &lt;QFileInfo&gt;</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#include &lt;QGroupBox&gt;</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#include &lt;QHBoxLayout&gt;</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#include &lt;QVBoxLayout&gt;</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#include &lt;QLabel&gt;</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#include &lt;QPushButton&gt;</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#include &lt;QMessageBox&gt;</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#include &lt;QScrollBar&gt;</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#include &lt;QSpacerItem&gt;</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#include &lt;QTextEdit&gt;</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#include &lt;QTextStream&gt;</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nmf_utils_8h.html">nmfUtils.h</a>&quot;</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nmf_logger_8h.html">nmfLogger.h</a>&quot;</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;QT_CHARTS_USE_NAMESPACE</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classnmf_log_widget.html">   63</a></span>&#160;<span class="keyword">class </span><a class="code" href="classnmf_log_widget.html">nmfLogWidget</a> : <span class="keyword">public</span> QObject</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;{</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    Q_OBJECT</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#endif // NMFLOGWIDGET_H</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <a class="code" href="classnmf_logger.html">nmfLogger</a>*  m_logger;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    std::string m_logDir;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    QLabel      *filenameLBL;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    QTextEdit   *logTE;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    QGroupBox   *controlsGB;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    QHBoxLayout *hMainLayt;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    QVBoxLayout *vMainLayt;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    QVBoxLayout *vGroupLayt;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    QPushButton *browsePB;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    QPushButton *refreshPB;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <a class="code" href="classnmf_log_widget.html#acb6f137ed97f6659004f2d65c620b934">nmfLogWidget</a>(<a class="code" href="classnmf_logger.html">nmfLogger</a>*  logger,</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                 std::string logDir);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;   ~<a class="code" href="classnmf_log_widget.html">nmfLogWidget</a>();</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_log_widget.html#a327abef307364e8cc3d1442111c5acb4">loadLogFile</a>(QString filename);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keyword">public</span> Q_SLOTS:</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_log_widget.html#a140d3edb3032455cbfb29bb906722df4">callback_refreshPB</a>();</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_log_widget.html#a9799b73e63766b1f51ff6a5b144c84bd">callback_browsePB</a>();</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;};</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#endif // NMFLOGWIDGET_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassnmf_log_widget_html"><div class="ttname"><a href="classnmf_log_widget.html">nmfLogWidget</a></div><div class="ttdef"><b>Definition:</b> nmfLogWidget.h:36</div></div>
+<div class="ttc" id="aclassnmf_log_widget_html_a327abef307364e8cc3d1442111c5acb4"><div class="ttname"><a href="classnmf_log_widget.html#a327abef307364e8cc3d1442111c5acb4">nmfLogWidget::loadLogFile</a></div><div class="ttdeci">void loadLogFile(QString filename)</div><div class="ttdoc">Load the named log file into the logger dock widget.</div><div class="ttdef"><b>Definition:</b> nmfLogWidget.cpp:60</div></div>
+<div class="ttc" id="aclassnmf_log_widget_html_acb6f137ed97f6659004f2d65c620b934"><div class="ttname"><a href="classnmf_log_widget.html#acb6f137ed97f6659004f2d65c620b934">nmfLogWidget::nmfLogWidget</a></div><div class="ttdeci">nmfLogWidget(nmfLogger *logger, std::string logDir)</div><div class="ttdoc">nmfLogWidget class constructor</div><div class="ttdef"><b>Definition:</b> nmfLogWidget.cpp:10</div></div>
+<div class="ttc" id="aclassnmf_log_widget_html"><div class="ttname"><a href="classnmf_log_widget.html">nmfLogWidget</a></div><div class="ttdoc">The nmfLogWidget class which allows the user to view current log messages or log messages from previo...</div><div class="ttdef"><b>Definition:</b> nmfLogWidget.h:63</div></div>
 <div class="ttc" id="aclassnmf_logger_html"><div class="ttname"><a href="classnmf_logger.html">nmfLogger</a></div><div class="ttdoc">This class describes the nmfLogger class for the MultiSpecies tools. It allows the user to save norma...</div><div class="ttdef"><b>Definition:</b> nmfLogger.h:44</div></div>
+<div class="ttc" id="aclassnmf_log_widget_html_a9799b73e63766b1f51ff6a5b144c84bd"><div class="ttname"><a href="classnmf_log_widget.html#a9799b73e63766b1f51ff6a5b144c84bd">nmfLogWidget::callback_browsePB</a></div><div class="ttdeci">void callback_browsePB()</div><div class="ttdoc">Callback invoked when the user clicks the Browse button. This causes a file dialog to appear and allo...</div><div class="ttdef"><b>Definition:</b> nmfLogWidget.cpp:118</div></div>
 <div class="ttc" id="anmf_logger_8h_html"><div class="ttname"><a href="nmf_logger_8h.html">nmfLogger.h</a></div><div class="ttdoc">Definition for the MultiSpecies Logger class.</div></div>
+<div class="ttc" id="aclassnmf_log_widget_html_a140d3edb3032455cbfb29bb906722df4"><div class="ttname"><a href="classnmf_log_widget.html#a140d3edb3032455cbfb29bb906722df4">nmfLogWidget::callback_refreshPB</a></div><div class="ttdeci">void callback_refreshPB()</div><div class="ttdoc">Callback invoked when the user clicks the Refresh button. This causes the current log file to be re-r...</div><div class="ttdef"><b>Definition:</b> nmfLogWidget.cpp:135</div></div>
 <div class="ttc" id="anmf_utils_8h_html"><div class="ttname"><a href="nmf_utils_8h.html">nmfUtils.h</a></div><div class="ttdoc">Definition for common typedefs and structs (i.e., non-graphical)</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

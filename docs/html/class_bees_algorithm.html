@@ -68,52 +68,118 @@ $(function() {
 <div class="title">BeesAlgorithm Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The <a class="el" href="class_bees_algorithm.html" title="The BeesAlgorithm class which contains all of the methods necessary to implement the Bees search algo...">BeesAlgorithm</a> class which contains all of the methods necessary to implement the Bees search algorithm.  
+ <a href="class_bees_algorithm.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_bees_algorithm_8h_source.html">BeesAlgorithm.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3a3fb02a867f2a93cfc9ae322a2db72a"><td class="memItemLeft" align="right" valign="top"><a id="a3a3fb02a867f2a93cfc9ae322a2db72a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>BeesAlgorithm</b> (<a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> BeeStruct, const bool &amp;verbose)</td></tr>
+<tr class="memitem:a3a3fb02a867f2a93cfc9ae322a2db72a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bees_algorithm.html#a3a3fb02a867f2a93cfc9ae322a2db72a">BeesAlgorithm</a> (<a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> BeeStruct, const bool &amp;verbose)</td></tr>
+<tr class="memdesc:a3a3fb02a867f2a93cfc9ae322a2db72a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_bees_algorithm.html" title="The BeesAlgorithm class which contains all of the methods necessary to implement the Bees search algo...">BeesAlgorithm</a> class constructor.  <a href="class_bees_algorithm.html#a3a3fb02a867f2a93cfc9ae322a2db72a">More...</a><br /></td></tr>
 <tr class="separator:a3a3fb02a867f2a93cfc9ae322a2db72a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6aabae8f188e35ed1ad0a4437147660b"><td class="memItemLeft" align="right" valign="top"><a id="a6aabae8f188e35ed1ad0a4437147660b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setSeed</b> (long seed)</td></tr>
-<tr class="separator:a6aabae8f188e35ed1ad0a4437147660b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42cfb6508487bb036b64892437a53111"><td class="memItemLeft" align="right" valign="top"><a id="a42cfb6508487bb036b64892437a53111"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>initializeParameterRangesAndPatchSizes</b> (<a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;theBeeStruct)</td></tr>
-<tr class="separator:a42cfb6508487bb036b64892437a53111"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66ef4cd92b4584b2765d18027b04a795"><td class="memItemLeft" align="right" valign="top"><a id="a66ef4cd92b4584b2765d18027b04a795"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>calculateActualNumEstParameters</b> ()</td></tr>
+<tr class="memitem:a66ef4cd92b4584b2765d18027b04a795"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bees_algorithm.html#a66ef4cd92b4584b2765d18027b04a795">calculateActualNumEstParameters</a> ()</td></tr>
+<tr class="memdesc:a66ef4cd92b4584b2765d18027b04a795"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculates the number of parameters  <a href="class_bees_algorithm.html#a66ef4cd92b4584b2765d18027b04a795">More...</a><br /></td></tr>
 <tr class="separator:a66ef4cd92b4584b2765d18027b04a795"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a304cdae65e77851c1005f897262455e7"><td class="memItemLeft" align="right" valign="top"><a id="a304cdae65e77851c1005f897262455e7"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>estimateParameters</b> (double &amp;bestFitness, std::vector&lt; double &gt; &amp;bestParameters, int &amp;RunNum, int &amp;subRunNum, std::string &amp;errorMsg)</td></tr>
-<tr class="separator:a304cdae65e77851c1005f897262455e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a968b0d3ca7e152a3707e67b31241a9"><td class="memItemLeft" align="right" valign="top"><a id="a0a968b0d3ca7e152a3707e67b31241a9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>extractCompetitionParameters</b> (const std::vector&lt; double &gt; &amp;parameters, int &amp;startPos, boost::numeric::ublas::matrix&lt; double &gt; &amp;alpha, boost::numeric::ublas::matrix&lt; double &gt; &amp;betaSpecies, boost::numeric::ublas::matrix&lt; double &gt; &amp;betaGuilds, boost::numeric::ublas::matrix&lt; double &gt; &amp;betaGuildsGuilds)</td></tr>
+<tr class="separator:a0a968b0d3ca7e152a3707e67b31241a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c6c34ce51d85d1659a5e2f607a08977"><td class="memItemLeft" align="right" valign="top"><a id="a8c6c34ce51d85d1659a5e2f607a08977"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>extractExponentParameters</b> (const std::vector&lt; double &gt; &amp;parameters, int &amp;startPos, std::vector&lt; double &gt; &amp;exponents)</td></tr>
+<tr class="separator:a8c6c34ce51d85d1659a5e2f607a08977"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab40fb3f2ce94030209d45d701ee05fa"><td class="memItemLeft" align="right" valign="top"><a id="aab40fb3f2ce94030209d45d701ee05fa"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>extractGrowthParameters</b> (const std::vector&lt; double &gt; &amp;parameters, int &amp;startPos, std::vector&lt; double &gt; &amp;growthRate, std::vector&lt; double &gt; &amp;growthRateCovariateCoeff, std::vector&lt; double &gt; &amp;carryingCapacity, std::vector&lt; double &gt; &amp;carryingCapacityCovariateCoeffs, double &amp;systemCarryingCapacity)</td></tr>
 <tr class="separator:aab40fb3f2ce94030209d45d701ee05fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a741d38d6a80eadbd93a726e2da759cb5"><td class="memItemLeft" align="right" valign="top"><a id="a741d38d6a80eadbd93a726e2da759cb5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>extractHandlingParameters</b> (const std::vector&lt; double &gt; &amp;parameters, int &amp;startPos, boost::numeric::ublas::matrix&lt; double &gt; &amp;handling)</td></tr>
+<tr class="separator:a741d38d6a80eadbd93a726e2da759cb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a431f1dee550cfc43626cd4e62fec7618"><td class="memItemLeft" align="right" valign="top"><a id="a431f1dee550cfc43626cd4e62fec7618"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>extractHarvestParameters</b> (const std::vector&lt; double &gt; &amp;parameters, int &amp;startPos, std::vector&lt; double &gt; &amp;catchability, std::vector&lt; double &gt; &amp;catchabilityCovariateCoeffs)</td></tr>
 <tr class="separator:a431f1dee550cfc43626cd4e62fec7618"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08d345707ad65245c4f88b2677786d30"><td class="memItemLeft" align="right" valign="top"><a id="a08d345707ad65245c4f88b2677786d30"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>extractInitBiomass</b> (const std::vector&lt; double &gt; &amp;parameters, int &amp;startPos, std::vector&lt; double &gt; &amp;initBiomass)</td></tr>
 <tr class="separator:a08d345707ad65245c4f88b2677786d30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a968b0d3ca7e152a3707e67b31241a9"><td class="memItemLeft" align="right" valign="top"><a id="a0a968b0d3ca7e152a3707e67b31241a9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>extractCompetitionParameters</b> (const std::vector&lt; double &gt; &amp;parameters, int &amp;startPos, boost::numeric::ublas::matrix&lt; double &gt; &amp;alpha, boost::numeric::ublas::matrix&lt; double &gt; &amp;betaSpecies, boost::numeric::ublas::matrix&lt; double &gt; &amp;betaGuilds, boost::numeric::ublas::matrix&lt; double &gt; &amp;betaGuildsGuilds)</td></tr>
-<tr class="separator:a0a968b0d3ca7e152a3707e67b31241a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a304cdae65e77851c1005f897262455e7"><td class="memItemLeft" align="right" valign="top"><a id="a304cdae65e77851c1005f897262455e7"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>estimateParameters</b> (double &amp;bestFitness, std::vector&lt; double &gt; &amp;bestParameters, int &amp;RunNum, int &amp;subRunNum, std::string &amp;errorMsg)</td></tr>
+<tr class="separator:a304cdae65e77851c1005f897262455e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8dac743356bac3180b6679d4867014b3"><td class="memItemLeft" align="right" valign="top"><a id="a8dac743356bac3180b6679d4867014b3"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>extractPredationParameters</b> (const std::vector&lt; double &gt; &amp;parameters, int &amp;startPos, boost::numeric::ublas::matrix&lt; double &gt; &amp;predation)</td></tr>
 <tr class="separator:a8dac743356bac3180b6679d4867014b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a741d38d6a80eadbd93a726e2da759cb5"><td class="memItemLeft" align="right" valign="top"><a id="a741d38d6a80eadbd93a726e2da759cb5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>extractHandlingParameters</b> (const std::vector&lt; double &gt; &amp;parameters, int &amp;startPos, boost::numeric::ublas::matrix&lt; double &gt; &amp;handling)</td></tr>
-<tr class="separator:a741d38d6a80eadbd93a726e2da759cb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c6c34ce51d85d1659a5e2f607a08977"><td class="memItemLeft" align="right" valign="top"><a id="a8c6c34ce51d85d1659a5e2f607a08977"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>extractExponentParameters</b> (const std::vector&lt; double &gt; &amp;parameters, int &amp;startPos, std::vector&lt; double &gt; &amp;exponents)</td></tr>
-<tr class="separator:a8c6c34ce51d85d1659a5e2f607a08977"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe30c0d22ca40a91dbdd1cfa40e36026"><td class="memItemLeft" align="right" valign="top"><a id="afe30c0d22ca40a91dbdd1cfa40e36026"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>extractSurveyQParameters</b> (const std::vector&lt; double &gt; &amp;parameters, int &amp;startPos, std::vector&lt; double &gt; &amp;surveyQ)</td></tr>
 <tr class="separator:afe30c0d22ca40a91dbdd1cfa40e36026"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d01347ee86a0df7c36129a16f50cda8"><td class="memItemLeft" align="right" valign="top"><a id="a0d01347ee86a0df7c36129a16f50cda8"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>evaluateObjectiveFunction</b> (const std::vector&lt; double &gt; &amp;parameters)</td></tr>
 <tr class="separator:a0d01347ee86a0df7c36129a16f50cda8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42cfb6508487bb036b64892437a53111"><td class="memItemLeft" align="right" valign="top"><a id="a42cfb6508487bb036b64892437a53111"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>initializeParameterRangesAndPatchSizes</b> (<a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;theBeeStruct)</td></tr>
+<tr class="separator:a42cfb6508487bb036b64892437a53111"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aabae8f188e35ed1ad0a4437147660b"><td class="memItemLeft" align="right" valign="top"><a id="a6aabae8f188e35ed1ad0a4437147660b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setSeed</b> (long seed)</td></tr>
+<tr class="separator:a6aabae8f188e35ed1ad0a4437147660b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="class_bees_algorithm.html" title="The BeesAlgorithm class which contains all of the methods necessary to implement the Bees search algo...">BeesAlgorithm</a> class which contains all of the methods necessary to implement the Bees search algorithm. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a3a3fb02a867f2a93cfc9ae322a2db72a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a3fb02a867f2a93cfc9ae322a2db72a">&#9670;&nbsp;</a></span>BeesAlgorithm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BeesAlgorithm::BeesAlgorithm </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a>&#160;</td>
+          <td class="paramname"><em>BeeStruct</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>verbose</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="class_bees_algorithm.html" title="The BeesAlgorithm class which contains all of the methods necessary to implement the Bees search algo...">BeesAlgorithm</a> class constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">BeeStruct</td><td>: structure containing model data needed for the Bees algorithm </td></tr>
+    <tr><td class="paramname">verbose</td><td>: if true, additional error statements printed, if false, minimal error statements printed </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a66ef4cd92b4584b2765d18027b04a795"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66ef4cd92b4584b2765d18027b04a795">&#9670;&nbsp;</a></span>calculateActualNumEstParameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int BeesAlgorithm::calculateActualNumEstParameters </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>calculates the number of parameters </p>
+<dl class="section return"><dt>Returns</dt><dd>number of parameters to be estimated </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>BeesAlgorithm/<a class="el" href="_bees_algorithm_8h_source.html">BeesAlgorithm.h</a></li>
 <li>BeesAlgorithm/BeesAlgorithm.cpp</li>

@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['importdatabase_576',['importDatabase',['../classnmf_database.html#afa82f3cede3d12c690bbe700458ab520',1,'nmfDatabase']]],
-  ['initlogger_577',['initLogger',['../classnmf_logger.html#a438524867cec8b85112ffe98c4676040',1,'nmfLogger']]],
-  ['isanerror_578',['isAnError',['../namespacenmf_utils_qt.html#a79cb045897a2a250cf95ad8ff330613b',1,'nmfUtilsQt']]],
-  ['isarelativebiomassmodel_579',['isARelativeBiomassModel',['../classnmf_database.html#a57c9e3be4a1f56819dbce7a06b31be0e',1,'nmfDatabase']]]
+  ['hide_773',['hide',['../classnmf_chart_movable_line.html#a639db1b6874f960726589c477979b35b',1,'nmfChartMovableLine']]],
+  ['hidedatatab_774',['hideDataTab',['../classnmf_viewer_widget.html#aa69a2df2ad0c1ffa5f11ee56e9a76983',1,'nmfViewerWidget']]],
+  ['hideframe_775',['hideFrame',['../classnmf_viewer_widget.html#ad92e7d97603ece871017bbd4deebbedd',1,'nmfViewerWidget']]],
+  ['hidelegend_776',['hideLegend',['../classnmf_progress_widget.html#a016dd3f22750ae62329fdf0d076aeedd',1,'nmfProgressWidget']]]
 ];

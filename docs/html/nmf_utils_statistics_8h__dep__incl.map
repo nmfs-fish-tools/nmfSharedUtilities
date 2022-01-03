@@ -1,6 +1,6 @@
 <map id="nmfUtilities/nmfUtilsStatistics.h" name="nmfUtilities/nmfUtilsStatistics.h">
 <area shape="rect" id="node1" title="This header file defines multi&#45;species statistical utility functions." alt="" coords="260,5,491,32"/>
-<area shape="rect" id="node2" href="$_bees_algorithm_8h_source.html" title=" " alt="" coords="5,87,236,114"/>
+<area shape="rect" id="node2" href="$_bees_algorithm_8h.html" title="Implementation of Bees Search Algorithm." alt="" coords="5,87,236,114"/>
 <area shape="rect" id="node3" href="$nmf_utils_complex_8h.html" title="These routines were originally from Complex2.bas." alt="" coords="261,87,490,114"/>
 <area shape="rect" id="node5" href="$nmf_utils_statistics_mohns_rho_8h.html" title="Definition for the nmfUtilsStatisticsMohnsRho class." alt="" coords="514,80,733,121"/>
 <area shape="rect" id="node4" href="$nmf_utils_complex_8cpp.html" title="These routines were originally from Complex2.bas." alt="" coords="253,169,497,196"/>

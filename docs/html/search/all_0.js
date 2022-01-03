@@ -7,5 +7,7 @@ var searchData=
   ['addtreeroot_4',['addTreeRoot',['../namespacenmf_utils_qt.html#a4daebe5b5dd4b56b8e93051207562e1e',1,'nmfUtilsQt']]],
   ['allcellsarepopulated_5',['allCellsArePopulated',['../namespacenmf_utils_qt.html#a326fe77c7f0902888bd4a1d2124c0695',1,'nmfUtilsQt::allCellsArePopulated(QTabWidget *tabWidget, QTableView *tableView, bool showError)'],['../namespacenmf_utils_qt.html#a2b2a1497f5fa1e583e648aa0c743fc9e',1,'nmfUtilsQt::allCellsArePopulated(QTabWidget *tabWidget, QTableWidget *tableWidget, bool showError, bool skipFirstRow)']]],
   ['allmaxcellsgreaterthanmincells_6',['allMaxCellsGreaterThanMinCells',['../namespacenmf_utils_qt.html#ab0d78aa1d88acff382386b2b1dc4475b',1,'nmfUtilsQt']]],
-  ['authenticatedatabase_7',['authenticateDatabase',['../classnmf_database.html#ad1e09e68d8ce4419cdbb4de4197f13d7',1,'nmfDatabase']]]
+  ['append_7',['append',['../namespacenmf_utils.html#a15f4c161da6c63a282b48bad4b62c83f',1,'nmfUtils']]],
+  ['applycovariate_8',['applyCovariate',['../namespacenmf_utils.html#ac3a40fac519b3563f3222ce83cd42b0d',1,'nmfUtils']]],
+  ['authenticatedatabase_9',['authenticateDatabase',['../classnmf_database.html#ad1e09e68d8ce4419cdbb4de4197f13d7',1,'nmfDatabase']]]
 ];

@@ -1,16 +1,14 @@
 var searchData=
 [
-  ['loadcsvfilecomboboxes_580',['loadCSVFileComboBoxes',['../namespacenmf_utils_qt.html#abb998e4c70e4e80be4c42074c7fcf440',1,'nmfUtilsQt']]],
-  ['loadcvsfilecovariate_581',['loadCVSFileCovariate',['../namespacenmf_utils_qt.html#af8f04562abe77258f57168458db52941',1,'nmfUtilsQt']]],
-  ['loadestdata_582',['loadEstData',['../classnmf_utils_statistics_averaging.html#af842849e471503907ffd7bf4159465bc',1,'nmfUtilsStatisticsAveraging::loadEstData()'],['../classnmf_utils_statistics_mohns_rho.html#aa29f08ace3efe19f26508ced2396b8ea',1,'nmfUtilsStatisticsMohnsRho::loadEstData()']]],
-  ['loadestimatedvectorparameters_583',['loadEstimatedVectorParameters',['../classnmf_database.html#a8e0e3a7c220e03c4463baab684ef4369',1,'nmfDatabase']]],
-  ['loadguildsspeciestableview_584',['loadGuildsSpeciesTableview',['../namespacenmf_utils_qt.html#a71a3da7fcdedd84c27cf7f6f1fa62ab6',1,'nmfUtilsQt']]],
-  ['loadmatrix_585',['loadMatrix',['../classnmf_database.html#a79437204721d5483a1b7d84296d845ee',1,'nmfDatabase']]],
-  ['loadmodelfromcsvfile_586',['loadModelFromCSVFile',['../namespacenmf_utils_qt.html#ae52b342207664ccc5136b64665c5f0ca',1,'nmfUtilsQt']]],
-  ['loadmultirundata_587',['loadMultiRunData',['../namespacenmf_utils_qt.html#a79b9c903664e1ce9477deba17ee5028a',1,'nmfUtilsQt']]],
-  ['loadparameterranges_588',['loadParameterRanges',['../classnmf_competition_form.html#af558bcb8a3bf0956566e17c7a541ff4d',1,'nmfCompetitionForm::loadParameterRanges()'],['../classnmf_growth_form.html#addb85b78ef7256752d0a88f391d62bbf',1,'nmfGrowthForm::loadParameterRanges()'],['../classnmf_harvest_form.html#a38fd09d1810dece7ed06a63a49523cd7',1,'nmfHarvestForm::loadParameterRanges()'],['../classnmf_predation_form.html#aff20e340480ece7c4fb949bd7bcffc48',1,'nmfPredationForm::loadParameterRanges()']]],
-  ['loadtablewidgetdata_589',['loadTableWidgetData',['../namespacenmf_utils_qt.html#a3650fb32ef1ab23988e316845acf3cd5',1,'nmfUtilsQt']]],
-  ['loadtimeseries_590',['loadTimeSeries',['../namespacenmf_utils_qt.html#a37fdbe6c158ecddfd30a34d1060b55f7',1,'nmfUtilsQt']]],
-  ['loadvector_591',['loadVector',['../classnmf_database.html#a51d7102e597ea4527c3798ada71d1d15',1,'nmfDatabase']]],
-  ['logmsg_592',['logMsg',['../classnmf_logger.html#a0e607badf8844edfa4663bc68e8c69b9',1,'nmfLogger']]]
+  ['importdatabase_777',['importDatabase',['../classnmf_database.html#afa82f3cede3d12c690bbe700458ab520',1,'nmfDatabase']]],
+  ['initialize_778',['initialize',['../namespacenmf_utils.html#a3691a65ca97dcd969fabe349f85ebb96',1,'nmfUtils::initialize(std::vector&lt; double &gt; &amp;vec, const int &amp;numValues)'],['../namespacenmf_utils.html#a1ab827c76afa6862895b1474f9d0e738',1,'nmfUtils::initialize(boost::numeric::ublas::vector&lt; std::string &gt; &amp;vec, const int &amp;nrows)'],['../namespacenmf_utils.html#a7190dbbe1e163dede478a9484d5de7e6',1,'nmfUtils::initialize(boost::numeric::ublas::vector&lt; int &gt; &amp;vec, const int &amp;nrows)'],['../namespacenmf_utils.html#a0f42c50431c04fb0f55c95b925a17a81',1,'nmfUtils::initialize(boost::numeric::ublas::vector&lt; double &gt; &amp;vec, const int &amp;nrows)'],['../namespacenmf_utils.html#af41611b045209a602e9fefe4c0e94b73',1,'nmfUtils::initialize(boost::numeric::ublas::matrix&lt; int &gt; &amp;mat, const int &amp;nrows, const int &amp;ncols)'],['../namespacenmf_utils.html#a47dc2c3f5d4982f408c193c8fb492e77',1,'nmfUtils::initialize(boost::numeric::ublas::matrix&lt; double &gt; &amp;mat, const int &amp;nrows, const int &amp;ncols)'],['../namespacenmf_utils.html#a53b806e3ff25971a8ac7e0c1c369c3f0',1,'nmfUtils::initialize(Boost3DArrayDouble &amp;array3d)'],['../namespacenmf_utils.html#a772aafbc9a378596e35ad76c0e00c2fc',1,'nmfUtils::initialize(Boost4DArrayDouble &amp;array4d)'],['../namespacenmf_utils.html#aded630b05712af20c9852c7daa09f3a8',1,'nmfUtils::initialize(Boost5DArrayDouble &amp;array5d)']]],
+  ['initlogger_779',['initLogger',['../classnmf_logger.html#a438524867cec8b85112ffe98c4676040',1,'nmfLogger']]],
+  ['invertmatrix_780',['invertMatrix',['../namespacenmf_utils.html#a5488fed14ff3859959b99b1fd0f252b3',1,'nmfUtils']]],
+  ['isanerror_781',['isAnError',['../namespacenmf_utils_qt.html#a79cb045897a2a250cf95ad8ff330613b',1,'nmfUtilsQt']]],
+  ['isarelativebiomassmodel_782',['isARelativeBiomassModel',['../classnmf_database.html#a57c9e3be4a1f56819dbce7a06b31be0e',1,'nmfDatabase']]],
+  ['isestimateparameterchecked_783',['isEstimateParameterChecked',['../namespacenmf_utils.html#a2e4b53f8045a8fe2ac2b132bea72b1b4',1,'nmfUtils']]],
+  ['isnearlyzero_784',['isNearlyZero',['../namespacenmf_utils.html#ad445967c593f84cda238acd5fe04f445',1,'nmfUtils']]],
+  ['isoswindows_785',['isOSWindows',['../namespacenmf_utils.html#a2c257364b8e0e872243413db9f943d60',1,'nmfUtils']]],
+  ['isstopped_786',['isStopped',['../classnmf_progress_widget.html#a903cfb3ddb7beb57087ecb95868b64b7',1,'nmfProgressWidget::isStopped()'],['../namespacenmf_utils.html#a4a6bcc536ed5a524f8bf9c1dffe98f28',1,'nmfUtils::isStopped()']]],
+  ['iswholenumber_787',['isWholeNumber',['../namespacenmf_utils.html#abdc0f0125ae7a0a8cc338ca4c828b1a0',1,'nmfUtils']]]
 ];

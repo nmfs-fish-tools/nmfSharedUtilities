@@ -13,25 +13,25 @@ nmfChartLegend::nmfChartLegend(QChart *chart)
 }
 
 void
-nmfChartLegend::setToolTips(std::vector<QString>& markerColors)
+nmfChartLegend::setupConnections()
 {
-    m_markerColors = markerColors;
-    m_maxNumMarkers = m_markerColors.size();
-}
+    int i=0;
 
-
-void
-nmfChartLegend::setConnections()
-{
     // Add hovered callbacks to set tooltips
     QList<QLegendMarker* > legendMarkers = m_chart->legend()->markers();
-    int i=0;
     for (QLegendMarker* legendMarker : legendMarkers) {
         legendMarker->setObjectName(QString::number(i++));
         disconnect(legendMarker,0,0,0);
         connect(legendMarker, SIGNAL(hovered(bool)),
                 this,         SLOT(callback_hoveredLegend(bool)));
     }
+}
+
+void
+nmfChartLegend::setToolTips(std::vector<QString>& markerColors)
+{
+    m_markerColors  = markerColors;
+    m_maxNumMarkers = m_markerColors.size();
 }
 
 void

@@ -1,6 +1,4 @@
-
 #include "nmfChartLineWithScatter.h"
-
 
 nmfChartLineWithScatter::nmfChartLineWithScatter()
 {
@@ -8,14 +6,13 @@ nmfChartLineWithScatter::nmfChartLineWithScatter()
     m_CustomToolTip = new nmfToolTip();
 }
 
-
 void
 nmfChartLineWithScatter::populateChart(
         QChart *chart,
         std::string &type,
-        const std::string &style,
+        const std::string &lineStyle,
         const bool& isMohnsRho,
-        const bool &ShowFirstPoint,
+        const bool &showFirstPoint,
         const bool &AddScatter,
         const int &XOffset,
         const bool &xAxisIsInteger,
@@ -23,16 +20,16 @@ nmfChartLineWithScatter::populateChart(
         const double &YMaxVal,
         const boost::numeric::ublas::matrix<double> &YAxisData,
         const boost::numeric::ublas::matrix<double> &ScatterData,
-        const QStringList &RowLabels,
-        const QStringList &ColumnLabels,
-        std::string &MainTitle,
-        std::string &XTitle,
-        std::string &YTitle,
-        const std::vector<bool> &GridLines,
-        const int &Theme,
-        const QColor &DashedLineColor,
-        const QColor &ScatterColor,
-        const std::string &LineColorValue,
+        const QStringList &rowLabels,
+        const QStringList &columnLabels,
+        std::string &mainTitle,
+        std::string &xTitle,
+        std::string &yTitle,
+        const std::vector<bool> &gridLines,
+        const int &theme,
+        const QColor &dashedLineColor,
+        const QColor &scatterColor,
+        const std::string &lineColorValue,
         const std::string &lineColorName,
         const QList<QString>& multiRunLineLabels,
         const bool& showLegend)
@@ -43,32 +40,29 @@ nmfChartLineWithScatter::populateChart(
     QScatterSeries *scatterSeries = nullptr;
     QString scatterSeriesName = "Obs Biomass";
     QPen pen;
-    QColor  LineColor(QString::fromStdString(LineColorValue));
+    QColor  LineColor(QString::fromStdString(lineColorValue));
     QString LineColorName = QString::fromStdString(lineColorName);
 
-    int XStartVal = (ShowFirstPoint) ? 0 : 1;
+    int XStartVal = (showFirstPoint) ? 0 : 1;
     XStartVal += XOffset;
 
-    // Set main title
+    // Set chart attributes
     QFont mainTitleFont = chart->titleFont();
     mainTitleFont.setPointSize(14);
     mainTitleFont.setWeight(QFont::Bold);
     chart->setTitleFont(mainTitleFont);
-    chart->setTitle(QString::fromStdString(MainTitle));
-
+    chart->setTitle(QString::fromStdString(mainTitle));
     chart->legend()->hide();
-    // Set current theme
-    chart->setTheme(static_cast<QChart::ChartTheme>(Theme));
-    //chart->removeAllSeries();
-//std::cout << 1 << std::endl;
+    chart->setTheme(static_cast<QChart::ChartTheme>(theme));
+
     // Load data into series and then add series to the chart
     numPointsInLine = YAxisData.size1();
     for (unsigned int line=0; line<YAxisData.size2(); ++line) {
         lineSeries = new QLineSeries();
-        if (style == "DashedLine") {
+        if (lineStyle == "DashedLine") {
             pen = lineSeries->pen();
             pen.setStyle(Qt::DashLine);
-            pen.setColor(DashedLineColor);
+            pen.setColor(dashedLineColor);
             pen.setWidth(2);
             lineSeries->setPen(pen);
         } else {
@@ -79,7 +73,7 @@ nmfChartLineWithScatter::populateChart(
             lineSeries->setPen(pen);
             //series->setColor(LineColor);
         }
-        for (unsigned j=XStartVal-XOffset; j<numPointsInLine; ++j) {
+        for (int j=XStartVal-XOffset; j<numPointsInLine; ++j) {
             lineSeries->append(j+XOffset,YAxisData(j,line));
         }
         numPointsInLine = (isMohnsRho) ? numPointsInLine-1 : numPointsInLine;
@@ -88,21 +82,20 @@ nmfChartLineWithScatter::populateChart(
         if (multiRunLineLabels.size() > 0) {
             lineSeries->setName(multiRunLineLabels[line]);
             m_tooltips[multiRunLineLabels[line]] = multiRunLineLabels[line];
-        } else if (ColumnLabels.size() > 0) {
-            lineSeries->setName(ColumnLabels[0]);
-            m_tooltips[ColumnLabels[0]] = LineColorName;
+        } else if (columnLabels.size() > 0) {
+            lineSeries->setName(columnLabels[0]);
+            m_tooltips[columnLabels[0]] = LineColorName;
         }
 
         disconnect(lineSeries,0,0,0);
         connect(lineSeries, SIGNAL(hovered(const QPointF&,bool)),
                 this,       SLOT(callback_hoveredLine(const QPointF&,bool)));
     }
-//std::cout << 2 << std::endl;
 
     if ((ScatterData.size1() != 0) && AddScatter) {
         scatterSeries = new QScatterSeries();
         scatterSeries->setMarkerSize(10);
-        scatterSeries->setColor(ScatterColor);
+        scatterSeries->setColor(scatterColor);
         for (unsigned int j=XStartVal-XOffset; j<ScatterData.size1(); ++j) {
             scatterSeries->append(j+XOffset,ScatterData(j,0)); // Change 0 if more than one type of scatter points
         }
@@ -116,14 +109,6 @@ nmfChartLineWithScatter::populateChart(
         connect(scatterSeries, SIGNAL(hovered(const QPointF&,bool)),
                 this,          SLOT(callback_hoveredScatter(const QPointF&,bool)));
     }
-//std::cout << 3 << std::endl;
-
-//    // Set main title
-//    QFont mainTitleFont = chart->titleFont();
-//    mainTitleFont.setPointSize(14);
-//    mainTitleFont.setWeight(QFont::Bold);
-//    chart->setTitleFont(mainTitleFont);
-//    chart->setTitle(QString::fromStdString(MainTitle));
 
     // Setup X and Y axes
     chart->createDefaultAxes();
@@ -131,11 +116,11 @@ nmfChartLineWithScatter::populateChart(
     titleFont.setPointSize(12);
     titleFont.setWeight(QFont::Bold);
     chart->axes(Qt::Horizontal).back()->setTitleFont(titleFont);
-    chart->axes(Qt::Horizontal).back()->setTitleText(QString::fromStdString(XTitle));
+    chart->axes(Qt::Horizontal).back()->setTitleText(QString::fromStdString(xTitle));
 
     QValueAxis *currentAxisY = qobject_cast<QValueAxis*>(chart->axes(Qt::Vertical).back());
     currentAxisY->setTitleFont(titleFont);
-    currentAxisY->setTitleText(QString::fromStdString(YTitle));
+    currentAxisY->setTitleText(QString::fromStdString(yTitle));
     currentYMin = currentAxisY->min();
     if (YMinVal >= 0) {
         currentAxisY->setMin(currentYMin*YMinVal/100.0);
@@ -152,8 +137,8 @@ nmfChartLineWithScatter::populateChart(
     }
 
     //   Set grid line visibility
-    chart->axes(Qt::Horizontal).back()->setGridLineVisible(GridLines[0]);
-    chart->axes(Qt::Vertical).back()->setGridLineVisible(GridLines[1]);
+    chart->axes(Qt::Horizontal).back()->setGridLineVisible(gridLines[0]);
+    chart->axes(Qt::Vertical).back()->setGridLineVisible(gridLines[1]);
 
     // Show legend
     chart->legend()->setVisible(showLegend);
@@ -166,9 +151,30 @@ nmfChartLineWithScatter::populateChart(
     for (QLegendMarker* legendMarker : legendMarkers) {
         disconnect(legendMarker,0,0,0);
         connect(legendMarker, SIGNAL(hovered(bool)),
-                this,         SLOT(callback_hoveredLegend(bool)));
+                this,         SLOT(callback_hoveredLegendMarker(bool)));
     }
 
+}
+
+void
+nmfChartLineWithScatter::callback_hideTooltip()
+{
+    // QToolTip::hideText();
+    m_CustomToolTip->hide();
+}
+
+void
+nmfChartLineWithScatter::callback_hoveredLegendMarker(bool hovered)
+{
+    QString tooltip;
+    QPoint pos = QCursor::pos();
+
+    if (hovered) {
+        tooltip = m_tooltips[qobject_cast<QLegendMarker* >(QObject::sender())->label()];
+        QToolTip::showText(pos, tooltip);
+    } else {
+        QToolTip::hideText();
+    }
 }
 
 void
@@ -184,7 +190,7 @@ nmfChartLineWithScatter::callback_hoveredLine(const QPointF& point, bool hovered
         m_CustomToolTip->move(pos.x(),pos.y()-20);
         m_CustomToolTip->setLabel(tooltip);
         m_CustomToolTip->show();
-        QTimer::singleShot(nmfConstantsMSSPM::ToolTipDuration, this, SLOT(callback_HideTooltip()));
+        QTimer::singleShot(nmfConstantsMSSPM::ToolTipDuration, this, SLOT(callback_hideTooltip()));
 
         // The following line doesn't keep the tooltip on for 2 seconds...just 1 second.
         // Could be a QT bug. As a workaround, I created a custom tooltip (m_CustomToolTip) and
@@ -207,7 +213,7 @@ nmfChartLineWithScatter::callback_hoveredScatter(const QPointF& point, bool hove
         m_CustomToolTip->move(pos.x(),pos.y()-20);
         m_CustomToolTip->setLabel(tooltip);
         m_CustomToolTip->show();
-        QTimer::singleShot(nmfConstantsMSSPM::ToolTipDuration, this, SLOT(callback_HideTooltip()));
+        QTimer::singleShot(nmfConstantsMSSPM::ToolTipDuration, this, SLOT(callback_hideTooltip()));
         // QToolTip::showText(pos, tooltip, nullptr, QRect(), 2000);
     } else {
         // QToolTip::hideText();
@@ -215,23 +221,3 @@ nmfChartLineWithScatter::callback_hoveredScatter(const QPointF& point, bool hove
     }
 }
 
-void
-nmfChartLineWithScatter::callback_hoveredLegend(bool hovered)
-{
-    QString tooltip;
-    QPoint pos = QCursor::pos();
-
-    if (hovered) {
-        tooltip = m_tooltips[qobject_cast<QLegendMarker* >(QObject::sender())->label()];
-        QToolTip::showText(pos, tooltip);
-    } else {
-        QToolTip::hideText();
-    }
-}
-
-void
-nmfChartLineWithScatter::callback_HideTooltip()
-{
-    // QToolTip::hideText();
-    m_CustomToolTip->hide();
-}

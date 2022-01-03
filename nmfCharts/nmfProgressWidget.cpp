@@ -16,8 +16,8 @@
 
 QT_CHARTS_USE_NAMESPACE
 
-nmfProgressWidget::nmfProgressWidget(QTimer *theTimer,
-                                     nmfLogger *theLogger,
+nmfProgressWidget::nmfProgressWidget(QTimer* timer,
+                                     nmfLogger* logger,
                                      std::string runType,
                                      QString mainTitle,
                                      QString xTitle,
@@ -39,8 +39,8 @@ nmfProgressWidget::nmfProgressWidget(QTimer *theTimer,
     m_elapsedTime.clear();
     m_wasStopped = false;
 
-    logger    = theLogger;
-    m_timer   = theTimer;
+    m_logger  = logger;
+    m_timer   = timer;
     m_RunType = runType;
     m_lastX   = 0;
 
@@ -49,7 +49,7 @@ nmfProgressWidget::nmfProgressWidget(QTimer *theTimer,
     vChartLayt  = new QVBoxLayout();
     hMinLayt    = new QHBoxLayout();
     hMaxLayt    = new QHBoxLayout();
-    hRangeLayt  = new QHBoxLayout();
+//  hRangeLayt  = new QHBoxLayout();
     yRangeLayt  = new QHBoxLayout();
     statusLayt  = new QHBoxLayout();
     vGroupLayt  = new QVBoxLayout();
@@ -120,10 +120,10 @@ nmfProgressWidget::nmfProgressWidget(QTimer *theTimer,
     vChartLayt->addWidget(statusLBL);
     hMainLayt->addLayout(vChartLayt);
     hMainLayt->addWidget(controlsGB);
-    hRangeLayt->addWidget(minLBL);
-    hRangeLayt->addWidget(minSB);
-    hRangeLayt->addWidget(maxLBL);
-    hRangeLayt->addWidget(maxSB);
+//  hRangeLayt->addWidget(minLBL);
+//  hRangeLayt->addWidget(minSB);
+//  hRangeLayt->addWidget(maxLBL);
+//  hRangeLayt->addWidget(maxSB);
     buttonLayt->addWidget(clearPB);
     buttonLayt->addWidget(stopPB);
     timeLayt->addWidget(timeLBL);
@@ -247,32 +247,55 @@ nmfProgressWidget::~nmfProgressWidget() {
 }
 
 void
-nmfProgressWidget::showLegend()
-{
-    m_chart->legend()->show();
-}
-
-void
-nmfProgressWidget::hideLegend()
-{
-    m_chart->legend()->hide();
-}
-
-void
-nmfProgressWidget::setWhatsThis(QString whatsThis)
-{
-    m_chartView->setWhatsThis(whatsThis);
-}
-
-void
 nmfProgressWidget::adjustYAxisLabelPrecision(QValueAxis *yAxis,
-                                             double yMin, double yMax)
+                                             double yMin,
+                                             double yMax)
 {
-//    if (yMax-yMin <=  0.31) {
-//        yAxis->setLabelFormat("%0.2f");
-//    } else {
-        yAxis->setLabelFormat("%0.2f");
-//    }
+    yAxis->setLabelFormat("%0.2f");
+}
+
+void
+nmfProgressWidget::clearChart()
+{
+    callback_clearPB();
+}
+
+void
+nmfProgressWidget::clearChartData(std::string filename)
+{
+    std::ofstream outputFileMSSPM(filename);
+    outputFileMSSPM.close();
+}
+
+void
+nmfProgressWidget::clearChartOnly()
+{
+    m_chart->removeAllSeries();
+}
+
+void
+nmfProgressWidget::clearRunBoxes()
+{
+    runLE->setText("");
+    subRunLE->setText("");
+}
+
+void
+nmfProgressWidget::clearTime()
+{
+    timeLE->setText("");
+}
+
+std::string
+nmfProgressWidget::getElapsedTime()
+{
+    return m_elapsedTime;
+}
+
+QString
+nmfProgressWidget::getMainTitle()
+{
+    return "<strong>"+m_mainTitle+"</strong>";
 }
 
 int
@@ -287,132 +310,10 @@ nmfProgressWidget::getNumYTicks()
     return (m_yMax-m_yMin)/m_yInc;
 }
 
-QString
-nmfProgressWidget::getMainTitle()
-{
-    return "<strong>"+m_mainTitle+"</strong>";
-}
-
-QString
-nmfProgressWidget::getXTitle()
-{
-    return m_xTitle;
-}
-
-QString
-nmfProgressWidget::getYTitle()
-{
-    return m_yTitle;
-}
-
 double
 nmfProgressWidget::getXInc()
 {
     return m_xInc;
-}
-
-
-double
-nmfProgressWidget::getYInc()
-{
-    return m_yInc;
-}
-
-
-void
-nmfProgressWidget::setXInc(const double& xInc)
-{
-    m_xInc = xInc;
-    updateChart();
-}
-
-void
-nmfProgressWidget::clearRunBoxes()
-{
-    runLE->setText("");
-    subRunLE->setText("");
-}
-
-void
-nmfProgressWidget::setRunBoxes(const int& run,
-                               const int& subRun,
-                               const int& numSubRuns)
-{
-    runLE->setText(QString::number(run));
-    subRunLE->setText(QString::number(subRun) + " of " +
-                      QString::number(numSubRuns));
-}
-
-void
-nmfProgressWidget::setYAxisTitleScale(const QString title, const double yMin,
-                                      const double yMax, const double yInc)
-{
-    m_yTitle = title;
-    if (m_yAxisAdjusted) {
-        m_yMin = yMinSB->value();
-        m_yMax = yMaxSB->value();
-        m_yInc = yMaxSB->singleStep();
-    } else {
-        m_yMin = yMin;
-        m_yMax = yMax;
-        m_yInc = yInc;
-    }
-
-    updateChart();
-}
-
-void
-nmfProgressWidget::shouldYRangeEditsStick(bool state)
-{
-    m_yAxisAdjusted = state;
-}
-
-bool
-nmfProgressWidget::ifYRangeEditsShouldStick()
-{
-    return m_yAxisAdjusted;
-}
-
-void
-nmfProgressWidget::setXAxisTitleScale(const QString& title, const double& xMin,
-                                      const double& xMax, const double& xInc)
-{
-    m_xTitle = title;
-    m_xMin   = xMin;
-    m_xMax   = xMax;
-    m_xInc   = xInc;
-    m_maxNumGenerations = xMax;
-    updateChart();
-}
-
-void
-nmfProgressWidget::setXRange(const double &xMin, const double &xMax)
-{
-    m_xMin = xMin;
-    m_xMax = xMax;
-    updateChart();
-}
-
-void
-nmfProgressWidget::setYRange(const double &yMin, const double &yMax)
-{
-    if (m_yAxisAdjusted)
-        return;
-
-    m_yMin = yMin;
-    m_yMax = yMax;
-    updateChart();
-}
-
-
-void
-nmfProgressWidget::setYInc(const double& yInc)
-{
-    if (m_yAxisAdjusted)
-        return;
-
-    m_yInc = yInc;
-    updateChart();
 }
 
 std::pair<double,double>
@@ -421,6 +322,17 @@ nmfProgressWidget::getXRange()
     return std::make_pair(m_xMin,m_xMax);
 }
 
+QString
+nmfProgressWidget::getXTitle()
+{
+    return m_xTitle;
+}
+
+double
+nmfProgressWidget::getYInc()
+{
+    return m_yInc;
+}
 
 std::pair<double,double>
 nmfProgressWidget::getYRange()
@@ -428,415 +340,17 @@ nmfProgressWidget::getYRange()
     return std::make_pair(m_yMin,m_yMax);
 }
 
-
-void
-nmfProgressWidget::setMainTitle(QString mainTitle)
+QString
+nmfProgressWidget::getYTitle()
 {
-    m_mainTitle = "<strong>" + mainTitle + "</strong>";
-    updateChart();
+    return m_yTitle;
 }
 
 void
-nmfProgressWidget::setXTitle(const QString title)
+nmfProgressWidget::hideLegend()
 {
-    m_xTitle = title;
-    updateChart();
+    m_chart->legend()->hide();
 }
-
-void
-nmfProgressWidget::setYTitle(const QString title)
-{
-    m_yTitle = title;
-    updateChart();
-}
-
-void
-nmfProgressWidget::setMaxNumGenerations(const int& MaxNumGenerations)
-{
-    m_maxNumGenerations = MaxNumGenerations;
-    updateChart();
-}
-
-void
-nmfProgressWidget::updateTime()
-{
-    timeLE->setText(QString::fromStdString(nmfUtilsQt::elapsedTimeCondensed(m_startTime)));
-}
-
-void
-nmfProgressWidget::clearTime()
-{
-    timeLE->setText("");
-}
-
-void
-nmfProgressWidget::updateChart()
-{
-    if (m_chart != nullptr) {
-
-        // Update Controls;
-        yMinSB->setValue(m_yMin);
-        yMinSB->setSingleStep(m_yInc);
-        yMaxSB->setValue(m_yMax);
-        yMaxSB->setSingleStep(m_yInc);
-
-        // Update Chart
-        m_chart->setTitle(m_mainTitle);
-//      m_chart->axes(Qt::Horizontal).back()->setRange(m_xMin, m_xMax); // Caused x-axis to rescale...not what's wanted
-        m_chart->axes(Qt::Horizontal).back()->setTitleText(m_xTitle);
-        m_chart->axes(Qt::Vertical).back()->setRange(m_yMin, m_yMax);
-        m_chart->axes(Qt::Vertical).back()->setTitleText(m_yTitle);
-        adjustYAxisLabelPrecision(qobject_cast<QValueAxis*>(m_chart->axes(Qt::Vertical).back()),
-                                  m_yMin, m_yMax);
-        m_chart->update();
-
-    }
-}
-
-void
-nmfProgressWidget::setupConnections() {
-
-    stopPB->disconnect();
-    clearPB->disconnect();
-    labelsCB->disconnect();
-    markersCB->disconnect();
-    minSB->disconnect();
-    maxSB->disconnect();
-    rangeSetPB->disconnect();
-    validPointsCB->disconnect();
-
-    connect(stopPB,     SIGNAL(clicked()),            this, SLOT(callback_stopPB()));
-    connect(clearPB,    SIGNAL(clicked()),            this, SLOT(callback_clearPB()));
-    connect(labelsCB,   SIGNAL(stateChanged(int)),    this, SLOT(callback_labelsCB(int)));
-    connect(markersCB,  SIGNAL(stateChanged(int)),    this, SLOT(callback_markersCB(int)));
-    connect(minSB,      SIGNAL(valueChanged(int)),    this, SLOT(callback_minSB(int)));
-    connect(maxSB,      SIGNAL(valueChanged(int)),    this, SLOT(callback_maxSB(int)));
-    connect(yMinSB,     SIGNAL(valueChanged(double)), this, SLOT(callback_yMinSB(double)));
-    connect(yMaxSB,     SIGNAL(valueChanged(double)), this, SLOT(callback_yMaxSB(double)));
-    connect(rangeSetPB, SIGNAL(clicked()),            this, SLOT(callback_rangeSetPB()));
-
-    connect(validPointsCB, SIGNAL(clicked(bool)),     this, SLOT(callback_validPointsCB(bool)));
-
-} // end SetupConnections
-
-void
-nmfProgressWidget::stopTimer()
-{
-    logger->logMsg(nmfConstants::Normal,"nmfProgressWidget::stopTimer " + m_RunType + " Progress Chart Timer");
-
-    m_timer->stop();
-}
-
-void
-nmfProgressWidget::startTimer(int delayMillisec)
-{
-    logger->logMsg(nmfConstants::Normal,"nmfProgressWidget::startTimer " + m_RunType + " Progress Chart Timer");
-
-    // Start Progress Chart's timer here
-    m_timer->start(delayMillisec);
-    startRun();
-
-    clearTime();
-
-}
-
-bool
-nmfProgressWidget::wasStopped()
-{
-    return m_wasStopped;
-}
-
-void
-nmfProgressWidget::callback_stopPB()
-{
-    stopAllRuns(true);
-}
-
-void
-nmfProgressWidget::stopAllRuns(bool verboseOn)
-{
-    logger->logMsg(nmfConstants::Normal,"nmfProgressWidget::stopAllRuns " + m_RunType + " Progress Chart Timer");
-
-    writeToStopRunFile();
-    m_wasStopped = true;
-
-std::cout << "=== === ===> nmfProgressWidget::stopAllRuns emitting StopAllEstimationRuns" << std::endl;
-    emit StopAllRuns();
-
-    QApplication::restoreOverrideCursor();
-
-    if (verboseOn) {
-        QMessageBox msgBox;
-        msgBox.setWindowTitle("Stop Run");
-        msgBox.setText("\nUser halted all run(s).\n");
-        msgBox.setStandardButtons(QMessageBox::Ok);
-        msgBox.setIcon(QMessageBox::Information);
-        msgBox.exec();
-    }
-
-    callback_clearPB();
-    m_wasStopped = false;
-    writeToStopRunFile();
-
-/*
-    if (! wasStopped()) {
-        emit StopTheRun();
-        writeToStopRunFile();
-        m_wasStopped = true;
-*/
-    if (m_RunType == "MSSPM") {
-        updateChartDataLabel(nmfConstantsMSSPM::MSSPMProgressChartLabelFile,
-                             "<b>Status:&nbsp;&nbsp;</b>User halted MSSPM run. Output data incomplete.");
-    } else if (m_RunType == "MSVPA") {
-        updateChartDataLabel(nmfConstantsMSVPA::MSVPAProgressChartLabelFile,
-                             "<b>Status:&nbsp;&nbsp;</b>User halted MSVPA run. Output data incomplete.");
-    } else if (m_RunType == "Forecast") {
-        updateChartDataLabel(nmfConstantsMSVPA::ForecastProgressChartLabelFile,
-                             "<b>Status:&nbsp;&nbsp;</b>User halted Forecast run. Output data incomplete.");
-    }
-/*
-    }
-*/
-} // end callback_stopPB
-
-void
-nmfProgressWidget::clearChart()
-{
-    callback_clearPB();
-}
-
-void
-nmfProgressWidget::clearChartOnly()
-{
-    m_chart->removeAllSeries();
-}
-
-void
-nmfProgressWidget::clearChartData(std::string filename)
-{
-    std::ofstream outputFileMSSPM(filename);
-    outputFileMSSPM.close();
-}
-
-void
-nmfProgressWidget::callback_clearPB() {
-
-    m_chart->removeAllSeries();
-    clearRunBoxes();
-
-    // Initialize progress output file
-    if (m_RunType == "MSSPM") {
-        std::ofstream outputFile(nmfConstantsMSSPM::MSSPMProgressChartFile);
-        outputFile.close();
-    } else if (m_RunType == "MSVPA") {
-        std::ofstream outputFile(nmfConstantsMSVPA::MSVPAProgressChartFile);
-        outputFile.close();
-    } else if (m_RunType == "Forecast") {
-        std::ofstream outputFile(nmfConstantsMSVPA::ForecastProgressChartFile);
-        outputFile.close();
-    }
-
-} // end callback_clearPB
-
-void
-nmfProgressWidget::callback_labelsCB(int state)
-{
-//    if (isStopped()) {
-        QLineSeries *lineSeries;
-        QList<QAbstractSeries *> allSeries = m_chart->series();
-        for (int i=0; i<allSeries.count(); ++i) {
-            lineSeries = qobject_cast<QLineSeries *>(allSeries[i]);
-            lineSeries->setPointLabelsVisible(state == Qt::Checked);
-        }
-        m_chartView->update();
-        m_chartView->repaint();
-        m_chart->update();
-//    }
-} // end callback_labelsCB
-
-
-void
-nmfProgressWidget::callback_markersCB(int state)
-{
-//    if (isStopped()) {
-        QLineSeries *lineSeries;
-        QList<QAbstractSeries *> allSeries = m_chart->series();
-        for (int i=0; i<allSeries.count(); ++i) {
-            lineSeries = qobject_cast<QLineSeries *>(allSeries[i]);
-            lineSeries->setPointsVisible(state == Qt::Checked);
-        }
-        m_chartView->update();
-        m_chartView->repaint();
-        m_chart->update();
-//    }
-} // end callback_markersCB
-
-
-void
-nmfProgressWidget::callback_minSB(int value) {
-
-    if (isStopped()) {
-        m_chart->axes(Qt::Horizontal).back()->setMin(value);
-        m_chart->update();
-    }
-
-} // end callback_minSB
-
-void
-nmfProgressWidget::callback_maxSB(int value)
-{
-    if (isStopped()) {
-        m_chart->axes(Qt::Horizontal).back()->setMax(value);
-        m_chart->update();
-    }
-
-} // end callback_maxSB
-
-void
-nmfProgressWidget::callback_yMinSB(double value)
-{
-    if (yMinSB->value() >= yMaxSB->value()) {
-        m_yMin = yMaxSB->value() - getYInc();
-    } else {
-        m_yMin = value;
-    }
-
-    updateChart();
-}
-
-void
-nmfProgressWidget::callback_yMaxSB(double value)
-{
-    if (yMaxSB->value() <= yMinSB->value()) {
-        m_yMax = yMinSB->value() + getYInc();
-        yMaxSB->blockSignals(true);
-        yMaxSB->setValue(m_yMax);
-        yMaxSB->blockSignals(false);
-    } else {
-        m_yMax = value;
-    }
-    updateChart();
-}
-
-void
-nmfProgressWidget::callback_lineHovered(QPointF point, bool state)
-{
-    QString msg;
-    if (state) {
-        msg = QString::number(point.x()) + "," +
-                QString::number(point.y());
-        m_chartView->setToolTip(msg);
-    }
-} // end callback_lineHovered
-
-void
-nmfProgressWidget::callback_rangeSetPB()
-{
-    QList<QAbstractSeries *> allSeries = m_chart->series();
-    QLineSeries *lineSeries = nullptr;
-    double value;
-    double min =  99999;
-    double max = -99999;
-
-    for (int i=0; i<allSeries.count(); ++i) {
-        lineSeries = qobject_cast<QLineSeries *>(allSeries[i]);
-        if (lineSeries) {
-            for (int j=0; j<lineSeries->count(); ++j) {
-                value = lineSeries->at(j).y();
-                min = (value < min) ? value : min;
-                max = (value > max) ? value : max;
-            }
-        }
-    }
-
-    callback_yMaxSB(max);
-    callback_yMinSB(min);
-}
-
-void
-nmfProgressWidget::callback_validPointsCB(bool checked)
-{
-    callback_rangeSetPB();
-
-    emit RedrawValidPointsOnly(checked,true);
-}
-
-bool
-nmfProgressWidget::readValidPointsOnly()
-{
-    return validPointsCB->isChecked();
-}
-
-void
-nmfProgressWidget::callback_scatterSeriesHovered(QPointF point,bool state)
-{
-    if (state) {
-        QString newToolTip = QString::number(point.x()) + "," + QString::number(point.y());
-        m_chart->setToolTip(newToolTip);
-        //std::cout << "POINT: " << point.x() << ", " << point.y() << std::endl;
-    } else {
-        m_chart->setToolTip("");
-    }
-
-} // end callback_scatterSeriesHovered
-
-std::string
-nmfProgressWidget::getElapsedTime()
-{
-    return m_elapsedTime;
-}
-
-void
-nmfProgressWidget::writeToStopRunFile()
-{
-    m_elapsedTime = nmfUtilsQt::elapsedTime(m_startTime);
-    emit StopTheTimer();
-
-    if (m_RunType == "MSSPM") {
-        std::ofstream outputFile(nmfConstantsMSSPM::MSSPMStopRunFile);
-        outputFile << "StoppedByUser" << std::endl;
-        outputFile << "unused" << std::endl;
-        outputFile << m_elapsedTime << std::endl;
-        outputFile << m_lastX << std::endl;
-        outputFile.close();
-   } else if (m_RunType == "MSVPA") {
-        std::ofstream outputFile(nmfConstantsMSVPA::MSVPAStopRunFile);
-        outputFile << "Stop" << std::endl;
-        outputFile.close();
-    } else if (m_RunType == "Forecast") {
-        std::ofstream outputFile(nmfConstantsMSVPA::ForecastStopRunFile);
-        outputFile << "Stop" << std::endl;
-        outputFile.close();
-    }
-
-    logger->logMsg(nmfConstants::Bold,m_RunType + " Run - End");
-    logger->logMsg(nmfConstants::Section,"================================================================================");
-
-
-} // end StopRun
-
-void
-nmfProgressWidget::startRun()
-{
-    m_startTime  = nmfUtilsQt::getCurrentTime();
-    m_wasStopped = false;
-
-    logger->logMsg(nmfConstants::Normal,"nmfProgressWidget::startRun: "+m_RunType);
-
-    if (m_RunType == "MSSPM") {
-        std::ofstream outputFile(nmfConstantsMSSPM::MSSPMStopRunFile);
-        outputFile << "Start" << std::endl;
-        outputFile.close();
-    } else if (m_RunType == "MSVPA") {
-        std::ofstream outputFile(nmfConstantsMSVPA::MSVPAStopRunFile);
-        outputFile << "Start" << std::endl;
-        outputFile.close();
-    } else {
-        std::ofstream outputFile(nmfConstantsMSVPA::ForecastStopRunFile);
-        outputFile << "Start" << std::endl;
-        outputFile.close();
-    }
-} // end StartRun
 
 bool
 nmfProgressWidget::isStopped()
@@ -868,31 +382,6 @@ nmfProgressWidget::isStopped()
            (cmd == "StopAllOK")     ||
            (cmd == "StopIncomplete");
 } // end isStopped
-
-
-void
-nmfProgressWidget::updateChartDataLabel(std::string inputLabelFileName,
-                                        std::string overrideMsg)
-{
-    // Update progress chart label
-    QString msg;
-    std::string line;
-
-    std::ifstream inputLabelFile(inputLabelFileName);
-    std::getline(inputLabelFile,line);
-    if (line.empty()) {
-        msg.clear();
-    } else {
-        msg = "<b>Status:&nbsp;&nbsp;</b>" + QString::fromStdString(line);
-    }
-    if (overrideMsg.empty())
-        statusLBL->setText(msg);
-    else
-        statusLBL->setText(QString::fromStdString(overrideMsg));
-    inputLabelFile.close();
-
-} // end updateChartDataLabel
-
 
 void
 nmfProgressWidget::readChartDataFile(std::string type,
@@ -949,12 +438,12 @@ nmfProgressWidget::readChartDataFile(std::string type,
     if (type == "MSSPM") { // Means we're looking at MSSPM data
 
         validLines.clear();
-        // Run through file and check and remove 99999 lines
+        // Run through file and check and remove invalid lines
         while (std::getline(inputFile,line)) {
             if (validPointsOnly) {
                 boost::split(parts,line,boost::is_any_of(","));
                 y = std::stod(parts[2]);
-                if (y < 90000) {
+                if (y < nmfConstantsMSSPM::MaxValidProgressYValue) {
                     validLines.push_back(line);
                 }
             } else {
@@ -1192,4 +681,491 @@ nmfProgressWidget::readChartDataFile(std::string type,
 
 } // end readChartDataFile
 
+bool
+nmfProgressWidget::readValidPointsOnly()
+{
+    return validPointsCB->isChecked();
+}
 
+void
+nmfProgressWidget::setMainTitle(QString mainTitle)
+{
+    m_mainTitle = "<strong>" + mainTitle + "</strong>";
+    updateChart();
+}
+
+void
+nmfProgressWidget::setMaxNumGenerations(const int& MaxNumGenerations)
+{
+    m_maxNumGenerations = MaxNumGenerations;
+    updateChart();
+}
+
+void
+nmfProgressWidget::setRunBoxes(const int& run,
+                               const int& subRun,
+                               const int& numSubRuns)
+{
+    runLE->setText(QString::number(run));
+    subRunLE->setText(QString::number(subRun) + " of " +
+                      QString::number(numSubRuns));
+}
+
+void
+nmfProgressWidget::setupConnections()
+{
+    stopPB->disconnect();
+    clearPB->disconnect();
+    labelsCB->disconnect();
+    markersCB->disconnect();
+    minSB->disconnect();
+    maxSB->disconnect();
+    rangeSetPB->disconnect();
+    validPointsCB->disconnect();
+
+    connect(stopPB,     SIGNAL(clicked()),            this, SLOT(callback_stopPB()));
+    connect(clearPB,    SIGNAL(clicked()),            this, SLOT(callback_clearPB()));
+    connect(labelsCB,   SIGNAL(stateChanged(int)),    this, SLOT(callback_labelsCB(int)));
+    connect(markersCB,  SIGNAL(stateChanged(int)),    this, SLOT(callback_markersCB(int)));
+    connect(minSB,      SIGNAL(valueChanged(int)),    this, SLOT(callback_xMinSB(int)));
+    connect(maxSB,      SIGNAL(valueChanged(int)),    this, SLOT(callback_xMaxSB(int)));
+    connect(yMinSB,     SIGNAL(valueChanged(double)), this, SLOT(callback_yMinSB(double)));
+    connect(yMaxSB,     SIGNAL(valueChanged(double)), this, SLOT(callback_yMaxSB(double)));
+    connect(rangeSetPB, SIGNAL(clicked()),            this, SLOT(callback_rangeSetPB()));
+    connect(validPointsCB, SIGNAL(clicked(bool)),     this, SLOT(callback_validPointsCB(bool)));
+
+} // end SetupConnections
+
+
+void
+nmfProgressWidget::setWhatsThis(QString whatsThis)
+{
+    m_chartView->setWhatsThis(whatsThis);
+}
+
+void
+nmfProgressWidget::setXAxisTitleScale(const QString& title, const double& xMin,
+                                      const double& xMax, const double& xInc)
+{
+    m_xTitle = title;
+    m_xMin   = xMin;
+    m_xMax   = xMax;
+    m_xInc   = xInc;
+    m_maxNumGenerations = xMax;
+    updateChart();
+}
+
+void
+nmfProgressWidget::setXInc(const double& xInc)
+{
+    m_xInc = xInc;
+    updateChart();
+}
+
+void
+nmfProgressWidget::setXRange(const double &xMin, const double &xMax)
+{
+    m_xMin = xMin;
+    m_xMax = xMax;
+    updateChart();
+}
+
+void
+nmfProgressWidget::setXTitle(const QString title)
+{
+    m_xTitle = title;
+    updateChart();
+}
+
+void
+nmfProgressWidget::setYAxisTitleScale(const QString title, const double yMin,
+                                      const double yMax, const double yInc)
+{
+    m_yTitle = title;
+    if (m_yAxisAdjusted) {
+        m_yMin = yMinSB->value();
+        m_yMax = yMaxSB->value();
+        m_yInc = yMaxSB->singleStep();
+    } else {
+        m_yMin = yMin;
+        m_yMax = yMax;
+        m_yInc = yInc;
+    }
+
+    updateChart();
+}
+
+void
+nmfProgressWidget::setYInc(const double& yInc)
+{
+    if (m_yAxisAdjusted)
+        return;
+
+    m_yInc = yInc;
+    updateChart();
+}
+
+void
+nmfProgressWidget::setYRange(const double &yMin, const double &yMax)
+{
+    if (m_yAxisAdjusted)
+        return;
+
+    m_yMin = yMin;
+    m_yMax = yMax;
+    updateChart();
+}
+
+void
+nmfProgressWidget::setYTitle(const QString title)
+{
+    m_yTitle = title;
+    updateChart();
+}
+
+void
+nmfProgressWidget::shouldYRangeEditsStick(bool state)
+{
+    m_yAxisAdjusted = state;
+}
+
+void
+nmfProgressWidget::showLegend()
+{
+    m_chart->legend()->show();
+}
+
+void
+nmfProgressWidget::startRun()
+{
+    m_startTime  = nmfUtilsQt::getCurrentTime();
+    m_wasStopped = false;
+
+    m_logger->logMsg(nmfConstants::Normal,"nmfProgressWidget::startRun: "+m_RunType);
+
+    if (m_RunType == "MSSPM") {
+        std::ofstream outputFile(nmfConstantsMSSPM::MSSPMStopRunFile);
+        outputFile << "Start" << std::endl;
+        outputFile.close();
+    } else if (m_RunType == "MSVPA") {
+        std::ofstream outputFile(nmfConstantsMSVPA::MSVPAStopRunFile);
+        outputFile << "Start" << std::endl;
+        outputFile.close();
+    } else {
+        std::ofstream outputFile(nmfConstantsMSVPA::ForecastStopRunFile);
+        outputFile << "Start" << std::endl;
+        outputFile.close();
+    }
+} // end StartRun
+
+void
+nmfProgressWidget::startTimer(int delayMillisec)
+{
+    m_logger->logMsg(nmfConstants::Normal,"nmfProgressWidget::startTimer " + m_RunType + " Progress Chart Timer");
+
+    // Start Progress Chart's timer here
+    m_timer->start(delayMillisec);
+    startRun();
+
+    clearTime();
+}
+
+void
+nmfProgressWidget::stopTimer()
+{
+    m_logger->logMsg(nmfConstants::Normal,"nmfProgressWidget::stopTimer " + m_RunType + " Progress Chart Timer");
+
+    m_timer->stop();
+}
+
+void
+nmfProgressWidget::stopAllRuns(bool verbose)
+{
+    m_logger->logMsg(nmfConstants::Normal,"nmfProgressWidget::stopAllRuns " + m_RunType + " Progress Chart Timer");
+
+    writeToStopRunFile();
+    m_wasStopped = true;
+
+std::cout << "=== === ===> nmfProgressWidget::stopAllRuns emitting StopAllEstimationRuns" << std::endl;
+    emit StopAllRuns();
+
+    QApplication::restoreOverrideCursor();
+
+    if (verbose) {
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Stop Run");
+        msgBox.setText("\nUser halted all run(s).\n");
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.setIcon(QMessageBox::Information);
+        msgBox.exec();
+    }
+
+    callback_clearPB();
+    m_wasStopped = false;
+    writeToStopRunFile();
+
+/*
+    if (! wasStopped()) {
+        emit StopTheRun();
+        writeToStopRunFile();
+        m_wasStopped = true;
+*/
+    if (m_RunType == "MSSPM") {
+        updateChartDataLabel(nmfConstantsMSSPM::MSSPMProgressChartLabelFile,
+                             "<b>Status:&nbsp;&nbsp;</b>User halted MSSPM run. Output data incomplete.");
+    } else if (m_RunType == "MSVPA") {
+        updateChartDataLabel(nmfConstantsMSVPA::MSVPAProgressChartLabelFile,
+                             "<b>Status:&nbsp;&nbsp;</b>User halted MSVPA run. Output data incomplete.");
+    } else if (m_RunType == "Forecast") {
+        updateChartDataLabel(nmfConstantsMSVPA::ForecastProgressChartLabelFile,
+                             "<b>Status:&nbsp;&nbsp;</b>User halted Forecast run. Output data incomplete.");
+    }
+/*
+    }
+*/
+} // end callback_stopPB
+
+void
+nmfProgressWidget::updateChart()
+{
+    if (m_chart != nullptr) {
+        // Update Controls;
+        yMinSB->setValue(m_yMin);
+        yMinSB->setSingleStep(m_yInc);
+        yMaxSB->setValue(m_yMax);
+        yMaxSB->setSingleStep(m_yInc);
+
+        // Update Chart
+        m_chart->setTitle(m_mainTitle);
+//      m_chart->axes(Qt::Horizontal).back()->setRange(m_xMin, m_xMax); // Caused x-axis to rescale...not what's wanted
+        m_chart->axes(Qt::Horizontal).back()->setTitleText(m_xTitle);
+        m_chart->axes(Qt::Vertical).back()->setRange(m_yMin, m_yMax);
+        m_chart->axes(Qt::Vertical).back()->setTitleText(m_yTitle);
+        adjustYAxisLabelPrecision(qobject_cast<QValueAxis*>(m_chart->axes(Qt::Vertical).back()),
+                                  m_yMin, m_yMax);
+        m_chart->update();
+    }
+}
+
+void
+nmfProgressWidget::updateChartDataLabel(std::string inputLabelFileName,
+                                        std::string overrideMsg)
+{
+    // Update progress chart label
+    QString msg;
+    std::string line;
+
+    std::ifstream inputLabelFile(inputLabelFileName);
+    std::getline(inputLabelFile,line);
+    if (line.empty()) {
+        msg.clear();
+    } else {
+        msg = "<b>Status:&nbsp;&nbsp;</b>" + QString::fromStdString(line);
+    }
+    if (overrideMsg.empty())
+        statusLBL->setText(msg);
+    else
+        statusLBL->setText(QString::fromStdString(overrideMsg));
+    inputLabelFile.close();
+
+} // end updateChartDataLabel
+
+
+void
+nmfProgressWidget::updateTime()
+{
+    timeLE->setText(QString::fromStdString(nmfUtilsQt::elapsedTimeCondensed(m_startTime)));
+}
+
+bool
+nmfProgressWidget::wasStopped()
+{
+    return m_wasStopped;
+}
+
+void
+nmfProgressWidget::writeToStopRunFile()
+{
+    m_elapsedTime = nmfUtilsQt::elapsedTime(m_startTime);
+    emit StopTheTimer();
+
+    if (m_RunType == "MSSPM") {
+        std::ofstream outputFile(nmfConstantsMSSPM::MSSPMStopRunFile);
+        outputFile << "StoppedByUser" << std::endl;
+        outputFile << "unused" << std::endl;
+        outputFile << m_elapsedTime << std::endl;
+        outputFile << m_lastX << std::endl;
+        outputFile.close();
+   } else if (m_RunType == "MSVPA") {
+        std::ofstream outputFile(nmfConstantsMSVPA::MSVPAStopRunFile);
+        outputFile << "Stop" << std::endl;
+        outputFile.close();
+    } else if (m_RunType == "Forecast") {
+        std::ofstream outputFile(nmfConstantsMSVPA::ForecastStopRunFile);
+        outputFile << "Stop" << std::endl;
+        outputFile.close();
+    }
+
+    m_logger->logMsg(nmfConstants::Bold,m_RunType + " Run - End");
+    m_logger->logMsg(nmfConstants::Section,"================================================================================");
+
+} // end StopRun
+
+void
+nmfProgressWidget::callback_clearPB() {
+
+    m_chart->removeAllSeries();
+    clearRunBoxes();
+
+    // Initialize progress output file
+    if (m_RunType == "MSSPM") {
+        std::ofstream outputFile(nmfConstantsMSSPM::MSSPMProgressChartFile);
+        outputFile.close();
+    } else if (m_RunType == "MSVPA") {
+        std::ofstream outputFile(nmfConstantsMSVPA::MSVPAProgressChartFile);
+        outputFile.close();
+    } else if (m_RunType == "Forecast") {
+        std::ofstream outputFile(nmfConstantsMSVPA::ForecastProgressChartFile);
+        outputFile.close();
+    }
+
+} // end callback_clearPB
+
+void
+nmfProgressWidget::callback_labelsCB(int state)
+{
+//    if (isStopped()) {
+        QLineSeries *lineSeries;
+        QList<QAbstractSeries *> allSeries = m_chart->series();
+        for (int i=0; i<allSeries.count(); ++i) {
+            lineSeries = qobject_cast<QLineSeries *>(allSeries[i]);
+            lineSeries->setPointLabelsVisible(state == Qt::Checked);
+        }
+        m_chartView->update();
+        m_chartView->repaint();
+        m_chart->update();
+//    }
+} // end callback_labelsCB
+
+//void
+//nmfProgressWidget::callback_lineHovered(QPointF point, bool state)
+//{
+//    QString msg;
+//    if (state) {
+//        msg = QString::number(point.x()) + "," +
+//                QString::number(point.y());
+//        m_chartView->setToolTip(msg);
+//    }
+//} // end callback_lineHovered
+
+void
+nmfProgressWidget::callback_markersCB(int state)
+{
+//    if (isStopped()) {
+        QLineSeries *lineSeries;
+        QList<QAbstractSeries *> allSeries = m_chart->series();
+        for (int i=0; i<allSeries.count(); ++i) {
+            lineSeries = qobject_cast<QLineSeries *>(allSeries[i]);
+            lineSeries->setPointsVisible(state == Qt::Checked);
+        }
+        m_chartView->update();
+        m_chartView->repaint();
+        m_chart->update();
+//    }
+} // end callback_markersCB
+
+void
+nmfProgressWidget::callback_xMinSB(int value) {
+
+    if (isStopped()) {
+        m_chart->axes(Qt::Horizontal).back()->setMin(value);
+        m_chart->update();
+    }
+
+} // end callback_minSB
+
+void
+nmfProgressWidget::callback_xMaxSB(int value)
+{
+    if (isStopped()) {
+        m_chart->axes(Qt::Horizontal).back()->setMax(value);
+        m_chart->update();
+    }
+
+} // end callback_maxSB
+
+void
+nmfProgressWidget::callback_rangeSetPB()
+{
+    QList<QAbstractSeries *> allSeries = m_chart->series();
+    QLineSeries *lineSeries = nullptr;
+    double value;
+    double min =  99999;
+    double max = -99999;
+
+    for (int i=0; i<allSeries.count(); ++i) {
+        lineSeries = qobject_cast<QLineSeries *>(allSeries[i]);
+        if (lineSeries) {
+            for (int j=0; j<lineSeries->count(); ++j) {
+                value = lineSeries->at(j).y();
+                min = (value < min) ? value : min;
+                max = (value > max) ? value : max;
+            }
+        }
+    }
+
+    callback_yMaxSB(max);
+    callback_yMinSB(min);
+}
+
+//void
+//nmfProgressWidget::callback_scatterSeriesHovered(QPointF point,bool state)
+//{
+//    if (state) {
+//        QString newToolTip = QString::number(point.x()) + "," + QString::number(point.y());
+//        m_chart->setToolTip(newToolTip);
+//        //std::cout << "POINT: " << point.x() << ", " << point.y() << std::endl;
+//    } else {
+//        m_chart->setToolTip("");
+//    }
+//} // end callback_scatterSeriesHovered
+
+void
+nmfProgressWidget::callback_stopPB()
+{
+    stopAllRuns(true);
+}
+
+void
+nmfProgressWidget::callback_validPointsCB(bool checked)
+{
+    callback_rangeSetPB();
+
+    emit RedrawValidPointsOnly(checked,true);
+}
+
+void
+nmfProgressWidget::callback_yMinSB(double value)
+{
+    if (yMinSB->value() >= yMaxSB->value()) {
+        m_yMin = yMaxSB->value() - getYInc();
+    } else {
+        m_yMin = value;
+    }
+
+    updateChart();
+}
+
+void
+nmfProgressWidget::callback_yMaxSB(double value)
+{
+    if (yMaxSB->value() <= yMinSB->value()) {
+        m_yMax = yMinSB->value() + getYInc();
+        yMaxSB->blockSignals(true);
+        yMaxSB->setValue(m_yMax);
+        yMaxSB->blockSignals(false);
+    } else {
+        m_yMax = value;
+    }
+    updateChart();
+}
