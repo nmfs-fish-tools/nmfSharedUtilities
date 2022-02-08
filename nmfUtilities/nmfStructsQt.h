@@ -244,6 +244,7 @@ struct CovariateStruct {
 struct ModelDataStruct {
 
     bool   isMohnsRho;
+    bool   isRelativeBiomass;
     bool   showDiagnosticChart;
     bool   useFixedSeedNLopt;
     bool   useFixedSeedBees;
@@ -344,6 +345,8 @@ struct ModelDataStruct {
     std::map<std::string,CovariateStruct>               GrowthRateCovariateCoeff;
     std::map<std::string,CovariateStruct>               CarryingCapacityCovariateCoeff;
     std::map<std::string,CovariateStruct>               CatchabilityCovariateCoeff;
+
+    std::map<QString,QString> PreviousUnits;
 
 //  boost::numeric::ublas::matrix<double> OutputBiomass;
 

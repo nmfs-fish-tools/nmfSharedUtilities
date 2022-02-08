@@ -78,6 +78,22 @@ public:
     virtual ~nmfChartLine() {delete m_CustomToolTip;}
 
     /**
+     * @brief Overlays a vertical line onto the current chart data
+     * @param chart : pointer to QChart
+     * @param lineStyle : style of line (i.e., DottedLine, DashedLine)
+     * @param xPos : x position of the vertical line
+     * @param yMinVal : minimum y value for the line
+     * @param yMaxVal : maximum y value for the line
+     * @param lineColor : color of the line
+     */
+    void overlayVerticalLine(
+            QChart* chart,
+            const std::string& lineStyle,
+            const double& xPos,
+            const double& yMinVal,
+            const double& yMaxVal,
+            const std::string& lineColor);
+    /**
      * @brief populates (and draws) the chart with all of the data necessary
      * @param chart : pointer to QChart
      * @param type : type of line chart

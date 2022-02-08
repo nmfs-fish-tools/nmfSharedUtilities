@@ -100,6 +100,7 @@ namespace nmfConstantsMSSPM
      const int    MaxTotalSpecies      =  50;
      const int    ToolTipDuration      = 2000; // milliseconds
      const double ValueToStartEE       = 1000000.0;
+     const int    DefaultDBTimeoutDays = 5;
      const bool   RearrangeTitle       = true;
      const bool   DontRearrangeTitle   = false;
      const bool   Clear                = true;
@@ -160,6 +161,10 @@ namespace nmfConstantsMSSPM
      const bool   NotEditable                      = false;
      const bool   GrayedIfNotEditable              = true;
      const bool   WhiteIfEditable                  = false;
+     const bool   ShowHistoricalDelimiterLine      = true;
+     const bool   DontShowHistoricalDelimiterLine  = false;
+
+
 
      const std::string  HiddenDir                      = ".MSSPM";
      const std::string  HiddenDataDir                  = ".MSSPM/data";
@@ -292,6 +297,7 @@ namespace nmfConstantsMSSPM
      const std::string TableSpecies                            = QString::fromStdString("Species").toLower().toStdString();
      const std::string TableSummaryDiagnostic                  = QString::fromStdString("SummaryDiagnostic").toLower().toStdString();
      const std::string TableSummaryModelFit                    = QString::fromStdString("SummaryModelFit").toLower().toStdString();
+     const std::string TableUnits                              = QString::fromStdString("Units").toLower().toStdString();
 
      const QStringList SummaryModelFitStatisticNames =
          {"SSresiduals",

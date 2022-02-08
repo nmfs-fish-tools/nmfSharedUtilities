@@ -102,6 +102,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abb9bbd669088074cac928720c4cd7b70"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#abb9bbd669088074cac928720c4cd7b70">createScenarioMap</a> (const std::string &amp;ProjectName, const std::string &amp;ModelName, std::map&lt; QString, QStringList &gt; &amp;ScenarioForecastMap)</td></tr>
 <tr class="memdesc:abb9bbd669088074cac928720c4cd7b70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a map of Scenario names and Forecast Labels that belong to each Scenario.  <a href="classnmf_database.html#abb9bbd669088074cac928720c4cd7b70">More...</a><br /></td></tr>
 <tr class="separator:abb9bbd669088074cac928720c4cd7b70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57ee5cc507b1cec2f1e308b547e76a1e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a57ee5cc507b1cec2f1e308b547e76a1e">createUnitsMap</a> (const std::string &amp;ProjectName, const std::string &amp;ModelName, std::map&lt; QString, QString &gt; &amp;previousUnits)</td></tr>
+<tr class="memdesc:a57ee5cc507b1cec2f1e308b547e76a1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a map of table names and their units from the units table.  <a href="classnmf_database.html#a57ee5cc507b1cec2f1e308b547e76a1e">More...</a><br /></td></tr>
+<tr class="separator:a57ee5cc507b1cec2f1e308b547e76a1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acea4471e976019a0f66291ce4ac146dc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#acea4471e976019a0f66291ce4ac146dc">databaseExists</a> (std::string dbName)</td></tr>
 <tr class="memdesc:acea4471e976019a0f66291ce4ac146dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if passed database exists.  <a href="classnmf_database.html#acea4471e976019a0f66291ce4ac146dc">More...</a><br /></td></tr>
 <tr class="separator:acea4471e976019a0f66291ce4ac146dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -219,6 +222,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a57c9e3be4a1f56819dbce7a06b31be0e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a57c9e3be4a1f56819dbce7a06b31be0e">isARelativeBiomassModel</a> (const std::string &amp;projectName, const std::string &amp;modelName)</td></tr>
 <tr class="memdesc:a57c9e3be4a1f56819dbce7a06b31be0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if the currently loaded model is set to relative biomass.  <a href="classnmf_database.html#a57c9e3be4a1f56819dbce7a06b31be0e">More...</a><br /></td></tr>
 <tr class="separator:a57c9e3be4a1f56819dbce7a06b31be0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade63121584918ddd06300715baf574a1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#ade63121584918ddd06300715baf574a1">isSurveyQ</a> (const std::string &amp;projectName, const std::string &amp;modelName)</td></tr>
+<tr class="memdesc:ade63121584918ddd06300715baf574a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a boolean describing if the observed biomass is relative (true) or absolute (false)  <a href="classnmf_database.html#ade63121584918ddd06300715baf574a1">More...</a><br /></td></tr>
+<tr class="separator:ade63121584918ddd06300715baf574a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e0e3a7c220e03c4463baab684ef4369"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a8e0e3a7c220e03c4463baab684ef4369">loadEstimatedVectorParameters</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, QComboBox *cmbox)</td></tr>
 <tr class="memdesc:a8e0e3a7c220e03c4463baab684ef4369"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the estimated parameter names into the passed combo box widget.  <a href="classnmf_database.html#a8e0e3a7c220e03c4463baab684ef4369">More...</a><br /></td></tr>
 <tr class="separator:a8e0e3a7c220e03c4463baab684ef4369"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -319,12 +325,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:ad5d69588497726129a45329a0bba4751"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#ad5d69588497726129a45329a0bba4751">saveApplicationTable</a> (QWidget *widget, <a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, std::string &amp;tableName)</td></tr>
 <tr class="memdesc:ad5d69588497726129a45329a0bba4751"><td class="mdescLeft">&#160;</td><td class="mdescRight">saveApplicationTable : Saves a table that identifies the type of database (i.e., MSVPA, MSSPM, MSCAA)  <a href="classnmf_database.html#ad5d69588497726129a45329a0bba4751">More...</a><br /></td></tr>
 <tr class="separator:ad5d69588497726129a45329a0bba4751"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6580bb0bd7eeec8a8d3e04a41b49d50"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#ae6580bb0bd7eeec8a8d3e04a41b49d50">updateForecastMonteCarloParameters</a> (QWidget *widget, <a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, const std::string &amp;ForecastName, const std::string &amp;Algorithm, const std::string &amp;Minimizer, const std::string &amp;ObjectiveCriterion, const std::string &amp;Scaling, const QStringList &amp;Species, const int &amp;RunNumber, const std::vector&lt; double &gt; &amp;GrowthRandomValues, const std::vector&lt; double &gt; &amp;CarryingCapacityRandomValues, const std::vector&lt; double &gt; &amp;CatchabilityRandomValues, const std::vector&lt; double &gt; &amp;ExponentRandomValues, const std::vector&lt; double &gt; &amp;CompetitionAlphaRandomValues, const std::vector&lt; double &gt; &amp;CompetitionBetaSpeciesRandomValues, const std::vector&lt; double &gt; &amp;CompetitionBetaGuildsRandomValues, const std::vector&lt; double &gt; &amp;CompetitionBetaGuildsGuildsRandomValues, const std::vector&lt; double &gt; &amp;PredationRandomValues, const std::vector&lt; double &gt; &amp;HandlingRandomValues, const std::vector&lt; double &gt; &amp;HarvestRandomValues)</td></tr>
-<tr class="memdesc:ae6580bb0bd7eeec8a8d3e04a41b49d50"><td class="mdescLeft">&#160;</td><td class="mdescRight">updateForecastMonteCarloParameters  <a href="classnmf_database.html#ae6580bb0bd7eeec8a8d3e04a41b49d50">More...</a><br /></td></tr>
-<tr class="separator:ae6580bb0bd7eeec8a8d3e04a41b49d50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b29296b4d8b2609e89943101e951abd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a6b29296b4d8b2609e89943101e951abd">updateAllModelsInProject</a> (QWidget *parent, const std::string &amp;type, const std::string &amp;projectName, const std::string &amp;currentModel, std::vector&lt; std::string &gt; &amp;modelsInProject)</td></tr>
 <tr class="memdesc:a6b29296b4d8b2609e89943101e951abd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates all of the models in the current project (necessary when observed biomass changes for one model)  <a href="classnmf_database.html#a6b29296b4d8b2609e89943101e951abd">More...</a><br /></td></tr>
 <tr class="separator:a6b29296b4d8b2609e89943101e951abd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6580bb0bd7eeec8a8d3e04a41b49d50"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#ae6580bb0bd7eeec8a8d3e04a41b49d50">updateForecastMonteCarloParameters</a> (QWidget *widget, <a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, const std::string &amp;ForecastName, const std::string &amp;Algorithm, const std::string &amp;Minimizer, const std::string &amp;ObjectiveCriterion, const std::string &amp;Scaling, const QStringList &amp;Species, const int &amp;RunNumber, const std::vector&lt; double &gt; &amp;GrowthRandomValues, const std::vector&lt; double &gt; &amp;CarryingCapacityRandomValues, const std::vector&lt; double &gt; &amp;CatchabilityRandomValues, const std::vector&lt; double &gt; &amp;ExponentRandomValues, const std::vector&lt; double &gt; &amp;CompetitionAlphaRandomValues, const std::vector&lt; double &gt; &amp;CompetitionBetaSpeciesRandomValues, const std::vector&lt; double &gt; &amp;CompetitionBetaGuildsRandomValues, const std::vector&lt; double &gt; &amp;CompetitionBetaGuildsGuildsRandomValues, const std::vector&lt; double &gt; &amp;PredationRandomValues, const std::vector&lt; double &gt; &amp;HandlingRandomValues, const std::vector&lt; double &gt; &amp;HarvestRandomValues)</td></tr>
+<tr class="memdesc:ae6580bb0bd7eeec8a8d3e04a41b49d50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the appropriate table with the Monte Carlo Forecast runs.  <a href="classnmf_database.html#ae6580bb0bd7eeec8a8d3e04a41b49d50">More...</a><br /></td></tr>
+<tr class="separator:ae6580bb0bd7eeec8a8d3e04a41b49d50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dd3b9daea340827b8714ab4aaad3e20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a7dd3b9daea340827b8714ab4aaad3e20">updateUnitsTable</a> (QWidget *parent, <a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;projectName, const std::string &amp;modelName, const std::string &amp;tableName, const std::string &amp;units)</td></tr>
+<tr class="memdesc:a7dd3b9daea340827b8714ab4aaad3e20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the units database table with the units corresponding to the table shown in the GUI.  <a href="classnmf_database.html#a7dd3b9daea340827b8714ab4aaad3e20">More...</a><br /></td></tr>
+<tr class="separator:a7dd3b9daea340827b8714ab4aaad3e20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -717,6 +726,50 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
     <tr><td class="paramname">ProjectName</td><td>: name of project </td></tr>
     <tr><td class="paramname">ModelName</td><td>: name of model </td></tr>
     <tr><td class="paramname">ScenarioForecastMap</td><td>: map to be returned </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a57ee5cc507b1cec2f1e308b547e76a1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57ee5cc507b1cec2f1e308b547e76a1e">&#9670;&nbsp;</a></span>createUnitsMap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfDatabase::createUnitsMap </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>ProjectName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>ModelName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::map&lt; QString, QString &gt; &amp;&#160;</td>
+          <td class="paramname"><em>previousUnits</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates a map of table names and their units from the units table. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ProjectName</td><td>: name of project </td></tr>
+    <tr><td class="paramname">ModelName</td><td>: name of model </td></tr>
+    <tr><td class="paramname">previousUnits</td><td>: map of table names and their units </td></tr>
   </table>
   </dd>
 </dl>
@@ -3360,6 +3413,44 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
 
 </div>
 </div>
+<a id="ade63121584918ddd06300715baf574a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade63121584918ddd06300715baf574a1">&#9670;&nbsp;</a></span>isSurveyQ()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfDatabase::isSurveyQ </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>projectName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>modelName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a boolean describing if the observed biomass is relative (true) or absolute (false) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">projectName</td><td>: name of project </td></tr>
+    <tr><td class="paramname">modelName</td><td>: name of model </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if observed biomass is relative, false if absolute </dd></dl>
+
+</div>
+</div>
 <a id="a8e0e3a7c220e03c4463baab684ef4369"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8e0e3a7c220e03c4463baab684ef4369">&#9670;&nbsp;</a></span>loadEstimatedVectorParameters()</h2>
 
@@ -5265,7 +5356,7 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
       </table>
 </div><div class="memdoc">
 
-<p>updateForecastMonteCarloParameters </p>
+<p>Updates the appropriate table with the Monte Carlo Forecast runs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">widget</td><td>: the parent widget over which to display any popup widgets </td></tr>
@@ -5294,6 +5385,71 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if table was read correctly, otherwise false </dd></dl>
+
+</div>
+</div>
+<a id="a7dd3b9daea340827b8714ab4aaad3e20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dd3b9daea340827b8714ab4aaad3e20">&#9670;&nbsp;</a></span>updateUnitsTable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfDatabase::updateUnitsTable </td>
+          <td>(</td>
+          <td class="paramtype">QWidget *&#160;</td>
+          <td class="paramname"><em>parent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classnmf_logger.html">nmfLogger</a> *&#160;</td>
+          <td class="paramname"><em>logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>projectName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>modelName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>tableName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>units</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates the units database table with the units corresponding to the table shown in the GUI. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parent</td><td>: the parent widget over which to display any popup widgets </td></tr>
+    <tr><td class="paramname">logger</td><td>: logger pointer for logging errors and messages </td></tr>
+    <tr><td class="paramname">projectName</td><td>: name of current project </td></tr>
+    <tr><td class="paramname">modelName</td><td>: name of current model </td></tr>
+    <tr><td class="paramname">tableName</td><td>: name of table containing units information </td></tr>
+    <tr><td class="paramname">units</td><td>: the units string (currently either lbs, kg, or mt) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

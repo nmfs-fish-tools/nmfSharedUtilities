@@ -247,7 +247,15 @@ namespace nmfUtilsQt {
     int calculateMultiColumnWidth(QTableView* tableview,
                                   const int&  firstCol,
                                   const int&  lastCol);
-
+    /**
+     * @brief Calculates the scale factor in accordance with the previous units and current units
+     * @param previousUnits : previously set units
+     * @param currentUnits : currently set units
+     * @return Returns scale factor for unit conversion between previousUnits and currentUnits
+     */
+    double calculateUnitsScaleFactor(
+            const QString& previousUnits,
+            const QString& currentUnits);
     /**
      * @brief Checks and calculates the passed value to the appropriate number of significant digits
      * @param value : value to be converted using significant digits
@@ -322,6 +330,52 @@ namespace nmfUtilsQt {
      */
     void clearTableView(const QList<QTableView*>& tables);
     /**
+     * @brief Converts the data in the passed table view from the previous units to the current units
+     * @param tableView : table containing the data to convert
+     * @param numSigDig : number of significant digits in data
+     * @param previousUnits : previous units of data
+     * @param currentUnits : current (i.e. new) units to convert the data to
+     */
+    void convertTableView(
+            QTableView* tableView,
+            const int& numSigDig,
+            const QString& previousUnits,
+            const QString& currentUnits);
+    /**
+     * @brief Converts the data in the passed table widget from the previous units to the current units
+     * @param tableWidget : table containing the data to convert
+     * @param column : table column to convert
+     * @param numSigDig : number of significant digits in data
+     * @param previousUnits : previous units of data
+     * @param currentUnits : current (i.e. new) units to convert the data to
+     */
+    void convertTableWidget(
+            QTableWidget* tableWidget,
+            const int& column,
+            const int& numSigDig,
+            const QString& previousUnits,
+            const QString& currentUnits);
+    /**
+     * @brief Assures all fields in passed dataStruct are in the desired units and performing any necessary conversions
+     * @param matrix : matrix to transform to new units
+     * @param previousUnits : the previous matrix units
+     * @param currentUnits : the new matrix units
+     */
+    void convertMatrix(
+            boost::numeric::ublas::matrix<double>& matrix,
+            const QString& previousUnits,
+            const QString& currentUnits);
+    /**
+     * @brief Assures all fields in passed dataStruct are in the desired units and performing any necessary conversions
+     * @param vector : vector to transform to new units
+     * @param previousUnits : the previous matrix units
+     * @param currentUnits : the new matrix units
+     */
+    void convertVector(
+            boost::numeric::ublas::vector<double>& vector,
+            const QString& previousUnits,
+            const QString& currentUnits);
+    /**
      * @brief Converts a vector of std::string types to a QStringList
      * @param stdStringVector : vector of std::string types
      * @param qStringlist : the returned (by reference) QStringList
@@ -390,6 +444,12 @@ namespace nmfUtilsQt {
      * @return Boolean signifying if the passed in filename exists
      */
     bool fileExists(QString filenameWithPath);
+    /**
+     * @brief Formats the number of seconds into either sec, min, hrs, days with units
+     * @param timeSeconds : time (in seconds) to format
+     * @return Returns the formatted time
+     */
+    QString formatTimeSeconds(const int& timeSeconds);
     /**
      * @brief Sends back the Covariate Values for all species for the given year and parameter
      * @param NLoptDataStruct : struct containing necessary data
@@ -577,6 +637,11 @@ namespace nmfUtilsQt {
     void reloadDataStruct(
             nmfStructsQt::ModelDataStruct& dataStruct,
             const QString& MultiRunLine);
+    /**
+     * @brief Removes commas from any numeric fields in table
+     * @param tableView : table view in which to remove commas
+     */
+    void removeCommas(QTableView* tableView);
     /**
      * @brief Removes the Qt settings file from the file system.
      * Useful for resetting the application GUI in case it disappears
@@ -840,6 +905,7 @@ namespace nmfUtilsQt {
      * @param parent : parent needed so as to know how to position the popup
      * @param name : name of the application
      * @param operatingSystem : operating system application is running on
+     * @param upTimeSeconds : time (in seconds) that application has been running
      * @param version : version of the application
      * @param specialAcknowledgement : special acknowledgement section
      * @param appMsg : main application message (created in calling routine);
@@ -849,6 +915,7 @@ namespace nmfUtilsQt {
             QWidget* parent,
             const QString& name,
             const QString& operatingSystem,
+            const int& upTimeSeconds,
             const QString& version,
             const QString& specialAcknowledgement,
             const QString& appMsg);

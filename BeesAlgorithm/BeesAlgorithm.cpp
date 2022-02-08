@@ -8,10 +8,15 @@ BeesAlgorithm::BeesAlgorithm(nmfStructsQt::ModelDataStruct theBeeStruct,
     bool isAggProd  = (theBeeStruct.CompetitionForm == "AGG-PROD");
     int  numSpecies =  theBeeStruct.NumSpecies;
     int  numGuilds  =  theBeeStruct.NumGuilds;
+    QString tableHarvestCatch    = QString::fromStdString(nmfConstantsMSSPM::TableHarvestCatch);
+    QString tableBiomassAbsolute = QString::fromStdString(nmfConstantsMSSPM::TableBiomassAbsolute);
+    QString tableBiomassRelative = QString::fromStdString(nmfConstantsMSSPM::TableBiomassRelative);
+
     m_BeeStruct      = theBeeStruct;
     m_Seed           = -1;
     m_DefaultFitness =  99999;
     m_NullFitness    = -999;
+    m_PreviousUnits  = theBeeStruct.PreviousUnits;
 
     std::string growthForm      = theBeeStruct.GrowthForm;
     std::string harvestForm     = theBeeStruct.HarvestForm;
@@ -52,6 +57,14 @@ BeesAlgorithm::BeesAlgorithm(nmfStructsQt::ModelDataStruct theBeeStruct,
                              competitionForm,predationForm);
     }
 
+//    if (theBeeStruct.isRelativeBiomass) {
+//        nmfUtilsQt::convertMatrix(theBeeStruct.ObservedBiomassBySpecies,m_PreviousUnits[tableBiomassRelative],"mt");
+//        nmfUtilsQt::convertMatrix(theBeeStruct.ObservedBiomassByGuilds, m_PreviousUnits[tableBiomassRelative],"mt");
+//    } else {
+//        nmfUtilsQt::convertMatrix(theBeeStruct.ObservedBiomassBySpecies,m_PreviousUnits[tableBiomassAbsolute],"mt");
+//        nmfUtilsQt::convertMatrix(theBeeStruct.ObservedBiomassByGuilds, m_PreviousUnits[tableBiomassAbsolute],"mt");
+//    }
+
     // Get the observed biomass
     if (isAggProd) {
         nmfUtils::initialize(m_ObsBiomassBySpeciesOrGuilds,
@@ -80,6 +93,10 @@ BeesAlgorithm::BeesAlgorithm(nmfStructsQt::ModelDataStruct theBeeStruct,
                          theBeeStruct.Catch.size1(),
                          theBeeStruct.Catch.size2());
     m_Catch = theBeeStruct.Catch;
+//std::cout << "m_Catch(0,0) before: " << m_Catch(0,0) << std::endl;
+//    nmfUtilsQt::convertMatrix(m_Catch, m_PreviousUnits[tableHarvestCatch], "mt");
+//std::cout << "prev units: " << m_PreviousUnits[tableHarvestCatch].toStdString() << std::endl;
+//std::cout << "m_Catch(0,0) after: " << m_Catch(0,0) << std::endl;
     if (verbose) {
         std::cout << "BeesAlgorithm: Read Catch" << std::endl;
     }
@@ -238,19 +255,24 @@ BeesAlgorithm::printParameterRanges(const int& NumSpecies,
 void
 BeesAlgorithm::loadInitBiomassParameterRanges(
         std::vector<std::pair<double,double> >& parameterRanges,
-        nmfStructsQt::ModelDataStruct& dataStruct)
+        nmfStructsQt::ModelDataStruct& theBeeStruct)
 {
     std::pair<double,double> aPair;
-    bool isCheckedInitBiomass = nmfUtils::isEstimateParameterChecked(dataStruct,"InitBiomass");
+    bool isCheckedInitBiomass = nmfUtils::isEstimateParameterChecked(theBeeStruct,"InitBiomass");
+    QString tableSpecies      = QString::fromStdString(nmfConstantsMSSPM::TableSpecies);
+
+//    nmfUtilsQt::convertVector(theBeeStruct.InitBiomass,    m_PreviousUnits[tableSpecies], "mt");
+//    nmfUtilsQt::convertVector(theBeeStruct.InitBiomassMin, m_PreviousUnits[tableSpecies], "mt");
+//    nmfUtilsQt::convertVector(theBeeStruct.InitBiomassMax, m_PreviousUnits[tableSpecies], "mt");
 
     // Always load initial biomass values
-    for (unsigned species=0; species<dataStruct.InitBiomassMin.size(); ++species) {
+    for (unsigned species=0; species<theBeeStruct.InitBiomassMin.size(); ++species) {
         if (isCheckedInitBiomass) {
-            aPair = std::make_pair(dataStruct.InitBiomassMin[species],
-                                   dataStruct.InitBiomassMax[species]);
+            aPair = std::make_pair(theBeeStruct.InitBiomassMin[species],
+                                   theBeeStruct.InitBiomassMax[species]);
         } else {
-            aPair = std::make_pair(dataStruct.InitBiomass[species], //-nmfConstantsMSSPM::epsilon,
-                                   dataStruct.InitBiomass[species]); //+nmfConstantsMSSPM::epsilon);
+            aPair = std::make_pair(theBeeStruct.InitBiomass[species], //-nmfConstantsMSSPM::epsilon,
+                                   theBeeStruct.InitBiomass[species]); //+nmfConstantsMSSPM::epsilon);
         }
         parameterRanges.emplace_back(aPair);
     }
@@ -259,16 +281,16 @@ BeesAlgorithm::loadInitBiomassParameterRanges(
 void
 BeesAlgorithm::loadSurveyQParameterRanges(
         std::vector<std::pair<double,double> >& parameterRanges,
-        nmfStructsQt::ModelDataStruct& dataStruct)
+        nmfStructsQt::ModelDataStruct& theBeeStruct)
 {
     std::pair<double,double> aPair;
-    bool isCheckedSurveyQ = nmfUtils::isEstimateParameterChecked(dataStruct,"SurveyQ");
+    bool isCheckedSurveyQ = nmfUtils::isEstimateParameterChecked(theBeeStruct,"SurveyQ");
 
     // If Survey Q is not estimated, hardcode 1.0's as min and max
-    for (unsigned species=0; species<dataStruct.SurveyQMin.size(); ++species) {
+    for (unsigned species=0; species<theBeeStruct.SurveyQMin.size(); ++species) {
         if (isCheckedSurveyQ) {
-            aPair = std::make_pair(dataStruct.SurveyQMin[species],
-                                   dataStruct.SurveyQMax[species]);
+            aPair = std::make_pair(theBeeStruct.SurveyQMin[species],
+                                   theBeeStruct.SurveyQMax[species]);
         } else {
             aPair = std::make_pair(1.0,1.0);
         }
@@ -1129,7 +1151,7 @@ BeesAlgorithm::estimateParameters(double &bestFitness,
     bool ok = false;
     std::unique_ptr<Bee> bestBee;
 
-    m_DefaultFitness =  99999;
+    m_DefaultFitness =  INT_MAX;
     m_NullFitness    = -999;
 
     bestBee = searchParameterSpaceForBestBee(RunNum,subRunNum,errorMsg);

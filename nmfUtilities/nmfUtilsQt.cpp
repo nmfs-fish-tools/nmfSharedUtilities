@@ -873,12 +873,30 @@ addTreeItem(QTreeWidgetItem *parent,
     parent->addChild(item);
 }
 
+QString
+formatTimeSeconds(const int& timeSeconds)
+{
+    QString formattedTime = "n/a";
+
+    if (timeSeconds < 60) {
+        formattedTime = QString::number(timeSeconds)+" sec(s)";
+    } else if (timeSeconds < 3600) {
+        formattedTime = QString::number((double)timeSeconds/   60.0,'f',1) + " min(s)";
+    } else if (timeSeconds < 86400) {
+        formattedTime = QString::number((double)timeSeconds/ 3600.0,'f',1) + " hr(s)";
+    } else {
+        formattedTime = QString::number((double)timeSeconds/86400.0,'f',1) + " day(s)";
+    }
+
+    return formattedTime;
+}
 
 void
 showAboutWidget(
         QWidget* parent,
         const QString& name,
         const QString& operatingSystem,
+        const int& upTimeSeconds,
         const QString& version,
         const QString& specialAcknowledgement,
         const QString& appMsg)
@@ -887,6 +905,7 @@ showAboutWidget(
     msg += "<strong><br>"+name+"</strong>";
     QString date = QDate::currentDate().toString();
 
+    msg += QString("<br><br>Application runtime: ") + formatTimeSeconds(upTimeSeconds);
     msg += QString("<br><br>Built on: ") + date; //QDate::fromString(date,"dddYYYYMMdd").toString();
 
     msg += QString("<br><br>Produced by the NOAA National Marine Fisheries Service.");
@@ -904,6 +923,36 @@ showAboutWidget(
     QGridLayout* gridLT = qobject_cast<QGridLayout *>(msgBox.layout());
     gridLT->addItem(horSP, gridLT->rowCount(), 0, 1, gridLT->columnCount());
     msgBox.exec();
+}
+
+double calculateUnitsScaleFactor(
+        const QString& previousUnits,
+        const QString& currentUnits)
+{
+    double scaleFactor = 1.0;
+
+    // Find the appropriate scale factor
+    if (previousUnits == "lbs") {
+        if (currentUnits == "kg") {
+            scaleFactor = nmfConstants::LBS_to_KG;
+        } else if (currentUnits == "mt") {
+            scaleFactor = nmfConstants::LBS_to_MT;
+        }
+    } else if (previousUnits == "kg") {
+        if (currentUnits == "lbs") {
+            scaleFactor = nmfConstants::KG_to_LBS;
+        } else if (currentUnits == "mt") {
+            scaleFactor = nmfConstants::KG_to_MT;
+        }
+    } else if (previousUnits == "mt") {
+        if (currentUnits == "lbs") {
+            scaleFactor = nmfConstants::MT_to_LBS;
+        } else if (currentUnits == "kg") {
+            scaleFactor = nmfConstants::MT_to_KG;
+        }
+    }
+
+    return scaleFactor;
 }
 
 void
@@ -967,6 +1016,87 @@ void checkForAndCreateDirectories(std::string dir,
     }
 }
 
+void convertTableWidget(
+        QTableWidget* tableWidget,
+        const int& col,
+        const int& numSigDig,
+        const QString& previousUnits,
+        const QString& currentUnits)
+{
+    double scaleFactor = calculateUnitsScaleFactor(previousUnits,currentUnits);
+    double valueWithoutComma;
+    QString valueWithComma;
+    QTableWidgetItem* item;
+
+    // Apply the scale factor
+    for (int row=0; row<tableWidget->rowCount(); ++row) {
+        // Get the cell data
+        valueWithoutComma = tableWidget->item(row,col)->text().remove(",").toDouble();
+        // Convert the cell data and update the model
+        valueWithComma = checkAndCalculateWithSignificantDigits(
+                            scaleFactor*valueWithoutComma,numSigDig,6);
+        item = new QTableWidgetItem(valueWithComma);
+        item->setTextAlignment(Qt::AlignCenter);
+        tableWidget->setItem(row,col,item);
+    }
+    tableWidget->resizeColumnsToContents();
+}
+
+void convertTableView(
+        QTableView* tableView,
+        const int& numSigDig,
+        const QString& previousUnits,
+        const QString& currentUnits)
+{
+    double scaleFactor = calculateUnitsScaleFactor(previousUnits,currentUnits);
+    double valueWithoutComma;
+    QModelIndex index;
+    QString valueWithComma;
+    QStandardItem* item;
+
+    // Apply the scale factor
+    QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(tableView->model());
+    for (int row=0; row<smodel->rowCount(); ++row) {
+        for (int col=0; col<smodel->columnCount(); ++col) {
+            // Get the cell data
+            index = smodel->index(row,col);
+            valueWithoutComma = index.data().toString().remove(",").toDouble();
+            // Convert the cell data and update the model
+            valueWithComma = checkAndCalculateWithSignificantDigits(
+                                scaleFactor*valueWithoutComma,numSigDig,6);
+            item = new QStandardItem(valueWithComma);
+            item->setTextAlignment(Qt::AlignCenter);
+            smodel->setItem(row,col,item);
+        }
+    }
+    tableView->resizeColumnsToContents();
+}
+
+void convertVector(
+        boost::numeric::ublas::vector<double>& vecData,
+        const QString& previousUnits,
+        const QString& currentUnits)
+{
+    double scaleFactor = calculateUnitsScaleFactor(previousUnits,currentUnits);
+
+    for (int i=0; i<(int)vecData.size(); ++i) {
+        vecData[i] *= scaleFactor;
+    }
+}
+
+void convertMatrix(
+        boost::numeric::ublas::matrix<double>& matData,
+        const QString& previousUnits,
+        const QString& currentUnits)
+{
+    double scaleFactor = calculateUnitsScaleFactor(previousUnits,currentUnits);
+
+    for (int row=0; row<(int)matData.size1(); ++row) {
+        for (int col=0; col<(int)matData.size2(); ++col) {
+            matData(row,col) *= scaleFactor;
+        }
+    }
+}
 
 void convertVectorToStrList(const std::vector<std::string>& labels,
                             QStringList& slist)
@@ -995,6 +1125,27 @@ createSettings(const std::string& winDir,
         return settings;
     }
     return nullptr;
+}
+
+void
+removeCommas(QTableView* tableView)
+{
+    double valueWithoutComma;
+    QModelIndex index;
+    QStandardItem* item;
+
+    // Apply the scale factor
+    QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(tableView->model());
+    for (int row=0; row<smodel->rowCount(); ++row) {
+        for (int col=0; col<smodel->columnCount(); ++col) {
+            index = smodel->index(row,col);
+            valueWithoutComma = index.data().toString().remove(",").toDouble();
+            item = new QStandardItem(QString::number(valueWithoutComma));
+            item->setTextAlignment(Qt::AlignCenter);
+            smodel->setItem(row,col,item);
+        }
+    }
+    tableView->resizeColumnsToContents();
 }
 
 bool
@@ -1579,7 +1730,7 @@ loadTimeSeries(QTabWidget* parentTabWidget,
                std::pair<int,int>& nonZeroCell,
                QString& errorMsg)
 {
-    Qt::ItemFlags flags;
+    bool retv = true;
     QString allLines;
     QString filename;
     QStringList lineList;
@@ -1611,6 +1762,7 @@ loadTimeSeries(QTabWidget* parentTabWidget,
             lineList = allLines.split('\n');
             int numYears   = lineList.count()-1; // -1 for the header
             int numSpecies = lineList[1].split(',').count()-1; // -1 to remove the year
+
             if ((smodel->rowCount()    == numYears) &&
                 (smodel->columnCount() == numSpecies))
             {
@@ -1654,11 +1806,12 @@ loadTimeSeries(QTabWidget* parentTabWidget,
                         ") does not equal current size of table (" +
                         QString::number(smodel->rowCount()) + "x" +
                         QString::number(smodel->columnCount()) + ")";
+                retv = false;
             }
             file.close();
         }
     }
-    return true;
+    return retv;
 }
 
 void

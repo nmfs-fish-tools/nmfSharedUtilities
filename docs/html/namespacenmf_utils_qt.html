@@ -140,21 +140,42 @@ Functions</h2></td></tr>
 <tr class="memitem:a4a9412e25b28f518c98f49b12ab0d6fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a4a9412e25b28f518c98f49b12ab0d6fc">addTreeItem</a> (QTreeWidgetItem *parent, QString label)</td></tr>
 <tr class="memdesc:a4a9412e25b28f518c98f49b12ab0d6fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds a widget tree item under the passed parent item  <a href="namespacenmf_utils_qt.html#a4a9412e25b28f518c98f49b12ab0d6fc">More...</a><br /></td></tr>
 <tr class="separator:a4a9412e25b28f518c98f49b12ab0d6fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73ea4e3a2a7c54bc216e25d8cb1d5e37"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a73ea4e3a2a7c54bc216e25d8cb1d5e37">showAboutWidget</a> (QWidget *parent, const QString &amp;name, const QString &amp;operatingSystem, const QString &amp;version, const QString &amp;specialAcknowledgement, const QString &amp;appMsg)</td></tr>
-<tr class="memdesc:a73ea4e3a2a7c54bc216e25d8cb1d5e37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show the About dialog for the application.  <a href="namespacenmf_utils_qt.html#a73ea4e3a2a7c54bc216e25d8cb1d5e37">More...</a><br /></td></tr>
-<tr class="separator:a73ea4e3a2a7c54bc216e25d8cb1d5e37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a241512f9406a9f87756cad6b28c036f7"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a241512f9406a9f87756cad6b28c036f7">formatTimeSeconds</a> (const int &amp;timeSeconds)</td></tr>
+<tr class="memdesc:a241512f9406a9f87756cad6b28c036f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats the number of seconds into either sec, min, hrs, days with units.  <a href="namespacenmf_utils_qt.html#a241512f9406a9f87756cad6b28c036f7">More...</a><br /></td></tr>
+<tr class="separator:a241512f9406a9f87756cad6b28c036f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac58c4919bb26ee35f72c601507ea4ed2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#ac58c4919bb26ee35f72c601507ea4ed2">showAboutWidget</a> (QWidget *parent, const QString &amp;name, const QString &amp;operatingSystem, const int &amp;upTimeSeconds, const QString &amp;version, const QString &amp;specialAcknowledgement, const QString &amp;appMsg)</td></tr>
+<tr class="memdesc:ac58c4919bb26ee35f72c601507ea4ed2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show the About dialog for the application.  <a href="namespacenmf_utils_qt.html#ac58c4919bb26ee35f72c601507ea4ed2">More...</a><br /></td></tr>
+<tr class="separator:ac58c4919bb26ee35f72c601507ea4ed2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae84426852bdd55b0d471b1ee3f71693c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#ae84426852bdd55b0d471b1ee3f71693c">calculateUnitsScaleFactor</a> (const QString &amp;previousUnits, const QString &amp;currentUnits)</td></tr>
+<tr class="memdesc:ae84426852bdd55b0d471b1ee3f71693c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the scale factor in accordance with the previous units and current units.  <a href="namespacenmf_utils_qt.html#ae84426852bdd55b0d471b1ee3f71693c">More...</a><br /></td></tr>
+<tr class="separator:ae84426852bdd55b0d471b1ee3f71693c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13d796f0ccd9861a78e6be6d4825243e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a13d796f0ccd9861a78e6be6d4825243e">checkForAndDeleteLogFiles</a> (QString name, std::string logDir, std::string logFilter)</td></tr>
 <tr class="memdesc:a13d796f0ccd9861a78e6be6d4825243e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes log files after confirming with the user.  <a href="namespacenmf_utils_qt.html#a13d796f0ccd9861a78e6be6d4825243e">More...</a><br /></td></tr>
 <tr class="separator:a13d796f0ccd9861a78e6be6d4825243e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15fa99a654817287b4b644a07b081b40"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a15fa99a654817287b4b644a07b081b40">checkForAndCreateDirectories</a> (std::string dir, std::string dataDir, std::string logDir)</td></tr>
 <tr class="memdesc:a15fa99a654817287b4b644a07b081b40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the passed directories if they don't already exist.  <a href="namespacenmf_utils_qt.html#a15fa99a654817287b4b644a07b081b40">More...</a><br /></td></tr>
 <tr class="separator:a15fa99a654817287b4b644a07b081b40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e98f8d34c639bb8f41b618ce327bf65"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a0e98f8d34c639bb8f41b618ce327bf65">convertTableWidget</a> (QTableWidget *tableWidget, const int &amp;column, const int &amp;numSigDig, const QString &amp;previousUnits, const QString &amp;currentUnits)</td></tr>
+<tr class="memdesc:a0e98f8d34c639bb8f41b618ce327bf65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the data in the passed table widget from the previous units to the current units.  <a href="namespacenmf_utils_qt.html#a0e98f8d34c639bb8f41b618ce327bf65">More...</a><br /></td></tr>
+<tr class="separator:a0e98f8d34c639bb8f41b618ce327bf65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4ab4266f3e62feb5fa0d5be359aef3d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#ad4ab4266f3e62feb5fa0d5be359aef3d">convertTableView</a> (QTableView *tableView, const int &amp;numSigDig, const QString &amp;previousUnits, const QString &amp;currentUnits)</td></tr>
+<tr class="memdesc:ad4ab4266f3e62feb5fa0d5be359aef3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the data in the passed table view from the previous units to the current units.  <a href="namespacenmf_utils_qt.html#ad4ab4266f3e62feb5fa0d5be359aef3d">More...</a><br /></td></tr>
+<tr class="separator:ad4ab4266f3e62feb5fa0d5be359aef3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1574cafd9968d2214e6d730cd0eaf1a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a1574cafd9968d2214e6d730cd0eaf1a4">convertVector</a> (boost::numeric::ublas::vector&lt; double &gt; &amp;vector, const QString &amp;previousUnits, const QString &amp;currentUnits)</td></tr>
+<tr class="memdesc:a1574cafd9968d2214e6d730cd0eaf1a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assures all fields in passed dataStruct are in the desired units and performing any necessary conversions.  <a href="namespacenmf_utils_qt.html#a1574cafd9968d2214e6d730cd0eaf1a4">More...</a><br /></td></tr>
+<tr class="separator:a1574cafd9968d2214e6d730cd0eaf1a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32fdb32b0c49c77c6c1ae118b61cce9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a32fdb32b0c49c77c6c1ae118b61cce9b">convertMatrix</a> (boost::numeric::ublas::matrix&lt; double &gt; &amp;matrix, const QString &amp;previousUnits, const QString &amp;currentUnits)</td></tr>
+<tr class="memdesc:a32fdb32b0c49c77c6c1ae118b61cce9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assures all fields in passed dataStruct are in the desired units and performing any necessary conversions.  <a href="namespacenmf_utils_qt.html#a32fdb32b0c49c77c6c1ae118b61cce9b">More...</a><br /></td></tr>
+<tr class="separator:a32fdb32b0c49c77c6c1ae118b61cce9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e17736e37e25786accbcb7369b35075"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a8e17736e37e25786accbcb7369b35075">convertVectorToStrList</a> (const std::vector&lt; std::string &gt; &amp;stdStringVector, QStringList &amp;qStringlist)</td></tr>
 <tr class="memdesc:a8e17736e37e25786accbcb7369b35075"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a vector of std::string types to a QStringList.  <a href="namespacenmf_utils_qt.html#a8e17736e37e25786accbcb7369b35075">More...</a><br /></td></tr>
 <tr class="separator:a8e17736e37e25786accbcb7369b35075"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a845638068d5f079ab339d5c94c944dec"><td class="memItemLeft" align="right" valign="top">QSettings *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a845638068d5f079ab339d5c94c944dec">createSettings</a> (const std::string &amp;windowsDir, const QString &amp;name)</td></tr>
 <tr class="memdesc:a845638068d5f079ab339d5c94c944dec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a Qt settings file.  <a href="namespacenmf_utils_qt.html#a845638068d5f079ab339d5c94c944dec">More...</a><br /></td></tr>
 <tr class="separator:a845638068d5f079ab339d5c94c944dec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cee76f187fa10c5d283b64bf5c55545"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a4cee76f187fa10c5d283b64bf5c55545">removeCommas</a> (QTableView *tableView)</td></tr>
+<tr class="memdesc:a4cee76f187fa10c5d283b64bf5c55545"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes commas from any numeric fields in table.  <a href="namespacenmf_utils_qt.html#a4cee76f187fa10c5d283b64bf5c55545">More...</a><br /></td></tr>
+<tr class="separator:a4cee76f187fa10c5d283b64bf5c55545"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a741f31eeae5a15f711cb728beafb509b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a741f31eeae5a15f711cb728beafb509b">removeSettingsFile</a> ()</td></tr>
 <tr class="memdesc:a741f31eeae5a15f711cb728beafb509b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the Qt settings file from the file system. Useful for resetting the application GUI in case it disappears (i.e., in case some bad GUI settings are saved)  <a href="namespacenmf_utils_qt.html#a741f31eeae5a15f711cb728beafb509b">More...</a><br /></td></tr>
 <tr class="separator:a741f31eeae5a15f711cb728beafb509b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -164,7 +185,7 @@ Functions</h2></td></tr>
 <tr class="memitem:ae52b342207664ccc5136b64665c5f0ca"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#ae52b342207664ccc5136b64665c5f0ca">loadModelFromCSVFile</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, std::string projectDir, std::string fileType, QTableView *table, QString filename, int &amp;numRows, int &amp;numSignificantDigits)</td></tr>
 <tr class="memdesc:ae52b342207664ccc5136b64665c5f0ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the CSV file into the passed tableview's model.  <a href="namespacenmf_utils_qt.html#ae52b342207664ccc5136b64665c5f0ca">More...</a><br /></td></tr>
 <tr class="separator:ae52b342207664ccc5136b64665c5f0ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f0ea1682bfa5a0fdbaa0bb1f7585594"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a4f0ea1682bfa5a0fdbaa0bb1f7585594">saveModelToCSVFile</a> (std::string projectDir, std::string fileType, std::string tabName, QTableView *table, bool queryFilename, bool removeCommas, QString theFilename, bool verboseOn)</td></tr>
+<tr class="memitem:a4f0ea1682bfa5a0fdbaa0bb1f7585594"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a4f0ea1682bfa5a0fdbaa0bb1f7585594">saveModelToCSVFile</a> (std::string projectDir, std::string fileType, std::string tabName, QTableView *table, bool queryFilename, bool <a class="el" href="namespacenmf_utils_qt.html#a4cee76f187fa10c5d283b64bf5c55545">removeCommas</a>, QString theFilename, bool verboseOn)</td></tr>
 <tr class="memdesc:a4f0ea1682bfa5a0fdbaa0bb1f7585594"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the data in the passed model to the appropriate directory and file.  <a href="namespacenmf_utils_qt.html#a4f0ea1682bfa5a0fdbaa0bb1f7585594">More...</a><br /></td></tr>
 <tr class="separator:a4f0ea1682bfa5a0fdbaa0bb1f7585594"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3650fb32ef1ab23988e316845acf3cd5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a3650fb32ef1ab23988e316845acf3cd5">loadTableWidgetData</a> (QTabWidget *parentTabWidget, QTableWidget *tableWidget, const QString &amp;inputDataPath, const QStringList &amp;guildValues, QString &amp;errorMsg)</td></tr>
@@ -556,6 +577,44 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
 
 </div>
 </div>
+<a id="ae84426852bdd55b0d471b1ee3f71693c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae84426852bdd55b0d471b1ee3f71693c">&#9670;&nbsp;</a></span>calculateUnitsScaleFactor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double nmfUtilsQt::calculateUnitsScaleFactor </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>previousUnits</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>currentUnits</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculates the scale factor in accordance with the previous units and current units. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">previousUnits</td><td>: previously set units </td></tr>
+    <tr><td class="paramname">currentUnits</td><td>: currently set units </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns scale factor for unit conversion between previousUnits and currentUnits </dd></dl>
+
+</div>
+</div>
 <a id="a937e6d1039ccef764ff66131fb7783bf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a937e6d1039ccef764ff66131fb7783bf">&#9670;&nbsp;</a></span>checkAndCalculateWithSignificantDigits()</h2>
 
@@ -889,6 +948,203 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
 
 </div>
 </div>
+<a id="a32fdb32b0c49c77c6c1ae118b61cce9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32fdb32b0c49c77c6c1ae118b61cce9b">&#9670;&nbsp;</a></span>convertMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::convertMatrix </td>
+          <td>(</td>
+          <td class="paramtype">boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>matrix</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>previousUnits</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>currentUnits</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Assures all fields in passed dataStruct are in the desired units and performing any necessary conversions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">matrix</td><td>: matrix to transform to new units </td></tr>
+    <tr><td class="paramname">previousUnits</td><td>: the previous matrix units </td></tr>
+    <tr><td class="paramname">currentUnits</td><td>: the new matrix units </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad4ab4266f3e62feb5fa0d5be359aef3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4ab4266f3e62feb5fa0d5be359aef3d">&#9670;&nbsp;</a></span>convertTableView()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::convertTableView </td>
+          <td>(</td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tableView</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numSigDig</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>previousUnits</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>currentUnits</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Converts the data in the passed table view from the previous units to the current units. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tableView</td><td>: table containing the data to convert </td></tr>
+    <tr><td class="paramname">numSigDig</td><td>: number of significant digits in data </td></tr>
+    <tr><td class="paramname">previousUnits</td><td>: previous units of data </td></tr>
+    <tr><td class="paramname">currentUnits</td><td>: current (i.e. new) units to convert the data to </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0e98f8d34c639bb8f41b618ce327bf65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e98f8d34c639bb8f41b618ce327bf65">&#9670;&nbsp;</a></span>convertTableWidget()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::convertTableWidget </td>
+          <td>(</td>
+          <td class="paramtype">QTableWidget *&#160;</td>
+          <td class="paramname"><em>tableWidget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>column</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numSigDig</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>previousUnits</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>currentUnits</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Converts the data in the passed table widget from the previous units to the current units. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tableWidget</td><td>: table containing the data to convert </td></tr>
+    <tr><td class="paramname">column</td><td>: table column to convert </td></tr>
+    <tr><td class="paramname">numSigDig</td><td>: number of significant digits in data </td></tr>
+    <tr><td class="paramname">previousUnits</td><td>: previous units of data </td></tr>
+    <tr><td class="paramname">currentUnits</td><td>: current (i.e. new) units to convert the data to </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1574cafd9968d2214e6d730cd0eaf1a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1574cafd9968d2214e6d730cd0eaf1a4">&#9670;&nbsp;</a></span>convertVector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::convertVector </td>
+          <td>(</td>
+          <td class="paramtype">boost::numeric::ublas::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>vector</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>previousUnits</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>currentUnits</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Assures all fields in passed dataStruct are in the desired units and performing any necessary conversions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vector</td><td>: vector to transform to new units </td></tr>
+    <tr><td class="paramname">previousUnits</td><td>: the previous matrix units </td></tr>
+    <tr><td class="paramname">currentUnits</td><td>: the new matrix units </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a8e17736e37e25786accbcb7369b35075"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8e17736e37e25786accbcb7369b35075">&#9670;&nbsp;</a></span>convertVectorToStrList()</h2>
 
@@ -1203,6 +1459,33 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Boolean signifying if the passed in filename exists </dd></dl>
+
+</div>
+</div>
+<a id="a241512f9406a9f87756cad6b28c036f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a241512f9406a9f87756cad6b28c036f7">&#9670;&nbsp;</a></span>formatTimeSeconds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString nmfUtilsQt::formatTimeSeconds </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>timeSeconds</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Formats the number of seconds into either sec, min, hrs, days with units. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timeSeconds</td><td>: time (in seconds) to format </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the formatted time </dd></dl>
 
 </div>
 </div>
@@ -2025,6 +2308,32 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
   <table class="params">
     <tr><td class="paramname">dataStruct</td><td>: the data struct to reload </td></tr>
     <tr><td class="paramname">MultiRunLine</td><td>: a line from the multi-run line file </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4cee76f187fa10c5d283b64bf5c55545"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cee76f187fa10c5d283b64bf5c55545">&#9670;&nbsp;</a></span>removeCommas()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::removeCommas </td>
+          <td>(</td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tableView</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Removes commas from any numeric fields in table. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tableView</td><td>: table view in which to remove commas </td></tr>
   </table>
   </dd>
 </dl>
@@ -3154,8 +3463,8 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
 
 </div>
 </div>
-<a id="a73ea4e3a2a7c54bc216e25d8cb1d5e37"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73ea4e3a2a7c54bc216e25d8cb1d5e37">&#9670;&nbsp;</a></span>showAboutWidget()</h2>
+<a id="ac58c4919bb26ee35f72c601507ea4ed2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac58c4919bb26ee35f72c601507ea4ed2">&#9670;&nbsp;</a></span>showAboutWidget()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3177,6 +3486,12 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
           <td></td>
           <td class="paramtype">const QString &amp;&#160;</td>
           <td class="paramname"><em>operatingSystem</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>upTimeSeconds</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -3210,6 +3525,7 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
     <tr><td class="paramname">parent</td><td>: parent needed so as to know how to position the popup </td></tr>
     <tr><td class="paramname">name</td><td>: name of the application </td></tr>
     <tr><td class="paramname">operatingSystem</td><td>: operating system application is running on </td></tr>
+    <tr><td class="paramname">upTimeSeconds</td><td>: time (in seconds) that application has been running </td></tr>
     <tr><td class="paramname">version</td><td>: version of the application </td></tr>
     <tr><td class="paramname">specialAcknowledgement</td><td>: special acknowledgement section </td></tr>
     <tr><td class="paramname">appMsg</td><td>: main application message (created in calling routine); lists all toolkits, versions, and links for more information </td></tr>

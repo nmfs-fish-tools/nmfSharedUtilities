@@ -19,6 +19,45 @@ nmfChartLine::clear(QChart* chart)
 }
 
 void
+nmfChartLine::overlayVerticalLine(
+        QChart* chart,
+        const std::string& lineStyle,
+        const double& xPos,
+        const double& yMinVal,
+        const double& yMaxVal,
+        const std::string& lineColor)
+{
+    QPen pen;
+    QLineSeries *series = nullptr;
+    QValueAxis *yAxis = qobject_cast<QValueAxis*>(chart->axes(Qt::Vertical).back());
+
+    // Draw vertical line
+    series = new QLineSeries();
+    pen = series->pen();
+    pen.setWidth(2);
+    pen.setColor(QColor(QString::fromStdString(lineColor)));
+    if (lineStyle == "DottedLine") {
+        pen.setStyle(Qt::DotLine);
+    } else if (lineStyle == "DashedLine") {
+        pen.setStyle(Qt::DashLine);
+    } else {
+        pen.setStyle(Qt::SolidLine);
+    }
+    series->setPen(pen);
+
+    double yMin = yAxis->min();
+    double yMax = yAxis->max();
+
+    yMin = (yMinVal >= 0) ? yMin*yMinVal/100.0 : yMin;
+    yMax = (yMaxVal >= 0) ? yMaxVal : yMax;
+
+    series->append(xPos,yMin);
+    series->append(xPos,yMax);
+
+    chart->addSeries(series);
+}
+
+void
 nmfChartLine::populateChart(
         QChart*            chart,
         std::string&       type,
@@ -136,6 +175,8 @@ nmfChartLine::populateChart(
             connect(series, SIGNAL(hovered(const QPointF&,bool)),
                     this,   SLOT(callback_hoveredLine(const QPointF&,bool)));
         }
+
+
     }
 
     // Setup X and Y axes

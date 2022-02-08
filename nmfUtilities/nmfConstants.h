@@ -98,7 +98,6 @@ namespace nmfConstants
     const bool   ManuallySetYMinMax      = true;
     const bool   DontManuallySetYMinMax  = false;
 
-    const double KgToLbs       = 2.20462;
     const double MortalityMax  = 5.0;
     const double MortalityInit = 1.0;
     const double MortalityMin  = 0.0;
@@ -118,6 +117,13 @@ namespace nmfConstants
     const double MaxBiomass      = 1e12;
     const double NearlyZero      = 0.000001;
     const double RAD_to_DEG      = (180.0/M_PI);
+    const double LBS_to_KG       = 0.45359237;
+    const double LBS_to_MT       = 0.00045359237;
+    const double KG_to_LBS       = 2.2046226218;
+    const double KG_to_MT        = 0.001;
+    const double MT_to_KG        = 1000.0;
+    const double MT_to_LBS       = 2204.6226218488;
+    const int    SecondsPerDay   = 86400;
 
     const int    Normal    = 0;
     const int    Bold      = 1;

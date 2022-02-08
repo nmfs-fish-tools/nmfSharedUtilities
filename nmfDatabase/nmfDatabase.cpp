@@ -127,7 +127,6 @@ nmfDatabase::nmfOpenDatabase(
     db.setPassword(password.c_str());
 
     bool dbOpenOK = db.open();
-
     if (! dbOpenOK) {
         errorMsg = db.lastError().text().toStdString();
         return false;
@@ -1085,6 +1084,27 @@ nmfDatabase::createScenarioMap(
     }
 }
 
+void
+nmfDatabase::createUnitsMap(
+        const std::string& ProjectName,
+        const std::string& ModelName,
+        std::map<QString,QString>& previousUnits)
+{
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+
+    fields   = {"TableName","Units"};
+    queryStr = "SELECT TableName,Units FROM " +
+                nmfConstantsMSSPM::TableUnits +
+               " WHERE ProjectName = '" + ProjectName +
+               "' AND  ModelName   = '" + ModelName   + "'";
+    dataMap  = nmfQueryDatabase(queryStr, fields);
+    for (int i=0; i<(int)dataMap["Units"].size(); ++i) {
+        previousUnits[QString::fromStdString(dataMap["TableName"][i])] =
+                QString::fromStdString(dataMap["Units"][i]);
+    }
+}
 
 bool
 nmfDatabase::getRunLengthAndStartYear(
@@ -1108,9 +1128,9 @@ nmfDatabase::getRunLengthAndStartYear(
     dataMap   = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["RunLength"].size();
     if (NumRecords == 0){
-        if (! ModelName.empty()) {
-            logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::getRunLengthAndStartYear: No records found in table Models for ModelName = "+ModelName);
-        }
+        logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::getRunLengthAndStartYear: No records found in table " +
+                       nmfConstantsMSSPM::TableModels);
+        logger->logMsg(nmfConstants::Error,queryStr);
         return false;
     }
     RunLength = std::stoi(dataMap["RunLength"][0]);
@@ -2168,6 +2188,30 @@ nmfDatabase::isARelativeBiomassModel(
 }
 
 bool
+nmfDatabase::isSurveyQ(
+        const std::string& ProjectName,
+        const std::string& ModelName)
+{
+    bool retv=false;
+    std::vector<std::string> fields;
+    std::string queryStr;
+    std::map<std::string, std::vector<std::string> > dataMap;
+
+    fields    = {"ObsBiomassType"};
+    queryStr  = "SELECT ObsBiomassType FROM " +
+                 nmfConstantsMSSPM::TableModels +
+                " WHERE ProjectName = '" + ProjectName +
+                "' AND ModelName = '"    + ModelName   + "'";
+    dataMap   = nmfQueryDatabase(queryStr,fields);
+    int NumRecords = dataMap["ObsBiomassType"].size();
+    if (NumRecords == 1) {
+        retv = (dataMap["ObsBiomassType"][0] == "Relative");
+    }
+
+    return retv;
+}
+
+bool
 nmfDatabase::getForecastHarvest(
         QWidget*           Widget,
         nmfLogger*         Logger,
@@ -2241,8 +2285,6 @@ nmfDatabase::getForecastHarvest(
     ForecastHarvest.push_back(TmpMatrix);
     return true;
 }
-
-
 
 bool
 nmfDatabase::updateForecastMonteCarloParameters(
@@ -3402,4 +3444,50 @@ nmfDatabase::checkForValues(
         retv = vec[index];
     }
     return retv;
+}
+
+void
+nmfDatabase::updateUnitsTable(
+        QWidget* parent,
+        nmfLogger* logger,
+        const std::string& projectName,
+        const std::string& modelName,
+        const std::string& tableName,
+        const std::string& units)
+{
+    std::string cmd;
+    std::string errorMsg;
+
+    // Delete existing units record
+    cmd = "DELETE FROM " + nmfConstantsMSSPM::TableUnits +
+          " WHERE ProjectName = '" + projectName +
+          "' AND ModelName = '" + modelName +
+          "' AND TableName = '" + tableName + "'";
+    errorMsg = nmfUpdateDatabase(cmd);
+    if (nmfUtilsQt::isAnError(errorMsg)) {
+        logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::updateUnitsTable: DELETE error: " + errorMsg);
+        logger->logMsg(nmfConstants::Error,"cmd: " + cmd);
+        QMessageBox::warning(parent, "Error",
+                             "\nError in Save command. Couldn't delete record from units table.\n",
+                             QMessageBox::Ok);
+        parent->setCursor(Qt::ArrowCursor);
+        return;
+    }
+
+    // Add current units
+    cmd  = "INSERT INTO " + nmfConstantsMSSPM::TableUnits +
+           " (ProjectName,ModelName,TableName,Units) VALUES ('" +
+            projectName + "','" +
+            modelName + "','" +
+            tableName + "','" +
+            units + "')";
+    errorMsg = nmfUpdateDatabase(cmd);
+    if (nmfUtilsQt::isAnError(errorMsg)) {
+        logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::updateUnitsTable: Write table error: " + errorMsg);
+        logger->logMsg(nmfConstants::Error,"cmd: " + cmd);
+        QMessageBox::warning(parent,"Warning",
+                             "\nCouldn't INSERT INTO units table.\n",
+                             QMessageBox::Ok);
+        return;
+    }
 }

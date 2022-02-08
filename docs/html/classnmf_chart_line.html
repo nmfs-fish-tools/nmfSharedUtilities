@@ -109,6 +109,9 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_chart_line.html#a82bb26beb6ed33d0e96177dd0b46d98b">nmfChartLine</a> ()</td></tr>
 <tr class="memdesc:a82bb26beb6ed33d0e96177dd0b46d98b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classnmf_chart_line.html" title="The class creates a line chart. The user can specify multiple lines worth of data for display.">nmfChartLine</a> constructor for multi-line chart widget <br /></td></tr>
 <tr class="separator:a82bb26beb6ed33d0e96177dd0b46d98b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe58e9db781188ce35c44864018b1f8c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_chart_line.html#abe58e9db781188ce35c44864018b1f8c">overlayVerticalLine</a> (QChart *chart, const std::string &amp;lineStyle, const double &amp;xPos, const double &amp;yMinVal, const double &amp;yMaxVal, const std::string &amp;lineColor)</td></tr>
+<tr class="memdesc:abe58e9db781188ce35c44864018b1f8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overlays a vertical line onto the current chart data.  <a href="classnmf_chart_line.html#abe58e9db781188ce35c44864018b1f8c">More...</a><br /></td></tr>
+<tr class="separator:abe58e9db781188ce35c44864018b1f8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18b45a910bc1e312f62b8fc33a8cb383"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_chart_line.html#a18b45a910bc1e312f62b8fc33a8cb383">populateChart</a> (QChart *chart, std::string &amp;type, const std::string &amp;lineStyle, const bool &amp;showFirstPoint, const bool &amp;showLegend, const double &amp;xOffset, const bool &amp;xAxisIsInteger, const double &amp;yMinVal, const double &amp;yMaxVal, const bool &amp;leaveGapsWhereNegative, const boost::numeric::ublas::matrix&lt; double &gt; &amp;lineData, const QStringList &amp;rowLabels, const QStringList &amp;columnLabels, const QStringList &amp;hoverLabels, std::string &amp;mainTitle, std::string &amp;xTitle, std::string &amp;yTitle, const std::vector&lt; bool &gt; &amp;gridLines, const int &amp;theme, const QColor &amp;lineColor, const std::string &amp;lineColorName, const double &amp;xInc)</td></tr>
 <tr class="memdesc:a18b45a910bc1e312f62b8fc33a8cb383"><td class="mdescLeft">&#160;</td><td class="mdescRight">populates (and draws) the chart with all of the data necessary  <a href="classnmf_chart_line.html#a18b45a910bc1e312f62b8fc33a8cb383">More...</a><br /></td></tr>
 <tr class="separator:a18b45a910bc1e312f62b8fc33a8cb383"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -184,6 +187,71 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">chart</td><td>: point to QChart object to clear </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abe58e9db781188ce35c44864018b1f8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe58e9db781188ce35c44864018b1f8c">&#9670;&nbsp;</a></span>overlayVerticalLine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfChartLine::overlayVerticalLine </td>
+          <td>(</td>
+          <td class="paramtype">QChart *&#160;</td>
+          <td class="paramname"><em>chart</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>lineStyle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>xPos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>yMinVal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>yMaxVal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>lineColor</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Overlays a vertical line onto the current chart data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">chart</td><td>: pointer to QChart </td></tr>
+    <tr><td class="paramname">lineStyle</td><td>: style of line (i.e., DottedLine, DashedLine) </td></tr>
+    <tr><td class="paramname">xPos</td><td>: x position of the vertical line </td></tr>
+    <tr><td class="paramname">yMinVal</td><td>: minimum y value for the line </td></tr>
+    <tr><td class="paramname">yMaxVal</td><td>: maximum y value for the line </td></tr>
+    <tr><td class="paramname">lineColor</td><td>: color of the line </td></tr>
   </table>
   </dd>
 </dl>

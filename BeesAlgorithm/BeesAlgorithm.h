@@ -96,6 +96,7 @@ private:
     std::unique_ptr<nmfPredationForm>      m_PredationForm;
     std::map<int,std::vector<int> >        m_GuildSpecies;
     std::vector<int>                       m_GuildNum;
+    std::map<QString,QString>              m_PreviousUnits;
 
     void checkAndIncrementSeed();
     std::unique_ptr<Bee> createNeighborhoodBee(std::vector<double> &bestSiteParameters);

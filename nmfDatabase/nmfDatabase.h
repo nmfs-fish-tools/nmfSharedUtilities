@@ -155,6 +155,16 @@ public:
             const std::string& ModelName,
             std::map<QString,QStringList>& ScenarioForecastMap);
     /**
+     * @brief Creates a map of table names and their units from the units table
+     * @param ProjectName : name of project
+     * @param ModelName : name of model
+     * @param previousUnits : map of table names and their units
+     */
+    void createUnitsMap(
+            const std::string& ProjectName,
+            const std::string& ModelName,
+            std::map<QString,QString>& previousUnits);
+    /**
      * @brief Determines if passed database exists
      * @param dbName : name of database
      * @return True if database exists, false otherwise
@@ -822,6 +832,15 @@ public:
     bool isARelativeBiomassModel(const std::string& projectName,
                                  const std::string& modelName);
     /**
+     * @brief Returns a boolean describing if the observed biomass is relative (true) or absolute (false)
+     * @param projectName : name of project
+     * @param modelName : name of model
+     * @return true if observed biomass is relative, false if absolute
+     */
+    bool isSurveyQ(
+            const std::string& projectName,
+            const std::string& modelName);
+    /**
      * @brief Loads the estimated parameter names into the passed combo box widget
      * @param logger ; logger pointer used to log any error messages
      * @param ProjectName : name of current project
@@ -1241,7 +1260,22 @@ public:
             nmfLogger*     logger,
             std::string&   tableName);
     /**
-     * @brief updateForecastMonteCarloParameters
+     * @brief Updates all of the models in the current project (necessary when observed biomass changes for one model)
+     * @param parent : parent widget over which to display any popups
+     * @param type : type of observed biomass
+     * @param projectName : name of project
+     * @param currentModel name of current model
+     * @param modelsInProject : vector of all models in current project
+     * @return true if all tables were read correctly
+     */
+    bool updateAllModelsInProject(
+            QWidget* parent,
+            const std::string& type,
+            const std::string& projectName,
+            const std::string& currentModel,
+            std::vector<std::string>& modelsInProject);
+    /**
+     * @brief Updates the appropriate table with the Monte Carlo Forecast runs
      * @param widget : the parent widget over which to display any popup widgets
      * @param logger : logger pointer for logging errors and messages
      * @param ProjectName : name of current project
@@ -1289,21 +1323,23 @@ public:
             const std::vector<double>& PredationRandomValues,
             const std::vector<double>& HandlingRandomValues,
             const std::vector<double>& HarvestRandomValues);
+
     /**
-     * @brief Updates all of the models in the current project (necessary when observed biomass changes for one model)
-     * @param parent : parent widget over which to display any popups
-     * @param type : type of observed biomass
-     * @param projectName : name of project
-     * @param currentModel name of current model
-     * @param modelsInProject : vector of all models in current project
-     * @return true if all tables were read correctly
+     * @brief Updates the units database table with the units corresponding to the table shown in the GUI
+     * @param parent : the parent widget over which to display any popup widgets
+     * @param logger : logger pointer for logging errors and messages
+     * @param projectName : name of current project
+     * @param modelName : name of current model
+     * @param tableName : name of table containing units information
+     * @param units : the units string (currently either lbs, kg, or mt)
      */
-    bool updateAllModelsInProject(
+    void updateUnitsTable(
             QWidget* parent,
-            const std::string& type,
+            nmfLogger* logger,
             const std::string& projectName,
-            const std::string& currentModel,
-            std::vector<std::string>& modelsInProject);
+            const std::string& modelName,
+            const std::string& tableName,
+            const std::string& units);
 
     //  std::string nmfLastError();
     //  void nmfDeleteConnection();
