@@ -296,65 +296,40 @@ namespace nmfUtils {
      */
     double getVectorSum(const boost::numeric::ublas::vector<double> &vec);
     /**
-     * @brief Initializes an STL vector of doubles
-     * @param vec : vector to initialize
-     * @param numValues : number of doubles in vector
+     * @brief Template function to initialize a multi_array of any size
+     * @param multi_array : multi_array to initialize
      */
-    void initialize(std::vector<double>& vec, const int& numValues);
+    template<typename T>
+    void initialize(T& multi_array)
+    {
+        std::fill_n(multi_array.data(), multi_array.num_elements(), 0);
+    }
     /**
-     * @brief Initializes a vector of std::string types
+     * @brief Template function to initialize a vector of various types
      * @param vec : vector to initialize
-     * @param nrows : number of rows in vector
+     * @param numElements : number of elements in vector
      */
-    void initialize(boost::numeric::ublas::vector<std::string>& vec,
-                    const int& nrows);
+    template<typename T>
+    void initialize(T& vec,
+                    int const& numElements)
+    {
+        vec.resize(numElements);
+        vec.clear();
+    }
     /**
-     * @brief Initializes a vector of int types
-     * @param vec : vector to initialize
-     * @param nrows : number of rows in vector
-     */
-    void initialize(boost::numeric::ublas::vector<int>& vec,
-                    const int& nrows);
-    /**
-     * @brief Initializes a vector of double types
-     * @param vec : vector to initialize
-     * @param nrows : number of rows in vector
-     */
-    void initialize(boost::numeric::ublas::vector<double>& vec,
-                    const int& nrows);
-    /**
-     * @brief Initializes a matrix of int types
-     * @param mat : matrix to initialize
+     * @brief Template function to initialize a matrix of various types
+     * @param matrix : matrix to initialize
      * @param nrows : number of rows in matrix
      * @param ncols : number of cols in matrix
      */
-    void initialize(boost::numeric::ublas::matrix<int>& mat,
-                    const int& nrows,
-                    const int& ncols);
-    /**
-     * @brief Initializes a matrix of double types
-     * @param mat : matrix to initialize
-     * @param nrows : number of rows in matrix
-     * @param ncols : number of cols in matrix
-     */
-    void initialize(boost::numeric::ublas::matrix<double>& mat,
-                    const int& nrows,
-                    const int& ncols);
-    /**
-     * @brief Initializes a 3d array of doubles
-     * @param array3d : 3d array to initialize
-     */
-    void initialize(Boost3DArrayDouble& array3d);
-    /**
-     * @brief Initializes a 4d array of doubles
-     * @param array4d : 4d array to initialize
-     */
-    void initialize(Boost4DArrayDouble& array4d);
-    /**
-     * @brief Initializes a 5d array of doubles
-     * @param array5d : 5d array to initialize
-     */
-    void initialize(Boost5DArrayDouble& array5d);
+    template<typename T>
+    void initialize(T& matrix,
+              int const& nrows,
+              int const& ncols)
+    {
+        matrix.resize(nrows,ncols,false);
+        matrix.clear();
+    }
     /**
      * @brief Finds the inverse of the passed matrix. (In order for an inverse to be found, the determinant of the matrix must not be 0.)
      * @param matrix : matrix whose inverse is desired
@@ -480,26 +455,25 @@ namespace nmfUtils {
                   << value << std::endl;
     }
     /**
-     * @brief prints out the name of a std::vector of std::string types and its elements
-     * @param name : name of std::vector
-     * @param vec : the std::vector of std::string types to print
+     * @brief Template function used to print out a vector; suggest to use numCharsPerElement
+     * of 30, 4, and 4 for boost vectors of std::string, boost vectors of
+     * double, and std::vectors of std::string, respectively
+     * @param name : name of the vector data
+     * @param numCharsPerElement : the number of characters that the values will contain
+     * @param vec : the templated vector type
      */
+    template<typename T>
     void printVector(const std::string& name,
-                     const std::vector<std::string>& vec);
-    /**
-     * @brief prints out the name of the boost vector of doubles and its elements
-     * @param name : name of boost vector
-     * @param vec : the boost vector of doubles to print
-     */
-    void printVector(const std::string& name,
-                     const boost::numeric::ublas::vector<double>& vec);
-    /**
-     * @brief prints out the name of the boost vector of doubles and its elements
-     * @param name : name of boost vector
-     * @param vec : the boost vector of doubles to print
-     */
-    void printVector(const std::string& name,
-                     const boost::numeric::ublas::vector<std::string>& vec);
+                     const int& numCharsPerElement,
+                     T& vec)
+    {
+        std::cout << "\n" << name << ": " << vec.size() << std::endl;
+        for (unsigned i = 0; i < vec.size(); ++i) {
+            std::cout << "| ";
+            std::cout << std::setw(numCharsPerElement) << vec(i) << " | ";
+            std::cout << std::endl;
+        }
+    }
     /**
      * @brief reads a table and creates a map of table names as keys and table descriptions as values
      * @param tableName : name of table

@@ -13,5 +13,5 @@ var searchData=
   ['printmatrix_382',['printMatrix',['../namespacenmf_utils.html#a4ecfdfab911b31382208c88aec4e6714',1,'nmfUtils']]],
   ['printmsg_383',['printMsg',['../namespacenmf_utils.html#aaa419f5fd78e8788f3347040d72826ef',1,'nmfUtils']]],
   ['printvalue_384',['printValue',['../namespacenmf_utils.html#a6a82ead7575e6d3ebc9427b383e68e42',1,'nmfUtils']]],
-  ['printvector_385',['printVector',['../namespacenmf_utils.html#a4ccf782d1b624d26188c0f2e51121a8a',1,'nmfUtils::printVector(const std::string &amp;name, const boost::numeric::ublas::vector&lt; std::string &gt; &amp;vec)'],['../namespacenmf_utils.html#aedbce3835ab7941625194c39f082876b',1,'nmfUtils::printVector(const std::string &amp;name, const std::vector&lt; std::string &gt; &amp;vec)'],['../namespacenmf_utils.html#a34bfbcbd9e17fb30aa0917f8b7221f1f',1,'nmfUtils::printVector(const std::string &amp;name, const boost::numeric::ublas::vector&lt; double &gt; &amp;vec)']]]
+  ['printvector_385',['printVector',['../namespacenmf_utils.html#a03463522a0f2c9dab049fab605916be9',1,'nmfUtils']]]
 ];

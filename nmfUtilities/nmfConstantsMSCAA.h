@@ -14,14 +14,15 @@
 
 namespace nmfConstantsMSCAA
 {
-    const double       Kg2Mt             = 0.001;
-    const int          MaxNumYears       = 100;
-    const int          MaxNumSpecies     =  12;
-    const int          MaxNumAges        =  30;
-    const bool         ClearSummary      = true;
-    const bool         DontClearSummary  = false;
-    const bool         ShowFirstPoint    = true;
-    const bool         HideFirstPoint    = false;
+    const double       Kg2Mt                      = 0.001;
+    const int          MaxNumYears                = 100;
+    const int          MaxNumSpecies              =  12;
+    const int          MaxNumAges                 =  30;
+    const int          DefaultDBTimeoutDays       =   5;
+    const bool         ClearSummary               = true;
+    const bool         DontClearSummary           = false;
+    const bool         ShowFirstPoint             = true;
+    const bool         HideFirstPoint             = false;
     const bool         LeaveGapsWhereNegative     = true;
     const bool         DontLeaveGapsWhereNegative = false;
 
