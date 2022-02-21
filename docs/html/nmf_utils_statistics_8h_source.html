@@ -70,179 +70,180 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="nmf_utils_statistics_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;iomanip&gt;</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &lt;math.h&gt;</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;utility&gt;</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &lt;boost/numeric/ublas/matrix.hpp&gt;</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &lt;boost/numeric/ublas/io.hpp&gt;</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &lt;boost/multi_array.hpp&gt;</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nmf_utils_8h.html">nmfUtils.h</a>&quot;</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nmf_utils_complex_8h.html">nmfUtilsComplex.h</a>&quot;</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="struct_n_l_reg_out.html">   48</a></span>&#160;<span class="keyword">struct </span><a class="code" href="struct_n_l_reg_out.html">NLRegOut</a> {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">double</span> A;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">double</span> B;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">double</span> K;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">double</span> RegMS;   <span class="comment">// regression mean square</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">int</span>    RegDf;   <span class="comment">// Regression degrees of freedom = Nparms</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">double</span> ResSE;   <span class="comment">// SQRT of errms</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">double</span> ErrorMS; <span class="comment">// Error mean squares</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">int</span>    ErrorDF; <span class="comment">// Error DF = N- (NParms+1)</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">double</span> F;       <span class="comment">// F-ratio = regMS/ErrorMS</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">double</span> ProbF;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">double</span> Rsquare; <span class="comment">// R-square = regSS/TotalSS</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">int</span>    ItFlag;  <span class="comment">// 1 if maxits reached</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="struct_lin_reg_out.html">   66</a></span>&#160;<span class="keyword">struct </span><a class="code" href="struct_lin_reg_out.html">LinRegOut</a> {</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">double</span> Alpha;   <span class="comment">// intercept</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">double</span> Beta;    <span class="comment">// Slope</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">double</span> RegMS;   <span class="comment">// regression mean square</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">int</span>    RegDf;   <span class="comment">// Regression degrees of freedom = 1</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">double</span> ErrorMS; <span class="comment">// Error mean squares</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">int</span>    ErrorDF; <span class="comment">// Error DF = N-2</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">double</span> F;       <span class="comment">// F-ratio = regMS/ErrorMS</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">double</span> K;       <span class="comment">// Growth</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">double</span> Rsquare; <span class="comment">// R-square = regSS/TotalSS</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">double</span> ResSE;   <span class="comment">// Residual standard error of regression</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">double</span> BetaSE;  <span class="comment">// Std Error of beta estimate</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">double</span> AlphaSE; <span class="comment">// Std Error of Alpha estimate</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">double</span> BetaT;   <span class="comment">// T-score for beta estimate</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">double</span> AlphaT;  <span class="comment">// T-score for alpha estimate</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">double</span> MeanX;   <span class="comment">// Average X..needed for predicted values</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">double</span> SSX;     <span class="comment">// Needed for SE of predicted values</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">int</span>    N;       <span class="comment">// Holds sample size</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;};</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keyword">namespace </span>nmfUtilsStatistics {</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#ifndef NMF_UTILS_STATISTICS</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#define NMF_UTILS_STATISTICS</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &lt;iomanip&gt;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;math.h&gt;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &lt;boost/numeric/ublas/matrix.hpp&gt;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#include &lt;boost/numeric/ublas/io.hpp&gt;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#include &lt;boost/multi_array.hpp&gt;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nmf_utils_8h.html">nmfUtils.h</a>&quot;</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nmf_utils_complex_8h.html">nmfUtilsComplex.h</a>&quot;</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="struct_n_l_reg_out.html">   49</a></span>&#160;<span class="keyword">struct </span><a class="code" href="struct_n_l_reg_out.html">NLRegOut</a> {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">double</span> A;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">double</span> B;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">double</span> K;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">double</span> RegMS;   <span class="comment">// regression mean square</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">int</span>    RegDf;   <span class="comment">// Regression degrees of freedom = Nparms</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">double</span> ResSE;   <span class="comment">// SQRT of errms</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">double</span> ErrorMS; <span class="comment">// Error mean squares</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">int</span>    ErrorDF; <span class="comment">// Error DF = N- (NParms+1)</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">double</span> F;       <span class="comment">// F-ratio = regMS/ErrorMS</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">double</span> ProbF;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">double</span> Rsquare; <span class="comment">// R-square = regSS/TotalSS</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">int</span>    ItFlag;  <span class="comment">// 1 if maxits reached</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;};</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="struct_lin_reg_out.html">   67</a></span>&#160;<span class="keyword">struct </span><a class="code" href="struct_lin_reg_out.html">LinRegOut</a> {</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">double</span> Alpha;   <span class="comment">// intercept</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">double</span> Beta;    <span class="comment">// Slope</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">double</span> RegMS;   <span class="comment">// regression mean square</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">int</span>    RegDf;   <span class="comment">// Regression degrees of freedom = 1</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">double</span> ErrorMS; <span class="comment">// Error mean squares</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">int</span>    ErrorDF; <span class="comment">// Error DF = N-2</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">double</span> F;       <span class="comment">// F-ratio = regMS/ErrorMS</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">double</span> K;       <span class="comment">// Growth</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">double</span> Rsquare; <span class="comment">// R-square = regSS/TotalSS</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">double</span> ResSE;   <span class="comment">// Residual standard error of regression</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">double</span> BetaSE;  <span class="comment">// Std Error of beta estimate</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">double</span> AlphaSE; <span class="comment">// Std Error of Alpha estimate</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">double</span> BetaT;   <span class="comment">// T-score for beta estimate</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">double</span> AlphaT;  <span class="comment">// T-score for alpha estimate</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">double</span> MeanX;   <span class="comment">// Average X..needed for predicted values</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">double</span> SSX;     <span class="comment">// Needed for SE of predicted values</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordtype">int</span>    N;       <span class="comment">// Holds sample size</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;};</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword">namespace </span>nmfUtilsStatistics {</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordtype">double</span> BetaCF(<span class="keywordtype">double</span> A, <span class="keywordtype">double</span> B, <span class="keywordtype">double</span> X);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">double</span> BetaI(<span class="keywordtype">double</span> A, <span class="keywordtype">double</span> B, <span class="keywordtype">double</span> X);</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">double</span> BETAFUNC(<span class="keywordtype">double</span> A, <span class="keywordtype">double</span> B);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordtype">bool</span> calculateAAE(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSpeciesOrGuilds,</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                      <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; runLength,</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                      <span class="keyword">const</span> std::vector&lt;double&gt;&amp; observed,</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                      <span class="keyword">const</span> std::vector&lt;double&gt;&amp; estimated,</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                      std::vector&lt;double&gt;&amp; aae);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordtype">void</span> calculateAE(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSpeciesOrGuilds,</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                     <span class="keyword">const</span> std::vector&lt;double&gt;&amp; meanObserved,</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                     <span class="keyword">const</span> std::vector&lt;double&gt;&amp; meanEstimated,</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                     std::vector&lt;double&gt;&amp; ae);</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keywordtype">void</span> calculateAIC(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSpeciesOrGuilds,</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                      <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numParameters,</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                      <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; runLength,</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                      <span class="keyword">const</span> std::vector&lt;double&gt;&amp; ssResiduals,</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                      std::vector&lt;double&gt;&amp; aic);</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;     <span class="keywordtype">double</span> calculateMaximumLikelihoodNoRescale(</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;             <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; EstBiomass,</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;             <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; ObsBiomass);</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keywordtype">double</span> calculateMean(</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;         <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; ObsBiomass,</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;         <span class="keyword">const</span> <span class="keywordtype">int</span> SpeciesNum);</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keywordtype">bool</span> calculateMEF(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSpeciesOrGuilds,</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                      <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; runLength,</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                      <span class="keyword">const</span> std::vector&lt;double&gt;&amp; meanObserved,</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                      <span class="keyword">const</span> std::vector&lt;double&gt;&amp; observed,</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                      <span class="keyword">const</span> std::vector&lt;double&gt;&amp; estimated,</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                      std::vector&lt;double&gt;&amp; mef);</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <span class="keywordtype">double</span> calculateModelEfficiency(<span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; EstBiomass,</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                                    <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; ObsBiomass);</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="keywordtype">bool</span> calculateMohnsRhoFor1dParameter(</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            std::vector&lt;boost::numeric::ublas::matrix&lt;double&gt; &gt;&amp; VectorOfParameterMatrices,</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            std::vector&lt;double&gt;&amp; MohnsRhoVector);</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="keywordtype">bool</span> calculateMohnsRhoFor2dParameter(</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;            std::vector&lt;boost::numeric::ublas::matrix&lt;double&gt; &gt;&amp; VectorOfParameterMatrices,</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;            std::vector&lt;double&gt;&amp; MohnsRhoVector);</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="keywordtype">bool</span> calculateMohnsRhoForTimeSeries(</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numPeels,</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSpecies,</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;            <span class="keyword">const</span> std::vector&lt;std::vector&lt;double&gt; &gt;&amp; timeSeries,</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;            std::vector&lt;double&gt;&amp; mohnsRhoVector);</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keywordtype">double</span> calculateSumOfSquares(<span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; EstBiomass,</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;                                 <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; ObsBiomass);</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="keywordtype">bool</span> calculateR(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSpeciesOrGuilds,</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; runLength,</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                    <span class="keyword">const</span> std::vector&lt;double&gt;&amp; meanObserved,</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                    <span class="keyword">const</span> std::vector&lt;double&gt;&amp; meanEstimated,</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                    <span class="keyword">const</span> std::vector&lt;double&gt;&amp; observed,</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                    <span class="keyword">const</span> std::vector&lt;double&gt;&amp; estimated,</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                    std::vector&lt;double&gt;&amp; correlationCoefficient);</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <span class="keywordtype">bool</span> calculateRI(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSpeciesOrGuilds,</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;                     <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; runLength,</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;                     <span class="keyword">const</span> std::vector&lt;double&gt;&amp; observed,</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                     <span class="keyword">const</span> std::vector&lt;double&gt;&amp; estimated,</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                     std::vector&lt;double&gt;&amp; reliabilityIndex);</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keywordtype">bool</span> calculateRMSE(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSpeciesOrGuilds,</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                       <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; runLength,</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;                       <span class="keyword">const</span> std::vector&lt;double&gt;&amp; observed,</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;                       <span class="keyword">const</span> std::vector&lt;double&gt;&amp; estimated,</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;                       std::vector&lt;double&gt;&amp; rmse);</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <span class="keywordtype">void</span> calculateRSquared(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSpeciesOrGuilds,</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                           <span class="keyword">const</span> std::vector&lt;double&gt;&amp; ssDeviations,</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;                           <span class="keyword">const</span> std::vector&lt;double&gt;&amp; ssTotals,</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;                           std::vector&lt;double&gt;&amp; rSquared);</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <span class="keywordtype">bool</span> calculateSSDeviations(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSpeciesOrGuilds,</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;                               <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; runLength,</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                               <span class="keyword">const</span> std::vector&lt;double&gt;&amp; estimated,</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                               <span class="keyword">const</span> std::vector&lt;double&gt;&amp; meanObserved,</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                               std::vector&lt;double&gt;&amp; ssDeviations);</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    <span class="keywordtype">void</span> calculateSSResiduals(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSpeciesOrGuilds,</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                              <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; runLength,</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                              <span class="keyword">const</span> std::vector&lt;double&gt;&amp; observed,</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                              <span class="keyword">const</span> std::vector&lt;double&gt;&amp; estimated,</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;                              std::vector&lt;double&gt;&amp; ssResiduals);</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    <span class="keywordtype">void</span> calculateSSTotals(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSpeciesOrGuilds,</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;                           <span class="keyword">const</span> std::vector&lt;double&gt;&amp; ssDeviations,</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;                           <span class="keyword">const</span> std::vector&lt;double&gt;&amp; ssResiduals,</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;                           std::vector&lt;double&gt;&amp; ssTotal);</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    <span class="keywordtype">double</span> FACTLN(<span class="keywordtype">int</span> N);</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <span class="keywordtype">double</span> FACTRL(<span class="keywordtype">int</span> N);</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160; </div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    <span class="keywordtype">double</span> GAMMLN(<span class="keywordtype">double</span> XX);</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160; </div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    <span class="keywordtype">void</span> LinReg(boost::numeric::ublas::matrix&lt;double&gt; &amp;dataIn,</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;                <span class="keywordtype">int</span> &amp;numColumns,</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;                <a class="code" href="struct_lin_reg_out.html">LinRegOut</a> &amp;dataOut);</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160; </div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    <span class="keywordtype">double</span> ProbF(<span class="keywordtype">double</span> F,</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                 <span class="keywordtype">int</span> DF1,</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                 <span class="keywordtype">int</span> DF2);</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160; </div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    <span class="keywordtype">double</span> ProbT(<span class="keywordtype">double</span> T,</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                 <span class="keywordtype">int</span> DF);</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160; </div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    <span class="keywordtype">void</span> ShepSRR(boost::numeric::ublas::matrix&lt;double&gt; &amp;Data,</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;                 <span class="keywordtype">int</span> &amp;NYears,</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;                 <a class="code" href="struct_n_l_reg_out.html">NLRegOut</a> &amp;NLOut);</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160; </div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    <span class="keywordtype">void</span> USERFUNC(boost::numeric::ublas::vector&lt;double&gt; &amp;parameters,</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;                  <span class="keywordtype">int</span> &amp;numYears,</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;                  boost::numeric::ublas::matrix&lt;double&gt; &amp;SRData,</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;                  <span class="keywordtype">double</span> &amp;negSumSquares);</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;}</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">double</span> BetaCF(<span class="keywordtype">double</span> A, <span class="keywordtype">double</span> B, <span class="keywordtype">double</span> X);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordtype">double</span> BetaI(<span class="keywordtype">double</span> A, <span class="keywordtype">double</span> B, <span class="keywordtype">double</span> X);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">double</span> BETAFUNC(<span class="keywordtype">double</span> A, <span class="keywordtype">double</span> B);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordtype">bool</span> calculateAAE(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSpeciesOrGuilds,</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                      <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; runLength,</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                      <span class="keyword">const</span> std::vector&lt;double&gt;&amp; observed,</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                      <span class="keyword">const</span> std::vector&lt;double&gt;&amp; estimated,</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                      std::vector&lt;double&gt;&amp; aae);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordtype">void</span> calculateAE(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSpeciesOrGuilds,</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                     <span class="keyword">const</span> std::vector&lt;double&gt;&amp; meanObserved,</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                     <span class="keyword">const</span> std::vector&lt;double&gt;&amp; meanEstimated,</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                     std::vector&lt;double&gt;&amp; ae);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keywordtype">void</span> calculateAIC(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSpeciesOrGuilds,</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                      <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numParameters,</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                      <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; runLength,</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                      <span class="keyword">const</span> std::vector&lt;double&gt;&amp; ssResiduals,</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                      std::vector&lt;double&gt;&amp; aic);</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;     <span class="keywordtype">double</span> calculateMaximumLikelihoodNoRescale(</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;             <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; EstBiomass,</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;             <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; ObsBiomass);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordtype">double</span> calculateMean(</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;         <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; ObsBiomass,</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;         <span class="keyword">const</span> <span class="keywordtype">int</span> SpeciesNum);</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keywordtype">bool</span> calculateMEF(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSpeciesOrGuilds,</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                      <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; runLength,</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                      <span class="keyword">const</span> std::vector&lt;double&gt;&amp; meanObserved,</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                      <span class="keyword">const</span> std::vector&lt;double&gt;&amp; observed,</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                      <span class="keyword">const</span> std::vector&lt;double&gt;&amp; estimated,</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                      std::vector&lt;double&gt;&amp; mef);</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    <span class="keywordtype">double</span> calculateModelEfficiency(<span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; EstBiomass,</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                                    <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; ObsBiomass);</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keywordtype">bool</span> calculateMohnsRhoFor1dParameter(</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            std::vector&lt;boost::numeric::ublas::matrix&lt;double&gt; &gt;&amp; VectorOfParameterMatrices,</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            std::vector&lt;double&gt;&amp; MohnsRhoVector);</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="keywordtype">bool</span> calculateMohnsRhoFor2dParameter(</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;            std::vector&lt;boost::numeric::ublas::matrix&lt;double&gt; &gt;&amp; VectorOfParameterMatrices,</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;            std::vector&lt;double&gt;&amp; MohnsRhoVector);</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keywordtype">bool</span> calculateMohnsRhoForTimeSeries(</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numPeels,</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSpecies,</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;            <span class="keyword">const</span> std::vector&lt;std::vector&lt;double&gt; &gt;&amp; timeSeries,</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;            std::vector&lt;double&gt;&amp; mohnsRhoVector);</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <span class="keywordtype">double</span> calculateSumOfSquares(<span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; EstBiomass,</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;                                 <span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt;&amp; ObsBiomass);</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <span class="keywordtype">bool</span> calculateR(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSpeciesOrGuilds,</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; runLength,</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                    <span class="keyword">const</span> std::vector&lt;double&gt;&amp; meanObserved,</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                    <span class="keyword">const</span> std::vector&lt;double&gt;&amp; meanEstimated,</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                    <span class="keyword">const</span> std::vector&lt;double&gt;&amp; observed,</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                    <span class="keyword">const</span> std::vector&lt;double&gt;&amp; estimated,</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                    std::vector&lt;double&gt;&amp; correlationCoefficient);</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <span class="keywordtype">bool</span> calculateRI(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSpeciesOrGuilds,</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;                     <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; runLength,</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                     <span class="keyword">const</span> std::vector&lt;double&gt;&amp; observed,</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                     <span class="keyword">const</span> std::vector&lt;double&gt;&amp; estimated,</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                     std::vector&lt;double&gt;&amp; reliabilityIndex);</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keywordtype">bool</span> calculateRMSE(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSpeciesOrGuilds,</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;                       <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; runLength,</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;                       <span class="keyword">const</span> std::vector&lt;double&gt;&amp; observed,</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;                       <span class="keyword">const</span> std::vector&lt;double&gt;&amp; estimated,</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;                       std::vector&lt;double&gt;&amp; rmse);</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    <span class="keywordtype">void</span> calculateRSquared(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSpeciesOrGuilds,</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;                           <span class="keyword">const</span> std::vector&lt;double&gt;&amp; ssDeviations,</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;                           <span class="keyword">const</span> std::vector&lt;double&gt;&amp; ssTotals,</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                           std::vector&lt;double&gt;&amp; rSquared);</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keywordtype">bool</span> calculateSSDeviations(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSpeciesOrGuilds,</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                               <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; runLength,</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                               <span class="keyword">const</span> std::vector&lt;double&gt;&amp; estimated,</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                               <span class="keyword">const</span> std::vector&lt;double&gt;&amp; meanObserved,</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;                               std::vector&lt;double&gt;&amp; ssDeviations);</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    <span class="keywordtype">void</span> calculateSSResiduals(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSpeciesOrGuilds,</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                              <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; runLength,</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                              <span class="keyword">const</span> std::vector&lt;double&gt;&amp; observed,</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;                              <span class="keyword">const</span> std::vector&lt;double&gt;&amp; estimated,</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                              std::vector&lt;double&gt;&amp; ssResiduals);</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    <span class="keywordtype">void</span> calculateSSTotals(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSpeciesOrGuilds,</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;                           <span class="keyword">const</span> std::vector&lt;double&gt;&amp; ssDeviations,</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;                           <span class="keyword">const</span> std::vector&lt;double&gt;&amp; ssResiduals,</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;                           std::vector&lt;double&gt;&amp; ssTotal);</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; </div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    <span class="keywordtype">double</span> FACTLN(<span class="keywordtype">int</span> N);</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    <span class="keywordtype">double</span> FACTRL(<span class="keywordtype">int</span> N);</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160; </div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    <span class="keywordtype">double</span> GAMMLN(<span class="keywordtype">double</span> XX);</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160; </div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    <span class="keywordtype">void</span> LinReg(boost::numeric::ublas::matrix&lt;double&gt; &amp;dataIn,</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;                <span class="keywordtype">int</span> &amp;numColumns,</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                <a class="code" href="struct_lin_reg_out.html">LinRegOut</a> &amp;dataOut);</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160; </div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    <span class="keywordtype">double</span> ProbF(<span class="keywordtype">double</span> F,</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                 <span class="keywordtype">int</span> DF1,</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                 <span class="keywordtype">int</span> DF2);</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160; </div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;    <span class="keywordtype">double</span> ProbT(<span class="keywordtype">double</span> T,</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                 <span class="keywordtype">int</span> DF);</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; </div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    <span class="keywordtype">void</span> ShepSRR(boost::numeric::ublas::matrix&lt;double&gt; &amp;Data,</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;                 <span class="keywordtype">int</span> &amp;NYears,</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;                 <a class="code" href="struct_n_l_reg_out.html">NLRegOut</a> &amp;NLOut);</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; </div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <span class="keywordtype">void</span> USERFUNC(boost::numeric::ublas::vector&lt;double&gt; &amp;parameters,</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;                  <span class="keywordtype">int</span> &amp;numYears,</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;                  boost::numeric::ublas::matrix&lt;double&gt; &amp;SRData,</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;                  <span class="keywordtype">double</span> &amp;negSumSquares);</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160; </div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;}</div>
 <div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160; </div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="astruct_n_l_reg_out_html"><div class="ttname"><a href="struct_n_l_reg_out.html">NLRegOut</a></div><div class="ttdoc">Holds outputs from non linear regression.</div><div class="ttdef"><b>Definition:</b> nmfUtilsStatistics.h:48</div></div>
-<div class="ttc" id="astruct_lin_reg_out_html"><div class="ttname"><a href="struct_lin_reg_out.html">LinRegOut</a></div><div class="ttdoc">Holds outputs from linear regression.</div><div class="ttdef"><b>Definition:</b> nmfUtilsStatistics.h:66</div></div>
+<div class="ttc" id="astruct_n_l_reg_out_html"><div class="ttname"><a href="struct_n_l_reg_out.html">NLRegOut</a></div><div class="ttdoc">Holds outputs from non linear regression.</div><div class="ttdef"><b>Definition:</b> nmfUtilsStatistics.h:49</div></div>
+<div class="ttc" id="astruct_lin_reg_out_html"><div class="ttname"><a href="struct_lin_reg_out.html">LinRegOut</a></div><div class="ttdoc">Holds outputs from linear regression.</div><div class="ttdef"><b>Definition:</b> nmfUtilsStatistics.h:67</div></div>
 <div class="ttc" id="anmf_utils_complex_8h_html"><div class="ttname"><a href="nmf_utils_complex_8h.html">nmfUtilsComplex.h</a></div><div class="ttdoc">These routines were originally from Complex2.bas.</div></div>
 <div class="ttc" id="anmf_utils_8h_html"><div class="ttname"><a href="nmf_utils_8h.html">nmfUtils.h</a></div><div class="ttdoc">Definition for common typedefs and structs (i.e., non-graphical)</div></div>
 <!-- start footer part -->

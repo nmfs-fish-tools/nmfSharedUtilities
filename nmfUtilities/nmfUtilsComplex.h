@@ -25,7 +25,8 @@
  * Please cite the author(s) in any work or product based on this material.
  */
 
-#pragma once
+#ifndef NMF_UTILS_COMPLEX
+#define NMF_UTILS_COMPLEX
 
 #include <iostream>
 #include <string>
@@ -113,4 +114,4 @@ void Centroid(int &IEV1,
 
 }
 
-
+#endif

@@ -149,80 +149,74 @@ $(function() {
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                              <span class="keyword">const</span> std::string&amp; harvestForm,</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                              <span class="keyword">const</span> std::string&amp; competitionForm,</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                              <span class="keyword">const</span> std::string&amp; predationForm);</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordtype">void</span> rescaleMean(<span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;matrix,</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                           boost::numeric::ublas::matrix&lt;double&gt; &amp;rescaledMatrix);</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordtype">void</span> rescaleMinMax(<span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;matrix,</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                             boost::numeric::ublas::matrix&lt;double&gt; &amp;rescaledMatrix);</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordtype">void</span> rescaleZScore(<span class="keyword">const</span> boost::numeric::ublas::matrix&lt;double&gt; &amp;matrix,</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                             boost::numeric::ublas::matrix&lt;double&gt; &amp;rescaledMatrix);</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    std::unique_ptr&lt;Bee&gt; searchNeighborhoodForBestBee(std::unique_ptr&lt;Bee&gt; bestSite,</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                                                      <span class="keywordtype">int</span> &amp;neighborhoodSize);</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    std::unique_ptr&lt;Bee&gt; searchParameterSpaceForBestBee(<span class="keywordtype">int</span>&amp; runNum,</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                                                        <span class="keywordtype">int</span>&amp; subRunNum,</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                                                        std::string&amp; errorMsg);</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keywordtype">bool</span> stoppedByUser();</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keywordtype">void</span> writeCurrentLoopFile(std::string &amp;MSSPMName,</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                              <span class="keywordtype">int</span>         &amp;NumGens,</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                              <span class="keywordtype">double</span>      &amp;BestFitness,</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                              <span class="keywordtype">int</span>         &amp;NumGensSinceBestFit);</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    <a class="code" href="class_bees_algorithm.html#a3a3fb02a867f2a93cfc9ae322a2db72a">BeesAlgorithm</a>(<a class="code" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> BeeStruct,</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                  <span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; verbose);</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;   ~<a class="code" href="class_bees_algorithm.html">BeesAlgorithm</a>();</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_bees_algorithm.html#a66ef4cd92b4584b2765d18027b04a795">calculateActualNumEstParameters</a>();</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordtype">void</span> extractCompetitionParameters(<span class="keyword">const</span> std::vector&lt;double&gt;&amp; parameters,</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                                      <span class="keywordtype">int</span>&amp; startPos,</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                                      boost::numeric::ublas::matrix&lt;double&gt;&amp; alpha,</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                                      boost::numeric::ublas::matrix&lt;double&gt;&amp; betaSpecies,</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                                      boost::numeric::ublas::matrix&lt;double&gt;&amp; betaGuilds,</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                                      boost::numeric::ublas::matrix&lt;double&gt;&amp; betaGuildsGuilds);</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <span class="keywordtype">void</span> extractExponentParameters(<span class="keyword">const</span> std::vector&lt;double&gt;&amp; parameters,</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                                   <span class="keywordtype">int</span>&amp; startPos,</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                                   std::vector&lt;double&gt;&amp; exponents);</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="keywordtype">void</span> extractGrowthParameters(<span class="keyword">const</span> std::vector&lt;double&gt;&amp; parameters,</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                                 <span class="keywordtype">int</span>&amp; startPos,</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                                 std::vector&lt;double&gt;&amp; growthRate,</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                                 std::vector&lt;double&gt;&amp; growthRateCovariateCoeff,</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                                 std::vector&lt;double&gt;&amp; carryingCapacity,</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                                 std::vector&lt;double&gt;&amp; carryingCapacityCovariateCoeffs,</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                                 <span class="keywordtype">double</span>&amp; systemCarryingCapacity);</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <span class="keywordtype">void</span> extractHandlingParameters(<span class="keyword">const</span> std::vector&lt;double&gt;&amp; parameters,</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                                   <span class="keywordtype">int</span>&amp; startPos,</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                                   boost::numeric::ublas::matrix&lt;double&gt;&amp; handling);</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="keywordtype">void</span> extractHarvestParameters(<span class="keyword">const</span> std::vector&lt;double&gt;&amp; parameters,</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                                  <span class="keywordtype">int</span>&amp; startPos,</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                                  std::vector&lt;double&gt;&amp; catchability,</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                                  std::vector&lt;double&gt;&amp; catchabilityCovariateCoeffs);</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <span class="keywordtype">void</span> extractInitBiomass(<span class="keyword">const</span> std::vector&lt;double&gt;&amp; parameters,</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                            <span class="keywordtype">int</span>&amp;                       startPos,</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                            std::vector&lt;double&gt;&amp;       initBiomass);</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    <span class="keywordtype">bool</span> estimateParameters(<span class="keywordtype">double</span> &amp;bestFitness,</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                            std::vector&lt;double&gt; &amp;bestParameters,</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                            <span class="keywordtype">int</span> &amp;RunNum,</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                            <span class="keywordtype">int</span> &amp;subRunNum,</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                            std::string&amp; errorMsg);</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="keywordtype">void</span> extractPredationParameters(<span class="keyword">const</span> std::vector&lt;double&gt;&amp; parameters,</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                                    <span class="keywordtype">int</span>&amp; startPos,</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;                                    boost::numeric::ublas::matrix&lt;double&gt;&amp; predation);</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="keywordtype">void</span> extractSurveyQParameters(<span class="keyword">const</span> std::vector&lt;double&gt;&amp; parameters,</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                                  <span class="keywordtype">int</span>&amp;                       startPos,</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;                                  std::vector&lt;double&gt;&amp;       surveyQ);</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="keywordtype">double</span> evaluateObjectiveFunction(<span class="keyword">const</span> std::vector&lt;double&gt; &amp;parameters);</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="keywordtype">void</span> initializeParameterRangesAndPatchSizes(<a class="code" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a>&amp; theBeeStruct);</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="keywordtype">void</span> setSeed(<span class="keywordtype">long</span> seed);</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;};</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    std::unique_ptr&lt;Bee&gt; searchNeighborhoodForBestBee(std::unique_ptr&lt;Bee&gt; bestSite,</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                                                      <span class="keywordtype">int</span> &amp;neighborhoodSize);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    std::unique_ptr&lt;Bee&gt; searchParameterSpaceForBestBee(<span class="keywordtype">int</span>&amp; runNum,</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                                                        <span class="keywordtype">int</span>&amp; subRunNum,</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                                                        std::string&amp; errorMsg);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordtype">bool</span> stoppedByUser();</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordtype">void</span> writeCurrentLoopFile(std::string &amp;MSSPMName,</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                              <span class="keywordtype">int</span>         &amp;NumGens,</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                              <span class="keywordtype">double</span>      &amp;BestFitness,</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                              <span class="keywordtype">int</span>         &amp;NumGensSinceBestFit);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <a class="code" href="class_bees_algorithm.html#a3a3fb02a867f2a93cfc9ae322a2db72a">BeesAlgorithm</a>(<a class="code" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> BeeStruct,</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;                  <span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; verbose);</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;   ~<a class="code" href="class_bees_algorithm.html">BeesAlgorithm</a>();</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_bees_algorithm.html#a66ef4cd92b4584b2765d18027b04a795">calculateActualNumEstParameters</a>();</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keywordtype">void</span> extractCompetitionParameters(<span class="keyword">const</span> std::vector&lt;double&gt;&amp; parameters,</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                                      <span class="keywordtype">int</span>&amp; startPos,</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                                      boost::numeric::ublas::matrix&lt;double&gt;&amp; alpha,</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                                      boost::numeric::ublas::matrix&lt;double&gt;&amp; betaSpecies,</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                                      boost::numeric::ublas::matrix&lt;double&gt;&amp; betaGuilds,</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                                      boost::numeric::ublas::matrix&lt;double&gt;&amp; betaGuildsGuilds);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordtype">void</span> extractExponentParameters(<span class="keyword">const</span> std::vector&lt;double&gt;&amp; parameters,</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                                   <span class="keywordtype">int</span>&amp; startPos,</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                                   std::vector&lt;double&gt;&amp; exponents);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keywordtype">void</span> extractGrowthParameters(<span class="keyword">const</span> std::vector&lt;double&gt;&amp; parameters,</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                                 <span class="keywordtype">int</span>&amp; startPos,</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                                 std::vector&lt;double&gt;&amp; growthRate,</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                                 std::vector&lt;double&gt;&amp; growthRateCovariateCoeff,</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                                 std::vector&lt;double&gt;&amp; carryingCapacity,</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                                 std::vector&lt;double&gt;&amp; carryingCapacityCovariateCoeffs,</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                                 <span class="keywordtype">double</span>&amp; systemCarryingCapacity);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keywordtype">void</span> extractHandlingParameters(<span class="keyword">const</span> std::vector&lt;double&gt;&amp; parameters,</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                                   <span class="keywordtype">int</span>&amp; startPos,</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                                   boost::numeric::ublas::matrix&lt;double&gt;&amp; handling);</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keywordtype">void</span> extractHarvestParameters(<span class="keyword">const</span> std::vector&lt;double&gt;&amp; parameters,</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                                  <span class="keywordtype">int</span>&amp; startPos,</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                                  std::vector&lt;double&gt;&amp; catchability,</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                                  std::vector&lt;double&gt;&amp; catchabilityCovariateCoeffs);</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keywordtype">void</span> extractInitBiomass(<span class="keyword">const</span> std::vector&lt;double&gt;&amp; parameters,</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                            <span class="keywordtype">int</span>&amp;                       startPos,</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                            std::vector&lt;double&gt;&amp;       initBiomass);</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keywordtype">bool</span> estimateParameters(<span class="keywordtype">double</span> &amp;bestFitness,</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                            std::vector&lt;double&gt; &amp;bestParameters,</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                            <span class="keywordtype">int</span> &amp;RunNum,</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                            <span class="keywordtype">int</span> &amp;subRunNum,</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                            std::string&amp; errorMsg);</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <span class="keywordtype">void</span> extractPredationParameters(<span class="keyword">const</span> std::vector&lt;double&gt;&amp; parameters,</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                                    <span class="keywordtype">int</span>&amp; startPos,</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                                    boost::numeric::ublas::matrix&lt;double&gt;&amp; predation);</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="keywordtype">void</span> extractSurveyQParameters(<span class="keyword">const</span> std::vector&lt;double&gt;&amp; parameters,</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                                  <span class="keywordtype">int</span>&amp;                       startPos,</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                                  std::vector&lt;double&gt;&amp;       surveyQ);</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="keywordtype">double</span> evaluateObjectiveFunction(<span class="keyword">const</span> std::vector&lt;double&gt; &amp;parameters);</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keywordtype">void</span> initializeParameterRangesAndPatchSizes(<a class="code" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a>&amp; theBeeStruct);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="keywordtype">void</span> setSeed(<span class="keywordtype">long</span> seed);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;};</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="astructbees_compare_l_t_html"><div class="ttname"><a href="structbees_compare_l_t.html">beesCompareLT</a></div><div class="ttdoc">The beesCompareLT struct is used in comparing the fitness of 2 bees in ascending order of fitness.</div><div class="ttdef"><b>Definition:</b> BeesAlgorithm.h:48</div></div>
 <div class="ttc" id="astructbees_compare_g_t_html"><div class="ttname"><a href="structbees_compare_g_t.html">beesCompareGT</a></div><div class="ttdoc">The beesCompareGT struct is used in comparing the fitness of 2 bees in descending order of fitness.</div><div class="ttdef"><b>Definition:</b> BeesAlgorithm.h:61</div></div>
 <div class="ttc" id="anmf_competition_form_8h_html"><div class="ttname"><a href="nmf_competition_form_8h.html">nmfCompetitionForm.h</a></div><div class="ttdoc">Definition for the Competition Form of the model.</div></div>
-<div class="ttc" id="astructnmf_structs_qt_1_1_model_data_struct_html"><div class="ttname"><a href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a></div><div class="ttdoc">The data structure used for parameter estimation. It contains the parameter min max limits as well as...</div><div class="ttdef"><b>Definition:</b> nmfStructsQt.h:244</div></div>
+<div class="ttc" id="astructnmf_structs_qt_1_1_model_data_struct_html"><div class="ttname"><a href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a></div><div class="ttdoc">The data structure used for parameter estimation. It contains the parameter min max limits as well as...</div><div class="ttdef"><b>Definition:</b> nmfStructsQt.h:245</div></div>
 <div class="ttc" id="anmf_harvest_form_8h_html"><div class="ttname"><a href="nmf_harvest_form_8h.html">nmfHarvestForm.h</a></div><div class="ttdoc">Definition for the Harvest Form of the model.</div></div>
 <div class="ttc" id="anmf_utils_statistics_8h_html"><div class="ttname"><a href="nmf_utils_statistics_8h.html">nmfUtilsStatistics.h</a></div><div class="ttdoc">This header file defines multi-species statistical utility functions.</div></div>
-<div class="ttc" id="aclass_bees_algorithm_html_a66ef4cd92b4584b2765d18027b04a795"><div class="ttname"><a href="class_bees_algorithm.html#a66ef4cd92b4584b2765d18027b04a795">BeesAlgorithm::calculateActualNumEstParameters</a></div><div class="ttdeci">int calculateActualNumEstParameters()</div><div class="ttdoc">calculates the number of parameters</div><div class="ttdef"><b>Definition:</b> BeesAlgorithm.cpp:1132</div></div>
+<div class="ttc" id="aclass_bees_algorithm_html_a66ef4cd92b4584b2765d18027b04a795"><div class="ttname"><a href="class_bees_algorithm.html#a66ef4cd92b4584b2765d18027b04a795">BeesAlgorithm::calculateActualNumEstParameters</a></div><div class="ttdeci">int calculateActualNumEstParameters()</div><div class="ttdoc">calculates the number of parameters</div><div class="ttdef"><b>Definition:</b> BeesAlgorithm.cpp:1008</div></div>
 <div class="ttc" id="anmf_predation_form_8h_html"><div class="ttname"><a href="nmf_predation_form_8h.html">nmfPredationForm.h</a></div><div class="ttdoc">Definition for the Predation Form of the model.</div></div>
 <div class="ttc" id="aclass_bees_algorithm_html"><div class="ttname"><a href="class_bees_algorithm.html">BeesAlgorithm</a></div><div class="ttdoc">The BeesAlgorithm class which contains all of the methods necessary to implement the Bees search algo...</div><div class="ttdef"><b>Definition:</b> BeesAlgorithm.h:74</div></div>
 <div class="ttc" id="anmf_constants_m_s_s_p_m_8h_html"><div class="ttname"><a href="nmf_constants_m_s_s_p_m_8h.html">nmfConstantsMSSPM.h</a></div><div class="ttdoc">Definition for constants used in MSSPM tool.</div></div>

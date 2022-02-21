@@ -1727,6 +1727,7 @@ loadTimeSeries(QTabWidget* parentTabWidget,
                const QString& inputFilename,
                const bool& firstLineReadOnly,
                const bool& scientificNotation,
+               const bool& allowBlanks,
                std::pair<int,int>& nonZeroCell,
                QString& errorMsg)
 {
@@ -1774,24 +1775,26 @@ loadTimeSeries(QTabWidget* parentTabWidget,
                     dataParts = lineList[i].split(',');
                     VerticalList << " " + dataParts[0] + " ";
                     for (int j=1; j<dataParts.count(); ++j) {
-                        value = dataParts[j].toDouble();
-                        if (value != 0) {
-                            nonZeroCell = std::make_pair(i-1,j-1);
-                        }
-                        if (scientificNotation) {
-                            valueWithComma = locale.toString(value,'g');
-                            item = new QStandardItem(valueWithComma);
-//                          item = new QStandardItem(QString::number(value,'g'));
+                        if (allowBlanks && dataParts[j].isEmpty()) {
+                            item = new QStandardItem("");
                         } else {
-                            valueWithComma = locale.toString(value,'f',6);
-                            item = new QStandardItem(valueWithComma);
-//                          item = new QStandardItem(QString::number(value,'f',6));
-                        }
-                        item->setTextAlignment(Qt::AlignCenter);
-                        if (firstLineReadOnly && (i == 1)) {
-                            setItemEditable(nmfConstantsMSSPM::NotEditable,
-                                            nmfConstantsMSSPM::GrayedIfNotEditable,
-                                            item);
+                            value = dataParts[j].toDouble();
+                            if (value != 0) {
+                                nonZeroCell = std::make_pair(i-1,j-1);
+                            }
+                            if (scientificNotation) {
+                                valueWithComma = locale.toString(value,'g');
+                                item = new QStandardItem(valueWithComma);
+                            } else {
+                                valueWithComma = locale.toString(value,'f',6);
+                                item = new QStandardItem(valueWithComma);
+                            }
+                            item->setTextAlignment(Qt::AlignCenter);
+                            if (firstLineReadOnly && (i == 1)) {
+                                setItemEditable(nmfConstantsMSSPM::NotEditable,
+                                                nmfConstantsMSSPM::GrayedIfNotEditable,
+                                                item);
+                            }
                         }
                         smodel->setItem(i-1, j-1, item);
                     }
@@ -2183,6 +2186,24 @@ void checkForAndReplaceInvalidCharacters(QString &stringValue)
 {
     stringValue.remove(QRegExp("[^a-zA-Z_\\d\\s]"));
     stringValue.replace(" ","_");
+}
+
+bool checkTableForBlanks(QTableView* tv)
+{
+    QModelIndex index;
+    QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(tv->model());
+    QString value;
+
+    for (int j=0; j<smodel->columnCount(); ++j) { // Species
+        for (int i=0; i<smodel->rowCount(); ++i) { // Time
+            index = smodel->index(i,j);
+            value = index.data().toString().trimmed();
+            if (value.isEmpty()) {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 bool extractTag(const QString filename,
@@ -2586,7 +2607,8 @@ updateProgressDlg(nmfLogger* logger,
 }
 
 void
-setBackgroundLineEdit(QLineEdit* lineEdit, const QString& backgroundStyleSheet)
+setBackgroundLineEdit(QLineEdit* lineEdit,
+                      const QString& backgroundStyleSheet)
 {
     lineEdit->setStyleSheet(backgroundStyleSheet);
 }
@@ -2667,6 +2689,41 @@ reselectTableViewCells(QTableView* tv,
             selectionModel->select(index,QItemSelectionModel::Select);
         }
     }
+}
+
+bool
+runAllTableChecks(nmfLogger*  logger,
+                  QWidget*    parent,
+                  QTableView* tableview,
+                  QTableView* minTableview,
+                  QTableView* maxTableview)
+{
+    // 1. Check alpha tables for blanks
+    if (! checkTableForBlanks(tableview)    ||
+        ! checkTableForBlanks(minTableview) ||
+        ! checkTableForBlanks(maxTableview))
+    {
+        QString msg = "No blanks allowed in any of the Alpha tables.";
+        logger->logMsg(nmfConstants::Error,msg.toStdString());
+        QMessageBox::critical(parent, "Save Error", "\n"+msg, QMessageBox::Ok);
+        parent->setCursor(Qt::ArrowCursor);
+        return false;
+    }
+
+    // 2. Check max cells are greater than min cells
+    if (! nmfUtilsQt::allMaxCellsGreaterThanMinCells(
+                qobject_cast<QStandardItemModel*>(minTableview->model()),
+                qobject_cast<QStandardItemModel*>(maxTableview->model())))
+    {
+        logger->logMsg(nmfConstants::Error,"[Table Save]: At least one Max cell less than a Min cell.");
+        QMessageBox::critical(parent, "Error",
+                             "\nError: There's at least one Max cell less than a Min cell. Please check tables.\n",
+                             QMessageBox::Ok);
+        parent->setCursor(Qt::ArrowCursor);
+        return false;
+    }
+
+    return true;
 }
 
 QModelIndexList

@@ -27,7 +27,9 @@
  *
  * Please cite the author(s) in any work or product based on this material.
  */
-#pragma once
+
+#ifndef NMF_UTILS_STATISTICS_AVERAGING
+#define NMF_UTILS_STATISTICS_AVERAGING
 
 #include <iostream>
 #include <ctime>
@@ -209,5 +211,4 @@ public:
                      boost::numeric::ublas::matrix<double>& EstBiomass);
 };
 
-
-
+#endif

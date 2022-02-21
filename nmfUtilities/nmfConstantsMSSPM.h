@@ -89,6 +89,7 @@ namespace nmfConstantsMSSPM
      const double NoFishingMortality   = -1.0;
      const double MaxOutOfBounds       = 9999999.0;
      const double MaxValidProgressYValue = 90000.0;
+     const double NoData               = -99999.0;
      const bool   RotateLabels         = true;
      const bool   DontRotateLabels     = false;
      const int    MaxNumberLogFiles    =  50;
@@ -163,8 +164,8 @@ namespace nmfConstantsMSSPM
      const bool   WhiteIfEditable                  = false;
      const bool   ShowHistoricalDelimiterLine      = true;
      const bool   DontShowHistoricalDelimiterLine  = false;
-
-
+     const bool   AllowBlanks                      = true;
+     const bool   DontAllowBlanks                  = false;
 
      const std::string  HiddenDir                      = ".MSSPM";
      const std::string  HiddenDataDir                  = ".MSSPM/data";

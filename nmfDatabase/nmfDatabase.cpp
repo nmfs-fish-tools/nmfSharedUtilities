@@ -1810,6 +1810,7 @@ nmfDatabase::getTimeSeriesDataByGuild(
         GuildNameToNumMap[guildName.toStdString()] = num++;
     }
     getSpeciesGuildMap(SpeciesToGuildMap);
+    double val = 0;
     for (int i=0; i<NumSpecies; ++i) {
         SpeciesName = dataMap["SpeName"][m];
         GuildName   = SpeciesToGuildMap[SpeciesName];
@@ -1831,7 +1832,12 @@ nmfDatabase::getTimeSeriesDataByGuild(
                     TableData(time,GuildNum)       += std::stod(dataMap["Value"][m++]); // C
                     DenominatorData(time,GuildNum) += OutputBiomass(time,i);            //  /B(c)
                 } else {
-                    TableData(time,GuildNum)       += std::stod(dataMap["Value"][m++]);
+                    val = std::stod(dataMap["Value"][m++]);
+                    if (val != nmfConstantsMSSPM::NoData) {
+                        TableData(time,GuildNum)       += val;
+                    } else {
+                        TableData(time,GuildNum)        = 0; // nmfConstantsMSSPM::NoData;
+                    }
                 }
             }
         }

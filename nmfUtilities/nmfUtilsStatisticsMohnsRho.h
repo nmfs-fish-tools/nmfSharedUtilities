@@ -28,7 +28,8 @@
  * Please cite the author(s) in any work or product based on this material.
  */
 
-#pragma once
+#ifndef NMF_UTILS_STATISTICS_MOHNS_RHO
+#define NMF_UTILS_STATISTICS_MOHNS_RHO
 
 #include <iostream>
 #include <ctime>
@@ -125,5 +126,4 @@ public:
 
 };
 
-
-
+#endif

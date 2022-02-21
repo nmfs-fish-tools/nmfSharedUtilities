@@ -29,7 +29,8 @@
  * Please cite the author(s) in any work or product based on this material.
  */
 
-#pragma once
+#ifndef NMF_UTILS_QT
+#define NMF_UTILS_QT
 
 #include <iostream>
 #include <fstream>
@@ -292,6 +293,12 @@ namespace nmfUtilsQt {
      * @param stringValue : the string value to check and modify if necessary
      */
     void checkForAndReplaceInvalidCharacters(QString& stringValue);
+    /**
+     * @brief Checks the passed tableview for any blanks
+     * @param tableview : tableview to check for blanks
+     * @return true if no blanks found, false otherwise
+     */
+    bool checkTableForBlanks(QTableView* tableview);
     /**
      * @brief Clears the current tableView selection or the entire tableView if there's no selection
      * @param qtApp : qt application
@@ -587,6 +594,7 @@ namespace nmfUtilsQt {
      * @param inputFilename : CSV filename if default is not desired
      * @param firstLineReadOnly : boolean to make the first line of the table read-only with gray background
      * @param scientificNotation : boolean to display data using scientific notation
+     * @param allowBlanks : if true allows missing data to be shown as blanks; if false, missing data will be shown as 0.0
      * @param nonZeroCell : row,col of first non-zero cell; used to set the pct range spin box where appropriate
      * @param errorMsg : error message produced during the load
      * @return : Boolean signifying a successful load (true) or an unsuccessful load (false)
@@ -597,6 +605,7 @@ namespace nmfUtilsQt {
                         const QString& inputFilename,
                         const bool& firstLineReadOnly,
                         const bool& scientificNotation,
+                        const bool& allowBlanks,
                         std::pair<int,int>& nonZeroCell,
                         QString& errorMsg);
     /**
@@ -667,6 +676,20 @@ namespace nmfUtilsQt {
      */
     void reselectTableViewCells(QTableView* tv,
                                 QModelIndexList indexes);
+    /**
+     * @brief Checks tables for blanks and min<max
+     * @param logger : application logger pointer
+     * @param parent : parent widget over which to display error messages
+     * @param tableview : main table
+     * @param minTableview : table of minimum values
+     * @param maxTableview : table of maximum values
+     * @return true if passed all tests, false if any tests failed
+     */
+    bool runAllTableChecks(nmfLogger*  logger,
+                           QWidget*    parent,
+                           QTableView* tableview,
+                           QTableView* minTableview,
+                           QTableView* maxTableview);
     /**
      * @brief Saves the table consisting of all QComboBoxes to a .csv file
      * @param parentTabWidget : parent widget
@@ -953,3 +976,5 @@ namespace nmfUtilsQt {
                            const std::string& msg,
                            int& pInc);
 } // end namespace
+
+#endif

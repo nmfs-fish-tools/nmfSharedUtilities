@@ -28,7 +28,9 @@
  *
  * Please cite the author(s) in any work or product based on this material.
  */
-#pragma once
+
+#ifndef NMF_LOGGER
+#define NMF_LOGGER
 
 #include <iostream>
 #include <ctime>
@@ -77,5 +79,5 @@ public:
     void logMsg(int color,std::string msg);
 };
 
-
+#endif
 

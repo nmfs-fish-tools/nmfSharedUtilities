@@ -334,128 +334,6 @@ std::cout << "*** BeesAlgorithm::initializeParameterRangesAndPatchSizes ** " << 
 
 
 void
-BeesAlgorithm::rescaleMinMax(const boost::numeric::ublas::matrix<double> &matrix,
-                                   boost::numeric::ublas::matrix<double> &rescaledMatrix)
-{
-    int numYears   = matrix.size1();
-    int numSpecies = matrix.size2();
-    double den;
-    double minVal;
-    double maxVal;
-    std::vector<double> minValues(numSpecies,0);
-    std::vector<double> maxValues(numSpecies,0);
-    std::vector<double> tmp(numYears,0);
-
-    // Find min,max values for each column of matrix
-    for (int species=0; species<numSpecies; ++species) {
-        for (int time=0; time<numYears; ++time) {
-            tmp[time] = matrix(time,species);
-        }
-        std::sort(tmp.begin(),tmp.end());
-        minValues[species] = tmp.front();
-        maxValues[species] = tmp.back();
-    }
-
-    // Rescale each column of the matrix with (x - min)/(max-min) formula.
-    for (int species=0; species<numSpecies; ++species) {
-        minVal = minValues[species];
-        maxVal = maxValues[species];
-        den    = maxVal - minVal;
-        for (int time=0; time<numYears; ++time) {
-            rescaledMatrix(time,species) = (matrix(time,species) - minVal) / den;  // min max normalization
-        }
-    }
-}
-
-
-
-void
-BeesAlgorithm::rescaleMean(const boost::numeric::ublas::matrix<double> &matrix,
-                                 boost::numeric::ublas::matrix<double> &rescaledMatrix)
-{
-    int numYears   = matrix.size1();
-    int numSpecies = matrix.size2();
-    double den;
-    double minVal;
-    double maxVal;
-    double avgVal;
-    std::vector<double> minValues(numSpecies,0);
-    std::vector<double> maxValues(numSpecies,0);
-    std::vector<double> avgValues(numSpecies,0);
-    std::vector<double> tmp(numYears,0);
-
-    // Find min,max values for each column of matrix
-    for (int species=0; species<numSpecies; ++species) {
-        avgVal = 0;
-        for (int time=0; time<numYears; ++time) {
-            tmp[time] = matrix(time,species);
-            avgVal += tmp[time];
-        }
-        avgVal /= numYears;
-        std::sort(tmp.begin(),tmp.end());
-        minValues[species] = tmp.front();
-        maxValues[species] = tmp.back();
-        avgValues[species] = avgVal;
-    }
-
-    // Rescale each column of the matrix with (x - min)/(max-min) formula.
-    for (int species=0; species<numSpecies; ++species) {
-        minVal = minValues[species];
-        maxVal = maxValues[species];
-        den    = maxVal - minVal;
-        avgVal = avgValues[species];
-        for (int time=0; time<numYears; ++time) {
-            rescaledMatrix(time,species) = (matrix(time,species) - avgVal) / den; // mean normalization
-        }
-    }
-}
-
-
-void
-BeesAlgorithm::rescaleZScore(const boost::numeric::ublas::matrix<double> &matrix,
-                                   boost::numeric::ublas::matrix<double> &rescaledMatrix)
-{
-    int numYears   = matrix.size1();
-    int numSpecies = matrix.size2();
-    double avgVal;
-    double val;
-    double sigVal;
-    double diff;
-    std::vector<double> avgValues(numSpecies,0);
-    std::vector<double> sigma(numSpecies,0);
-
-    // Find min,max values for each column of matrix
-    for (int species=0; species<numSpecies; ++species) {
-        avgVal = 0;
-        for (int time=0; time<numYears; ++time) {
-            avgVal += matrix(time,species);
-        }
-        avgVal /= numYears;
-        avgValues[species] = avgVal;
-    }
-
-    // Find standard deviation
-    for (int species=0; species<numSpecies; ++species) {
-        val = 0;
-        for (int time=0; time<numYears; ++time) {
-            diff = (matrix(time,species) - avgVal);
-            val += diff*diff;
-        }
-        val /= numYears;
-        sigma[species] = std::sqrt(val);
-    }
-
-    // Rescale each column of the matrix with (x - min)/(max-min) formula.
-    for (int species=0; species<numSpecies; ++species) {
-        avgVal = avgValues[species];
-        sigVal = sigma[species];
-        for (int time=0; time<numYears; ++time) {
-            rescaledMatrix(time,species) = (matrix(time,species) - avgVal) / sigVal; // standardization or z score normalization
-        }
-    }
-}
-
-void
 BeesAlgorithm::extractInitBiomass(const std::vector<double>& parameters,
                                   int&                       startPos,
                                   std::vector<double>&       initBiomass)
@@ -467,7 +345,6 @@ BeesAlgorithm::extractInitBiomass(const std::vector<double>& parameters,
     }
     startPos = numInitBiomassParameters;
 }
-
 
 void
 BeesAlgorithm::extractGrowthParameters(const std::vector<double>& parameters,
@@ -485,7 +362,6 @@ BeesAlgorithm::extractGrowthParameters(const std::vector<double>& parameters,
                                         systemCarryingCapacity);
     }
 }
-
 
 void
 BeesAlgorithm::extractHarvestParameters(const std::vector<double>& parameters,
@@ -800,18 +676,18 @@ if (estBiomassVal < 0) {
 
     // Scale the data
     if (m_Scaling == "Min Max") {
-        rescaleMinMax(estBiomassSpecies, estBiomassRescaled);
-        rescaleMinMax(m_ObsBiomassBySpeciesOrGuilds, obsBiomassBySpeciesOrGuildsRescaled);
+        nmfUtils::rescaleMatrixMinMax(estBiomassSpecies, estBiomassRescaled);
+        nmfUtils::rescaleMatrixMinMax(m_ObsBiomassBySpeciesOrGuilds, obsBiomassBySpeciesOrGuildsRescaled);
     } else if (m_Scaling == "Mean") {
-        rescaleMean(estBiomassSpecies, estBiomassRescaled);
-        rescaleMean(m_ObsBiomassBySpeciesOrGuilds, obsBiomassBySpeciesOrGuildsRescaled);
+        nmfUtils::rescaleMatrixMean(estBiomassSpecies, estBiomassRescaled);
+        nmfUtils::rescaleMatrixMean(m_ObsBiomassBySpeciesOrGuilds, obsBiomassBySpeciesOrGuildsRescaled);
     } else if (m_Scaling == "Z-Score") {
-        rescaleZScore(estBiomassSpecies, estBiomassRescaled);
-        rescaleZScore(m_ObsBiomassBySpeciesOrGuilds, obsBiomassBySpeciesOrGuildsRescaled);
+        nmfUtils::rescaleMatrixZScore(estBiomassSpecies, estBiomassRescaled);
+        nmfUtils::rescaleMatrixZScore(m_ObsBiomassBySpeciesOrGuilds, obsBiomassBySpeciesOrGuildsRescaled);
     } else {
-//        std::cout << "Error: No Scaling Algorithm detected. Defaulting to Min Max." << std::endl;
-        rescaleMinMax(estBiomassSpecies, estBiomassRescaled);
-        rescaleMinMax(m_ObsBiomassBySpeciesOrGuilds, obsBiomassBySpeciesOrGuildsRescaled);
+//      std::cout << "Error: No Scaling Algorithm detected. Defaulting to Min Max." << std::endl;
+        nmfUtils::rescaleMatrixMinMax(estBiomassSpecies, estBiomassRescaled);
+        nmfUtils::rescaleMatrixMinMax(m_ObsBiomassBySpeciesOrGuilds, obsBiomassBySpeciesOrGuildsRescaled);
     }
 
     // Calculate fitness using the appropriate objective criterion

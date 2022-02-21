@@ -87,6 +87,7 @@ public:
      * @param yMax : maximum y value
      * @param lineData : matrix containing the line data
      * @param scatterData : matrix containing the scatter data
+     * @param skipScatterData : matrix containing booleans signifying if the corresponding scatterData point should be "skipped over" (i.e., not displayed)
      * @param rowLabels : labels along the x-axis
      * @param columnLabels : labels along the y-axis
      * @param mainTitle : the main title for the chart
@@ -114,6 +115,7 @@ public:
             const double& yMax,
             const boost::numeric::ublas::matrix<double>& lineData,
             const boost::numeric::ublas::matrix<double>& scatterData,
+            const boost::numeric::ublas::matrix<double>& skipScatterData,
             const QStringList& rowLabels,
             const QStringList& columnLabels,
             std::string& mainTitle,

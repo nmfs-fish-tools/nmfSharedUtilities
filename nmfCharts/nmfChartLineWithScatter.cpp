@@ -20,6 +20,7 @@ nmfChartLineWithScatter::populateChart(
         const double &YMaxVal,
         const boost::numeric::ublas::matrix<double> &YAxisData,
         const boost::numeric::ublas::matrix<double> &ScatterData,
+        const boost::numeric::ublas::matrix<double> &SkipScatterData,
         const QStringList &rowLabels,
         const QStringList &columnLabels,
         std::string &mainTitle,
@@ -97,7 +98,9 @@ nmfChartLineWithScatter::populateChart(
         scatterSeries->setMarkerSize(10);
         scatterSeries->setColor(scatterColor);
         for (unsigned int j=XStartVal-XOffset; j<ScatterData.size1(); ++j) {
-            scatterSeries->append(j+XOffset,ScatterData(j,0)); // Change 0 if more than one type of scatter points
+            if (! SkipScatterData(j,0)) {
+                scatterSeries->append(j+XOffset,ScatterData(j,0)); // Change 0 if more than one type of scatter points
+            }
         }
         chart->addSeries(scatterSeries);
         scatterSeries->setName(scatterSeriesName);

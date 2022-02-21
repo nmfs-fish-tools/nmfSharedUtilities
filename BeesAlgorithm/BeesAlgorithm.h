@@ -117,12 +117,6 @@ private:
                               const std::string& harvestForm,
                               const std::string& competitionForm,
                               const std::string& predationForm);
-    void rescaleMean(const boost::numeric::ublas::matrix<double> &matrix,
-                           boost::numeric::ublas::matrix<double> &rescaledMatrix);
-    void rescaleMinMax(const boost::numeric::ublas::matrix<double> &matrix,
-                             boost::numeric::ublas::matrix<double> &rescaledMatrix);
-    void rescaleZScore(const boost::numeric::ublas::matrix<double> &matrix,
-                             boost::numeric::ublas::matrix<double> &rescaledMatrix);
     std::unique_ptr<Bee> searchNeighborhoodForBestBee(std::unique_ptr<Bee> bestSite,
                                                       int &neighborhoodSize);
     std::unique_ptr<Bee> searchParameterSpaceForBestBee(int& runNum,

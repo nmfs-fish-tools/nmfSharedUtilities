@@ -25,7 +25,8 @@
  * Please cite the author(s) in any work or product based on this material.
  */
 
-#pragma once
+#ifndef NMF_UTILS_SOLVERS
+#define NMF_UTILS_SOLVERS
 
 #include <iostream>
 #include <string>
@@ -60,3 +61,4 @@ void SolveF(const double Catch,
 
 }
 
+#endif

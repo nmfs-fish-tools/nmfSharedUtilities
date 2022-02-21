@@ -27,7 +27,8 @@
  * Please cite the author(s) in any work or product based on this material.
  */
 
-#pragma once
+#ifndef NMF_STRUCTSQT
+#define NMF_STRUCTSQT
 
 #include <iostream>
 #include <string>
@@ -353,6 +354,7 @@ struct ModelDataStruct {
     std::vector<EstimateRunBox> EstimateRunBoxes;
 };
 
-
 }
+
+#endif
 

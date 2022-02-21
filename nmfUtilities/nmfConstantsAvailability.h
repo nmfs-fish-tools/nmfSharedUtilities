@@ -28,7 +28,8 @@
  * Please cite the author(s) in any work or product based on this material.
  */
 
-#pragma once
+#ifndef NMF_CONSTANTS_AVAILABILITY
+#define NMF_CONSTANTS_AVAILABILITY
 
 #include <iostream>
 #include <vector>
@@ -118,3 +119,4 @@ namespace nmfConstantsAvailability
         "Modified Holling Type III"};
 }
 
+#endif

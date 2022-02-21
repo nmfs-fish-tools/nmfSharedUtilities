@@ -200,9 +200,9 @@ Functions</h2></td></tr>
 <tr class="memitem:af8f04562abe77258f57168458db52941"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#af8f04562abe77258f57168458db52941">loadCVSFileCovariate</a> (QTabWidget *parentTabWidget, QTableView *tableView, const QString &amp;inputDataPath, const QString &amp;inputFilename, QString &amp;errorMsg)</td></tr>
 <tr class="memdesc:af8f04562abe77258f57168458db52941"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a time series .csv file into a QTableView.  <a href="namespacenmf_utils_qt.html#af8f04562abe77258f57168458db52941">More...</a><br /></td></tr>
 <tr class="separator:af8f04562abe77258f57168458db52941"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37fdbe6c158ecddfd30a34d1060b55f7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a37fdbe6c158ecddfd30a34d1060b55f7">loadTimeSeries</a> (QTabWidget *parentTabWidget, QTableView *tableView, const QString &amp;inputDataPath, const QString &amp;inputFilename, const bool &amp;firstLineReadOnly, const bool &amp;scientificNotation, std::pair&lt; int, int &gt; &amp;nonZeroCell, QString &amp;errorMsg)</td></tr>
-<tr class="memdesc:a37fdbe6c158ecddfd30a34d1060b55f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a time series .csv file into a QTableView.  <a href="namespacenmf_utils_qt.html#a37fdbe6c158ecddfd30a34d1060b55f7">More...</a><br /></td></tr>
-<tr class="separator:a37fdbe6c158ecddfd30a34d1060b55f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02b886ca249046e89cd7618b499b9085"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a02b886ca249046e89cd7618b499b9085">loadTimeSeries</a> (QTabWidget *parentTabWidget, QTableView *tableView, const QString &amp;inputDataPath, const QString &amp;inputFilename, const bool &amp;firstLineReadOnly, const bool &amp;scientificNotation, const bool &amp;allowBlanks, std::pair&lt; int, int &gt; &amp;nonZeroCell, QString &amp;errorMsg)</td></tr>
+<tr class="memdesc:a02b886ca249046e89cd7618b499b9085"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a time series .csv file into a QTableView.  <a href="namespacenmf_utils_qt.html#a02b886ca249046e89cd7618b499b9085">More...</a><br /></td></tr>
+<tr class="separator:a02b886ca249046e89cd7618b499b9085"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88a7290840c8f1ed4c13682b280c319c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a88a7290840c8f1ed4c13682b280c319c">saveTableWidgetData</a> (QTabWidget *parentTabWidget, QTableWidget *tableWidget, QString &amp;inputDataPath, const QString &amp;outputFilename)</td></tr>
 <tr class="memdesc:a88a7290840c8f1ed4c13682b280c319c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save the passed QTableWidget data to a .csv file.  <a href="namespacenmf_utils_qt.html#a88a7290840c8f1ed4c13682b280c319c">More...</a><br /></td></tr>
 <tr class="separator:a88a7290840c8f1ed4c13682b280c319c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -227,6 +227,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a35f68a447343a380c47bfa1d31b948f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a35f68a447343a380c47bfa1d31b948f1">checkForAndReplaceInvalidCharacters</a> (QString &amp;stringValue)</td></tr>
 <tr class="memdesc:a35f68a447343a380c47bfa1d31b948f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes any non-alphanumeric characters and replaces any space characters with an underscore character.  <a href="namespacenmf_utils_qt.html#a35f68a447343a380c47bfa1d31b948f1">More...</a><br /></td></tr>
 <tr class="separator:a35f68a447343a380c47bfa1d31b948f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f800455f47d750b01597626c07b9220"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a8f800455f47d750b01597626c07b9220">checkTableForBlanks</a> (QTableView *tableview)</td></tr>
+<tr class="memdesc:a8f800455f47d750b01597626c07b9220"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks the passed tableview for any blanks.  <a href="namespacenmf_utils_qt.html#a8f800455f47d750b01597626c07b9220">More...</a><br /></td></tr>
+<tr class="separator:a8f800455f47d750b01597626c07b9220"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a217735a158df428b111d43cffa4684db"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a217735a158df428b111d43cffa4684db">extractTag</a> (const QString filename, QString &amp;tag)</td></tr>
 <tr class="memdesc:a217735a158df428b111d43cffa4684db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the embedded tag from the passed filename.  <a href="namespacenmf_utils_qt.html#a217735a158df428b111d43cffa4684db">More...</a><br /></td></tr>
 <tr class="separator:a217735a158df428b111d43cffa4684db"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -305,6 +308,9 @@ Functions</h2></td></tr>
 <tr class="memitem:abe56c19cb8cd59dbf3d6278bf816fb16"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#abe56c19cb8cd59dbf3d6278bf816fb16">reselectTableViewCells</a> (QTableView *tv, QModelIndexList indexes)</td></tr>
 <tr class="memdesc:abe56c19cb8cd59dbf3d6278bf816fb16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reselects the passed indexes from within the passed tableview.  <a href="namespacenmf_utils_qt.html#abe56c19cb8cd59dbf3d6278bf816fb16">More...</a><br /></td></tr>
 <tr class="separator:abe56c19cb8cd59dbf3d6278bf816fb16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc5d55a8ba2ad130a52311d0ea13b7d3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#acc5d55a8ba2ad130a52311d0ea13b7d3">runAllTableChecks</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, QWidget *parent, QTableView *tableview, QTableView *minTableview, QTableView *maxTableview)</td></tr>
+<tr class="memdesc:acc5d55a8ba2ad130a52311d0ea13b7d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks tables for blanks and min&lt;max.  <a href="namespacenmf_utils_qt.html#acc5d55a8ba2ad130a52311d0ea13b7d3">More...</a><br /></td></tr>
+<tr class="separator:acc5d55a8ba2ad130a52311d0ea13b7d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7257537712ae66d36e7f4854f54dec86"><td class="memItemLeft" align="right" valign="top">QModelIndexList&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a7257537712ae66d36e7f4854f54dec86">getSelectedTableViewCells</a> (QTableView *tv)</td></tr>
 <tr class="memdesc:a7257537712ae66d36e7f4854f54dec86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a list of selected tableview cells.  <a href="namespacenmf_utils_qt.html#a7257537712ae66d36e7f4854f54dec86">More...</a><br /></td></tr>
 <tr class="separator:a7257537712ae66d36e7f4854f54dec86"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -771,6 +777,33 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a8f800455f47d750b01597626c07b9220"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f800455f47d750b01597626c07b9220">&#9670;&nbsp;</a></span>checkTableForBlanks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfUtilsQt::checkTableForBlanks </td>
+          <td>(</td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tableview</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks the passed tableview for any blanks. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tableview</td><td>: tableview to check for blanks </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if no blanks found, false otherwise </dd></dl>
 
 </div>
 </div>
@@ -2046,8 +2079,8 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
 
 </div>
 </div>
-<a id="a37fdbe6c158ecddfd30a34d1060b55f7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a37fdbe6c158ecddfd30a34d1060b55f7">&#9670;&nbsp;</a></span>loadTimeSeries()</h2>
+<a id="a02b886ca249046e89cd7618b499b9085"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02b886ca249046e89cd7618b499b9085">&#9670;&nbsp;</a></span>loadTimeSeries()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2091,6 +2124,12 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>allowBlanks</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">std::pair&lt; int, int &gt; &amp;&#160;</td>
           <td class="paramname"><em>nonZeroCell</em>, </td>
         </tr>
@@ -2117,6 +2156,7 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
     <tr><td class="paramname">inputFilename</td><td>: CSV filename if default is not desired </td></tr>
     <tr><td class="paramname">firstLineReadOnly</td><td>: boolean to make the first line of the table read-only with gray background </td></tr>
     <tr><td class="paramname">scientificNotation</td><td>: boolean to display data using scientific notation </td></tr>
+    <tr><td class="paramname">allowBlanks</td><td>: if true allows missing data to be shown as blanks; if false, missing data will be shown as 0.0 </td></tr>
     <tr><td class="paramname">nonZeroCell</td><td>: row,col of first non-zero cell; used to set the pct range spin box where appropriate </td></tr>
     <tr><td class="paramname">errorMsg</td><td>: error message produced during the load </td></tr>
   </table>
@@ -2432,6 +2472,65 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="acc5d55a8ba2ad130a52311d0ea13b7d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc5d55a8ba2ad130a52311d0ea13b7d3">&#9670;&nbsp;</a></span>runAllTableChecks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfUtilsQt::runAllTableChecks </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classnmf_logger.html">nmfLogger</a> *&#160;</td>
+          <td class="paramname"><em>logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QWidget *&#160;</td>
+          <td class="paramname"><em>parent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tableview</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>minTableview</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>maxTableview</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks tables for blanks and min&lt;max. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">logger</td><td>: application logger pointer </td></tr>
+    <tr><td class="paramname">parent</td><td>: parent widget over which to display error messages </td></tr>
+    <tr><td class="paramname">tableview</td><td>: main table </td></tr>
+    <tr><td class="paramname">minTableview</td><td>: table of minimum values </td></tr>
+    <tr><td class="paramname">maxTableview</td><td>: table of maximum values </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if passed all tests, false if any tests failed </dd></dl>
 
 </div>
 </div>

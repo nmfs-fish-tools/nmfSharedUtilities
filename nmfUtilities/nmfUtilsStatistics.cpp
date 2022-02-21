@@ -515,8 +515,10 @@ void calculateSSResiduals(const int& NumSpeciesOrGuilds,
     for (int i=0;i<NumSpeciesOrGuilds;++i) {
         sum = 0;
         for (int j=0; j<=RunLength;++j) {
-            diff = Observed[m] - Estimated[m];
-            sum += diff*diff;
+            if (Observed[m] != nmfConstantsMSSPM::NoData) {
+                diff = Observed[m] - Estimated[m];
+                sum += diff*diff;
+            }
             ++m;
         }
         SSResiduals.push_back(sum);
@@ -601,11 +603,13 @@ bool calculateR(const int& NumSpeciesOrGuilds,
         sumObs = 0;
         sumEst = 0;
         for (int j=0; j<=RunLength; ++j) {
-            diffObs = (Observed[m]  - MeanObserved[i]);
-            diffEst = (Estimated[m] - MeanEstimated[i]);
-            num += diffObs*diffEst;
-            sumObs += diffObs*diffObs;
-            sumEst += diffEst*diffEst;
+            if (Observed[m] != nmfConstantsMSSPM::NoData) {
+                diffObs = (Observed[m]  - MeanObserved[i]);
+                diffEst = (Estimated[m] - MeanEstimated[i]);
+                num    += diffObs*diffEst;
+                sumObs += diffObs*diffObs;
+                sumEst += diffEst*diffEst;
+            }
             ++m;
         }
         den = sqrt(sumObs*sumEst);
@@ -627,18 +631,23 @@ bool calculateRMSE(const int& NumSpeciesOrGuilds,
     int m = 0;
     double sum;
     double diff;
+    int numYearsWithoutBlanks = 0;
 
     if (RunLength == 0) {
         return false;
     }
     for (int i=0; i<NumSpeciesOrGuilds; ++i) {
         sum = 0;
+        numYearsWithoutBlanks = 0;
         for (int j=0; j<=RunLength; ++j) {
-            diff = Estimated[m]-Observed[m];
-            sum += diff*diff;
+            if (Observed[m] != nmfConstantsMSSPM::NoData) {
+                diff = Estimated[m] - Observed[m];
+                sum += diff*diff;
+                ++numYearsWithoutBlanks;
+            }
             ++m;
         }
-        RMSE.push_back(sqrt(sum/(RunLength+1)));
+        RMSE.push_back(sqrt(sum/numYearsWithoutBlanks));
     }
 
     return true;
@@ -651,6 +660,7 @@ bool calculateRI(const int& NumSpeciesOrGuilds,
                    std::vector<double>& RI)
 {
     int m = 0;
+    int numYearsWithoutBlanks = 0;
     double sum;
     double val;
 
@@ -660,12 +670,16 @@ bool calculateRI(const int& NumSpeciesOrGuilds,
     RI.clear();
     for (int i=0; i<NumSpeciesOrGuilds; ++i) {
         sum = 0;
+        numYearsWithoutBlanks = 0;
         for (int j=0; j<=RunLength; ++j) {
-            val = log(Observed[m]/Estimated[m]);
-            sum += val*val;
+            if (Observed[m] != nmfConstantsMSSPM::NoData) {
+                val = log(Observed[m]/Estimated[m]);
+                sum += val*val;
+                ++numYearsWithoutBlanks;
+            }
             ++m;
         }
-        RI.push_back(exp(sqrt((1.0/(RunLength+1))*sum)));
+        RI.push_back(exp(sqrt((1.0/numYearsWithoutBlanks)*sum)));
     }
 
     return true;
@@ -689,6 +703,7 @@ bool calculateAAE(const int& NumSpeciesOrGuilds,
                   std::vector<double>& AAE)
 {
     int m = 0;
+    int numYearsWithoutBlanks = 0;
     double sum;
 
     if (RunLength == 0) {
@@ -697,11 +712,15 @@ bool calculateAAE(const int& NumSpeciesOrGuilds,
     AAE.clear();
     for (int i=0; i<NumSpeciesOrGuilds; ++i) {
         sum = 0;
+        numYearsWithoutBlanks = 0;
         for (int j=0; j<=RunLength; ++j) {
-            sum += fabs(Estimated[m] - Observed[m]);
+            if (Observed[m] != nmfConstantsMSSPM::NoData) {
+                sum += fabs(Estimated[m] - Observed[m]);
+                ++numYearsWithoutBlanks;
+            }
             ++m;
         }
-        AAE.push_back(sum/(RunLength+1));
+        AAE.push_back(sum/numYearsWithoutBlanks);
     }
 
     return true;
@@ -725,10 +744,12 @@ bool calculateMEF(const int& NumSpeciesOrGuilds,
     for (int i=0; i<NumSpeciesOrGuilds; ++i) {
         sum1 = sum2 = 0;
         for (int j=0; j<=RunLength; ++j) {
-            diff1 = Observed[m]  - MeanObserved[i];
-            sum1 += diff1*diff1;
-            diff2 = Estimated[m] - Observed[m];
-            sum2 += diff2*diff2;
+            if (Observed[m] != nmfConstantsMSSPM::NoData) {
+                diff1 = Observed[m]  - MeanObserved[i];
+                sum1 += diff1*diff1;
+                diff2 = Estimated[m] - Observed[m];
+                sum2 += diff2*diff2;
+            }
             ++m;
         }
         if (sum1 == 0) {
@@ -867,14 +888,17 @@ double calculateMean(
         const int speciesNum)
 {
     int numYears   = ObsBiomass.size1();
+    int numYearsWithData = 0; // Not equal to numYears because there may be blanks in observed biomass
     double meanObs = 0.0;
 
     for (int time=0; time<numYears; ++time) {
-        meanObs += ObsBiomass(time,speciesNum);
+        if (ObsBiomass(time,speciesNum) != nmfConstantsMSSPM::NoData) {
+            meanObs += ObsBiomass(time,speciesNum);
+            ++numYearsWithData;
+        }
     }
 
-    // meanObs /= (nrows*ncols);
-    meanObs /= numYears;
+    meanObs /= numYearsWithData;
     return meanObs;
 }
 
@@ -894,7 +918,7 @@ double calculateMaximumLikelihoodNoRescale(
     double finalValue = 0;
     int numYears   = EstBiomass.size1();
     int numSpecies = EstBiomass.size2();
-    int NumPoints  = numYears;
+    int NumPoints  = 0; // Not equal to numYears if there are blanks in observed biomass
     std::vector<double> weights;
 
     for (int j=0; j<numSpecies; ++j) {
@@ -909,8 +933,11 @@ double calculateMaximumLikelihoodNoRescale(
         // Calculate standard deviation of the sample sigma = sqrt(1/(N-1) * sum[(x(i)-x(m))^2])
         sumSq = 0;
         for (int i=0; i<numYears; ++i) {
-            diff = ObsBiomass(i,j) - mu;
-            sumSq += diff*diff;
+            if (ObsBiomass(i,j) != nmfConstantsMSSPM::NoData) {
+                diff = ObsBiomass(i,j) - mu;
+                sumSq += diff*diff;
+                ++NumPoints;
+            }
         }
 
         sigma = sqrt((1.0/(NumPoints-1))*sumSq);
@@ -922,9 +949,11 @@ double calculateMaximumLikelihoodNoRescale(
         // Calculate MLE
         finalValue = 0;
         for (int i=0; i<numYears; ++i) {
-            value = (ObsBiomass(i,j) - EstBiomass(i,j)) / sigma;
-            value =  -(k3 + 0.5*value*value + log(sigma));
-            finalValue += value;
+            if (ObsBiomass(i,j) != nmfConstantsMSSPM::NoData) {
+                value = (ObsBiomass(i,j) - EstBiomass(i,j)) / sigma;
+                value =  -(k3 + 0.5*value*value + log(sigma));
+                finalValue += value;
+            }
         }
 
         finalSum += finalValue;
@@ -939,6 +968,7 @@ double calculateModelEfficiency(const boost::numeric::ublas::matrix<double>& Est
 {
     int nrows = EstBiomass.size1();
     int ncols = EstBiomass.size2();
+    int numItems = 0; // Not equal to nrows*ncols if there are blanks in observed biomass
     double diff;
     double meanObs    = 0;
     double deviation  = 0;
@@ -946,17 +976,22 @@ double calculateModelEfficiency(const boost::numeric::ublas::matrix<double>& Est
 
     for (int time=0; time<nrows; ++time) {
         for (int species=0; species<ncols; ++species) {
-            meanObs += ObsBiomass(time,species);
+            if (ObsBiomass(time,species) != nmfConstantsMSSPM::NoData) {
+                meanObs += ObsBiomass(time,species);
+                ++numItems;
+            }
         }
     }
-    meanObs /= (nrows*ncols);
+    meanObs /= numItems;
 
     for (int time=0; time<nrows; ++time) {
         for (int species=0; species<ncols; ++species) {
-            diff = EstBiomass(time,species) - ObsBiomass(time,species);
-            sumSquares += (diff*diff);
-            diff = ObsBiomass(time,species) - meanObs;
-            deviation  += (diff*diff);
+            if (ObsBiomass(time,species) != nmfConstantsMSSPM::NoData) {
+                diff = EstBiomass(time,species) - ObsBiomass(time,species);
+                sumSquares += (diff*diff);
+                diff = ObsBiomass(time,species) - meanObs;
+                deviation  += (diff*diff);
+            }
         }
     }
 
@@ -971,8 +1006,10 @@ double calculateSumOfSquares(const boost::numeric::ublas::matrix<double>& EstBio
 
     for (unsigned time=0; time<EstBiomass.size1(); ++time) {
         for (unsigned species=0; species<EstBiomass.size2(); ++species) {
-            diff = EstBiomass(time,species) - ObsBiomass(time,species);
-            sumSquares += (diff*diff);
+            if (ObsBiomass(time,species) != nmfConstantsMSSPM::NoData) {
+                diff = EstBiomass(time,species) - ObsBiomass(time,species);
+                sumSquares += (diff*diff);
+            }
         }
     }
     return log10(sumSquares+1);

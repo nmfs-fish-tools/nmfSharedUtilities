@@ -25,7 +25,8 @@
  * Please cite the author(s) in any work or product based on this material.
  */
 
-#pragma once
+#ifndef NMF_UTILS_STATISTICS
+#define NMF_UTILS_STATISTICS
 
 #include <iomanip>
 #include <iostream>
@@ -368,4 +369,4 @@ namespace nmfUtilsStatistics {
 
 }
 
-
+#endif

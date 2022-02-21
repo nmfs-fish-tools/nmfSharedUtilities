@@ -425,48 +425,172 @@ bool checkForError(nmfLogger *logger,
  * Rescales matrix Xij by: log base 10 (X)
  */
 void
-rescaleMatrixLog(boost::numeric::ublas::matrix<double> &Matrix)
+rescaleMatrixLog(boost::numeric::ublas::matrix<double> &matrix)
 {
-    int NumRows = Matrix.size1();
-    int NumCols = Matrix.size2();
+    int NumRows = matrix.size1();
+    int NumCols = matrix.size2();
 
     // Rescale the matrix using the min and max values found for each species
     for (auto species=0; species<NumCols; ++species) {
         for (auto time=0; time<NumRows; ++time) {
-            Matrix(time,species) = std::log10(Matrix(time,species));
+            if (matrix(time,species) != nmfConstantsMSSPM::NoData) {
+                matrix(time,species) = std::log10(matrix(time,species));
+            }
         }
     }
 }
 
-/*
- * Rescales matrix Xij by: (X - Xmin) / (Xmax - Xmin)
- */
 void
-rescaleMatrixMinMax(boost::numeric::ublas::matrix<double> &Matrix)
+rescaleMatrixMean(const boost::numeric::ublas::matrix<double> &matrix,
+                        boost::numeric::ublas::matrix<double> &rescaledMatrix)
 {
+    int numYears   = matrix.size1();
+    int numSpecies = matrix.size2();
+    int numYearsWithoutBlanks = 0; // Not equal to numYears if there are blanks in observed biomass
     double den;
-    double min;
-    double max;
-    int NumRows = Matrix.size1();
-    int NumCols = Matrix.size2();
-    std::vector<double> MinValues;
-    std::vector<double> MaxValues;
+    double minVal;
+    double maxVal;
+    double avgVal;
+    double tmpVal;
+    std::vector<double> minValues(numSpecies,0);
+    std::vector<double> maxValues(numSpecies,0);
+    std::vector<double> avgValues(numSpecies,0);
+    std::vector<double> tmp;
+    std::vector<double> numBlankYears;
 
-    // Find min and max values for each species
-    for (auto species=0; species<NumCols; ++species) {
-        boost::numeric::ublas::matrix_column<boost::numeric::ublas::matrix<double> > aMatrixColumn(Matrix,species);
-        auto result = std::minmax_element(aMatrixColumn.begin(), aMatrixColumn.end());
-        MinValues.push_back(*result.first);
-        MaxValues.push_back(*result.second);
+    // Find min,max values for each column of matrix
+    for (int species=0; species<numSpecies; ++species) {
+        avgVal = 0;
+        numBlankYears.push_back(0);
+        tmp.clear();
+        numYearsWithoutBlanks = 0;
+        for (int time=0; time<numYears; ++time) {
+            if (matrix(time,species) != nmfConstantsMSSPM::NoData) {
+                tmpVal = matrix(time,species);
+                tmp.push_back(tmpVal);
+                avgVal += tmpVal;
+                ++numYearsWithoutBlanks;
+            } else {
+                ++numBlankYears[species];
+            }
+        }
+        avgVal /= (numYearsWithoutBlanks-numBlankYears[species]);
+        std::sort(tmp.begin(),tmp.end());
+        minValues[species] = tmp.front();
+        maxValues[species] = tmp.back();
+        avgValues[species] = avgVal;
     }
 
-    // Rescale the matrix using the min and max values found for each species
-    for (auto species=0; species<NumCols; ++species) {
-        min = MinValues[species];
-        max = MaxValues[species];
-        den = (max - min);
-        for (auto time=0; time<NumRows; ++time) {
-            Matrix(time,species) = (Matrix(time,species) - min) / den;
+    // Rescale each column of the matrix with (x - ave)/(max-min) formula.
+    for (int species=0; species<numSpecies; ++species) {
+        minVal = minValues[species];
+        maxVal = maxValues[species];
+        den    = maxVal - minVal;
+        avgVal = avgValues[species];
+        for (int time=0; time<numYears; ++time) {
+            if (matrix(time,species) != nmfConstantsMSSPM::NoData) {
+                rescaledMatrix(time,species) = (matrix(time,species) - avgVal) / den; // mean normalization
+            } else {
+                rescaledMatrix(time,species) = nmfConstantsMSSPM::NoData;
+            }
+        }
+    }
+}
+
+void
+rescaleMatrixMinMax(const boost::numeric::ublas::matrix<double> &matrix,
+                          boost::numeric::ublas::matrix<double> &rescaledMatrix)
+{
+    int numYears   = rescaledMatrix.size1();
+    int numSpecies = rescaledMatrix.size2();
+    double den;
+    double minVal;
+    double maxVal;
+    std::vector<double> minValues(numSpecies,0);
+    std::vector<double> maxValues(numSpecies,0);
+    std::vector<double> tmp;
+
+    // Find min,max values for each column of matrix
+    for (int species=0; species<numSpecies; ++species) {
+        tmp.clear();
+        for (int time=0; time<numYears; ++time) {
+            if (matrix(time,species) != nmfConstantsMSSPM::NoData) {
+                tmp.push_back(matrix(time,species));
+            }
+        }
+        std::sort(tmp.begin(),tmp.end());
+        minValues[species] = tmp.front();
+        maxValues[species] = tmp.back();
+    }
+
+    // Rescale each column of the matrix with (x - min)/(max-min) formula.
+    for (int species=0; species<numSpecies; ++species) {
+        minVal = minValues[species];
+        maxVal = maxValues[species];
+        den    = maxVal - minVal;
+        for (int time=0; time<numYears; ++time) {
+            if (matrix(time,species) != nmfConstantsMSSPM::NoData) {
+                rescaledMatrix(time,species) = (matrix(time,species) - minVal) / den;  // min max normalization
+            } else {
+                rescaledMatrix(time,species) = nmfConstantsMSSPM::NoData;
+            }
+        }
+    }
+}
+
+void
+rescaleMatrixZScore(const boost::numeric::ublas::matrix<double> &matrix,
+                          boost::numeric::ublas::matrix<double> &rescaledMatrix)
+{
+    int numYears   = matrix.size1();
+    int numSpecies = matrix.size2();
+    int numYearsWithoutBlanks = 0; // Not equal to numYears since there may be blanks in observed biomass
+    double avgVal;
+    double val;
+    double sigVal;
+    double diff;
+    std::vector<double> avgValues(numSpecies,0);
+    std::vector<double> sigma(numSpecies,0);
+
+    // Find min,max values for each column of matrix
+    for (int species=0; species<numSpecies; ++species) {
+        avgVal = 0;
+        numYearsWithoutBlanks = 0;
+        for (int time=0; time<numYears; ++time) {
+            if (matrix(time,species) != nmfConstantsMSSPM::NoData) {
+                avgVal += matrix(time,species);
+                ++numYearsWithoutBlanks;
+            }
+        }
+        avgVal /= numYearsWithoutBlanks;
+        avgValues[species] = avgVal;
+    }
+
+    // Find standard deviation
+    for (int species=0; species<numSpecies; ++species) {
+        val = 0;
+        numYearsWithoutBlanks = 0;
+        for (int time=0; time<numYears; ++time) {
+            if (matrix(time,species) != nmfConstantsMSSPM::NoData) {
+                diff = (matrix(time,species) - avgVal);
+                val += diff*diff;
+                ++numYearsWithoutBlanks;
+            }
+        }
+        val /= numYearsWithoutBlanks;
+        sigma[species] = std::sqrt(val);
+    }
+
+    // Rescale each column of the matrix with (x - min)/(sigma) formula.
+    for (int species=0; species<numSpecies; ++species) {
+        avgVal = avgValues[species];
+        sigVal = sigma[species];
+        for (int time=0; time<numYears; ++time) {
+            if (matrix(time,species) != nmfConstantsMSSPM::NoData) {
+                rescaledMatrix(time,species) = (matrix(time,species) - avgVal) / sigVal; // standardization or z score normalization
+            } else {
+                rescaledMatrix(time,species) =  nmfConstantsMSSPM::NoData;
+            }
         }
     }
 }

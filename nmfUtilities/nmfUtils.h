@@ -29,7 +29,8 @@
  * Please cite the author(s) in any work or product based on this material.
  */
 
-#pragma once
+#ifndef NMF_UTILS
+#define NMF_UTILS
 
 #include <ctime>
 #include <cmath>
@@ -493,10 +494,27 @@ namespace nmfUtils {
      */
     void rescaleMatrixLog(boost::numeric::ublas::matrix<double>& matrix);
     /**
+     * @brief rescales the passed matrix by: (X - Xavg) / (Xmax - Xmin) where X is an element of the matrix
+     * @param matrix : the matrix to rescale
+     * @param rescaledMatrix : the rescaled matrix
+     */
+    void rescaleMatrixMean(const boost::numeric::ublas::matrix<double> &matrix,
+                                 boost::numeric::ublas::matrix<double> &rescaledMatrix);
+    /**
      * @brief rescales the passed matrix by: (X - Xmin) / (Xmax - Xmin) where X is an element of the matrix
      * @param matrix : the matrix to rescale
+     * @param rescaledMatrix : the rescaled matrix
      */
-    void rescaleMatrixMinMax(boost::numeric::ublas::matrix<double>& matrix);
+    void rescaleMatrixMinMax(const boost::numeric::ublas::matrix<double>& matrix,
+                                   boost::numeric::ublas::matrix<double>& rescaledMatrix);
+    /**
+     * @brief rescales the passed matrix by: (X - Xavg) / (sigma) where X is an element of the matrix
+     * and sigma is the standard deviation
+     * @param matrix : the matrix to rescale
+     * @param rescaledMatrix : the rescaled matrix
+     */
+    void rescaleMatrixZScore(const boost::numeric::ublas::matrix<double> &matrix,
+                                   boost::numeric::ublas::matrix<double> &rescaledMatrix);
     /**
      * @brief Sets the passed matrix values to the passed resetValue
      * @param mat : matrix to reset
@@ -525,3 +543,4 @@ namespace nmfUtils {
                std::string& str2);
 }
 
+#endif
