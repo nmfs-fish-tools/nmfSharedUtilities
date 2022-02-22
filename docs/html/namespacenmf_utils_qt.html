@@ -164,9 +164,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a1574cafd9968d2214e6d730cd0eaf1a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a1574cafd9968d2214e6d730cd0eaf1a4">convertVector</a> (boost::numeric::ublas::vector&lt; double &gt; &amp;vector, const QString &amp;previousUnits, const QString &amp;currentUnits)</td></tr>
 <tr class="memdesc:a1574cafd9968d2214e6d730cd0eaf1a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assures all fields in passed dataStruct are in the desired units and performing any necessary conversions.  <a href="namespacenmf_utils_qt.html#a1574cafd9968d2214e6d730cd0eaf1a4">More...</a><br /></td></tr>
 <tr class="separator:a1574cafd9968d2214e6d730cd0eaf1a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32fdb32b0c49c77c6c1ae118b61cce9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a32fdb32b0c49c77c6c1ae118b61cce9b">convertMatrix</a> (boost::numeric::ublas::matrix&lt; double &gt; &amp;matrix, const QString &amp;previousUnits, const QString &amp;currentUnits)</td></tr>
-<tr class="memdesc:a32fdb32b0c49c77c6c1ae118b61cce9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assures all fields in passed dataStruct are in the desired units and performing any necessary conversions.  <a href="namespacenmf_utils_qt.html#a32fdb32b0c49c77c6c1ae118b61cce9b">More...</a><br /></td></tr>
-<tr class="separator:a32fdb32b0c49c77c6c1ae118b61cce9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc77b6f23c02b0592beef33a88197c1d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#abc77b6f23c02b0592beef33a88197c1d">convertMatrix</a> (boost::numeric::ublas::matrix&lt; double &gt; &amp;matrix, const QString &amp;previousUnits, const QString &amp;currentUnits, const bool &amp;convertBlanks)</td></tr>
+<tr class="memdesc:abc77b6f23c02b0592beef33a88197c1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assures all fields in passed dataStruct are in the desired units and performing any necessary conversions.  <a href="namespacenmf_utils_qt.html#abc77b6f23c02b0592beef33a88197c1d">More...</a><br /></td></tr>
+<tr class="separator:abc77b6f23c02b0592beef33a88197c1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e17736e37e25786accbcb7369b35075"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a8e17736e37e25786accbcb7369b35075">convertVectorToStrList</a> (const std::vector&lt; std::string &gt; &amp;stdStringVector, QStringList &amp;qStringlist)</td></tr>
 <tr class="memdesc:a8e17736e37e25786accbcb7369b35075"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a vector of std::string types to a QStringList.  <a href="namespacenmf_utils_qt.html#a8e17736e37e25786accbcb7369b35075">More...</a><br /></td></tr>
 <tr class="separator:a8e17736e37e25786accbcb7369b35075"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -981,8 +981,8 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
 
 </div>
 </div>
-<a id="a32fdb32b0c49c77c6c1ae118b61cce9b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32fdb32b0c49c77c6c1ae118b61cce9b">&#9670;&nbsp;</a></span>convertMatrix()</h2>
+<a id="abc77b6f23c02b0592beef33a88197c1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc77b6f23c02b0592beef33a88197c1d">&#9670;&nbsp;</a></span>convertMatrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1003,7 +1003,13 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const QString &amp;&#160;</td>
-          <td class="paramname"><em>currentUnits</em>&#160;</td>
+          <td class="paramname"><em>currentUnits</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>convertBlanks</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1019,6 +1025,7 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
     <tr><td class="paramname">matrix</td><td>: matrix to transform to new units </td></tr>
     <tr><td class="paramname">previousUnits</td><td>: the previous matrix units </td></tr>
     <tr><td class="paramname">currentUnits</td><td>: the new matrix units </td></tr>
+    <tr><td class="paramname">convertBlanks</td><td>: if true, values designated as blanks will be converted; if false, they will not be converted </td></tr>
   </table>
   </dd>
 </dl>

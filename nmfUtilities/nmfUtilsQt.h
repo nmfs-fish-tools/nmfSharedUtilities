@@ -367,11 +367,13 @@ namespace nmfUtilsQt {
      * @param matrix : matrix to transform to new units
      * @param previousUnits : the previous matrix units
      * @param currentUnits : the new matrix units
+     * @param convertBlanks : if true, values designated as blanks will be converted; if false, they will not be converted
      */
     void convertMatrix(
             boost::numeric::ublas::matrix<double>& matrix,
             const QString& previousUnits,
-            const QString& currentUnits);
+            const QString& currentUnits,
+            const bool& convertBlanks);
     /**
      * @brief Assures all fields in passed dataStruct are in the desired units and performing any necessary conversions
      * @param vector : vector to transform to new units

@@ -1087,13 +1087,16 @@ void convertVector(
 void convertMatrix(
         boost::numeric::ublas::matrix<double>& matData,
         const QString& previousUnits,
-        const QString& currentUnits)
+        const QString& currentUnits,
+        const bool& convertBlanks)
 {
     double scaleFactor = calculateUnitsScaleFactor(previousUnits,currentUnits);
 
     for (int row=0; row<(int)matData.size1(); ++row) {
         for (int col=0; col<(int)matData.size2(); ++col) {
-            matData(row,col) *= scaleFactor;
+            if (convertBlanks == nmfConstantsMSSPM::ConvertAll) {
+                matData(row,col) *= scaleFactor;
+            }
         }
     }
 }

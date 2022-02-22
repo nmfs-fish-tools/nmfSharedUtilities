@@ -166,6 +166,8 @@ namespace nmfConstantsMSSPM
      const bool   DontShowHistoricalDelimiterLine  = false;
      const bool   AllowBlanks                      = true;
      const bool   DontAllowBlanks                  = false;
+     const bool   ConvertAll                       = true;
+     const bool   DontConvertBlanks                = false;
 
      const std::string  HiddenDir                      = ".MSSPM";
      const std::string  HiddenDataDir                  = ".MSSPM/data";

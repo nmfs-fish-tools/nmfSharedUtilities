@@ -76,7 +76,7 @@ var searchData=
   ['cleartime_679',['clearTime',['../classnmf_progress_widget.html#aea6acba14449c66e1b0f3c7dfa64a5e5',1,'nmfProgressWidget']]],
   ['complex_680',['Complex',['../namespacenmf_utils_complex.html#a020003d2bfbc31c5e2dcf6fca573dc8a',1,'nmfUtilsComplex']]],
   ['convertcatchunitstovalue_681',['convertCatchUnitsToValue',['../namespacenmf_utils.html#af010db35efa2de5ef973be37587666c1',1,'nmfUtils']]],
-  ['convertmatrix_682',['convertMatrix',['../namespacenmf_utils_qt.html#a32fdb32b0c49c77c6c1ae118b61cce9b',1,'nmfUtilsQt']]],
+  ['convertmatrix_682',['convertMatrix',['../namespacenmf_utils_qt.html#abc77b6f23c02b0592beef33a88197c1d',1,'nmfUtilsQt']]],
   ['convertsizeunitstovalue_683',['convertSizeUnitsToValue',['../namespacenmf_utils.html#a4173396093fd9206cdc7e695e85229ee',1,'nmfUtils']]],
   ['converttableview_684',['convertTableView',['../namespacenmf_utils_qt.html#ad4ab4266f3e62feb5fa0d5be359aef3d',1,'nmfUtilsQt']]],
   ['converttablewidget_685',['convertTableWidget',['../namespacenmf_utils_qt.html#a0e98f8d34c639bb8f41b618ce327bf65',1,'nmfUtilsQt']]],
