@@ -884,62 +884,98 @@ bool calculateMohnsRhoForTimeSeries(
 
 
 double calculateMean(
+        const bool useLogData,
         const boost::numeric::ublas::matrix<double>& ObsBiomass,
         const int speciesNum)
 {
-    int numYears   = ObsBiomass.size1();
+    int numYears = ObsBiomass.size1();
     int numYearsWithData = 0; // Not equal to numYears because there may be blanks in observed biomass
-    double meanObs = 0.0;
+    double sumObsBiomassPerSpecies = 0.0;
 
     for (int time=0; time<numYears; ++time) {
         if (ObsBiomass(time,speciesNum) != nmfConstantsMSSPM::NoData) {
-            meanObs += ObsBiomass(time,speciesNum);
+            if (useLogData) {
+                sumObsBiomassPerSpecies += std::log(ObsBiomass(time,speciesNum));
+            } else {
+                sumObsBiomassPerSpecies += ObsBiomass(time,speciesNum);
+            }
             ++numYearsWithData;
         }
     }
 
-    meanObs /= numYearsWithData;
-    return meanObs;
+    return (sumObsBiomassPerSpecies/numYearsWithData);
 }
 
-
-double calculateMaximumLikelihoodNoRescale(
-        const boost::numeric::ublas::matrix<double>& EstBiomass,
+std::vector<double> calculateSigmasSquared(
         const boost::numeric::ublas::matrix<double>& ObsBiomass)
 {
-    // First find sigma = sqrt(1/N sum[(x(i)-mu)^2] )
+    int numYears = (int)ObsBiomass.size1();
+    int NumPoints = 0;
     double mu;
-    double sigma = 0.0;
     double diff;
-    double sumSq = 0;
-    double finalSum = 0;
-    double k3 = 0;
-    double value = 0;
-    double finalValue = 0;
-    int numYears   = EstBiomass.size1();
-    int numSpecies = EstBiomass.size2();
-    int NumPoints  = 0; // Not equal to numYears if there are blanks in observed biomass
-    std::vector<double> weights;
+    double sigmaSquared;
+    double sumSq;
+    std::vector<double> sigmasSquared;
 
-    for (int j=0; j<numSpecies; ++j) {
-        weights.push_back(1.0);
-    }
+    for (int species=0; species<(int)ObsBiomass.size2(); ++species) {
 
-    k3 = log(sqrt(2*M_PI));
-    for (int j=0; j<numSpecies; ++j) {
+        mu = calculateMean(nmfConstantsMSSPM::UseLogData,ObsBiomass,species);
 
-        mu = calculateMean(ObsBiomass,j);
-
-        // Calculate standard deviation of the sample sigma = sqrt(1/(N-1) * sum[(x(i)-x(m))^2])
+        // Calculate the sum of the squares of the observed biomass and its mean
         sumSq = 0;
-        for (int i=0; i<numYears; ++i) {
-            if (ObsBiomass(i,j) != nmfConstantsMSSPM::NoData) {
-                diff = ObsBiomass(i,j) - mu;
+        NumPoints = 0;
+        for (int time=0; time<numYears; ++time) {
+            if (ObsBiomass(time,species) != nmfConstantsMSSPM::NoData) {
+                diff   = std::log(ObsBiomass(time,species)) - mu;
                 sumSq += diff*diff;
                 ++NumPoints;
             }
         }
 
+        // Calculate standard deviation of the sample; sigma = sqrt(1/(N-1) * sum[(x(i)-x(m))^2])
+        sigmaSquared = sumSq/(NumPoints-1);
+        if (sigmaSquared == 0) {
+            std::cout << "Error: Found sigma=0 in nmfUtilsStatistics::calculateSigmasSquared" << std::endl;
+            return {};
+        } else {
+           sigmasSquared.push_back(sigmaSquared);
+        }
+    }
+
+    return sigmasSquared;
+}
+
+double calculateMaximumLikelihoodNoRescale(
+        const boost::numeric::ublas::matrix<double>& EstBiomass,
+        const boost::numeric::ublas::matrix<double>& ObsBiomass)
+{
+    double mu;
+    double sigma = 0.0;
+    double diff;
+    double sumSq = 0;
+    double totalMLEForAllSpecies = 0;
+    double obsMinusEstOverSigma = 0;
+    double mlePerSpecies = 0;
+    int numYears   = EstBiomass.size1();
+    int numSpecies = EstBiomass.size2();
+    int NumPoints  = 0; // Not equal to numYears if there are blanks in observed biomass
+
+    for (int species=0; species<numSpecies; ++species) {
+
+        mu = calculateMean(nmfConstantsMSSPM::DontUseLogData,ObsBiomass,species);
+
+        // Calculate the sum of the squares of the observed biomass and its mean
+        sumSq = 0;
+        NumPoints = 0;
+        for (int time=0; time<numYears; ++time) {
+            if (ObsBiomass(time,species) != nmfConstantsMSSPM::NoData) {
+                diff   = ObsBiomass(time,species) - mu;
+                sumSq += diff*diff;
+                ++NumPoints;
+            }
+        }
+
+        // Calculate standard deviation of the sample; sigma = sqrt(1/(N-1) * sum[(x(i)-x(m))^2])
         sigma = sqrt((1.0/(NumPoints-1))*sumSq);
         if (sigma == 0) {
             std::cout << "Error: Found sigma=0 in nmfUtilsStatistics::calculateMaximumLikelihoodNoRescale" << std::endl;
@@ -947,20 +983,21 @@ double calculateMaximumLikelihoodNoRescale(
         }
 
         // Calculate MLE
-        finalValue = 0;
-        for (int i=0; i<numYears; ++i) {
-            if (ObsBiomass(i,j) != nmfConstantsMSSPM::NoData) {
-                value = (ObsBiomass(i,j) - EstBiomass(i,j)) / sigma;
-                value =  -(k3 + 0.5*value*value + log(sigma));
-                finalValue += value;
+        mlePerSpecies = 0;
+        for (int time=0; time<numYears; ++time) {
+            if (ObsBiomass(time,species) != nmfConstantsMSSPM::NoData) {
+                obsMinusEstOverSigma = (ObsBiomass(time,species) - EstBiomass(time,species)) / sigma;
+                mlePerSpecies += -(nmfConstants::LogRoot2PI + // I could leave this term off, but am including it here for clarity
+                                   0.5*obsMinusEstOverSigma*obsMinusEstOverSigma +
+                                   log(sigma));
             }
         }
 
-        finalSum += finalValue;
+        totalMLEForAllSpecies += mlePerSpecies;
 
     } // end species
 
-    return -finalSum;
+    return -totalMLEForAllSpecies; // Necessary since totalMLEForAllSpecies is negative
 }
 
 double calculateModelEfficiency(const boost::numeric::ublas::matrix<double>& EstBiomass,
@@ -1001,14 +1038,14 @@ double calculateModelEfficiency(const boost::numeric::ublas::matrix<double>& Est
 double calculateSumOfSquares(const boost::numeric::ublas::matrix<double>& EstBiomass,
                              const boost::numeric::ublas::matrix<double>& ObsBiomass)
 {
-    double diff;
+    double diff1;
     double sumSquares = 0;
 
     for (unsigned time=0; time<EstBiomass.size1(); ++time) {
         for (unsigned species=0; species<EstBiomass.size2(); ++species) {
             if (ObsBiomass(time,species) != nmfConstantsMSSPM::NoData) {
-                diff = EstBiomass(time,species) - ObsBiomass(time,species);
-                sumSquares += (diff*diff);
+                diff1 = EstBiomass(time,species) - ObsBiomass(time,species);
+                sumSquares += (diff1*diff1);
             }
         }
     }

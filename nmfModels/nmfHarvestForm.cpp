@@ -10,10 +10,11 @@ nmfHarvestForm::nmfHarvestForm(std::string harvestType)
     m_HarvestMap.clear();
     m_HarvestKey.clear();
 
-    m_FunctionMap["Null"]             = &nmfHarvestForm::FunctionMap_Null;
-    m_FunctionMap["Catch"]            = &nmfHarvestForm::FunctionMap_Catch;
-    m_FunctionMap["Effort (qE)"]      = &nmfHarvestForm::FunctionMap_Effort;
-    m_FunctionMap["Exploitation (F)"] = &nmfHarvestForm::FunctionMap_Exploitation;
+    m_FunctionMap["Null"]                = &nmfHarvestForm::FunctionMap_Null;
+    m_FunctionMap["Catch"]               = &nmfHarvestForm::FunctionMap_Catch;
+    m_FunctionMap["Effort (qE)"]         = &nmfHarvestForm::FunctionMap_Effort;
+    m_FunctionMap["Effort Fit to Catch"] = &nmfHarvestForm::FunctionMap_Effort;
+    m_FunctionMap["Exploitation (F)"]    = &nmfHarvestForm::FunctionMap_Exploitation;
 
     setupFormMaps();
 }
@@ -40,15 +41,17 @@ nmfHarvestForm::setupFormMaps()
     std::string qiEit  = "q<sub>"+index1+"</sub>E<sub>"+index1+",t</sub>";
     std::string Cit    = "C<sub>"+index1+",t</sub>";
 
-    m_HarvestMap["Null"]             = "";
-    m_HarvestMap["Exploitation (F)"] = " - " +  Fit  + Bit;
-    m_HarvestMap["Effort (qE)"]      = " - " + qiEit + Bit;
-    m_HarvestMap["Catch"]            = " - " +  Cit;
+    m_HarvestMap["Null"]                = "";
+    m_HarvestMap["Exploitation (F)"]    = " - " +  Fit  + Bit;
+    m_HarvestMap["Effort (qE)"]         = " - " + qiEit + Bit;
+    m_HarvestMap["Effort Fit to Catch"] = " - " + qiEit + Bit;
+    m_HarvestMap["Catch"]               = " - " +  Cit;
 
-    m_HarvestKey["Null"]             = "";
-    m_HarvestKey["Exploitation (F)"] = "F = Exploitation Rate<br/>";
-    m_HarvestKey["Effort (qE)"]      = "q = Catchability<br/>E = Effort<br/>";
-    m_HarvestKey["Catch"]            = "C = Catch<br/>";
+    m_HarvestKey["Null"]                = "";
+    m_HarvestKey["Exploitation (F)"]    = "F = Exploitation Rate<br/>";
+    m_HarvestKey["Effort (qE)"]         = "q = Catchability<br/>E = Effort<br/>";
+    m_HarvestKey["Effort Fit to Catch"] = "q = Catchability<br/>E = Effort<br/>";
+    m_HarvestKey["Catch"]               = "C = Catch<br/>";
 }
 
 std::string
@@ -80,7 +83,7 @@ nmfHarvestForm::extractParameters(
 //        startPos += numParameters;
 //    } else
 
-    if (m_Type == "Effort (qE)") {
+    if ((m_Type == "Effort (qE)") || (m_Type == "Effort Fit to Catch")) {
         for (int i=startPos; i<startPos+m_NumSpecies; ++i) {
             catchability.emplace_back(parameters[i]);
         }
@@ -115,7 +118,7 @@ nmfHarvestForm::loadParameterRanges(
         return;
     }
 
-    if (m_Type == "Effort (qE)") {
+    if ((m_Type == "Effort (qE)") || (m_Type == "Effort Fit to Catch")) {
         // Load the catchability values
         for (int species=0; species<m_NumSpecies; ++species) {
             if (isCheckedCatchability) {

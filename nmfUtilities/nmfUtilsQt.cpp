@@ -965,7 +965,7 @@ checkForAndDeleteLogFiles(QString name,
     size_t NumLogFiles = 0;
     QString fileToRemoveWithPath;
     QDir directory(QString::fromStdString(logDirName));
-    QStringList filenames = directory.entryList(QStringList() << "*.log" << "*.log",QDir::Files);
+    QStringList filenames = directory.entryList(QStringList() << "*.log", QDir::Files);
     NumLogFiles = filenames.size();
 
     // Ask if user wants to remove log files if there are a multiple of
@@ -1657,7 +1657,6 @@ loadCVSFileCovariate(QTabWidget* parentTabWidget,
                      const QString& inputFilename,
                      QString& errorMsg)
 {
-    Qt::ItemFlags flags;
     QString allLines;
     QString filename;
     QStringList lineList;
@@ -1816,6 +1815,8 @@ loadTimeSeries(QTabWidget* parentTabWidget,
             }
             file.close();
         }
+    } else {
+        return false;
     }
     return retv;
 }

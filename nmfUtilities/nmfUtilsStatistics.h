@@ -40,6 +40,7 @@
 #include <boost/numeric/ublas/io.hpp>
 #include <boost/multi_array.hpp>
 
+#include "nmfConstants.h"
 #include "nmfUtils.h"
 #include "nmfUtilsComplex.h"
 
@@ -145,13 +146,15 @@ namespace nmfUtilsStatistics {
              const boost::numeric::ublas::matrix<double>& ObsBiomass);
     /**
      * @brief Calculates the mean of the passed matrix for the particular species
-     * @param ObsBiomass : 2-dimensional (observed biomass) matrix
-     * @param SpeciesNum : Species number to use to find the mean
+     * @param useLogData : boolean signifying if log of data should be taken prior to calculations
+     * @param obsBiomass : 2-dimensional (observed biomass) matrix
+     * @param speciesNum : Species number to use to find the mean
      * @return Returns the mean of the matrix for the particular Species number
      */
     double calculateMean(
-         const boost::numeric::ublas::matrix<double>& ObsBiomass,
-         const int SpeciesNum);
+            const bool useLogData,
+            const boost::numeric::ublas::matrix<double>& obsBiomass,
+            const int speciesNum);
     /**
      * @brief Calculates the modeling efficiency statistic: [Σ(Oₜ-Ō)²-Σ(Eₜ-Oₜ)²] / Σ(Oₜ-Ō)²
      * @param numSpeciesOrGuilds : the number of either species or guilds
@@ -275,6 +278,12 @@ namespace nmfUtilsStatistics {
                            const std::vector<double>& ssDeviations,
                            const std::vector<double>& ssTotals,
                            std::vector<double>& rSquared);
+    /**
+     * @brief Calculates a sigma per species from the passed observed biomass matrix
+     * @param ObsBiomass : observed biomass with arguments (time,species)
+     * @return Vector of doubles where each double is the standard deviation of the particular species
+     */
+    std::vector<double> calculateSigmasSquared(const boost::numeric::ublas::matrix<double>& ObsBiomass);
     /**
      * @brief Calculates the sum of the square deviations: Σ(Eₜ-Ō)² over all t years
      * @param numSpeciesOrGuilds : the number of either species or guilds
