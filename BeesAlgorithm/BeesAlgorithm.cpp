@@ -454,6 +454,7 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     int NumGuilds  = m_BeeStruct.NumGuilds;
     int guildNum;
     int NumSpeciesOrGuilds = (isAggProd) ? NumGuilds : NumSpecies;
+    bool isEffortFitToCatch = (m_BeeStruct.HarvestForm == "Effort Fit to Catch");
     std::string covariateAlgorithmType = m_BeeStruct.CovariateAlgorithmType;
     std::vector<double> sigmasSquared;
     std::vector<double> initBiomass;
@@ -489,6 +490,8 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     boost::numeric::ublas::matrix<double> competitionBetaGuildsGuilds;
     boost::numeric::ublas::matrix<double> predationRho;
     boost::numeric::ublas::matrix<double> predationHandling;
+    boost::numeric::ublas::matrix<double> Catch  = m_BeeStruct.Catch;
+    boost::numeric::ublas::matrix<double> Effort = m_BeeStruct.Effort;
     nmfUtils::initialize(EstBiomassSpecies,                   NumYears,           NumSpeciesOrGuilds);
     nmfUtils::initialize(EstBiomassGuilds,                    NumYears,           NumGuilds);
     nmfUtils::initialize(estBiomassRescaled,                  NumYears,           NumSpeciesOrGuilds);
@@ -703,7 +706,8 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     if (m_BeeStruct.ObjectiveCriterion == "Least Squares") {
 
         fitness =  nmfUtilsStatistics::calculateSumOfSquares(
-                    estBiomassRescaled,
+                    isEffortFitToCatch,catchability,Effort,Catch,
+                    estBiomassRescaled,EstBiomassSpecies,
                     obsBiomassBySpeciesOrGuildsRescaled);
 
     } else if (m_BeeStruct.ObjectiveCriterion == "Model Efficiency") {

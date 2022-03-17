@@ -1136,16 +1136,20 @@ removeCommas(QTableView* tableView)
     double valueWithoutComma;
     QModelIndex index;
     QStandardItem* item;
+    QString valueStr;
 
     // Apply the scale factor
     QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(tableView->model());
     for (int row=0; row<smodel->rowCount(); ++row) {
         for (int col=0; col<smodel->columnCount(); ++col) {
             index = smodel->index(row,col);
-            valueWithoutComma = index.data().toString().remove(",").toDouble();
-            item = new QStandardItem(QString::number(valueWithoutComma));
-            item->setTextAlignment(Qt::AlignCenter);
-            smodel->setItem(row,col,item);
+            valueStr = index.data().toString();
+            if (! valueStr.isEmpty()) {
+                valueWithoutComma = valueStr.remove(",").toDouble();
+                item = new QStandardItem(QString::number(valueWithoutComma));
+                item->setTextAlignment(Qt::AlignCenter);
+                smodel->setItem(row,col,item);
+            }
         }
     }
     tableView->resizeColumnsToContents();
@@ -1777,7 +1781,7 @@ loadTimeSeries(QTabWidget* parentTabWidget,
                     dataParts = lineList[i].split(',');
                     VerticalList << " " + dataParts[0] + " ";
                     for (int j=1; j<dataParts.count(); ++j) {
-                        if (allowBlanks && dataParts[j].isEmpty()) {
+                        if (allowBlanks && dataParts[j].trimmed().isEmpty()) {
                             item = new QStandardItem("");
                         } else {
                             value = dataParts[j].toDouble();

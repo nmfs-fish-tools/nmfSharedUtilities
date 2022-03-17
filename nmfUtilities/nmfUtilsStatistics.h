@@ -215,12 +215,22 @@ namespace nmfUtilsStatistics {
             std::vector<double>& mohnsRhoVector);
     /**
      * @brief Calculates the sum of squares fitness of ⵉ(Be - Bo)²
+     * @param isEffortFitToCatch : true if the harvest type is EffortFitToCatch; false otherwise
+     * @param Catchability : vector of q values per species
+     * @param Effort : Effort matrix
+     * @param Catch : Catch matrix
      * @param EstBiomass : estimated biomass matrix
      * @param ObsBiomass : observed biomass matrix
      * @return Returns the fitness value for SSE
      */
-    double calculateSumOfSquares(const boost::numeric::ublas::matrix<double>& EstBiomass,
-                                 const boost::numeric::ublas::matrix<double>& ObsBiomass);
+    double calculateSumOfSquares(
+            const bool& isEffortFitToCatch,
+            const std::vector<double>& Catchability,
+            const boost::numeric::ublas::matrix<double>& Effort,
+            const boost::numeric::ublas::matrix<double>& Catch,
+            const boost::numeric::ublas::matrix<double>& EstBiomassNoRescale,
+            const boost::numeric::ublas::matrix<double>& EstBiomass,
+            const boost::numeric::ublas::matrix<double>& ObsBiomass);
     /**
      * @brief Calculate the correlation coefficient: Σ[(Oₜ-Ō)(Eₜ-Ē)] / sqrt{Σ(Oₜ-Ō)²Σ(Eₜ-Ē)²}
      * @param numSpeciesOrGuilds : the number of either species or guilds

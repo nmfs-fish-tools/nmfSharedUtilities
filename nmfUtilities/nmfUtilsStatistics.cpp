@@ -1035,20 +1035,31 @@ double calculateModelEfficiency(const boost::numeric::ublas::matrix<double>& Est
     return (deviation == 0) ? 0 : (1.0 - sumSquares/deviation); // Nash-Sutcliffe Model Efficiency Coefficient
 }
 
-double calculateSumOfSquares(const boost::numeric::ublas::matrix<double>& EstBiomass,
-                             const boost::numeric::ublas::matrix<double>& ObsBiomass)
+double calculateSumOfSquares(
+        const bool& isEffortFitToCatch,
+        const std::vector<double>& catchability,
+        const boost::numeric::ublas::matrix<double>& Effort,
+        const boost::numeric::ublas::matrix<double>& Catch,
+        const boost::numeric::ublas::matrix<double>& EstBiomassNoRescale,
+        const boost::numeric::ublas::matrix<double>& EstBiomass,
+        const boost::numeric::ublas::matrix<double>& ObsBiomass)
 {
-    double diff1;
+    double diff1 = 0;
+    double diff2 = 0;
     double sumSquares = 0;
 
     for (unsigned time=0; time<EstBiomass.size1(); ++time) {
         for (unsigned species=0; species<EstBiomass.size2(); ++species) {
             if (ObsBiomass(time,species) != nmfConstantsMSSPM::NoData) {
                 diff1 = EstBiomass(time,species) - ObsBiomass(time,species);
-                sumSquares += (diff1*diff1);
+                diff2 = (isEffortFitToCatch) ?
+                         Catch(time,species) - catchability[species]*Effort(time,species)*EstBiomassNoRescale(time,species): 0;
+                sumSquares += (diff1*diff1) + (diff2*diff2);
             }
         }
     }
+//std::cout << "log10(sumSquares+1): " << log10(sumSquares+1) << std::endl;
+
     return log10(sumSquares+1);
 }
 

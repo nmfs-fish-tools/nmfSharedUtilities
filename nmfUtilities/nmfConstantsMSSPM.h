@@ -203,6 +203,7 @@ namespace nmfConstantsMSSPM
      const QString      HarvestNone                    = "Null";
      const QString      HarvestCatch                   = "Catch";
      const QString      HarvestEffort                  = "Effort (qE)";
+     const QString      HarvestEffortFitToCatch        = "Effort Fit to Catch";
      const QString      HarvestExploitation            = "Exploitation Rate (Harvest/Bc)";
 
      const QString      ParameterNameInitialBiomass              = "Initial Absolute Biomass";

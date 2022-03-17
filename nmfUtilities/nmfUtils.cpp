@@ -731,17 +731,21 @@ applyCovariate(nmfLogger *logger,
     double retv = 0;
     std::string msg;
 
-    if (covariateAlgorithmType == nmfConstantsMSSPM::Linear) {
-        retv = parameter*(1.0+covariateCoeff*covariateValue);
-    } else if (covariateAlgorithmType == nmfConstantsMSSPM::Exponential) {
-        retv = std::pow(parameter,(covariateCoeff*covariateValue));
+    if (covariateValue == nmfConstantsMSSPM::NoData) {
+        retv = parameter;
     } else {
-        msg = "nmfUtils::applyCovariate: Found invalid covariate algorithm type of: " +
-               covariateAlgorithmType;
-        if (logger != nullptr) {
-            logger->logMsg(nmfConstants::Error,msg);
+        if (covariateAlgorithmType == nmfConstantsMSSPM::Linear) {
+            retv = parameter*(1.0+covariateCoeff*covariateValue);
+        } else if (covariateAlgorithmType == nmfConstantsMSSPM::Exponential) {
+            retv = std::pow(parameter,(covariateCoeff*covariateValue));
         } else {
-            std::cout << "Error: " << msg << std::endl;
+            msg = "nmfUtils::applyCovariate: Found invalid covariate algorithm type of: " +
+                    covariateAlgorithmType;
+            if (logger != nullptr) {
+                logger->logMsg(nmfConstants::Error,msg);
+            } else {
+                std::cout << "Error: " << msg << std::endl;
+            }
         }
     }
 

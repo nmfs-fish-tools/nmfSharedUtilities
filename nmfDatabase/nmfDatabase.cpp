@@ -2243,7 +2243,8 @@ nmfDatabase::getForecastHarvest(
     std::string ForecastTable = nmfConstantsMSSPM::TableForecastHarvestCatch;
     ForecastHarvest.clear();
 
-    if (HarvestForm == "Effort (qE)") {
+    if ((HarvestForm == nmfConstantsMSSPM::HarvestEffort.toStdString()) ||
+        (HarvestForm == nmfConstantsMSSPM::HarvestEffortFitToCatch.toStdString())) {
         ForecastTable = nmfConstantsMSSPM::TableForecastHarvestEffort;
     } else if (HarvestForm == "Exploitation (F)") {
         ForecastTable = nmfConstantsMSSPM::TableForecastHarvestExploitation;
@@ -3004,7 +3005,7 @@ nmfDatabase::getVectorParameterNames(
     if (dataMap["GrowthForm"][0] == "Null") {
         parameterNames.removeAll("Growth Rate (r)");
     }
-    if (dataMap["HarvestForm"][0] != "Effort (qE)") {
+    if (dataMap["HarvestForm"][0] == nmfConstantsMSSPM::HarvestCatch.toStdString()) {
         parameterNames.removeAll("Catchability (q)");
     }
 
@@ -3055,7 +3056,7 @@ nmfDatabase::loadEstimatedVectorParameters(
         index = cmbox->findText("Growth Rate (r)");
         cmbox->removeItem(index);
     }
-    if (dataMap["HarvestForm"][0] != "Effort (qE)") {
+    if (dataMap["HarvestForm"][0] == nmfConstantsMSSPM::HarvestCatch.toStdString()) {
         index = cmbox->findText("Catchability (q)");
         cmbox->removeItem(index);
     }
@@ -3288,7 +3289,7 @@ nmfDatabase::getHarvestData(const std::string& HarvestType,
     std::string HarvestTypePrefix = "harvest";
     std::string HarvestTableName;
 
-    // Because type could be: "Effort (qE)" or "Exploitation (F)"
+    // Because type could be: "Effort Fit to Catch" or "Effort (qE)" or "Exploitation (F)"
     HarvestTableName = HarvestTypePrefix + QString::fromStdString(HarvestType).toLower().split(" ")[0].toStdString();
 
     fields   = {"ProjectName","ModelName","SpeName","Year","Value"};
@@ -3376,7 +3377,9 @@ nmfDatabase::getHarvestData(
                 }
             }
         }
-    } else if (HarvestForm == nmfConstantsMSSPM::HarvestEffort.toStdString()) {
+    } else if ((HarvestForm == nmfConstantsMSSPM::HarvestEffort.toStdString()) ||
+               (HarvestForm == nmfConstantsMSSPM::HarvestEffortFitToCatch.toStdString()))
+    {
         if (! getTimeSeriesData(parent,logger,projectName,modelName,
                                 "",nmfConstantsMSSPM::TableHarvestEffort,
                                 numSpeciesOrGuilds,RunLength,harvestData)) {
