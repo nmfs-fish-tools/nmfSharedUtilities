@@ -1531,6 +1531,41 @@ nmfDatabase::getSpeciesData(
     return true;
 }
 
+bool
+nmfDatabase::getFitWeights(
+        nmfLogger* logger,
+        const std::string& ProjectName,
+        const std::string& ModelName,
+        const std::string& TableName,
+        int &NumSpecies,
+        boost::numeric::ublas::matrix<double> &FitWeights)
+{
+    int NumRecords;
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+
+    fields   = {"ProjectName","ModelName","SpeName","Biomass","Catch"};
+    queryStr = "SELECT ProjectName,ModelName,SpeName,Biomass,Catch FROM " +
+                TableName + " ORDER BY SpeName";
+    dataMap  = nmfQueryDatabase(queryStr, fields);
+    NumRecords = dataMap["SpeName"].size();
+    if (NumRecords == 0) {
+        //logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::getFitWeights: No species found in table Species");
+        // May not be an error. User may not be running Effort Fit to Catch.
+        return false;
+    }
+
+    if (NumSpecies == NumRecords) {
+        for (int species=0; species<NumSpecies; ++species) {
+            FitWeights(species,0) = std::stod(dataMap["Biomass"][species]);
+            FitWeights(species,1) = std::stod(dataMap["Catch"][species]);
+        }
+    }
+
+    return true;
+}
+
 bool nmfDatabase::getGuilds(
         nmfLogger*  logger,
         std::vector<std::string>& guilds)
@@ -1932,7 +1967,6 @@ nmfDatabase::getTimeSeriesData(
 
 bool
 nmfDatabase::getForecastInfo(
-        const std::string& TableName,
         const std::string& ProjectName,
         const std::string& ModelName,
         const std::string& ForecastName,
@@ -1942,29 +1976,46 @@ nmfDatabase::getForecastInfo(
         std::string&       Minimizer,
         std::string&       ObjectiveCriterion,
         std::string&       Scaling,
+        std::string&       GrowthForm,
+        std::string&       HarvestForm,
+        std::string&       WithinGuildCompetitionForm,
+        std::string&       PredationForm,
+        std::string&       ForecastHarvestType,
         int&               NumRuns)
 {
     std::vector<std::string> fields;
     std::map<std::string, std::vector<std::string> > dataMap;
     std::string queryStr;
+    std::string TableName = nmfConstantsMSSPM::TableForecasts;
+
+    ForecastHarvestType.clear();
 
     // Find Forecast info
-    fields    = {"ProjectName","ModelName","ForecastName","Algorithm","Minimizer","ObjectiveCriterion","Scaling","GrowthForm","HarvestForm","WithinGuildCompetitionForm","PredationForm","RunLength","StartYear","EndYear","NumRuns"};
-    queryStr  = "SELECT ProjectName,ModelName,ForecastName,Algorithm,Minimizer,ObjectiveCriterion,Scaling,GrowthForm,HarvestForm,WithinGuildCompetitionForm,PredationForm,RunLength,StartYear,EndYear,NumRuns FROM " +
-                 TableName +
+    fields    = {"ProjectName","ModelName","ForecastName","Algorithm","Minimizer","ObjectiveCriterion","Scaling",
+                 "GrowthForm","HarvestForm","WithinGuildCompetitionForm","PredationForm","RunLength","StartYear",
+                 "EndYear","ForecastHarvestType","NumRuns"};
+    queryStr  = std::string("SELECT ProjectName,ModelName,ForecastName,Algorithm,Minimizer,ObjectiveCriterion,Scaling,") +
+                "GrowthForm,HarvestForm,WithinGuildCompetitionForm,PredationForm,RunLength,StartYear," +
+                "EndYear,ForecastHarvestType,NumRuns FROM " + TableName +
                 " WHERE ProjectName = '" + ProjectName +
                 "' AND ModelName = '"    + ModelName +
                 "' AND ForecastName = '" + ForecastName + "'";
+
     dataMap   = nmfQueryDatabase(queryStr, fields);
     if (dataMap["ForecastName"].size() != 0) {
-        RunLength          = std::stoi(dataMap["RunLength"][0]);
-        StartForecastYear  = std::stoi(dataMap["StartYear"][0]);
-     // EndYear            = std::stoi(dataMap["EndYear"][0]);
-        Algorithm          = dataMap["Algorithm"][0];
-        Minimizer          = dataMap["Minimizer"][0];
-        ObjectiveCriterion = dataMap["ObjectiveCriterion"][0];
-        Scaling            = dataMap["Scaling"][0];
-        NumRuns            = std::stoi(dataMap["NumRuns"][0]);
+        RunLength           = std::stoi(dataMap["RunLength"][0]);
+        StartForecastYear   = std::stoi(dataMap["StartYear"][0]);
+     // EndYear             = std::stoi(dataMap["EndYear"][0]);
+        Algorithm           = dataMap["Algorithm"][0];
+        Minimizer           = dataMap["Minimizer"][0];
+        ObjectiveCriterion  = dataMap["ObjectiveCriterion"][0];
+        Scaling             = dataMap["Scaling"][0];
+        GrowthForm          = dataMap["GrowthForm"][0];
+        HarvestForm         = dataMap["HarvestForm"][0];
+        WithinGuildCompetitionForm = dataMap["WithinGuildCompetitionForm"][0];
+        PredationForm       = dataMap["PredationForm"][0];
+        ForecastHarvestType = dataMap["ForecastHarvestType"][0];
+        NumRuns             = std::stoi(dataMap["NumRuns"][0]);
         return true;
     }
     return false;
@@ -2293,6 +2344,7 @@ nmfDatabase::getForecastHarvest(
     return true;
 }
 
+// RSK continue here and check this
 bool
 nmfDatabase::updateForecastMonteCarloParameters(
         QWidget*                   widget,
@@ -2306,7 +2358,7 @@ nmfDatabase::updateForecastMonteCarloParameters(
         const std::string&         Scaling,
         const QStringList&         Species,
         const int&                 RunNumber,
-        const std::vector<double>& GrowthRandomValues,
+        const std::vector<double>& GrowthRateRandomValues,
         const std::vector<double>& CarryingCapacityRandomValues,
         const std::vector<double>& CatchabilityRandomValues,
         const std::vector<double>& ExponentRandomValues,
@@ -2316,7 +2368,11 @@ nmfDatabase::updateForecastMonteCarloParameters(
         const std::vector<double>& CompetitionBetaGuildsGuildsRandomValues,
         const std::vector<double>& PredationRandomValues,
         const std::vector<double>& HandlingRandomValues,
-        const std::vector<double>& HarvestRandomValues)
+        const std::vector<double>& HarvestRandomValues,
+        const std::vector<double>& GrowthRateCovCoeffRandomValues,
+        const std::vector<double>& CarryingCapacityCovCoeffRandomValues,
+        const std::vector<double>& CatchabilityCovCoeffRandomValues,
+        const std::vector<double>& SurveyQCovCoeffRandomValues)
 {
     std::string saveCmd;
     std::string deleteCmd;
@@ -2360,8 +2416,8 @@ nmfDatabase::updateForecastMonteCarloParameters(
                "SpeName,GrowthRate,CarryingCapacity,Catchability," +
                "Exponent,CompetitionAlpha,CompetitionBetaSpecies,CompetitionBetaGuilds," +
                "CompetitionBetaGuildsGuilds,Predation,Handling," +
-               "Harvest) VALUES ";
-    int NumValues = GrowthRandomValues.size();
+               "Harvest,GrowthRateCovCoeff,CarryingCapacityCovCoeff,CatchabilityCovCoeff,SurveyQCovCoeff) VALUES ";
+    int NumValues = GrowthRateRandomValues.size();
 
     for (int j=0; j<NumValues; ++j) {
         carryingCapacity = checkForValues(j,NumValues,CarryingCapacityRandomValues);
@@ -2383,7 +2439,7 @@ nmfDatabase::updateForecastMonteCarloParameters(
                     "','" + ObjectiveCriterion +
                     "','" + Scaling +
                     "','" + Species[j].toStdString() +
-                    "',"  + std::to_string(GrowthRandomValues[j]) +
+                    "',"  + std::to_string(GrowthRateRandomValues[j]) +
                     ","   + std::to_string(carryingCapacity) +
                     ","   + std::to_string(catchability) +
                     ","   + std::to_string(exponent) +
@@ -2393,7 +2449,11 @@ nmfDatabase::updateForecastMonteCarloParameters(
                     ","   + std::to_string(betaGuildsGuilds) +
                     ","   + std::to_string(predation) +
                     ","   + std::to_string(handling) +
-                    ","   + std::to_string(harvest) + "),";
+                    ","   + std::to_string(harvest) +
+                    ","   + std::to_string(GrowthRateCovCoeffRandomValues[j]) +
+                    ","   + std::to_string(CarryingCapacityCovCoeffRandomValues[j]) +
+                    ","   + std::to_string(CatchabilityCovCoeffRandomValues[j]) +
+                    ","   + std::to_string(SurveyQCovCoeffRandomValues[j]) + "),";
     }
 
     saveCmd = saveCmd.substr(0,saveCmd.size()-1);
@@ -2996,10 +3056,10 @@ nmfDatabase::getVectorParameterNames(
     }
 
     // Check for appropriate items in parameter combo boxes.
-    if (dataMap["ObsBiomassType"][0] != "Relative") {
+    if (dataMap["ObsBiomassType"][0] == "Absolute") {
         parameterNames.removeAll("SurveyQ");
     }
-    if (dataMap["GrowthForm"][0] != "Logistic") {
+    if (dataMap["GrowthForm"][0] == "Linear") {
         parameterNames.removeAll("Carrying Capacity (K)");
     }
     if (dataMap["GrowthForm"][0] == "Null") {
@@ -3009,6 +3069,27 @@ nmfDatabase::getVectorParameterNames(
         parameterNames.removeAll("Catchability (q)");
     }
 
+    // Now load any estimated covariate parameters
+    std::vector<std::string> CovariateParameters;
+    std::map<QString,QString> covParamNames = {{"GrowthRate",      "Growth Rate (r) Covariate Coefficient"},
+                                               {"CarryingCapacity","Carrying Capacity (K) Covariate Coefficient"},
+                                               {"Catchability",    "Catchability (q) Covariate Coefficient"},
+                                               {"SurveyQ",         "SurveyQ Covariate Coefficient"}};
+    fields     = {"ParameterName"};
+    queryStr   = "SELECT DISTINCT(ParameterName) FROM " +
+                  nmfConstantsMSSPM::TableCovariateAssignment +
+                 " WHERE ProjectName = '" + ProjectName +
+                 "' AND ModelName = '"    + ModelName   +
+                 "' AND CovariateName != ''";
+    dataMap    = nmfQueryDatabase(queryStr, fields);
+    NumRecords = dataMap["ParameterName"].size();
+
+    // Add the appropriate covariate items to the comboboxes
+    for (int i=0; i<NumRecords; ++i) {
+        QString covariateParameter = QString::fromStdString(dataMap["ParameterName"][i]);
+        parameterNames.push_back(covParamNames[covariateParameter]);
+    }
+qDebug() << "parameter names: " << parameterNames;
     return parameterNames;
 }
 
@@ -3041,25 +3122,10 @@ nmfDatabase::loadEstimatedVectorParameters(
     // Figure out which items should be in the pulldown lists based upon the Model structure
     cmbox->blockSignals(true);
     cmbox->clear();
-    cmbox->addItems(nmfConstantsMSSPM::VectorParameterNames);
+    QStringList parameterNames = getVectorParameterNames(logger,ProjectName,ModelName);
+    cmbox->addItems(parameterNames);
+    nmfUtilsQt::sort(cmbox);
 
-    // Check for appropriate items in parameter combo boxes.
-    if (dataMap["ObsBiomassType"][0] != "Relative") {
-        index = cmbox->findText("SurveyQ");
-        cmbox->removeItem(index);
-    }
-    if (dataMap["GrowthForm"][0] != "Logistic") {
-        index = cmbox->findText("Carrying Capacity (K)");
-        cmbox->removeItem(index);
-    }
-    if (dataMap["GrowthForm"][0] == "Null") {
-        index = cmbox->findText("Growth Rate (r)");
-        cmbox->removeItem(index);
-    }
-    if (dataMap["HarvestForm"][0] == nmfConstantsMSSPM::HarvestCatch.toStdString()) {
-        index = cmbox->findText("Catchability (q)");
-        cmbox->removeItem(index);
-    }
     cmbox->blockSignals(false);
 }
 

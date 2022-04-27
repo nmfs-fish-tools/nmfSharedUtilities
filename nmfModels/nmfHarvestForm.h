@@ -236,6 +236,15 @@ public:
                     std::vector<std::pair<double,double> >& ParameterRanges,
                     nmfStructsQt::ModelDataStruct& DataStruct);
     /**
+     * @brief Updates the default harvest type to be used for forecasts to whatever
+     * the current Forecast Harvest Type Button is set to
+     * @param forecastHarvestTypeLabel : current label of the Forecast Harvest type button
+     * @return True if harvest type has been correctly set (and harvest model is Effort Fit to Catch);
+     * false otherwise
+     */
+    bool modifyHarvestTypeDueToFitToCatch(
+            std::string forecastHarvestTypeLabel);
+    /**
      * @brief Sets the AggProd variable
      * @param isAggProd : boolean describing the AggProd status (i.e., true/false)
      */

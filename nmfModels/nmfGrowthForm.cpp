@@ -221,8 +221,8 @@ nmfGrowthForm::evaluate(const std::string& covariateAlgorithmType,
         return (this->*FunctionMap[m_Type])(covariateAlgorithmType,
                                             biomassAtTimeT,
                                             growthRate,
-                                            growthRateCovariate,
                                             growthRateCovariateCoeff,
+                                            growthRateCovariate,
                                             carryingCapacity,
                                             carryingCapacityCovariateCoeff,
                                             carryingCapacityCovariate);
@@ -256,7 +256,6 @@ nmfGrowthForm::FunctionMap_Linear(const std::string& covariateAlgorithmType,
     double growthRateTerm = nmfUtils::applyCovariate(nullptr,
                 covariateAlgorithmType,growthRate,
                 growthRateCovariateCoeff,growthRateCovariate);
-
     return growthRateTerm*biomassAtTime;
 }
 

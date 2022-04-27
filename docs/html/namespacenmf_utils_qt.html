@@ -101,9 +101,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a2b2a1497f5fa1e583e648aa0c743fc9e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a2b2a1497f5fa1e583e648aa0c743fc9e">allCellsArePopulated</a> (QTabWidget *tabWidget, QTableWidget *tableWidget, bool showError, bool skipFirstRow)</td></tr>
 <tr class="memdesc:a2b2a1497f5fa1e583e648aa0c743fc9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks that all cells in a QTableView table are populated.  <a href="namespacenmf_utils_qt.html#a2b2a1497f5fa1e583e648aa0c743fc9e">More...</a><br /></td></tr>
 <tr class="separator:a2b2a1497f5fa1e583e648aa0c743fc9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0d78aa1d88acff382386b2b1dc4475b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#ab0d78aa1d88acff382386b2b1dc4475b">allMaxCellsGreaterThanMinCells</a> (QStandardItemModel *smodelMin, QStandardItemModel *smodelMax)</td></tr>
-<tr class="memdesc:ab0d78aa1d88acff382386b2b1dc4475b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks to see if all of the values in the second model are greater than or equal to all of the values in the first model (on a cell by cell basis)  <a href="namespacenmf_utils_qt.html#ab0d78aa1d88acff382386b2b1dc4475b">More...</a><br /></td></tr>
-<tr class="separator:ab0d78aa1d88acff382386b2b1dc4475b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a788ad2e1909b646d2b28a6068dbd330c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a788ad2e1909b646d2b28a6068dbd330c">areAllCellsHoldingUniqueData</a> (QTableView *tv1, QTableView *tv1Min, QTableView *tv1Max, QTableView *tv2, QTableView *tv2Min, QTableView *tv2Max, QString &amp;badCell)</td></tr>
+<tr class="memdesc:a788ad2e1909b646d2b28a6068dbd330c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks the passed in tables to see if any of the same cells in each table have different values.  <a href="namespacenmf_utils_qt.html#a788ad2e1909b646d2b28a6068dbd330c">More...</a><br /></td></tr>
+<tr class="separator:a788ad2e1909b646d2b28a6068dbd330c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4553ed8cd538a1f2670af75be9708e59"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a4553ed8cd538a1f2670af75be9708e59">areAllCellsNonBlank</a> (QTableView *tableview)</td></tr>
+<tr class="memdesc:a4553ed8cd538a1f2670af75be9708e59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks the passed tableview for any blanks.  <a href="namespacenmf_utils_qt.html#a4553ed8cd538a1f2670af75be9708e59">More...</a><br /></td></tr>
+<tr class="separator:a4553ed8cd538a1f2670af75be9708e59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1855bbec9b3531d8ab8f11afb9bb0f4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#ae1855bbec9b3531d8ab8f11afb9bb0f4">areAllMaxCellsGreaterThanMinCells</a> (QStandardItemModel *smodelMin, QStandardItemModel *smodelMax, QString &amp;badCell)</td></tr>
+<tr class="memdesc:ae1855bbec9b3531d8ab8f11afb9bb0f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks to see if all of the values in the second model are greater than or equal to all of the values in the first model (on a cell by cell basis)  <a href="namespacenmf_utils_qt.html#ae1855bbec9b3531d8ab8f11afb9bb0f4">More...</a><br /></td></tr>
+<tr class="separator:ae1855bbec9b3531d8ab8f11afb9bb0f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8b8b45e828e6159eeb90fabbce26a44"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#af8b8b45e828e6159eeb90fabbce26a44">areAllInitialCellsWithinRange</a> (QStandardItemModel *smodel, QStandardItemModel *smodelMin, QStandardItemModel *smodelMax, QString &amp;badCell)</td></tr>
+<tr class="memdesc:af8b8b45e828e6159eeb90fabbce26a44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks to see if all of the initial values are within their respective range values.  <a href="namespacenmf_utils_qt.html#af8b8b45e828e6159eeb90fabbce26a44">More...</a><br /></td></tr>
+<tr class="separator:af8b8b45e828e6159eeb90fabbce26a44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4326678543b25866ed2fdfe6fe87a051"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a4326678543b25866ed2fdfe6fe87a051">rename</a> (QString fileIn, QString fileOut)</td></tr>
 <tr class="memdesc:a4326678543b25866ed2fdfe6fe87a051"><td class="mdescLeft">&#160;</td><td class="mdescRight">Effectively does a file rename...but not quite. It copies the first to the second and then removes the first. I did this as the std:rename function didn't work on Windows...and a system() mv command caused a shell to pop up briefly over the UI.  <a href="namespacenmf_utils_qt.html#a4326678543b25866ed2fdfe6fe87a051">More...</a><br /></td></tr>
 <tr class="separator:a4326678543b25866ed2fdfe6fe87a051"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -227,9 +236,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a35f68a447343a380c47bfa1d31b948f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a35f68a447343a380c47bfa1d31b948f1">checkForAndReplaceInvalidCharacters</a> (QString &amp;stringValue)</td></tr>
 <tr class="memdesc:a35f68a447343a380c47bfa1d31b948f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes any non-alphanumeric characters and replaces any space characters with an underscore character.  <a href="namespacenmf_utils_qt.html#a35f68a447343a380c47bfa1d31b948f1">More...</a><br /></td></tr>
 <tr class="separator:a35f68a447343a380c47bfa1d31b948f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f800455f47d750b01597626c07b9220"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a8f800455f47d750b01597626c07b9220">checkTableForBlanks</a> (QTableView *tableview)</td></tr>
-<tr class="memdesc:a8f800455f47d750b01597626c07b9220"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks the passed tableview for any blanks.  <a href="namespacenmf_utils_qt.html#a8f800455f47d750b01597626c07b9220">More...</a><br /></td></tr>
-<tr class="separator:a8f800455f47d750b01597626c07b9220"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a217735a158df428b111d43cffa4684db"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a217735a158df428b111d43cffa4684db">extractTag</a> (const QString filename, QString &amp;tag)</td></tr>
 <tr class="memdesc:a217735a158df428b111d43cffa4684db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the embedded tag from the passed filename.  <a href="namespacenmf_utils_qt.html#a217735a158df428b111d43cffa4684db">More...</a><br /></td></tr>
 <tr class="separator:a217735a158df428b111d43cffa4684db"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -308,9 +314,9 @@ Functions</h2></td></tr>
 <tr class="memitem:abe56c19cb8cd59dbf3d6278bf816fb16"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#abe56c19cb8cd59dbf3d6278bf816fb16">reselectTableViewCells</a> (QTableView *tv, QModelIndexList indexes)</td></tr>
 <tr class="memdesc:abe56c19cb8cd59dbf3d6278bf816fb16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reselects the passed indexes from within the passed tableview.  <a href="namespacenmf_utils_qt.html#abe56c19cb8cd59dbf3d6278bf816fb16">More...</a><br /></td></tr>
 <tr class="separator:abe56c19cb8cd59dbf3d6278bf816fb16"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc5d55a8ba2ad130a52311d0ea13b7d3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#acc5d55a8ba2ad130a52311d0ea13b7d3">runAllTableChecks</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, QWidget *parent, QTableView *tableview, QTableView *minTableview, QTableView *maxTableview)</td></tr>
-<tr class="memdesc:acc5d55a8ba2ad130a52311d0ea13b7d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks tables for blanks and min&lt;max.  <a href="namespacenmf_utils_qt.html#acc5d55a8ba2ad130a52311d0ea13b7d3">More...</a><br /></td></tr>
-<tr class="separator:acc5d55a8ba2ad130a52311d0ea13b7d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae78b0b5f996b1ace6822a9363a535cf5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#ae78b0b5f996b1ace6822a9363a535cf5">runAllTableChecks</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, QWidget *parent, QTableView *tableview, QTableView *minTableview, QTableView *maxTableview, QTableView *tableviewCompare, QTableView *minTableviewCompare, QTableView *maxTableviewCompare)</td></tr>
+<tr class="memdesc:ae78b0b5f996b1ace6822a9363a535cf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks tables for blanks and min&lt;max.  <a href="namespacenmf_utils_qt.html#ae78b0b5f996b1ace6822a9363a535cf5">More...</a><br /></td></tr>
+<tr class="separator:ae78b0b5f996b1ace6822a9363a535cf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7257537712ae66d36e7f4854f54dec86"><td class="memItemLeft" align="right" valign="top">QModelIndexList&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a7257537712ae66d36e7f4854f54dec86">getSelectedTableViewCells</a> (QTableView *tv)</td></tr>
 <tr class="memdesc:a7257537712ae66d36e7f4854f54dec86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a list of selected tableview cells.  <a href="namespacenmf_utils_qt.html#a7257537712ae66d36e7f4854f54dec86">More...</a><br /></td></tr>
 <tr class="separator:a7257537712ae66d36e7f4854f54dec86"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -500,14 +506,166 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
 
 </div>
 </div>
-<a id="ab0d78aa1d88acff382386b2b1dc4475b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0d78aa1d88acff382386b2b1dc4475b">&#9670;&nbsp;</a></span>allMaxCellsGreaterThanMinCells()</h2>
+<a id="a788ad2e1909b646d2b28a6068dbd330c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a788ad2e1909b646d2b28a6068dbd330c">&#9670;&nbsp;</a></span>areAllCellsHoldingUniqueData()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool nmfUtilsQt::allMaxCellsGreaterThanMinCells </td>
+          <td class="memname">bool nmfUtilsQt::areAllCellsHoldingUniqueData </td>
+          <td>(</td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tv1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tv1Min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tv1Max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tv2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tv2Min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tv2Max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString &amp;&#160;</td>
+          <td class="paramname"><em>badCell</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks the passed in tables to see if any of the same cells in each table have different values. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tv1</td><td>: first table to check </td></tr>
+    <tr><td class="paramname">tv1Min</td><td>: minimum range table for first table </td></tr>
+    <tr><td class="paramname">tv1Max</td><td>: maximum range table for first table </td></tr>
+    <tr><td class="paramname">tv2</td><td>: second table to check </td></tr>
+    <tr><td class="paramname">tv2Min</td><td>: minimum range table for second table </td></tr>
+    <tr><td class="paramname">tv2Max</td><td>: maximum range table for second table </td></tr>
+    <tr><td class="paramname">badCell</td><td>: index of erroneous cell </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if tables have no values in same cells (or if either pointer is nullptr), false if there are data in similar cells </dd></dl>
+
+</div>
+</div>
+<a id="a4553ed8cd538a1f2670af75be9708e59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4553ed8cd538a1f2670af75be9708e59">&#9670;&nbsp;</a></span>areAllCellsNonBlank()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfUtilsQt::areAllCellsNonBlank </td>
+          <td>(</td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tableview</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks the passed tableview for any blanks. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tableview</td><td>: tableview to check for blanks </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if no blanks found, false otherwise </dd></dl>
+
+</div>
+</div>
+<a id="af8b8b45e828e6159eeb90fabbce26a44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8b8b45e828e6159eeb90fabbce26a44">&#9670;&nbsp;</a></span>areAllInitialCellsWithinRange()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfUtilsQt::areAllInitialCellsWithinRange </td>
+          <td>(</td>
+          <td class="paramtype">QStandardItemModel *&#160;</td>
+          <td class="paramname"><em>smodel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QStandardItemModel *&#160;</td>
+          <td class="paramname"><em>smodelMin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QStandardItemModel *&#160;</td>
+          <td class="paramname"><em>smodelMax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString &amp;&#160;</td>
+          <td class="paramname"><em>badCell</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks to see if all of the initial values are within their respective range values. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">smodel</td><td>: the initial table model </td></tr>
+    <tr><td class="paramname">smodelMin</td><td>: the minimum model to check </td></tr>
+    <tr><td class="paramname">smodelMax</td><td>: the maximum model to check </td></tr>
+    <tr><td class="paramname">badCell</td><td>: index of erroneous cell </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="ae1855bbec9b3531d8ab8f11afb9bb0f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1855bbec9b3531d8ab8f11afb9bb0f4">&#9670;&nbsp;</a></span>areAllMaxCellsGreaterThanMinCells()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfUtilsQt::areAllMaxCellsGreaterThanMinCells </td>
           <td>(</td>
           <td class="paramtype">QStandardItemModel *&#160;</td>
           <td class="paramname"><em>smodelMin</em>, </td>
@@ -516,7 +674,13 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">QStandardItemModel *&#160;</td>
-          <td class="paramname"><em>smodelMax</em>&#160;</td>
+          <td class="paramname"><em>smodelMax</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString &amp;&#160;</td>
+          <td class="paramname"><em>badCell</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -531,6 +695,7 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
   <table class="params">
     <tr><td class="paramname">smodelMin</td><td>: the minimum model to check </td></tr>
     <tr><td class="paramname">smodelMax</td><td>: the maximum model to check </td></tr>
+    <tr><td class="paramname">badCell</td><td>: index of erroneous cell </td></tr>
   </table>
   </dd>
 </dl>
@@ -777,33 +942,6 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a id="a8f800455f47d750b01597626c07b9220"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f800455f47d750b01597626c07b9220">&#9670;&nbsp;</a></span>checkTableForBlanks()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool nmfUtilsQt::checkTableForBlanks </td>
-          <td>(</td>
-          <td class="paramtype">QTableView *&#160;</td>
-          <td class="paramname"><em>tableview</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Checks the passed tableview for any blanks. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">tableview</td><td>: tableview to check for blanks </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if no blanks found, false otherwise </dd></dl>
 
 </div>
 </div>
@@ -2482,8 +2620,8 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
 
 </div>
 </div>
-<a id="acc5d55a8ba2ad130a52311d0ea13b7d3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acc5d55a8ba2ad130a52311d0ea13b7d3">&#9670;&nbsp;</a></span>runAllTableChecks()</h2>
+<a id="ae78b0b5f996b1ace6822a9363a535cf5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae78b0b5f996b1ace6822a9363a535cf5">&#9670;&nbsp;</a></span>runAllTableChecks()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2516,7 +2654,25 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">QTableView *&#160;</td>
-          <td class="paramname"><em>maxTableview</em>&#160;</td>
+          <td class="paramname"><em>maxTableview</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tableviewCompare</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>minTableviewCompare</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>maxTableviewCompare</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -2534,6 +2690,9 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
     <tr><td class="paramname">tableview</td><td>: main table </td></tr>
     <tr><td class="paramname">minTableview</td><td>: table of minimum values </td></tr>
     <tr><td class="paramname">maxTableview</td><td>: table of maximum values </td></tr>
+    <tr><td class="paramname">tableviewCompare</td><td>: if not null, this tableview is used to compare values with tableview above; useful for the Competition(alpha) Predation(rho) comparison testing </td></tr>
+    <tr><td class="paramname">minTableviewCompare</td><td>: table used to compare minimum values </td></tr>
+    <tr><td class="paramname">maxTableviewCompare</td><td>: table used to compare maximum values </td></tr>
   </table>
   </dd>
 </dl>

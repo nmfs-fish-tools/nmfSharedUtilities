@@ -293,6 +293,7 @@ struct ModelDataStruct {
     std::string ScalingAlgorithm;
 
     std::string CovariateAlgorithmType;
+    std::string ForecastHarvestType;
 
     std::vector<std::string>              SpeciesNames;
     std::map<int,std::vector<int> >       GuildSpecies; // List of species numbers that make up guild num
@@ -301,6 +302,8 @@ struct ModelDataStruct {
     boost::numeric::ublas::matrix<double> ObservedBiomassByGuilds;
     boost::numeric::ublas::matrix<double> Catch;
     boost::numeric::ublas::matrix<double> Effort;
+    boost::numeric::ublas::matrix<double> FitWeights;
+
     boost::numeric::ublas::vector<double> InitBiomass;
     boost::numeric::ublas::vector<double> InitBiomassMin;
     boost::numeric::ublas::vector<double> InitBiomassMax;

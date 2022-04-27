@@ -66,6 +66,7 @@
 #include <QPushButton>
 #include <QScrollBar>
 #include <QSettings>
+#include <QSortFilterProxyModel>
 #include <QSpacerItem>
 #include <QStackedBarSeries>
 #include <QStandardItemModel>
@@ -229,15 +230,55 @@ namespace nmfUtilsQt {
             bool          showError,
             bool          skipFirstRow);
     /**
+     * @brief Checks the passed in tables to see if any of the same cells in each table have different values
+     * @param tv1 : first table to check
+     * @param tv1Min : minimum range table for first table
+     * @param tv1Max : maximum range table for first table
+     * @param tv2 : second table to check
+     * @param tv2Min : minimum range table for second table
+     * @param tv2Max : maximum range table for second table
+     * @param badCell : index of erroneous cell
+     * @return true if tables have no values in same cells (or if either pointer is nullptr),
+     * false if there are data in similar cells
+     */
+    bool areAllCellsHoldingUniqueData(QTableView* tv1,
+                                      QTableView* tv1Min,
+                                      QTableView* tv1Max,
+                                      QTableView* tv2,
+                                      QTableView* tv2Min,
+                                      QTableView* tv2Max,
+                                      QString& badCell);
+    /**
+     * @brief Checks the passed tableview for any blanks
+     * @param tableview : tableview to check for blanks
+     * @return true if no blanks found, false otherwise
+     */
+    bool areAllCellsNonBlank(QTableView* tableview);
+    /**
      * @brief Checks to see if all of the values in the second model are greater than
      * or equal to all of the values in the first model (on a cell by cell basis)
      * @param smodelMin : the minimum model to check
      * @param smodelMax : the maximum model to check
+     * @param badCell : index of erroneous cell
      * @return True if all the max model cells are greater than or equal to the min model cells, else False
      */
-    bool allMaxCellsGreaterThanMinCells(
+    bool areAllMaxCellsGreaterThanMinCells(
             QStandardItemModel* smodelMin,
-            QStandardItemModel* smodelMax);
+            QStandardItemModel* smodelMax,
+            QString& badCell);
+    /**
+     * @brief Checks to see if all of the initial values are within their respective range values
+     * @param smodel : the initial table model
+     * @param smodelMin : the minimum model to check
+     * @param smodelMax : the maximum model to check
+     * @param badCell : index of erroneous cell
+     * @return
+     */
+    bool areAllInitialCellsWithinRange(
+            QStandardItemModel* smodel,
+            QStandardItemModel* smodelMin,
+            QStandardItemModel* smodelMax,
+            QString& badCell);
     /**
      * @brief Calculates the sum of the widths of the column range
      * @param tableview : tableview whose column widths are to be measured
@@ -293,12 +334,6 @@ namespace nmfUtilsQt {
      * @param stringValue : the string value to check and modify if necessary
      */
     void checkForAndReplaceInvalidCharacters(QString& stringValue);
-    /**
-     * @brief Checks the passed tableview for any blanks
-     * @param tableview : tableview to check for blanks
-     * @return true if no blanks found, false otherwise
-     */
-    bool checkTableForBlanks(QTableView* tableview);
     /**
      * @brief Clears the current tableView selection or the entire tableView if there's no selection
      * @param qtApp : qt application
@@ -685,13 +720,19 @@ namespace nmfUtilsQt {
      * @param tableview : main table
      * @param minTableview : table of minimum values
      * @param maxTableview : table of maximum values
+     * @param tableviewCompare : if not null, this tableview is used to compare values with tableview above; useful for the Competition(alpha) Predation(rho) comparison testing
+     * @param minTableviewCompare : table used to compare minimum values
+     * @param maxTableviewCompare : table used to compare maximum values
      * @return true if passed all tests, false if any tests failed
      */
     bool runAllTableChecks(nmfLogger*  logger,
                            QWidget*    parent,
                            QTableView* tableview,
                            QTableView* minTableview,
-                           QTableView* maxTableview);
+                           QTableView* maxTableview,
+                           QTableView* tableviewCompare,
+                           QTableView* minTableviewCompare,
+                           QTableView* maxTableviewCompare);
     /**
      * @brief Saves the table consisting of all QComboBoxes to a .csv file
      * @param parentTabWidget : parent widget
@@ -944,6 +985,11 @@ namespace nmfUtilsQt {
             const QString& version,
             const QString& specialAcknowledgement,
             const QString& appMsg);
+    /**
+     * @brief Sorts all of the items in the passed in QComboBox
+     * @param cmbox : combo box to sort
+     */
+    void sort(QComboBox* cmbox);
     /**
      * @brief Useful for changing .jpg,.png to .csv
      * @param filename : file name on which to modify the extension

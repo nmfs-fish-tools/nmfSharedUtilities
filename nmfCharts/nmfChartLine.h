@@ -37,6 +37,7 @@
 #include <QLegendMarker>
 #include <QLine>
 #include <QLineSeries>
+#include <QPainter>
 #include <QPushButton>
 #include <QScatterSeries>
 #include <QString>
@@ -51,6 +52,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/range/algorithm_ext/erase.hpp>
 
+#include <iostream>
 #include <vector>
 #include "nmfUtilsQt.h"
 
@@ -70,6 +72,19 @@ private:
     std::map<QString,QString> m_Tooltips;
     nmfToolTip*               m_CustomToolTip;
 
+    void resetAxes(
+            QChart*            chart,
+            const bool&        ShowLegend,
+            const bool&        XAxisIsInteger,
+            const int&         XStartVal,
+            const int&         NumXValues,
+            const double&      YMinVal,
+            double&            YMaxVal,
+            const bool&        LeaveGapsWhereNegative,
+            std::string&       XTitle,
+            std::string&       YTitle,
+            const std::vector<bool>& GridLines,
+            const double&      XInc);
 public:
     /**
      * @brief nmfChartLine constructor for multi-line chart widget
@@ -79,68 +94,90 @@ public:
 
     /**
      * @brief Overlays a vertical line onto the current chart data
-     * @param chart : pointer to QChart
-     * @param lineStyle : style of line (i.e., DottedLine, DashedLine)
-     * @param xPos : x position of the vertical line
-     * @param yMinVal : minimum y value for the line
-     * @param yMaxVal : maximum y value for the line
-     * @param lineColor : color of the line
+     * @param Chart : pointer to QChart
+     * @param LineStyle : style of line (i.e., DottedLine, DashedLine)
+     * @param ShowFirstPoint : boolean signifying if the first point should be shown
+     * @param ShowLegend : legend visibility boolean
+     * @param XOffset : start year used as an offset for the x-axis scale
+     * @param XAxisIsInteger : boolean signifiying if x axis numbers are integers
+     * @param XPos : x position of the vertical line
+     * @param YMinVal : minimum y value for the line
+     * @param YMaxVal : maximum y value for the line
+     * @param LeaveGapsWhereNegative
+     * @param NumXValues : number of values along x axis
+     * @param HoverLabel : hover label for the overlay line
+     * @param XTitle : title of x axis
+     * @param YTitle : title of y axis
+     * @param LineColor : color of the line
+     * @param GridLines : gridline visibility booleans
+     * @param XInc : increment of x-axis
      */
     void overlayVerticalLine(
-            QChart* chart,
-            const std::string& lineStyle,
-            const double& xPos,
-            const double& yMinVal,
-            const double& yMaxVal,
-            const std::string& lineColor);
+            QChart* Chart,
+            const std::string& LineStyle,
+            const bool&        ShowFirstPoint,
+            const bool&        ShowLegend,
+            const double&      XOffset,
+            const bool&        XAxisIsInteger,
+            const double&      XPos,
+            const double&      YMinVal,
+            double&            YMaxVal,
+            const bool&        LeaveGapsWhereNegative,
+            int&               NumXValues,
+            const QString&     HoverLabel,
+            std::string&       XTitle,
+            std::string&       YTitle,
+            const std::string& LineColor,
+            const std::vector<bool>& GridLines,
+            const double&      XInc);
     /**
      * @brief populates (and draws) the chart with all of the data necessary
-     * @param chart : pointer to QChart
-     * @param type : type of line chart
-     * @param lineStyle : style of line (i.e., DottedLine, DashedLine)
-     * @param showFirstPoint : boolean signifying if the first point should be shown
-     * @param showLegend : boolean to specify the visibility of the legend
-     * @param xOffset : the x offset that should be applied to the data series
-     * @param xAxisIsInteger : boolean signifying if the values along the x-axis should be integers
-     * @param yMinVal : minimum y value
-     * @param yMaxVal : maximum y value
-     * @param leaveGapsWhereNegative
-     * @param lineData : matrix containing the line data
-     * @param rowLabels : labels along the x-axis
-     * @param columnLabels : labels along the y-axis
-     * @param hoverLabels : labels for line tooltips
-     * @param mainTitle : the main title for the chart
-     * @param xTitle : the x-axis label
-     * @param yTitle : the y-axis label
-     * @param gridLines : vector of booleans designating if the gridlines should be visible
-     * @param theme : color theme for the chart
-     * @param lineColor : the line color designation
-     * @param lineColorName : the name of the line color to be used as a tooltip
-     * @param xInc : increment along the x-axis
+     * @param Chart : pointer to QChart
+     * @param LineType : type of line chart
+     * @param LineStyle : style of line (i.e., DottedLine, DashedLine)
+     * @param ShowFirstPoint : boolean signifying if the first point should be shown
+     * @param ShowLegend : boolean to specify the visibility of the legend
+     * @param XOffset : the x offset that should be applied to the data series
+     * @param XAxisIsInteger : boolean signifying if the values along the x-axis should be integers
+     * @param YMinVal : minimum y value
+     * @param YMaxVal : maximum y value
+     * @param LeaveGapsWhereNegative
+     * @param LineData : matrix containing the line data
+     * @param RowLabels : labels along the x-axis
+     * @param ColumnLabels : labels along the y-axis
+     * @param HoverLabels : labels for line tooltips
+     * @param MainTitle : the main title for the chart
+     * @param XTitle : the x-axis label
+     * @param YTitle : the y-axis label
+     * @param GridLines : vector of booleans designating if the gridlines should be visible
+     * @param Theme : color theme for the chart
+     * @param LineColor : the line color designation
+     * @param LineColorName : the name of the line color to be used as a tooltip
+     * @param XInc : increment along the x-axis
      */
     void populateChart(
-            QChart*            chart,
-            std::string&       type,
-            const std::string& lineStyle,
-            const bool&        showFirstPoint,
-            const bool&        showLegend,
-            const double&      xOffset,
-            const bool&        xAxisIsInteger,
-            const double&      yMinVal,
-            const double&      yMaxVal,
-            const bool&        leaveGapsWhereNegative,
-            const boost::numeric::ublas::matrix<double> &lineData,
-            const QStringList& rowLabels,
-            const QStringList& columnLabels,
-            const QStringList& hoverLabels,
-            std::string&       mainTitle,
-            std::string&       xTitle,
-            std::string&       yTitle,
-            const std::vector<bool>& gridLines,
-            const int&         theme,
-            const QColor&      lineColor,
-            const std::string& lineColorName,
-            const double&      xInc);
+            QChart*            Chart,
+            std::string&       LineType,
+            const std::string& LineStyle,
+            const bool&        ShowFirstPoint,
+            const bool&        ShowLegend,
+            const double&      XOffset,
+            const bool&        XAxisIsInteger,
+            const double&      YMinVal,
+            double&            YMaxVal,
+            const bool&        LeaveGapsWhereNegative,
+            const boost::numeric::ublas::matrix<double> &LineData,
+            const QStringList& RowLabels,
+            const QStringList& ColumnLabels,
+            const QStringList& HoverLabels,
+            std::string&       MainTitle,
+            std::string&       XTitle,
+            std::string&       YTitle,
+            const std::vector<bool>& GridLines,
+            const int&         Theme,
+            const QColor&      LineColor,
+            const std::string& LineColorName,
+            const double&      XInc);
     /**
      * @brief clears all series from the passed chart
      * @param chart : point to QChart object to clear

@@ -132,7 +132,7 @@ public:
     /**
      * @brief BeesAlgorithm class constructor
      * @param BeeStruct : structure containing model data needed for the Bees algorithm
-     * @param verbose : if true, additional error statements printed, if false, minimal error statements printed
+     * @param verbose : if true, additional error statements printed; if false, minimal error statements printed
      */
     BeesAlgorithm(nmfStructsQt::ModelDataStruct BeeStruct,
                   const bool& verbose);
@@ -143,46 +143,58 @@ public:
      * @return number of parameters to be estimated
      */
     int calculateActualNumEstParameters();
-    void extractCompetitionParameters(const std::vector<double>& parameters,
-                                      int& startPos,
-                                      boost::numeric::ublas::matrix<double>& alpha,
-                                      boost::numeric::ublas::matrix<double>& betaSpecies,
-                                      boost::numeric::ublas::matrix<double>& betaGuilds,
-                                      boost::numeric::ublas::matrix<double>& betaGuildsGuilds);
-    void extractExponentParameters(const std::vector<double>& parameters,
-                                   int& startPos,
-                                   std::vector<double>& exponents);
-    void extractGrowthParameters(const std::vector<double>& parameters,
-                                 int& startPos,
-                                 std::vector<double>& growthRate,
-                                 std::vector<double>& growthRateCovariateCoeff,
-                                 std::vector<double>& carryingCapacity,
-                                 std::vector<double>& carryingCapacityCovariateCoeffs,
-                                 double& systemCarryingCapacity);
-    void extractHandlingParameters(const std::vector<double>& parameters,
-                                   int& startPos,
-                                   boost::numeric::ublas::matrix<double>& handling);
-    void extractHarvestParameters(const std::vector<double>& parameters,
-                                  int& startPos,
-                                  std::vector<double>& catchability,
-                                  std::vector<double>& catchabilityCovariateCoeffs);
-    void extractInitBiomass(const std::vector<double>& parameters,
-                            int&                       startPos,
-                            std::vector<double>&       initBiomass);
-    bool estimateParameters(double &bestFitness,
-                            std::vector<double> &bestParameters,
-                            int &RunNum,
-                            int &subRunNum,
-                            std::string& errorMsg);
-    void extractPredationParameters(const std::vector<double>& parameters,
-                                    int& startPos,
-                                    boost::numeric::ublas::matrix<double>& predation);
-    void extractSurveyQParameters(const std::vector<double>& parameters,
-                                  int&                       startPos,
-                                  std::vector<double>&       surveyQ);
-    double evaluateObjectiveFunction(const std::vector<double> &parameters);
-    void initializeParameterRangesAndPatchSizes(nmfStructsQt::ModelDataStruct& theBeeStruct);
-    void setSeed(long seed);
+    bool estimateParameters(
+            double &bestFitness,
+            std::vector<double> &bestParameters,
+            int &RunNum,
+            int &subRunNum,
+            std::string& errorMsg);
+    void extractCompetitionParameters(
+            const std::vector<double>& parameters,
+            int& startPos,
+            boost::numeric::ublas::matrix<double>& alpha,
+            boost::numeric::ublas::matrix<double>& betaSpecies,
+            boost::numeric::ublas::matrix<double>& betaGuilds,
+            boost::numeric::ublas::matrix<double>& betaGuildsGuilds);
+    void extractExponentParameters(
+            const std::vector<double>& parameters,
+            int& startPos,
+            std::vector<double>& exponents);
+    void extractGrowthParameters(
+            const std::vector<double>& parameters,
+            int& startPos,
+            std::vector<double>& growthRate,
+            std::vector<double>& growthRateCovariateCoeff,
+            std::vector<double>& carryingCapacity,
+            std::vector<double>& carryingCapacityCovariateCoeffs,
+            double& systemCarryingCapacity);
+    void extractHandlingParameters(
+            const std::vector<double>& parameters,
+            int& startPos,
+            boost::numeric::ublas::matrix<double>& handling);
+    void extractHarvestParameters(
+            const std::vector<double>& parameters,
+            int& startPos,
+            std::vector<double>& catchability,
+            std::vector<double>& catchabilityCovariateCoeffs);
+    void extractInitBiomass(
+            const std::vector<double>& parameters,
+            int&                       startPos,
+            std::vector<double>&       initBiomass);
+    void extractPredationParameters(
+            const std::vector<double>& parameters,
+            int& startPos,
+            boost::numeric::ublas::matrix<double>& predation);
+    void extractSurveyQParameters(
+            const std::vector<double>& parameters,
+            int&                       startPos,
+            std::vector<double>&       surveyQ);
+    double evaluateObjectiveFunction(
+            const std::vector<double> &parameters);
+    void initializeParameterRangesAndPatchSizes(
+            nmfStructsQt::ModelDataStruct& theBeeStruct);
+    void setSeed(
+            const long& seed);
 
 };
 

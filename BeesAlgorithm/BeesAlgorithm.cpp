@@ -8,9 +8,9 @@ BeesAlgorithm::BeesAlgorithm(nmfStructsQt::ModelDataStruct theBeeStruct,
     bool isAggProd  = (theBeeStruct.CompetitionForm == "AGG-PROD");
     int  numSpecies =  theBeeStruct.NumSpecies;
     int  numGuilds  =  theBeeStruct.NumGuilds;
-    QString tableHarvestCatch    = QString::fromStdString(nmfConstantsMSSPM::TableHarvestCatch);
-    QString tableBiomassAbsolute = QString::fromStdString(nmfConstantsMSSPM::TableBiomassAbsolute);
-    QString tableBiomassRelative = QString::fromStdString(nmfConstantsMSSPM::TableBiomassRelative);
+//  QString tableHarvestCatch    = QString::fromStdString(nmfConstantsMSSPM::TableHarvestCatch);
+//  QString tableBiomassAbsolute = QString::fromStdString(nmfConstantsMSSPM::TableBiomassAbsolute);
+//  QString tableBiomassRelative = QString::fromStdString(nmfConstantsMSSPM::TableBiomassRelative);
 
     m_BeeStruct      = theBeeStruct;
     m_Seed           = -1;
@@ -126,7 +126,7 @@ BeesAlgorithm::~BeesAlgorithm()
 }
 
 void
-BeesAlgorithm::setSeed(long seed)
+BeesAlgorithm::setSeed(const long& seed)
 {
     m_Seed = seed;
 }
@@ -465,7 +465,7 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     std::vector<double> catchabilityCovariateCoeffs;
     std::vector<double> guildCarryingCapacity;
     std::vector<double> predationExponent;
-    std::vector<double> catchability;
+    std::vector<double> Catchability;
     std::vector<double> surveyQ;
     boost::numeric::ublas::matrix<double> initBiomassCovariate;
     boost::numeric::ublas::matrix<double> growthRateCovariate;
@@ -481,8 +481,8 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     boost::numeric::ublas::matrix<double> competitionBetaGuildGuildCovariate;
     boost::numeric::ublas::matrix<double> EstBiomassSpecies;
     boost::numeric::ublas::matrix<double> EstBiomassGuilds;
-    boost::numeric::ublas::matrix<double> estBiomassRescaled;
-    boost::numeric::ublas::matrix<double> obsBiomassBySpeciesOrGuildsRescaled;
+    boost::numeric::ublas::matrix<double> EstBiomassRescaled;
+    boost::numeric::ublas::matrix<double> ObsBiomassBySpeciesOrGuildsRescaled;
     boost::numeric::ublas::matrix<double> obsBiomassBySpeciesOrGuilds;
     boost::numeric::ublas::matrix<double> competitionAlpha;
     boost::numeric::ublas::matrix<double> competitionBetaSpecies;
@@ -490,12 +490,19 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     boost::numeric::ublas::matrix<double> competitionBetaGuildsGuilds;
     boost::numeric::ublas::matrix<double> predationRho;
     boost::numeric::ublas::matrix<double> predationHandling;
-    boost::numeric::ublas::matrix<double> Catch  = m_BeeStruct.Catch;
-    boost::numeric::ublas::matrix<double> Effort = m_BeeStruct.Effort;
+    boost::numeric::ublas::matrix<double> Effort   = m_BeeStruct.Effort;
+    boost::numeric::ublas::matrix<double> ObsCatch = m_BeeStruct.Catch;
+    boost::numeric::ublas::matrix<double> ObsCatchRescaled;
+    boost::numeric::ublas::matrix<double> EstCatch;
+    boost::numeric::ublas::matrix<double> EstCatchRescaled;
+
+    nmfUtils::initialize(ObsCatchRescaled,                    NumYears,           NumSpeciesOrGuilds);
+    nmfUtils::initialize(EstCatch,                            NumYears,           NumSpeciesOrGuilds);
+    nmfUtils::initialize(EstCatchRescaled,                    NumYears,           NumSpeciesOrGuilds);
     nmfUtils::initialize(EstBiomassSpecies,                   NumYears,           NumSpeciesOrGuilds);
     nmfUtils::initialize(EstBiomassGuilds,                    NumYears,           NumGuilds);
-    nmfUtils::initialize(estBiomassRescaled,                  NumYears,           NumSpeciesOrGuilds);
-    nmfUtils::initialize(obsBiomassBySpeciesOrGuildsRescaled, NumYears,           NumSpeciesOrGuilds);
+    nmfUtils::initialize(EstBiomassRescaled,                  NumYears,           NumSpeciesOrGuilds);
+    nmfUtils::initialize(ObsBiomassBySpeciesOrGuildsRescaled, NumYears,           NumSpeciesOrGuilds);
     nmfUtils::initialize(competitionAlpha,                    NumSpeciesOrGuilds, NumSpeciesOrGuilds);
     nmfUtils::initialize(competitionBetaSpecies,              NumSpecies,         NumSpecies);
     nmfUtils::initialize(competitionBetaGuilds,               NumSpeciesOrGuilds, NumGuilds);
@@ -532,7 +539,7 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
                                     carryingCapacity,carryingCapacityCovariateCoeffs,
                                     systemCarryingCapacity);
     m_HarvestForm->extractParameters(parameters,startPos,
-                                     catchability,catchabilityCovariateCoeffs);
+                                     Catchability,catchabilityCovariateCoeffs);
     m_CompetitionForm->extractParameters(parameters,startPos,competitionAlpha,
                                          competitionBetaSpecies,competitionBetaGuilds,
                                          competitionBetaGuildsGuilds);
@@ -628,7 +635,7 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
             HarvestTerm     = m_HarvestForm->evaluate(covariateAlgorithmType,
                                                       timeMinus1,species,EstBiomassTMinus1,
                                                       m_Catch,m_Effort,m_Exploitation,
-                                                      catchability[species],
+                                                      Catchability[species],
                                                       catchabilityCovariateCoeffs[species],
                                                       catchabilityCovariate(timeMinus1,species));
 //std::cout << "guild cc: " << guildCarryingCapacity[guildNum] << std::endl;
@@ -688,41 +695,51 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
 
     // Scale the data
     if (m_Scaling == "Min Max") {
-        nmfUtils::rescaleMatrixMinMax(EstBiomassSpecies, estBiomassRescaled);
-        nmfUtils::rescaleMatrixMinMax(m_ObsBiomassBySpeciesOrGuilds, obsBiomassBySpeciesOrGuildsRescaled);
+        nmfUtils::rescaleMatrixMinMax(ObsCatch, ObsCatchRescaled);
+        nmfUtils::rescaleMatrixMinMax(EstCatch, EstCatchRescaled);
+        nmfUtils::rescaleMatrixMinMax(EstBiomassSpecies, EstBiomassRescaled);
+        nmfUtils::rescaleMatrixMinMax(m_ObsBiomassBySpeciesOrGuilds, ObsBiomassBySpeciesOrGuildsRescaled);
     } else if (m_Scaling == "Mean") {
-        nmfUtils::rescaleMatrixMean(EstBiomassSpecies, estBiomassRescaled);
-        nmfUtils::rescaleMatrixMean(m_ObsBiomassBySpeciesOrGuilds, obsBiomassBySpeciesOrGuildsRescaled);
+        nmfUtils::rescaleMatrixMean(ObsCatch, ObsCatchRescaled);
+        nmfUtils::rescaleMatrixMean(EstCatch, EstCatchRescaled);
+        nmfUtils::rescaleMatrixMean(EstBiomassSpecies, EstBiomassRescaled);
+        nmfUtils::rescaleMatrixMean(m_ObsBiomassBySpeciesOrGuilds, ObsBiomassBySpeciesOrGuildsRescaled);
     } else if (m_Scaling == "Z-Score") {
-        nmfUtils::rescaleMatrixZScore(EstBiomassSpecies, estBiomassRescaled);
-        nmfUtils::rescaleMatrixZScore(m_ObsBiomassBySpeciesOrGuilds, obsBiomassBySpeciesOrGuildsRescaled);
+        nmfUtils::rescaleMatrixZScore(ObsCatch, ObsCatchRescaled);
+        nmfUtils::rescaleMatrixZScore(EstCatch, EstCatchRescaled);
+        nmfUtils::rescaleMatrixZScore(EstBiomassSpecies, EstBiomassRescaled);
+        nmfUtils::rescaleMatrixZScore(m_ObsBiomassBySpeciesOrGuilds, ObsBiomassBySpeciesOrGuildsRescaled);
     } else {
 //      std::cout << "Error: No Scaling Algorithm detected. Defaulting to Min Max." << std::endl;
-        nmfUtils::rescaleMatrixMinMax(EstBiomassSpecies, estBiomassRescaled);
-        nmfUtils::rescaleMatrixMinMax(m_ObsBiomassBySpeciesOrGuilds, obsBiomassBySpeciesOrGuildsRescaled);
+        nmfUtils::rescaleMatrixMinMax(ObsCatch, ObsCatchRescaled);
+        nmfUtils::rescaleMatrixMinMax(EstCatch, EstCatchRescaled);
+        nmfUtils::rescaleMatrixMinMax(EstBiomassSpecies, EstBiomassRescaled);
+        nmfUtils::rescaleMatrixMinMax(m_ObsBiomassBySpeciesOrGuilds, ObsBiomassBySpeciesOrGuildsRescaled);
     }
 
     // Calculate fitness using the appropriate objective criterion
     if (m_BeeStruct.ObjectiveCriterion == "Least Squares") {
-
-        fitness =  nmfUtilsStatistics::calculateSumOfSquares(
-                    isEffortFitToCatch,catchability,Effort,Catch,
-                    estBiomassRescaled,EstBiomassSpecies,
-                    obsBiomassBySpeciesOrGuildsRescaled);
-
+        fitness =  nmfUtilsStatistics::calculateLeastSquares(
+                    isEffortFitToCatch,
+                    ObsCatchRescaled, ObsBiomassBySpeciesOrGuildsRescaled,
+                    EstCatchRescaled, EstBiomassRescaled,
+                    m_BeeStruct.FitWeights);
     } else if (m_BeeStruct.ObjectiveCriterion == "Model Efficiency") {
-
         // Negate the MEF here since the ranges is from -inf to 1, where 1 is best.  So we negate it,
         // then minimize that, and then negate and plot the resulting value.
         fitness = -nmfUtilsStatistics::calculateModelEfficiency(
-                    estBiomassRescaled,
-                    obsBiomassBySpeciesOrGuildsRescaled);
+                    isEffortFitToCatch,
+                    ObsCatchRescaled, ObsBiomassBySpeciesOrGuildsRescaled,
+                    EstCatchRescaled, EstBiomassRescaled,
+                    m_BeeStruct.FitWeights);
     } else if (m_BeeStruct.ObjectiveCriterion == "Maximum Likelihood") {
         // The maximum likelihood calculations must use the unscaled data or else the
         // results will be incorrect.
         fitness =  nmfUtilsStatistics::calculateMaximumLikelihoodNoRescale(
-                    EstBiomassSpecies,
-                    m_ObsBiomassBySpeciesOrGuilds);
+                    isEffortFitToCatch,
+                    ObsCatchRescaled, ObsBiomassBySpeciesOrGuildsRescaled,
+                    EstCatchRescaled, EstBiomassRescaled,
+                    m_BeeStruct.FitWeights);
     }
 
     return fitness;
@@ -824,7 +841,7 @@ BeesAlgorithm::searchNeighborhoodForBestBee(std::unique_ptr<Bee> bestSite,
 
 
 std::unique_ptr<Bee>
-BeesAlgorithm::searchParameterSpaceForBestBee(int &RunNum,
+BeesAlgorithm::searchParameterSpaceForBestBee(int &runNum,
                                               int& subRunNum,
                                               std::string& errorMsg)
 {
@@ -925,7 +942,7 @@ std::cout << "Found initial bees." << std::endl;
         done = (currentGeneration >= maxGenerations);
 //std::cout << "Generation: " <<  currentGeneration << ", Fitness: " << theBestBee->getFitness() << std::endl;
 
-        MSSPMName = "Run " + std::to_string(RunNum) +
+        MSSPMName = "Run " + std::to_string(runNum) +
                     "-"    + std::to_string(subRunNum);
         bestFitness = theBestBee->getFitness();
 
@@ -1033,7 +1050,7 @@ BeesAlgorithm::calculateActualNumEstParameters()
 bool
 BeesAlgorithm::estimateParameters(double &bestFitness,
                                   std::vector<double> &bestParameters,
-                                  int &RunNum,
+                                  int &runNum,
                                   int &subRunNum,
                                   std::string& errorMsg)
 {
@@ -1043,7 +1060,7 @@ BeesAlgorithm::estimateParameters(double &bestFitness,
     m_DefaultFitness =  INT_MAX;
     m_NullFitness    = -999;
 
-    bestBee = searchParameterSpaceForBestBee(RunNum,subRunNum,errorMsg);
+    bestBee = searchParameterSpaceForBestBee(runNum,subRunNum,errorMsg);
 
     if (bestBee->getFitness() != m_NullFitness) {
         bestFitness    = bestBee->getFitness();

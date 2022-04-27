@@ -189,18 +189,21 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsStatistics:
 <tr class="memitem:a53cbb1600bd5c14cf8325d9ecd64e766"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsStatistics::calculateAIC</b> (const int &amp;numSpeciesOrGuilds, const int &amp;numParameters, const int &amp;runLength, const std::vector&lt; double &gt; &amp;ssResiduals, std::vector&lt; double &gt; &amp;aic)</td></tr>
 <tr class="memdesc:a53cbb1600bd5c14cf8325d9ecd64e766"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates Akaike Info Criterion: n*ln(σ²) + 2*K, where n = number of observations, σ² = ssResiduals/n, and K = number of parameters.  <a href="nmf_utils_statistics_8cpp.html#a53cbb1600bd5c14cf8325d9ecd64e766">More...</a><br /></td></tr>
 <tr class="separator:a53cbb1600bd5c14cf8325d9ecd64e766"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92f975272b324a22ab466b9f44b9e5f1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsStatistics::calculateMaximumLikelihoodNoRescale</b> (const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomass, const boost::numeric::ublas::matrix&lt; double &gt; &amp;ObsBiomass)</td></tr>
-<tr class="memdesc:a92f975272b324a22ab466b9f44b9e5f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the negative log maximum likelihood value where (e)stimated, (o)bserved, and (m)ean (B)iomass.  <a href="nmf_utils_statistics_8cpp.html#a92f975272b324a22ab466b9f44b9e5f1">More...</a><br /></td></tr>
-<tr class="separator:a92f975272b324a22ab466b9f44b9e5f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc2ee5ff7f45743b49aff54b1fdccaf8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsStatistics::calculateMaximumLikelihoodNoRescale</b> (const int &amp;Species, const boost::numeric::ublas::matrix&lt; double &gt; &amp;ObsBiomass, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomass)</td></tr>
+<tr class="memdesc:adc2ee5ff7f45743b49aff54b1fdccaf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the negative log maximum likelihood value.  <a href="nmf_utils_statistics_8cpp.html#adc2ee5ff7f45743b49aff54b1fdccaf8">More...</a><br /></td></tr>
+<tr class="separator:adc2ee5ff7f45743b49aff54b1fdccaf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2f692ac566bc7df7d642a9db041799e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsStatistics::calculateMaximumLikelihoodNoRescale</b> (const bool &amp;isEffortFitToCatch, const boost::numeric::ublas::matrix&lt; double &gt; &amp;ObsCatch, const boost::numeric::ublas::matrix&lt; double &gt; &amp;ObsBiomass, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCatch, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomass, const boost::numeric::ublas::matrix&lt; double &gt; &amp;FitWeights)</td></tr>
+<tr class="memdesc:aa2f692ac566bc7df7d642a9db041799e"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculateMaximumLikelihoodNoRescale  <a href="nmf_utils_statistics_8cpp.html#aa2f692ac566bc7df7d642a9db041799e">More...</a><br /></td></tr>
+<tr class="separator:aa2f692ac566bc7df7d642a9db041799e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b5d27a767e6a015503ed4f409dd76f2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsStatistics::calculateMean</b> (const bool useLogData, const boost::numeric::ublas::matrix&lt; double &gt; &amp;obsBiomass, const int speciesNum)</td></tr>
 <tr class="memdesc:a3b5d27a767e6a015503ed4f409dd76f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the mean of the passed matrix for the particular species.  <a href="nmf_utils_statistics_8cpp.html#a3b5d27a767e6a015503ed4f409dd76f2">More...</a><br /></td></tr>
 <tr class="separator:a3b5d27a767e6a015503ed4f409dd76f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cc853c2f3dc23ad0fc2c2f8a4c1fc02"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsStatistics::calculateMEF</b> (const int &amp;numSpeciesOrGuilds, const int &amp;runLength, const std::vector&lt; double &gt; &amp;meanObserved, const std::vector&lt; double &gt; &amp;observed, const std::vector&lt; double &gt; &amp;estimated, std::vector&lt; double &gt; &amp;mef)</td></tr>
 <tr class="memdesc:a9cc853c2f3dc23ad0fc2c2f8a4c1fc02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the modeling efficiency statistic: [Σ(Oₜ-Ō)²-Σ(Eₜ-Oₜ)²] / Σ(Oₜ-Ō)²  <a href="nmf_utils_statistics_8cpp.html#a9cc853c2f3dc23ad0fc2c2f8a4c1fc02">More...</a><br /></td></tr>
 <tr class="separator:a9cc853c2f3dc23ad0fc2c2f8a4c1fc02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e78c4aa49c5fd2598f687dcda83ce0b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsStatistics::calculateModelEfficiency</b> (const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomass, const boost::numeric::ublas::matrix&lt; double &gt; &amp;ObsBiomass)</td></tr>
-<tr class="memdesc:a7e78c4aa49c5fd2598f687dcda83ce0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the model efficiency fitness of 1 - ⵉ(Be - Bo)² / ⵉ(Bo - Bm)² where (e)stimated, (o)bserved, and (m)ean (B)iomass.  <a href="nmf_utils_statistics_8cpp.html#a7e78c4aa49c5fd2598f687dcda83ce0b">More...</a><br /></td></tr>
-<tr class="separator:a7e78c4aa49c5fd2598f687dcda83ce0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bb28659718da27cb85b67b6baedc56b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsStatistics::calculateModelEfficiency</b> (const bool &amp;isEffortFitToCatch, const boost::numeric::ublas::matrix&lt; double &gt; &amp;ObsCatch, const boost::numeric::ublas::matrix&lt; double &gt; &amp;ObsBiomass, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCatch, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomass, const boost::numeric::ublas::matrix&lt; double &gt; &amp;FitWeights)</td></tr>
+<tr class="memdesc:a4bb28659718da27cb85b67b6baedc56b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the model efficiency fitness of 1 - ⵉ(Be - Bo)² / ⵉ(Bo - Bm)² where (e)stimated, (o)bserved, and (m)ean (B)iomass or Catch.  <a href="nmf_utils_statistics_8cpp.html#a4bb28659718da27cb85b67b6baedc56b">More...</a><br /></td></tr>
+<tr class="separator:a4bb28659718da27cb85b67b6baedc56b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3b326261a6be2dff18abdbc530e56d7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsStatistics::calculateMohnsRhoFor1dParameter</b> (std::vector&lt; boost::numeric::ublas::matrix&lt; double &gt; &gt; &amp;VectorOfParameterMatrices, std::vector&lt; double &gt; &amp;MohnsRhoVector)</td></tr>
 <tr class="memdesc:ab3b326261a6be2dff18abdbc530e56d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the Mohns Rho values for the given 1-dimensional parameter.  <a href="nmf_utils_statistics_8cpp.html#ab3b326261a6be2dff18abdbc530e56d7">More...</a><br /></td></tr>
 <tr class="separator:ab3b326261a6be2dff18abdbc530e56d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -210,9 +213,9 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsStatistics:
 <tr class="memitem:a9a3a28ad3ce957b585036f14b2cfb034"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsStatistics::calculateMohnsRhoForTimeSeries</b> (const int &amp;numPeels, const int &amp;numSpecies, const std::vector&lt; std::vector&lt; double &gt; &gt; &amp;timeSeries, std::vector&lt; double &gt; &amp;mohnsRhoVector)</td></tr>
 <tr class="memdesc:a9a3a28ad3ce957b585036f14b2cfb034"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the Mohns Rho values for the given time series.  <a href="nmf_utils_statistics_8cpp.html#a9a3a28ad3ce957b585036f14b2cfb034">More...</a><br /></td></tr>
 <tr class="separator:a9a3a28ad3ce957b585036f14b2cfb034"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61e3f25b16f55e558845aed41fd8045b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsStatistics::calculateSumOfSquares</b> (const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomass, const boost::numeric::ublas::matrix&lt; double &gt; &amp;ObsBiomass)</td></tr>
-<tr class="memdesc:a61e3f25b16f55e558845aed41fd8045b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the sum of squares fitness of ⵉ(Be - Bo)²  <a href="nmf_utils_statistics_8cpp.html#a61e3f25b16f55e558845aed41fd8045b">More...</a><br /></td></tr>
-<tr class="separator:a61e3f25b16f55e558845aed41fd8045b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8905ddafa8e80dc580eaaae30d3b854c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsStatistics::calculateLeastSquares</b> (const bool &amp;isEffortFitToCatch, const boost::numeric::ublas::matrix&lt; double &gt; &amp;ObsCatch, const boost::numeric::ublas::matrix&lt; double &gt; &amp;ObsBiomass, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCatch, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomass, const boost::numeric::ublas::matrix&lt; double &gt; &amp;FitWeights)</td></tr>
+<tr class="memdesc:a8905ddafa8e80dc580eaaae30d3b854c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the sum of squares fitness of ⵉ(Be - Bo)²  <a href="nmf_utils_statistics_8cpp.html#a8905ddafa8e80dc580eaaae30d3b854c">More...</a><br /></td></tr>
+<tr class="separator:a8905ddafa8e80dc580eaaae30d3b854c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5274137c510f7881a6a82ba1e84e230"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsStatistics::calculateR</b> (const int &amp;numSpeciesOrGuilds, const int &amp;runLength, const std::vector&lt; double &gt; &amp;meanObserved, const std::vector&lt; double &gt; &amp;meanEstimated, const std::vector&lt; double &gt; &amp;observed, const std::vector&lt; double &gt; &amp;estimated, std::vector&lt; double &gt; &amp;correlationCoefficient)</td></tr>
 <tr class="memdesc:aa5274137c510f7881a6a82ba1e84e230"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the correlation coefficient: Σ[(Oₜ-Ō)(Eₜ-Ē)] / sqrt{Σ(Oₜ-Ō)²Σ(Eₜ-Ē)²}.  <a href="nmf_utils_statistics_8cpp.html#aa5274137c510f7881a6a82ba1e84e230">More...</a><br /></td></tr>
 <tr class="separator:aa5274137c510f7881a6a82ba1e84e230"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -440,15 +443,39 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsStatistics::S
 
 </div>
 </div>
-<a id="a92f975272b324a22ab466b9f44b9e5f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a92f975272b324a22ab466b9f44b9e5f1">&#9670;&nbsp;</a></span>calculateMaximumLikelihoodNoRescale()</h2>
+<a id="a8905ddafa8e80dc580eaaae30d3b854c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8905ddafa8e80dc580eaaae30d3b854c">&#9670;&nbsp;</a></span>calculateLeastSquares()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double nmfUtilsStatistics::calculateMaximumLikelihoodNoRescale </td>
+          <td class="memname">double nmfUtilsStatistics::calculateLeastSquares </td>
           <td>(</td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>isEffortFitToCatch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ObsCatch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ObsBiomass</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstCatch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
           <td class="paramname"><em>EstBiomass</em>, </td>
         </tr>
@@ -456,7 +483,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsStatistics::S
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
-          <td class="paramname"><em>ObsBiomass</em>&#160;</td>
+          <td class="paramname"><em>FitWeights</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -466,15 +493,130 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsStatistics::S
       </table>
 </div><div class="memdoc">
 
-<p>Calculates the negative log maximum likelihood value where (e)stimated, (o)bserved, and (m)ean (B)iomass. </p>
+<p>Calculates the sum of squares fitness of ⵉ(Be - Bo)² </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">EstBiomass</td><td>: unscaled estimated biomass matrix </td></tr>
-    <tr><td class="paramname">ObsBiomass</td><td>: unscaled observed biomass matrix </td></tr>
+    <tr><td class="paramname">isEffortFitToCatch</td><td>: true if the harvest type is EffortFitToCatch; false otherwise </td></tr>
+    <tr><td class="paramname">ObsCatch</td><td>: Observed Catch matrix </td></tr>
+    <tr><td class="paramname">ObsBiomass</td><td>: Observed Biomass matrix </td></tr>
+    <tr><td class="paramname">EstCatch</td><td>: Estimated Catch matrix (= qEB, catchability*Effort*EstBiomass) </td></tr>
+    <tr><td class="paramname">EstBiomass</td><td>: Estimated Biomass matrix </td></tr>
+    <tr><td class="paramname">FitWeights</td><td>: Biomass and Catch fit weights (from 0 to 1) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns the -log maximum likelihood value </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the fitness value for SSE </dd></dl>
+
+</div>
+</div>
+<a id="aa2f692ac566bc7df7d642a9db041799e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2f692ac566bc7df7d642a9db041799e">&#9670;&nbsp;</a></span>calculateMaximumLikelihoodNoRescale() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double nmfUtilsStatistics::calculateMaximumLikelihoodNoRescale </td>
+          <td>(</td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>isEffortFitToCatch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ObsCatch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ObsBiomass</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstCatch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstBiomass</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>FitWeights</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>calculateMaximumLikelihoodNoRescale </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">isEffortFitToCatch</td><td>: true if the harvest type is EffortFitToCatch; false otherwise </td></tr>
+    <tr><td class="paramname">ObsCatch</td><td>: Observed Catch matrix </td></tr>
+    <tr><td class="paramname">ObsBiomass</td><td>: Observed Biomass matrix </td></tr>
+    <tr><td class="paramname">EstCatch</td><td>: Estimated Catch matrix (= qEB, catchability*Effort*EstBiomass) </td></tr>
+    <tr><td class="paramname">EstBiomass</td><td>: Estimated Biomass matrix </td></tr>
+    <tr><td class="paramname">FitWeights</td><td>: Biomass and Catch fit weights (from 0 to 1) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the total -log maximum likelihood value </dd></dl>
+
+</div>
+</div>
+<a id="adc2ee5ff7f45743b49aff54b1fdccaf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc2ee5ff7f45743b49aff54b1fdccaf8">&#9670;&nbsp;</a></span>calculateMaximumLikelihoodNoRescale() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double nmfUtilsStatistics::calculateMaximumLikelihoodNoRescale </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>Species</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ObsBiomass</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstBiomass</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculates the negative log maximum likelihood value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Species</td><td>: the particular species whose mle value you're finding </td></tr>
+    <tr><td class="paramname">ObsBiomass</td><td>: Observed Biomass matrix </td></tr>
+    <tr><td class="paramname">EstBiomass</td><td>: Estimated Biomass matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the per species -log maximum likelihood value </dd></dl>
 
 </div>
 </div>
@@ -589,8 +731,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsStatistics::S
 
 </div>
 </div>
-<a id="a7e78c4aa49c5fd2598f687dcda83ce0b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e78c4aa49c5fd2598f687dcda83ce0b">&#9670;&nbsp;</a></span>calculateModelEfficiency()</h2>
+<a id="a4bb28659718da27cb85b67b6baedc56b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bb28659718da27cb85b67b6baedc56b">&#9670;&nbsp;</a></span>calculateModelEfficiency()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -598,6 +740,30 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsStatistics::S
         <tr>
           <td class="memname">double nmfUtilsStatistics::calculateModelEfficiency </td>
           <td>(</td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>isEffortFitToCatch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ObsCatch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ObsBiomass</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstCatch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
           <td class="paramname"><em>EstBiomass</em>, </td>
         </tr>
@@ -605,7 +771,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsStatistics::S
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
-          <td class="paramname"><em>ObsBiomass</em>&#160;</td>
+          <td class="paramname"><em>FitWeights</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -615,11 +781,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsStatistics::S
       </table>
 </div><div class="memdoc">
 
-<p>Calculates the model efficiency fitness of 1 - ⵉ(Be - Bo)² / ⵉ(Bo - Bm)² where (e)stimated, (o)bserved, and (m)ean (B)iomass. </p>
+<p>Calculates the model efficiency fitness of 1 - ⵉ(Be - Bo)² / ⵉ(Bo - Bm)² where (e)stimated, (o)bserved, and (m)ean (B)iomass or Catch. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">EstBiomass</td><td>: estimated biomass matrix </td></tr>
-    <tr><td class="paramname">ObsBiomass</td><td>: observed biomass matrix </td></tr>
+    <tr><td class="paramname">isEffortFitToCatch</td><td>: true if the harvest type is EffortFitToCatch; false otherwise </td></tr>
+    <tr><td class="paramname">ObsCatch</td><td>: Observed Catch matrix </td></tr>
+    <tr><td class="paramname">ObsBiomass</td><td>: Observed Biomass matrix </td></tr>
+    <tr><td class="paramname">EstCatch</td><td>: Estimated Catch matrix (= qEB, catchability*Effort*EstBiomass) </td></tr>
+    <tr><td class="paramname">EstBiomass</td><td>: Estimated Biomass matrix </td></tr>
+    <tr><td class="paramname">FitWeights</td><td>: Biomass and Catch fit weights (from 0 to 1) </td></tr>
   </table>
   </dd>
 </dl>
@@ -1189,44 +1359,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>nmfUtilsStatistics::S
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a id="a61e3f25b16f55e558845aed41fd8045b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a61e3f25b16f55e558845aed41fd8045b">&#9670;&nbsp;</a></span>calculateSumOfSquares()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double nmfUtilsStatistics::calculateSumOfSquares </td>
-          <td>(</td>
-          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
-          <td class="paramname"><em>EstBiomass</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
-          <td class="paramname"><em>ObsBiomass</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Calculates the sum of squares fitness of ⵉ(Be - Bo)² </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">EstBiomass</td><td>: estimated biomass matrix </td></tr>
-    <tr><td class="paramname">ObsBiomass</td><td>: observed biomass matrix </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns the fitness value for SSE </dd></dl>
 
 </div>
 </div>

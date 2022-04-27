@@ -268,6 +268,12 @@ namespace nmfUtils {
     double getMatrixMax(boost::numeric::ublas::matrix<double> &mat,
                         bool roundOff);
     /**
+     * @brief Gets the mean from the passed in matrix
+     * @param mat : matrix to find the mean of
+     * @return The mean value of the matrix
+     */
+    double getMatrixMean(const boost::numeric::ublas::matrix<double>& mat);
+    /**
      * @brief Get the sum over all of the matrix elements
      * @param mat : matrix in which to sum over
      * @return : The sum over all of the matrix elements
@@ -494,26 +500,26 @@ namespace nmfUtils {
      */
     void rescaleMatrixLog(boost::numeric::ublas::matrix<double>& matrix);
     /**
-     * @brief rescales the passed matrix by: (X - Xavg) / (Xmax - Xmin) where X is an element of the matrix
-     * @param matrix : the matrix to rescale
+     * @brief rescales the unscaledMatrix by: (X - Xavg) / (Xmax - Xmin) where X is an element of the matrix
+     * @param unscaledMatrix : the matrix to rescale
      * @param rescaledMatrix : the rescaled matrix
      */
-    void rescaleMatrixMean(const boost::numeric::ublas::matrix<double> &matrix,
+    void rescaleMatrixMean(const boost::numeric::ublas::matrix<double> &unscaledMatrix,
                                  boost::numeric::ublas::matrix<double> &rescaledMatrix);
     /**
-     * @brief rescales the passed matrix by: (X - Xmin) / (Xmax - Xmin) where X is an element of the matrix
-     * @param matrix : the matrix to rescale
+     * @brief rescales the unscaledMatrix by: (X - Xmin) / (Xmax - Xmin) where X is an element of the matrix
+     * @param unscaledMatrix : the matrix to rescale
      * @param rescaledMatrix : the rescaled matrix
      */
-    void rescaleMatrixMinMax(const boost::numeric::ublas::matrix<double>& matrix,
+    void rescaleMatrixMinMax(const boost::numeric::ublas::matrix<double>& unscaledMatrix,
                                    boost::numeric::ublas::matrix<double>& rescaledMatrix);
     /**
-     * @brief rescales the passed matrix by: (X - Xavg) / (sigma) where X is an element of the matrix
+     * @brief rescales the unscaledMatrix by: (X - Xavg) / (sigma) where X is an element of the matrix
      * and sigma is the standard deviation
-     * @param matrix : the matrix to rescale
+     * @param unscaledMatrix : the matrix to rescale
      * @param rescaledMatrix : the rescaled matrix
      */
-    void rescaleMatrixZScore(const boost::numeric::ublas::matrix<double> &matrix,
+    void rescaleMatrixZScore(const boost::numeric::ublas::matrix<double> &unscaledMatrix,
                                    boost::numeric::ublas::matrix<double> &rescaledMatrix);
     /**
      * @brief Sets the passed matrix values to the passed resetValue

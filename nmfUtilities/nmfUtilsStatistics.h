@@ -136,14 +136,32 @@ namespace nmfUtilsStatistics {
                       std::vector<double>& aic);
     /**
      * @brief Calculates the negative log maximum likelihood value
-     * where (e)stimated, (o)bserved, and (m)ean (B)iomass
-     * @param EstBiomass : unscaled estimated biomass matrix
-     * @param ObsBiomass : unscaled observed biomass matrix
-     * @return Returns the -log maximum likelihood value
+     * @param Species : the particular species whose mle value you're finding
+     * @param ObsBiomass : Observed Biomass matrix
+     * @param EstBiomass : Estimated Biomass matrix
+     * @return Returns the per species -log maximum likelihood value
      */
-     double calculateMaximumLikelihoodNoRescale(
+    double calculateMaximumLikelihoodNoRescale(
+            const int& Species,
+            const boost::numeric::ublas::matrix<double>& ObsBiomass,
+            const boost::numeric::ublas::matrix<double>& EstBiomass);
+    /**
+      * @brief calculateMaximumLikelihoodNoRescale
+      * @param isEffortFitToCatch : true if the harvest type is EffortFitToCatch; false otherwise
+      * @param ObsCatch : Observed Catch matrix
+      * @param ObsBiomass : Observed Biomass matrix
+      * @param EstCatch : Estimated Catch matrix (= qEB, catchability*Effort*EstBiomass)
+      * @param EstBiomass : Estimated Biomass matrix
+      * @param FitWeights : Biomass and Catch fit weights (from 0 to 1)
+      * @return Returns the total -log maximum likelihood value
+      */
+    double calculateMaximumLikelihoodNoRescale(
+            const bool& isEffortFitToCatch,
+            const boost::numeric::ublas::matrix<double>& ObsCatch,
+            const boost::numeric::ublas::matrix<double>& ObsBiomass,
+             const boost::numeric::ublas::matrix<double>& EstCatch,
              const boost::numeric::ublas::matrix<double>& EstBiomass,
-             const boost::numeric::ublas::matrix<double>& ObsBiomass);
+             const boost::numeric::ublas::matrix<double>& FitWeights);
     /**
      * @brief Calculates the mean of the passed matrix for the particular species
      * @param useLogData : boolean signifying if log of data should be taken prior to calculations
@@ -173,14 +191,22 @@ namespace nmfUtilsStatistics {
                       std::vector<double>& mef);
     /**
      * @brief Calculates the model efficiency fitness of 1 - ⵉ(Be - Bo)² / ⵉ(Bo - Bm)²
-     * where (e)stimated, (o)bserved, and (m)ean (B)iomass
-     * @param EstBiomass : estimated biomass matrix
-     * @param ObsBiomass : observed biomass matrix
+     * where (e)stimated, (o)bserved, and (m)ean (B)iomass or Catch
+     * @param isEffortFitToCatch : true if the harvest type is EffortFitToCatch; false otherwise
+     * @param ObsCatch : Observed Catch matrix
+     * @param ObsBiomass : Observed Biomass matrix
+     * @param EstCatch : Estimated Catch matrix (= qEB, catchability*Effort*EstBiomass)
+     * @param EstBiomass : Estimated Biomass matrix
+     * @param FitWeights : Biomass and Catch fit weights (from 0 to 1)
      * @return Returns the model efficiency value
      */
-    double calculateModelEfficiency(const boost::numeric::ublas::matrix<double>& EstBiomass,
-                                    const boost::numeric::ublas::matrix<double>& ObsBiomass);
-
+    double calculateModelEfficiency(
+            const bool& isEffortFitToCatch,
+            const boost::numeric::ublas::matrix<double>& ObsCatch,
+            const boost::numeric::ublas::matrix<double>& ObsBiomass,
+            const boost::numeric::ublas::matrix<double>& EstCatch,
+            const boost::numeric::ublas::matrix<double>& EstBiomass,
+            const boost::numeric::ublas::matrix<double>& FitWeights);
     /**
      * @brief Calculates the Mohns Rho values for the given 1-dimensional parameter
      * @param VectorOfParameterMatrices
@@ -216,21 +242,20 @@ namespace nmfUtilsStatistics {
     /**
      * @brief Calculates the sum of squares fitness of ⵉ(Be - Bo)²
      * @param isEffortFitToCatch : true if the harvest type is EffortFitToCatch; false otherwise
-     * @param Catchability : vector of q values per species
-     * @param Effort : Effort matrix
-     * @param Catch : Catch matrix
-     * @param EstBiomass : estimated biomass matrix
-     * @param ObsBiomass : observed biomass matrix
+     * @param ObsCatch : Observed Catch matrix
+     * @param ObsBiomass : Observed Biomass matrix
+     * @param EstCatch : Estimated Catch matrix (= qEB, catchability*Effort*EstBiomass)
+     * @param EstBiomass : Estimated Biomass matrix
+     * @param FitWeights : Biomass and Catch fit weights (from 0 to 1)
      * @return Returns the fitness value for SSE
      */
-    double calculateSumOfSquares(
+    double calculateLeastSquares(
             const bool& isEffortFitToCatch,
-            const std::vector<double>& Catchability,
-            const boost::numeric::ublas::matrix<double>& Effort,
-            const boost::numeric::ublas::matrix<double>& Catch,
-            const boost::numeric::ublas::matrix<double>& EstBiomassNoRescale,
+            const boost::numeric::ublas::matrix<double>& ObsCatch,
+            const boost::numeric::ublas::matrix<double>& ObsBiomass,
+            const boost::numeric::ublas::matrix<double>& EstCatch,
             const boost::numeric::ublas::matrix<double>& EstBiomass,
-            const boost::numeric::ublas::matrix<double>& ObsBiomass);
+            const boost::numeric::ublas::matrix<double>& FitWeights);
     /**
      * @brief Calculate the correlation coefficient: Σ[(Oₜ-Ō)(Eₜ-Ē)] / sqrt{Σ(Oₜ-Ō)²Σ(Eₜ-Ē)²}
      * @param numSpeciesOrGuilds : the number of either species or guilds

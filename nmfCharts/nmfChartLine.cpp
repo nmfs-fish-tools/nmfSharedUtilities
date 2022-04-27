@@ -20,54 +20,81 @@ nmfChartLine::clear(QChart* chart)
 
 void
 nmfChartLine::overlayVerticalLine(
-        QChart* chart,
-        const std::string& lineStyle,
-        const double& xPos,
-        const double& yMinVal,
-        const double& yMaxVal,
-        const std::string& lineColor)
+        QChart* Chart,
+        const std::string& LineStyle,
+        const bool&        ShowFirstPoint,
+        const bool&        ShowLegend,
+        const double&      XOffset,
+        const bool&        XAxisIsInteger,
+        const double&      XPos,
+        const double&      YMinVal,
+        double&            YMaxVal,
+        const bool&        LeaveGapsWhereNegative,
+        int&               NumXValues,
+        const QString&     HoverLabel,
+        std::string&       XTitle,
+        std::string&       YTitle,
+        const std::string& LineColor,
+        const std::vector<bool>& GridLines,
+        const double&      XInc)
 {
-    QPen pen;
-    QLineSeries *series = nullptr;
-    QValueAxis *yAxis = qobject_cast<QValueAxis*>(chart->axes(Qt::Vertical).back());
+    QString hoverLabel;
+    int XStartVal = (ShowFirstPoint) ? 0 : 1;
+    XStartVal += XOffset;
+    QLineSeries *series = new QLineSeries();;
+    QPen pen = series->pen();
 
-    // Draw vertical line
-    series = new QLineSeries();
-    pen = series->pen();
+    // Set pen color and style for the vertical line
     pen.setWidth(2);
-    pen.setColor(QColor(QString::fromStdString(lineColor)));
-    if (lineStyle == "DottedLine") {
+    pen.setColor(QColor(QString::fromStdString(LineColor)));
+    if (LineStyle == "DottedLine") {
         pen.setStyle(Qt::DotLine);
-    } else if (lineStyle == "DashedLine") {
+    } else if (LineStyle == "DashedLine") {
         pen.setStyle(Qt::DashLine);
     } else {
         pen.setStyle(Qt::SolidLine);
     }
     series->setPen(pen);
 
-    double yMin = yAxis->min();
-    double yMax = yAxis->max();
+    // Add points for the dotted line
+    series->append(XPos,YMinVal);
+    series->append(XPos,YMaxVal);
+    Chart->addSeries(series);
 
-    yMin = (yMinVal >= 0) ? yMin*yMinVal/100.0 : yMin;
-    yMax = (yMaxVal >= 0) ? yMaxVal : yMax;
+    // Set hover help
+    hoverLabel = (HoverLabel.isEmpty()) ? "No Label Set" : HoverLabel;
+    m_HoverLabels[hoverLabel] = hoverLabel;
 
-    series->append(xPos,yMin);
-    series->append(xPos,yMax);
+    // Using the hover help QString as the name of the series so that I can
+    // find later on the hover help that corresponds to the series the user is
+    // hovering over.
+    series->setName(hoverLabel);
 
-    chart->addSeries(series);
+    // Connect callback for this series
+    disconnect(series,0,0,0);
+    connect(series, SIGNAL(hovered(const QPointF&,bool)),
+            this,   SLOT(callback_hoveredLine(const QPointF&,bool)));
+
+    // Set the axes' labels and scale.
+    // N.B. When adding a series you MUST make sure axes have been
+    // explicitly added.  If not, the line from the series will not
+    // be drawn correctly.
+    resetAxes(Chart, ShowLegend, XAxisIsInteger, XStartVal,
+              NumXValues, YMinVal, YMaxVal, LeaveGapsWhereNegative,
+              XTitle, YTitle, GridLines, XInc);
 }
 
 void
 nmfChartLine::populateChart(
-        QChart*            chart,
-        std::string&       type,
-        const std::string& lineStyle,
+        QChart*            Chart,
+        std::string&       LineType,
+        const std::string& LineStyle,
         const bool&        ShowFirstPoint,
         const bool&        ShowLegend,
         const double&      XOffset,
         const bool&        XAxisIsInteger,
         const double&      YMinVal,
-        const double&      YMaxVal,
+        double&            YMaxVal,
         const bool&        LeaveGapsWhereNegative,
         const boost::numeric::ublas::matrix<double> &lineData,
         const QStringList& RowLabels,
@@ -93,18 +120,18 @@ nmfChartLine::populateChart(
     int NumXValues = lineData.size1();
 
     // Set main title
-    QFont mainTitleFont = chart->titleFont();
+    QFont mainTitleFont = Chart->titleFont();
     mainTitleFont.setPointSize(14);
     mainTitleFont.setWeight(QFont::Bold);
-    chart->setTitleFont(mainTitleFont);
-    chart->setTitle(QString::fromStdString(MainTitle));
+    Chart->setTitleFont(mainTitleFont);
+    Chart->setTitle(QString::fromStdString(MainTitle));
 
-    chart->legend()->hide();
+    Chart->legend()->hide();
 
     // Set current theme
-    chart->setTheme(static_cast<QChart::ChartTheme>(Theme));
+    Chart->setTheme(static_cast<QChart::ChartTheme>(Theme));
 
-    if (type == "FreeLine") { // A FreeLine doesn't use default integers for x axis
+    if (LineType == "FreeLine") { // A FreeLine doesn't use default integers for x axis
           series = new QLineSeries();
 
           // For now...just use allow line
@@ -120,19 +147,20 @@ nmfChartLine::populateChart(
                                lineData(1,i));
         }
 
-        chart->addSeries(series);
+        Chart->addSeries(series);
         series->setPointsVisible();
 
-    } else if (type == "Line") {
+    } else if (LineType == "Line") {
 
         // Load data into series and then add series to the chart
         for (unsigned line=0; line<lineData.size2(); ++line) {
             series = new QLineSeries();
+
+            // Set hover help for this series
             hoverLabel = (unsigned(HoverLabels.size()) <= line) ? "" : HoverLabels[line];
             if (hoverLabel.isEmpty()) {
                 hoverLabel = "No Label Set";
             }
-
             m_HoverLabels[hoverLabel] = hoverLabel;
 
             // Using the hover help QString as the name of the series so that I can
@@ -140,24 +168,26 @@ nmfChartLine::populateChart(
             // hovering over.
             series->setName(hoverLabel);
 
+            // Set pen color and style
             pen = series->pen();
             if (lineColorName == "MonteCarloSimulation") {
                 pen.setColor(LineColor);
             } else if (lineColorName == "No Uncertainty Variations") {
-                 pen.setColor(Qt::black);
+                pen.setColor(Qt::black);
             } else {
                 pen.setColor(QColor(QString::fromStdString(nmfConstants::LineColors[line%nmfConstants::LineColors.size()])));
             }
             pen.setWidth(2);
-            if (lineStyle == "DottedLine") {
+            if (LineStyle == "DottedLine") {
                 pen.setStyle(Qt::DotLine);
-            } else if (lineStyle == "DashedLine") {
+            } else if (LineStyle == "DashedLine") {
                 pen.setStyle(Qt::DashLine);
             } else {
                 pen.setStyle(Qt::SolidLine);
             }
             series->setPen(pen);
 
+            // Add data points to the series
             for (int j=XStartVal-XOffset; j<NumXValues; ++j) {
                 yVal = lineData(j,line);
                 if (yVal != nmfConstants::NoValueDouble) {
@@ -165,27 +195,51 @@ nmfChartLine::populateChart(
                 }
             }
 
-            chart->addSeries(series);
+            // Add the series to the chart (each curve (i.e., forecast run) is a series)
+            Chart->addSeries(series);
 
+            // Connect callback for this series
             if (ColumnLabels.size() > 0) {
                 m_Tooltips[ColumnLabels[0]] = lineColorName;
             }
             disconnect(series,0,0,0);
-
             connect(series, SIGNAL(hovered(const QPointF&,bool)),
                     this,   SLOT(callback_hoveredLine(const QPointF&,bool)));
         }
 
-
     }
 
-    // Setup X and Y axes
+    // Set the axes' labels and scale. N.B. This must be called after adding
+    // any series to a chart.
+    resetAxes(Chart, ShowLegend, XAxisIsInteger, XStartVal,
+              NumXValues, YMinVal, YMaxVal, LeaveGapsWhereNegative,
+              XTitle, YTitle, GridLines, XInc);
+}
+
+
+void
+nmfChartLine::resetAxes(
+        QChart*            chart,
+        const bool&        ShowLegend,
+        const bool&        XAxisIsInteger,
+        const int&         XStartVal,
+        const int&         NumXValues,
+        const double&      YMinVal,
+        double&            YMaxVal,
+        const bool&        LeaveGapsWhereNegative,
+        std::string&       XTitle,
+        std::string&       YTitle,
+        const std::vector<bool>& GridLines,
+        const double&      XInc)
+{
+    // Make default axes and set font
     chart->createDefaultAxes();
     QAbstractAxis *axisX = chart->axes(Qt::Horizontal).back();
     QFont titleFont = axisX->titleFont();
     titleFont.setPointSize(12);
     titleFont.setWeight(QFont::Bold);
 
+    // Setup Y axis
     QValueAxis *currentAxisY = qobject_cast<QValueAxis*>(chart->axes(Qt::Vertical).back());
     currentAxisY->setTitleFont(titleFont);
     currentAxisY->setTitleText(QString::fromStdString(YTitle));
@@ -198,6 +252,7 @@ nmfChartLine::populateChart(
     }
     currentAxisY->applyNiceNumbers();
 
+    // Handle any gaps
     if (LeaveGapsWhereNegative) {
         double currentYMax = currentAxisY->max();
         // Replace any y = -1 found in series with 99999
@@ -219,7 +274,7 @@ nmfChartLine::populateChart(
         currentAxisY->setMax(currentYMax);
     }
 
-
+    // Assure x axis numbers are integers (I assume they're years)
     QValueAxis *currentAxisX = qobject_cast<QValueAxis*>(chart->axes(Qt::Horizontal).back());
     currentAxisX->setTitleFont(titleFont);
     currentAxisX->setTitleText(QString::fromStdString(XTitle));
@@ -240,6 +295,8 @@ nmfChartLine::populateChart(
     chart->legend()->setAlignment(Qt::AlignRight);
     chart->legend()->setShowToolTips(true);
     chart->legend()->setMarkerShape(QLegend::MarkerShapeFromSeries);
+
+    YMaxVal = currentAxisY->max();
 }
 
 void

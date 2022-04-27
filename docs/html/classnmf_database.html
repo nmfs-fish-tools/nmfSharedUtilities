@@ -117,6 +117,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9fb6edf3388529b231e64e1217b75927"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a9fb6edf3388529b231e64e1217b75927">getCovariateAlgorithmType</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;ProjectName, const std::string &amp;ModelName)</td></tr>
 <tr class="memdesc:a9fb6edf3388529b231e64e1217b75927"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the last saved covariate type for the current project name and model name.  <a href="classnmf_database.html#a9fb6edf3388529b231e64e1217b75927">More...</a><br /></td></tr>
 <tr class="separator:a9fb6edf3388529b231e64e1217b75927"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bd040e8ad47cc2ba1cfd7d098356fc0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a2bd040e8ad47cc2ba1cfd7d098356fc0">getFitWeights</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, const std::string &amp;TableName, int &amp;NumSpecies, boost::numeric::ublas::matrix&lt; double &gt; &amp;FitWeights)</td></tr>
+<tr class="memdesc:a2bd040e8ad47cc2ba1cfd7d098356fc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the Biomass and Catch Fit Weights for the model.  <a href="classnmf_database.html#a2bd040e8ad47cc2ba1cfd7d098356fc0">More...</a><br /></td></tr>
+<tr class="separator:a2bd040e8ad47cc2ba1cfd7d098356fc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a1a05895333ec2eaf65620634801151"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a3a1a05895333ec2eaf65620634801151">getGuilds</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, std::vector&lt; std::string &gt; &amp;guilds)</td></tr>
 <tr class="memdesc:a3a1a05895333ec2eaf65620634801151"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets all the guilds in the current project.  <a href="classnmf_database.html#a3a1a05895333ec2eaf65620634801151">More...</a><br /></td></tr>
 <tr class="separator:a3a1a05895333ec2eaf65620634801151"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,9 +153,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a15169dc48fc79e223ad031f13020c9b2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a15169dc48fc79e223ad031f13020c9b2">getForecastHarvest</a> (QWidget *Widget, <a class="el" href="classnmf_logger.html">nmfLogger</a> *Logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, const std::string &amp;ForecastName, const int &amp;NumSpecies, const int &amp;RunLength, std::string &amp;Algorithm, std::string &amp;Minimizer, std::string &amp;ObjectiveCriterion, std::string &amp;Scaling, const std::string &amp;HarvestForm, std::vector&lt; boost::numeric::ublas::matrix&lt; double &gt; &gt; &amp;HarvestData)</td></tr>
 <tr class="memdesc:a15169dc48fc79e223ad031f13020c9b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back the Harvest data to be used for the forecast.  <a href="classnmf_database.html#a15169dc48fc79e223ad031f13020c9b2">More...</a><br /></td></tr>
 <tr class="separator:a15169dc48fc79e223ad031f13020c9b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72e80d0444f7ecdfa72949fc4f160ce4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a72e80d0444f7ecdfa72949fc4f160ce4">getForecastInfo</a> (const std::string &amp;TableName, const std::string &amp;ProjectName, const std::string &amp;ModelName, const std::string &amp;ForecastName, int &amp;RunLength, int &amp;StartForecastYear, std::string &amp;Algorithm, std::string &amp;Minimizer, std::string &amp;ObjectiveCriterion, std::string &amp;Scaling, int &amp;NumRuns)</td></tr>
-<tr class="memdesc:a72e80d0444f7ecdfa72949fc4f160ce4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back information about the passed in forecast.  <a href="classnmf_database.html#a72e80d0444f7ecdfa72949fc4f160ce4">More...</a><br /></td></tr>
-<tr class="separator:a72e80d0444f7ecdfa72949fc4f160ce4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5383de123bc8c2ebeefeb5829f3f300e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a5383de123bc8c2ebeefeb5829f3f300e">getForecastInfo</a> (const std::string &amp;ProjectName, const std::string &amp;ModelName, const std::string &amp;ForecastName, int &amp;RunLength, int &amp;StartForecastYear, std::string &amp;Algorithm, std::string &amp;Minimizer, std::string &amp;ObjectiveCriterion, std::string &amp;Scaling, std::string &amp;GrowthForm, std::string &amp;HarvestForm, std::string &amp;WithinGuildCompetitionForm, std::string &amp;PredationForm, std::string &amp;ForecastHarvestType, int &amp;NumRuns)</td></tr>
+<tr class="memdesc:a5383de123bc8c2ebeefeb5829f3f300e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back information about the passed in forecast.  <a href="classnmf_database.html#a5383de123bc8c2ebeefeb5829f3f300e">More...</a><br /></td></tr>
+<tr class="separator:a5383de123bc8c2ebeefeb5829f3f300e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a277bd91a577e662cceef0d3dbcb3359f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a277bd91a577e662cceef0d3dbcb3359f">getForecastMonteCarloHoverData</a> (QWidget *widget, <a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;Species, const std::string &amp;ProjectName, const std::string &amp;ModelName, const std::string &amp;ForecastName, const std::string &amp;Algorithm, const std::string &amp;Minimizer, const std::string &amp;ObjectiveCriterion, const std::string &amp;Scaling, QStringList &amp;HoverData)</td></tr>
 <tr class="memdesc:a277bd91a577e662cceef0d3dbcb3359f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back the hover text data, for each monte carlo run, that describes the parameters used for the run.  <a href="classnmf_database.html#a277bd91a577e662cceef0d3dbcb3359f">More...</a><br /></td></tr>
 <tr class="separator:a277bd91a577e662cceef0d3dbcb3359f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1309,6 +1312,72 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
 
 </div>
 </div>
+<a id="a2bd040e8ad47cc2ba1cfd7d098356fc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bd040e8ad47cc2ba1cfd7d098356fc0">&#9670;&nbsp;</a></span>getFitWeights()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfDatabase::getFitWeights </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classnmf_logger.html">nmfLogger</a> *&#160;</td>
+          <td class="paramname"><em>logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>ProjectName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>ModelName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>TableName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>NumSpecies</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>FitWeights</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the Biomass and Catch Fit Weights for the model. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">logger</td><td>: logger pointer used to log any error messages </td></tr>
+    <tr><td class="paramname">ProjectName</td><td>: name of current project </td></tr>
+    <tr><td class="paramname">ModelName</td><td>: name of current model </td></tr>
+    <tr><td class="paramname">TableName</td><td>: name of table containing the weights </td></tr>
+    <tr><td class="paramname">NumSpecies</td><td>: number of species in currently loaded model </td></tr>
+    <tr><td class="paramname">FitWeights</td><td>: matrix of fit weights </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if weights were read without error, else False </dd></dl>
+
+</div>
+</div>
 <a id="a8cc6018c485015792e6de158962b6ea7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8cc6018c485015792e6de158962b6ea7">&#9670;&nbsp;</a></span>getForecastBiomass()</h2>
 
@@ -1647,8 +1716,8 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
 
 </div>
 </div>
-<a id="a72e80d0444f7ecdfa72949fc4f160ce4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a72e80d0444f7ecdfa72949fc4f160ce4">&#9670;&nbsp;</a></span>getForecastInfo()</h2>
+<a id="a5383de123bc8c2ebeefeb5829f3f300e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5383de123bc8c2ebeefeb5829f3f300e">&#9670;&nbsp;</a></span>getForecastInfo()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1656,12 +1725,6 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
         <tr>
           <td class="memname">bool nmfDatabase::getForecastInfo </td>
           <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>TableName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>ProjectName</em>, </td>
         </tr>
@@ -1716,6 +1779,36 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>GrowthForm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>HarvestForm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>WithinGuildCompetitionForm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>PredationForm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>ForecastHarvestType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">int &amp;&#160;</td>
           <td class="paramname"><em>NumRuns</em>&#160;</td>
         </tr>
@@ -1730,7 +1823,6 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
 <p>Sends back information about the passed in forecast. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">TableName</td><td>: name of table containing the forecast information </td></tr>
     <tr><td class="paramname">ProjectName</td><td>: name of current project </td></tr>
     <tr><td class="paramname">ModelName</td><td>: name of current model </td></tr>
     <tr><td class="paramname">ForecastName</td><td>: name of current forecast </td></tr>
@@ -1740,6 +1832,11 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
     <tr><td class="paramname">Minimizer</td><td>: name of forecast minimizer algorithm (passed back) </td></tr>
     <tr><td class="paramname">ObjectiveCriterion</td><td>: name of forecast objective criterion (passed back) </td></tr>
     <tr><td class="paramname">Scaling</td><td>: name of forecast scaling algorithm (passed back) </td></tr>
+    <tr><td class="paramname">GrowthForm</td><td>: name of the growth form (passed back) </td></tr>
+    <tr><td class="paramname">HarvestForm</td><td>: name of the harvest form (passed back) </td></tr>
+    <tr><td class="paramname">WithinGuildCompetitionForm</td><td>: name of the competition form (passed back) </td></tr>
+    <tr><td class="paramname">PredationForm</td><td>: name of the predation form (passed back) </td></tr>
+    <tr><td class="paramname">ForecastHarvestType</td><td>: the forecast harvest type as set by the forecast type button in Forecast tab 2 </td></tr>
     <tr><td class="paramname">NumRuns</td><td>: number of runs in forecast (passed back) </td></tr>
   </table>
   </dd>

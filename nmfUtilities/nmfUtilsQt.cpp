@@ -438,9 +438,93 @@ bool allCellsArePopulated(QTabWidget *tabWidget,
     return true;
 }
 
-bool allMaxCellsGreaterThanMinCells(
+
+bool areAllCellsHoldingUniqueData(QTableView* tv1,
+                                  QTableView* tv1Min,
+                                  QTableView* tv1Max,
+                                  QTableView* tv2,
+                                  QTableView* tv2Min,
+                                  QTableView* tv2Max,
+                                  QString& badCell)
+{
+    badCell.clear();
+
+    // First assure that no table is null
+    if ((tv1    == nullptr) || (tv2    == nullptr) ||
+        (tv1Min == nullptr) || (tv2Min == nullptr) ||
+        (tv1Max == nullptr) || (tv2Max == nullptr)) {
+        return true;
+    }
+
+    // Next assure that the tables are the same size (checking just tv1 and tv2 should be sufficient)
+    QStandardItemModel* smodel1    = qobject_cast<QStandardItemModel*>(tv1->model());
+    QStandardItemModel* smodel1Min = qobject_cast<QStandardItemModel*>(tv1Min->model());
+    QStandardItemModel* smodel1Max = qobject_cast<QStandardItemModel*>(tv1Max->model());
+    QStandardItemModel* smodel2    = qobject_cast<QStandardItemModel*>(tv2->model());
+    QStandardItemModel* smodel2Min = qobject_cast<QStandardItemModel*>(tv2Min->model());
+    QStandardItemModel* smodel2Max = qobject_cast<QStandardItemModel*>(tv2Max->model());
+    if ((smodel1->rowCount()    != smodel2->rowCount()) ||
+        (smodel1->columnCount() != smodel2->columnCount())) {
+        return true;
+    }
+
+    // Finally check for values in same cells in each table
+    bool cell1IsFixed,cell2IsFixed;
+    int numRows = smodel1->rowCount();
+    int numCols = smodel1->columnCount();
+
+    QModelIndex index1,index1Min,index1Max;
+    QModelIndex index2,index2Min,index2Max;
+    QString value1,value1Min,value1Max;
+    QString value2,value2Min,value2Max;
+    for (int row=0; row<numRows; ++row) {
+        for (int col=0; col<numCols; ++col) {
+            index1    = smodel1->index(row,col);
+            index1Min = smodel1Min->index(row,col);
+            index1Max = smodel1Max->index(row,col);
+            index2    = smodel2->index(row,col);
+            index2Min = smodel2Min->index(row,col);
+            index2Max = smodel2Max->index(row,col);
+            value1    = index1.data().toString();
+            value1Min = index1Min.data().toString();
+            value1Max = index1Max.data().toString();
+            value2    = index2.data().toString();
+            value2Min = index2Min.data().toString();
+            value2Max = index2Max.data().toString();
+            cell1IsFixed = (value1 == value1Min && value1 == value1Max);
+            cell2IsFixed = (value2 == value2Min && value2 == value2Max);
+            if (! cell1IsFixed || ! cell2IsFixed) {
+                badCell = QString("(")+QString::number(row)+","+QString::number(col)+")";
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+bool areAllCellsNonBlank(QTableView* tv)
+{
+    QModelIndex index;
+    QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(tv->model());
+    QString value;
+
+    for (int j=0; j<smodel->columnCount(); ++j) { // Species
+        for (int i=0; i<smodel->rowCount(); ++i) { // Time
+            index = smodel->index(i,j);
+            value = index.data().toString().trimmed();
+            if (value.isEmpty()) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+bool areAllMaxCellsGreaterThanMinCells(
         QStandardItemModel* smodelMin,
-        QStandardItemModel* smodelMax)
+        QStandardItemModel* smodelMax,
+        QString& badCell)
 {
     int numRows = smodelMin->rowCount();
     int numCols = smodelMin->columnCount();
@@ -449,6 +533,8 @@ bool allMaxCellsGreaterThanMinCells(
     double valueMin;
     double valueMax;
 
+    badCell.clear();
+
     for (int i=0; i<numRows; ++i) {
         for (int j=0; j<numCols; ++ j) {
             indexMin = smodelMin->index(i,j);
@@ -456,6 +542,39 @@ bool allMaxCellsGreaterThanMinCells(
             valueMin = indexMin.data().toString().remove(",").toDouble();
             valueMax = indexMax.data().toString().remove(",").toDouble();
             if (valueMin > valueMax) {
+                badCell = QString("(")+QString::number(i)+","+QString::number(j)+")";
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+// 3. Check initial cells are >= min cells and <= max cells
+bool areAllInitialCellsWithinRange(
+        QStandardItemModel* smodel,
+        QStandardItemModel* smodelMin,
+        QStandardItemModel* smodelMax,
+        QString& badCell)
+{
+    int numRows = smodel->rowCount();
+    int numCols = smodel->columnCount();
+    QModelIndex index,indexMin,indexMax;
+    double value,valueMin,valueMax;
+
+    badCell.clear();
+
+    for (int i=0; i<numRows; ++i) {
+        for (int j=0; j<numCols; ++ j) {
+            index    = smodel->index(i,j);
+            indexMin = smodelMin->index(i,j);
+            indexMax = smodelMax->index(i,j);
+            value    = index.data().toString().remove(",").toDouble();
+            valueMin = indexMin.data().toString().remove(",").toDouble();
+            valueMax = indexMax.data().toString().remove(",").toDouble();
+            if ((value < valueMin) || (value > valueMax)) {
+                badCell = QString("(")+QString::number(i)+","+QString::number(j)+")";
                 return false;
             }
         }
@@ -923,6 +1042,17 @@ showAboutWidget(
     QGridLayout* gridLT = qobject_cast<QGridLayout *>(msgBox.layout());
     gridLT->addItem(horSP, gridLT->rowCount(), 0, 1, gridLT->columnCount());
     msgBox.exec();
+}
+
+void sort(QComboBox* cmbox)
+{
+    QSortFilterProxyModel* proxy = new QSortFilterProxyModel(cmbox);
+    proxy->setSourceModel(cmbox->model());
+    // Reparent the combobox's parent so QComboBox's setModel() doesn't delete it
+    cmbox->model()->setParent(proxy);
+    cmbox->setModel(proxy);
+    // sort the model which will sort the items in the combobox
+    cmbox->model()->sort(0);
 }
 
 double calculateUnitsScaleFactor(
@@ -1769,9 +1899,17 @@ loadTimeSeries(QTabWidget* parentTabWidget,
             lineList = allLines.split('\n');
             int numYears   = lineList.count()-1; // -1 for the header
             int numSpecies = lineList[1].split(',').count()-1; // -1 to remove the year
+            int numCols = smodel->columnCount();
+            int numRows = smodel->rowCount();
 
-            if ((smodel->rowCount()    == numYears) &&
-                (smodel->columnCount() == numSpecies))
+            // If the table is empty, create the columns and rows required
+            if (numCols == 0) {
+                smodel->insertColumns(0,numSpecies);
+                numCols = smodel->columnCount();
+            }
+
+            if ((numRows == numYears) &&
+                (numCols == numSpecies))
             {
                 QStringList speciesParts = lineList[0].split(',');
                 for (int j=1;j<speciesParts.count();++j) {
@@ -2194,24 +2332,6 @@ void checkForAndReplaceInvalidCharacters(QString &stringValue)
 {
     stringValue.remove(QRegExp("[^a-zA-Z_\\d\\s]"));
     stringValue.replace(" ","_");
-}
-
-bool checkTableForBlanks(QTableView* tv)
-{
-    QModelIndex index;
-    QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(tv->model());
-    QString value;
-
-    for (int j=0; j<smodel->columnCount(); ++j) { // Species
-        for (int i=0; i<smodel->rowCount(); ++i) { // Time
-            index = smodel->index(i,j);
-            value = index.data().toString().trimmed();
-            if (value.isEmpty()) {
-                return false;
-            }
-        }
-    }
-    return true;
 }
 
 bool extractTag(const QString filename,
@@ -2704,14 +2824,19 @@ runAllTableChecks(nmfLogger*  logger,
                   QWidget*    parent,
                   QTableView* tableview,
                   QTableView* minTableview,
-                  QTableView* maxTableview)
+                  QTableView* maxTableview,
+                  QTableView* tableviewCompare,
+                  QTableView* minTableviewCompare,
+                  QTableView* maxTableviewCompare)
 {
+    QString badCell = "";
+
     // 1. Check alpha tables for blanks
-    if (! checkTableForBlanks(tableview)    ||
-        ! checkTableForBlanks(minTableview) ||
-        ! checkTableForBlanks(maxTableview))
+    if (! areAllCellsNonBlank(tableview)    ||
+        ! areAllCellsNonBlank(minTableview) ||
+        ! areAllCellsNonBlank(maxTableview))
     {
-        QString msg = "No blanks allowed in any of the Alpha tables.";
+        QString msg = "No blanks allowed in any of the tables.";
         logger->logMsg(nmfConstants::Error,msg.toStdString());
         QMessageBox::critical(parent, "Save Error", "\n"+msg, QMessageBox::Ok);
         parent->setCursor(Qt::ArrowCursor);
@@ -2719,14 +2844,52 @@ runAllTableChecks(nmfLogger*  logger,
     }
 
     // 2. Check max cells are greater than min cells
-    if (! nmfUtilsQt::allMaxCellsGreaterThanMinCells(
+    if (! nmfUtilsQt::areAllMaxCellsGreaterThanMinCells(
                 qobject_cast<QStandardItemModel*>(minTableview->model()),
-                qobject_cast<QStandardItemModel*>(maxTableview->model())))
+                qobject_cast<QStandardItemModel*>(maxTableview->model()),
+                badCell))
     {
-        logger->logMsg(nmfConstants::Error,"[Table Save]: At least one Max cell less than a Min cell.");
+        logger->logMsg(nmfConstants::Error,"[Table Save]: Cell " + badCell.toStdString() + " has a max cell less than a min cell.");
         QMessageBox::critical(parent, "Error",
-                             "\nError: There's at least one Max cell less than a Min cell. Please check tables.\n",
+                             "\nError: Cell " + badCell + " has a max cell less than a min cell. Please check tables.\n",
                              QMessageBox::Ok);
+        parent->setCursor(Qt::ArrowCursor);
+        return false;
+    }
+
+    // 3. Check initial cells are >= min cells and <= max cells
+    if (! nmfUtilsQt::areAllInitialCellsWithinRange(
+                qobject_cast<QStandardItemModel*>(tableview->model()),
+                qobject_cast<QStandardItemModel*>(minTableview->model()),
+                qobject_cast<QStandardItemModel*>(maxTableview->model()),
+                badCell))
+    {
+        logger->logMsg(nmfConstants::Error,"[Table Save]: Cell " + badCell.toStdString() + " is outside of min max range.");
+        QMessageBox::critical(parent, "Error",
+                             "\nError: Cell " + badCell + " is outside of min max range. Please check tables.\n",
+                             QMessageBox::Ok);
+        parent->setCursor(Qt::ArrowCursor);
+        return false;
+    }
+
+    // 4. Check if there are values in any of the same cells between the Competition (alpha) and Predation (rho) tables
+    if (! areAllCellsHoldingUniqueData(tableview,
+                                       minTableview,
+                                       maxTableview,
+                                       tableviewCompare,
+                                       minTableviewCompare,
+                                       maxTableviewCompare,
+                                       badCell)) {
+        std::string msgShort = "Warning: Found values in similar cells in the Competition (alpha) and Predation (rho) matrices.";
+        std::string msgLong = msgShort;
+        msgLong += "\n\nThere shouldn't be any similar cells (i.e., the same cell in both tables) that have the same ";
+        msgLong += "initial values with a non-zero range.  If so, there may be ambiguous values estimated for alpha and rho. ";
+        msgLong += "For example, if there are values in cell (1,1) in each table and estimation produces alpha(1,1) = 2 and ";
+        msgLong += "rho(1,1) = 3, this would be equivalent to alpha(1,1) = 3 and rho(1,1) = 2. So, it would be unclear as ";
+        msgLong += "to which is the correct answer.";
+        msgLong += "\n\nFor a more detailed explanation, please see the User's Manual.";
+        logger->logMsg(nmfConstants::Warning,msgShort);
+        QMessageBox::warning(parent,"Warning",QString("\n")+QString::fromStdString(msgLong)+"\n",QMessageBox::Ok);
         parent->setCursor(Qt::ArrowCursor);
         return false;
     }

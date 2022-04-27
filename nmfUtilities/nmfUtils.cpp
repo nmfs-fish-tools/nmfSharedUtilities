@@ -16,165 +16,97 @@
 
 namespace nmfUtils {
 
-void printError(const std::string msg, const std::string errorMsg)
+void
+append(std::vector<double>& newVec,
+       std::vector<double>& currentVec)
 {
-    std::cout << "\nError: " << errorMsg << std::endl;
-    std::cout << msg << std::endl;
+    currentVec.insert(currentVec.end(), newVec.begin(), newVec.end());
 }
 
-void printMsg(std::string msg) {
-    std::cout << msg << std::endl;
-}
-
-void printMapPair(const std::pair<std::string, std::vector<std::string> > &pair) {
-    std::cout << "Key: " << pair.first << std::endl;
-    copy(pair.second.begin(), pair.second.end(),
-            std::ostream_iterator<std::string>(std::cout, "\n"));
-}
-
-void printMap(const std::string name, const std::map<std::string, std::vector<std::string> > &dataMap) {
-    std::cout << "Map: " << name << std::endl;
-    std::for_each(dataMap.begin(), dataMap.end(), printMapPair);
-}
-
-void printMatrix(const std::string &name,
-        const boost::numeric::ublas::matrix<double> &mat,
-        const int width,
-        const int precision) {
-    std::cout << "\n" << name << " (" << mat.size1() << "x" << mat.size2()
-            << ")" << std::endl;
-    for (unsigned i = 0; i < mat.size1(); ++i) {
-        std::cout << "  ";
-        for (unsigned j = 0; j < mat.size2(); ++j) {
-            std::cout << std::setw(width)
-                      << std::setprecision(precision)
-                      << std::fixed << mat(i, j) << "  ";
-        }
-        std::cout << std::endl;
-    }
-}
-
-
-double getMatrixSum(const boost::numeric::ublas::matrix<double> &mat) {
-    return sum(prod(boost::numeric::ublas::scalar_vector<double>(mat.size1()), mat));
-}
-
-double getVectorSum(const boost::numeric::ublas::vector<double> &vec) {
-    return sum(vec);
-}
-
-
-
-void print3DArray(
-        const std::string &name,
-        const std::vector<int> &dimensions,
-        const Boost3DArrayDouble &array,
-        const int &width,
-        const int &precision)
+double
+applyCovariate(nmfLogger *logger,
+               const std::string& covariateAlgorithmType,
+               const double& parameter,
+               const double& covariateCoeff,
+               const double& covariateValue)
 {
-    int imax = dimensions[0];
-    int jmax = dimensions[1];
-    int kmax = dimensions[2];
+    double retv = 0;
+    std::string msg;
 
-    std::cout <<  name.c_str() << " (" << imax << "x" << jmax << "x" << kmax << "):\n" << std::endl;
-    for (int i = 0; i < imax; ++i) {
-        for (int j = 0; j < jmax; ++j) {
-            for (int k = 0; k < kmax; ++k) {
-                std::cout << std::fixed << std::setw(width) << std::setprecision(precision) << array[i][j][k] << " ";
+    if (covariateValue == nmfConstantsMSSPM::NoData) {
+        retv = parameter;
+    } else {
+        if (covariateAlgorithmType == nmfConstantsMSSPM::Linear) {
+            retv = parameter*(1.0+covariateCoeff*covariateValue);
+        } else if (covariateAlgorithmType == nmfConstantsMSSPM::Exponential) {
+            retv = std::pow(parameter,(covariateCoeff*covariateValue));
+        } else {
+            msg = "nmfUtils::applyCovariate: Found invalid covariate algorithm type of: " +
+                    covariateAlgorithmType;
+            if (logger != nullptr) {
+                logger->logMsg(nmfConstants::Error,msg);
+            } else {
+                std::cout << "Error: " << msg << std::endl;
             }
-            std::cout << std::endl;
         }
-        std::cout << std::endl;
     }
-}
-
-void print4DArray(
-        const std::string &name,
-        const std::vector<int> &dimensions,
-        const Boost4DArrayDouble &array)
-{
-    int imax = dimensions[0];
-    int jmax = dimensions[1];
-    int kmax = dimensions[2];
-    int lmax = dimensions[3];
-
-    std::cout << name.c_str() << " (" << imax << "x" << jmax << "x" << kmax << "x" << lmax
-            << "):\n" << std::endl;
-    for (int i = 0; i < imax; ++i) {
-        for (int j = 0; j < jmax; ++j) {
-            for (int k = 0; k < kmax; ++k) {
-                for (int l = 0; l < lmax; ++l) {
-                    std::cout << array[i][j][k][l] << " ";
-                }
-                std::cout << std::endl;
-            }
-            std::cout << std::endl;
-        }
-        std::cout << std::endl;
-    }
-}
-
-bool invertMatrix(
-        boost::numeric::ublas::matrix<double>& matrix,
-        boost::numeric::ublas::matrix<double>& inverseMatrix)
-{
-    bool retv = true;
-
-    initialize(inverseMatrix,int(matrix.size1()),int(matrix.size2()));
-
-    try {
-        inverseMatrix = boost::numeric::ublas::identity_matrix<float>(matrix.size1());
-        boost::numeric::ublas::permutation_matrix<std::size_t> pm(matrix.size1());
-        boost::numeric::ublas::lu_factorize(matrix,pm);
-        boost::numeric::ublas::lu_substitute(matrix, pm, inverseMatrix);
-    }  catch (...) {
-        retv = false;
-    }
-
+//std::cout << "***** covVal: " << covariateValue << ", retv: " << retv << std::endl;
     return retv;
 }
 
-double getMatrixMax(boost::numeric::ublas::matrix<double> &mat,
-                         bool roundOff=false)
+bool checkForError(nmfLogger *logger,
+                   std::string table,
+                   std::string field,
+                   std::map<std::string, std::vector<std::string> > &dataMap,
+                   std::string queryStr)
 {
-    // find largest value in mat
-    double maxVal = 0.0;
-    double val = 0.0;
-    for (boost::numeric::ublas::matrix<double>::iterator1 it1 =
-            mat.begin1(); it1 != mat.end1(); ++it1) {
-        for (boost::numeric::ublas::matrix<double>::iterator2 it2 = it1.begin();
-                it2 != it1.end(); ++it2) {
-            val = *it2;
-            if (val > maxVal) {
-                maxVal = val;
-            }
-        }
+    if (dataMap[field].size() == 0) {
+        logger->logMsg(nmfConstants::Error,"Error - Check " + table + " table. ");
+        logger->logMsg(nmfConstants::Error,"Error - No data found for cmd: "+queryStr);
+        return true; // there was an error
     }
-    if (maxVal > 1.0) {
-        if (roundOff) {
-            int numDigits = int(log10(maxVal) + 1);
-            int firstDigit = int((maxVal / pow(10.0, numDigits - 1)) + 0.5);
-            maxVal = firstDigit * pow(10.0, numDigits - 1);
-        }
-    } else {
-        maxVal = 1.0;
-    }
-    return maxVal;
 
+    return false; // there was no error
+
+} // end errorCheck
+
+double convertCatchUnitsToValue(std::string catchUnits)
+{
+    double CatchUnitsVal = 0.0;
+
+    if (catchUnits == "Hundreds of Fish")
+        CatchUnitsVal =    0.1;
+    else if (catchUnits == "Thousands of Fish")
+        CatchUnitsVal =    1.0;
+    else if (catchUnits == "Millions of Fish")
+        CatchUnitsVal = 1000.0;
+
+    return CatchUnitsVal;
 }
 
-boost::numeric::ublas::matrix<double>
-convertVectorToMatrix(std::vector<double>& vec)
+double convertSizeUnitsToValue(std::string sizeUnits)
 {
-    int i = 0;
-    boost::numeric::ublas::matrix<double> matrix;
+    double SizeUnitsVal = 0.0;
 
-    initialize(matrix,vec.size(),1);
-    for (double val : vec) {
-        matrix(i++,0) = val;
-    }
+    if (sizeUnits == "Millimeters")
+        SizeUnitsVal = 0.1;
+    else if (sizeUnits == "Centimeters")
+        SizeUnitsVal = 1.0;
+    else if (sizeUnits == "Inches")
+        SizeUnitsVal = 2.54;
 
-    return matrix;
+    return SizeUnitsVal;
+}
+
+std::string
+convertToScientificNotation(double val)
+{
+    std::ostringstream streamDouble; // Needed to stuff a double into a string with scientific notation
+
+    streamDouble.str("");
+    streamDouble << val;
+
+    return streamDouble.str();
 }
 
 std::string
@@ -225,6 +157,136 @@ std::string convertValues2DToOutputStr(const std::string& label,
     return bestFitnessStr;
 }
 
+boost::numeric::ublas::matrix<double>
+convertVectorToMatrix(std::vector<double>& vec)
+{
+    int i = 0;
+    boost::numeric::ublas::matrix<double> matrix;
+
+    initialize(matrix,vec.size(),1);
+    for (double val : vec) {
+        matrix(i++,0) = val;
+    }
+
+    return matrix;
+}
+
+double convertWeightUnitsToValue(std::string weightUnits)
+{
+    double WeightUnitsVal = 0.0;
+
+    if (weightUnits == "Gram")
+        WeightUnitsVal = 0.001;
+    else if (weightUnits == "Kilograms")
+        WeightUnitsVal = 1.0;
+    else if (weightUnits == "Pounds")
+        WeightUnitsVal = (1.0/2.2);
+
+    return WeightUnitsVal;
+}
+
+void copyFile(std::string fileA,
+         std::string fileB)
+{
+    std::ifstream fileIn( fileA, std::ios::in);
+    std::ofstream fileOut(fileB, std::ios::out);
+
+    fileOut << fileIn.rdbuf();
+
+    fileIn.close();
+    fileOut.close();
+}
+
+void getFilesWithExt(std::string path,
+                std::string ext,
+                QStringList& filesToCopy)
+{
+    QString fullExt = "*" + QString::fromStdString(ext);
+    filesToCopy.clear();
+
+    QDir directory(QString::fromStdString(path));
+    filesToCopy = directory.entryList(QStringList() << fullExt << fullExt,QDir::Files);
+}
+
+double getMatrixMax(boost::numeric::ublas::matrix<double> &mat,
+                         bool roundOff=false)
+{
+    // find largest value in mat
+    double maxVal = 0.0;
+    double val = 0.0;
+
+    for (boost::numeric::ublas::matrix<double>::iterator1 it1 =
+            mat.begin1(); it1 != mat.end1(); ++it1) {
+        for (boost::numeric::ublas::matrix<double>::iterator2 it2 = it1.begin();
+                it2 != it1.end(); ++it2) {
+            val = *it2;
+            if (val > maxVal) {
+                maxVal = val;
+            }
+        }
+    }
+    if (maxVal > 1.0) {
+        if (roundOff) {
+            int numDigits = int(log10(maxVal) + 1);
+            int firstDigit = int((maxVal / pow(10.0, numDigits - 1)) + 0.5);
+            maxVal = firstDigit * pow(10.0, numDigits - 1);
+        }
+    } else {
+        maxVal = 1.0;
+    }
+
+    return maxVal;
+}
+
+double getMatrixMean(const boost::numeric::ublas::matrix<double>& mat)
+{
+    int numItems = 0; // Not equal to nrows*ncols if there are blanks in observed biomass
+    int nrows = mat.size1();
+    int ncols = mat.size2();
+    double mean = 0;
+
+    for (int time=0; time<nrows; ++time) {
+        for (int species=0; species<ncols; ++species) {
+            if (mat(time,species) != nmfConstantsMSSPM::NoData) {
+                mean += mat(time,species);
+                ++numItems;
+            }
+        }
+    }
+
+    if (numItems > 0) {
+        mean /= numItems;
+    } else {
+        std::cout << "Error: Trying to find the mean of an empty matrix" << std::endl;
+    }
+
+    return mean;
+}
+
+double getMatrixSum(const boost::numeric::ublas::matrix<double> &mat) {
+    return sum(prod(boost::numeric::ublas::scalar_vector<double>(mat.size1()), mat));
+}
+
+std::string getOS()
+{
+    // The _WIN64 check should be first, since _WIN32 is 1 for both 32-bit and 64-bit
+    #ifdef _WIN64
+        return "Windows 64-bit";
+    #elif _WIN32
+        return "Windows 32-bit";
+    #elif __APPLE__ || __MACH__
+        return "Mac OSX";
+    #elif __linux__
+        return "Linux";
+    #elif __FreeBSD__
+        return "FreeBSD";
+    #elif __unix || __unix__
+        return "Unix";
+    #else
+        return "Other";
+    #endif
+}
+
 /*
  * Returns a random number between the passed limits: [lowerLimit,upperLimit)
  * If seed < 0, no seed is used and the algorithm is stochastic.
@@ -251,9 +313,79 @@ double getRandomNumber(int seedValue, double lowerLimit, double upperLimit)
     return retv;
 }
 
+double getVectorSum(const boost::numeric::ublas::vector<double> &vec) {
+    return sum(vec);
+}
+
+bool invertMatrix(
+        boost::numeric::ublas::matrix<double>& matrix,
+        boost::numeric::ublas::matrix<double>& inverseMatrix)
+{
+    bool retv = true;
+
+    initialize(inverseMatrix,int(matrix.size1()),int(matrix.size2()));
+
+    try {
+        inverseMatrix = boost::numeric::ublas::identity_matrix<float>(matrix.size1());
+        boost::numeric::ublas::permutation_matrix<std::size_t> pm(matrix.size1());
+        boost::numeric::ublas::lu_factorize(matrix,pm);
+        boost::numeric::ublas::lu_substitute(matrix, pm, inverseMatrix);
+    }  catch (...) {
+        retv = false;
+    }
+
+    return retv;
+}
+
+bool isEstimateParameterChecked(
+        const nmfStructsQt::ModelDataStruct& dataStruct,
+        const std::string& ParameterName)
+{
+    std::vector<nmfStructsQt::EstimateRunBox> EstimateRunBoxes = dataStruct.EstimateRunBoxes;
+    for (nmfStructsQt::EstimateRunBox runBox : EstimateRunBoxes) {
+        if (runBox.parameter == ParameterName) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 bool isNearlyZero(const double& value)
 {
     return (std::abs(value) < nmfConstants::NearlyZero);
+}
+bool isOSWindows()
+{
+    std::string osName = getOS();
+
+    return ((osName == "Windows 32-bit") ||
+            (osName == "Windows 64-bit"));
+}
+
+bool isStopped(std::string& runName,
+          std::string& msg1,
+          std::string& msg2,
+          std::string& stopRunFile,
+          std::string& state)
+{
+    std::string cmd;
+    std::ifstream inputFile(stopRunFile);
+    if (inputFile) {
+        std::getline(inputFile,cmd);
+        std::getline(inputFile,runName);
+        std::getline(inputFile,msg1);
+        std::getline(inputFile,msg2);
+    }
+    inputFile.close();
+
+    state = cmd;
+
+    return ((cmd == "Stop")           ||
+            (cmd == "StopAllOk")      ||
+            (cmd == "StopIncomplete") ||
+            (cmd == "StoppedByUser"));
+
 }
 
 bool isWholeNumber(double value)
@@ -261,73 +393,91 @@ bool isWholeNumber(double value)
     return (floor(value) == ceil(value));
 }
 
-double round(double number, int decimalPlaces)
+void print3DArray(
+        const std::string &name,
+        const std::vector<int> &dimensions,
+        const Boost3DArrayDouble &array,
+        const int &width,
+        const int &precision)
 {
-    if (decimalPlaces < 0) {
-        std::cout << "Error: decimalPlaces argument in nmfUtils::round() function must be >= 0." << std::endl;
-        decimalPlaces = 0;
+    int imax = dimensions[0];
+    int jmax = dimensions[1];
+    int kmax = dimensions[2];
+
+    std::cout <<  name.c_str() << " (" << imax << "x" << jmax << "x" << kmax << "):\n" << std::endl;
+    for (int i = 0; i < imax; ++i) {
+        for (int j = 0; j < jmax; ++j) {
+            for (int k = 0; k < kmax; ++k) {
+                std::cout << std::fixed << std::setw(width) << std::setprecision(precision) << array[i][j][k] << " ";
+            }
+            std::cout << std::endl;
+        }
+        std::cout << std::endl;
     }
-
-    double factor = std::pow(10,decimalPlaces);
-    return  std::floor(number*factor+0.5)/factor;
 }
 
-void split(std::string main, std::string delim, std::string &str1, std::string &str2)
+void print4DArray(
+        const std::string &name,
+        const std::vector<int> &dimensions,
+        const Boost4DArrayDouble &array)
 {
-    if (main.empty()) {
-        return;
+    int imax = dimensions[0];
+    int jmax = dimensions[1];
+    int kmax = dimensions[2];
+    int lmax = dimensions[3];
+
+    std::cout << name.c_str() << " (" << imax << "x" << jmax << "x" << kmax << "x" << lmax
+            << "):\n" << std::endl;
+    for (int i = 0; i < imax; ++i) {
+        for (int j = 0; j < jmax; ++j) {
+            for (int k = 0; k < kmax; ++k) {
+                for (int l = 0; l < lmax; ++l) {
+                    std::cout << array[i][j][k][l] << " ";
+                }
+                std::cout << std::endl;
+            }
+            std::cout << std::endl;
+        }
+        std::cout << std::endl;
     }
-    std::string main2 = main;
-    size_t sep = main2.find(delim);
-    if (sep == 0) {
-        return;
+}
+
+void printError(const std::string msg, const std::string errorMsg)
+{
+    std::cout << "\nError: " << errorMsg << std::endl;
+    std::cout << msg << std::endl;
+}
+
+void printMap(const std::string name, const std::map<std::string, std::vector<std::string> > &dataMap) {
+    std::cout << "Map: " << name << std::endl;
+    std::for_each(dataMap.begin(), dataMap.end(), printMapPair);
+}
+
+void printMapPair(const std::pair<std::string, std::vector<std::string> > &pair) {
+    std::cout << "Key: " << pair.first << std::endl;
+    copy(pair.second.begin(), pair.second.end(),
+            std::ostream_iterator<std::string>(std::cout, "\n"));
+}
+
+void printMatrix(const std::string &name,
+        const boost::numeric::ublas::matrix<double> &mat,
+        const int width,
+        const int precision) {
+    std::cout << "\n" << name << " (" << mat.size1() << "x" << mat.size2()
+            << ")" << std::endl;
+    for (unsigned i = 0; i < mat.size1(); ++i) {
+        std::cout << "  ";
+        for (unsigned j = 0; j < mat.size2(); ++j) {
+            std::cout << std::setw(width)
+                      << std::setprecision(precision)
+                      << std::fixed << mat(i, j) << "  ";
+        }
+        std::cout << std::endl;
     }
-
-    str1 = main2.erase(sep,main2.size());
-    main2 = main;
-    str2 = main2.erase(0,sep+1);
 }
 
-double convertCatchUnitsToValue(std::string catchUnits)
-{
-    double CatchUnitsVal = 0.0;
-
-    if (catchUnits == "Hundreds of Fish")
-        CatchUnitsVal =    0.1;
-    else if (catchUnits == "Thousands of Fish")
-        CatchUnitsVal =    1.0;
-    else if (catchUnits == "Millions of Fish")
-        CatchUnitsVal = 1000.0;
-
-    return CatchUnitsVal;
-}
-
-double convertWeightUnitsToValue(std::string weightUnits)
-{
-    double WeightUnitsVal = 0.0;
-
-    if (weightUnits == "Gram")
-        WeightUnitsVal = 0.001;
-    else if (weightUnits == "Kilograms")
-        WeightUnitsVal = 1.0;
-    else if (weightUnits == "Pounds")
-        WeightUnitsVal = (1.0/2.2);
-
-    return WeightUnitsVal;
-}
-
-double convertSizeUnitsToValue(std::string sizeUnits)
-{
-    double SizeUnitsVal = 0.0;
-
-    if (sizeUnits == "Millimeters")
-        SizeUnitsVal = 0.1;
-    else if (sizeUnits == "Centimeters")
-        SizeUnitsVal = 1.0;
-    else if (sizeUnits == "Inches")
-        SizeUnitsVal = 2.54;
-
-    return SizeUnitsVal;
+void printMsg(std::string msg) {
+    std::cout << msg << std::endl;
 }
 
 void readTableDescriptions(std::string TableName,
@@ -360,7 +510,6 @@ void readTableDescriptions(std::string TableName,
         std::cout << msg << std::endl;
     }
 } // end readTableDescription
-
 
 void readTableNames(std::map<std::string,std::vector<std::string> > *TableNames)
 {
@@ -402,25 +551,6 @@ void readTableNames(std::map<std::string,std::vector<std::string> > *TableNames)
     }
 } // end readTableNames
 
-
-
-bool checkForError(nmfLogger *logger,
-                   std::string table,
-                   std::string field,
-                   std::map<std::string, std::vector<std::string> > &dataMap,
-                   std::string queryStr)
-{
-    if (dataMap[field].size() == 0) {
-        logger->logMsg(nmfConstants::Error,"Error - Check " + table + " table. ");
-        logger->logMsg(nmfConstants::Error,"Error - No data found for cmd: "+queryStr);
-        return true; // there was an error
-    }
-
-    return false; // there was no error
-
-} // end errorCheck
-
-
 /*
  * Rescales matrix Xij by: log base 10 (X)
  */
@@ -441,11 +571,15 @@ rescaleMatrixLog(boost::numeric::ublas::matrix<double> &matrix)
 }
 
 void
-rescaleMatrixMean(const boost::numeric::ublas::matrix<double> &matrix,
+rescaleMatrixMean(const boost::numeric::ublas::matrix<double> &unscaledatrix,
                         boost::numeric::ublas::matrix<double> &rescaledMatrix)
 {
-    int numYears   = matrix.size1();
-    int numSpecies = matrix.size2();
+    // NumYears will change if running a Mohn's Rho. Use rescaleMatrix for the correct
+    // number of years as size1(). Don't use unscaledatrix as an incoming NLoptDataStruct.Catch
+    // will have the full number of years, but the rescaledMatrix will be the appropriate
+    // size for a Mohn's Rho run.
+    int numYears   = rescaledMatrix.size1();
+    int numSpecies = rescaledMatrix.size2();
     int numYearsWithoutBlanks = 0; // Not equal to numYears if there are blanks in observed biomass
     double den;
     double minVal;
@@ -465,9 +599,10 @@ rescaleMatrixMean(const boost::numeric::ublas::matrix<double> &matrix,
         tmp.clear();
         numYearsWithoutBlanks = 0;
         for (int time=0; time<numYears; ++time) {
-            if (matrix(time,species) != nmfConstantsMSSPM::NoData) {
-                tmpVal = matrix(time,species);
+            if (unscaledatrix(time,species) != nmfConstantsMSSPM::NoData) {
+                tmpVal = unscaledatrix(time,species);
                 tmp.push_back(tmpVal);
+
                 avgVal += tmpVal;
                 ++numYearsWithoutBlanks;
             } else {
@@ -488,8 +623,8 @@ rescaleMatrixMean(const boost::numeric::ublas::matrix<double> &matrix,
         den    = maxVal - minVal;
         avgVal = avgValues[species];
         for (int time=0; time<numYears; ++time) {
-            if (matrix(time,species) != nmfConstantsMSSPM::NoData) {
-                rescaledMatrix(time,species) = (matrix(time,species) - avgVal) / den; // mean normalization
+            if (unscaledatrix(time,species) != nmfConstantsMSSPM::NoData) {
+                rescaledMatrix(time,species) = (den != 0) ? (unscaledatrix(time,species) - avgVal) / den : 0; // mean normalization
             } else {
                 rescaledMatrix(time,species) = nmfConstantsMSSPM::NoData;
             }
@@ -498,7 +633,7 @@ rescaleMatrixMean(const boost::numeric::ublas::matrix<double> &matrix,
 }
 
 void
-rescaleMatrixMinMax(const boost::numeric::ublas::matrix<double> &matrix,
+rescaleMatrixMinMax(const boost::numeric::ublas::matrix<double> &unscaledMatrix,
                           boost::numeric::ublas::matrix<double> &rescaledMatrix)
 {
     int numYears   = rescaledMatrix.size1();
@@ -514,8 +649,8 @@ rescaleMatrixMinMax(const boost::numeric::ublas::matrix<double> &matrix,
     for (int species=0; species<numSpecies; ++species) {
         tmp.clear();
         for (int time=0; time<numYears; ++time) {
-            if (matrix(time,species) != nmfConstantsMSSPM::NoData) {
-                tmp.push_back(matrix(time,species));
+            if (unscaledMatrix(time,species) != nmfConstantsMSSPM::NoData) {
+                tmp.push_back(unscaledMatrix(time,species));
             }
         }
         std::sort(tmp.begin(),tmp.end());
@@ -529,8 +664,8 @@ rescaleMatrixMinMax(const boost::numeric::ublas::matrix<double> &matrix,
         maxVal = maxValues[species];
         den    = maxVal - minVal;
         for (int time=0; time<numYears; ++time) {
-            if (matrix(time,species) != nmfConstantsMSSPM::NoData) {
-                rescaledMatrix(time,species) = (matrix(time,species) - minVal) / den;  // min max normalization
+            if (unscaledMatrix(time,species) != nmfConstantsMSSPM::NoData) {
+                rescaledMatrix(time,species) = (den != 0) ? (unscaledMatrix(time,species) - minVal) / den : 0;
             } else {
                 rescaledMatrix(time,species) = nmfConstantsMSSPM::NoData;
             }
@@ -539,11 +674,11 @@ rescaleMatrixMinMax(const boost::numeric::ublas::matrix<double> &matrix,
 }
 
 void
-rescaleMatrixZScore(const boost::numeric::ublas::matrix<double> &matrix,
+rescaleMatrixZScore(const boost::numeric::ublas::matrix<double> &unscaledMatrix,
                           boost::numeric::ublas::matrix<double> &rescaledMatrix)
 {
-    int numYears   = matrix.size1();
-    int numSpecies = matrix.size2();
+    int numYears   = rescaledMatrix.size1();
+    int numSpecies = rescaledMatrix.size2();
     int numYearsWithoutBlanks = 0; // Not equal to numYears since there may be blanks in observed biomass
     double avgVal;
     double val;
@@ -557,8 +692,8 @@ rescaleMatrixZScore(const boost::numeric::ublas::matrix<double> &matrix,
         avgVal = 0;
         numYearsWithoutBlanks = 0;
         for (int time=0; time<numYears; ++time) {
-            if (matrix(time,species) != nmfConstantsMSSPM::NoData) {
-                avgVal += matrix(time,species);
+            if (unscaledMatrix(time,species) != nmfConstantsMSSPM::NoData) {
+                avgVal += unscaledMatrix(time,species);
                 ++numYearsWithoutBlanks;
             }
         }
@@ -571,8 +706,8 @@ rescaleMatrixZScore(const boost::numeric::ublas::matrix<double> &matrix,
         val = 0;
         numYearsWithoutBlanks = 0;
         for (int time=0; time<numYears; ++time) {
-            if (matrix(time,species) != nmfConstantsMSSPM::NoData) {
-                diff = (matrix(time,species) - avgVal);
+            if (unscaledMatrix(time,species) != nmfConstantsMSSPM::NoData) {
+                diff = (unscaledMatrix(time,species) - avgVal);
                 val += diff*diff;
                 ++numYearsWithoutBlanks;
             }
@@ -586,8 +721,8 @@ rescaleMatrixZScore(const boost::numeric::ublas::matrix<double> &matrix,
         avgVal = avgValues[species];
         sigVal = sigma[species];
         for (int time=0; time<numYears; ++time) {
-            if (matrix(time,species) != nmfConstantsMSSPM::NoData) {
-                rescaledMatrix(time,species) = (matrix(time,species) - avgVal) / sigVal; // standardization or z score normalization
+            if (unscaledMatrix(time,species) != nmfConstantsMSSPM::NoData) {
+                rescaledMatrix(time,species) = (unscaledMatrix(time,species) - avgVal) / sigVal; // standardization or z score normalization
             } else {
                 rescaledMatrix(time,species) =  nmfConstantsMSSPM::NoData;
             }
@@ -606,150 +741,31 @@ reset(boost::numeric::ublas::matrix<double>& mat,
     }
 }
 
-bool
-isEstimateParameterChecked(
-        const nmfStructsQt::ModelDataStruct& dataStruct,
-        const std::string& ParameterName)
+double round(double number, int decimalPlaces)
 {
-    std::vector<nmfStructsQt::EstimateRunBox> EstimateRunBoxes = dataStruct.EstimateRunBoxes;
-    for (nmfStructsQt::EstimateRunBox runBox : EstimateRunBoxes) {
-        if (runBox.parameter == ParameterName) {
-            return true;
-        }
+    if (decimalPlaces < 0) {
+        std::cout << "Error: decimalPlaces argument in nmfUtils::round() function must be >= 0." << std::endl;
+        decimalPlaces = 0;
     }
 
-    return false;
+    double factor = std::pow(10,decimalPlaces);
+    return  std::floor(number*factor+0.5)/factor;
 }
 
-std::string
-convertToScientificNotation(double val)
+void split(std::string main, std::string delim, std::string &str1, std::string &str2)
 {
-    std::ostringstream streamDouble; // Needed to stuff a double into a string with scientific notation
-
-    streamDouble.str("");
-    streamDouble << val;
-
-    return streamDouble.str();
-}
-
-void
-getFilesWithExt(std::string path,
-                std::string ext,
-                QStringList& filesToCopy)
-{
-    QString fullExt = "*" + QString::fromStdString(ext);
-    filesToCopy.clear();
-
-    QDir directory(QString::fromStdString(path));
-    filesToCopy = directory.entryList(QStringList() << fullExt << fullExt,QDir::Files);
-}
-
-void
-copyFile(std::string fileA,
-         std::string fileB)
-{
-    std::ifstream fileIn( fileA, std::ios::in);
-    std::ofstream fileOut(fileB, std::ios::out);
-
-    fileOut << fileIn.rdbuf();
-
-    fileIn.close();
-    fileOut.close();
-}
-
-bool
-isOSWindows()
-{
-    std::string osName = getOS();
-
-    return ((osName == "Windows 32-bit") ||
-            (osName == "Windows 64-bit"));
-}
-
-std::string
-getOS()
-{
-    // The _WIN64 check should be first, since _WIN32 is 1 for both 32-bit and 64-bit
-    #ifdef _WIN64
-        return "Windows 64-bit";
-    #elif _WIN32
-        return "Windows 32-bit";
-    #elif __APPLE__ || __MACH__
-        return "Mac OSX";
-    #elif __linux__
-        return "Linux";
-    #elif __FreeBSD__
-        return "FreeBSD";
-    #elif __unix || __unix__
-        return "Unix";
-    #else
-        return "Other";
-    #endif
-}
-
-void
-append(std::vector<double>& newVec,
-       std::vector<double>& currentVec)
-{
-    currentVec.insert(currentVec.end(), newVec.begin(), newVec.end());
-}
-
-
-bool
-isStopped(std::string& runName,
-          std::string& msg1,
-          std::string& msg2,
-          std::string& stopRunFile,
-          std::string& state)
-{
-    std::string cmd;
-    std::ifstream inputFile(stopRunFile);
-    if (inputFile) {
-        std::getline(inputFile,cmd);
-        std::getline(inputFile,runName);
-        std::getline(inputFile,msg1);
-        std::getline(inputFile,msg2);
+    if (main.empty()) {
+        return;
     }
-    inputFile.close();
-
-    state = cmd;
-
-    return ((cmd == "Stop")           ||
-            (cmd == "StopAllOk")      ||
-            (cmd == "StopIncomplete") ||
-            (cmd == "StoppedByUser"));
-
-}
-
-double
-applyCovariate(nmfLogger *logger,
-               const std::string& covariateAlgorithmType,
-               const double& parameter,
-               const double& covariateCoeff,
-               const double& covariateValue)
-{
-    double retv = 0;
-    std::string msg;
-
-    if (covariateValue == nmfConstantsMSSPM::NoData) {
-        retv = parameter;
-    } else {
-        if (covariateAlgorithmType == nmfConstantsMSSPM::Linear) {
-            retv = parameter*(1.0+covariateCoeff*covariateValue);
-        } else if (covariateAlgorithmType == nmfConstantsMSSPM::Exponential) {
-            retv = std::pow(parameter,(covariateCoeff*covariateValue));
-        } else {
-            msg = "nmfUtils::applyCovariate: Found invalid covariate algorithm type of: " +
-                    covariateAlgorithmType;
-            if (logger != nullptr) {
-                logger->logMsg(nmfConstants::Error,msg);
-            } else {
-                std::cout << "Error: " << msg << std::endl;
-            }
-        }
+    std::string main2 = main;
+    size_t sep = main2.find(delim);
+    if (sep == 0) {
+        return;
     }
 
-    return retv;
+    str1 = main2.erase(sep,main2.size());
+    main2 = main;
+    str2 = main2.erase(0,sep+1);
 }
 
 }

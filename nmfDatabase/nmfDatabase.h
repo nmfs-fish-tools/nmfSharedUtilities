@@ -219,6 +219,24 @@ public:
             nmfLogger* logger,
             const std::string& ProjectName,
             const std::string& ModelName);
+
+    /**
+     * @brief Returns the Biomass and Catch Fit Weights for the model
+     * @param logger : logger pointer used to log any error messages
+     * @param ProjectName : name of current project
+     * @param ModelName : name of current model
+     * @param TableName : name of table containing the weights
+     * @param NumSpecies : number of species in currently loaded model
+     * @param FitWeights : matrix of fit weights
+     * @return True if weights were read without error, else False
+     */
+    bool getFitWeights(
+            nmfLogger* logger,
+            const std::string& ProjectName,
+            const std::string& ModelName,
+            const std::string& TableName,
+            int &NumSpecies,
+            boost::numeric::ublas::matrix<double> &FitWeights);
     /**
      * @brief Gets all the guilds in the current project
      * @param logger : logger pointer used to log any error messages
@@ -431,7 +449,6 @@ public:
             std::vector<boost::numeric::ublas::matrix<double> >& HarvestData);
     /**
      * @brief Sends back information about the passed in forecast
-     * @param TableName : name of table containing the forecast information
      * @param ProjectName : name of current project
      * @param ModelName : name of current model
      * @param ForecastName : name of current forecast
@@ -441,11 +458,15 @@ public:
      * @param Minimizer : name of forecast minimizer algorithm (passed back)
      * @param ObjectiveCriterion : name of forecast objective criterion (passed back)
      * @param Scaling : name of forecast scaling algorithm (passed back)
+     * @param GrowthForm : name of the growth form (passed back)
+     * @param HarvestForm : name of the harvest form (passed back)
+     * @param WithinGuildCompetitionForm : name of the competition form (passed back)
+     * @param PredationForm : name of the predation form (passed back)
+     * @param ForecastHarvestType : the forecast harvest type as set by the forecast type button in Forecast tab 2
      * @param NumRuns : number of runs in forecast (passed back)
      * @return True if database query and fetch were successful, false otherwise
      */
     bool getForecastInfo(
-            const std::string& TableName,
             const std::string& ProjectName,
             const std::string& ModelName,
             const std::string& ForecastName,
@@ -455,6 +476,11 @@ public:
             std::string&       Minimizer,
             std::string&       ObjectiveCriterion,
             std::string&       Scaling,
+            std::string&       GrowthForm,
+            std::string&       HarvestForm,
+            std::string&       WithinGuildCompetitionForm,
+            std::string&       PredationForm,
+            std::string&       ForecastHarvestType,
             int&               NumRuns);
     /**
      * @brief Sends back the hover text data, for each monte carlo run, that describes the parameters used for the run
@@ -1298,6 +1324,10 @@ public:
      * @param PredationRandomValues : random values from user inputted uncertainty error
      * @param HandlingRandomValues : random values from user inputted uncertainty error
      * @param HarvestRandomValues : random values from user inputted uncertainty error
+     * @param GrowthRateCovCoeffRandomValues : random values from user inputted Growth Rate covariate coefficient uncertainty error
+     * @param CarryingCapacityCovCoeffRandomValues : random values from user inputted Carrying Capacity covariate coefficient uncertainty error
+     * @param CatchabilityCovCoeffRandomValues : random values from user inputted Catchability covariate coefficient uncertainty error
+     * @param SurveyQCovCoeffRandomValues : random values from user inputted SurveyQ covariate coefficient uncertainty error
      * @return true if table was read correctly, otherwise false
      */
     bool updateForecastMonteCarloParameters(
@@ -1322,7 +1352,11 @@ public:
             const std::vector<double>& CompetitionBetaGuildsGuildsRandomValues,
             const std::vector<double>& PredationRandomValues,
             const std::vector<double>& HandlingRandomValues,
-            const std::vector<double>& HarvestRandomValues);
+            const std::vector<double>& HarvestRandomValues,
+            const std::vector<double>& GrowthRateCovCoeffRandomValues,
+            const std::vector<double>& CarryingCapacityCovCoeffRandomValues,
+            const std::vector<double>& CatchabilityCovCoeffRandomValues,
+            const std::vector<double>& SurveyQCovCoeffRandomValues);
 
     /**
      * @brief Updates the units database table with the units corresponding to the table shown in the GUI

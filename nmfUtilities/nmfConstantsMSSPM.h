@@ -170,6 +170,8 @@ namespace nmfConstantsMSSPM
      const bool   DontConvertBlanks                = false;
      const bool   UseLogData                       = true;
      const bool   DontUseLogData                   = false;
+     const bool   ReadHarvestTypeFromTable         = true;
+     const bool   DontReadHarvestTypeFromTable     = false;
 
      const std::string  HiddenDir                      = ".MSSPM";
      const std::string  HiddenDataDir                  = ".MSSPM/data";
@@ -205,6 +207,8 @@ namespace nmfConstantsMSSPM
      const QString      HarvestEffort                  = "Effort (qE)";
      const QString      HarvestEffortFitToCatch        = "Effort Fit to Catch";
      const QString      HarvestExploitation            = "Exploitation Rate (Harvest/Bc)";
+     const QString      ForecastHarvestTypeCatch       = "Catch";
+     const QString      ForecastHarvestTypeEffort      = "Effort";
 
      const QString      ParameterNameInitialBiomass              = "Initial Absolute Biomass";
      const QString      ParameterNameSurveyQ                     = "SurveyQ";
@@ -218,11 +222,28 @@ namespace nmfConstantsMSSPM
      const QString      ParameterNamePredationRho                = "Predation Rho";
      const QString      ParameterNamePredationHandling           = "Predation Handling";
      const QString      ParameterNamePredationExponent           = "Predation Exponent";
+     const QString      ParameterNameGrowthRateCovCoeff          = "Growth Rate (r) Covariate Coefficient";
+     const QString      ParameterNameCarryingCapacityCovCoeff    = "Carrying Capacity (K) Covariate Coefficient";
+     const QString      ParameterNameCatchabilityCovCoeff        = "Catchability (q) Covariate Coefficient";
+     const QString      ParameterNameSurveyQCovCoeff             = "SurveyQ Covariate Coefficient";
 
      const QString      SectionSetup                           = "Setup";
      const QString      SectionEstimation                      = "Estimation Data Input";
      const QString      SectionDiagnostic                      = "Diagnostic Data Input";
      const QString      SectionForecast                        = "Forecast";
+
+     const int          PageSetupProject                       = 1;
+     const int          PageSetupSpecies                       = 2;
+     const int          PageSetupModel                         = 3;
+
+     const int          PageEstimationPopulation               = 0;
+     const int          PageEstimationHarvest                  = 1;
+     const int          PageEstimationCompetition              = 2;
+     const int          PageEstimationPredation                = 3;
+     const int          PageEstimationObservation              = 4;
+     const int          PageEstimationCovariate                = 5;
+     const int          PageEstimationRun                      = 6;
+     const int          PageEstimationModelReview              = 7;
 
      const std::string Linear                                  = "Linear";
      const std::string Exponential                             = "Exponential";
@@ -254,11 +275,19 @@ namespace nmfConstantsMSSPM
      const std::string TableDiagnosticInitBiomass              = QString::fromStdString("DiagnosticInitBiomass").toLower().toStdString();
      const std::string TableDiagnosticSurface                  = QString::fromStdString("DiagnosticSurface").toLower().toStdString();
      const std::string TableDiagnosticSurveyQ                  = QString::fromStdString("DiagnosticSurveyQ").toLower().toStdString();
+     const std::string TableDiagnosticGrowthRateCovCoeff       = QString::fromStdString("DiagnosticGrowthRateCovCoeff").toLower().toStdString();
+     const std::string TableDiagnosticCarryingCapacityCovCoeff = QString::fromStdString("DiagnosticCarryingCapacityCovCoeff").toLower().toStdString();
+     const std::string TableDiagnosticCatchabilityCovCoeff     = QString::fromStdString("DiagnosticCatchabilityCovCoeff").toLower().toStdString();
+     const std::string TableDiagnosticSurveyQCovCoeff          = QString::fromStdString("DiagnosticSurveyQCovCoeff").toLower().toStdString();
+
+     const std::string TableFitWeights                         = QString::fromStdString("FitWeights").toLower().toStdString();
      const std::string TableForecastBiomass                    = QString::fromStdString("ForecastBiomass").toLower().toStdString();
      const std::string TableForecastBiomassMonteCarlo          = QString::fromStdString("ForecastBiomassMonteCarlo").toLower().toStdString();
      const std::string TableForecastBiomassMultiScenario       = QString::fromStdString("ForecastBiomassMultiScenario").toLower().toStdString();
      const std::string TableForecastHarvestCatch               = QString::fromStdString("ForecastHarvestCatch").toLower().toStdString();
+     const std::string TableForecastHarvestCatchFTC            = QString::fromStdString("ForecastHarvestCatchFTC").toLower().toStdString();
      const std::string TableForecastHarvestEffort              = QString::fromStdString("ForecastHarvestEffort").toLower().toStdString();
+     const std::string TableForecastHarvestEffortFTC           = QString::fromStdString("ForecastHarvestEffortFTC").toLower().toStdString();
      const std::string TableForecastHarvestExploitation        = QString::fromStdString("ForecastHarvestExploitation").toLower().toStdString();
      const std::string TableForecastMonteCarloParameters       = QString::fromStdString("ForecastMonteCarloParameters").toLower().toStdString();
      const std::string TableForecastUncertainty                = QString::fromStdString("ForecastUncertainty").toLower().toStdString();
@@ -290,6 +319,7 @@ namespace nmfConstantsMSSPM
      const std::string TableOutputPredationHandling            = QString::fromStdString("OutputPredationHandling").toLower().toStdString();
      const std::string TableOutputPredationRho                 = QString::fromStdString("OutputPredationRho").toLower().toStdString();
      const std::string TableOutputSurveyQ                      = QString::fromStdString("OutputSurveyQ").toLower().toStdString();
+     const std::string TableOutputSurveyQCovariateCoeffs       = QString::fromStdString("OutputSurveyQCovariateCoeffs").toLower().toStdString();
      const std::string TablePredationExponent                  = QString::fromStdString("PredationExponent").toLower().toStdString();
      const std::string TablePredationExponentMax               = QString::fromStdString("PredationExponentMax").toLower().toStdString();
      const std::string TablePredationExponentMin               = QString::fromStdString("PredationExponentMin").toLower().toStdString();

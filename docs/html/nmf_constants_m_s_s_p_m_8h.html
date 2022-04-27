@@ -509,6 +509,12 @@ const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSS
 <tr class="memitem:a310e94057b56c1e9594249fd884d36be"><td class="memItemLeft" align="right" valign="top"><a id="a310e94057b56c1e9594249fd884d36be"></a>
 const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::DontUseLogData</b> = false</td></tr>
 <tr class="separator:a310e94057b56c1e9594249fd884d36be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06bb12bdc2743eadabb9dd860359d044"><td class="memItemLeft" align="right" valign="top"><a id="a06bb12bdc2743eadabb9dd860359d044"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ReadHarvestTypeFromTable</b> = true</td></tr>
+<tr class="separator:a06bb12bdc2743eadabb9dd860359d044"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61f1756a5dc3e42cc8a9faca7cb7a5c3"><td class="memItemLeft" align="right" valign="top"><a id="a61f1756a5dc3e42cc8a9faca7cb7a5c3"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::DontReadHarvestTypeFromTable</b> = false</td></tr>
+<tr class="separator:a61f1756a5dc3e42cc8a9faca7cb7a5c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a285f6e37e936263a76881f766862ffc6"><td class="memItemLeft" align="right" valign="top"><a id="a285f6e37e936263a76881f766862ffc6"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::HiddenDir</b> = &quot;.MSSPM&quot;</td></tr>
 <tr class="separator:a285f6e37e936263a76881f766862ffc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -605,9 +611,18 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants
 <tr class="memitem:a15381d357b0b944d037906b8d10c8e1f"><td class="memItemLeft" align="right" valign="top"><a id="a15381d357b0b944d037906b8d10c8e1f"></a>
 const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::HarvestEffort</b> = &quot;Effort (qE)&quot;</td></tr>
 <tr class="separator:a15381d357b0b944d037906b8d10c8e1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a242eb5525b276631b81d0462120c3bd2"><td class="memItemLeft" align="right" valign="top"><a id="a242eb5525b276631b81d0462120c3bd2"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::HarvestEffortFitToCatch</b> = &quot;Effort Fit to Catch&quot;</td></tr>
+<tr class="separator:a242eb5525b276631b81d0462120c3bd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f87515ce443edd0d6500d6ee01ea3e1"><td class="memItemLeft" align="right" valign="top"><a id="a7f87515ce443edd0d6500d6ee01ea3e1"></a>
 const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::HarvestExploitation</b> = &quot;Exploitation Rate (Harvest/Bc)&quot;</td></tr>
 <tr class="separator:a7f87515ce443edd0d6500d6ee01ea3e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab164f7d2f2e3ce52f03eb6ee294b3e8b"><td class="memItemLeft" align="right" valign="top"><a id="ab164f7d2f2e3ce52f03eb6ee294b3e8b"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ForecastHarvestTypeCatch</b> = &quot;Catch&quot;</td></tr>
+<tr class="separator:ab164f7d2f2e3ce52f03eb6ee294b3e8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a475958e395fe34f72caf3a10b2edc836"><td class="memItemLeft" align="right" valign="top"><a id="a475958e395fe34f72caf3a10b2edc836"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ForecastHarvestTypeEffort</b> = &quot;Effort&quot;</td></tr>
+<tr class="separator:a475958e395fe34f72caf3a10b2edc836"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d296d629aa93c3fdfbaae10159ad1d5"><td class="memItemLeft" align="right" valign="top"><a id="a2d296d629aa93c3fdfbaae10159ad1d5"></a>
 const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::ParameterNameInitialBiomass</b> = &quot;Initial Absolute Biomass&quot;</td></tr>
 <tr class="separator:a2d296d629aa93c3fdfbaae10159ad1d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -656,6 +671,39 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants
 <tr class="memitem:a3f9e8f5fcad5e4acab5e76eda5361aa1"><td class="memItemLeft" align="right" valign="top"><a id="a3f9e8f5fcad5e4acab5e76eda5361aa1"></a>
 const QString&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::SectionForecast</b> = &quot;Forecast&quot;</td></tr>
 <tr class="separator:a3f9e8f5fcad5e4acab5e76eda5361aa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a193a24e24115624f090a38a59bfe55"><td class="memItemLeft" align="right" valign="top"><a id="a3a193a24e24115624f090a38a59bfe55"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::PageSetupProject</b> = 1</td></tr>
+<tr class="separator:a3a193a24e24115624f090a38a59bfe55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf0fdfb3f23997704a9c530c7c9363fe"><td class="memItemLeft" align="right" valign="top"><a id="abf0fdfb3f23997704a9c530c7c9363fe"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::PageSetupSpecies</b> = 2</td></tr>
+<tr class="separator:abf0fdfb3f23997704a9c530c7c9363fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee051293f39c1ebff2d886833fdb926b"><td class="memItemLeft" align="right" valign="top"><a id="aee051293f39c1ebff2d886833fdb926b"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::PageSetupModel</b> = 3</td></tr>
+<tr class="separator:aee051293f39c1ebff2d886833fdb926b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a800dbccbd10e87c119d4f98226da5a"><td class="memItemLeft" align="right" valign="top"><a id="a4a800dbccbd10e87c119d4f98226da5a"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::PageEstimationPopulation</b> = 0</td></tr>
+<tr class="separator:a4a800dbccbd10e87c119d4f98226da5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a6fc94a9756706e410f669a0f3d7bf1"><td class="memItemLeft" align="right" valign="top"><a id="a0a6fc94a9756706e410f669a0f3d7bf1"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::PageEstimationHarvest</b> = 1</td></tr>
+<tr class="separator:a0a6fc94a9756706e410f669a0f3d7bf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab49630761fb2d478aecc8de8ba99066"><td class="memItemLeft" align="right" valign="top"><a id="aab49630761fb2d478aecc8de8ba99066"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::PageEstimationCompetition</b> = 2</td></tr>
+<tr class="separator:aab49630761fb2d478aecc8de8ba99066"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab101ffbe188e4da57653fea98863ec42"><td class="memItemLeft" align="right" valign="top"><a id="ab101ffbe188e4da57653fea98863ec42"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::PageEstimationPredation</b> = 3</td></tr>
+<tr class="separator:ab101ffbe188e4da57653fea98863ec42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3ad616153d218512973f4bda9a62a0a"><td class="memItemLeft" align="right" valign="top"><a id="af3ad616153d218512973f4bda9a62a0a"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::PageEstimationObservation</b> = 4</td></tr>
+<tr class="separator:af3ad616153d218512973f4bda9a62a0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fa945684f970e9bde5a0f66de70a56f"><td class="memItemLeft" align="right" valign="top"><a id="a0fa945684f970e9bde5a0f66de70a56f"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::PageEstimationCovariate</b> = 5</td></tr>
+<tr class="separator:a0fa945684f970e9bde5a0f66de70a56f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4aa60c598aadfb10fb0d8c0d122a7511"><td class="memItemLeft" align="right" valign="top"><a id="a4aa60c598aadfb10fb0d8c0d122a7511"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::PageEstimationRun</b> = 6</td></tr>
+<tr class="separator:a4aa60c598aadfb10fb0d8c0d122a7511"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a382529c1141a22602639301784162db4"><td class="memItemLeft" align="right" valign="top"><a id="a382529c1141a22602639301784162db4"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::PageEstimationModelReview</b> = 7</td></tr>
+<tr class="separator:a382529c1141a22602639301784162db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2972b812c3ecf83d8e1fe84355b4b921"><td class="memItemLeft" align="right" valign="top"><a id="a2972b812c3ecf83d8e1fe84355b4b921"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::Linear</b> = &quot;Linear&quot;</td></tr>
 <tr class="separator:a2972b812c3ecf83d8e1fe84355b4b921"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -743,6 +791,9 @@ const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConst
 <tr class="memitem:a52ce226e12bb6d546fedba061b5c8dcd"><td class="memItemLeft" align="right" valign="top"><a id="a52ce226e12bb6d546fedba061b5c8dcd"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableDiagnosticSurveyQ</b> = QString::fromStdString(&quot;DiagnosticSurveyQ&quot;).toLower().toStdString()</td></tr>
 <tr class="separator:a52ce226e12bb6d546fedba061b5c8dcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3d2bca000973f8459d6ca675f613f09"><td class="memItemLeft" align="right" valign="top"><a id="ac3d2bca000973f8459d6ca675f613f09"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableFitWeights</b> = QString::fromStdString(&quot;FitWeights&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:ac3d2bca000973f8459d6ca675f613f09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbadf814ff82aecaeb2fdb8707d06ce7"><td class="memItemLeft" align="right" valign="top"><a id="acbadf814ff82aecaeb2fdb8707d06ce7"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableForecastBiomass</b> = QString::fromStdString(&quot;ForecastBiomass&quot;).toLower().toStdString()</td></tr>
 <tr class="separator:acbadf814ff82aecaeb2fdb8707d06ce7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -755,9 +806,15 @@ const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConst
 <tr class="memitem:a9462da026e9fe4ac581ad99207a97f42"><td class="memItemLeft" align="right" valign="top"><a id="a9462da026e9fe4ac581ad99207a97f42"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableForecastHarvestCatch</b> = QString::fromStdString(&quot;ForecastHarvestCatch&quot;).toLower().toStdString()</td></tr>
 <tr class="separator:a9462da026e9fe4ac581ad99207a97f42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2218f5c18d24fe41aa6e279ddec552b6"><td class="memItemLeft" align="right" valign="top"><a id="a2218f5c18d24fe41aa6e279ddec552b6"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableForecastHarvestCatchFTC</b> = QString::fromStdString(&quot;ForecastHarvestCatchFTC&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a2218f5c18d24fe41aa6e279ddec552b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5fe57248842e0ac930285dbfeefe299"><td class="memItemLeft" align="right" valign="top"><a id="aa5fe57248842e0ac930285dbfeefe299"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableForecastHarvestEffort</b> = QString::fromStdString(&quot;ForecastHarvestEffort&quot;).toLower().toStdString()</td></tr>
 <tr class="separator:aa5fe57248842e0ac930285dbfeefe299"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00427f29cad22cea512a93c11e2cfb0d"><td class="memItemLeft" align="right" valign="top"><a id="a00427f29cad22cea512a93c11e2cfb0d"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableForecastHarvestEffortFTC</b> = QString::fromStdString(&quot;ForecastHarvestEffortFTC&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:a00427f29cad22cea512a93c11e2cfb0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad56fb068f126f78ef8100d98ee1fb2d2"><td class="memItemLeft" align="right" valign="top"><a id="ad56fb068f126f78ef8100d98ee1fb2d2"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstantsMSSPM::TableForecastHarvestExploitation</b> = QString::fromStdString(&quot;ForecastHarvestExploitation&quot;).toLower().toStdString()</td></tr>
 <tr class="separator:ad56fb068f126f78ef8100d98ee1fb2d2"><td class="memSeparator" colspan="2">&#160;</td></tr>

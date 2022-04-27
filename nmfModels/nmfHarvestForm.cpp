@@ -10,15 +10,30 @@ nmfHarvestForm::nmfHarvestForm(std::string harvestType)
     m_HarvestMap.clear();
     m_HarvestKey.clear();
 
-    m_FunctionMap["Null"]                = &nmfHarvestForm::FunctionMap_Null;
-    m_FunctionMap["Catch"]               = &nmfHarvestForm::FunctionMap_Catch;
-    m_FunctionMap["Effort (qE)"]         = &nmfHarvestForm::FunctionMap_Effort;
-    m_FunctionMap["Effort Fit to Catch"] = &nmfHarvestForm::FunctionMap_Effort;
-    m_FunctionMap["Exploitation (F)"]    = &nmfHarvestForm::FunctionMap_Exploitation;
+    m_FunctionMap[nmfConstantsMSSPM::HarvestNone.toStdString()]   = &nmfHarvestForm::FunctionMap_Null;
+    m_FunctionMap[nmfConstantsMSSPM::HarvestCatch.toStdString()]  = &nmfHarvestForm::FunctionMap_Catch;
+    m_FunctionMap[nmfConstantsMSSPM::HarvestEffort.toStdString()] = &nmfHarvestForm::FunctionMap_Effort;
+    m_FunctionMap[nmfConstantsMSSPM::HarvestEffortFitToCatch.toStdString()] = &nmfHarvestForm::FunctionMap_Catch;
+    m_FunctionMap["Exploitation (F)"] = &nmfHarvestForm::FunctionMap_Exploitation;
 
     setupFormMaps();
 }
 
+bool
+nmfHarvestForm::modifyHarvestTypeDueToFitToCatch(std::string forecastHarvestTypeLabel)
+{
+    bool retv = false;
+
+    if (forecastHarvestTypeLabel == nmfConstantsMSSPM::ForecastHarvestTypeCatch.toStdString()) {
+        m_FunctionMap["Effort Fit to Catch"] = &nmfHarvestForm::FunctionMap_Catch;
+        retv = true;
+    } else if (forecastHarvestTypeLabel == nmfConstantsMSSPM::ForecastHarvestTypeEffort.toStdString()) {
+        m_FunctionMap["Effort Fit to Catch"] = &nmfHarvestForm::FunctionMap_Effort;
+        retv = true;
+    }
+
+    return retv;
+}
 
 void
 nmfHarvestForm::setType(std::string newType)
@@ -41,17 +56,18 @@ nmfHarvestForm::setupFormMaps()
     std::string qiEit  = "q<sub>"+index1+"</sub>E<sub>"+index1+",t</sub>";
     std::string Cit    = "C<sub>"+index1+",t</sub>";
 
-    m_HarvestMap["Null"]                = "";
-    m_HarvestMap["Exploitation (F)"]    = " - " +  Fit  + Bit;
-    m_HarvestMap["Effort (qE)"]         = " - " + qiEit + Bit;
-    m_HarvestMap["Effort Fit to Catch"] = " - " + qiEit + Bit;
-    m_HarvestMap["Catch"]               = " - " +  Cit;
+    m_HarvestMap[nmfConstantsMSSPM::HarvestNone.toStdString()]             = "";
+    m_HarvestMap[nmfConstantsMSSPM::HarvestEffort.toStdString()]           = " - " + qiEit + Bit;
+    m_HarvestMap[nmfConstantsMSSPM::HarvestEffortFitToCatch.toStdString()] = " - " + qiEit + Bit;
+    m_HarvestMap[nmfConstantsMSSPM::HarvestCatch.toStdString()]            = " - " +  Cit;
+    m_HarvestMap["Exploitation (F)"] = " - " +  Fit  + Bit;
 
-    m_HarvestKey["Null"]                = "";
-    m_HarvestKey["Exploitation (F)"]    = "F = Exploitation Rate<br/>";
-    m_HarvestKey["Effort (qE)"]         = "q = Catchability<br/>E = Effort<br/>";
-    m_HarvestKey["Effort Fit to Catch"] = "q = Catchability<br/>E = Effort<br/>";
-    m_HarvestKey["Catch"]               = "C = Catch<br/>";
+    m_HarvestKey[nmfConstantsMSSPM::HarvestNone.toStdString()]             = "";
+    m_HarvestKey[nmfConstantsMSSPM::HarvestEffort.toStdString()]           = "q = Catchability<br/>E = Effort<br/>";
+    m_HarvestKey[nmfConstantsMSSPM::HarvestEffortFitToCatch.toStdString()] = "q = Catchability<br/>E = Effort<br/>";
+    m_HarvestKey[nmfConstantsMSSPM::HarvestCatch.toStdString()]            = "C = Catch<br/>";
+    m_HarvestKey["Exploitation (F)"] = "F = Exploitation Rate<br/>";
+
 }
 
 std::string
@@ -83,7 +99,8 @@ nmfHarvestForm::extractParameters(
 //        startPos += numParameters;
 //    } else
 
-    if ((m_Type == "Effort (qE)") || (m_Type == "Effort Fit to Catch")) {
+    if ((m_Type == nmfConstantsMSSPM::HarvestEffort.toStdString()) ||
+        (m_Type == nmfConstantsMSSPM::HarvestEffortFitToCatch.toStdString())) {
         for (int i=startPos; i<startPos+m_NumSpecies; ++i) {
             catchability.emplace_back(parameters[i]);
         }
@@ -114,11 +131,12 @@ nmfHarvestForm::loadParameterRanges(
         return;
     }
 
-    if (m_Type == "Null") {
+    if (m_Type == nmfConstantsMSSPM::HarvestNone.toStdString()) {
         return;
     }
 
-    if ((m_Type == "Effort (qE)") || (m_Type == "Effort Fit to Catch")) {
+    if ((m_Type == nmfConstantsMSSPM::HarvestEffort.toStdString()) ||
+        (m_Type == nmfConstantsMSSPM::HarvestEffortFitToCatch.toStdString())) {
         // Load the catchability values
         for (int species=0; species<m_NumSpecies; ++species) {
             if (isCheckedCatchability) {
@@ -203,7 +221,13 @@ nmfHarvestForm::FunctionMap_Catch(const std::string& covariateAlgorithmType,
                                   const double& catchabilityCovariateCoeff,
                                   const double& catchabilityCovariate)
 {
-    return Catch(timeMinus1,species);
+
+    if (Catch.size1() == 0) {
+        std::cout << "Error: Catch matrix is empty" << std::endl;
+        return 0;
+    } else {
+        return Catch(timeMinus1,species);
+    }
 }
 
 
