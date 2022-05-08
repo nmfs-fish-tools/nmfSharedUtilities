@@ -60,6 +60,7 @@ private:
     std::vector< std::vector<double> > m_EstCatchability;
     std::vector< std::vector<double> > m_EstCatchabilityCovariateCoeffs;
     std::vector< std::vector<double> > m_EstSurveyQ;
+    std::vector< std::vector<double> > m_EstSurveyQCovariateCoeffs;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionAlpha;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionBetaSpecies;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionBetaGuilds;
@@ -76,6 +77,7 @@ private:
     std::vector<double> m_AveCatchability;
     std::vector<double> m_AveCatchabilityCovariateCoeffs;
     std::vector<double> m_AveSurveyQ;
+    std::vector<double> m_AveSurveyQCovariateCoeffs;
     boost::numeric::ublas::matrix<double> m_AveCompetitionAlpha;
     boost::numeric::ublas::matrix<double> m_AveCompetitionBetaSpecies;
     boost::numeric::ublas::matrix<double> m_AveCompetitionBetaGuilds;
@@ -93,6 +95,7 @@ private:
     std::vector< std::vector<double> > m_EstCatchabilityCovariateCoeffs_trimmed;
     std::vector< std::vector<double> > m_EstPredationExponent_trimmed;
     std::vector< std::vector<double> > m_EstSurveyQ_trimmed;
+    std::vector< std::vector<double> > m_EstSurveyQCovariateCoeffs_trimmed;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionAlpha_trimmed;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionBetaSpecies_trimmed;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionBetaGuilds_trimmed;
@@ -145,6 +148,7 @@ public:
      * @param AveCatchability : average catchability vector
      * @param AveCatchabilityCovariateCoeffs : average catchability covariate coefficients vector
      * @param AveSurveyQ : average survey q vector
+     * @param AveSurveyQCovariateCoeffs : average survey q covariate coefficients vector
      * @param AveCompetitionAlpha : average competition alpha matrix
      * @param AveCompetitionBetaSpecies : average competition beta for species matrix
      * @param AveCompetitionBetaGuilds : average competition beta for guilds matrix
@@ -163,6 +167,7 @@ public:
                     std::vector<double>& AveCatchability,
                     std::vector<double>& AveCatchabilityCovariateCoeffs,
                     std::vector<double>& AveSurveyQ,
+                    std::vector<double>& AveSurveyQCovariateCoeffs,
                     boost::numeric::ublas::matrix<double>& AveCompetitionAlpha,
                     boost::numeric::ublas::matrix<double>& AveCompetitionBetaSpecies,
                     boost::numeric::ublas::matrix<double>& AveCompetitionBetaGuilds,
@@ -183,6 +188,7 @@ public:
      * @param EstCatchability : estimated catchability vector
      * @param EstCatchabilityCovariateCoeffs : estimated catchability covariate coefficients vector
      * @param EstSurveyQ : estimated survey q vector
+     * @param EstSurveyQCovariateCoeffs : estimated survey q covariate coefficient vector
      * @param EstCompetitionAlpha : estimated competition alpha matrix
      * @param EstCompetitionBetaSpecies : estimated competition beta species matrix
      * @param EstCompetitionBetaGuilds : estimated competition beta guilds matrix
@@ -202,6 +208,7 @@ public:
                      std::vector<double>& EstCatchability,
                      std::vector<double>& EstCatchabilityCovariateCoeffs,
                      std::vector<double>& EstSurveyQ,
+                     std::vector<double>& EstSurveyQCovariateCoeffs,
                      boost::numeric::ublas::matrix<double>& EstCompetitionAlpha,
                      boost::numeric::ublas::matrix<double>& EstCompetitionBetaSpecies,
                      boost::numeric::ublas::matrix<double>& EstCompetitionBetaGuilds,

@@ -349,6 +349,7 @@ struct ModelDataStruct {
     std::map<std::string,CovariateStruct>               GrowthRateCovariateCoeff;
     std::map<std::string,CovariateStruct>               CarryingCapacityCovariateCoeff;
     std::map<std::string,CovariateStruct>               CatchabilityCovariateCoeff;
+    std::map<std::string,CovariateStruct>               SurveyQCovariateCoeff;
 
     std::map<QString,QString> PreviousUnits;
 

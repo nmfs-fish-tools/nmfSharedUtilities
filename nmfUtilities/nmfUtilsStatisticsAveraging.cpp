@@ -31,6 +31,7 @@ nmfUtilsStatisticsAveraging::clearAveragedData()
     m_AvePredationRho.clear();
     m_AvePredationHandling.clear();
     m_AveSurveyQ.clear();
+    m_AveSurveyQCovariateCoeffs.clear();
     m_AveBiomass.clear();
 }
 
@@ -48,6 +49,7 @@ nmfUtilsStatisticsAveraging::clearEstData()
     m_EstCatchability.clear();
     m_EstCatchabilityCovariateCoeffs.clear();
     m_EstSurveyQ.clear();
+    m_EstSurveyQCovariateCoeffs.clear();
     m_EstCompetitionAlpha.clear();
     m_EstCompetitionBetaSpecies.clear();
     m_EstCompetitionBetaGuilds.clear();
@@ -75,6 +77,8 @@ nmfUtilsStatisticsAveraging::clearTrimmedData()
     m_EstCompetitionBetaSpecies_trimmed.clear();
     m_EstCompetitionBetaGuilds_trimmed.clear();
     m_EstCompetitionBetaGuildsGuilds_trimmed.clear();
+    m_EstSurveyQ_trimmed.clear();
+    m_EstSurveyQCovariateCoeffs_trimmed.clear();
 }
 
 void
@@ -94,7 +98,8 @@ nmfUtilsStatisticsAveraging::calculateWeighted(const std::vector<double>& weight
                                                    m_AvePredationExponent,
                                                    m_AveCatchability,
                                                    m_AveCatchabilityCovariateCoeffs,
-                                                   m_AveSurveyQ};
+                                                   m_AveSurveyQ,
+                                                   m_AveSurveyQCovariateCoeffs};
     clearAveragedData();
 
     // Find averages for all vector estimated parameters
@@ -106,7 +111,8 @@ nmfUtilsStatisticsAveraging::calculateWeighted(const std::vector<double>& weight
                                                         m_EstPredationExponent_trimmed,
                                                         m_EstCatchability_trimmed,
                                                         m_EstCatchabilityCovariateCoeffs_trimmed,
-                                                        m_EstSurveyQ_trimmed})
+                                                        m_EstSurveyQ_trimmed,
+                                                        m_EstSurveyQCovariateCoeffs_trimmed})
     {
         for (int species=0; species<NumSpecies; ++species) {
             sum = 0;
@@ -130,6 +136,7 @@ nmfUtilsStatisticsAveraging::calculateWeighted(const std::vector<double>& weight
     m_AveCatchability                    = aveVector[6];
     m_AveCatchabilityCovariateCoeffs     = aveVector[7];
     m_AveSurveyQ                         = aveVector[8];
+    m_AveSurveyQCovariateCoeffs          = aveVector[9];
 
     // Find averages for all matrix estimated parameters
     index = 0;
@@ -203,6 +210,7 @@ nmfUtilsStatisticsAveraging::createTrimmedStructures(const int& numberOfTopRunsT
         m_EstCatchability_trimmed                    = m_EstCatchability;
         m_EstCatchabilityCovariateCoeffs_trimmed     = m_EstCatchabilityCovariateCoeffs;
         m_EstSurveyQ_trimmed                         = m_EstSurveyQ;
+        m_EstSurveyQCovariateCoeffs_trimmed          = m_EstSurveyQCovariateCoeffs;
         m_EstCompetitionAlpha_trimmed                = m_EstCompetitionAlpha;
         m_EstCompetitionBetaSpecies_trimmed          = m_EstCompetitionBetaSpecies;
         m_EstCompetitionBetaGuilds_trimmed           = m_EstCompetitionBetaGuilds;
@@ -240,7 +248,7 @@ nmfUtilsStatisticsAveraging::createTrimmedStructures(const int& numberOfTopRunsT
             ++run;
         }
 
-        // Now copy the appropriate
+        // Now copy the appropriate elements
         for (int index : positionOfTopNRuns) {
             m_AIC_trimmed.push_back(m_AIC[index]);
             m_EstInitBiomass_trimmed.push_back(m_EstInitBiomass[index]);
@@ -258,6 +266,7 @@ nmfUtilsStatisticsAveraging::createTrimmedStructures(const int& numberOfTopRunsT
             m_EstPredationRho_trimmed.push_back(m_EstPredationRho[index]);
             m_EstPredationHandling_trimmed.push_back(m_EstPredationHandling[index]);
             m_EstSurveyQ_trimmed.push_back(m_EstSurveyQ[index]);
+            m_EstSurveyQCovariateCoeffs_trimmed.push_back(m_EstSurveyQCovariateCoeffs[index]);
             m_EstBiomass_trimmed.push_back(m_EstBiomass[index]);
         }
     }
@@ -339,6 +348,7 @@ nmfUtilsStatisticsAveraging::getAveData(std::vector<double>& Fitness,
                                         std::vector<double>& AveCatchability,
                                         std::vector<double>& AveCatchabilityCovariateCoeffs,
                                         std::vector<double>& AveSurveyQ,
+                                        std::vector<double>& AveSurveyQCovariateCoeffs,
                                         boost::numeric::ublas::matrix<double>& AveCompetitionAlpha,
                                         boost::numeric::ublas::matrix<double>& AveCompetitionBetaSpecies,
                                         boost::numeric::ublas::matrix<double>& AveCompetitionBetaGuilds,
@@ -363,6 +373,7 @@ nmfUtilsStatisticsAveraging::getAveData(std::vector<double>& Fitness,
     AvePredationRho                    = m_AvePredationRho;
     AvePredationHandling               = m_AvePredationHandling;
     AveSurveyQ                         = m_AveSurveyQ;
+    AveSurveyQCovariateCoeffs          = m_AveSurveyQCovariateCoeffs;
     AveBiomass                         = m_AveBiomass;
 }
 
@@ -379,6 +390,7 @@ nmfUtilsStatisticsAveraging::loadEstData(
         std::vector<double>& EstCatchability,
         std::vector<double>& EstCatchabilityCovariateCoeffs,
         std::vector<double>& EstSurveyQ,
+        std::vector<double>& EstSurveyQCovariateCoeffs,
         boost::numeric::ublas::matrix<double>& EstCompetitionAlpha,
         boost::numeric::ublas::matrix<double>& EstCompetitionBetaSpecies,
         boost::numeric::ublas::matrix<double>& EstCompetitionBetaGuilds,
@@ -398,6 +410,7 @@ nmfUtilsStatisticsAveraging::loadEstData(
     m_EstCatchability.push_back(EstCatchability);
     m_EstCatchabilityCovariateCoeffs.push_back(EstCatchabilityCovariateCoeffs);
     m_EstSurveyQ.push_back(EstSurveyQ);
+    m_EstSurveyQCovariateCoeffs.push_back(EstSurveyQCovariateCoeffs);
     m_EstCompetitionAlpha.push_back(EstCompetitionAlpha);
     m_EstCompetitionBetaSpecies.push_back(EstCompetitionBetaSpecies);
     m_EstCompetitionBetaGuilds.push_back(EstCompetitionBetaGuilds);

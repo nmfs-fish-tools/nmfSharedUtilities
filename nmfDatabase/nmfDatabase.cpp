@@ -2245,30 +2245,6 @@ nmfDatabase::isARelativeBiomassModel(
 }
 
 bool
-nmfDatabase::isSurveyQ(
-        const std::string& ProjectName,
-        const std::string& ModelName)
-{
-    bool retv=false;
-    std::vector<std::string> fields;
-    std::string queryStr;
-    std::map<std::string, std::vector<std::string> > dataMap;
-
-    fields    = {"ObsBiomassType"};
-    queryStr  = "SELECT ObsBiomassType FROM " +
-                 nmfConstantsMSSPM::TableModels +
-                " WHERE ProjectName = '" + ProjectName +
-                "' AND ModelName = '"    + ModelName   + "'";
-    dataMap   = nmfQueryDatabase(queryStr,fields);
-    int NumRecords = dataMap["ObsBiomassType"].size();
-    if (NumRecords == 1) {
-        retv = (dataMap["ObsBiomassType"][0] == "Relative");
-    }
-
-    return retv;
-}
-
-bool
 nmfDatabase::getForecastHarvest(
         QWidget*           Widget,
         nmfLogger*         Logger,
@@ -2457,7 +2433,6 @@ nmfDatabase::updateForecastMonteCarloParameters(
     }
 
     saveCmd = saveCmd.substr(0,saveCmd.size()-1);
-
     errorMsg = nmfUpdateDatabase(saveCmd);
     if (nmfUtilsQt::isAnError(errorMsg)) {
         logger->logMsg(nmfConstants::Error,"[Error] nmfDatabase::updateForecastMonteCarloParameters: Write table error: " + errorMsg);
@@ -2866,7 +2841,8 @@ nmfDatabase::getSpeciesInitialCovariateData(nmfLogger* Logger,
                                             std::string& ModelName,
                                             std::vector<double>& GrowthRateCovariateCoeffs,
                                             std::vector<double>& CarryingCapacityCovariateCoeffs,
-                                            std::vector<double>& CatchabilityCovariateCoeffs)
+                                            std::vector<double>& CatchabilityCovariateCoeffs,
+                                            std::vector<double>& SurveyQCovariateCoeffs)
 {
     int NumRecords;
     int NumSpecies;
@@ -2879,6 +2855,11 @@ nmfDatabase::getSpeciesInitialCovariateData(nmfLogger* Logger,
     std::vector<nmfStructsQt::CovariateStruct> covariateRangeVector;
     QStringList SpeciesList;
 
+    GrowthRateCovariateCoeffs.clear();
+    CarryingCapacityCovariateCoeffs.clear();
+    CatchabilityCovariateCoeffs.clear();
+    SurveyQCovariateCoeffs.clear();
+
     // Get data from database table
     fields     = {"ProjectName","ModelName","SpeName",
                   "CoeffName","CoeffMinName","CoeffMaxName",
@@ -2890,36 +2871,44 @@ nmfDatabase::getSpeciesInitialCovariateData(nmfLogger* Logger,
                  "' ORDER BY SpeName ";
     dataMap    = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["CoeffName"].size();
-    if (NumRecords == 0) {  // No covariate coefficient data so just fill with 0's
-       getSpecies(Logger,NumSpecies,SpeciesList);
-       for (int i=0; i<NumSpecies; ++i) {
-           GrowthRateCovariateCoeffs.push_back(0);
-           CarryingCapacityCovariateCoeffs.push_back(0);
-           CatchabilityCovariateCoeffs.push_back(0);
-       }
-       return true;
-    }
 
-    GrowthRateCovariateCoeffs.clear();
-    CarryingCapacityCovariateCoeffs.clear();
-    for (int i=0; i<NumRecords; ++i) {
-        CoeffName = dataMap["CoeffName"][i];
-        if (CoeffName == "GrowthRate") {
+    // Load with the appropriate table data
+    if (NumRecords > 0) {
+        for (int i=0; i<NumRecords; ++i) {
+            CoeffName = dataMap["CoeffName"][i];
             covariateInitialValue = (dataMap["CoeffValue"][i].empty()) ?
-                 0 : QString::fromStdString(dataMap["CoeffValue"][i]).toDouble();
-            GrowthRateCovariateCoeffs.push_back(covariateInitialValue);
-        } else if (CoeffName == "CarryingCapacity") {
-            covariateInitialValue = (dataMap["CoeffValue"][i].empty()) ?
-                 0 : QString::fromStdString(dataMap["CoeffValue"][i]).toDouble();
-            CarryingCapacityCovariateCoeffs.push_back(covariateInitialValue);
-        } else if (CoeffName == "Catchability") {
-            covariateInitialValue = (dataMap["CoeffValue"][i].empty()) ?
-                 0 : QString::fromStdString(dataMap["CoeffValue"][i]).toDouble();
-            CatchabilityCovariateCoeffs.push_back(covariateInitialValue);
+                        0 : QString::fromStdString(dataMap["CoeffValue"][i]).toDouble();
+            if (CoeffName == "GrowthRate") {
+                GrowthRateCovariateCoeffs.push_back(covariateInitialValue);
+            } else if (CoeffName == "CarryingCapacity") {
+                CarryingCapacityCovariateCoeffs.push_back(covariateInitialValue);
+            } else if (CoeffName == "Catchability") {
+                CatchabilityCovariateCoeffs.push_back(covariateInitialValue);
+            } else if (CoeffName == "SurveyQ") {
+                SurveyQCovariateCoeffs.push_back(covariateInitialValue);
+            }
         }
     }
 
+
+    // Assure any empty covariates are populated with a default of 0
+    getSpecies(Logger,NumSpecies,SpeciesList);
+    setToZeroIfEmpty(GrowthRateCovariateCoeffs,NumSpecies);
+    setToZeroIfEmpty(CarryingCapacityCovariateCoeffs,NumSpecies);
+    setToZeroIfEmpty(CatchabilityCovariateCoeffs,NumSpecies);
+    setToZeroIfEmpty(SurveyQCovariateCoeffs,NumSpecies);
+
     return true;
+}
+
+void
+nmfDatabase::setToZeroIfEmpty(
+        std::vector<double>& CovariateCoeffs,
+        const int& NumSpecies)
+{
+    if (CovariateCoeffs.size() == 0) {
+        nmfUtils::initialize(CovariateCoeffs,NumSpecies);
+    }
 }
 
 bool
@@ -3003,7 +2992,7 @@ nmfDatabase::getModelFormData(nmfLogger*   Logger,
                               bool&        isBiomassAbsolute)
 {
     std::vector<std::string> fields;
-    std::map<std::string, std::vector<std::string> > dataMap,dataMapMin,dataMapMax;
+    std::map<std::string, std::vector<std::string> > dataMap;
     std::string queryStr;
 
     // Find model forms
@@ -3089,7 +3078,7 @@ nmfDatabase::getVectorParameterNames(
         QString covariateParameter = QString::fromStdString(dataMap["ParameterName"][i]);
         parameterNames.push_back(covParamNames[covariateParameter]);
     }
-qDebug() << "parameter names: " << parameterNames;
+
     return parameterNames;
 }
 

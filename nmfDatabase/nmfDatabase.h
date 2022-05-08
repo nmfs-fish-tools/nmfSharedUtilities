@@ -727,6 +727,7 @@ public:
      * @param GrowthRateCovariateCoeff : initial values for growth rate covariate coefficients per species
      * @param CarryingCapacityCovariateCoeff : initial values for carrying capacity covariate coefficients per species
      * @param CatchabilityCovariateCoeff : initial values for catchability covariate coefficients per species
+     * @param SurveyQCovariateCoeffs : initial values for catchability covariate coefficients per species
      * @return true if no errors reading table data, false otherwise
      */
     bool getSpeciesInitialCovariateData(nmfLogger* Logger,
@@ -734,7 +735,8 @@ public:
                                         std::string& ModelName,
                                         std::vector<double>& GrowthRateCovariateCoeffs,
                                         std::vector<double>& CarryingCapacityCovariateCoeffs,
-                                        std::vector<double>& CatchabilityCovariateCoeffs);
+                                        std::vector<double>& CatchabilityCovariateCoeffs,
+                                        std::vector<double>& SurveyQCovariateCoeffs);
     /**
      * @brief Sends back initial data for all species
      * @param Logger : logger pointer to log any error messages
@@ -850,22 +852,14 @@ public:
                            std::string& Username,
                            std::string& Password);
     /**
-     * @brief Determines if the currently loaded model is set to relative biomass
+     * @brief Determines if the currently loaded model is set to relative biomass; useful
+     * for determining usage of Survey Q
      * @param projectName : name of project
      * @param modelName : name of model
      * @return true if data refers to relative biomass, false otherwise
      */
     bool isARelativeBiomassModel(const std::string& projectName,
                                  const std::string& modelName);
-    /**
-     * @brief Returns a boolean describing if the observed biomass is relative (true) or absolute (false)
-     * @param projectName : name of project
-     * @param modelName : name of model
-     * @return true if observed biomass is relative, false if absolute
-     */
-    bool isSurveyQ(
-            const std::string& projectName,
-            const std::string& modelName);
     /**
      * @brief Loads the estimated parameter names into the passed combo box widget
      * @param logger ; logger pointer used to log any error messages
@@ -1285,6 +1279,14 @@ public:
             QWidget*       widget,
             nmfLogger*     logger,
             std::string&   tableName);
+    /**
+     * @brief Sets the passed vector to 0's if it's empty
+     * @param CovariateCoeffs : vector to initialize
+     * @param NumElements : number of desired elements in vector
+     */
+    void setToZeroIfEmpty(
+            std::vector<double>& CovariateCoeffs,
+            const int& NumElements);
     /**
      * @brief Updates all of the models in the current project (necessary when observed biomass changes for one model)
      * @param parent : parent widget over which to display any popups

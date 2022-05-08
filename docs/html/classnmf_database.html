@@ -192,9 +192,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a34aaf13af26158b8175494511ed0b822"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a34aaf13af26158b8175494511ed0b822">getSpeciesData</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;species, int &amp;MinAge, int &amp;MaxAge, int &amp;FirstYear, int &amp;LastYear, float &amp;MinLength, float &amp;MaxLength, int &amp;NumLengthBins)</td></tr>
 <tr class="memdesc:a34aaf13af26158b8175494511ed0b822"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back data about the passed in species (MSCAA)  <a href="classnmf_database.html#a34aaf13af26158b8175494511ed0b822">More...</a><br /></td></tr>
 <tr class="separator:a34aaf13af26158b8175494511ed0b822"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2a7d14d6aa357ee59876d9acbe7ba23"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#ac2a7d14d6aa357ee59876d9acbe7ba23">getSpeciesInitialCovariateData</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *Logger, std::string &amp;ProjectName, std::string &amp;ModelName, std::vector&lt; double &gt; &amp;GrowthRateCovariateCoeffs, std::vector&lt; double &gt; &amp;CarryingCapacityCovariateCoeffs, std::vector&lt; double &gt; &amp;CatchabilityCovariateCoeffs)</td></tr>
-<tr class="memdesc:ac2a7d14d6aa357ee59876d9acbe7ba23"><td class="mdescLeft">&#160;</td><td class="mdescRight">getSpeciesInitialCovariateData  <a href="classnmf_database.html#ac2a7d14d6aa357ee59876d9acbe7ba23">More...</a><br /></td></tr>
-<tr class="separator:ac2a7d14d6aa357ee59876d9acbe7ba23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66300673f61f0acb8b4850e9afad2a56"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a66300673f61f0acb8b4850e9afad2a56">getSpeciesInitialCovariateData</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *Logger, std::string &amp;ProjectName, std::string &amp;ModelName, std::vector&lt; double &gt; &amp;GrowthRateCovariateCoeffs, std::vector&lt; double &gt; &amp;CarryingCapacityCovariateCoeffs, std::vector&lt; double &gt; &amp;CatchabilityCovariateCoeffs, std::vector&lt; double &gt; &amp;SurveyQCovariateCoeffs)</td></tr>
+<tr class="memdesc:a66300673f61f0acb8b4850e9afad2a56"><td class="mdescLeft">&#160;</td><td class="mdescRight">getSpeciesInitialCovariateData  <a href="classnmf_database.html#a66300673f61f0acb8b4850e9afad2a56">More...</a><br /></td></tr>
+<tr class="separator:a66300673f61f0acb8b4850e9afad2a56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b388017b28887c35040e5f27c4236a3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a3b388017b28887c35040e5f27c4236a3">getSpeciesInitialData</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *Logger, int &amp;NumSpecies, QStringList &amp;SpeciesList, std::vector&lt; double &gt; &amp;InitBiomass, std::vector&lt; double &gt; &amp;GrowthRate, std::vector&lt; double &gt; &amp;SpeciesK)</td></tr>
 <tr class="memdesc:a3b388017b28887c35040e5f27c4236a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back initial data for all species.  <a href="classnmf_database.html#a3b388017b28887c35040e5f27c4236a3">More...</a><br /></td></tr>
 <tr class="separator:a3b388017b28887c35040e5f27c4236a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -223,11 +223,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:afa82f3cede3d12c690bbe700458ab520"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queries user and imports a .sql database from disk.  <a href="classnmf_database.html#afa82f3cede3d12c690bbe700458ab520">More...</a><br /></td></tr>
 <tr class="separator:afa82f3cede3d12c690bbe700458ab520"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57c9e3be4a1f56819dbce7a06b31be0e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a57c9e3be4a1f56819dbce7a06b31be0e">isARelativeBiomassModel</a> (const std::string &amp;projectName, const std::string &amp;modelName)</td></tr>
-<tr class="memdesc:a57c9e3be4a1f56819dbce7a06b31be0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if the currently loaded model is set to relative biomass.  <a href="classnmf_database.html#a57c9e3be4a1f56819dbce7a06b31be0e">More...</a><br /></td></tr>
+<tr class="memdesc:a57c9e3be4a1f56819dbce7a06b31be0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if the currently loaded model is set to relative biomass; useful for determining usage of Survey Q.  <a href="classnmf_database.html#a57c9e3be4a1f56819dbce7a06b31be0e">More...</a><br /></td></tr>
 <tr class="separator:a57c9e3be4a1f56819dbce7a06b31be0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade63121584918ddd06300715baf574a1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#ade63121584918ddd06300715baf574a1">isSurveyQ</a> (const std::string &amp;projectName, const std::string &amp;modelName)</td></tr>
-<tr class="memdesc:ade63121584918ddd06300715baf574a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a boolean describing if the observed biomass is relative (true) or absolute (false)  <a href="classnmf_database.html#ade63121584918ddd06300715baf574a1">More...</a><br /></td></tr>
-<tr class="separator:ade63121584918ddd06300715baf574a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e0e3a7c220e03c4463baab684ef4369"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a8e0e3a7c220e03c4463baab684ef4369">loadEstimatedVectorParameters</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, QComboBox *cmbox)</td></tr>
 <tr class="memdesc:a8e0e3a7c220e03c4463baab684ef4369"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the estimated parameter names into the passed combo box widget.  <a href="classnmf_database.html#a8e0e3a7c220e03c4463baab684ef4369">More...</a><br /></td></tr>
 <tr class="separator:a8e0e3a7c220e03c4463baab684ef4369"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -328,12 +325,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:ad5d69588497726129a45329a0bba4751"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#ad5d69588497726129a45329a0bba4751">saveApplicationTable</a> (QWidget *widget, <a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, std::string &amp;tableName)</td></tr>
 <tr class="memdesc:ad5d69588497726129a45329a0bba4751"><td class="mdescLeft">&#160;</td><td class="mdescRight">saveApplicationTable : Saves a table that identifies the type of database (i.e., MSVPA, MSSPM, MSCAA)  <a href="classnmf_database.html#ad5d69588497726129a45329a0bba4751">More...</a><br /></td></tr>
 <tr class="separator:ad5d69588497726129a45329a0bba4751"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4bd6cd0eba5e15b07ab9b6ad802b2c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#af4bd6cd0eba5e15b07ab9b6ad802b2c4">setToZeroIfEmpty</a> (std::vector&lt; double &gt; &amp;CovariateCoeffs, const int &amp;NumElements)</td></tr>
+<tr class="memdesc:af4bd6cd0eba5e15b07ab9b6ad802b2c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the passed vector to 0's if it's empty.  <a href="classnmf_database.html#af4bd6cd0eba5e15b07ab9b6ad802b2c4">More...</a><br /></td></tr>
+<tr class="separator:af4bd6cd0eba5e15b07ab9b6ad802b2c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b29296b4d8b2609e89943101e951abd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a6b29296b4d8b2609e89943101e951abd">updateAllModelsInProject</a> (QWidget *parent, const std::string &amp;type, const std::string &amp;projectName, const std::string &amp;currentModel, std::vector&lt; std::string &gt; &amp;modelsInProject)</td></tr>
 <tr class="memdesc:a6b29296b4d8b2609e89943101e951abd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates all of the models in the current project (necessary when observed biomass changes for one model)  <a href="classnmf_database.html#a6b29296b4d8b2609e89943101e951abd">More...</a><br /></td></tr>
 <tr class="separator:a6b29296b4d8b2609e89943101e951abd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6580bb0bd7eeec8a8d3e04a41b49d50"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#ae6580bb0bd7eeec8a8d3e04a41b49d50">updateForecastMonteCarloParameters</a> (QWidget *widget, <a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, const std::string &amp;ForecastName, const std::string &amp;Algorithm, const std::string &amp;Minimizer, const std::string &amp;ObjectiveCriterion, const std::string &amp;Scaling, const QStringList &amp;Species, const int &amp;RunNumber, const std::vector&lt; double &gt; &amp;GrowthRandomValues, const std::vector&lt; double &gt; &amp;CarryingCapacityRandomValues, const std::vector&lt; double &gt; &amp;CatchabilityRandomValues, const std::vector&lt; double &gt; &amp;ExponentRandomValues, const std::vector&lt; double &gt; &amp;CompetitionAlphaRandomValues, const std::vector&lt; double &gt; &amp;CompetitionBetaSpeciesRandomValues, const std::vector&lt; double &gt; &amp;CompetitionBetaGuildsRandomValues, const std::vector&lt; double &gt; &amp;CompetitionBetaGuildsGuildsRandomValues, const std::vector&lt; double &gt; &amp;PredationRandomValues, const std::vector&lt; double &gt; &amp;HandlingRandomValues, const std::vector&lt; double &gt; &amp;HarvestRandomValues)</td></tr>
-<tr class="memdesc:ae6580bb0bd7eeec8a8d3e04a41b49d50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the appropriate table with the Monte Carlo Forecast runs.  <a href="classnmf_database.html#ae6580bb0bd7eeec8a8d3e04a41b49d50">More...</a><br /></td></tr>
-<tr class="separator:ae6580bb0bd7eeec8a8d3e04a41b49d50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f0aaa525a086846ddedb10a8b0f0280"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a5f0aaa525a086846ddedb10a8b0f0280">updateForecastMonteCarloParameters</a> (QWidget *widget, <a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, const std::string &amp;ForecastName, const std::string &amp;Algorithm, const std::string &amp;Minimizer, const std::string &amp;ObjectiveCriterion, const std::string &amp;Scaling, const QStringList &amp;Species, const int &amp;RunNumber, const std::vector&lt; double &gt; &amp;GrowthRandomValues, const std::vector&lt; double &gt; &amp;CarryingCapacityRandomValues, const std::vector&lt; double &gt; &amp;CatchabilityRandomValues, const std::vector&lt; double &gt; &amp;ExponentRandomValues, const std::vector&lt; double &gt; &amp;CompetitionAlphaRandomValues, const std::vector&lt; double &gt; &amp;CompetitionBetaSpeciesRandomValues, const std::vector&lt; double &gt; &amp;CompetitionBetaGuildsRandomValues, const std::vector&lt; double &gt; &amp;CompetitionBetaGuildsGuildsRandomValues, const std::vector&lt; double &gt; &amp;PredationRandomValues, const std::vector&lt; double &gt; &amp;HandlingRandomValues, const std::vector&lt; double &gt; &amp;HarvestRandomValues, const std::vector&lt; double &gt; &amp;GrowthRateCovCoeffRandomValues, const std::vector&lt; double &gt; &amp;CarryingCapacityCovCoeffRandomValues, const std::vector&lt; double &gt; &amp;CatchabilityCovCoeffRandomValues, const std::vector&lt; double &gt; &amp;SurveyQCovCoeffRandomValues)</td></tr>
+<tr class="memdesc:a5f0aaa525a086846ddedb10a8b0f0280"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the appropriate table with the Monte Carlo Forecast runs.  <a href="classnmf_database.html#a5f0aaa525a086846ddedb10a8b0f0280">More...</a><br /></td></tr>
+<tr class="separator:a5f0aaa525a086846ddedb10a8b0f0280"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7dd3b9daea340827b8714ab4aaad3e20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a7dd3b9daea340827b8714ab4aaad3e20">updateUnitsTable</a> (QWidget *parent, <a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;projectName, const std::string &amp;modelName, const std::string &amp;tableName, const std::string &amp;units)</td></tr>
 <tr class="memdesc:a7dd3b9daea340827b8714ab4aaad3e20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the units database table with the units corresponding to the table shown in the GUI.  <a href="classnmf_database.html#a7dd3b9daea340827b8714ab4aaad3e20">More...</a><br /></td></tr>
 <tr class="separator:a7dd3b9daea340827b8714ab4aaad3e20"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2991,8 +2991,8 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
 
 </div>
 </div>
-<a id="ac2a7d14d6aa357ee59876d9acbe7ba23"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac2a7d14d6aa357ee59876d9acbe7ba23">&#9670;&nbsp;</a></span>getSpeciesInitialCovariateData()</h2>
+<a id="a66300673f61f0acb8b4850e9afad2a56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66300673f61f0acb8b4850e9afad2a56">&#9670;&nbsp;</a></span>getSpeciesInitialCovariateData()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3031,7 +3031,13 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
-          <td class="paramname"><em>CatchabilityCovariateCoeffs</em>&#160;</td>
+          <td class="paramname"><em>CatchabilityCovariateCoeffs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>SurveyQCovariateCoeffs</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -3050,6 +3056,7 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
     <tr><td class="paramname">GrowthRateCovariateCoeff</td><td>: initial values for growth rate covariate coefficients per species </td></tr>
     <tr><td class="paramname">CarryingCapacityCovariateCoeff</td><td>: initial values for carrying capacity covariate coefficients per species </td></tr>
     <tr><td class="paramname">CatchabilityCovariateCoeff</td><td>: initial values for catchability covariate coefficients per species </td></tr>
+    <tr><td class="paramname">SurveyQCovariateCoeffs</td><td>: initial values for catchability covariate coefficients per species </td></tr>
   </table>
   </dd>
 </dl>
@@ -3498,7 +3505,7 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
       </table>
 </div><div class="memdoc">
 
-<p>Determines if the currently loaded model is set to relative biomass. </p>
+<p>Determines if the currently loaded model is set to relative biomass; useful for determining usage of Survey Q. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">projectName</td><td>: name of project </td></tr>
@@ -3507,44 +3514,6 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if data refers to relative biomass, false otherwise </dd></dl>
-
-</div>
-</div>
-<a id="ade63121584918ddd06300715baf574a1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade63121584918ddd06300715baf574a1">&#9670;&nbsp;</a></span>isSurveyQ()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool nmfDatabase::isSurveyQ </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>projectName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>modelName</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns a boolean describing if the observed biomass is relative (true) or absolute (false) </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">projectName</td><td>: name of project </td></tr>
-    <tr><td class="paramname">modelName</td><td>: name of model </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if observed biomass is relative, false if absolute </dd></dl>
 
 </div>
 </div>
@@ -5248,6 +5217,43 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
 
 </div>
 </div>
+<a id="af4bd6cd0eba5e15b07ab9b6ad802b2c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4bd6cd0eba5e15b07ab9b6ad802b2c4">&#9670;&nbsp;</a></span>setToZeroIfEmpty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfDatabase::setToZeroIfEmpty </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CovariateCoeffs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>NumElements</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the passed vector to 0's if it's empty. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">CovariateCoeffs</td><td>: vector to initialize </td></tr>
+    <tr><td class="paramname">NumElements</td><td>: number of desired elements in vector </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a6b29296b4d8b2609e89943101e951abd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6b29296b4d8b2609e89943101e951abd">&#9670;&nbsp;</a></span>updateAllModelsInProject()</h2>
 
@@ -5307,8 +5313,8 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
 
 </div>
 </div>
-<a id="ae6580bb0bd7eeec8a8d3e04a41b49d50"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6580bb0bd7eeec8a8d3e04a41b49d50">&#9670;&nbsp;</a></span>updateForecastMonteCarloParameters()</h2>
+<a id="a5f0aaa525a086846ddedb10a8b0f0280"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f0aaa525a086846ddedb10a8b0f0280">&#9670;&nbsp;</a></span>updateForecastMonteCarloParameters()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -5443,7 +5449,31 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
-          <td class="paramname"><em>HarvestRandomValues</em>&#160;</td>
+          <td class="paramname"><em>HarvestRandomValues</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>GrowthRateCovCoeffRandomValues</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CarryingCapacityCovCoeffRandomValues</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>CatchabilityCovCoeffRandomValues</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>SurveyQCovCoeffRandomValues</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -5478,6 +5508,10 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
     <tr><td class="paramname">PredationRandomValues</td><td>: random values from user inputted uncertainty error </td></tr>
     <tr><td class="paramname">HandlingRandomValues</td><td>: random values from user inputted uncertainty error </td></tr>
     <tr><td class="paramname">HarvestRandomValues</td><td>: random values from user inputted uncertainty error </td></tr>
+    <tr><td class="paramname">GrowthRateCovCoeffRandomValues</td><td>: random values from user inputted Growth Rate covariate coefficient uncertainty error </td></tr>
+    <tr><td class="paramname">CarryingCapacityCovCoeffRandomValues</td><td>: random values from user inputted Carrying Capacity covariate coefficient uncertainty error </td></tr>
+    <tr><td class="paramname">CatchabilityCovCoeffRandomValues</td><td>: random values from user inputted Catchability covariate coefficient uncertainty error </td></tr>
+    <tr><td class="paramname">SurveyQCovCoeffRandomValues</td><td>: random values from user inputted SurveyQ covariate coefficient uncertainty error </td></tr>
   </table>
   </dd>
 </dl>

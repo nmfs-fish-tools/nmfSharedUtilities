@@ -10,6 +10,5 @@ var searchData=
   ['isnearlyzero_223',['isNearlyZero',['../namespacenmf_utils.html#ad445967c593f84cda238acd5fe04f445',1,'nmfUtils']]],
   ['isoswindows_224',['isOSWindows',['../namespacenmf_utils.html#a2c257364b8e0e872243413db9f943d60',1,'nmfUtils']]],
   ['isstopped_225',['isStopped',['../classnmf_progress_widget.html#a903cfb3ddb7beb57087ecb95868b64b7',1,'nmfProgressWidget::isStopped()'],['../namespacenmf_utils.html#a4a6bcc536ed5a524f8bf9c1dffe98f28',1,'nmfUtils::isStopped()']]],
-  ['issurveyq_226',['isSurveyQ',['../classnmf_database.html#ade63121584918ddd06300715baf574a1',1,'nmfDatabase']]],
-  ['iswholenumber_227',['isWholeNumber',['../namespacenmf_utils.html#abdc0f0125ae7a0a8cc338ca4c828b1a0',1,'nmfUtils']]]
+  ['iswholenumber_226',['isWholeNumber',['../namespacenmf_utils.html#abdc0f0125ae7a0a8cc338ca4c828b1a0',1,'nmfUtils']]]
 ];

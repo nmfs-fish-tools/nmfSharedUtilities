@@ -29,7 +29,7 @@ BeesAlgorithm::BeesAlgorithm(nmfStructsQt::ModelDataStruct theBeeStruct,
     // Get number of independent runs
     m_Scaling = theBeeStruct.ScalingAlgorithm;
     if (verbose) {
-        std::cout << "\nBeesAlgorithm: Parameters to Estimate: " << m_BeeStruct.TotalNumberParameters << std::endl;
+        std::cout << "BeesAlgorithm: Parameters to Estimate: " << m_BeeStruct.TotalNumberParameters << std::endl;
     }
     // Make patch size a percentage of parameter space
     m_PatchSizePct = m_BeeStruct.BeesNeighborhoodSize/100.0;
@@ -118,7 +118,7 @@ BeesAlgorithm::BeesAlgorithm(nmfStructsQt::ModelDataStruct theBeeStruct,
     if (verbose) {
         std::cout << "BeesAlgorithm: Read Exploitation" << std::endl;
     }
-std::cout << "BeesAlgorithm::BeesAlgorithm end" << std::endl;
+//std::cout << "BeesAlgorithm::BeesAlgorithm end" << std::endl;
 }
 
 BeesAlgorithm::~BeesAlgorithm()
@@ -285,6 +285,9 @@ BeesAlgorithm::loadSurveyQParameterRanges(
 {
     std::pair<double,double> aPair;
     bool isCheckedSurveyQ = nmfUtils::isEstimateParameterChecked(theBeeStruct,"SurveyQ");
+    std::string speciesName;
+    std::map<std::string,nmfStructsQt::CovariateStruct> covariateCoeffMap;
+    nmfStructsQt::CovariateStruct covariateStruct;
 
     // If Survey Q is not estimated, hardcode 1.0's as min and max
     for (unsigned species=0; species<theBeeStruct.SurveyQMin.size(); ++species) {
@@ -293,6 +296,20 @@ BeesAlgorithm::loadSurveyQParameterRanges(
                                    theBeeStruct.SurveyQMax[species]);
         } else {
             aPair = std::make_pair(1.0,1.0);
+        }
+        parameterRanges.emplace_back(aPair);
+    }
+
+    // Always load SurveyQ Covariate Coefficient values
+    for (unsigned species=0; species<theBeeStruct.SurveyQMin.size(); ++species) {
+        speciesName       = theBeeStruct.SpeciesNames[species];
+        covariateCoeffMap = theBeeStruct.SurveyQCovariateCoeff;
+        covariateStruct   = covariateCoeffMap[speciesName];
+        if (isCheckedSurveyQ) {
+            aPair = std::make_pair(covariateStruct.CoeffMinValue,
+                                   covariateStruct.CoeffMaxValue);
+        } else {
+            aPair = std::make_pair(0.0,0.0);
         }
         parameterRanges.emplace_back(aPair);
     }
@@ -307,7 +324,7 @@ BeesAlgorithm::loadSurveyQParameterRanges(
 void
 BeesAlgorithm::initializeParameterRangesAndPatchSizes(nmfStructsQt::ModelDataStruct& theBeeStruct)
 {
-std::cout << "*** BeesAlgorithm::initializeParameterRangesAndPatchSizes ** " << std::endl;
+//std::cout << "BeesAlgorithm: initializeParameterRangesAndPatchSizes" << std::endl;
     std::vector<std::pair<double,double> > parameterRanges;
 
     m_ParameterRanges.clear();
@@ -322,16 +339,13 @@ std::cout << "*** BeesAlgorithm::initializeParameterRangesAndPatchSizes ** " << 
 
     // Calculate the patch sizes for each parameter range
     for (unsigned int i=0;i<m_ParameterRanges.size();++i) {
-        if (m_ParameterRanges[i].second == m_ParameterRanges[i].first) {
+        if (m_ParameterRanges[i].first == m_ParameterRanges[i].second) {
             m_PatchSizes.emplace_back(0);
         } else {
             m_PatchSizes.emplace_back(m_PatchSizePct*(m_ParameterRanges[i].second-m_ParameterRanges[i].first));
         }
     }
-
 }
-
-
 
 void
 BeesAlgorithm::extractInitBiomass(const std::vector<double>& parameters,
@@ -422,11 +436,20 @@ BeesAlgorithm::extractExponentParameters(const std::vector<double>& parameters,
 void
 BeesAlgorithm::extractSurveyQParameters(const std::vector<double>& parameters,
                                         int&                       startPos,
-                                        std::vector<double>&       surveyQ)
+                                        std::vector<double>&       surveyQ,
+                                        std::vector<double>&       surveyQCovariateCoeffs)
 {
     int numSurveyQParameters = m_BeeStruct.SurveyQMin.size();
+
+    // Extract Survey Q parameters
     for (int i=startPos; i<startPos+numSurveyQParameters; ++i) {
         surveyQ.emplace_back(parameters[i]);
+    }
+    startPos += numSurveyQParameters;
+
+    // Extract Survey Q Covariate Coefficient parameters
+    for (int i=startPos; i<startPos+numSurveyQParameters; ++i) {
+        surveyQCovariateCoeffs.emplace_back(parameters[i]);
     }
     startPos += numSurveyQParameters;
 }
@@ -465,8 +488,9 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     std::vector<double> catchabilityCovariateCoeffs;
     std::vector<double> guildCarryingCapacity;
     std::vector<double> predationExponent;
-    std::vector<double> Catchability;
+    std::vector<double> catchability;
     std::vector<double> surveyQ;
+    std::vector<double> surveyQCovariateCoeffs;
     boost::numeric::ublas::matrix<double> initBiomassCovariate;
     boost::numeric::ublas::matrix<double> growthRateCovariate;
     boost::numeric::ublas::matrix<double> carryingCapacityCovariate;
@@ -539,25 +563,24 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
                                     carryingCapacity,carryingCapacityCovariateCoeffs,
                                     systemCarryingCapacity);
     m_HarvestForm->extractParameters(parameters,startPos,
-                                     Catchability,catchabilityCovariateCoeffs);
+                                     catchability,catchabilityCovariateCoeffs);
     m_CompetitionForm->extractParameters(parameters,startPos,competitionAlpha,
                                          competitionBetaSpecies,competitionBetaGuilds,
                                          competitionBetaGuildsGuilds);
     m_PredationForm->extractPredationParameters(parameters,startPos,predationRho);
     m_PredationForm->extractHandlingParameters(parameters,startPos,predationHandling);
     m_PredationForm->extractExponentParameters(parameters,startPos,predationExponent);
-    extractSurveyQParameters(parameters,startPos,surveyQ);
+    extractSurveyQParameters(parameters,startPos,
+                             surveyQ,surveyQCovariateCoeffs);
 
     // Since we may be estimating SurveyQ, need to divide the Observed Biomass by the SurveyQ
-    double surveyQCovariateCoeff = 0.0; // RSK estimate this later
     for (int species=0; species<int(obsBiomassBySpeciesOrGuilds.size2()); ++species) {
         surveyQVal = surveyQ[species];
         for (int time=0; time<int(obsBiomassBySpeciesOrGuilds.size1()); ++time) {
             surveyQTerm = nmfUtils::applyCovariate(nullptr,
                         covariateAlgorithmType,surveyQVal,
-                        surveyQCovariateCoeff,surveyQCovariate(time,species));
+                        surveyQCovariateCoeffs[species],surveyQCovariate(time,species));
             obsBiomassBySpeciesOrGuilds(time,species) /= surveyQTerm;
-//          obsBiomassBySpeciesOrGuilds(time,species) /= (surveyQVal*(1.0+surveyQCovariateCoeff*surveyQCovariate(time,species)));
         }
     }
 
@@ -635,7 +658,7 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
             HarvestTerm     = m_HarvestForm->evaluate(covariateAlgorithmType,
                                                       timeMinus1,species,EstBiomassTMinus1,
                                                       m_Catch,m_Effort,m_Exploitation,
-                                                      Catchability[species],
+                                                      catchability[species],
                                                       catchabilityCovariateCoeffs[species],
                                                       catchabilityCovariate(timeMinus1,species));
 //std::cout << "guild cc: " << guildCarryingCapacity[guildNum] << std::endl;
@@ -667,22 +690,21 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
                                                         predationExponentCovariate);
 
             // Assume log normal error (eps = error term)
-            eps = std::log(m_ObsBiomassBySpeciesOrGuilds(timeMinus1,species)) - std::log(EstBiomassTMinus1);
-            logEstBiomassVal = std::log(EstBiomassTMinus1 + GrowthTerm - HarvestTerm -
-                                        CompetitionTerm - PredationTerm) + eps;
+//          eps = std::log(m_ObsBiomassBySpeciesOrGuilds(timeMinus1,species)) - std::log(EstBiomassTMinus1);
+//          logEstBiomassVal = std::log(EstBiomassTMinus1 + GrowthTerm - HarvestTerm - CompetitionTerm - PredationTerm) + eps;
             // This logic is needed for the correct calculation of eps on subsequent iterations
-            EstBiomassTMinus1 = std::exp(logEstBiomassVal + 0.5*sigmasSquared[species]);
-            EstBiomassSpecies(time,species) = EstBiomassTMinus1;
+//          EstBiomassTMinus1 = std::exp(logEstBiomassVal + 0.5*sigmasSquared[species]);
+//          EstBiomassSpecies(time,species) = EstBiomassTMinus1;
             // the ½σ² term is needed due to the difference between log normal and normal distributions
 
-//            EstBiomassValTMinus1  += GrowthTerm - HarvestTerm - CompetitionTerm - PredationTerm;
-//            if (estBiomassVal < 0) {
-//                estBiomassVal = 0;
-//            }
-//            if ((estBiomassVal < 0) || (std::isnan(std::fabs(estBiomassVal)))) {
-//                return m_DefaultFitness;
-//            }
-//            EstBiomassSpecies(time,species) = EstBiomassValTMin us1;
+            EstBiomassTMinus1  += GrowthTerm - HarvestTerm - CompetitionTerm - PredationTerm;
+            if (EstBiomassTMinus1 < 0) {
+                EstBiomassTMinus1 = 0;
+            }
+            if ((EstBiomassTMinus1 < 0) || (std::isnan(std::fabs(EstBiomassTMinus1)))) {
+                return m_DefaultFitness;
+            }
+            EstBiomassSpecies(time,species) = EstBiomassTMinus1;
 
             // update estBiomassGuilds for next time step
             for (int i=0; i<NumGuilds; ++i) {
@@ -800,9 +822,10 @@ BeesAlgorithm::createNeighborhoodBee(std::vector<double> &bestSiteParameters)
     double rval;
     std::vector<double> parameters = {};
 //std::cout << "rval: " << rval << std::endl;
+
     for (unsigned int i=0; i<bestSiteParameters.size(); ++i) {
         patchSize = m_PatchSizes[i];
-//std::cout << i << ", " << patchSize << std::endl;
+//std::cout << "-> " << i << ", " << patchSize << std::endl;
         val = bestSiteParameters[i];
         rval = nmfUtils::getRandomNumber(m_Seed,0.0,1.0);
         checkAndIncrementSeed();
@@ -815,9 +838,10 @@ BeesAlgorithm::createNeighborhoodBee(std::vector<double> &bestSiteParameters)
         }
         parameters.emplace_back(val);
     }
+
     fitness = evaluateObjectiveFunction(parameters);
 
-  return std::move(std::make_unique<Bee>(fitness,parameters));
+    return std::move(std::make_unique<Bee>(fitness,parameters));
 }
 
 
@@ -904,6 +928,7 @@ std::cout << "Found initial bees." << std::endl;
         for (int i=0; i<numBestSites; ++i) {
             bestSites.emplace_back(std::move(totalBeePopulation[i]));
         }
+
 
         // For each best bee, calculate the neighborhood size in terms of bees,
         // find those bees in each neighborhood and add only the best one to next_gen

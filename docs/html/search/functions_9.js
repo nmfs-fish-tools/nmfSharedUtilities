@@ -2,7 +2,7 @@ var searchData=
 [
   ['loadcsvfilecomboboxes_821',['loadCSVFileComboBoxes',['../namespacenmf_utils_qt.html#abb998e4c70e4e80be4c42074c7fcf440',1,'nmfUtilsQt']]],
   ['loadcvsfilecovariate_822',['loadCVSFileCovariate',['../namespacenmf_utils_qt.html#af8f04562abe77258f57168458db52941',1,'nmfUtilsQt']]],
-  ['loadestdata_823',['loadEstData',['../classnmf_utils_statistics_averaging.html#af842849e471503907ffd7bf4159465bc',1,'nmfUtilsStatisticsAveraging::loadEstData()'],['../classnmf_utils_statistics_mohns_rho.html#aa29f08ace3efe19f26508ced2396b8ea',1,'nmfUtilsStatisticsMohnsRho::loadEstData()']]],
+  ['loadestdata_823',['loadEstData',['../classnmf_utils_statistics_averaging.html#ad24f30aa029e5a54e9b3a9571ad5adad',1,'nmfUtilsStatisticsAveraging::loadEstData()'],['../classnmf_utils_statistics_mohns_rho.html#aa29f08ace3efe19f26508ced2396b8ea',1,'nmfUtilsStatisticsMohnsRho::loadEstData()']]],
   ['loadestimatedvectorparameters_824',['loadEstimatedVectorParameters',['../classnmf_database.html#a8e0e3a7c220e03c4463baab684ef4369',1,'nmfDatabase']]],
   ['loadguildsspeciestableview_825',['loadGuildsSpeciesTableview',['../namespacenmf_utils_qt.html#a71a3da7fcdedd84c27cf7f6f1fa62ab6',1,'nmfUtilsQt']]],
   ['loadlogfile_826',['loadLogFile',['../classnmf_log_widget.html#a327abef307364e8cc3d1442111c5acb4',1,'nmfLogWidget']]],

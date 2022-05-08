@@ -188,7 +188,8 @@ public:
     void extractSurveyQParameters(
             const std::vector<double>& parameters,
             int&                       startPos,
-            std::vector<double>&       surveyQ);
+            std::vector<double>&       surveyQ,
+            std::vector<double>&       surveyQCovariateCoeffs);
     double evaluateObjectiveFunction(
             const std::vector<double> &parameters);
     void initializeParameterRangesAndPatchSizes(

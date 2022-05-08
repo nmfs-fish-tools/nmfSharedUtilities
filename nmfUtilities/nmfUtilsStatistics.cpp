@@ -580,7 +580,11 @@ void calculateAIC(const int& NumSpeciesOrGuilds,
 {
     AIC.clear();
     for (int i=0;i<NumSpeciesOrGuilds;++i) {
-        AIC.push_back((RunLength+1)*std::log(SSResiduals[i]/(RunLength+1)) + 2 * NumParameters);
+        if (SSResiduals[i] == 0) {
+            AIC.push_back(0.0);
+        } else {
+            AIC.push_back((RunLength+1)*std::log(SSResiduals[i]/(RunLength+1)) + 2 * NumParameters);
+        }
     }
 }
 

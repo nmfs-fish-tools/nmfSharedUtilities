@@ -2,7 +2,7 @@ var searchData=
 [
   ['getalgorithmidentifiers_139',['getAlgorithmIdentifiers',['../classnmf_database.html#a454b5b43c3ac708aa1a712e17b645674',1,'nmfDatabase']]],
   ['getalltables_140',['getAllTables',['../classnmf_database.html#a3ec3074f42dee41eceb59019417a649e',1,'nmfDatabase']]],
-  ['getavedata_141',['getAveData',['../classnmf_utils_statistics_averaging.html#a2410984d2328f050147e630555fce527',1,'nmfUtilsStatisticsAveraging']]],
+  ['getavedata_141',['getAveData',['../classnmf_utils_statistics_averaging.html#a2105b97fe87f827034b9383a52ee5dc0',1,'nmfUtilsStatisticsAveraging']]],
   ['getcompetitiondata_142',['getCompetitionData',['../classnmf_database.html#aed5bc01bf598eb640a027cd1866efad5',1,'nmfDatabase']]],
   ['getcovariatealgorithmtype_143',['getCovariateAlgorithmType',['../classnmf_database.html#a9fb6edf3388529b231e64e1217b75927',1,'nmfDatabase']]],
   ['getcovariates_144',['getCovariates',['../namespacenmf_utils_qt.html#a60383b9f64e385e8ddaa7afd4aca817b',1,'nmfUtilsQt']]],
@@ -54,7 +54,7 @@ var searchData=
   ['getspeciesdata_190',['getSpeciesData',['../classnmf_database.html#a34aaf13af26158b8175494511ed0b822',1,'nmfDatabase']]],
   ['getspeciesguildmap_191',['getSpeciesGuildMap',['../classnmf_database.html#a907bb7e79fde1734d733168e43668469',1,'nmfDatabase']]],
   ['getspeciesindex_192',['getSpeciesIndex',['../classnmf_database.html#a4b7d96ea488150fd52fb59130d421bca',1,'nmfDatabase']]],
-  ['getspeciesinitialcovariatedata_193',['getSpeciesInitialCovariateData',['../classnmf_database.html#ac2a7d14d6aa357ee59876d9acbe7ba23',1,'nmfDatabase']]],
+  ['getspeciesinitialcovariatedata_193',['getSpeciesInitialCovariateData',['../classnmf_database.html#a66300673f61f0acb8b4850e9afad2a56',1,'nmfDatabase']]],
   ['getspeciesinitialdata_194',['getSpeciesInitialData',['../classnmf_database.html#a3b388017b28887c35040e5f27c4236a3',1,'nmfDatabase']]],
   ['getspeciestoindexmap_195',['getSpeciesToIndexMap',['../classnmf_database.html#af962377ee4128971c888138ca4162bed',1,'nmfDatabase']]],
   ['getsurveyqdata_196',['getSurveyQData',['../classnmf_database.html#a00fec6fd4b230a28525d9a47f161623a',1,'nmfDatabase']]],
