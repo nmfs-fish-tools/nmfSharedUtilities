@@ -1321,9 +1321,12 @@ std::cout << "Removing: " << fileToRemove.toStdString() << std::endl;
         }
 
     } else {
-        fileToRemove = QDir("~/.config/NOAA").filePath(appName+".conf");
+        fileToRemove = QDir(".config/NOAA").filePath(appName+".conf");
+        fileToRemove = QDir(QDir::homePath()).filePath(fileToRemove);
 std::cout << "Removing: " << fileToRemove.toStdString() << std::endl;
-        std::remove(fileToRemove.toLatin1());
+        if (! dir.remove(fileToRemove)) {
+            std::cout << "Error: failed to remove settings file" << std::endl;
+        }
     }
     return true;
 }
@@ -1552,15 +1555,41 @@ void saveModelToCSVFile(std::string projectDir,
     }
 }
 
+void
+getNumSpeciesFromImportFile(
+        const QString& filename,
+        int& numRows)
+{
+    QString allLines;
+    QStringList lineList;
+    QStringList dataParts;
+    QStringList ColumnHeader  = {};
+
+    numRows = 0;
+    if (! filename.isEmpty()) {
+        QFile file(filename);
+        if (file.open(QIODevice::ReadOnly)) {
+            allLines = file.readAll().trimmed();
+            lineList = allLines.split('\n');
+            numRows = lineList.count()-1; // -1 for the header
+            //numCols = lineList[0].split(',').count();
+        }
+        file.close();
+    }
+}
+
 bool
 loadTableWidgetData(QTabWidget* parentTabWidget,
                     QTableWidget* tableWidget,
-                    const QString& inputDataPath,
-                    const QStringList& guildValues,
+                    const QString& filename,
+                    const int& numRows,
+                    const int& numCols,
+                    QStringList& guildValues,
+                    const std::vector<int>& ColumnsToLoad,
                     QString& errorMsg)
 {
+    int colNum = 0;
     QString allLines;
-    QString filename;
     QStringList lineList;
     QStringList dataParts;
     QStringList ColumnHeader  = {};
@@ -1573,38 +1602,36 @@ loadTableWidgetData(QTabWidget* parentTabWidget,
         return false;
     }
 
-    filename = QFileDialog::getOpenFileName(parentTabWidget,
-                   QObject::tr("Select CSV file"), inputDataPath,
-                   QObject::tr("Data Files (*.csv)"));
     if (! filename.isEmpty()) {
         QFile file(filename);
         if (file.open(QIODevice::ReadOnly)) {
             allLines = file.readAll().trimmed();
             lineList = allLines.split('\n');
-            int numRows = lineList.count()-1; // -1 for the header
-            int numCols = lineList[0].split(',').count();
-            if ((tableWidget->rowCount()    == numRows) &&
-                (tableWidget->columnCount() == numCols))
+            if (tableWidget->rowCount() == numRows)
             {
                 // Create the header
                 QStringList speciesParts = lineList[0].split(',');
-                for (int col=0;col<speciesParts.count();++col) {
-                    ColumnHeader << speciesParts[col];
+                for (int col=0; col<(int)ColumnsToLoad.size(); ++col) {
+                    ColumnHeader << speciesParts[ColumnsToLoad[col]];
                 }
                 // Create and load the table widgets
                 for (int row=1;row<=numRows; ++row) {
                     dataParts = lineList[row].split(',');
-                    for (int col=0; col<dataParts.count(); ++col) {
-                        if (isSpeciesTable && (col == 1)) {
+                    for (int col=0; col<(int)ColumnsToLoad.size(); ++col) {
+                        colNum = ColumnsToLoad[col];
+                        if (isSpeciesTable && (colNum == 1)) {
                             QComboBox* cbox = new QComboBox();
                             cbox->addItems(guildValues);
-                            cbox->setCurrentText(dataParts[col]);
+                            cbox->setCurrentText(dataParts[colNum]);
                             tableWidget->setCellWidget(row-1,col,cbox);
                         } else {
                             QTableWidgetItem* item = new QTableWidgetItem();
                             item->setTextAlignment(Qt::AlignCenter);
-                            item->setText(dataParts[col]);
+                            item->setText(dataParts[colNum]);
                             tableWidget->setItem(row-1,col,item);
+                            if (colNum == nmfConstantsMSSPM::Column_Species_Guild) {
+                                guildValues << dataParts[0];
+                            }
                         }
                     }
                 }
@@ -1630,13 +1657,14 @@ loadGuildsSpeciesTableview(QTabWidget* parentTabWidget,
                            const QString& inputDataPath,
                            const QString& inputFilename,
                            QList<QString>& SpeciesGuilds,
+                           const bool& queryForFilename,
+                           QString& filename,
                            QString& errorMsg)
 {
     bool retv = false;
     bool isSpecies = (type == "Species");
     int offset = (isSpecies) ? 1 : 0;
     QString allLines;
-    QString filename;
     QStringList lineList;
     QStringList dataParts;
     QStringList ColumnLabelList  = {};
@@ -1652,11 +1680,13 @@ loadGuildsSpeciesTableview(QTabWidget* parentTabWidget,
         return false;
     }
 
-    filename = (inputFilename.isEmpty()) ?
-                QFileDialog::getOpenFileName(parentTabWidget,
-                   QObject::tr("Select CSV file"), inputDataPath,
-                   QObject::tr("Data Files (species*.csv guilds*.csv)")) :
-                inputFilename;
+    if (queryForFilename) {
+        filename = (inputFilename.isEmpty()) ?
+                    QFileDialog::getOpenFileName(parentTabWidget,
+                                                 QObject::tr("Select CSV file"), inputDataPath,
+                                                 QObject::tr("Data Files (species*.csv guilds*.csv)")) :
+                    inputFilename;
+    }
 
     if (! filename.isEmpty()) {
         QFile file(filename);

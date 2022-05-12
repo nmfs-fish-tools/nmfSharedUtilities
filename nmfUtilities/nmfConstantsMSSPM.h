@@ -41,6 +41,8 @@
 namespace nmfConstantsMSSPM
 {
      const int    Start_Year            = 1900;
+     const int    Num_Columns_Species   = 5;
+     const int    Num_Columns_Guilds    = 3;
 
      const int    Column_Guild_Name       =  0;
      const int    Column_Guild_GrowthRate =  1;

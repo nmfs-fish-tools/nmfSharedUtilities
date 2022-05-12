@@ -518,6 +518,14 @@ namespace nmfUtilsQt {
      */
     QDateTime getCurrentTime();
     /**
+     * @brief Gets the number of rows (i.e., Species) in the Species csv file
+     * @param filename : name of Species csv file
+     * @param numRows : number of Species
+     */
+    void getNumSpeciesFromImportFile(
+            const QString& filename,
+            int& numRows);
+    /**
      * @brief Gets a list of selected tableview cells
      * @param tv : tableview to find the selected cells of
      * @return list of indexes of selected cells
@@ -571,6 +579,8 @@ namespace nmfUtilsQt {
      * @param type : type of tableview (i.e., "Guild" or "Species")
      * @param inputDataPath : default path for the input .csv file
      * @param inputFilename : CSV filename if default is not desired
+     * @param queryForFilename : boolean if true code will query user for the csv filename; if false, it won't
+     * @param guildsFilename : filename for the guilds csv file
      * @param errorMsg : error message produced during the load
      * @return : Boolean signifying a successful load (true) or an unsuccessful load (false)
      */
@@ -580,6 +590,8 @@ namespace nmfUtilsQt {
                                     const QString& inputDataPath,
                                     const QString& inputFilename,
                                     QList<QString>& SpeciesGuilds,
+                                    const bool& queryForFilename,
+                                    QString& guildsFilename,
                                     QString& errorMsg);
     /**
      * @brief Loads the CSV file into the passed tableview's model
@@ -613,15 +625,21 @@ namespace nmfUtilsQt {
      * @brief Load data from a .csv file into a QTableWidget
      * @param parentTabWidget : parent widget onto which any popup message will be displayed
      * @param tableWidget : table widget that will contain the csv data
-     * @param inputDataPath : input directory containing the csv data
+     * @param filename : import species filename
+     * @param numRows : number of rows in gui table
+     * @param numCols : number of columns in gui table
      * @param guildValues : QStringList containing all of the guilds
+     * @param columnsToLoad : column numbers to load (there are sometimes more columns in the file than need to be loaded into the particular gui)
      * @param errorMsg : passes back any error message
      * @return Boolean with true for a successful load else false
      */
     bool loadTableWidgetData(QTabWidget* parentTabWidget,
                              QTableWidget* tableWidget,
-                             const QString& inputDataPath,
-                             const QStringList& guildValues,
+                             const QString& filename,
+                             const int& numRows,
+                             const int& numCols,
+                             QStringList& guildValues,
+                             const std::vector<int>& columnsToLoad,
                              QString& errorMsg);
     /**
      * @brief Load a time series .csv file into a QTableView

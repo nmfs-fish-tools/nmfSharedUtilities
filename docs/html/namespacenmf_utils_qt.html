@@ -200,12 +200,15 @@ Functions</h2></td></tr>
 <tr class="memitem:a4f0ea1682bfa5a0fdbaa0bb1f7585594"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a4f0ea1682bfa5a0fdbaa0bb1f7585594">saveModelToCSVFile</a> (std::string projectDir, std::string fileType, std::string tabName, QTableView *table, bool queryFilename, bool <a class="el" href="namespacenmf_utils_qt.html#a4cee76f187fa10c5d283b64bf5c55545">removeCommas</a>, QString theFilename, bool verboseOn)</td></tr>
 <tr class="memdesc:a4f0ea1682bfa5a0fdbaa0bb1f7585594"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the data in the passed model to the appropriate directory and file.  <a href="namespacenmf_utils_qt.html#a4f0ea1682bfa5a0fdbaa0bb1f7585594">More...</a><br /></td></tr>
 <tr class="separator:a4f0ea1682bfa5a0fdbaa0bb1f7585594"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3650fb32ef1ab23988e316845acf3cd5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a3650fb32ef1ab23988e316845acf3cd5">loadTableWidgetData</a> (QTabWidget *parentTabWidget, QTableWidget *tableWidget, const QString &amp;inputDataPath, const QStringList &amp;guildValues, QString &amp;errorMsg)</td></tr>
-<tr class="memdesc:a3650fb32ef1ab23988e316845acf3cd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load data from a .csv file into a QTableWidget.  <a href="namespacenmf_utils_qt.html#a3650fb32ef1ab23988e316845acf3cd5">More...</a><br /></td></tr>
-<tr class="separator:a3650fb32ef1ab23988e316845acf3cd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71a3da7fcdedd84c27cf7f6f1fa62ab6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a71a3da7fcdedd84c27cf7f6f1fa62ab6">loadGuildsSpeciesTableview</a> (QTabWidget *parentTabWidget, QTableView *tableView, const QString &amp;type, const QString &amp;inputDataPath, const QString &amp;inputFilename, QList&lt; QString &gt; &amp;SpeciesGuilds, QString &amp;errorMsg)</td></tr>
-<tr class="memdesc:a71a3da7fcdedd84c27cf7f6f1fa62ab6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a non time series .csv file into a QTableView.  <a href="namespacenmf_utils_qt.html#a71a3da7fcdedd84c27cf7f6f1fa62ab6">More...</a><br /></td></tr>
-<tr class="separator:a71a3da7fcdedd84c27cf7f6f1fa62ab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96d1fb290410261d5ac97a7263ece6d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a96d1fb290410261d5ac97a7263ece6d4">getNumSpeciesFromImportFile</a> (const QString &amp;filename, int &amp;numRows)</td></tr>
+<tr class="memdesc:a96d1fb290410261d5ac97a7263ece6d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of rows (i.e., Species) in the Species csv file.  <a href="namespacenmf_utils_qt.html#a96d1fb290410261d5ac97a7263ece6d4">More...</a><br /></td></tr>
+<tr class="separator:a96d1fb290410261d5ac97a7263ece6d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48c73d29293cba311de8d98ebe00396c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a48c73d29293cba311de8d98ebe00396c">loadTableWidgetData</a> (QTabWidget *parentTabWidget, QTableWidget *tableWidget, const QString &amp;filename, const int &amp;numRows, const int &amp;numCols, QStringList &amp;guildValues, const std::vector&lt; int &gt; &amp;columnsToLoad, QString &amp;errorMsg)</td></tr>
+<tr class="memdesc:a48c73d29293cba311de8d98ebe00396c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load data from a .csv file into a QTableWidget.  <a href="namespacenmf_utils_qt.html#a48c73d29293cba311de8d98ebe00396c">More...</a><br /></td></tr>
+<tr class="separator:a48c73d29293cba311de8d98ebe00396c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ebf19a26b49651ddf686961de24b1e4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a9ebf19a26b49651ddf686961de24b1e4">loadGuildsSpeciesTableview</a> (QTabWidget *parentTabWidget, QTableView *tableView, const QString &amp;type, const QString &amp;inputDataPath, const QString &amp;inputFilename, QList&lt; QString &gt; &amp;SpeciesGuilds, const bool &amp;queryForFilename, QString &amp;guildsFilename, QString &amp;errorMsg)</td></tr>
+<tr class="memdesc:a9ebf19a26b49651ddf686961de24b1e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a non time series .csv file into a QTableView.  <a href="namespacenmf_utils_qt.html#a9ebf19a26b49651ddf686961de24b1e4">More...</a><br /></td></tr>
+<tr class="separator:a9ebf19a26b49651ddf686961de24b1e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb998e4c70e4e80be4c42074c7fcf440"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#abb998e4c70e4e80be4c42074c7fcf440">loadCSVFileComboBoxes</a> (QTabWidget *parentTabWidget, QTableView *tableView, const QString &amp;inputDataPath, const QString &amp;inputFilename, QString &amp;errorMsg)</td></tr>
 <tr class="memdesc:abb998e4c70e4e80be4c42074c7fcf440"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the CSV File into a table of combo boxes.  <a href="namespacenmf_utils_qt.html#abb998e4c70e4e80be4c42074c7fcf440">More...</a><br /></td></tr>
 <tr class="separator:abb998e4c70e4e80be4c42074c7fcf440"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1768,6 +1771,43 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
 
 </div>
 </div>
+<a id="a96d1fb290410261d5ac97a7263ece6d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96d1fb290410261d5ac97a7263ece6d4">&#9670;&nbsp;</a></span>getNumSpeciesFromImportFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::getNumSpeciesFromImportFile </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>numRows</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the number of rows (i.e., Species) in the Species csv file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>: name of Species csv file </td></tr>
+    <tr><td class="paramname">numRows</td><td>: number of Species </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a7257537712ae66d36e7f4854f54dec86"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7257537712ae66d36e7f4854f54dec86">&#9670;&nbsp;</a></span>getSelectedTableViewCells()</h2>
 
@@ -1978,8 +2018,8 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
 
 </div>
 </div>
-<a id="a71a3da7fcdedd84c27cf7f6f1fa62ab6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a71a3da7fcdedd84c27cf7f6f1fa62ab6">&#9670;&nbsp;</a></span>loadGuildsSpeciesTableview()</h2>
+<a id="a9ebf19a26b49651ddf686961de24b1e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ebf19a26b49651ddf686961de24b1e4">&#9670;&nbsp;</a></span>loadGuildsSpeciesTableview()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2023,6 +2063,18 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>queryForFilename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString &amp;&#160;</td>
+          <td class="paramname"><em>guildsFilename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">QString &amp;&#160;</td>
           <td class="paramname"><em>errorMsg</em>&#160;</td>
         </tr>
@@ -2042,6 +2094,8 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
     <tr><td class="paramname">type</td><td>: type of tableview (i.e., "Guild" or "Species") </td></tr>
     <tr><td class="paramname">inputDataPath</td><td>: default path for the input .csv file </td></tr>
     <tr><td class="paramname">inputFilename</td><td>: CSV filename if default is not desired </td></tr>
+    <tr><td class="paramname">queryForFilename</td><td>: boolean if true code will query user for the csv filename; if false, it won't </td></tr>
+    <tr><td class="paramname">guildsFilename</td><td>: filename for the guilds csv file </td></tr>
     <tr><td class="paramname">errorMsg</td><td>: error message produced during the load </td></tr>
   </table>
   </dd>
@@ -2168,8 +2222,8 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
 
 </div>
 </div>
-<a id="a3650fb32ef1ab23988e316845acf3cd5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3650fb32ef1ab23988e316845acf3cd5">&#9670;&nbsp;</a></span>loadTableWidgetData()</h2>
+<a id="a48c73d29293cba311de8d98ebe00396c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48c73d29293cba311de8d98ebe00396c">&#9670;&nbsp;</a></span>loadTableWidgetData()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2190,13 +2244,31 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const QString &amp;&#160;</td>
-          <td class="paramname"><em>inputDataPath</em>, </td>
+          <td class="paramname"><em>filename</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const QStringList &amp;&#160;</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numRows</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numCols</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QStringList &amp;&#160;</td>
           <td class="paramname"><em>guildValues</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>columnsToLoad</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -2217,8 +2289,11 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
   <table class="params">
     <tr><td class="paramname">parentTabWidget</td><td>: parent widget onto which any popup message will be displayed </td></tr>
     <tr><td class="paramname">tableWidget</td><td>: table widget that will contain the csv data </td></tr>
-    <tr><td class="paramname">inputDataPath</td><td>: input directory containing the csv data </td></tr>
+    <tr><td class="paramname">filename</td><td>: import species filename </td></tr>
+    <tr><td class="paramname">numRows</td><td>: number of rows in gui table </td></tr>
+    <tr><td class="paramname">numCols</td><td>: number of columns in gui table </td></tr>
     <tr><td class="paramname">guildValues</td><td>: QStringList containing all of the guilds </td></tr>
+    <tr><td class="paramname">columnsToLoad</td><td>: column numbers to load (there are sometimes more columns in the file than need to be loaded into the particular gui) </td></tr>
     <tr><td class="paramname">errorMsg</td><td>: passes back any error message </td></tr>
   </table>
   </dd>
