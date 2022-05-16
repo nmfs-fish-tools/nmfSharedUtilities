@@ -150,6 +150,8 @@ namespace nmfConstantsMSSPM
      const bool   PreEstimation        = true;
      const bool   ShowLegend           = true;
      const bool   DontShowLegend       = false;
+     const bool   ClearModelName       = true;
+     const bool   DontClearModelName   = false;
      const QString ChartType2d         = "2d";
      const QString ChartType3d         = "3d";
      const bool   MultiplyTableByCatchability      = true;

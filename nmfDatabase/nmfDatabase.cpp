@@ -1128,9 +1128,9 @@ nmfDatabase::getRunLengthAndStartYear(
     dataMap   = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["RunLength"].size();
     if (NumRecords == 0){
-        logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::getRunLengthAndStartYear: No records found in table " +
+        logger->logMsg(nmfConstants::Warning,"[Warning] nmfDatabase::getRunLengthAndStartYear: No records found in table " +
                        nmfConstantsMSSPM::TableModels);
-        logger->logMsg(nmfConstants::Error,queryStr);
+        logger->logMsg(nmfConstants::Warning,queryStr);
         return false;
     }
     RunLength = std::stoi(dataMap["RunLength"][0]);
@@ -3104,7 +3104,7 @@ nmfDatabase::loadEstimatedVectorParameters(
     dataMap    = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["ModelName"].size();
     if (NumRecords == 0) {
-        logger->logMsg(nmfConstants::Error,"[Error 1] nmfDatabase::callback_UpdateDiagnosticParameterChoices: No records found in table Models for ModelName = "+ModelName);
+        logger->logMsg(nmfConstants::Warning,"[Warning] nmfDatabase::callback_UpdateDiagnosticParameterChoices: No records found in table Models for ModelName = "+ModelName);
         return;
     }
 
