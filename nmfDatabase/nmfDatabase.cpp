@@ -1302,10 +1302,10 @@ nmfDatabase::importDatabase(QWidget*     widget,
                             nmfLogger*   logger,
                             std::string& ProjectDir,
                             std::string& Username,
-                            std::string& Password)
+                            std::string& Password,
+                            const QString& DefaultFilename)
 {
     QMessageBox::StandardButton reply;
-    QString databaseDir;
     QString msg;
     QString cmd;
     QString existingDatabase;
@@ -1313,27 +1313,30 @@ nmfDatabase::importDatabase(QWidget*     widget,
     QProcess process;
     QStringList args;
     std::string errorMsg="";
+    QString databaseDir = QDir(ProjectDir.c_str()).filePath("databases");
+    QString fileDatabaseName = DefaultFilename; // filename without path
+    QString InputFileName = QDir(databaseDir).filePath(fileDatabaseName); // filename with path
 
-    databaseDir = QDir(ProjectDir.c_str()).filePath("databases");
     if (! QDir(databaseDir).exists()) {
         databaseDir = QString::fromStdString(ProjectDir);
     }
 
-    QString InputFileName = QFileDialog::getOpenFileName(widget,
-        "Import Database",
-        databaseDir.toLatin1(),
-        "*.sql");
-    QString fileDatabaseName = QFileInfo(InputFileName).baseName();
-    if (fileDatabaseName.isEmpty() || fileDatabaseName.contains(" ")) {
-        msg  = "Error: nmfDatabase::importDatabase: Illegal filename found (" + fileDatabaseName + "). ";
-        msg += "Filename may not contain spaces.";
-        logger->logMsg(nmfConstants::Error,msg.toStdString());
-        return "";
+    if (DefaultFilename.isEmpty()) {
+        InputFileName = QFileDialog::getOpenFileName(
+                    widget, "Import Database", databaseDir.toLatin1(), "*.sql");
+        fileDatabaseName = QFileInfo(InputFileName).baseName();
+        if (fileDatabaseName.isEmpty() || fileDatabaseName.contains(" ")) {
+            msg  = "Error: nmfDatabase::importDatabase: Illegal filename found (" + fileDatabaseName + "). ";
+            msg += "Filename may not contain spaces.";
+            logger->logMsg(nmfConstants::Error,msg.toStdString());
+            return "";
+        }
+    } else {
+        fileDatabaseName = QFileInfo(InputFileName).baseName();
     }
 
     // Does database already exist?
     bool databaseAlreadyExists = databaseExists(fileDatabaseName.toStdString());
-    //QApplication::flush();
     QApplication::processEvents();
 
     // If database exists, ask user if they want it overwritten.
@@ -1364,8 +1367,8 @@ nmfDatabase::importDatabase(QWidget*     widget,
             logger->logMsg(nmfConstants::Error,"Error: nmfDatabase::importDatabase: "+errorMsg);
             return "";
         }
-
     }
+
 
     // Hiro -update logic for Mac OS
     if (nmfUtils::isOSWindows())
@@ -1390,13 +1393,8 @@ nmfDatabase::importDatabase(QWidget*     widget,
                                  "\nThis may take a minute or two. Please be patient.\n");
 
         QApplication::setOverrideCursor(Qt::WaitCursor);
-
-        // Execute import batch file
         QProcess::execute(importBatchFile.c_str(),nullArgs);
-
-        // Remove import batch file
         std::remove(importBatchFile.c_str());
-
         QApplication::restoreOverrideCursor();
     } else {
         // This seems to work for Linux.
@@ -1412,66 +1410,63 @@ nmfDatabase::importDatabase(QWidget*     widget,
         }
         QApplication::restoreOverrideCursor();
     }
+
+
     return fileDatabaseName;
 }
 
 
 void
-nmfDatabase::exportDatabase(QWidget*     widget,
-                            std::string& ProjectDir,
-                            std::string& Username,
-                            std::string& Password,
-                            std::string& ProjectDatabase)
+nmfDatabase::exportDatabase(QWidget*       widget,
+                            std::string&   ProjectDir,
+                            std::string&   Username,
+                            std::string&   Password,
+                            std::string&   ProjectDatabase,
+                            const QString& DefaultOutputFileName)
 {
     QString msg;
     QStringList args;
     QMessageBox::StandardButton reply;
-    bool okToWrite = false;
+    bool okToWrite = true;
 
     // Get the databases full path. Create it if it doesn't yet exist.
     QString databaseDir = QDir(ProjectDir.c_str()).filePath("databases");
-
     if (! QDir(databaseDir).exists()) {
         QDir().mkpath(databaseDir);
     }
 
-    // Show file dialog and have user enter in the output .sql file name.
-    QString selFilter = "Database Files (*.sql)";
-    QString filePath = databaseDir.append(QString::fromStdString("/" + ProjectDatabase));
-    QString OutputFileName = QFileDialog::getSaveFileName(widget,
-        "Export Database",
-        filePath.toLatin1(),
-        "*.sql",
-        &selFilter,
-        QFileDialog::DontConfirmOverwrite);
-    if (OutputFileName.isEmpty())
-        return;
-    //QApplication::flush();
-    QApplication::processEvents();
+    QString OutputFileName = QDir(databaseDir).filePath(DefaultOutputFileName);
 
-    // Check for correct file extension and add one if it's not there or is incorrect.
-    QFileInfo fi(OutputFileName);
-    if (fi.suffix().isEmpty() || (fi.suffix() != "sql"))
-        OutputFileName += ".sql";
+    // If there's no default filename then just query the user for a filename
+    if (DefaultOutputFileName.isEmpty()) {
+        // Show file dialog and have user enter in the output .sql file name.
+        QString selFilter = "Database Files (*.sql)";
+        OutputFileName = QFileDialog::getSaveFileName(widget, "Export Database",
+                                                      databaseDir.toLatin1(), "*.sql",
+                                                      &selFilter, QFileDialog::DontConfirmOverwrite);
+        if (OutputFileName.isEmpty()) {
+            return;
+        }
+        QApplication::processEvents();
 
-    // If the file already exists, check with user if they want to overwrite it.
-    if (QFileInfo(OutputFileName).exists()) {
-        msg = "\nFile exists: " + OutputFileName + "\n\nOK to Overwrite?";
-        reply = QMessageBox::question(widget,
-                                      "File Exists",
-                                      msg.toLatin1(),
-                                      QMessageBox::No|QMessageBox::Yes,
-                                      QMessageBox::Yes);
-        okToWrite = (reply == QMessageBox::Yes);
-    } else {
-        okToWrite = true;
+        // Check for correct file extension and add one if it's not there or is incorrect.
+        QFileInfo fi(OutputFileName);
+        if (fi.suffix().isEmpty() || (fi.suffix() != "sql")) {
+            OutputFileName += ".sql";
+        }
+
+        // If the file already exists, check with user if they want to overwrite it.
+        if (QFileInfo(OutputFileName).exists()) {
+            msg = "\nFile exists: " + OutputFileName + "\n\nOK to Overwrite?";
+            reply = QMessageBox::question(widget, "File Exists", msg.toLatin1(),
+                                          QMessageBox::No|QMessageBox::Yes, QMessageBox::Yes);
+            okToWrite = (reply == QMessageBox::Yes);
+        }
     }
 
     // Done with all checks so go ahead with the mysqldump.
     if (okToWrite) {
-
         QApplication::setOverrideCursor(Qt::WaitCursor);
-
         QProcess dumpProcess;
         QStringList args;
         args << "-u" + QString::fromStdString(Username)
@@ -1482,13 +1477,13 @@ nmfDatabase::exportDatabase(QWidget*     widget,
         if (! dumpProcess.waitForFinished(-1)) { // -1 so it won't timeout
             dumpProcess.kill();
         }
-
         QApplication::restoreOverrideCursor();
-
     }
 
     QMessageBox::information(widget, "Export Database",
-                             QString::fromStdString("\nDatabase " + ProjectDatabase + " has been successfully exported.\n"));
+                             QString::fromStdString("\nDatabase " + ProjectDatabase +
+                                                    " has been successfully exported to:\n\n") +
+                                                    OutputFileName + "\n");
 }
 
 bool

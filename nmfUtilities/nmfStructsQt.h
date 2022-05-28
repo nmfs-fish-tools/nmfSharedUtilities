@@ -183,6 +183,7 @@ struct ModelReviewStruct {
     QString EstimationAlgorithm;
     QString MinimizerAlgorithm;
     QString ScalingAlgorithm;
+    QString DatabaseSnapshot;
     QString setToDeterministicBees;
     int     maxGenerations;
     int     numBees;

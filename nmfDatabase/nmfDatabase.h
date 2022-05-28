@@ -177,12 +177,14 @@ public:
      * @param Username : current user name
      * @param Password : current password
      * @param ProjectDatabase : name of the database to export
+     * @param DefaultOutputFileName : name of the default file to use to save exported database
      */
-    void exportDatabase(QWidget*     widget,
-                        std::string& ProjectDir,
-                        std::string& Username,
-                        std::string& Password,
-                        std::string& ProjectDatabase);
+    void exportDatabase(QWidget*       widget,
+                        std::string&   ProjectDir,
+                        std::string&   Username,
+                        std::string&   Password,
+                        std::string&   ProjectDatabase,
+                        const QString& DefaultOutputFileName);
     /**
      * @brief Gets the identifying information for the current estimation algorithm selected
      * @param widget : widget over which to show any popups
@@ -844,13 +846,15 @@ public:
      * @param ProjectDir : project directory in which to look for the databases subdirectory from which to do the import
      * @param Username : username (needed to run the import command)
      * @param Password : password (needed to run the import command)
+     * @param DefaultFilename : default file to import; if blank, query user for file
      * @return Complete filename (including path) of the .sql database file loaded
      */
     QString importDatabase(QWidget*     widget,
                            nmfLogger*   logger,
                            std::string& ProjectDir,
                            std::string& Username,
-                           std::string& Password);
+                           std::string& Password,
+                           const QString& DefaultFilename);
     /**
      * @brief Determines if the currently loaded model is set to relative biomass; useful
      * for determining usage of Survey Q

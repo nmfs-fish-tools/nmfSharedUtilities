@@ -108,9 +108,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acea4471e976019a0f66291ce4ac146dc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#acea4471e976019a0f66291ce4ac146dc">databaseExists</a> (std::string dbName)</td></tr>
 <tr class="memdesc:acea4471e976019a0f66291ce4ac146dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if passed database exists.  <a href="classnmf_database.html#acea4471e976019a0f66291ce4ac146dc">More...</a><br /></td></tr>
 <tr class="separator:acea4471e976019a0f66291ce4ac146dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f416af659d65b0fc07262dc84ff0723"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a3f416af659d65b0fc07262dc84ff0723">exportDatabase</a> (QWidget *widget, std::string &amp;ProjectDir, std::string &amp;Username, std::string &amp;Password, std::string &amp;ProjectDatabase)</td></tr>
-<tr class="memdesc:a3f416af659d65b0fc07262dc84ff0723"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports the passed database to a .sql output file.  <a href="classnmf_database.html#a3f416af659d65b0fc07262dc84ff0723">More...</a><br /></td></tr>
-<tr class="separator:a3f416af659d65b0fc07262dc84ff0723"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a005b3dba029d281bbedbf50a7ec4f81d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a005b3dba029d281bbedbf50a7ec4f81d">exportDatabase</a> (QWidget *widget, std::string &amp;ProjectDir, std::string &amp;Username, std::string &amp;Password, std::string &amp;ProjectDatabase, const QString &amp;DefaultOutputFileName)</td></tr>
+<tr class="memdesc:a005b3dba029d281bbedbf50a7ec4f81d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports the passed database to a .sql output file.  <a href="classnmf_database.html#a005b3dba029d281bbedbf50a7ec4f81d">More...</a><br /></td></tr>
+<tr class="separator:a005b3dba029d281bbedbf50a7ec4f81d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a454b5b43c3ac708aa1a712e17b645674"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a454b5b43c3ac708aa1a712e17b645674">getAlgorithmIdentifiers</a> (QWidget *widget, <a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, std::string &amp;Algorithm, std::string &amp;Minimizer, std::string &amp;ObjectiveCriterion, std::string &amp;Scaling, std::string &amp;CompetitionForm, const bool &amp;showPopupError)</td></tr>
 <tr class="memdesc:a454b5b43c3ac708aa1a712e17b645674"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the identifying information for the current estimation algorithm selected.  <a href="classnmf_database.html#a454b5b43c3ac708aa1a712e17b645674">More...</a><br /></td></tr>
 <tr class="separator:a454b5b43c3ac708aa1a712e17b645674"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -219,9 +219,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab6ee39b669023cc534c9265d2be7c3be"><td class="memItemLeft" align="right" valign="top">QStringList&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#ab6ee39b669023cc534c9265d2be7c3be">getVectorParameterNames</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;ProjectName, const std::string &amp;ModelName)</td></tr>
 <tr class="memdesc:ab6ee39b669023cc534c9265d2be7c3be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns list of current estimated parameter names.  <a href="classnmf_database.html#ab6ee39b669023cc534c9265d2be7c3be">More...</a><br /></td></tr>
 <tr class="separator:ab6ee39b669023cc534c9265d2be7c3be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa82f3cede3d12c690bbe700458ab520"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#afa82f3cede3d12c690bbe700458ab520">importDatabase</a> (QWidget *widget, <a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, std::string &amp;ProjectDir, std::string &amp;Username, std::string &amp;Password)</td></tr>
-<tr class="memdesc:afa82f3cede3d12c690bbe700458ab520"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queries user and imports a .sql database from disk.  <a href="classnmf_database.html#afa82f3cede3d12c690bbe700458ab520">More...</a><br /></td></tr>
-<tr class="separator:afa82f3cede3d12c690bbe700458ab520"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88f115dc2dc0c93dfd48dec9727656b6"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a88f115dc2dc0c93dfd48dec9727656b6">importDatabase</a> (QWidget *widget, <a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, std::string &amp;ProjectDir, std::string &amp;Username, std::string &amp;Password, const QString &amp;DefaultFilename)</td></tr>
+<tr class="memdesc:a88f115dc2dc0c93dfd48dec9727656b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queries user and imports a .sql database from disk.  <a href="classnmf_database.html#a88f115dc2dc0c93dfd48dec9727656b6">More...</a><br /></td></tr>
+<tr class="separator:a88f115dc2dc0c93dfd48dec9727656b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57c9e3be4a1f56819dbce7a06b31be0e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a57c9e3be4a1f56819dbce7a06b31be0e">isARelativeBiomassModel</a> (const std::string &amp;projectName, const std::string &amp;modelName)</td></tr>
 <tr class="memdesc:a57c9e3be4a1f56819dbce7a06b31be0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if the currently loaded model is set to relative biomass; useful for determining usage of Survey Q.  <a href="classnmf_database.html#a57c9e3be4a1f56819dbce7a06b31be0e">More...</a><br /></td></tr>
 <tr class="separator:a57c9e3be4a1f56819dbce7a06b31be0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -806,8 +806,8 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
 
 </div>
 </div>
-<a id="a3f416af659d65b0fc07262dc84ff0723"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f416af659d65b0fc07262dc84ff0723">&#9670;&nbsp;</a></span>exportDatabase()</h2>
+<a id="a005b3dba029d281bbedbf50a7ec4f81d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a005b3dba029d281bbedbf50a7ec4f81d">&#9670;&nbsp;</a></span>exportDatabase()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -840,7 +840,13 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::string &amp;&#160;</td>
-          <td class="paramname"><em>ProjectDatabase</em>&#160;</td>
+          <td class="paramname"><em>ProjectDatabase</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>DefaultOutputFileName</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -858,6 +864,7 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
     <tr><td class="paramname">Username</td><td>: current user name </td></tr>
     <tr><td class="paramname">Password</td><td>: current password </td></tr>
     <tr><td class="paramname">ProjectDatabase</td><td>: name of the database to export </td></tr>
+    <tr><td class="paramname">DefaultOutputFileName</td><td>: name of the default file to use to save exported database </td></tr>
   </table>
   </dd>
 </dl>
@@ -3420,8 +3427,8 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
 
 </div>
 </div>
-<a id="afa82f3cede3d12c690bbe700458ab520"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa82f3cede3d12c690bbe700458ab520">&#9670;&nbsp;</a></span>importDatabase()</h2>
+<a id="a88f115dc2dc0c93dfd48dec9727656b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88f115dc2dc0c93dfd48dec9727656b6">&#9670;&nbsp;</a></span>importDatabase()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3454,7 +3461,13 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::string &amp;&#160;</td>
-          <td class="paramname"><em>Password</em>&#160;</td>
+          <td class="paramname"><em>Password</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>DefaultFilename</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -3472,6 +3485,7 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
     <tr><td class="paramname">ProjectDir</td><td>: project directory in which to look for the databases subdirectory from which to do the import </td></tr>
     <tr><td class="paramname">Username</td><td>: username (needed to run the import command) </td></tr>
     <tr><td class="paramname">Password</td><td>: password (needed to run the import command) </td></tr>
+    <tr><td class="paramname">DefaultFilename</td><td>: default file to import; if blank, query user for file </td></tr>
   </table>
   </dd>
 </dl>

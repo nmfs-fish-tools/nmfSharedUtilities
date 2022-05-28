@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['importdatabase_217',['importDatabase',['../classnmf_database.html#afa82f3cede3d12c690bbe700458ab520',1,'nmfDatabase']]],
+  ['importdatabase_217',['importDatabase',['../classnmf_database.html#a88f115dc2dc0c93dfd48dec9727656b6',1,'nmfDatabase']]],
   ['initialize_218',['initialize',['../namespacenmf_utils.html#a75302c31afddcd4fe8167857a3e0e62d',1,'nmfUtils::initialize(T &amp;multi_array)'],['../namespacenmf_utils.html#aa712b70e9b45497184acec71b3f46904',1,'nmfUtils::initialize(T &amp;vec, int const &amp;numElements)'],['../namespacenmf_utils.html#a1926245c0ac116d7d2c4fff2c3f7af24',1,'nmfUtils::initialize(T &amp;matrix, int const &amp;nrows, int const &amp;ncols)']]],
   ['initlogger_219',['initLogger',['../classnmf_logger.html#a438524867cec8b85112ffe98c4676040',1,'nmfLogger']]],
   ['invertmatrix_220',['invertMatrix',['../namespacenmf_utils.html#a5488fed14ff3859959b99b1fd0f252b3',1,'nmfUtils']]],
