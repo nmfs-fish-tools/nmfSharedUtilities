@@ -84,7 +84,9 @@ namespace nmfConstantsMSSPM
      const int    Model_Review_Column_rSquared     =  1;
      const int    Model_Review_Column_SSResiduals  =  2;
      const int    Model_Review_Column_AIC          =  3;
+     const int    Model_Review_Column_DB_Snapshot  = 13;
      const int    Model_Review_Column_Last_Visible = 14;
+     const int    Model_Review_Column_Estimated_Parameters = 62;
      const bool   Query_User_For_Filename      = true;
      const bool   Dont_Query_User_For_Filename = false;
 //   const double epsilon              = 0.0; // 0.001;
