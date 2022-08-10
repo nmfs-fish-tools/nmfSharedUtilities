@@ -422,16 +422,17 @@ bool allCellsArePopulated(QTabWidget *tabWidget,
                                           QMessageBox::Ok);
                 }
                 return false;
-            } else if (value.contains(',')) {
-                if (showError) {
-                    msg = "Found an invalid numeric value of: " + value;
-                    msg += ". No commas or special characters allowed.";
-                    QMessageBox::warning(tabWidget, QT_TR_NOOP("Warning"),
-                                         QT_TR_NOOP("\n"+msg+"\n"),
-                                         QMessageBox::Ok);
-                }
-                return false;
             }
+//            else if (value.contains(',')) {
+//                if (showError) {
+//                    msg = "Found an invalid numeric value of: " + value;
+//                    msg += ". No commas or special characters allowed.";
+//                    QMessageBox::warning(tabWidget, QT_TR_NOOP("Warning"),
+//                                         QT_TR_NOOP("\n"+msg+"\n"),
+//                                         QMessageBox::Ok);
+//                }
+//                return false;
+//            }
         } // end for j
     } // end for i
 

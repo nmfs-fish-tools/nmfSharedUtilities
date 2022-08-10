@@ -1774,7 +1774,6 @@ nmfDatabase::getTimeSeriesDataByGuild(
 //  bool isChartBiomass      = (OutputChartType == nmfConstantsMSSPM::OutputChartBiomass);
     bool isChartHarvest      = (OutputChartType == nmfConstantsMSSPM::OutputChartHarvest);
     bool isChartExploitation = (OutputChartType == nmfConstantsMSSPM::OutputChartExploitation);
-//std::cout << "TableName: " << TableName << std::endl;
 
     boost::numeric::ublas::matrix<double> DenominatorData;
 
