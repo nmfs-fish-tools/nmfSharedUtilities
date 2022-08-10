@@ -58,10 +58,14 @@ namespace nmfConstantsMSSPM
      const int    Column_Supp_Guild_GrowthRate       =  1;
      const int    Column_Supp_Guild_CarryingCapacity =  4;
 
-     const int    Column_Supp_Species_Name             =  0;
-     const int    Column_Supp_Species_InitBiomass      =  1;
-     const int    Column_Supp_Species_GrowthRate       =  4;
-     const int    Column_Supp_Species_CarryingCapacity =  8;
+     const int    Column_Supp_Species_Name                =   0;
+     const int    Column_Supp_Species_InitBiomass         =   1;
+     const int    Column_Supp_Species_GrowthRate          =   4;
+     const int    Column_Supp_Species_CarryingCapacity    =   8;
+     const int    Column_Supp_Species_CarryingCapacityMin =   9;
+     const int    Column_Supp_Species_SurveyQ             =  12;
+     const int    Column_Supp_Species_SurveyQMin          =  13;
+     const int    Column_Supp_Species_SurveyQMax          =  14;
 
      const int    Column_SpeId          =  0;
      const int    Column_SpeName        =  1;

@@ -115,7 +115,7 @@ namespace nmfConstants
     const double NoValueDouble   = -9999.0;
     const int    ProgressUpdateFrequency = 1000; // How often to update progress bar (milliseconds).
     const double MaxBiomass      = 1e12;
-    const double NearlyZero      = 0.000001;
+    const double NearlyZero      = 1e-14;
     const double RAD_to_DEG      = (180.0/M_PI);
     const double LBS_to_KG       = 0.45359237;
     const double LBS_to_MT       = 0.00045359237;
@@ -144,7 +144,8 @@ namespace nmfConstants
     const std::vector<std::string> LineColorNames = {"Blue","Orange","Black","Sky Blue","Gray","Red"};
 
     const std::string  ClearWindow = "";
-    const std::string  BlankLine = " ";
+    const std::string  BlankLine   = " ";
+    const std::string  NoData      = "na";
 
     const std::vector<std::string> SurfaceThemes = {
             "Qt",

@@ -965,8 +965,12 @@ double calculateMaximumLikelihoodNoRescale(
     int numSpecies = ObsBiomass.size2();
 
     for (int species=0; species<numSpecies; ++species) {
-        biomassWeight = FitWeights(species,0);
-        catchWeight   = FitWeights(species,1);
+        biomassWeight = 1.0;
+        catchWeight   = 0.0;
+        if (isEffortFitToCatch) {
+            biomassWeight = FitWeights(species,0);
+            catchWeight   = FitWeights(species,1);
+        }
 
         mleBiomass = calculateMaximumLikelihoodNoRescale(species,ObsBiomass,EstBiomass);
         mleCatch   = (isEffortFitToCatch) ? calculateMaximumLikelihoodNoRescale(species,ObsCatch,EstCatch) : 0;

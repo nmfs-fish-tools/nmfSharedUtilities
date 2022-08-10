@@ -1652,7 +1652,8 @@ loadTableWidgetData(QTabWidget* parentTabWidget,
 
 bool
 loadGuildsSpeciesTableview(QTabWidget* parentTabWidget,
-                           QTableView* tableView,
+                           //QTableView* tableView,
+                           QStandardItemModel* smodel,
                            const QString& type,
                            const QString& inputDataPath,
                            const QString& inputFilename,
@@ -1669,7 +1670,7 @@ loadGuildsSpeciesTableview(QTabWidget* parentTabWidget,
     QStringList dataParts;
     QStringList ColumnLabelList  = {};
     QStandardItem* item;
-    QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(tableView->model());
+    //QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(tableView->model());
     errorMsg.clear();
     SpeciesGuilds.clear();
     QLocale locale(QLocale::English);
@@ -1723,8 +1724,8 @@ loadGuildsSpeciesTableview(QTabWidget* parentTabWidget,
                     }
                 }
                 smodel->setHorizontalHeaderLabels(ColumnLabelList);
-                tableView->setModel(smodel);
-                tableView->resizeColumnsToContents();
+                //tableView->setModel(smodel);
+                //tableView->resizeColumnsToContents();
             } else {
                 errorMsg = "Error: table size from .csv file (" +
                         QString::number(numLines) + "x" + QString::number(numColumns) +
@@ -1949,7 +1950,9 @@ loadTimeSeries(QTabWidget* parentTabWidget,
                     dataParts = lineList[i].split(',');
                     VerticalList << " " + dataParts[0] + " ";
                     for (int j=1; j<dataParts.count(); ++j) {
-                        if (allowBlanks && dataParts[j].trimmed().isEmpty()) {
+                        if (allowBlanks &&
+                                (dataParts[j].trimmed().isEmpty() ||
+                                 dataParts[j].trimmed().toLower() == QString::fromStdString(nmfConstants::NoData))) {
                             item = new QStandardItem("");
                         } else {
                             value = dataParts[j].toDouble();

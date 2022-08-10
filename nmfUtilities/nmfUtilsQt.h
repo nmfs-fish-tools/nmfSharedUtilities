@@ -575,7 +575,8 @@ namespace nmfUtilsQt {
     /**
      * @brief Load a non time series .csv file into a QTableView
      * @param parentTabWidget : parent tab containing the QTableView object
-     * @param tableView : QTableView that will contain the .csv data
+     * @param smodel: the QTableView model that will contains the .csv data
+//   * @param tableView : QTableView that will contain the .csv data
      * @param type : type of tableview (i.e., "Guild" or "Species")
      * @param inputDataPath : default path for the input .csv file
      * @param inputFilename : CSV filename if default is not desired
@@ -585,7 +586,8 @@ namespace nmfUtilsQt {
      * @return : Boolean signifying a successful load (true) or an unsuccessful load (false)
      */
     bool loadGuildsSpeciesTableview(QTabWidget* parentTabWidget,
-                                    QTableView* tableView,
+                                    //QTableView* tableView,
+                                    QStandardItemModel* smodel,
                                     const QString& type,
                                     const QString& inputDataPath,
                                     const QString& inputFilename,
