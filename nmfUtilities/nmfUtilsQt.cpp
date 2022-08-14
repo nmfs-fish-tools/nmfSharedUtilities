@@ -2865,6 +2865,12 @@ runAllTableChecks(nmfLogger*  logger,
 {
     QString badCell = "";
 
+    if ((tableviewCompare->model()->rowCount()    == 0) ||
+        (minTableviewCompare->model()->rowCount() == 0) ||
+        (maxTableviewCompare->model()->rowCount() == 0)) {
+        return true;
+    }
+
     // 1. Check alpha tables for blanks
     if (! areAllCellsNonBlank(tableview)    ||
         ! areAllCellsNonBlank(minTableview) ||
