@@ -902,10 +902,10 @@ std::cout << "Found a bee" << std::endl;
         return theBestBee;
     }
     for (int i=0; i<numTotalBees; ++i) {
-std::cout << "Creating bee: " << i << std::endl;
+//std::cout << "Creating bee: " << i << std::endl;
         totalBeePopulation.emplace_back(createRandomBee(false,errorMsg));
     }
-std::cout << "Found initial bees." << std::endl;
+std::cout << "Created " << numTotalBees << " initial bees." << std::endl;
 
     while (! done) {
 

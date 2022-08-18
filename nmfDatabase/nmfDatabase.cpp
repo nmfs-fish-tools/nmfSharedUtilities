@@ -1369,6 +1369,16 @@ nmfDatabase::importDatabase(QWidget*     widget,
         }
     }
 
+//    // RSK - tried this straightforward logic...but it didn't work
+//    cmd = "SOURCE \"" + InputFileName + "\";";
+//    //cmd.replace("/","\\\\");
+//    QApplication::setOverrideCursor(Qt::WaitCursor);
+//    errorMsg = nmfUpdateDatabase(cmd.toStdString());
+//    QApplication::restoreOverrideCursor();
+//    if (nmfUtilsQt::isAnError(errorMsg)) {
+//        logger->logMsg(nmfConstants::Error,"Error: nmfDatabase::importDatabase: "+errorMsg);
+//        return "";
+//    }
 
     // Hiro -update logic for Mac OS
     if (nmfUtils::isOSWindows())
