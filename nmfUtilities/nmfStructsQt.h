@@ -258,6 +258,8 @@ struct ModelDataStruct {
     int    NLoptStopAfterTime;
     int    NLoptStopAfterIter;
     int    NLoptNumberOfRuns;
+    int    NLoptUseInitialPopulationSize;
+    double NLoptInitialPopulationSize;
 
     int    NumMohnsRhoMultiRuns;
 

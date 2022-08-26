@@ -1277,7 +1277,7 @@ removeCommas(QTableView* tableView)
             valueStr = index.data().toString();
             if (! valueStr.isEmpty()) {
                 valueWithoutComma = valueStr.remove(",").toDouble();
-                item = new QStandardItem(QString::number(valueWithoutComma));
+                item = new QStandardItem(QString::number(valueWithoutComma,'g',10)); // RSK replace this with precision value in preferences. Different precision for different data?
                 item->setTextAlignment(Qt::AlignCenter);
                 smodel->setItem(row,col,item);
             }
@@ -1964,7 +1964,7 @@ loadTimeSeries(QTabWidget* parentTabWidget,
                                 valueWithComma = locale.toString(value,'g');
                                 item = new QStandardItem(valueWithComma);
                             } else {
-                                valueWithComma = locale.toString(value,'f',6);
+                                valueWithComma = locale.toString(value,'f',8);
                                 item = new QStandardItem(valueWithComma);
                             }
                             item->setTextAlignment(Qt::AlignCenter);

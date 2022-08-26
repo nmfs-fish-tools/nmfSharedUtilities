@@ -76,7 +76,8 @@ nmfGrowthForm::loadParameterRanges(
     m_NumSpecies = (int)dataStruct.SpeciesNames.size();
 
     if (m_NumSpecies != (int)dataStruct.GrowthRateMin.size()) {
-        std::cout << "Error nmfGrowthForm::loadParameterRanges: GrowthRateMin size is not the same as NumSpecies" << std::endl;
+        std::cout << "Error nmfGrowthForm::loadParameterRanges: GrowthRateMin size (" + std::to_string(dataStruct.GrowthRateMin.size()) +
+                     ") is not the same as NumSpecies (" + std::to_string(m_NumSpecies) + ")" << std::endl;
         return;
     }
     if (m_NumSpecies != (int)dataStruct.CarryingCapacityMin.size()) {
