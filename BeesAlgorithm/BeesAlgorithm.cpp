@@ -781,6 +781,7 @@ BeesAlgorithm::createRandomBee(bool doWhileLoop, std::string& errorMsg)
     QDateTime endTime;
     std::vector<double> NullParameters = {};
     std::vector<double> parameters(m_BeeStruct.TotalNumberParameters,0.0);
+    double randomValue;
 
 //std::cout << "--> Num Parameters: " << m_BeeStruct.TotalNumberParameters << std::endl;
     while (! foundAPotentialBee) {
@@ -788,8 +789,9 @@ BeesAlgorithm::createRandomBee(bool doWhileLoop, std::string& errorMsg)
             minVal = m_ParameterRanges[i].first;
             maxVal = m_ParameterRanges[i].second;
 //std::cout << "--> range: " << i << "  [" << minVal << "," << maxVal << "] ";
+            randomValue = nmfUtils::getRandomNumber(m_Seed,0.0,1.0);
             parameters[i] = (maxVal == minVal) ? minVal :
-                             minVal+(maxVal-minVal)*(nmfUtils::getRandomNumber(m_Seed,0.0,1.0));
+                             minVal+(maxVal-minVal)*randomValue;
             checkAndIncrementSeed();
 //std::cout << "--> " << parameters[i] << std::endl;
         }
@@ -908,7 +910,6 @@ std::cout << "Found a bee" << std::endl;
 std::cout << "Created " << numTotalBees << " initial bees." << std::endl;
 
     while (! done) {
-
         std::sort(totalBeePopulation.begin(),
                   totalBeePopulation.end(),
                   beesCompareLT());
@@ -928,7 +929,6 @@ std::cout << "Created " << numTotalBees << " initial bees." << std::endl;
         for (int i=0; i<numBestSites; ++i) {
             bestSites.emplace_back(std::move(totalBeePopulation[i]));
         }
-
 
         // For each best bee, calculate the neighborhood size in terms of bees,
         // find those bees in each neighborhood and add only the best one to next_gen

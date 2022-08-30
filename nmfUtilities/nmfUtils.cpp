@@ -304,10 +304,10 @@ double getRandomNumber(int seedValue, double lowerLimit, double upperLimit)
     double span = upperLimit - lowerLimit;
 
     if (seedValue < 0) { // stochastic
-        retv = span*QRandomGenerator::global()->generateDouble() - 0.5*span;
+        retv = span*QRandomGenerator::global()->generateDouble() + lowerLimit; // - 0.5*span;
     } else {             // deterministic
         QRandomGenerator randomGenerator(seedValue);
-        retv = span*randomGenerator.generateDouble() - 0.5*span;
+        retv = span*randomGenerator.generateDouble() + lowerLimit; // - 0.5*span;
     }
 
     return retv;
