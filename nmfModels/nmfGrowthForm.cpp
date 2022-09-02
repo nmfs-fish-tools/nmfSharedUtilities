@@ -63,6 +63,7 @@ nmfGrowthForm::setAggProd(bool isAggProd)
 
 void
 nmfGrowthForm::loadParameterRanges(
+        std::vector<double>& parameterInitialValues,
         std::vector<std::pair<double,double> >& parameterRanges,
         const nmfStructsQt::ModelDataStruct& dataStruct)
 {
@@ -96,6 +97,7 @@ nmfGrowthForm::loadParameterRanges(
         }
         parameterRanges.emplace_back(aPair);
         m_ParameterRanges.emplace_back(aPair);
+        parameterInitialValues.emplace_back(dataStruct.GrowthRate[species]);
     }
 
     // Always load growth rate covariate values
@@ -112,6 +114,7 @@ nmfGrowthForm::loadParameterRanges(
         }
         parameterRanges.emplace_back(aPair);
         m_ParameterRanges.emplace_back(aPair);
+        parameterInitialValues.emplace_back(covariateStruct.CoeffValue);
     }
 
     if (m_Type == "Logistic") {
@@ -126,6 +129,7 @@ nmfGrowthForm::loadParameterRanges(
             }
             parameterRanges.emplace_back(aPair);
             m_ParameterRanges.emplace_back(aPair);
+            parameterInitialValues.emplace_back(dataStruct.CarryingCapacity[species]);
         }
 
         // Load carrying capacity covariate coefficient values
@@ -142,6 +146,7 @@ nmfGrowthForm::loadParameterRanges(
             }
             parameterRanges.emplace_back(aPair);
             m_ParameterRanges.emplace_back(aPair);
+            parameterInitialValues.emplace_back(covariateStruct.CoeffValue);
         }
     }
 }

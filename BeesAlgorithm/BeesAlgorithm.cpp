@@ -254,6 +254,7 @@ BeesAlgorithm::printParameterRanges(const int& NumSpecies,
 
 void
 BeesAlgorithm::loadInitBiomassParameterRanges(
+        std::vector<double>& parameterInitialValues,
         std::vector<std::pair<double,double> >& parameterRanges,
         nmfStructsQt::ModelDataStruct& theBeeStruct)
 {
@@ -275,11 +276,13 @@ BeesAlgorithm::loadInitBiomassParameterRanges(
                                    theBeeStruct.InitBiomass[species]); //+nmfConstantsMSSPM::epsilon);
         }
         parameterRanges.emplace_back(aPair);
+        parameterInitialValues.emplace_back(theBeeStruct.InitBiomass[species]);
     }
 }
 
 void
 BeesAlgorithm::loadSurveyQParameterRanges(
+        std::vector<double>& parameterInitialValues,
         std::vector<std::pair<double,double> >& parameterRanges,
         nmfStructsQt::ModelDataStruct& theBeeStruct)
 {
@@ -288,6 +291,7 @@ BeesAlgorithm::loadSurveyQParameterRanges(
     std::string speciesName;
     std::map<std::string,nmfStructsQt::CovariateStruct> covariateCoeffMap;
     nmfStructsQt::CovariateStruct covariateStruct;
+    double initialValue;
 
     // If Survey Q is not estimated, hardcode 1.0's as min and max
     for (unsigned species=0; species<theBeeStruct.SurveyQMin.size(); ++species) {
@@ -295,9 +299,11 @@ BeesAlgorithm::loadSurveyQParameterRanges(
             aPair = std::make_pair(theBeeStruct.SurveyQMin[species],
                                    theBeeStruct.SurveyQMax[species]);
         } else {
-            aPair = std::make_pair(1.0,1.0);
+            initialValue = theBeeStruct.SurveyQ[species];
+            aPair = std::make_pair(initialValue,initialValue);
         }
         parameterRanges.emplace_back(aPair);
+        parameterInitialValues.emplace_back(theBeeStruct.SurveyQ[species]);
     }
 
     // Always load SurveyQ Covariate Coefficient values
@@ -309,9 +315,11 @@ BeesAlgorithm::loadSurveyQParameterRanges(
             aPair = std::make_pair(covariateStruct.CoeffMinValue,
                                    covariateStruct.CoeffMaxValue);
         } else {
-            aPair = std::make_pair(0.0,0.0);
+            initialValue = covariateStruct.CoeffValue;
+            aPair = std::make_pair(initialValue,initialValue);
         }
         parameterRanges.emplace_back(aPair);
+        parameterInitialValues.emplace_back(covariateStruct.CoeffValue);
     }
 }
 
@@ -326,15 +334,16 @@ BeesAlgorithm::initializeParameterRangesAndPatchSizes(nmfStructsQt::ModelDataStr
 {
 //std::cout << "BeesAlgorithm: initializeParameterRangesAndPatchSizes" << std::endl;
     std::vector<std::pair<double,double> > parameterRanges;
+    std::vector<double> parameterInitialValues;
 
     m_ParameterRanges.clear();
     m_PatchSizes.clear();
-    loadInitBiomassParameterRanges(        parameterRanges, theBeeStruct);
-    m_GrowthForm->loadParameterRanges(     parameterRanges, theBeeStruct);
-    m_HarvestForm->loadParameterRanges(    parameterRanges, theBeeStruct);
-    m_CompetitionForm->loadParameterRanges(parameterRanges, theBeeStruct);
-    m_PredationForm->loadParameterRanges(  parameterRanges, theBeeStruct);
-    loadSurveyQParameterRanges(            parameterRanges, theBeeStruct);
+    loadInitBiomassParameterRanges(        parameterInitialValues, parameterRanges, theBeeStruct);
+    m_GrowthForm->loadParameterRanges(     parameterInitialValues, parameterRanges, theBeeStruct);
+    m_HarvestForm->loadParameterRanges(    parameterInitialValues, parameterRanges, theBeeStruct);
+    m_CompetitionForm->loadParameterRanges(parameterInitialValues, parameterRanges, theBeeStruct);
+    m_PredationForm->loadParameterRanges(  parameterInitialValues, parameterRanges, theBeeStruct);
+    loadSurveyQParameterRanges(            parameterInitialValues, parameterRanges, theBeeStruct);
     m_ParameterRanges = parameterRanges;
 
     // Calculate the patch sizes for each parameter range
@@ -342,7 +351,9 @@ BeesAlgorithm::initializeParameterRangesAndPatchSizes(nmfStructsQt::ModelDataStr
         if (m_ParameterRanges[i].first == m_ParameterRanges[i].second) {
             m_PatchSizes.emplace_back(0);
         } else {
-            m_PatchSizes.emplace_back(m_PatchSizePct*(m_ParameterRanges[i].second-m_ParameterRanges[i].first));
+// RSK not sure about this logic
+//          m_PatchSizes.emplace_back(m_PatchSizePct*(m_ParameterRanges[i].second-m_ParameterRanges[i].first));
+            m_PatchSizes.emplace_back((m_ParameterRanges[i].second+m_ParameterRanges[i].first)/2.0);
         }
     }
 }

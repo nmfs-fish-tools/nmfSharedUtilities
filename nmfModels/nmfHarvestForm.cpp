@@ -115,6 +115,7 @@ nmfHarvestForm::extractParameters(
 
 void
 nmfHarvestForm::loadParameterRanges(
+        std::vector<double>& parameterInitialValues,
         std::vector<std::pair<double,double> >& parameterRanges,
         nmfStructsQt::ModelDataStruct& dataStruct)
 
@@ -148,6 +149,7 @@ nmfHarvestForm::loadParameterRanges(
             }
             parameterRanges.emplace_back(aPair);
             m_ParameterRanges.emplace_back(aPair);
+            parameterInitialValues.emplace_back(dataStruct.Catchability[species]);
         }
 
         // Load catchability covariate coefficient values
@@ -164,6 +166,7 @@ nmfHarvestForm::loadParameterRanges(
             }
             parameterRanges.emplace_back(aPair);
             m_ParameterRanges.emplace_back(aPair);
+            parameterInitialValues.emplace_back(covariateStruct.CoeffValue);
         }
     }
 }

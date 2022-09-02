@@ -105,9 +105,11 @@ private:
     bool isABetterFitness(double& bestFitnessInPopulation,
                           double& bestBeesFitness);
     void loadInitBiomassParameterRanges(
+            std::vector<double>& parameterInitialValues,
             std::vector<std::pair<double,double> >& parameterRanges,
             nmfStructsQt::ModelDataStruct& dataStruct);
     void loadSurveyQParameterRanges(
+            std::vector<double>& parameterInitialValues,
             std::vector<std::pair<double,double> >& parameterRanges,
             nmfStructsQt::ModelDataStruct& dataStruct);
     void printBee(double &fitness, std::vector<double> &parameters);

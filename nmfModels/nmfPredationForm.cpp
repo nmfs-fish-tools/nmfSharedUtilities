@@ -129,13 +129,14 @@ nmfPredationForm::extractExponentParameters(
 
 void
 nmfPredationForm::loadParameterRanges(
+        std::vector<double>& parameterInitialValues,
         std::vector<std::pair<double,double> >& parameterRanges,
         nmfStructsQt::ModelDataStruct& dataStruct)
 {
     bool isCheckedRho      = nmfUtils::isEstimateParameterChecked(dataStruct,"PredationRho");
     bool isCheckedHandling = nmfUtils::isEstimateParameterChecked(dataStruct,"Handling");
     bool isCheckedExponent = nmfUtils::isEstimateParameterChecked(dataStruct,"PredationExponent");
-    double min;
+    double initialValue;
     std::pair<double,double> aPair;
 
     if (m_Type == "Null")
@@ -152,15 +153,16 @@ nmfPredationForm::loadParameterRanges(
                 aPair = std::make_pair(dataStruct.PredationRhoMin[i][j],
                                        dataStruct.PredationRhoMax[i][j]);
             } else {
-                min   = dataStruct.PredationRhoMin[i][j];
-                aPair = std::make_pair(min,min);
+                initialValue = dataStruct.PredationRho[i][j];
+                aPair = std::make_pair(initialValue,initialValue);
             }
             parameterRanges.emplace_back(aPair);
             m_ParameterRanges.emplace_back(aPair);
+            parameterInitialValues.emplace_back(dataStruct.PredationRho[i][j]);
         }
     }
     m_NumParameters = dataStruct.PredationRhoMin.size() *
-                         dataStruct.PredationRhoMin[0].size();
+                      dataStruct.PredationRhoMin[0].size();
 
     if ((m_Type == "Type II") || (m_Type == "Type III")) {
         for (unsigned i=0; i<dataStruct.PredationHandlingMin.size(); ++i) {
@@ -169,15 +171,16 @@ nmfPredationForm::loadParameterRanges(
                     aPair = std::make_pair(dataStruct.PredationHandlingMin[i][j],
                                            dataStruct.PredationHandlingMax[i][j]);
                 } else {
-                    min   = dataStruct.PredationHandlingMin[i][j];
-                    aPair = std::make_pair(min,min);
+                    initialValue = dataStruct.PredationHandling[i][j];
+                    aPair = std::make_pair(initialValue,initialValue);
                 }
                 parameterRanges.emplace_back(aPair);
                 m_ParameterRanges.emplace_back(aPair);
+                parameterInitialValues.emplace_back(dataStruct.PredationHandling[i][j]);
             }
         }
         m_NumParameters += dataStruct.PredationHandlingMin.size() *
-                              dataStruct.PredationHandlingMin[0].size();
+                           dataStruct.PredationHandlingMin[0].size();
     }
 
     if (m_Type == "Type III") {
@@ -186,11 +189,12 @@ nmfPredationForm::loadParameterRanges(
                 aPair = std::make_pair(dataStruct.PredationExponentMin[i],
                                        dataStruct.PredationExponentMax[i]);
             } else {
-                min   = dataStruct.PredationExponentMin[i];
-                aPair = std::make_pair(min,min);
+                initialValue = dataStruct.PredationExponent[i];
+                aPair = std::make_pair(initialValue,initialValue);
             }
             parameterRanges.emplace_back(aPair);
             m_ParameterRanges.emplace_back(aPair);
+            parameterInitialValues.emplace_back(dataStruct.PredationExponent[i]);
         }
         m_NumParameters += dataStruct.PredationExponentMin.size();
     }

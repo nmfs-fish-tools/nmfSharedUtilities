@@ -196,10 +196,12 @@ public:
     std::string getType();
     /**
      * @brief Loads the parameter ranges structure with data from the model data structure
+     * @param ParameterInitialValues : parameter initial values (not necessarily mid-point of range)
      * @param ParameterRanges : parameter ranges
      * @param DataStruct : model data structure
      */
     void loadParameterRanges(
+            std::vector<double>& ParameterInitialValues,
             std::vector<std::pair<double,double> >& ParameterRanges,
             const nmfStructsQt::ModelDataStruct& DataStruct);
     /**

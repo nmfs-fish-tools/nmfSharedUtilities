@@ -229,12 +229,14 @@ public:
     std::string getKey();
     /**
      * @brief Loads the parameter ranges structure with data from the model data structure
+     * @param ParameterInitialValues : parameter initial values (not necessarily mid-range point)
      * @param ParameterRanges : parameter ranges
      * @param DataStruct : model data structure
      */
     void loadParameterRanges(
-                    std::vector<std::pair<double,double> >& ParameterRanges,
-                    nmfStructsQt::ModelDataStruct& DataStruct);
+            std::vector<double>& ParameterInitialValues,
+            std::vector<std::pair<double,double> >& ParameterRanges,
+            nmfStructsQt::ModelDataStruct& DataStruct);
     /**
      * @brief Updates the default harvest type to be used for forecasts to whatever
      * the current Forecast Harvest Type Button is set to

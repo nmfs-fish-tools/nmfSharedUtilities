@@ -326,18 +326,25 @@ struct ModelDataStruct {
     boost::numeric::ublas::vector<double> SurveyQMin;
     boost::numeric::ublas::vector<double> SurveyQMax;
 
+    std::vector<std::vector<double> >     Competition;
     std::vector<std::vector<double> >     CompetitionMin;
     std::vector<std::vector<double> >     CompetitionMax;
+    std::vector<std::vector<double> >     CompetitionBetaSpecies;
     std::vector<std::vector<double> >     CompetitionBetaSpeciesMin;
     std::vector<std::vector<double> >     CompetitionBetaSpeciesMax;
+    std::vector<std::vector<double> >     CompetitionBetaGuilds;
     std::vector<std::vector<double> >     CompetitionBetaGuildsMin;
     std::vector<std::vector<double> >     CompetitionBetaGuildsMax;
+    std::vector<std::vector<double> >     CompetitionBetaGuildsGuilds;
     std::vector<std::vector<double> >     CompetitionBetaGuildsGuildsMin;
     std::vector<std::vector<double> >     CompetitionBetaGuildsGuildsMax;
+    std::vector<std::vector<double> >     PredationRho;
     std::vector<std::vector<double> >     PredationRhoMin;
     std::vector<std::vector<double> >     PredationRhoMax;
+    std::vector<std::vector<double> >     PredationHandling;
     std::vector<std::vector<double> >     PredationHandlingMin;
     std::vector<std::vector<double> >     PredationHandlingMax;
+    std::vector<double>                   PredationExponent;
     std::vector<double>                   PredationExponentMin;
     std::vector<double>                   PredationExponentMax;
     std::vector<double>                   Parameters;

@@ -333,10 +333,12 @@ public:
     int getNumParameters();
     /**
      * @brief Loads the parameter ranges structure with data from the model data structure
+     * @param ParameterInitialValues : parameter initial values (not always mid-range point)
      * @param ParameterRanges : parameter ranges
      * @param DataStruct : model data structure
      */
     void loadParameterRanges(
+            std::vector<double>& ParameterInitialValues,
             std::vector<std::pair<double,double> >& ParameterRanges,
             nmfStructsQt::ModelDataStruct& DataStruct);
     /**
