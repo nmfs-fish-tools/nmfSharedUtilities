@@ -281,6 +281,10 @@ nmfGrowthForm::FunctionMap_Logistic(const std::string& covariateAlgorithmType,
     double growthRateTerm = nmfUtils::applyCovariate(nullptr,
                 covariateAlgorithmType,growthRate,
                 growthRateCovariateCoeff,growthRateCovariate);
+//std::cout << "growth term: " << growthRateTerm <<
+//             ", covType: " << covariateAlgorithmType <<
+//             ", r: " << growthRate << ", coeff: " <<growthRateCovariateCoeff <<
+//             ", cov: " << growthRateCovariate << std::endl;
     double carryingCapacityTerm = nmfUtils::applyCovariate(nullptr,
                 covariateAlgorithmType,carryingCapacity,
                 carryingCapacityCovariateCoeff,carryingCapacityCovariate);

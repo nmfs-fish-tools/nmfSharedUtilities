@@ -12,6 +12,7 @@ BeesAlgorithm::BeesAlgorithm(nmfStructsQt::ModelDataStruct theBeeStruct,
 //  QString tableBiomassAbsolute = QString::fromStdString(nmfConstantsMSSPM::TableBiomassAbsolute);
 //  QString tableBiomassRelative = QString::fromStdString(nmfConstantsMSSPM::TableBiomassRelative);
 
+    m_MaxFitness     = 999999999;
     m_BeeStruct      = theBeeStruct;
     m_Seed           = -1;
     m_DefaultFitness =  99999;
@@ -775,6 +776,18 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
                     m_BeeStruct.FitWeights);
     }
 
+// Debug code to print out the CarryingCapacity covariates
+//if (fitness < m_MaxFitness) {
+//    for (int i=0; i<(int)parameters.size(); ++i) {
+//        if (i == 0) {std::cout << std::endl;}
+//        if ((i>=40) and (i<= 49)) {
+//            std::cout << "parameter:  " << parameters[i] <<
+//                         ", fitness: " << fitness << std::endl;
+//        }
+//    }
+//    m_MaxFitness = fitness;
+//}
+
     return fitness;
 }
 
@@ -799,12 +812,12 @@ BeesAlgorithm::createRandomBee(bool doWhileLoop, std::string& errorMsg)
         for (int i=0; i<m_BeeStruct.TotalNumberParameters; ++i) {
             minVal = m_ParameterRanges[i].first;
             maxVal = m_ParameterRanges[i].second;
-//std::cout << "--> range: " << i << "  [" << minVal << "," << maxVal << "] ";
             randomValue = nmfUtils::getRandomNumber(m_Seed,0.0,1.0);
-            parameters[i] = (maxVal == minVal) ? minVal :
+            parameters[i] = (minVal == maxVal) ? minVal :
                              minVal+(maxVal-minVal)*randomValue;
             checkAndIncrementSeed();
-//std::cout << "--> " << parameters[i] << std::endl;
+//std::cout << "--> range: " << i << "  [" << minVal << "," << maxVal <<
+//             "], parameter:  " << parameters[i] << std::endl;
         }
         fitness = evaluateObjectiveFunction(parameters);
 //std::cout << "--> fitness: " << fitness << std::endl;
