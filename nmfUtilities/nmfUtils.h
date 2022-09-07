@@ -495,6 +495,13 @@ namespace nmfUtils {
      */
     void readTableNames(std::map<std::string,std::vector<std::string> >* TableNames);
     /**
+     * @brief Removes the first row of the matrix and resets matrix size accordingly
+     * @param matrixIn : input matrix whose first row is to be removed
+     * @param matrixOut : output matrix whose first row was removed
+     */
+    void removeFirstRow(boost::numeric::ublas::matrix<double> &matrixIn,
+                        boost::numeric::ublas::matrix<double> &matrixOut);
+    /**
      * @brief rescales the passed matrix by: log base 10
      * @param matrix to rescale
      */

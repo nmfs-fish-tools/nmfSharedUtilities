@@ -82,7 +82,7 @@ private:
     int                                    m_NullFitness;
     double                                 m_PatchSizePct;
     std::string                            m_Scaling;
-    boost::numeric::ublas::matrix<double>  m_ObsBiomassBySpeciesOrGuilds;
+//  boost::numeric::ublas::matrix<double>  m_ObsBiomassBySpeciesOrGuilds;
     boost::numeric::ublas::matrix<double>  m_ObsBiomassByGuilds;
     boost::numeric::ublas::matrix<double>  m_Catch;
     boost::numeric::ublas::matrix<double>  m_Effort;

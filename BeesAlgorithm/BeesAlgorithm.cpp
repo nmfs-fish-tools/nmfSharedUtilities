@@ -67,18 +67,17 @@ BeesAlgorithm::BeesAlgorithm(nmfStructsQt::ModelDataStruct theBeeStruct,
 //    }
 
     // Get the observed biomass
-    if (isAggProd) {
-        nmfUtils::initialize(m_ObsBiomassBySpeciesOrGuilds,
-                             theBeeStruct.ObservedBiomassByGuilds.size1(),
-                             theBeeStruct.ObservedBiomassByGuilds.size2());
-        m_ObsBiomassBySpeciesOrGuilds = theBeeStruct.ObservedBiomassByGuilds;
-
-    } else {
-        nmfUtils::initialize(m_ObsBiomassBySpeciesOrGuilds,
-                             theBeeStruct.ObservedBiomassBySpecies.size1(),
-                             theBeeStruct.ObservedBiomassBySpecies.size2());
-        m_ObsBiomassBySpeciesOrGuilds = theBeeStruct.ObservedBiomassBySpecies;
-    }
+//    if (isAggProd) {
+//        nmfUtils::initialize(m_ObsBiomassBySpeciesOrGuilds,
+//                             theBeeStruct.ObservedBiomassByGuilds.size1(),
+//                             theBeeStruct.ObservedBiomassByGuilds.size2());
+//        m_ObsBiomassBySpeciesOrGuilds = theBeeStruct.ObservedBiomassByGuilds;
+//    } else {
+//        nmfUtils::initialize(m_ObsBiomassBySpeciesOrGuilds,
+//                             theBeeStruct.ObservedBiomassBySpecies.size1(),
+//                             theBeeStruct.ObservedBiomassBySpecies.size2());
+//        m_ObsBiomassBySpeciesOrGuilds = theBeeStruct.ObservedBiomassBySpecies;
+//    }
 
     nmfUtils::initialize(m_ObsBiomassByGuilds,
                          theBeeStruct.ObservedBiomassByGuilds.size1(),
@@ -599,21 +598,12 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
 //std::cout << "last start pos: " << startPos << std::endl;
 
     // guildCarryingCapacity is carrying capacity for the guild the species is a member of
-
     // Calculate carrying capacity for all guilds
     systemCarryingCapacity = 0;
-//std::cout << "NumGuilds: " << NumGuilds << std::endl;
     for (int i=0; i<NumGuilds; ++i) {
         guildK = 0;
-//std::cout << "m_GuildSpecies[i].size(): " << m_GuildSpecies[i].size() << std::endl;
-//std::cout << "carryingCapacity.size(): " << carryingCapacity.size() << std::endl;
-
         for (unsigned j=0; j<m_GuildSpecies[i].size(); ++j) {
-//std::cout << "m_GuildSpecies[" << i << "][" << j << "]: " << m_GuildSpecies[i][j] << std::endl;
-
             guildK += carryingCapacity[m_GuildSpecies[i][j]];
-//std::cout << "carryingCapacity[m_GuildSpecies[i][j]]: " << carryingCapacity[m_GuildSpecies[i][j]] << std::endl;
-
             systemCarryingCapacity += guildK;
         }
         guildCarryingCapacity.push_back(guildK);
@@ -622,18 +612,22 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     // Evaluate the objective function for all years and species or guilds and put
     // result in matrix
     for (int i=0; i<NumSpeciesOrGuilds; ++i) {
-        EstBiomassSpecies(0,i) = m_ObsBiomassBySpeciesOrGuilds(0,i);
+//      EstBiomassSpecies(0,i) = m_ObsBiomassBySpeciesOrGuilds(0,i);
+        EstBiomassSpecies(0,i) = initBiomass[i];
+//if (i == 0) {
+// std::cout << "EST BM S: " << EstBiomassSpecies(0,i) << std::endl;
+//}
     }
 
     for (int i=0; i<NumGuilds; ++i) {
         EstBiomassGuilds(0,i)  = m_ObsBiomassByGuilds(0,i); // Remember there's only initial guild biomass data.
     }
 
-    bool isCheckedInitBiomass = nmfUtils::isEstimateParameterChecked(m_BeeStruct,"InitBiomass");
+//    bool isCheckedInitBiomass = nmfUtils::isEstimateParameterChecked(m_BeeStruct,"InitBiomass");
 
 
     double initBiomassCoeff = 0.0; // RSK will be estimated eventually
-    sigmasSquared = nmfUtilsStatistics::calculateSigmasSquared(m_ObsBiomassBySpeciesOrGuilds);
+    sigmasSquared = nmfUtilsStatistics::calculateSigmasSquared(obsBiomassBySpeciesOrGuilds); // m_ObsBiomassBySpeciesOrGuilds);
     if (sigmasSquared.size() == 0) {
         return m_DefaultFitness;
     }
@@ -643,22 +637,18 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
             // Find guild that speciesNum is in
             guildNum = m_GuildNum[species];
 
-            if (isCheckedInitBiomass) {
-                if (timeMinus1 == 0) {
-                    EstBiomassTMinus1 = initBiomass[species];
-                } else {
-                    EstBiomassTMinus1 = EstBiomassSpecies(timeMinus1,species);
-                }
-            } else {
-                EstBiomassTMinus1 = EstBiomassSpecies(timeMinus1,species);
-            }
+            EstBiomassTMinus1 = EstBiomassSpecies(timeMinus1,species);
+
             if (timeMinus1 == 0) {
-//              estBiomassVal *= (1.0+initBiomassCoeff*initBiomassCovariate(timeMinus1,species));
                 EstBiomassTMinus1 = nmfUtils::applyCovariate(nullptr,
                             covariateAlgorithmType,EstBiomassTMinus1,
                             initBiomassCoeff,initBiomassCovariate(timeMinus1,species));
             }
-
+//if (time == 1 && species == 0) {
+//    std::cout << "initBM,EstBM,ESTBM: " << initBiomass[species] << ", "
+//              << EstBiomassSpecies(timeMinus1,species) << ", "
+//              << EstBiomassTMinus1 << std::endl;
+//}
             GrowthTerm      = m_GrowthForm->evaluate(covariateAlgorithmType,
                                                      EstBiomassTMinus1,
                                                      growthRate[species],
@@ -732,23 +722,27 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
         nmfUtils::rescaleMatrixMinMax(ObsCatch, ObsCatchRescaled);
         nmfUtils::rescaleMatrixMinMax(EstCatch, EstCatchRescaled);
         nmfUtils::rescaleMatrixMinMax(EstBiomassSpecies, EstBiomassRescaled);
-        nmfUtils::rescaleMatrixMinMax(m_ObsBiomassBySpeciesOrGuilds, ObsBiomassBySpeciesOrGuildsRescaled);
+        nmfUtils::rescaleMatrixMinMax(obsBiomassBySpeciesOrGuilds, ObsBiomassBySpeciesOrGuildsRescaled);
+//      nmfUtils::rescaleMatrixMinMax(m_ObsBiomassBySpeciesOrGuilds, ObsBiomassBySpeciesOrGuildsRescaled);
     } else if (m_Scaling == "Mean") {
         nmfUtils::rescaleMatrixMean(ObsCatch, ObsCatchRescaled);
         nmfUtils::rescaleMatrixMean(EstCatch, EstCatchRescaled);
         nmfUtils::rescaleMatrixMean(EstBiomassSpecies, EstBiomassRescaled);
-        nmfUtils::rescaleMatrixMean(m_ObsBiomassBySpeciesOrGuilds, ObsBiomassBySpeciesOrGuildsRescaled);
+        nmfUtils::rescaleMatrixMean(obsBiomassBySpeciesOrGuilds, ObsBiomassBySpeciesOrGuildsRescaled);
+//      nmfUtils::rescaleMatrixMean(m_ObsBiomassBySpeciesOrGuilds, ObsBiomassBySpeciesOrGuildsRescaled);
     } else if (m_Scaling == "Z-Score") {
         nmfUtils::rescaleMatrixZScore(ObsCatch, ObsCatchRescaled);
         nmfUtils::rescaleMatrixZScore(EstCatch, EstCatchRescaled);
         nmfUtils::rescaleMatrixZScore(EstBiomassSpecies, EstBiomassRescaled);
-        nmfUtils::rescaleMatrixZScore(m_ObsBiomassBySpeciesOrGuilds, ObsBiomassBySpeciesOrGuildsRescaled);
+        nmfUtils::rescaleMatrixZScore(obsBiomassBySpeciesOrGuilds, ObsBiomassBySpeciesOrGuildsRescaled);
+//      nmfUtils::rescaleMatrixZScore(m_ObsBiomassBySpeciesOrGuilds, ObsBiomassBySpeciesOrGuildsRescaled);
     } else {
 //      std::cout << "Error: No Scaling Algorithm detected. Defaulting to Min Max." << std::endl;
         nmfUtils::rescaleMatrixMinMax(ObsCatch, ObsCatchRescaled);
         nmfUtils::rescaleMatrixMinMax(EstCatch, EstCatchRescaled);
         nmfUtils::rescaleMatrixMinMax(EstBiomassSpecies, EstBiomassRescaled);
-        nmfUtils::rescaleMatrixMinMax(m_ObsBiomassBySpeciesOrGuilds, ObsBiomassBySpeciesOrGuildsRescaled);
+        nmfUtils::rescaleMatrixMinMax(obsBiomassBySpeciesOrGuilds, ObsBiomassBySpeciesOrGuildsRescaled);
+//      nmfUtils::rescaleMatrixMinMax(m_ObsBiomassBySpeciesOrGuilds, ObsBiomassBySpeciesOrGuildsRescaled);
     }
 
     // Calculate fitness using the appropriate objective criterion

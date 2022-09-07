@@ -551,6 +551,22 @@ void readTableNames(std::map<std::string,std::vector<std::string> > *TableNames)
     }
 } // end readTableNames
 
+void
+removeFirstRow(boost::numeric::ublas::matrix<double> &matrixIn,
+               boost::numeric::ublas::matrix<double> &matrixOut)
+{
+    int numRows = matrixIn.size1();
+    int numCols = matrixIn.size2();
+
+    boost::numeric::ublas::matrix_range<boost::numeric::ublas::matrix<double> > matrixTrimmed (
+                matrixIn,
+                boost::numeric::ublas::range(1,numRows),
+                boost::numeric::ublas::range(0,numCols));
+
+    matrixOut = matrixTrimmed;
+}
+
+
 /*
  * Rescales matrix Xij by: log base 10 (X)
  */
