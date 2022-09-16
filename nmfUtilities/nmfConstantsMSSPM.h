@@ -219,6 +219,9 @@ namespace nmfConstantsMSSPM
      const QString      HarvestExploitation            = "Exploitation Rate (Harvest/Bc)";
      const QString      ForecastHarvestTypeCatch       = "Catch";
      const QString      ForecastHarvestTypeEffort      = "Effort";
+     const QString      DistributionNone               = "None";
+     const QString      DistributionLognormal          = "Lognormal";
+     const QString      DistributionUniform            = "Uniform";
 
      const QString      ParameterNameInitialBiomass              = "Initial Absolute Biomass";
      const QString      ParameterNameSurveyQ                     = "SurveyQ";
