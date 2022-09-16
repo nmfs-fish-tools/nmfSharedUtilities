@@ -2533,19 +2533,17 @@ nmfDatabase::saveApplicationTable(
 bool
 nmfDatabase::loadVector(
         nmfLogger* Logger,
-        const std::vector<std::map<std::string, std::vector<std::string> > >& dataMaps,
+        std::map<std::string, std::vector<std::string> >& dataMap,
         const int& NumRows,
         std::vector<double>& vec)
 {
     int m=0;
     bool retv = true;
     std::string msg;
-    std::map<std::string, std::vector<std::string> > dataMap0 = dataMaps[0];
-    std::map<std::string, std::vector<std::string> > dataMap1 = dataMaps[1];
 
     vec.clear();
 
-    int NumRecords = int(dataMap0["SpeName"].size());
+    int NumRecords = int(dataMap["SpeName"].size());
     if (NumRows != NumRecords) {
         msg = "\nnmfDatabase::loadVector: NumSpecies (" + std::to_string(NumRows) +
               ") != NumRecords (" +
@@ -2555,18 +2553,48 @@ nmfDatabase::loadVector(
     } else {
         m = 0;
         for (int species=0; species<NumRows; ++species) {
-            vec.push_back((std::stod(dataMap1["Value"][m]) +
-                           std::stod(dataMap0["Value"][m]))/2.0);
+            vec.push_back(QString::fromStdString(dataMap["Value"][m]).toDouble());
             ++m;
         }
     }
     return retv;
 }
 
+//bool
+//nmfDatabase::loadVector(
+//        nmfLogger* Logger,
+//        const std::vector<std::map<std::string, std::vector<std::string> > >& dataMaps,
+//        const int& NumRows,
+//        std::vector<double>& vec)
+//{
+//    int m=0;
+//    bool retv = true;
+//    std::string msg;
+//    std::map<std::string, std::vector<std::string> > dataMap0 = dataMaps[0];
+//    std::map<std::string, std::vector<std::string> > dataMap1 = dataMaps[1];
+//    vec.clear();
+//    int NumRecords = int(dataMap0["SpeName"].size());
+//    if (NumRows != NumRecords) {
+//        msg = "\nnmfDatabase::loadVector: NumSpecies (" + std::to_string(NumRows) +
+//              ") != NumRecords (" +
+//                std::to_string(NumRecords) + ")";
+//        Logger->logMsg(nmfConstants::Error,msg);
+//        retv = false;
+//    } else {
+//        m = 0;
+//        for (int species=0; species<NumRows; ++species) {
+//            vec.push_back((std::stod(dataMap1["Value"][m]) +
+//                           std::stod(dataMap0["Value"][m]))/2.0);
+//            ++m;
+//        }
+//    }
+//    return retv;
+//}
+
 bool
 nmfDatabase::loadMatrix(
         nmfLogger* Logger,
-        const std::vector<std::map<std::string, std::vector<std::string> > >& dataMaps,
+        std::map<std::string, std::vector<std::string> >& dataMap,
         const int& NumRows,
         const int& NumCols,
         boost::numeric::ublas::matrix<double>& matrix)
@@ -2574,12 +2602,10 @@ nmfDatabase::loadMatrix(
     int m=0;
     bool retv = true;
     std::string msg;
-    std::map<std::string, std::vector<std::string> > dataMap0 = dataMaps[0];
-    std::map<std::string, std::vector<std::string> > dataMap1 = dataMaps[1];
 
     nmfUtils::initialize(matrix,NumRows,NumCols);
 
-    int NumRecords = int(dataMap0["SpeciesA"].size());
+    int NumRecords = int(dataMap["SpeciesA"].size());
     if (NumRows*NumCols != NumRecords) {
         msg = "\nnmfDatabase::loadMatrix: NumSpecies*NumSpecies (" + std::to_string(NumRows) +
                 "x" + std::to_string(NumCols) + ") != NumRecords (" +
@@ -2588,16 +2614,49 @@ nmfDatabase::loadMatrix(
         retv = false;
     } else {
         m = 0;
-        for (int speciesA=0; speciesA<NumRows; ++speciesA) {
-            for (int speciesB=0; speciesB<NumCols; ++speciesB) {
-                matrix(speciesA,speciesB) = (std::stod(dataMap1["Value"][m]) +
-                                             std::stod(dataMap0["Value"][m]))/2.0;
+        for (int speciesB=0; speciesB<NumCols; ++speciesB) {
+            for (int speciesA=0; speciesA<NumRows; ++speciesA) {
+                matrix(speciesA,speciesB) = QString::fromStdString(dataMap["Value"][m]).toDouble();
                 ++m;
             }
         }
     }
     return retv;
 }
+
+//bool
+//nmfDatabase::loadMatrix(
+//        nmfLogger* Logger,
+//        const std::vector<std::map<std::string, std::vector<std::string> > >& dataMaps,
+//        const int& NumRows,
+//        const int& NumCols,
+//        boost::numeric::ublas::matrix<double>& matrix)
+//{
+//    int m=0;
+//    bool retv = true;
+//    std::string msg;
+//    std::map<std::string, std::vector<std::string> > dataMap0 = dataMaps[0];
+//    std::map<std::string, std::vector<std::string> > dataMap1 = dataMaps[1];
+//    nmfUtils::initialize(matrix,NumRows,NumCols);
+//    int NumRecords = int(dataMap0["SpeciesA"].size());
+//    if (NumRows*NumCols != NumRecords) {
+//        msg = "\nnmfDatabase::loadMatrix: NumSpecies*NumSpecies (" + std::to_string(NumRows) +
+//                "x" + std::to_string(NumCols) + ") != NumRecords (" +
+//                std::to_string(NumRecords) + ")";
+//        Logger->logMsg(nmfConstants::Error,msg);
+//        retv = false;
+//    } else {
+//        m = 0;
+//        for (int speciesA=0; speciesA<NumRows; ++speciesA) {
+//            for (int speciesB=0; speciesB<NumCols; ++speciesB) {
+//                matrix(speciesA,speciesB) = (std::stod(dataMap1["Value"][m]) +
+//                                             std::stod(dataMap0["Value"][m]))/2.0;
+//                ++m;
+//            }
+//        }
+//    }
+//    return retv;
+//}
 
 
 bool
@@ -2677,13 +2736,14 @@ nmfDatabase::getPredationData(const std::string& PredationForm,
     bool ok;
     bool retv = true;
     std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
     std::map<std::string, std::vector<std::string> > dataMapMin;
     std::map<std::string, std::vector<std::string> > dataMapMax;
     std::string queryStr;
     std::vector<std::map<std::string, std::vector<std::string> > > dataMaps = {dataMapMin,dataMapMax};
-    std::vector<std::string> rhoFilenames      = {nmfConstantsMSSPM::TablePredationRhoMin,      nmfConstantsMSSPM::TablePredationRhoMax};
-    std::vector<std::string> handlingFilenames = {nmfConstantsMSSPM::TablePredationHandlingMin, nmfConstantsMSSPM::TablePredationHandlingMax};
-    std::vector<std::string> exponentFilenames = {nmfConstantsMSSPM::TablePredationExponentMin, nmfConstantsMSSPM::TablePredationExponentMax};
+    std::vector<std::string> rhoFilenames      = {nmfConstantsMSSPM::TablePredationRho};      // {nmfConstantsMSSPM::TablePredationRhoMin,      nmfConstantsMSSPM::TablePredationRhoMax};
+    std::vector<std::string> handlingFilenames = {nmfConstantsMSSPM::TablePredationHandling}; // {nmfConstantsMSSPM::TablePredationHandlingMin, nmfConstantsMSSPM::TablePredationHandlingMax};
+    std::vector<std::string> exponentFilenames = {nmfConstantsMSSPM::TablePredationExponent}; // {nmfConstantsMSSPM::TablePredationExponentMin, nmfConstantsMSSPM::TablePredationExponentMax};
 
     if (PredationForm == "Null") {
         return true;
@@ -2698,9 +2758,9 @@ nmfDatabase::getPredationData(const std::string& PredationForm,
                    " WHERE ProjectName = '" + ProjectName +
                    "' AND  ModelName = '"   + ModelName   +
                    "' ORDER BY SpeciesA,SpeciesB ";
-        dataMaps[i] = nmfQueryDatabase(queryStr, fields);
+        dataMap = nmfQueryDatabase(queryStr, fields);
     }
-    ok = loadMatrix(Logger,dataMaps,NumSpecies,NumSpecies,Rho);
+    ok = loadMatrix(Logger,dataMap,NumSpecies,NumSpecies,Rho);
     if (! ok) {
         return false;
     }
@@ -2713,9 +2773,9 @@ nmfDatabase::getPredationData(const std::string& PredationForm,
                        " WHERE ProjectName = '" + ProjectName +
                        "' AND ModelName = '"    + ModelName +
                        "' ORDER BY SpeciesA,SpeciesB ";
-            dataMaps[i] = nmfQueryDatabase(queryStr, fields);
+            dataMap = nmfQueryDatabase(queryStr, fields);
         }
-        ok = loadMatrix(Logger,dataMaps,NumSpecies,NumSpecies,Handling);
+        ok = loadMatrix(Logger,dataMap,NumSpecies,NumSpecies,Handling);
         if (! ok) {
             return false;
         }
@@ -2730,9 +2790,9 @@ nmfDatabase::getPredationData(const std::string& PredationForm,
                        " WHERE ProjectName = '" + ProjectName +
                        "' AND ModelName = '"    + ModelName +
                        "' ORDER BY SpeName ";
-            dataMaps[i] = nmfQueryDatabase(queryStr, fields);
+            dataMap = nmfQueryDatabase(queryStr, fields);
         }
-        ok = loadVector(Logger,dataMaps,NumSpecies,Exponent);
+        ok = loadVector(Logger,dataMap,NumSpecies,Exponent);
         if (! ok) {
             return false;
         }
@@ -2756,14 +2816,15 @@ nmfDatabase::getCompetitionData(const std::string& CompetitionType,
     bool ok;
     bool retv = true;
     std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
     std::map<std::string, std::vector<std::string> > dataMapMin;
     std::map<std::string, std::vector<std::string> > dataMapMax;
     std::string queryStr;
     std::vector<std::map<std::string, std::vector<std::string> > > dataMaps = {dataMapMin,dataMapMax};
-    std::vector<std::string> AlphaFilenames            = {nmfConstantsMSSPM::TableCompetitionAlphaMin,           nmfConstantsMSSPM::TableCompetitionAlphaMax};
-    std::vector<std::string> BetaSpeciesFilenames      = {nmfConstantsMSSPM::TableCompetitionBetaSpeciesMin,     nmfConstantsMSSPM::TableCompetitionBetaSpeciesMax};
-    std::vector<std::string> BetaGuildsFilenames       = {nmfConstantsMSSPM::TableCompetitionBetaGuildsMin,      nmfConstantsMSSPM::TableCompetitionBetaGuildsMin};
-    std::vector<std::string> BetaGuildsGuildsFilenames = {nmfConstantsMSSPM::TableCompetitionBetaGuildsGuildsMin,nmfConstantsMSSPM::TableCompetitionBetaGuildsGuildsMax};
+    std::vector<std::string> AlphaFilenames            = {nmfConstantsMSSPM::TableCompetitionAlpha};            // {nmfConstantsMSSPM::TableCompetitionAlphaMin,           nmfConstantsMSSPM::TableCompetitionAlphaMax};
+    std::vector<std::string> BetaSpeciesFilenames      = {nmfConstantsMSSPM::TableCompetitionBetaSpecies};      // {nmfConstantsMSSPM::TableCompetitionBetaSpeciesMin,     nmfConstantsMSSPM::TableCompetitionBetaSpeciesMax};
+    std::vector<std::string> BetaGuildsFilenames       = {nmfConstantsMSSPM::TableCompetitionBetaGuilds};       // {nmfConstantsMSSPM::TableCompetitionBetaGuildsMin,      nmfConstantsMSSPM::TableCompetitionBetaGuildsMin};
+    std::vector<std::string> BetaGuildsGuildsFilenames = {nmfConstantsMSSPM::TableCompetitionBetaGuildsGuilds}; // {nmfConstantsMSSPM::TableCompetitionBetaGuildsGuildsMin,nmfConstantsMSSPM::TableCompetitionBetaGuildsGuildsMax};
 
     if (CompetitionType == "Null") {
         return true;
@@ -2779,9 +2840,9 @@ nmfDatabase::getCompetitionData(const std::string& CompetitionType,
                        " WHERE ProjectName = '" + ProjectName +
                        "' AND ModelName = '"    + ModelName +
                        "' ORDER BY SpeciesA,SpeciesB ";
-            dataMaps[i] = nmfQueryDatabase(queryStr, fields);
+            dataMap = nmfQueryDatabase(queryStr, fields);
         }
-        ok = loadMatrix(Logger,dataMaps,NumSpecies,NumSpecies,CompetitionAlpha);
+        ok = loadMatrix(Logger,dataMap,NumSpecies,NumSpecies,CompetitionAlpha);
         if (! ok) {
             retv = false;
         }
@@ -2796,9 +2857,9 @@ nmfDatabase::getCompetitionData(const std::string& CompetitionType,
                        " WHERE ProjectName = '" + ProjectName +
                        "' AND ModelName = '"    + ModelName +
                        "' ORDER BY SpeciesA,SpeciesB ";
-            dataMaps[i] = nmfQueryDatabase(queryStr, fields);
+            dataMap = nmfQueryDatabase(queryStr, fields);
         }
-        ok = loadMatrix(Logger,dataMaps,NumSpecies,NumSpecies,CompetitionBetaSpecies);
+        ok = loadMatrix(Logger,dataMap,NumSpecies,NumSpecies,CompetitionBetaSpecies);
         if (! ok) {
             retv = false;
         }
@@ -2811,9 +2872,9 @@ nmfDatabase::getCompetitionData(const std::string& CompetitionType,
                        " WHERE ProjectName = '" + ProjectName +
                        "' AND ModelName = '"    + ModelName +
                        "' ORDER BY Guild,SpeName ";
-            dataMaps[i] = nmfQueryDatabase(queryStr, fields);
+            dataMap = nmfQueryDatabase(queryStr, fields);
         }
-        ok = loadMatrix(Logger,dataMaps,NumSpecies,NumGuilds,CompetitionBetaGuild);
+        ok = loadMatrix(Logger,dataMap,NumSpecies,NumGuilds,CompetitionBetaGuild);
         if (! ok) {
             retv = false;
         }
@@ -2828,9 +2889,9 @@ nmfDatabase::getCompetitionData(const std::string& CompetitionType,
                        " WHERE ProjectName = '" + ProjectName +
                        "' AND ModelName = '"    + ModelName +
                        "' ORDER BY GuildA,GuildB ";
-            dataMaps[i] = nmfQueryDatabase(queryStr, fields);
+            dataMap = nmfQueryDatabase(queryStr, fields);
         }
-        ok = loadMatrix(Logger,dataMaps,NumGuilds,NumGuilds,CompetitionBetaGuildGuild);
+        ok = loadMatrix(Logger,dataMap,NumGuilds,NumGuilds,CompetitionBetaGuildGuild);
         if (! ok) {
             retv = false;
         }

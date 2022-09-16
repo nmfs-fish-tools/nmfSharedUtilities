@@ -1653,7 +1653,6 @@ loadTableWidgetData(QTabWidget* parentTabWidget,
 
 bool
 loadGuildsSpeciesTableview(QTabWidget* parentTabWidget,
-                           //QTableView* tableView,
                            QStandardItemModel* smodel,
                            const QString& type,
                            const QString& inputDataPath,

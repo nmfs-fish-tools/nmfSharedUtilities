@@ -877,9 +877,9 @@ public:
             const std::string& ModelName,
             QComboBox*         cmbox);
     /**
-     * @brief Convenience routine to load a matrix from a passed in vector of table data maps
+     * @brief Convenience routine to load a matrix from a passed in table data map
      * @param logger ; logger pointer used to log any error messages
-     * @param dataMaps : table data maps to extract data from
+     * @param dataMap : table data map to extract data from
      * @param numRows : number of rows in table
      * @param numCols : number of columns in table
      * @param matrix : matrix containing the table data
@@ -887,21 +887,27 @@ public:
      */
     bool loadMatrix(
             nmfLogger* logger,
-            const std::vector<std::map<std::string, std::vector<std::string> > >& dataMaps,
-            const int& numRows,
-            const int& numCols,
+            std::map<std::string, std::vector<std::string> >& dataMap,
+            const int& NumRows,
+            const int& NumCols,
             boost::numeric::ublas::matrix<double>& matrix);
+//    bool loadMatrix(
+//            nmfLogger* logger,
+//            const std::vector<std::map<std::string, std::vector<std::string> > >& dataMaps,
+//            const int& numRows,
+//            const int& numCols,
+//            boost::numeric::ublas::matrix<double>& matrix);
     /**
-     * @brief Convenience routine to load a vector from a passed in vector of table data maps
+     * @brief Convenience routine to load a vector from a passed in table data map
      * @param logger ; logger pointer used to log any error messages
-     * @param dataMaps : table data maps to extract data from
+     * @param dataMap : table data map to extract data from
      * @param numRows : number of elements in table
      * @param vector : vector containing the table data
      * @return true if correct number of table records were found, false otherwise
      */
     bool loadVector(
             nmfLogger* logger,
-            const std::vector<std::map<std::string, std::vector<std::string> > >& dataMaps,
+            std::map<std::string, std::vector<std::string> >& dataMap,
             const int& numRows,
             std::vector<double>& vector);
     /**

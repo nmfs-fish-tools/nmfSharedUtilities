@@ -147,8 +147,8 @@ nmfPredationForm::loadParameterRanges(
     m_isAggProd  = (dataStruct.CompetitionForm == "AGG-PROD");
     m_NumSpeciesOrGuilds = (m_isAggProd) ? m_NumGuilds : m_NumSpecies;
 
-    for (unsigned i=0; i<dataStruct.PredationRhoMin.size(); ++i) {
-        for (unsigned int j=0; j<dataStruct.PredationRhoMin[0].size(); ++j) {
+    for (unsigned int j=0; j<dataStruct.PredationRhoMin[0].size(); ++j) {
+        for (unsigned i=0; i<dataStruct.PredationRhoMin.size(); ++i) {
             if (isCheckedRho) {
                 aPair = std::make_pair(dataStruct.PredationRhoMin[i][j],
                                        dataStruct.PredationRhoMax[i][j]);
@@ -165,8 +165,8 @@ nmfPredationForm::loadParameterRanges(
                       dataStruct.PredationRhoMin[0].size();
 
     if ((m_Type == "Type II") || (m_Type == "Type III")) {
-        for (unsigned i=0; i<dataStruct.PredationHandlingMin.size(); ++i) {
-            for (unsigned int j=0; j<dataStruct.PredationHandlingMin[0].size(); ++j) {
+        for (unsigned int j=0; j<dataStruct.PredationHandlingMin[0].size(); ++j) {
+            for (unsigned i=0; i<dataStruct.PredationHandlingMin.size(); ++i) {
                 if (isCheckedHandling) {
                     aPair = std::make_pair(dataStruct.PredationHandlingMin[i][j],
                                            dataStruct.PredationHandlingMax[i][j]);
@@ -267,6 +267,11 @@ nmfPredationForm::FunctionMap_TypeI(const std::string& covariateAlgorithmType,
                     covariateAlgorithmType,EstPredationRho(row,species),
                     PredationRhoCovariateCoeff,PredationRhoCovariate(timeMinus1,species));
         PredationSum += EstPredationRhoTerm * EstimatedBiomass(timeMinus1,row);
+//if (species == 0) {
+//  std::cout << "should all be 0, EstPredationRho(row,species): " << EstPredationRho(row,species) <<
+//            ", " << PredationRhoCovariateCoeff <<
+//            ", " << PredationRhoCovariate(timeMinus1,species) << std::endl;
+//}
     }
 
     return EstimatedBiomassTimeMinus1*PredationSum;
