@@ -307,7 +307,9 @@ namespace nmfConstantsMSSPM
      const std::string TableForecasts                          = QString::fromStdString("Forecasts").toLower().toStdString();
      const std::string TableGuilds                             = QString::fromStdString("Guilds").toLower().toStdString();
      const std::string TableHarvestCatch                       = QString::fromStdString("HarvestCatch").toLower().toStdString();
+//   const std::string TableHarvestCatchFTC                    = QString::fromStdString("HarvestCatchFTC").toLower().toStdString();
      const std::string TableHarvestEffort                      = QString::fromStdString("HarvestEffort").toLower().toStdString();
+//   const std::string TableHarvestEffortFTC                   = QString::fromStdString("HarvestEffortFTC").toLower().toStdString();
      const std::string TableHarvestExploitation                = QString::fromStdString("HarvestExploitation").toLower().toStdString();
      const std::string TableModelReview                        = QString::fromStdString("ModelReview").toLower().toStdString();
      const std::string TableModels                             = QString::fromStdString("Models").toLower().toStdString();
