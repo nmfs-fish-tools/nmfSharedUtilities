@@ -413,7 +413,7 @@ namespace nmfConstantsMSSPM
 
      const std::vector<std::string> TablesToClean =
         {TableBiomassAbsolute,
-         TableBiomassAbsolute,
+         TableBiomassRelative,
          TableBiomassRelativeDividedByEstSurveyQ,
          TableBiomassRelativeScalars,
          TableCompetitionAlpha,
@@ -428,6 +428,9 @@ namespace nmfConstantsMSSPM
          TableCompetitionBetaSpecies,
          TableCompetitionBetaSpeciesMax,
          TableCompetitionBetaSpeciesMin,
+         TableCovariate,
+         TableCovariateAssignment,
+         TableCovariateInitialValuesAndRanges,
          TableHarvestCatch,
          TableHarvestEffort,
          TableHarvestExploitation,
