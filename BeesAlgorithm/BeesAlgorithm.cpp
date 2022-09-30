@@ -768,6 +768,7 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
                     ObsCatchRescaled, ObsBiomassBySpeciesOrGuildsRescaled,
                     EstCatchRescaled, EstBiomassRescaled,
                     m_BeeStruct.FitWeights);
+std::cout << "Warning....check this for using rescaled data with Max Likelihood" << std::endl;
     }
 
 // Debug code to print out the CarryingCapacity covariates

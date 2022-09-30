@@ -3133,8 +3133,8 @@ nmfDatabase::getVectorParameterNames(
     queryStr   = "SELECT DISTINCT(ParameterName) FROM " +
                   nmfConstantsMSSPM::TableCovariateAssignment +
                  " WHERE ProjectName = '" + ProjectName +
-                 "' AND ModelName = '"    + ModelName   +
-                 "' AND CovariateName != ''";
+                 "' AND ModelName = '"    + ModelName + "'";
+//                 + "' AND CovariateName != ''";
     dataMap    = nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["ParameterName"].size();
 
