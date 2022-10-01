@@ -431,10 +431,12 @@ namespace nmfConstantsMSSPM
          TableCovariate,
          TableCovariateAssignment,
          TableCovariateInitialValuesAndRanges,
+         TableFitWeights,
          TableHarvestCatch,
          TableHarvestEffort,
          TableHarvestExploitation,
          TableModels,
+         TableModelReview,
          TablePredationExponent,
          TablePredationExponentMax,
          TablePredationExponentMin,
@@ -443,7 +445,10 @@ namespace nmfConstantsMSSPM
          TablePredationHandlingMin,
          TablePredationRho,
          TablePredationRhoMax,
-         TablePredationRhoMin};
+         TablePredationRhoMin,
+         TableSummaryDiagnostic,
+         TableSummaryModelFit,
+         TableUnits};
 }
 
 
