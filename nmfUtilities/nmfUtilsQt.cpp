@@ -2857,18 +2857,9 @@ runAllTableChecks(nmfLogger*  logger,
                   QWidget*    parent,
                   QTableView* tableview,
                   QTableView* minTableview,
-                  QTableView* maxTableview,
-                  QTableView* tableviewCompare,
-                  QTableView* minTableviewCompare,
-                  QTableView* maxTableviewCompare)
+                  QTableView* maxTableview)
 {
     QString badCell = "";
-
-    if ((tableviewCompare->model()->rowCount()    == 0) ||
-        (minTableviewCompare->model()->rowCount() == 0) ||
-        (maxTableviewCompare->model()->rowCount() == 0)) {
-        return true;
-    }
 
     // 1. Check alpha tables for blanks
     if (! areAllCellsNonBlank(tableview)    ||
@@ -2911,14 +2902,34 @@ runAllTableChecks(nmfLogger*  logger,
         return false;
     }
 
+    return true;
+}
+
+bool
+runAllTableChecks(nmfLogger*  logger,
+                  QWidget*    parent,
+                  QTableView* tableview,
+                  QTableView* minTableview,
+                  QTableView* maxTableview,
+                  QTableView* tableviewCompare,
+                  QTableView* minTableviewCompare,
+                  QTableView* maxTableviewCompare)
+{
+    QString badCell = "";
+
+    bool isCompareTable =
+            ((tableviewCompare->model()->rowCount()    != 0) &&
+             (minTableviewCompare->model()->rowCount() != 0) &&
+             (maxTableviewCompare->model()->rowCount() != 0));
+
     // 4. Check if there are values in any of the same cells between the Competition (alpha) and Predation (rho) tables
-    if (! areAllCellsHoldingUniqueData(tableview,
-                                       minTableview,
-                                       maxTableview,
-                                       tableviewCompare,
-                                       minTableviewCompare,
-                                       maxTableviewCompare,
-                                       badCell)) {
+    if (isCompareTable && ! areAllCellsHoldingUniqueData(tableview,
+                                                         minTableview,
+                                                         maxTableview,
+                                                         tableviewCompare,
+                                                         minTableviewCompare,
+                                                         maxTableviewCompare,
+                                                         badCell)) {
         std::string msgShort = "Warning: Found values in similar cells in the Competition (alpha) and Predation (rho) matrices.";
         std::string msgLong = msgShort;
         msgLong += "\n\nThere shouldn't be any similar cells (i.e., the same cell in both tables) that have the same ";
@@ -2935,6 +2946,7 @@ runAllTableChecks(nmfLogger*  logger,
 
     return true;
 }
+
 
 QModelIndexList
 getSelectedTableViewCells(QTableView* tv)

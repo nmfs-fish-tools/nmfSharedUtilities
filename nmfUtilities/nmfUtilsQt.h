@@ -754,6 +754,20 @@ namespace nmfUtilsQt {
                            QTableView* minTableviewCompare,
                            QTableView* maxTableviewCompare);
     /**
+     * @brief Checks tables for blanks and min<max
+     * @param logger : application logger pointer
+     * @param parent : parent widget over which to display error messages
+     * @param tableview : main table
+     * @param minTableview : table of minimum values
+     * @param maxTableview : table of maximum values
+     * @return true if passed all tests, false if any tests failed
+     */
+    bool runAllTableChecks(nmfLogger*  logger,
+                           QWidget*    parent,
+                           QTableView* tableview,
+                           QTableView* minTableview,
+                           QTableView* maxTableview);
+    /**
      * @brief Saves the table consisting of all QComboBoxes to a .csv file
      * @param parentTabWidget : parent widget
      * @param tableView : QTableView containing all of the combo boxes
