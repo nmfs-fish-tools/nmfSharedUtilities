@@ -312,8 +312,6 @@ nmfCompetitionForm::FunctionMap_NOK(
     double EstCompetitionAlphaTerm;
 
     for (unsigned row=0; row<EstCompetitionAlpha.size2(); ++row) {
-//      EstCompetitionAlphaTerm = EstCompetitionAlpha(row,species) *
-//              (1.0 + CompetitionAlphaCovariateCoeff*CompetitionAlphaCovariate(timeMinus1,species));
         EstCompetitionAlphaTerm = nmfUtils::applyCovariate(nullptr,
                     covariateAlgorithmType,EstCompetitionAlpha(row,species),
                     CompetitionAlphaCovariateCoeff,CompetitionAlphaCovariate(timeMinus1,species));
@@ -365,8 +363,6 @@ nmfCompetitionForm::FunctionMap_MSPROD(
     }
     double CompetitionBetaSpeciesTerm;
     for (unsigned j=0; j<numSpecies; ++j) {
-//      CompetitionBetaSpeciesTerm = EstCompetitionBetaSpecies(species,j) *
-//              (1.0+CompetitionBetaSpeciesCovariateCoeff*CompetitionBetaSpeciesCovariate(timeMinus1,j));
         CompetitionBetaSpeciesTerm = nmfUtils::applyCovariate(nullptr,
                     covariateAlgorithmType,EstCompetitionBetaSpecies(species,j),
                     CompetitionBetaSpeciesCovariateCoeff,CompetitionBetaSpeciesCovariate(timeMinus1,j));
@@ -374,22 +370,25 @@ nmfCompetitionForm::FunctionMap_MSPROD(
     }
     double CompetitionBetaGuildTerm;
     for (unsigned j=0; j<numGuilds; ++j) {
-//      CompetitionBetaGuildTerm = EstCompetitionBetaGuild(species,j) *
-//              (1.0+CompetitionBetaGuildCovariateCoeff*CompetitionBetaGuildGuildCovariate(timeMinus1,j));
         CompetitionBetaGuildTerm = nmfUtils::applyCovariate(nullptr,
                     covariateAlgorithmType,EstCompetitionBetaGuild(species,j),
                     CompetitionBetaGuildCovariateCoeff,CompetitionBetaGuildGuildCovariate(timeMinus1,j));
         sumOverGuilds += CompetitionBetaGuildTerm*EstBiomassGuild(timeMinus1,j);
+//if (sumOverGuilds > 1e8) {
+//qDebug() << sumOverGuilds << CompetitionBetaGuildTerm << EstBiomassGuild(timeMinus1,j);
+//}
     }
+//if (sumOverGuilds > 1e8) {
+//qDebug() << "gbts: " << sumOverSpecies << guildCarryingCapacity << sumOverGuilds << systemCarryingCapacity;
+//}
 
     term1 = sumOverSpecies/guildCarryingCapacity;
     term2 = sumOverGuilds/(systemCarryingCapacity - guildCarryingCapacity);
 
-//  double growthTerm = growthRate[species]*(1.0+growthRateCovariateCoeff*growthRateCovariate(timeMinus1,species));
     double growthTerm = nmfUtils::applyCovariate(nullptr,
                 covariateAlgorithmType,growthRate[species],
                 growthRateCovariateCoeff,growthRateCovariate(timeMinus1,species));
-
+//qDebug() << "gbts: " << growthTerm << biomassAtTime << term1 << term2;
     return growthTerm*biomassAtTime*(term1-term2);
 }
 

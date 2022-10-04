@@ -36,7 +36,9 @@ applyCovariate(nmfLogger *logger,
     if (covariateValue == nmfConstantsMSSPM::NoData) {
         retv = parameter;
     } else {
-        if (covariateAlgorithmType == nmfConstantsMSSPM::Linear) {
+        if (covariateCoeff == 0) {
+            retv = parameter;
+        } else if (covariateAlgorithmType == nmfConstantsMSSPM::Linear) {
             retv = parameter*(1.0+covariateCoeff*covariateValue);
         } else if (covariateAlgorithmType == nmfConstantsMSSPM::Exponential) {
             retv = std::pow(parameter,(covariateCoeff*covariateValue));

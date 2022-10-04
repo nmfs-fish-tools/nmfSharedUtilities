@@ -738,6 +738,7 @@ bool calculateMEF(const int& NumSpeciesOrGuilds,
                   std::vector<double>& MEF)
 {
     int m = 0;
+    bool retv = true;
     double sum1,sum2;
     double diff1,diff2;
 
@@ -756,12 +757,14 @@ bool calculateMEF(const int& NumSpeciesOrGuilds,
             }
             ++m;
         }
-        if (sum1 == 0) {
-            return false;
+        if (nmfUtils::isNearlyZero(sum1)) {
+            MEF.push_back(-999999);
+            retv = false;
+        } else {
+            MEF.push_back(1.0-sum2/sum1);
         }
-        MEF.push_back((sum1-sum2)/sum1);
     }
-    return true;
+    return retv;
 }
 
 
@@ -1058,7 +1061,11 @@ double calculateModelEfficiency(
         }
     }
 
-    return (deviation == 0) ? 0 : (1.0 - sumSquares/deviation); // Nash-Sutcliffe Model Efficiency Coefficient
+    if (nmfUtils::isNearlyZero(deviation)) {
+        return 0;
+    } else {
+        return (deviation == 0) ? 0 : (1.0 - sumSquares/deviation); // Nash-Sutcliffe Model Efficiency Coefficient
+    }
 }
 
 double calculateLeastSquares(
