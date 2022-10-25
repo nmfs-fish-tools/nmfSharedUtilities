@@ -298,6 +298,7 @@ struct ModelDataStruct {
     std::string CovariateAlgorithmType;
     std::string ForecastHarvestType;
 
+    boost::numeric::ublas::vector<double> SpeciesWeights;
     std::vector<std::string>              SpeciesNames;
     std::map<int,std::vector<int> >       GuildSpecies; // List of species numbers that make up guild num
     std::vector<int>                      GuildNum;     // Specifies which species are members of which guilds

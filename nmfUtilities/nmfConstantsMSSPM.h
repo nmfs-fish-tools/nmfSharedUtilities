@@ -48,11 +48,7 @@ namespace nmfConstantsMSSPM
      const int    Column_Guild_GrowthRate =  1;
      const int    Column_Guild_GuildK     =  2;
 
-     const int    Column_Species_SpeName     =  0;
-     const int    Column_Species_Guild       =  1;
-     const int    Column_Species_InitBiomass =  2;
-     const int    Column_Species_GrowthRate  =  3;
-     const int    Column_Species_SpeciesK    =  4;
+     const int    Column_Species_Guild    =  2;
 
      const int    Column_Supp_Guild_Name             =  0;
      const int    Column_Supp_Guild_GrowthRate       =  1;
@@ -107,7 +103,7 @@ namespace nmfConstantsMSSPM
      const int    MaxNumberYears       = 100;
      const int    MaxNumberSpecies     =  12;
      const int    MaxTotalSpecies      =  50;
-     const int    ToolTipDuration      = 2000; // milliseconds
+     const int    ToolTipDuration      = 5000; // milliseconds
      const double ValueToStartEE       = 1000000.0;
      const int    DefaultDBTimeoutDays = 5;
      const bool   RearrangeTitle       = true;
@@ -206,7 +202,10 @@ namespace nmfConstantsMSSPM
      const std::string  FilenameSummaryModelFit        = "SummaryModelFit.csv";
      const std::string  FilenameSummaryDiagnostic      = "SummaryDiagnostic.csv";
      const std::string  FilenameEstimatedParameters    = "EstimatedParameters.csv";
+     const std::string  TitleChartBiomass              = "B(calc) with B(obs) points";
+     const std::string  TitleChartBiomassAndCatch      = "Catch with B(obs) points";
      const QString      OutputChartBiomass             = "Biomass vs Time";
+     const QString      OutputChartBiomassAndCatch     = "Biomass & Catch vs Time";
      const QString      OutputChartHarvest             = "Harvest vs Time";
      const QString      OutputChartExploitation        = "Exploitation Rate";
      const QString      OutputChartExploitationCatchAverageTitle = "Exploitation Rate Ave(C/Bc)";

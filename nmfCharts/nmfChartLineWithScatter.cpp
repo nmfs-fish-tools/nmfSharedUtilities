@@ -46,6 +46,7 @@ nmfChartLineWithScatter::populateChart(
 
     int XStartVal = (showFirstPoint) ? 0 : 1;
     XStartVal += XOffset;
+    m_FirstYear = XStartVal;
 
     // Set chart attributes
     QFont mainTitleFont = chart->titleFont();
@@ -55,6 +56,8 @@ nmfChartLineWithScatter::populateChart(
     chart->setTitle(QString::fromStdString(mainTitle));
     chart->legend()->hide();
     chart->setTheme(static_cast<QChart::ChartTheme>(theme));
+    m_Chart = chart;
+    m_NumYears = ScatterData.size1();
 
     // Load data into series and then add series to the chart
     numPointsInLine = YAxisData.size1();
@@ -107,6 +110,7 @@ nmfChartLineWithScatter::populateChart(
         if (m_tooltips.size() > 0) {
             m_tooltips[scatterSeriesName] = scatterSeriesName; //"Deep Sky Blue";
         }
+        m_ScatterSeries = scatterSeries;
 
         disconnect(scatterSeries,0,0,0);
         connect(scatterSeries, SIGNAL(hovered(const QPointF&,bool)),
@@ -187,7 +191,8 @@ nmfChartLineWithScatter::callback_hoveredLine(const QPointF& point, bool hovered
     QPoint pos = QCursor::pos();
 
     if (hovered) {
-        tooltip = m_tooltips[qobject_cast<QLineSeries* >(QObject::sender())->name()];
+//      tooltip = m_tooltips[qobject_cast<QLineSeries* >(QObject::sender())->name()];
+        tooltip = "(" + QString::number(point.x()) + "," + QString::number(point.y()) + ")";
 
         // Workaround code to keep tooltip up for 2 seconds.  See note below.
         m_CustomToolTip->move(pos.x(),pos.y()-20);
@@ -212,12 +217,13 @@ nmfChartLineWithScatter::callback_hoveredScatter(const QPointF& point, bool hove
     QPoint pos = QCursor::pos();
 
     if (hovered) {
-        tooltip = m_tooltips[qobject_cast<QScatterSeries* >(QObject::sender())->name()];
+        //tooltip = m_tooltips[qobject_cast<QScatterSeries* >(QObject::sender())->name()];
+        tooltip = "(" + QString::number(point.x()) + "," + QString::number(point.y()) + ")";
         m_CustomToolTip->move(pos.x(),pos.y()-20);
         m_CustomToolTip->setLabel(tooltip);
         m_CustomToolTip->show();
         QTimer::singleShot(nmfConstantsMSSPM::ToolTipDuration, this, SLOT(callback_hideTooltip()));
-        // QToolTip::showText(pos, tooltip, nullptr, QRect(), 2000);
+//      QToolTip::showText(pos, tooltip, nullptr, QRect(), 5000);
     } else {
         // QToolTip::hideText();
         m_CustomToolTip->hide();

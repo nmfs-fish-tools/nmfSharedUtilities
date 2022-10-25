@@ -34,6 +34,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <map>
 #include <string>
 #include <vector>
 
@@ -279,6 +280,26 @@ namespace nmfUtilsQt {
             QStandardItemModel* smodelMin,
             QStandardItemModel* smodelMax,
             QString& badCell);
+    /**
+     * @brief buildColumnMap - builds a species column name to number map
+     * @param logger : logger pointer to log any errors
+     * @param smodel : the tableview's model from which to extract the column names
+     * @param columnMap : column map to return the name-number map information
+     */
+    void buildColumnMap(
+            nmfLogger* logger,
+            QStandardItemModel* smodel,
+            std::map<QString,int>& columnMap);
+    /**
+     * @brief buildColumnMap - builds a species column name to number map
+     * @param logger : logger pointer to log any errors
+     * @param tableW : table widget from which to extract column names
+     * @param columnMap : column map to return the name-number map information
+     */
+    void buildColumnMap(
+            nmfLogger* logger,
+            QTableWidget* tableW,
+            std::map<QString,int>& columnMap);
     /**
      * @brief Calculates the sum of the widths of the column range
      * @param tableview : tableview whose column widths are to be measured
@@ -576,6 +597,7 @@ namespace nmfUtilsQt {
      * @brief Load a non time series .csv file into a QTableView
      * @param parentTabWidget : parent tab containing the QTableView object
      * @param smodel: the QTableView model that will contains the .csv data
+     * @param columnMap : map of column name to column number
 //   * @param tableView : QTableView that will contain the .csv data
      * @param type : type of tableview (i.e., "Guild" or "Species")
      * @param inputDataPath : default path for the input .csv file
@@ -586,8 +608,8 @@ namespace nmfUtilsQt {
      * @return : Boolean signifying a successful load (true) or an unsuccessful load (false)
      */
     bool loadGuildsSpeciesTableview(QTabWidget* parentTabWidget,
-                                    //QTableView* tableView,
                                     QStandardItemModel* smodel,
+                                    std::map<QString,int>& columnMap,
                                     const QString& type,
                                     const QString& inputDataPath,
                                     const QString& inputFilename,
@@ -825,6 +847,7 @@ namespace nmfUtilsQt {
      * csv file in the passed directory
      * @param parentTabWidget : parent table widget of table to be saved
      * @param smodel : table model containing data to be saved
+     * @param columnMap : maps column name to column number
      * @param inputDataPath : default path where .csv file is to be saved
      * @param outputFilename : name of the output filename with path
      * @param SpeciesName : list of Species names
@@ -834,15 +857,17 @@ namespace nmfUtilsQt {
      * @param SpeciesK : list of species carrying capacities
      * @return true/false denoting successful or unsuccessful save
      */
-    bool saveSpeciesTableView(QTabWidget* parentTabWidget,
-                              QStandardItemModel* smodel,
-                              QString& inputDataPath,
-                              QString& outputFilename,
-                              QList<QString>& SpeciesName,
-                              QList<QString>& SpeciesGuild,
-                              QList<QString>& SpeciesInitialBiomass,
-                              QList<QString>& SpeciesGrowthRate,
-                              QList<QString>& SpeciesK);
+    bool saveSpeciesTableView(
+            QTabWidget* parentTabWidget,
+            QStandardItemModel* smodel,
+            std::map<QString,int>& columnMap,
+            QString& inputDataPath,
+            QString& outputFilename,
+            QList<QString>& SpeciesName,
+            QList<QString>& SpeciesGuild,
+            QList<QString>& SpeciesInitialBiomass,
+            QList<QString>& SpeciesGrowthRate,
+            QList<QString>& SpeciesK);
     /**
      * @brief Saves the data in the passed model to a csv file in the passed directory
      * @param parentTabWidget : parent table widget of table to be saved

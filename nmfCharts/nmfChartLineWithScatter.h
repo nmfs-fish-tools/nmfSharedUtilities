@@ -30,6 +30,7 @@
 #pragma once
 
 #include <QChart>
+#include <QGraphicsView>
 #include <QLine>
 #include <QLineSeries>
 #include <QScatterSeries>
@@ -64,6 +65,10 @@ class nmfChartLineWithScatter : public QObject
 private:
     std::map<QString,QString> m_tooltips;
     nmfToolTip*               m_CustomToolTip;
+    QChart*                   m_Chart;
+    QScatterSeries*           m_ScatterSeries;
+    int                       m_NumYears;
+    int                       m_FirstYear;
 
 public:
     /**

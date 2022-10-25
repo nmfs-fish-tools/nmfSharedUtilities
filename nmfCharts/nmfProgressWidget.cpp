@@ -60,6 +60,7 @@ nmfProgressWidget::nmfProgressWidget(QTimer* timer,
     controlsGB  = new QGroupBox();
     statusLBL   = new QLabel();
     timeLBL     = new QLabel("Elapsed Time:");
+    tolLBL      = new QLabel("Min Tol:");
     pointLBL    = new QLabel("Points:");
     markersCB   = new QCheckBox("Markers");
     labelsCB    = new QCheckBox("Labels");
@@ -70,6 +71,7 @@ nmfProgressWidget::nmfProgressWidget(QTimer* timer,
     rangeSetPB  = new QPushButton("[↕]");
     runStatusLBL= new QLabel("Completed (Run, SubRun):");
     timeLE      = new QLineEdit();
+    tolLE       = new QLineEdit();
     runLE       = new QLineEdit();
     subRunLE    = new QLineEdit();
     rangeLBL    = new QLabel("Iterations (X) Axis:");
@@ -81,10 +83,16 @@ nmfProgressWidget::nmfProgressWidget(QTimer* timer,
     stopPB      = new QPushButton("Stop");
 
     // Setup widgets
-    timeLBL->setFixedWidth(100);
+    clearPB->setFixedWidth(110);
+    stopPB->setFixedWidth(110);
+    timeLBL->setFixedWidth(80);
     timeLE->setFixedWidth(80);
     timeLE->setReadOnly(true);
-    pointLBL->setFixedWidth(100);
+    tolLBL->setFixedWidth(50);
+    tolLBL->setAlignment(Qt::AlignRight);
+    tolLE->setFixedWidth(60);
+    tolLE->setReadOnly(true);
+    pointLBL->setFixedWidth(70);
     m_yAxisAdjusted = false;
     yMinSB->setDecimals(2);
     yMaxSB->setDecimals(2);
@@ -106,6 +114,8 @@ nmfProgressWidget::nmfProgressWidget(QTimer* timer,
     subRunLE->clear();
     timeLBL->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
     timeLE->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
+    tolLBL->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
+    tolLE->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
     runLE->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
     subRunLE->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
 
@@ -128,7 +138,9 @@ nmfProgressWidget::nmfProgressWidget(QTimer* timer,
     buttonLayt->addWidget(stopPB);
     timeLayt->addWidget(timeLBL);
     timeLayt->addWidget(timeLE);
-    timeLayt->addSpacerItem(new QSpacerItem(95,1,QSizePolicy::Fixed,QSizePolicy::Fixed));
+    timeLayt->addWidget(tolLBL);
+    timeLayt->addWidget(tolLE);
+//    timeLayt->addSpacerItem(new QSpacerItem(95,1,QSizePolicy::Fixed,QSizePolicy::Fixed));
     pointsLayt->addWidget(pointLBL);
     pointsLayt->addWidget(markersCB);
     pointsLayt->addWidget(labelsCB);
@@ -184,7 +196,17 @@ nmfProgressWidget::nmfProgressWidget(QTimer* timer,
     timeLBL->setToolTip("The current run's elapsed time in hh:mm:ss format");
     timeLBL->setStatusTip("The current run's elapsed time in hh:mm:ss format");
     timeLE->setToolTip("The current run's elapsed time in hh:mm:ss format");
-    timeLE->setStatusTip("The current run's elapsed time in hh:mm:ss format");
+    timeLE->setStatusTip("The current run's minimum tolerance");
+    tolLBL->setToolTip("The fitness tolerance value (i.e., abs(currentFitness-previousFitness))");
+    tolLBL->setStatusTip("The fitness tolerance value (i.e., abs(currentFitness-previousFitness))");
+    tolLE->setToolTip("The fitness tolerance value (i.e., abs(currentFitness-previousFitness))");
+    tolLE->setStatusTip("The fitness tolerance value (i.e., abs(currentFitness-previousFitness))");
+    whatsThis = "<strong><center>Tolerance</center></strong><p> ";
+    whatsThis += "The tolerance is defined as the difference between the current iteration of the objective ";
+    whatsThis += "function's fitness value and the previous value. The label shows only the smallest ";
+    whatsThis += "tolerance reached so far in the current model run.</p>";
+    tolLBL->setWhatsThis(whatsThis);
+    tolLE->setWhatsThis(whatsThis);
 
     // Show empty grid
     QValueAxis  *newXAxis  = new QValueAxis();
@@ -286,6 +308,12 @@ nmfProgressWidget::clearTime()
     timeLE->setText("");
 }
 
+void
+nmfProgressWidget::clearTolerance()
+{
+    tolLE->setText("");
+}
+
 std::string
 nmfProgressWidget::getElapsedTime()
 {
@@ -384,6 +412,12 @@ nmfProgressWidget::isStopped()
 } // end isStopped
 
 void
+nmfProgressWidget::setTolerance(double tol)
+{
+    tolLE->setText(QString::number(tol,'E',1));
+}
+
+void
 nmfProgressWidget::readChartDataFile(std::string type,
                                      std::string inputFileName,
                                      std::string inputLabelFileName,
@@ -466,6 +500,10 @@ nmfProgressWidget::readChartDataFile(std::string type,
                     strVector.clear();
                     strVector.push_back(validLines[i]);
                     theRunName = parts[0];
+                }
+                if (tolLE->text().isEmpty() ||
+                      QString::fromStdString(parts[3]).toDouble() < tolLE->text().toDouble()) {
+                   setTolerance(QString::fromStdString(parts[3]).toDouble());
                 }
             }
             chartData.push_back(strVector);
@@ -733,7 +771,6 @@ nmfProgressWidget::setupConnections()
     connect(yMaxSB,     SIGNAL(valueChanged(double)), this, SLOT(callback_yMaxSB(double)));
     connect(rangeSetPB, SIGNAL(clicked()),            this, SLOT(callback_rangeSetPB()));
     connect(validPointsCB, SIGNAL(clicked(bool)),     this, SLOT(callback_validPointsCB(bool)));
-
 } // end SetupConnections
 
 
@@ -868,6 +905,7 @@ nmfProgressWidget::startTimer(int delayMillisec)
     startRun();
 
     clearTime();
+    clearTolerance();
 }
 
 void
@@ -879,37 +917,27 @@ nmfProgressWidget::stopTimer()
 }
 
 void
-nmfProgressWidget::stopAllRuns(bool verbose)
+nmfProgressWidget::callback_stopPB()
+{
+    stopAllRuns();
+}
+
+void
+nmfProgressWidget::stopAllRuns()
 {
     m_logger->logMsg(nmfConstants::Normal,"nmfProgressWidget::stopAllRuns " + m_RunType + " Progress Chart Timer");
 
     writeToStopRunFile();
     m_wasStopped = true;
 
-std::cout << "=== === ===> nmfProgressWidget::stopAllRuns emitting StopAllEstimationRuns" << std::endl;
     emit StopAllRuns();
 
     QApplication::restoreOverrideCursor();
-
-    if (verbose) {
-        QMessageBox msgBox;
-        msgBox.setWindowTitle("Stop Run");
-        msgBox.setText("\nUser halted all run(s).\n");
-        msgBox.setStandardButtons(QMessageBox::Ok);
-        msgBox.setIcon(QMessageBox::Information);
-        msgBox.exec();
-    }
 
     callback_clearPB();
     m_wasStopped = false;
     writeToStopRunFile();
 
-/*
-    if (! wasStopped()) {
-        emit StopTheRun();
-        writeToStopRunFile();
-        m_wasStopped = true;
-*/
     if (m_RunType == "MSSPM") {
         updateChartDataLabel(nmfConstantsMSSPM::MSSPMProgressChartLabelFile,
                              "<b>Status:&nbsp;&nbsp;</b>User halted MSSPM run. Output data incomplete.");
@@ -920,10 +948,7 @@ std::cout << "=== === ===> nmfProgressWidget::stopAllRuns emitting StopAllEstima
         updateChartDataLabel(nmfConstantsMSVPA::ForecastProgressChartLabelFile,
                              "<b>Status:&nbsp;&nbsp;</b>User halted Forecast run. Output data incomplete.");
     }
-/*
-    }
-*/
-} // end callback_stopPB
+}
 
 void
 nmfProgressWidget::updateChart()
@@ -1130,11 +1155,6 @@ nmfProgressWidget::callback_rangeSetPB()
 //    }
 //} // end callback_scatterSeriesHovered
 
-void
-nmfProgressWidget::callback_stopPB()
-{
-    stopAllRuns(true);
-}
 
 void
 nmfProgressWidget::callback_validPointsCB(bool checked)

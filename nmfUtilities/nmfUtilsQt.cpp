@@ -584,6 +584,34 @@ bool areAllInitialCellsWithinRange(
     return true;
 }
 
+void buildColumnMap(
+        nmfLogger* logger,
+        QStandardItemModel* smodel,
+        std::map<QString,int>& columnMap)
+{
+    int columnNumber = 0;
+    int numCols = smodel->columnCount();
+
+    while (columnNumber < numCols) {
+        columnMap[smodel->horizontalHeaderItem(columnNumber)->text()] = columnNumber;
+        ++columnNumber;
+    }
+}
+
+void buildColumnMap(
+        nmfLogger* logger,
+        QTableWidget* tableW,
+        std::map<QString,int>& columnMap)
+{
+    int columnNumber = 0;
+    int numCols = tableW->columnCount();
+
+    while (columnNumber < numCols) {
+        columnMap[tableW->horizontalHeaderItem(columnNumber)->text()] = columnNumber;
+        ++columnNumber;
+    }
+}
+
 /*
  * This doesn't actually rename a file.  It copies the first
  * to the second.  I did this as the std:rename function didn't
@@ -1654,6 +1682,7 @@ loadTableWidgetData(QTabWidget* parentTabWidget,
 bool
 loadGuildsSpeciesTableview(QTabWidget* parentTabWidget,
                            QStandardItemModel* smodel,
+                           std::map<QString,int>& columnMap,
                            const QString& type,
                            const QString& inputDataPath,
                            const QString& inputFilename,
@@ -1670,7 +1699,6 @@ loadGuildsSpeciesTableview(QTabWidget* parentTabWidget,
     QStringList dataParts;
     QStringList ColumnLabelList  = {};
     QStandardItem* item;
-    //QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(tableView->model());
     errorMsg.clear();
     SpeciesGuilds.clear();
     QLocale locale(QLocale::English);
@@ -1713,7 +1741,7 @@ loadGuildsSpeciesTableview(QTabWidget* parentTabWidget,
                         dataParts.removeAt(nmfConstantsMSSPM::Column_Species_Guild);
                     }
                     for (int j=0; j<dataParts.count(); ++j) {
-                        if (j > 0) {
+                        if (j != columnMap["SpeName"]) {
                             valueWithComma = locale.toString(dataParts[j].toDouble());
                             item = new QStandardItem(valueWithComma);
                         } else {
@@ -1724,8 +1752,6 @@ loadGuildsSpeciesTableview(QTabWidget* parentTabWidget,
                     }
                 }
                 smodel->setHorizontalHeaderLabels(ColumnLabelList);
-                //tableView->setModel(smodel);
-                //tableView->resizeColumnsToContents();
             } else {
                 errorMsg = "Error: table size from .csv file (" +
                         QString::number(numLines) + "x" + QString::number(numColumns) +
@@ -2051,15 +2077,17 @@ saveTableWidgetData(QTabWidget* parentTabWidget,
 }
 
 bool
-saveSpeciesTableView(QTabWidget* parentTabWidget,
-                     QStandardItemModel* smodel,
-                     QString& inputDataPath,
-                     QString& outputFilename,
-                     QList<QString>& SpeciesName,
-                     QList<QString>& SpeciesGuild,
-                     QList<QString>& SpeciesInitialBiomass,
-                     QList<QString>& SpeciesGrowthRate,
-                     QList<QString>& SpeciesK)
+saveSpeciesTableView(
+        QTabWidget* parentTabWidget,
+        QStandardItemModel* smodel,
+        std::map<QString,int>& columnNumberMap,
+        QString& inputDataPath,
+        QString& outputFilename,
+        QList<QString>& SpeciesName,
+        QList<QString>& SpeciesGuild,
+        QList<QString>& SpeciesInitialBiomass,
+        QList<QString>& SpeciesGrowthRate,
+        QList<QString>& SpeciesK)
 {
     bool retv = true;
     bool fromTableWidget = (SpeciesName.size() != 0);
@@ -2084,23 +2112,29 @@ saveSpeciesTableView(QTabWidget* parentTabWidget,
             QTextStream stream(&file);
             int numRows = smodel->rowCount();
             int numCols = smodel->columnCount();
-            stream << smodel->headerData(0,Qt::Horizontal).toString() << ",Guild";
-            for (int col=1; col<numCols; ++col) {
-                stream << "," << smodel->headerData(col,Qt::Horizontal).toString();
+            for (int col=0; col<numCols; ++col) {
+                if (col == columnNumberMap["SpeName"]) {
+                    stream << smodel->headerData(columnNumberMap["SpeName"],Qt::Horizontal).toString() << ",Guild";
+                } else {
+                    stream << smodel->headerData(col,Qt::Horizontal).toString();
+                }
+                if (col < numCols-1) {
+                    stream << ",";
+                }
             }
             stream << "\n";
             for (int row=0; row<numRows; ++row) {
                 for (int col=0; col<numCols; ++col) {
                     if (fromTableWidget) {
-                        if (col == nmfConstantsMSSPM::Column_Supp_Species_Name) {
+                        if (col == columnNumberMap["SpeName"]) {
                             value = SpeciesName[row];
                             stream << value << ",";
                             value = SpeciesGuild[row];
-                        } else if (col == nmfConstantsMSSPM::Column_Supp_Species_InitBiomass) {
+                        } else if (col == columnNumberMap["InitBiomass"]) {
                             value = SpeciesInitialBiomass[row];
-                        } else if (col == nmfConstantsMSSPM::Column_Supp_Species_GrowthRate) {
+                        } else if (col == columnNumberMap["GrowthRate"]) {
                             value = SpeciesGrowthRate[row];
-                        } else if (col == nmfConstantsMSSPM::Column_Supp_Species_CarryingCapacity) {
+                        } else if (col == columnNumberMap["SpeciesKMin"]) {
                             value = SpeciesK[row];
                         } else {
                             valueWithoutComma = smodel->index(row,col).data().toString().remove(",");
@@ -2109,7 +2143,7 @@ saveSpeciesTableView(QTabWidget* parentTabWidget,
                     } else {
                         valueWithoutComma = smodel->index(row,col).data().toString().remove(",");
                         value = valueWithoutComma;
-                        if (col == nmfConstantsMSSPM::Column_Supp_Species_Name) {
+                        if (col == columnNumberMap["SpeName"]) {
                             stream << value << ",";
                             value = SpeciesGuild[row];
                         }
@@ -2678,11 +2712,12 @@ reloadDataStruct(nmfStructsQt::ModelDataStruct& dataStruct,
     dataStruct.BeesNumRepetitions    = parts[12].toInt();
 
     dataStruct.NLoptUseStopVal       = parts[14].toInt();
-    dataStruct.NLoptStopVal          = parts[15].toInt();
+    dataStruct.NLoptStopVal          = parts[15].toDouble();
     dataStruct.NLoptUseStopAfterTime = parts[17].toInt();
     dataStruct.NLoptStopAfterTime    = parts[18].toInt();
     dataStruct.NLoptUseStopAfterIter = parts[20].toInt();
     dataStruct.NLoptStopAfterIter    = parts[21].toInt();
+    // tbd add NLoptInitialPopulationSize as double
 
     dataStruct.EstimateRunBoxes.clear();
     int startIndex = 22;
