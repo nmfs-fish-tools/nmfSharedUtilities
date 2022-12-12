@@ -901,11 +901,11 @@ double calculateMean(
 
     for (int time=0; time<numYears; ++time) {
         if (ObsBiomass(time,speciesNum) != nmfConstantsMSSPM::NoData) {
-            if (useLogData) {
-                sumObsBiomassPerSpecies += std::log(ObsBiomass(time,speciesNum));
-            } else {
+//            if (useLogData) {
+//                sumObsBiomassPerSpecies += std::log(ObsBiomass(time,speciesNum));
+//            } else {
                 sumObsBiomassPerSpecies += ObsBiomass(time,speciesNum);
-            }
+//            }
             ++numYearsWithData;
         }
     }
@@ -926,14 +926,15 @@ std::vector<double> calculateSigmasSquared(
 
     for (int species=0; species<(int)ObsBiomass.size2(); ++species) {
 
-        mu = calculateMean(nmfConstantsMSSPM::UseLogData,ObsBiomass,species);
+        mu = calculateMean(nmfConstantsMSSPM::DontUseLogData,ObsBiomass,species);
 
         // Calculate the sum of the squares of the observed biomass and its mean
         sumSq = 0;
         NumPoints = 0;
         for (int time=0; time<numYears; ++time) {
             if (ObsBiomass(time,species) != nmfConstantsMSSPM::NoData) {
-                diff   = std::log(ObsBiomass(time,species)) - mu;
+//              diff   = std::log(ObsBiomass(time,species)) - mu;
+                diff   = ObsBiomass(time,species) - mu;
                 sumSq += diff*diff;
                 ++NumPoints;
             }
@@ -975,15 +976,17 @@ double calculateMaximumLikelihoodNoRescale(
             biomassWeight = FitWeights(species,0);
             catchWeight   = FitWeights(species,1);
         }
-        mleBiomass =                        calculateMaximumLikelihoodNoRescale(species,ObsBiomass,EstBiomass);
-        mleCatch   = (isEffortFitToCatch) ? calculateMaximumLikelihoodNoRescale(species,ObsCatch,  EstCatch) : 0;
-        totalMLEForAllSpecies += speciesWeights[species]*(biomassWeight*mleBiomass + catchWeight*mleCatch);
+
+        mleBiomass = calculateMaximumLikelihoodNoRescale(speciesWeights,species,ObsBiomass,EstBiomass);
+        mleCatch   = (isEffortFitToCatch) ? calculateMaximumLikelihoodNoRescale(speciesWeights,species,ObsCatch,EstCatch) : 0;
+        totalMLEForAllSpecies += speciesWeights(species) * ( biomassWeight*mleBiomass + catchWeight*mleCatch );
     }
 
     return -totalMLEForAllSpecies;
 }
 
 double calculateMaximumLikelihoodNoRescale(
+        const boost::numeric::ublas::vector<double>& speciesWeights,
         const int& species,
         const boost::numeric::ublas::matrix<double>& ObsMatrix,
         const boost::numeric::ublas::matrix<double>& EstMatrix)
@@ -995,12 +998,13 @@ double calculateMaximumLikelihoodNoRescale(
     double sumSquares = 0;
     double numPoints  = 0; // Not equal to numYears if there are blanks in observed biomass
     double ObsMinusEstOverSigma;
-    double mu = calculateMean(nmfConstantsMSSPM::DontUseLogData,ObsMatrix,species);
+    double muCurrentSpecies = calculateMean(nmfConstantsMSSPM::DontUseLogData,ObsMatrix,species);
 
     // Calculate the sum of the squares of the observed biomass and its mean
     for (int time=0; time<numYears; ++time) {
         if (ObsMatrix(time,species) != nmfConstantsMSSPM::NoData) {
-            diff = ObsMatrix(time,species) - mu;
+            diff = ObsMatrix(time,species) - muCurrentSpecies;
+//          diff = speciesWeights(species)*(ObsMatrix(time,species) - muCurrentSpecies);
             sumSquares += diff*diff;
             ++numPoints;
         }
@@ -1014,22 +1018,14 @@ double calculateMaximumLikelihoodNoRescale(
     }
 
     // Calculate MLE
-    bool useLogNormal = false; // RSK - todo - implement this in the GUI
     for (int time=0; time<numYears; ++time) {
         if (ObsMatrix(time,species) != nmfConstantsMSSPM::NoData) {
-            if (useLogNormal) {
-                diff = std::log(ObsMatrix(time,species)) - std::log(EstMatrix(time,species));
-                ObsMinusEstOverSigma = diff / sigma;
-                mlePerSpecies += -(ObsMatrix(time,species) +
-                                   nmfConstants::HalfLogRoot2PI + // I could leave this term off, but am including it here for clarity
-                                   0.5*ObsMinusEstOverSigma*ObsMinusEstOverSigma +
-                                   log(sigma));
-            } else {
-                ObsMinusEstOverSigma = diff / sigma;
-                mlePerSpecies += -(nmfConstants::HalfLogRoot2PI + // I could leave this term off, but am including it here for clarity
-                                   0.5*ObsMinusEstOverSigma*ObsMinusEstOverSigma +
-                                   log(sigma));
-            }
+//          diff = speciesWeights(species)*(ObsMatrix(time,species) - EstMatrix(time,species));
+            diff = ObsMatrix(time,species) - EstMatrix(time,species);
+            ObsMinusEstOverSigma = diff / sigma;
+            mlePerSpecies += -(nmfConstants::LogRoot2PI + // I could leave this term off, but am including it here for clarity
+                               0.5*ObsMinusEstOverSigma*ObsMinusEstOverSigma +
+                               log(sigma));
         }
     }
 
@@ -1061,12 +1057,12 @@ double calculateModelEfficiency(
             biomassWeight = FitWeights(species,0);
             catchWeight   = FitWeights(species,1);
             if (ObsBiomass(time,species) != nmfConstantsMSSPM::NoData) {
-                diff1 = ObsBiomass(time,species) - EstBiomass(time,species);
-                diff2 = (isEffortFitToCatch) ? ObsCatch(time,species) - EstCatch(time,species) : 0;
-                sumSquares += speciesWeights[species]*(biomassWeight*(diff1*diff1) + catchWeight*(diff2*diff2));
-                diff1 = ObsBiomass(time,species) - meanObsBiomass;
-                diff2 = (isEffortFitToCatch) ? ObsCatch(time,species) - meanObsCatch : 0;
-                deviation += speciesWeights[species]*(biomassWeight*(diff1*diff1) + catchWeight*(diff2*diff2));
+                diff1 = speciesWeights(species)*(ObsBiomass(time,species)-EstBiomass(time,species));
+                diff2 = (isEffortFitToCatch) ? speciesWeights(species)*(ObsCatch(time,species)-EstCatch(time,species)) : 0;
+                sumSquares += biomassWeight*(diff1*diff1) + catchWeight*(diff2*diff2);
+                diff1 = speciesWeights(species)*(ObsBiomass(time,species)-meanObsBiomass);
+                diff2 = (isEffortFitToCatch) ? speciesWeights(species)*(ObsCatch(time,species)-meanObsCatch) : 0;;
+                deviation += biomassWeight*(diff1*diff1) + catchWeight*(diff2*diff2);
             }
         }
     }
@@ -1100,13 +1096,15 @@ double calculateLeastSquares(
         for (unsigned species=0; species<EstBiomass.size2(); ++species) {
             biomassWeight = FitWeights(species,0);
             catchWeight   = FitWeights(species,1);
+
             if (ObsBiomass(time,species) != nmfConstantsMSSPM::NoData) {
+
                 // These values have all been rescaled
-                diff1         = ObsBiomass(time,species) - EstBiomass(time,species);
-                diff2         = (isEffortFitToCatch) ? ObsCatch(time,species) - EstCatch(time,species) : 0;
+                diff1         = speciesWeights(species)*(ObsBiomass(time,species)-EstBiomass(time,species));
+                diff2         = (isEffortFitToCatch) ? speciesWeights(species)*(ObsCatch(time,species)-EstCatch(time,species)) : 0;
                 biomassWeight = (isEffortFitToCatch) ? biomassWeight : 1.0;
                 // This will do an average of biomass and catch sum of the squares
-                sumSquares += speciesWeights[species]*(biomassWeight*(diff1*diff1) + catchWeight*(diff2*diff2));
+                sumSquares += biomassWeight*(diff1*diff1) + catchWeight*(diff2*diff2);
             }
         }
     }

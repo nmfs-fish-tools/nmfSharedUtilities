@@ -58,6 +58,7 @@ private:
             const std::string& CovariateAlgorithmType,
             const double& BiomassAtTime,
             const double& EstGrowthRate,
+            const double& EstGrowthRateShape,
             const double& EstGrowthRateCovariateCoeff,
             const double& GrowthRateCovariate,
             const double& EstCarryingCapacity,
@@ -81,6 +82,7 @@ public:
      * @param CovariateAlgorithmType : the covariate algorithm type to use for subsequent covariate calculations
      * @param BiomassAtTime : biomass at the currrent time
      * @param EstGrowthRate : estimated growth rate value
+     * @param EstGrowthRateShape : estimated growth rate shape parameter value
      * @param EstGrowthRateCovariateCoeff : estimated growth rate covariate coefficient value
      * @param GrowthRateCovariate : growth rate covariate value
      * @param EstCarryingCapacity : estimated carrying capacity values
@@ -91,6 +93,7 @@ public:
     double evaluate(const std::string& CovariateAlgorithmType,
                     const double& BiomassAtTime,
                     const double& EstGrowthRate,
+                    const double& EstGrowthRateShape,
                     const double& EstGrowthRateCovariateCoeff,
                     const double& GrowthRateCovariate,
                     const double& EstCarryingCapacity,
@@ -101,6 +104,7 @@ public:
      * @param Parameters : vector of all Growth parameter values
      * @param StartPos : start position from which to extract parameters
      * @param GrowthRate : growth rate parameters
+     * @param GrowthRateShape : growth rate shape parameters
      * @param GrowthRateCovariateCoeff : growth rate covariate coefficient parameters
      * @param CarryingCapacity : carrying capacity parameters
      * @param CarryingCapacityCovariateCoeff : carrying capacity covariate coefficient parameters
@@ -109,6 +113,7 @@ public:
             const std::vector<double>& Parameters,
             int& StartPos,
             std::vector<double>& GrowthRate,
+            std::vector<double>& GrowthRateShape,
             std::vector<double>& GrowthRateCovariateCoeff,
             std::vector<double>& CarryingCapacity,
             std::vector<double>& CarryingCapacityCovariateCoeff,
@@ -118,6 +123,7 @@ public:
      * @param CovariateAlgorithmType : the covariate algorithm type to use for subsequent covariate calculations
      * @param BiomassAtTime : biomass at the currrent time
      * @param EstGrowthRate : estimated growth rate value
+     * @param EstGrowthRateShape : estimated growth rate shape parameter value
      * @param EstGrowthRateCovariateCoeff : estimated growth rate covariate coefficient value
      * @param GrowthRateCovariate : growth rate covariate values
      * @param EstCarryingCapacity : estimated carrying capacity value
@@ -128,6 +134,7 @@ public:
     double FunctionMap_Linear(const std::string& CovariateAlgorithmType,
                               const double& BiomassAtTime,
                               const double& EstGrowthRate,
+                              const double& EstGrowthRateShape,
                               const double& EstGrowthRateCovariateCoeff,
                               const double& GrowthRateCovariate,
                               const double& EstCarryingCapacity,
@@ -138,6 +145,7 @@ public:
      * @param CovariateAlgorithmType : the covariate algorithm type to use for subsequent covariate calculations
      * @param BiomassAtTime : biomass at the currrent time
      * @param EstGrowthRate : estimated growth rate value
+     * @param EstGrowthRateShape : estimated growth rate shape parameter value
      * @param EstGrowthRateCovariateCoeff : estimated growth rate covariate coefficient value
      * @param GrowthRateCovariate : growth rate covariate value
      * @param EstCarryingCapacity : estimated carrying capacity values
@@ -148,6 +156,7 @@ public:
     double FunctionMap_Logistic(const std::string& CovariateAlgorithmType,
                                 const double& BiomassAtTime,
                                 const double& EstGrowthRate,
+                                const double& EstGrowthRateShape,
                                 const double& EstGrowthRateCovariateCoeff,
                                 const double& GrowthRateCovariate,
                                 const double& EstCarryingCapacity,
@@ -158,6 +167,7 @@ public:
      * @param CovariateAlgorithmType : the covariate algorithm type to use for subsequent covariate calculations
      * @param BiomassAtTime : biomass at the currrent time
      * @param EstGrowthRate : estimated growth rate value
+     * @param EstGrowthRateShape : estimated growth rate shape parameter value
      * @param EstGrowthRateCovariateCoeff : estimated growth rate covariate coefficient value
      * @param GrowthRateCovariate : growth rate covariate value
      * @param EstCarryingCapacity : estimated carrying capacity values
@@ -168,6 +178,7 @@ public:
     double FunctionMap_Null(const std::string& CovariateAlgorithmType,
                             const double& BiomassAtTime,
                             const double& EstGrowthRate,
+                            const double& EstGrowthRateShape,
                             const double& EstGrowthRateCovariateCoeff,
                             const double& GrowthRateCovariate,
                             const double& EstCarryingCapacity,

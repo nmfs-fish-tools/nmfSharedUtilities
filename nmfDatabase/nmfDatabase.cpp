@@ -243,8 +243,8 @@ std::string
 nmfDatabase::nmfUpdateDatabase(std::string qry)
 {
     //std::cout << "Updating database..." << std::endl;
-    QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery retv = db.exec(QString::fromStdString(qry));
+    QSqlDatabase db   = QSqlDatabase::database();
+    QSqlQuery    retv = db.exec(QString::fromStdString(qry));
 
     return retv.lastError().text().toStdString();
 }
@@ -2339,6 +2339,7 @@ nmfDatabase::updateForecastMonteCarloParameters(
         const QStringList&         Species,
         const int&                 RunNumber,
         const std::vector<double>& GrowthRateRandomValues,
+        const std::vector<double>& GrowthRateShapeRandomValues,
         const std::vector<double>& CarryingCapacityRandomValues,
         const std::vector<double>& CatchabilityRandomValues,
         const std::vector<double>& ExponentRandomValues,
@@ -2389,11 +2390,10 @@ nmfDatabase::updateForecastMonteCarloParameters(
         QMessageBox::warning(widget, "Error", msg, QMessageBox::Ok);
         return false;
     }
-
     saveCmd  = "INSERT INTO " +
                 tableName +
                " (ProjectName,ModelName,ForecastName,RunNum,Algorithm,Minimizer,ObjectiveCriterion,Scaling," +
-               "SpeName,GrowthRate,CarryingCapacity,Catchability," +
+               "SpeName,GrowthRate,GrowthRateShape,CarryingCapacity,Catchability," +
                "Exponent,CompetitionAlpha,CompetitionBetaSpecies,CompetitionBetaGuilds," +
                "CompetitionBetaGuildsGuilds,Predation,Handling," +
                "Harvest,GrowthRateCovCoeff,CarryingCapacityCovCoeff,CatchabilityCovCoeff,SurveyQCovCoeff) VALUES ";
@@ -2420,6 +2420,7 @@ nmfDatabase::updateForecastMonteCarloParameters(
                     "','" + Scaling +
                     "','" + Species[j].toStdString() +
                     "',"  + std::to_string(GrowthRateRandomValues[j]) +
+                    ","   + std::to_string(GrowthRateShapeRandomValues[j]) +
                     ","   + std::to_string(carryingCapacity) +
                     ","   + std::to_string(catchability) +
                     ","   + std::to_string(exponent) +
@@ -2982,6 +2983,7 @@ nmfDatabase::getSpeciesInitialData(nmfLogger* Logger,
                                    QStringList& SpeciesList,
                                    std::vector<double>& InitBiomass,
                                    std::vector<double>& GrowthRate,
+                                   std::vector<double>& GrowthRateShape,
                                    std::vector<double>& SpeciesK)
 {
     std::vector<std::string> fields;
@@ -2993,8 +2995,8 @@ nmfDatabase::getSpeciesInitialData(nmfLogger* Logger,
     GrowthRate.clear();
     SpeciesK.clear();
 
-    fields   = {"SpeName","InitBiomass","GrowthRate","SpeciesK"};
-    queryStr = "SELECT SpeName,InitBiomass,GrowthRate,SpeciesK from " +
+    fields   = {"SpeName","InitBiomass","GrowthRate","GrowthRateShape","SpeciesK"};
+    queryStr = "SELECT SpeName,InitBiomass,GrowthRate,GrowthRateShape,SpeciesK from " +
                 nmfConstantsMSSPM::TableSpecies +
                " ORDER BY SpeName";
     dataMap  = nmfQueryDatabase(queryStr, fields);
@@ -3008,6 +3010,7 @@ nmfDatabase::getSpeciesInitialData(nmfLogger* Logger,
         SpeciesList << QString::fromStdString(dataMap["SpeName"][species]);
         InitBiomass.push_back(std::stod(dataMap["InitBiomass"][species]));
         GrowthRate.push_back(std::stod(dataMap["GrowthRate"][species]));
+        GrowthRateShape.push_back(std::stod(dataMap["GrowthRateShape"][species]));
         SpeciesK.push_back(std::stod(dataMap["SpeciesK"][species]));
     }
 
@@ -3115,9 +3118,11 @@ nmfDatabase::getVectorParameterNames(
     }
     if (dataMap["GrowthForm"][0] == "Linear") {
         parameterNames.removeAll("Carrying Capacity (K)");
+        parameterNames.removeAll("Growth Rate Shape (p)");
     }
     if (dataMap["GrowthForm"][0] == "Null") {
         parameterNames.removeAll("Growth Rate (r)");
+        parameterNames.removeAll("Growth Rate Shape (p)");
     }
     if (dataMap["HarvestForm"][0] == nmfConstantsMSSPM::HarvestCatch.toStdString()) {
         parameterNames.removeAll("Catchability (q)");

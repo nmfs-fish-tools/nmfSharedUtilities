@@ -18,7 +18,6 @@ BeesAlgorithm::BeesAlgorithm(nmfStructsQt::ModelDataStruct theBeeStruct,
     m_DefaultFitness =  99999;
     m_NullFitness    = -999;
     m_PreviousUnits  = theBeeStruct.PreviousUnits;
-    m_LastFitness    = 0;
 
     std::string growthForm      = theBeeStruct.GrowthForm;
     std::string harvestForm     = theBeeStruct.HarvestForm;
@@ -376,6 +375,7 @@ void
 BeesAlgorithm::extractGrowthParameters(const std::vector<double>& parameters,
                                        int&                       startPos,
                                        std::vector<double>&       growthRate,
+                                       std::vector<double>&       growthRateShape,
                                        std::vector<double>&       growthRateCovariateCoeffs,
                                        std::vector<double>&       carryingCapacity,
                                        std::vector<double>&       carryingCapacityCovariateCoeffs,
@@ -383,7 +383,7 @@ BeesAlgorithm::extractGrowthParameters(const std::vector<double>& parameters,
 {
     if ((m_GrowthForm != nullptr)) {
         m_GrowthForm->extractParameters(parameters,startPos,
-                                        growthRate,growthRateCovariateCoeffs,
+                                        growthRate,growthRateShape,growthRateCovariateCoeffs,
                                         carryingCapacity,carryingCapacityCovariateCoeffs,
                                         systemCarryingCapacity);
     }
@@ -494,6 +494,7 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     std::vector<double> sigmasSquared;
     std::vector<double> initBiomass;
     std::vector<double> growthRate;
+    std::vector<double> growthRateShape;
     std::vector<double> growthRateCovariateCoeffs;
     std::vector<double> carryingCapacity;
     std::vector<double> carryingCapacityCovariateCoeffs;
@@ -503,7 +504,6 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     std::vector<double> catchability;
     std::vector<double> surveyQ;
     std::vector<double> surveyQCovariateCoeffs;
-    boost::numeric::ublas::vector<double> speciesWeights = m_BeeStruct.SpeciesWeights;
     boost::numeric::ublas::matrix<double> initBiomassCovariate;
     boost::numeric::ublas::matrix<double> growthRateCovariate;
     boost::numeric::ublas::matrix<double> carryingCapacityCovariate;
@@ -560,8 +560,6 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     nmfUtilsQt::getCovariates(m_BeeStruct,NumYears,"CompetitionBetaGuildSpecies",   competitionBetaGuildSpeciesCovariate);
     nmfUtilsQt::getCovariates(m_BeeStruct,NumYears,"CompetitionBetaGuildGuild",     competitionBetaGuildGuildCovariate);
 
-    m_LastFitness = m_DefaultFitness;
-
     if (isAggProd) {
         NumSpeciesOrGuilds = NumGuilds;
         obsBiomassBySpeciesOrGuilds = m_BeeStruct.ObservedBiomassByGuilds;
@@ -574,7 +572,7 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     // Load the parameters into their respective data structures for use in the objective function.
     extractInitBiomass(parameters,startPos,initBiomass);
     m_GrowthForm->extractParameters(parameters,startPos,
-                                    growthRate,growthRateCovariateCoeffs,
+                                    growthRate,growthRateShape,growthRateCovariateCoeffs,
                                     carryingCapacity,carryingCapacityCovariateCoeffs,
                                     systemCarryingCapacity);
     m_HarvestForm->extractParameters(parameters,startPos,
@@ -656,6 +654,7 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
             GrowthTerm      = m_GrowthForm->evaluate(covariateAlgorithmType,
                                                      EstBiomassTMinus1,
                                                      growthRate[species],
+                                                     growthRateShape[species],
                                                      growthRateCovariateCoeffs[species],
                                                      growthRateCovariate(timeMinus1,species),
                                                      carryingCapacity[species],
@@ -752,7 +751,8 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     // Calculate fitness using the appropriate objective criterion
     if (m_BeeStruct.ObjectiveCriterion == "Least Squares") {
         fitness =  nmfUtilsStatistics::calculateLeastSquares(
-                    speciesWeights, isEffortFitToCatch,
+                    m_BeeStruct.SpeciesWeights,
+                    isEffortFitToCatch,
                     ObsCatchRescaled, ObsBiomassBySpeciesOrGuildsRescaled,
                     EstCatchRescaled, EstBiomassRescaled,
                     m_BeeStruct.FitWeights);
@@ -760,19 +760,21 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
         // Negate the MEF here since the ranges is from -inf to 1, where 1 is best.  So we negate it,
         // then minimize that, and then negate and plot the resulting value.
         fitness = -nmfUtilsStatistics::calculateModelEfficiency(
-                    speciesWeights, isEffortFitToCatch,
+                    m_BeeStruct.SpeciesWeights,
+                    isEffortFitToCatch,
                     ObsCatchRescaled, ObsBiomassBySpeciesOrGuildsRescaled,
                     EstCatchRescaled, EstBiomassRescaled,
                     m_BeeStruct.FitWeights);
     } else if (m_BeeStruct.ObjectiveCriterion == "Maximum Likelihood") {
         // The maximum likelihood calculations must use the unscaled data or else the
         // results will be incorrect.
-        // Ignore the previous comment. Allow scaling for maximum likelihood.
         fitness =  nmfUtilsStatistics::calculateMaximumLikelihoodNoRescale(
-                    speciesWeights, isEffortFitToCatch,
+                    m_BeeStruct.SpeciesWeights,
+                    isEffortFitToCatch,
                     ObsCatchRescaled, ObsBiomassBySpeciesOrGuildsRescaled,
                     EstCatchRescaled, EstBiomassRescaled,
                     m_BeeStruct.FitWeights);
+std::cout << "Warning....check this for using rescaled data with Max Likelihood" << std::endl;
     }
 
 // Debug code to print out the CarryingCapacity covariates
@@ -786,8 +788,6 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
 //    }
 //    m_MaxFitness = fitness;
 //}
-
-    m_LastFitness = fitness;
 
     return fitness;
 }
@@ -1049,7 +1049,6 @@ BeesAlgorithm::writeCurrentLoopFile(std::string &MSSPMName,
     double adjustedBestFitness; // May need negating if ObjCrit is Model Efficiency
     std::ofstream outputFile(nmfConstantsMSSPM::MSSPMProgressChartFile,
                              std::ios::out|std::ios::app);
-    double tolerance = std::fabs(BestFitness - m_LastFitness);
 
     adjustedBestFitness = BestFitness;
     //
@@ -1066,7 +1065,6 @@ BeesAlgorithm::writeCurrentLoopFile(std::string &MSSPMName,
     outputFile << MSSPMName   << ", "
                << NumGens     << ", "
                << adjustedBestFitness << ", "
-               << tolerance << ", "
                << NumGensSinceBestFit << std::endl;
 
     outputFile.close();

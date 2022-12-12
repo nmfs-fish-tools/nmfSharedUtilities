@@ -18,6 +18,7 @@ nmfUtilsStatisticsAveraging::clearAveragedData()
 {
     m_AveInitBiomass.clear();
     m_AveGrowthRates.clear();
+    m_AveGrowthRateShapes.clear();
     m_AveGrowthRateCovariateCoeffs.clear();
     m_AveCarryingCapacities.clear();
     m_AveCarryingCapacityCovariateCoeffs.clear();
@@ -42,6 +43,7 @@ nmfUtilsStatisticsAveraging::clearEstData()
     m_AIC.clear();
     m_EstInitBiomass.clear();
     m_EstGrowthRates.clear();
+    m_EstGrowthRateShapes.clear();
     m_EstGrowthRateCovariateCoeffs.clear();
     m_EstCarryingCapacities.clear();
     m_EstCarryingCapacityCovariateCoeffs.clear();
@@ -65,6 +67,7 @@ nmfUtilsStatisticsAveraging::clearTrimmedData()
     m_AIC_trimmed.clear();
     m_EstInitBiomass_trimmed.clear();
     m_EstGrowthRates_trimmed.clear();
+    m_EstGrowthRateShapes_trimmed.clear();
     m_EstGrowthRateCovariateCoeffs_trimmed.clear();
     m_EstCarryingCapacities_trimmed.clear();
     m_EstCarryingCapacityCovariateCoeffs_trimmed.clear();
@@ -92,6 +95,7 @@ nmfUtilsStatisticsAveraging::calculateWeighted(const std::vector<double>& weight
     double sum;
     std::vector<std::vector<double> > aveVector = {m_AveInitBiomass,
                                                    m_AveGrowthRates,
+                                                   m_AveGrowthRateShapes,
                                                    m_AveGrowthRateCovariateCoeffs,
                                                    m_AveCarryingCapacities,
                                                    m_AveCarryingCapacityCovariateCoeffs,
@@ -105,6 +109,7 @@ nmfUtilsStatisticsAveraging::calculateWeighted(const std::vector<double>& weight
     // Find averages for all vector estimated parameters
     for (std::vector<std::vector<double> > estVector : {m_EstInitBiomass_trimmed,
                                                         m_EstGrowthRates_trimmed,
+                                                        m_EstGrowthRateShapes_trimmed,
                                                         m_EstGrowthRateCovariateCoeffs_trimmed,
                                                         m_EstCarryingCapacities_trimmed,
                                                         m_EstCarryingCapacityCovariateCoeffs_trimmed,
@@ -129,14 +134,15 @@ nmfUtilsStatisticsAveraging::calculateWeighted(const std::vector<double>& weight
     }
     m_AveInitBiomass                     = aveVector[0];
     m_AveGrowthRates                     = aveVector[1];
-    m_AveGrowthRateCovariateCoeffs       = aveVector[2];
-    m_AveCarryingCapacities              = aveVector[3];
-    m_AveCarryingCapacityCovariateCoeffs = aveVector[4];
-    m_AvePredationExponent               = aveVector[5];
-    m_AveCatchability                    = aveVector[6];
-    m_AveCatchabilityCovariateCoeffs     = aveVector[7];
-    m_AveSurveyQ                         = aveVector[8];
-    m_AveSurveyQCovariateCoeffs          = aveVector[9];
+    m_AveGrowthRateShapes                = aveVector[2];
+    m_AveGrowthRateCovariateCoeffs       = aveVector[3];
+    m_AveCarryingCapacities              = aveVector[4];
+    m_AveCarryingCapacityCovariateCoeffs = aveVector[5];
+    m_AvePredationExponent               = aveVector[6];
+    m_AveCatchability                    = aveVector[7];
+    m_AveCatchabilityCovariateCoeffs     = aveVector[8];
+    m_AveSurveyQ                         = aveVector[9];
+    m_AveSurveyQCovariateCoeffs          = aveVector[10];
 
     // Find averages for all matrix estimated parameters
     index = 0;
@@ -203,6 +209,7 @@ nmfUtilsStatisticsAveraging::createTrimmedStructures(const int& numberOfTopRunsT
         m_AIC_trimmed                                = m_AIC;
         m_EstInitBiomass_trimmed                     = m_EstInitBiomass;
         m_EstGrowthRates_trimmed                     = m_EstGrowthRates;
+        m_EstGrowthRateShapes_trimmed                = m_EstGrowthRateShapes;
         m_EstGrowthRateCovariateCoeffs_trimmed       = m_EstGrowthRateCovariateCoeffs;
         m_EstCarryingCapacities_trimmed              = m_EstCarryingCapacities;
         m_EstCarryingCapacityCovariateCoeffs_trimmed = m_EstCarryingCapacityCovariateCoeffs;
@@ -253,6 +260,7 @@ nmfUtilsStatisticsAveraging::createTrimmedStructures(const int& numberOfTopRunsT
             m_AIC_trimmed.push_back(m_AIC[index]);
             m_EstInitBiomass_trimmed.push_back(m_EstInitBiomass[index]);
             m_EstGrowthRates_trimmed.push_back(m_EstGrowthRates[index]);
+            m_EstGrowthRateShapes_trimmed.push_back(m_EstGrowthRateShapes[index]);
             m_EstGrowthRateCovariateCoeffs_trimmed.push_back(m_EstGrowthRateCovariateCoeffs[index]);
             m_EstCarryingCapacities_trimmed.push_back(m_EstCarryingCapacities[index]);
             m_EstCarryingCapacityCovariateCoeffs_trimmed.push_back(m_EstCarryingCapacityCovariateCoeffs[index]);
@@ -341,6 +349,7 @@ void
 nmfUtilsStatisticsAveraging::getAveData(std::vector<double>& Fitness,
                                         std::vector<double>& AveInitBiomass,
                                         std::vector<double>& AveGrowthRates,
+                                        std::vector<double>& AveGrowthRateShapes,
                                         std::vector<double>& AveGrowthRateCovariateCoeffs,
                                         std::vector<double>& AveCarryingCapacities,
                                         std::vector<double>& AveCarryingCapacityCovariateCoeffs,
@@ -360,6 +369,7 @@ nmfUtilsStatisticsAveraging::getAveData(std::vector<double>& Fitness,
     Fitness                            = m_Fitness;
     AveInitBiomass                     = m_AveInitBiomass;
     AveGrowthRates                     = m_AveGrowthRates;
+    AveGrowthRateShapes                = m_AveGrowthRateShapes;
     AveGrowthRateCovariateCoeffs       = m_AveGrowthRateCovariateCoeffs;
     AveCarryingCapacities              = m_AveCarryingCapacities;
     AveCarryingCapacityCovariateCoeffs = m_AveCarryingCapacityCovariateCoeffs;
@@ -383,6 +393,7 @@ nmfUtilsStatisticsAveraging::loadEstData(
         std::vector<double>& AIC,                   // per run, AIC values for all species and for model
         std::vector<double>& EstInitBiomass,        // estimated values for each species
         std::vector<double>& EstGrowthRates,
+        std::vector<double>& EstGrowthRateShapes,
         std::vector<double>& EstGrowthRateCovariateCoeffs,
         std::vector<double>& EstCarryingCapacities,
         std::vector<double>& EstCarryingCapacityCovariateCoeffs,
@@ -403,6 +414,7 @@ nmfUtilsStatisticsAveraging::loadEstData(
     m_AIC.push_back(AIC.back()); // Store only the last element of AIC (it's the model average over all species for that particular run)
     m_EstInitBiomass.push_back(EstInitBiomass);
     m_EstGrowthRates.push_back(EstGrowthRates);
+    m_EstGrowthRateShapes.push_back(EstGrowthRateShapes);
     m_EstGrowthRateCovariateCoeffs.push_back(EstGrowthRateCovariateCoeffs);
     m_EstCarryingCapacities.push_back(EstCarryingCapacities);
     m_EstCarryingCapacityCovariateCoeffs.push_back(EstCarryingCapacityCovariateCoeffs);

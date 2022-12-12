@@ -160,7 +160,6 @@ nmfChartLineWithScatter::populateChart(
         connect(legendMarker, SIGNAL(hovered(bool)),
                 this,         SLOT(callback_hoveredLegendMarker(bool)));
     }
-
 }
 
 void

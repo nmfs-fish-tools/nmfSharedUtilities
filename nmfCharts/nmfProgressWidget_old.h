@@ -89,6 +89,7 @@ public:
     QHBoxLayout *pointsLayt;
     QLabel      *statusLBL;
     QLabel      *timeLBL;
+    QLabel      *tolLBL;
     QLabel      *pointLBL;
     QLabel      *rangeLBL;
     QLabel      *minLBL;
@@ -106,6 +107,7 @@ public:
     QPushButton *stopPB;
     QPushButton *rangeSetPB;
     QLineEdit   *timeLE;
+    QLineEdit   *tolLE;
     QLineEdit   *runLE;
     QLineEdit   *subRunLE;
 
@@ -177,6 +179,10 @@ public:
      * @brief Clears the time line edit box
      */
     void clearTime();
+    /**
+     * @brief Clears the tolerance line edit box
+     */
+    void clearTolerance();
     /**
      * @brief Gets the elapsed run time
      * @return Returns the elapsed run time string
@@ -273,6 +279,11 @@ public:
                      const int& subRun,
                      const int& numSubRuns);
     /**
+     * @brief sets the tolerance qlineedit widget
+     * @param tolStr : tolerance value as double; tolerance defined as difference between current fitness and previous
+     */
+    void setTolerance(double tol);
+    /**
      * @brief Sets up the signal/slot connections for the class
      */
     void setupConnections();
@@ -356,9 +367,8 @@ public:
     void startTimer(int delayMillisec);
     /**
      * @brief Stops all MSSPM runs
-     * @param verbose : if true, display a popup message with information, if false, no popup is shown
      */
-    void stopAllRuns(bool verbose);
+    void stopAllRuns();
     /**
      * @brief Stops the current active timer
      */

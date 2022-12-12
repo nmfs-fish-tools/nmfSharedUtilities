@@ -21,20 +21,21 @@ nmfGrowthForm::nmfGrowthForm(std::string growthType)
 void
 nmfGrowthForm::setupFormMaps()
 {
-    std::string index1    = (m_isAGGPROD) ? "I" : "i";
-    std::string lhs       = "B<sub>"+index1+",t+1</sub> = ";  // left hand side of equation
-    std::string Bit       = "B<sub>"+index1+",t</sub>";       // right hand side of equation
-    std::string Ki        = "K<sub>"+index1+"</sub>";
-    std::string riBit     = "r<sub>"+index1+"</sub>" + Bit;
-    m_Prefix              = lhs + Bit;
+    std::string index1      = (m_isAGGPROD) ? "I" : "i";
+    std::string lhs         = "B<sub>"+index1+",t+1</sub> = ";  // left hand side of equation
+    std::string Bit         = "B<sub>"+index1+",t</sub>";       // right hand side of equation
+    std::string Ki          = "K<sub>"+index1+"</sub>";
+    std::string Pi          = "p<sub>"+index1+"</sub>";
+    std::string riBit       = "r<sub>"+index1+"</sub>" + Bit;
+    m_Prefix                = lhs + Bit;
 
     m_GrowthMap["Null"]     = "";
     m_GrowthMap["Linear"]   = " + " + riBit;
-    m_GrowthMap["Logistic"] = " + " + riBit + "(1 - " + Bit + "/" + Ki + ")";
+    m_GrowthMap["Logistic"] = " + " + riBit + "(1 - (" + Bit + "/" + Ki + ")^(" + Pi + "))";
 
     m_GrowthKey["Null"]     = "";
     m_GrowthKey["Linear"]   = "B = Biomass<br/>r = Growth Rate<br/>";
-    m_GrowthKey["Logistic"] = "B = Biomass<br/>r = Growth Rate<br/>K = Carrying Capacity<br/>";
+    m_GrowthKey["Logistic"] = "B = Biomass<br/>r = Growth Rate<br/>p = Growth Rate Shape Exponent<br/>K = Carrying Capacity<br/>";
 }
 
 std::string
@@ -98,6 +99,20 @@ nmfGrowthForm::loadParameterRanges(
         parameterRanges.emplace_back(aPair);
         m_ParameterRanges.emplace_back(aPair);
         parameterInitialValues.emplace_back(dataStruct.GrowthRate[species]);
+    }
+
+    // Always load growth rate shape parameter values
+    for (int species=0; species<m_NumSpecies; ++species) {
+        if (isCheckedGrowthRate) {
+            aPair = std::make_pair(dataStruct.GrowthRateShapeMin[species],
+                                   dataStruct.GrowthRateShapeMax[species]);
+        } else {
+            aPair = std::make_pair(dataStruct.GrowthRateShape[species],
+                                   dataStruct.GrowthRateShape[species]);
+        }
+        parameterRanges.emplace_back(aPair);
+        m_ParameterRanges.emplace_back(aPair);
+        parameterInitialValues.emplace_back(dataStruct.GrowthRateShape[species]);
     }
 
     // Always load growth rate covariate values
@@ -168,6 +183,7 @@ nmfGrowthForm::extractParameters(
         const std::vector<double>& parameters,
         int&                       startPos,
         std::vector<double>&       growthRate,
+        std::vector<double>&       growthRateShape,
         std::vector<double>&       growthRateCovariateCoeffs,
         std::vector<double>&       carryingCapacity,
         std::vector<double>&       carryingCapacityCovariateCoeffs,
@@ -177,11 +193,13 @@ nmfGrowthForm::extractParameters(
 
     systemCarryingCapacity = 0;
     growthRate.clear();
+    growthRateShape.clear();
     carryingCapacity.clear();
 
     if (m_Type == "Linear") {
         for (int i=startPos; i<startPos+m_NumSpecies; ++i) {
             growthRate.emplace_back(parameters[i]);
+            growthRateShape.emplace_back(0);
             carryingCapacity.emplace_back(0);
         }
         startPos += m_NumSpecies;
@@ -192,6 +210,10 @@ nmfGrowthForm::extractParameters(
     } else if (m_Type == "Logistic") {
         for (int i=startPos; i<startPos+m_NumSpecies; ++i) {
             growthRate.emplace_back(parameters[i]);
+        }
+        startPos += m_NumSpecies;
+        for (int i=startPos; i<startPos+m_NumSpecies; ++i) {
+            growthRateShape.emplace_back(parameters[i]);
         }
         startPos += m_NumSpecies;
         for (int i=startPos; i<startPos+m_NumSpecies; ++i) {
@@ -215,6 +237,7 @@ double
 nmfGrowthForm::evaluate(const std::string& covariateAlgorithmType,
                         const double& biomassAtTimeT,
                         const double& growthRate,
+                        const double& growthRateShape,
                         const double& growthRateCovariateCoeff,
                         const double& growthRateCovariate,
                         const double& carryingCapacity,
@@ -227,6 +250,7 @@ nmfGrowthForm::evaluate(const std::string& covariateAlgorithmType,
         return (this->*FunctionMap[m_Type])(covariateAlgorithmType,
                                             biomassAtTimeT,
                                             growthRate,
+                                            growthRateShape,
                                             growthRateCovariateCoeff,
                                             growthRateCovariate,
                                             carryingCapacity,
@@ -239,6 +263,7 @@ double
 nmfGrowthForm::FunctionMap_Null(const std::string& covariateAlgorithmType,
                                 const double& biomassAtTime,
                                 const double& growthRate,
+                                const double& growthRateShape,
                                 const double& growthRateCovariateCoeff,
                                 const double& growthRateCovariate,
                                 const double& carryingCapacity,
@@ -252,6 +277,7 @@ double
 nmfGrowthForm::FunctionMap_Linear(const std::string& covariateAlgorithmType,
                                   const double& biomassAtTime,
                                   const double& growthRate,
+                                  const double& growthRateShape,
                                   const double& growthRateCovariateCoeff,
                                   const double& growthRateCovariate,
                                   const double& carryingCapacity,
@@ -269,6 +295,7 @@ double
 nmfGrowthForm::FunctionMap_Logistic(const std::string& covariateAlgorithmType,
                                     const double& biomassAtTime,
                                     const double& growthRate,
+                                    const double& growthRateShape,
                                     const double& growthRateCovariateCoeff,
                                     const double& growthRateCovariate,
                                     const double& carryingCapacity,
@@ -289,5 +316,7 @@ nmfGrowthForm::FunctionMap_Logistic(const std::string& covariateAlgorithmType,
                 covariateAlgorithmType,carryingCapacity,
                 carryingCapacityCovariateCoeff,carryingCapacityCovariate);
 
-    return (growthRateTerm * biomassAtTime * (1.0-biomassAtTime/(carryingCapacityTerm)));
+//  return (growthRateTerm * biomassAtTime * (1.0 - biomassAtTime/carryingCapacityTerm));
+    return (growthRateTerm * biomassAtTime * (1.0 - std::pow((biomassAtTime/carryingCapacityTerm),growthRateShape)));
+
 }

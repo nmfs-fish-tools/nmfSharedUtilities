@@ -225,6 +225,7 @@ namespace nmfConstantsMSSPM
      const QString      ParameterNameInitialBiomass              = "Initial Absolute Biomass";
      const QString      ParameterNameSurveyQ                     = "SurveyQ";
      const QString      ParameterNameGrowthRate                  = "Growth Rate";
+     const QString      ParameterNameGrowthRateShape             = "Growth Rate Shape";
      const QString      ParameterNameCarryingCapacity            = "Carrying Capacity";
      const QString      ParameterNameCatchability                = "Catchability";
      const QString      ParameterNameCompetitionAlpha            = "Competition Alpha";
@@ -284,6 +285,7 @@ namespace nmfConstantsMSSPM
      const std::string TableDiagnosticCarryingCapacity         = QString::fromStdString("DiagnosticCarryingCapacity").toLower().toStdString();
      const std::string TableDiagnosticCatchability             = QString::fromStdString("DiagnosticCatchability").toLower().toStdString();
      const std::string TableDiagnosticGrowthRate               = QString::fromStdString("DiagnosticGrowthRate").toLower().toStdString();
+     const std::string TableDiagnosticGrowthRateShape          = QString::fromStdString("DiagnosticGrowthRateShape").toLower().toStdString();
      const std::string TableDiagnosticInitBiomass              = QString::fromStdString("DiagnosticInitBiomass").toLower().toStdString();
      const std::string TableDiagnosticSurface                  = QString::fromStdString("DiagnosticSurface").toLower().toStdString();
      const std::string TableDiagnosticSurveyQ                  = QString::fromStdString("DiagnosticSurveyQ").toLower().toStdString();
@@ -324,6 +326,7 @@ namespace nmfConstantsMSSPM
      const std::string TableOutputCompetitionBetaGuildsGuilds  = QString::fromStdString("OutputCompetitionBetaGuildsGuilds").toLower().toStdString();
      const std::string TableOutputCompetitionBetaSpecies       = QString::fromStdString("OutputCompetitionBetaSpecies").toLower().toStdString();
      const std::string TableOutputGrowthRate                   = QString::fromStdString("OutputGrowthRate").toLower().toStdString();
+     const std::string TableOutputGrowthRateShape              = QString::fromStdString("OutputGrowthRateShape").toLower().toStdString();
      const std::string TableOutputGrowthRateCovariateCoeffs    = QString::fromStdString("OutputGrowthRateCovariateCoeffs").toLower().toStdString();
      const std::string TableOutputInitBiomass                  = QString::fromStdString("OutputInitBiomass").toLower().toStdString();
      const std::string TableOutputMSY                          = QString::fromStdString("OutputMSY").toLower().toStdString();
@@ -378,6 +381,7 @@ namespace nmfConstantsMSSPM
      const QStringList SummaryDiagnosticStatisticNames =
          {"Mohn's Rho (Initial Absolute Biomass)",
           "Mohn's Rho (Growth Rate)",
+          "Mohn's Rho (Growth Rate Shape)",
           "Mohn's Rho (Carrying Capacity)",
           "Mohn's Rho (Competition Alpha)",
           "Mohn's Rho (Competition Beta Species)",
@@ -392,6 +396,7 @@ namespace nmfConstantsMSSPM
      const QStringList VectorParameterNames =
          {"Initial Biomass (B₀)",
           "Growth Rate (r)",
+          "Growth Rate Shape (p)",
           "Carrying Capacity (K)",
           "Catchability (q)",
           "SurveyQ"};
@@ -399,6 +404,7 @@ namespace nmfConstantsMSSPM
      const std::vector<std::string> EstimateCheckboxNames =
          {"InitBiomass",
           "GrowthRate",
+          "GrowthRateShape",
           "CarryingCapacity",
           "Catchability",
           "Handling",

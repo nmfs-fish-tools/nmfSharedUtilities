@@ -34,7 +34,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <map>
 #include <string>
 #include <vector>
 
@@ -528,6 +527,14 @@ namespace nmfUtilsQt {
             const std::string& parameterName,
             boost::numeric::ublas::matrix<double>& covariateMatrix);
     /**
+     * @brief Prompts the user for a valid export filename
+     * @param parent : parent widget over which to show popups
+     * @param tableName : name of table from which to export csv file
+     * @return true if not errors, false otherwise
+     */
+    bool getCSVFileName(QWidget* parent,
+                        QString& tableName);
+    /**
      * @brief Gets the name of the current tab
      * @param tabWidget : tab widget containing the tab in question
      * @return Returns the name of the current tab
@@ -597,25 +604,26 @@ namespace nmfUtilsQt {
      * @brief Load a non time series .csv file into a QTableView
      * @param parentTabWidget : parent tab containing the QTableView object
      * @param smodel: the QTableView model that will contains the .csv data
-     * @param columnMap : map of column name to column number
 //   * @param tableView : QTableView that will contain the .csv data
      * @param type : type of tableview (i.e., "Guild" or "Species")
      * @param inputDataPath : default path for the input .csv file
      * @param inputFilename : CSV filename if default is not desired
      * @param queryForFilename : boolean if true code will query user for the csv filename; if false, it won't
      * @param guildsFilename : filename for the guilds csv file
+     * @param nameColumn : column of table that holds the name of the guild or species (depending upon the table)
      * @param errorMsg : error message produced during the load
      * @return : Boolean signifying a successful load (true) or an unsuccessful load (false)
      */
     bool loadGuildsSpeciesTableview(QTabWidget* parentTabWidget,
+                                    //QTableView* tableView,
                                     QStandardItemModel* smodel,
-                                    std::map<QString,int>& columnMap,
                                     const QString& type,
                                     const QString& inputDataPath,
                                     const QString& inputFilename,
                                     QList<QString>& SpeciesGuilds,
                                     const bool& queryForFilename,
                                     QString& guildsFilename,
+                                    const int& nameColumn,
                                     QString& errorMsg);
     /**
      * @brief Loads the CSV file into the passed tableview's model

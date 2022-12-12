@@ -42,6 +42,7 @@ nmfUtilsStatisticsMohnsRho::clearEstData()
     m_Peel.clear();
     m_EstInitBiomass.clear();
     m_EstGrowthRates.clear();
+    m_EstGrowthRateShape.clear();
     m_EstCarryingCapacities.clear();
     m_EstPredationExponent.clear();
     m_EstCatchability.clear();
@@ -66,6 +67,7 @@ nmfUtilsStatisticsMohnsRho::loadEstData(
         int& Peel,
         std::vector<double>& EstInitBiomass,        // estimated values for each species
         std::vector<double>& EstGrowthRates,
+        std::vector<double>& EstGrowthRateShape,
         std::vector<double>& EstCarryingCapacities,
         std::vector<double>& EstPredationExponent,
         std::vector<double>& EstCatchability,
@@ -81,6 +83,7 @@ nmfUtilsStatisticsMohnsRho::loadEstData(
     m_Peel.push_back(Peel);
     m_EstInitBiomass.push_back(nmfUtils::convertVectorToMatrix(EstInitBiomass));
     m_EstGrowthRates.push_back(nmfUtils::convertVectorToMatrix(EstGrowthRates));
+    m_EstGrowthRateShape.push_back(nmfUtils::convertVectorToMatrix(EstGrowthRateShape));
     m_EstCarryingCapacities.push_back(nmfUtils::convertVectorToMatrix(EstCarryingCapacities));
     m_EstCatchability.push_back(nmfUtils::convertVectorToMatrix(EstCatchability));
     m_EstSurveyQ.push_back(nmfUtils::convertVectorToMatrix(EstSurveyQ));
@@ -93,16 +96,17 @@ nmfUtilsStatisticsMohnsRho::loadEstData(
     m_EstPredationExponent.push_back(nmfUtils::convertVectorToMatrix(EstPredationExponent));
     m_EstBiomass.push_back(EstBiomass);
 
-    m_ParameterMap[nmfConstantsMSSPM::ParameterNameInitialBiomass]            = m_EstInitBiomass;
-    m_ParameterMap[nmfConstantsMSSPM::ParameterNameGrowthRate]                = m_EstGrowthRates;
-    m_ParameterMap[nmfConstantsMSSPM::ParameterNameCarryingCapacity]          = m_EstCarryingCapacities;
-    m_ParameterMap[nmfConstantsMSSPM::ParameterNameCatchability]              = m_EstCatchability;
-    m_ParameterMap[nmfConstantsMSSPM::ParameterNameSurveyQ]                   = m_EstSurveyQ;
-    m_ParameterMap[nmfConstantsMSSPM::ParameterNameCompetitionAlpha]          = m_EstCompetitionAlpha;
-    m_ParameterMap[nmfConstantsMSSPM::ParameterNameCompetitionBetaSpecies]    = m_EstCompetitionBetaSpecies;
-    m_ParameterMap[nmfConstantsMSSPM::ParameterNameCompetitionBetaGuilds]      = m_EstCompetitionBetaGuilds;
+    m_ParameterMap[nmfConstantsMSSPM::ParameterNameInitialBiomass]              = m_EstInitBiomass;
+    m_ParameterMap[nmfConstantsMSSPM::ParameterNameGrowthRate]                  = m_EstGrowthRates;
+    m_ParameterMap[nmfConstantsMSSPM::ParameterNameGrowthRateShape]             = m_EstGrowthRateShape;
+    m_ParameterMap[nmfConstantsMSSPM::ParameterNameCarryingCapacity]            = m_EstCarryingCapacities;
+    m_ParameterMap[nmfConstantsMSSPM::ParameterNameCatchability]                = m_EstCatchability;
+    m_ParameterMap[nmfConstantsMSSPM::ParameterNameSurveyQ]                     = m_EstSurveyQ;
+    m_ParameterMap[nmfConstantsMSSPM::ParameterNameCompetitionAlpha]            = m_EstCompetitionAlpha;
+    m_ParameterMap[nmfConstantsMSSPM::ParameterNameCompetitionBetaSpecies]      = m_EstCompetitionBetaSpecies;
+    m_ParameterMap[nmfConstantsMSSPM::ParameterNameCompetitionBetaGuilds]       = m_EstCompetitionBetaGuilds;
     m_ParameterMap[nmfConstantsMSSPM::ParameterNameCompetitionBetaGuildsGuilds] = m_EstCompetitionBetaGuildsGuilds;
-    m_ParameterMap[nmfConstantsMSSPM::ParameterNamePredationRho]              = m_EstPredationRho;
-    m_ParameterMap[nmfConstantsMSSPM::ParameterNamePredationHandling]         = m_EstPredationHandling;
-    m_ParameterMap[nmfConstantsMSSPM::ParameterNamePredationExponent]         = m_EstPredationExponent;
+    m_ParameterMap[nmfConstantsMSSPM::ParameterNamePredationRho]                = m_EstPredationRho;
+    m_ParameterMap[nmfConstantsMSSPM::ParameterNamePredationHandling]           = m_EstPredationHandling;
+    m_ParameterMap[nmfConstantsMSSPM::ParameterNamePredationExponent]           = m_EstPredationExponent;
 }

@@ -98,7 +98,6 @@ private:
     std::vector<int>                       m_GuildNum;
     std::map<QString,QString>              m_PreviousUnits;
     double                                 m_MaxFitness;
-    double                                 m_LastFitness;
 
     void checkAndIncrementSeed();
     std::unique_ptr<Bee> createNeighborhoodBee(std::vector<double> &bestSiteParameters);
@@ -168,6 +167,7 @@ public:
             const std::vector<double>& parameters,
             int& startPos,
             std::vector<double>& growthRate,
+            std::vector<double>& growthRateShape,
             std::vector<double>& growthRateCovariateCoeff,
             std::vector<double>& carryingCapacity,
             std::vector<double>& carryingCapacityCovariateCoeffs,

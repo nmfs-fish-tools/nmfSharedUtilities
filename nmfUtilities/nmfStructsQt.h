@@ -203,6 +203,8 @@ struct ModelReviewStruct {
     QString isEstInitialBiomassEnabled;
     QString isEstInitialBiomassChecked;
     QString isEstGrowthRateEnabled;
+    QString isEstGrowthRateShapeChecked;
+    QString isEstGrowthRateShapeEnabled;
     QString isEstGrowthRateChecked;
     QString isEstCarryingCapacityEnabled;
     QString isEstCarryingCapacityChecked;
@@ -232,6 +234,7 @@ struct ModelReviewStruct {
     QString isEnsembleUsingPct;
     QString ensembleFilename;
 };
+
 
 struct CovariateStruct {
     double CoeffValue;
@@ -314,6 +317,9 @@ struct ModelDataStruct {
     boost::numeric::ublas::vector<double> GrowthRate;
     boost::numeric::ublas::vector<double> GrowthRateMin;
     boost::numeric::ublas::vector<double> GrowthRateMax;
+    boost::numeric::ublas::vector<double> GrowthRateShape;
+    boost::numeric::ublas::vector<double> GrowthRateShapeMin;
+    boost::numeric::ublas::vector<double> GrowthRateShapeMax;
     boost::numeric::ublas::vector<double> CarryingCapacity;
     boost::numeric::ublas::vector<double> CarryingCapacityMin;
     boost::numeric::ublas::vector<double> CarryingCapacityMax;

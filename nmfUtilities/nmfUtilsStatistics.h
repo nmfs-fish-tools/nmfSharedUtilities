@@ -136,18 +136,20 @@ namespace nmfUtilsStatistics {
                       std::vector<double>& aic);
     /**
      * @brief Calculates the negative log maximum likelihood value
+     * @param SpeciesWeights : vector of species fitness (biomass) weights
      * @param Species : the particular species whose mle value you're finding
      * @param ObsBiomass : Observed Biomass matrix
      * @param EstBiomass : Estimated Biomass matrix
      * @return Returns the per species -log maximum likelihood value
      */
     double calculateMaximumLikelihoodNoRescale(
+            const boost::numeric::ublas::vector<double>& SpeciesWeights,
             const int& Species,
             const boost::numeric::ublas::matrix<double>& ObsBiomass,
             const boost::numeric::ublas::matrix<double>& EstBiomass);
     /**
       * @brief calculateMaximumLikelihoodNoRescale
-      * @param speciesWeights : vector of species fitness (biomass) weights
+      * @param SpeciesWeights : vector of species fitness (biomass) weights
       * @param isEffortFitToCatch : true if the harvest type is EffortFitToCatch; false otherwise
       * @param ObsCatch : Observed Catch matrix
       * @param ObsBiomass : Observed Biomass matrix
@@ -157,7 +159,7 @@ namespace nmfUtilsStatistics {
       * @return Returns the total -log maximum likelihood value
       */
     double calculateMaximumLikelihoodNoRescale(
-            const boost::numeric::ublas::vector<double>& speciesWeights,
+            const boost::numeric::ublas::vector<double>& SpeciesWeights,
             const bool& isEffortFitToCatch,
             const boost::numeric::ublas::matrix<double>& ObsCatch,
             const boost::numeric::ublas::matrix<double>& ObsBiomass,
@@ -194,7 +196,7 @@ namespace nmfUtilsStatistics {
     /**
      * @brief Calculates the model efficiency fitness of 1 - ⵉ(Be - Bo)² / ⵉ(Bo - Bm)²
      * where (e)stimated, (o)bserved, and (m)ean (B)iomass or Catch
-     * @param speciesWeights : vector of species fitness (biomass) weights
+     * @param SpeciesWeights : vector of species fitness (biomass) weights
      * @param isEffortFitToCatch : true if the harvest type is EffortFitToCatch; false otherwise
      * @param ObsCatch : Observed Catch matrix
      * @param ObsBiomass : Observed Biomass matrix
@@ -204,7 +206,7 @@ namespace nmfUtilsStatistics {
      * @return Returns the model efficiency value
      */
     double calculateModelEfficiency(
-            const boost::numeric::ublas::vector<double>& speciesWeights,
+            const boost::numeric::ublas::vector<double>& SpeciesWeights,
             const bool& isEffortFitToCatch,
             const boost::numeric::ublas::matrix<double>& ObsCatch,
             const boost::numeric::ublas::matrix<double>& ObsBiomass,
@@ -245,7 +247,7 @@ namespace nmfUtilsStatistics {
             std::vector<double>& mohnsRhoVector);
     /**
      * @brief Calculates the sum of squares fitness of ⵉ(Be - Bo)²
-     * @param speciesWeights : vector of species fitness (biomass) weights
+     * @param SpeciesWeights : vector of species fitness (biomass) weights
      * @param isEffortFitToCatch : true if the harvest type is EffortFitToCatch; false otherwise
      * @param ObsCatch : Observed Catch matrix
      * @param ObsBiomass : Observed Biomass matrix
@@ -255,7 +257,7 @@ namespace nmfUtilsStatistics {
      * @return Returns the fitness value for SSE
      */
     double calculateLeastSquares(
-            const boost::numeric::ublas::vector<double>& speciesWeights,
+            const boost::numeric::ublas::vector<double>& SpeciesWeights,
             const bool& isEffortFitToCatch,
             const boost::numeric::ublas::matrix<double>& ObsCatch,
             const boost::numeric::ublas::matrix<double>& ObsBiomass,

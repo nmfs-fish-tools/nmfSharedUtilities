@@ -53,6 +53,7 @@ private:
     std::vector<int> m_Peel;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstInitBiomass;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstGrowthRates;
+    std::vector< boost::numeric::ublas::matrix<double> > m_EstGrowthRateShape;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstCarryingCapacities;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstCatchability;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstSurveyQ;
@@ -96,6 +97,7 @@ public:
      * @param Peel : current peel number
      * @param EstInitBiomass : estimated initial biomass vector
      * @param EstGrowthRates : estimated growth rate vector
+     * @param EstGrowthRateShapes : estimated growth rate shapes parameter vector
      * @param EstCarryingCapacities : estimated carrying capacities vector
      * @param EstPredationExponent : estimated predation exponent vector
      * @param EstCatchability : estimated catchability vector
@@ -111,6 +113,7 @@ public:
     void loadEstData(int& Peel,
                      std::vector<double>& EstInitBiomass,
                      std::vector<double>& EstGrowthRates,
+                     std::vector<double>& EstGrowthRateShapes,
                      std::vector<double>& EstCarryingCapacities,
                      std::vector<double>& EstPredationExponent,
                      std::vector<double>& EstCatchability,

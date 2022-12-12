@@ -53,6 +53,7 @@ private:
     std::vector<double> m_AIC; // Not a vector of vectors because we're just using the model AIC value and not the AIC values from each of the species
     std::vector< std::vector<double> > m_EstInitBiomass;
     std::vector< std::vector<double> > m_EstGrowthRates;
+    std::vector< std::vector<double> > m_EstGrowthRateShapes;
     std::vector< std::vector<double> > m_EstGrowthRateCovariateCoeffs;
     std::vector< std::vector<double> > m_EstCarryingCapacities;
     std::vector< std::vector<double> > m_EstCarryingCapacityCovariateCoeffs;
@@ -70,6 +71,7 @@ private:
     std::vector< boost::numeric::ublas::matrix<double> > m_EstBiomass;
     std::vector<double> m_AveInitBiomass;
     std::vector<double> m_AveGrowthRates;
+    std::vector<double> m_AveGrowthRateShapes;
     std::vector<double> m_AveGrowthRateCovariateCoeffs;
     std::vector<double> m_AveCarryingCapacities;
     std::vector<double> m_AveCarryingCapacityCovariateCoeffs;
@@ -88,6 +90,7 @@ private:
     std::vector<double> m_AIC_trimmed;
     std::vector< std::vector<double> > m_EstInitBiomass_trimmed;
     std::vector< std::vector<double> > m_EstGrowthRates_trimmed;
+    std::vector< std::vector<double> > m_EstGrowthRateShapes_trimmed;
     std::vector< std::vector<double> > m_EstGrowthRateCovariateCoeffs_trimmed;
     std::vector< std::vector<double> > m_EstCarryingCapacities_trimmed;
     std::vector< std::vector<double> > m_EstCarryingCapacityCovariateCoeffs_trimmed;
@@ -141,6 +144,7 @@ public:
      * @param Fitness : average fitness values vector
      * @param AveInitBiomass : average initial biomass vector
      * @param AveGrowthRates : average growth rate vector
+     * @param AveGrowthRateShapes : average growth rate shapes parameter vector
      * @param AveGrowthRateCovariateCoeffs : average growth rate covariate coefficients vector
      * @param AveCarryingCapacities : average carrying capacities vector
      * @param AveCarryingCapacityCovariateCoeffs : average carrying capacity covariate coefficients vector
@@ -160,6 +164,7 @@ public:
     void getAveData(std::vector<double>& Fitness,
                     std::vector<double>& AveInitBiomass,
                     std::vector<double>& AveGrowthRates,
+                    std::vector<double>& AveGrowthRateShapes,
                     std::vector<double>& AveGrowthRateCovariateCoeffs,
                     std::vector<double>& AveCarryingCapacities,
                     std::vector<double>& AveCarryingCapacityCovariateCoeffs,
@@ -181,6 +186,7 @@ public:
      * @param AIC : Akaike Information Criterion of estimated values vector
      * @param EstInitBiomass : estimated initial biomass vector
      * @param EstGrowthRates : estimated growth rate vector
+     * @param EstGrowthRateShapes : estimated growth rate shapes parameter vector
      * @param EstGrowthRateCovariateCoeffs : estimated growth rate covariate coefficient vector
      * @param EstCarryingCapacities : estimated carrying capacities vector
      * @param EstCarryingCapacityCovariateCoeffs : estimated carrying capacity covariate coefficients vector
@@ -201,6 +207,7 @@ public:
                      std::vector<double>& AIC,
                      std::vector<double>& EstInitBiomass,
                      std::vector<double>& EstGrowthRates,
+                     std::vector<double>& EstGrowthRateShapes,
                      std::vector<double>& EstGrowthRateCovariateCoeffs,
                      std::vector<double>& EstCarryingCapacities,
                      std::vector<double>& EstCarryingCapacityCovariateCoeffs,

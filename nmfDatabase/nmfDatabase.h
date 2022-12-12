@@ -746,6 +746,7 @@ public:
      * @param SpeciesList : list of species names found
      * @param InitBiomass : initial biomass for all species
      * @param GrowthRate : growth rate for all species
+     * @param GrowthRateShape : growth rate shape parameter for all species
      * @param SpeciesK : carrying capacity for all species
      * @return true if no errors reading table data, false otherwise
      */
@@ -754,6 +755,7 @@ public:
                                QStringList& SpeciesList,
                                std::vector<double>& InitBiomass,
                                std::vector<double>& GrowthRate,
+                               std::vector<double>& GrowthRateShape,
                                std::vector<double>& SpeciesK);
     /**
      * @brief Creates and returns a species guild map, that is, a map of what species are in what guild
@@ -1326,6 +1328,7 @@ public:
      * @param Species : current species
      * @param RunNumber : the current monte carlo run number
      * @param GrowthRandomValues : random values from user inputted uncertainty error
+     * @param GrowthRateShapeRandomValues : random values from user inputted uncertainty error around the shape parameter
      * @param CarryingCapacityRandomValues : random values from user inputted uncertainty error
      * @param CatchabilityRandomValues : random values from user inputted uncertainty error
      * @param ExponentRandomValues : random values from user inputted uncertainty error
@@ -1355,6 +1358,7 @@ public:
             const QStringList&         Species,
             const int&                 RunNumber,
             const std::vector<double>& GrowthRandomValues,
+            const std::vector<double>& GrowthRateShapeRandomValues,
             const std::vector<double>& CarryingCapacityRandomValues,
             const std::vector<double>& CatchabilityRandomValues,
             const std::vector<double>& ExponentRandomValues,
