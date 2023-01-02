@@ -2686,22 +2686,13 @@ reloadDataStruct(nmfStructsQt::ModelDataStruct& dataStruct,
                  const QString& MultiRunLine)
 {
     QStringList parts = MultiRunLine.split(",");
-//std::cout << "num parts: " << parts.size() << std::endl;
-//for (int ii=0; ii<parts.size(); ++ii) {
-// std::cout << ii << ": " << parts[ii].toStdString() << std::endl;
-//}
+
     dataStruct.NLoptNumberOfRuns     = parts[0].toInt();
 
     dataStruct.ObjectiveCriterion    = parts[1].toStdString();
     dataStruct.EstimationAlgorithm   = parts[2].toStdString();
     dataStruct.MinimizerAlgorithm    = parts[3].toStdString();
     dataStruct.ScalingAlgorithm      = parts[4].toStdString();
-
-//std::cout << "Processing: " << dataStruct.NLoptNumberOfRuns << " runs: " <<
-//             dataStruct.EstimationAlgorithm << "," <<
-//             dataStruct.MinimizerAlgorithm << "," <<
-//             dataStruct.ObjectiveCriterion << "," <<
-//             dataStruct.ScalingAlgorithm << std::endl;
 
     dataStruct.BeesMaxGenerations    = parts[5].toInt();
     dataStruct.BeesNumTotal          = parts[6].toInt();
@@ -2713,7 +2704,7 @@ reloadDataStruct(nmfStructsQt::ModelDataStruct& dataStruct,
     dataStruct.BeesNumRepetitions    = parts[12].toInt();
 
     dataStruct.NLoptUseStopVal       = parts[14].toInt();
-    dataStruct.NLoptStopVal          = parts[15].toInt();
+    dataStruct.NLoptStopVal          = parts[15].toDouble();
     dataStruct.NLoptUseStopAfterTime = parts[17].toInt();
     dataStruct.NLoptStopAfterTime    = parts[18].toInt();
     dataStruct.NLoptUseStopAfterIter = parts[20].toInt();
@@ -2723,7 +2714,8 @@ reloadDataStruct(nmfStructsQt::ModelDataStruct& dataStruct,
     int startIndex = 22;
     nmfStructsQt::EstimateRunBox runBox;
     for (int col=22; col<parts.size()-2; col+=3) { // -2 since still need to include the last parameter's name field
-        if ((parts[col+1].toInt()==1) && (parts[col+2].toInt()==1)) {
+//      if ((parts[col+1].toInt()==1) && (parts[col+2].toInt()==1)) {
+        if (parts[col+2].toInt()==1) {
             runBox.parameter = nmfConstantsMSSPM::EstimateCheckboxNames[(col-startIndex)/3];
             runBox.state     = std::make_pair(true,true);
             dataStruct.EstimateRunBoxes.push_back(runBox);
@@ -3008,6 +3000,14 @@ runAllTableChecks(nmfLogger*  logger,
         logger->logMsg(nmfConstants::Warning,msgShort);
         QMessageBox::warning(parent,"Warning",QString("\n")+QString::fromStdString(msgLong)+"\n",QMessageBox::Ok);
         parent->setCursor(Qt::ArrowCursor);
+        return false;
+    }
+
+    // Run remaining table checks
+    if (! runAllTableChecks(logger, parent, tableview, minTableview, maxTableview)) {
+        return false;
+    }
+    if (! runAllTableChecks(logger, parent, tableviewCompare, minTableviewCompare, maxTableviewCompare)) {
         return false;
     }
 

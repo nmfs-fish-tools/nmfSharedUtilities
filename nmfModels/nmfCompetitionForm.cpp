@@ -142,77 +142,76 @@ nmfCompetitionForm::loadParameterRanges(
     m_NumGuilds  = dataStruct.NumGuilds;
 
     if (m_Type == "NO_K") {
-        for (unsigned i=0; i<dataStruct.CompetitionMin.size(); ++i) {
-            for (unsigned j=0; j<dataStruct.CompetitionMin[0].size(); ++j) {
+        for (unsigned row=0; row<dataStruct.CompetitionMin.size2(); ++row) {
+            for (unsigned col=0; col<dataStruct.CompetitionMin.size1(); ++col) {
                 if (isCheckedAlpha) {
-                    aPair = std::make_pair(dataStruct.CompetitionMin[i][j],
-                                           dataStruct.CompetitionMax[i][j]);
+                    aPair = std::make_pair(dataStruct.CompetitionMin(row,col),
+                                           dataStruct.CompetitionMax(row,col));
                 } else {
-                    initialValue = dataStruct.Competition[i][j];
+                    initialValue = dataStruct.Competition(row,col);
                     aPair = std::make_pair(initialValue,initialValue);
                 }
                 parameterRanges.emplace_back(aPair);
                 m_ParameterRanges.emplace_back(aPair);
-                parameterInitialValues.emplace_back(dataStruct.Competition[i][j]);
+                parameterInitialValues.emplace_back(dataStruct.Competition(row,col));
             }
         }
-        m_NumParameters += dataStruct.CompetitionMin.size() *
-                           dataStruct.CompetitionMin[0].size();
+        m_NumParameters += dataStruct.CompetitionMin.size1() *
+                           dataStruct.CompetitionMin.size2();
     }
 
     else if (m_Type == "MS-PROD") {
-        for (unsigned i=0; i<dataStruct.CompetitionBetaSpeciesMin.size(); ++i) {
-            for (unsigned j=0; j<dataStruct.CompetitionBetaSpeciesMin[0].size(); ++j) {
+        for (unsigned row=0; row<dataStruct.CompetitionBetaSpeciesMin.size2(); ++row) {
+            for (unsigned col=0; col<dataStruct.CompetitionBetaSpeciesMin.size1(); ++col) {
                 if (isCheckedBetaSpeciesSpecies) {
-                    aPair = std::make_pair(dataStruct.CompetitionBetaSpeciesMin[i][j],
-                                           dataStruct.CompetitionBetaSpeciesMax[i][j]);
+                    aPair = std::make_pair(dataStruct.CompetitionBetaSpeciesMin(row,col),
+                                           dataStruct.CompetitionBetaSpeciesMax(row,col));
                 } else {
-                    initialValue = dataStruct.CompetitionBetaSpecies[i][j];
+                    initialValue = dataStruct.CompetitionBetaSpecies(row,col);
                     aPair = std::make_pair(initialValue,initialValue);
                 }
                 parameterRanges.emplace_back(aPair);
                 m_ParameterRanges.emplace_back(aPair);
-                parameterInitialValues.emplace_back(dataStruct.CompetitionBetaSpecies[i][j]);
+                parameterInitialValues.emplace_back(dataStruct.CompetitionBetaSpecies(row,col));
             }
         }
-        m_NumParameters += dataStruct.CompetitionBetaSpeciesMin.size() *
-                              dataStruct.CompetitionBetaSpeciesMin[0].size();
-
-        for (unsigned i=0; i<dataStruct.CompetitionBetaGuildsMin.size(); ++i) {
-            for (unsigned j=0; j<dataStruct.CompetitionBetaGuildsMin[0].size(); ++j) {
+        m_NumParameters += dataStruct.CompetitionBetaSpeciesMin.size1() *
+                           dataStruct.CompetitionBetaSpeciesMin.size2();
+        for (unsigned row=0; row<dataStruct.CompetitionBetaGuildsMin.size2(); ++row) {
+            for (unsigned col=0; col<dataStruct.CompetitionBetaGuildsMin.size1(); ++col) {
                 if (isCheckedBetaGuildSpecies) {
-                    aPair = std::make_pair(dataStruct.CompetitionBetaGuildsMin[i][j],
-                                           dataStruct.CompetitionBetaGuildsMax[i][j]);
+                    aPair = std::make_pair(dataStruct.CompetitionBetaGuildsMin(row,col),
+                                           dataStruct.CompetitionBetaGuildsMax(row,col));
                 } else {
-                    initialValue = dataStruct.CompetitionBetaGuilds[i][j];
+                    initialValue = dataStruct.CompetitionBetaGuilds(row,col);
                     aPair = std::make_pair(initialValue,initialValue);
                 }
                 parameterRanges.emplace_back(aPair);
                 m_ParameterRanges.emplace_back(aPair);
-                parameterInitialValues.emplace_back(dataStruct.CompetitionBetaGuilds[i][j]);
+                parameterInitialValues.emplace_back(dataStruct.CompetitionBetaGuilds(row,col));
             }
         }
-        m_NumParameters += dataStruct.CompetitionBetaGuildsMin.size() *
-                           dataStruct.CompetitionBetaGuildsMin[0].size();
+        m_NumParameters += dataStruct.CompetitionBetaGuildsMin.size1() *
+                           dataStruct.CompetitionBetaGuildsMin.size2();
     }
 
     else if (m_Type == "AGG-PROD") {
-        for (unsigned i=0; i<dataStruct.CompetitionBetaGuildsGuildsMin.size(); ++i) {
-            for (unsigned j=0; j<dataStruct.CompetitionBetaGuildsGuildsMin[0].size(); ++j) {
+        for (unsigned row=0; row<dataStruct.CompetitionBetaGuildsGuildsMin.size2(); ++row) {
+            for (unsigned col=0; col<dataStruct.CompetitionBetaGuildsGuildsMin.size1(); ++col) {
                 if (isCheckedBetaGuildGuild) {
-                    aPair = std::make_pair(dataStruct.CompetitionBetaGuildsGuildsMin[i][j],
-                                           dataStruct.CompetitionBetaGuildsGuildsMax[i][j]);
+                    aPair = std::make_pair(dataStruct.CompetitionBetaGuildsGuildsMin(row,col),
+                                           dataStruct.CompetitionBetaGuildsGuildsMax(row,col));
                 } else {
-                    initialValue = dataStruct.CompetitionBetaGuildsGuilds[i][j];
+                    initialValue = dataStruct.CompetitionBetaGuildsGuilds(row,col);
                     aPair = std::make_pair(initialValue,initialValue);
                 }
                 parameterRanges.emplace_back(aPair);
                 m_ParameterRanges.emplace_back(aPair);
-                parameterInitialValues.emplace_back(dataStruct.CompetitionBetaGuildsGuilds[i][j]);
+                parameterInitialValues.emplace_back(dataStruct.CompetitionBetaGuildsGuilds(row,col));
             }
         }
-        m_NumParameters += dataStruct.CompetitionBetaGuildsGuildsMin.size() *
-                           dataStruct.CompetitionBetaGuildsGuildsMin[0].size();
+        m_NumParameters += dataStruct.CompetitionBetaGuildsGuildsMin.size1() *
+                           dataStruct.CompetitionBetaGuildsGuildsMin.size2();
     }
 }
 
@@ -307,7 +306,7 @@ nmfCompetitionForm::FunctionMap_NOK(
         const boost::numeric::ublas::matrix<double> &EstCompetitionBetaGuildGuild,
         const boost::numeric::ublas::matrix<double> &CompetitionBetaGuildGuildCovariate)
 {
-    long double competitionSum = 0;
+    double competitionSum = 0;
     double CompetitionAlphaCovariateCoeff = 0.0; // RSK estimate this later
     double EstCompetitionAlphaTerm;
 
@@ -315,9 +314,10 @@ nmfCompetitionForm::FunctionMap_NOK(
         EstCompetitionAlphaTerm = nmfUtils::applyCovariate(nullptr,
                     covariateAlgorithmType,EstCompetitionAlpha(row,species),
                     CompetitionAlphaCovariateCoeff,CompetitionAlphaCovariate(timeMinus1,species));
-        competitionSum += (long double)EstCompetitionAlphaTerm * (long double)EstBiomassSpecies(timeMinus1,row);
-    }
+        competitionSum += (double)EstCompetitionAlphaTerm * (double)EstBiomassSpecies(timeMinus1,row);
+//qDebug() << "row,term,sum: " << row << EstCompetitionAlphaTerm << competitionSum;
 
+    }
     return double(biomassAtTime)*double(competitionSum);
 }
 

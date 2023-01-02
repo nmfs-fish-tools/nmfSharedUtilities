@@ -467,12 +467,12 @@ void printMatrix(const std::string &name,
         const int precision) {
     std::cout << "\n" << name << " (" << mat.size1() << "x" << mat.size2()
             << ")" << std::endl;
-    for (unsigned i = 0; i < mat.size1(); ++i) {
+    for (unsigned row = 0; row < mat.size1(); ++row) {
         std::cout << "  ";
-        for (unsigned j = 0; j < mat.size2(); ++j) {
+        for (unsigned col = 0; col < mat.size2(); ++col) {
             std::cout << std::setw(width)
                       << std::setprecision(precision)
-                      << std::fixed << mat(i, j) << "  ";
+                      << std::fixed << mat(row, col) << "  ";
         }
         std::cout << std::endl;
     }

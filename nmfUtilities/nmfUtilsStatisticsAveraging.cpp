@@ -93,6 +93,7 @@ nmfUtilsStatisticsAveraging::calculateWeighted(const std::vector<double>& weight
     int NumSpecies = m_EstInitBiomass_trimmed[0].size();
     int index=0;
     double sum;
+
     std::vector<std::vector<double> > aveVector = {m_AveInitBiomass,
                                                    m_AveGrowthRates,
                                                    m_AveGrowthRateShapes,
@@ -296,6 +297,7 @@ nmfUtilsStatisticsAveraging::calculateUnweighted()
 
     // Now apply the weights
     calculateWeighted(equalWeights);
+
 }
 
 void

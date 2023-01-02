@@ -147,40 +147,40 @@ nmfPredationForm::loadParameterRanges(
     m_isAggProd  = (dataStruct.CompetitionForm == "AGG-PROD");
     m_NumSpeciesOrGuilds = (m_isAggProd) ? m_NumGuilds : m_NumSpecies;
 
-    for (unsigned int j=0; j<dataStruct.PredationRhoMin[0].size(); ++j) {
-        for (unsigned i=0; i<dataStruct.PredationRhoMin.size(); ++i) {
+    for (unsigned row=0; row<dataStruct.PredationRhoMin.size1(); ++row) {
+        for (unsigned int col=0; col<dataStruct.PredationRhoMin.size2(); ++col) {
             if (isCheckedRho) {
-                aPair = std::make_pair(dataStruct.PredationRhoMin[i][j],
-                                       dataStruct.PredationRhoMax[i][j]);
+                aPair = std::make_pair(dataStruct.PredationRhoMin(row,col),
+                                       dataStruct.PredationRhoMax(row,col));
             } else {
-                initialValue = dataStruct.PredationRho[i][j];
+                initialValue = dataStruct.PredationRho(row,col);
                 aPair = std::make_pair(initialValue,initialValue);
             }
             parameterRanges.emplace_back(aPair);
             m_ParameterRanges.emplace_back(aPair);
-            parameterInitialValues.emplace_back(dataStruct.PredationRho[i][j]);
+            parameterInitialValues.emplace_back(dataStruct.PredationRho(row,col));
         }
     }
-    m_NumParameters = dataStruct.PredationRhoMin.size() *
-                      dataStruct.PredationRhoMin[0].size();
+    m_NumParameters = dataStruct.PredationRhoMin.size1() *
+                      dataStruct.PredationRhoMin.size2();
 
     if ((m_Type == "Type II") || (m_Type == "Type III")) {
-        for (unsigned int j=0; j<dataStruct.PredationHandlingMin[0].size(); ++j) {
-            for (unsigned i=0; i<dataStruct.PredationHandlingMin.size(); ++i) {
+        for (unsigned row=0; row<dataStruct.PredationHandlingMin.size1(); ++row) {
+            for (unsigned int col=0; col<dataStruct.PredationHandlingMin.size2(); ++col) {
                 if (isCheckedHandling) {
-                    aPair = std::make_pair(dataStruct.PredationHandlingMin[i][j],
-                                           dataStruct.PredationHandlingMax[i][j]);
+                    aPair = std::make_pair(dataStruct.PredationHandlingMin(row,col),
+                                           dataStruct.PredationHandlingMax(row,col));
                 } else {
-                    initialValue = dataStruct.PredationHandling[i][j];
+                    initialValue = dataStruct.PredationHandling(row,col);
                     aPair = std::make_pair(initialValue,initialValue);
                 }
                 parameterRanges.emplace_back(aPair);
                 m_ParameterRanges.emplace_back(aPair);
-                parameterInitialValues.emplace_back(dataStruct.PredationHandling[i][j]);
+                parameterInitialValues.emplace_back(dataStruct.PredationHandling(row,col));
             }
         }
-        m_NumParameters += dataStruct.PredationHandlingMin.size() *
-                           dataStruct.PredationHandlingMin[0].size();
+        m_NumParameters += dataStruct.PredationHandlingMin.size1() *
+                           dataStruct.PredationHandlingMin.size2();
     }
 
     if (m_Type == "Type III") {
@@ -261,7 +261,7 @@ nmfPredationForm::FunctionMap_TypeI(const std::string& covariateAlgorithmType,
     double EstPredationRhoTerm;
     double PredationRhoCovariateCoeff = 0.0; // RSK estimate this later
 
-    for (int row=0; row<int(EstPredationRho.size2()); ++row) {
+    for (int row=0; row<int(EstPredationRho.size1()); ++row) {
         EstPredationRhoTerm = nmfUtils::applyCovariate(nullptr,
                     covariateAlgorithmType,    EstPredationRho(row,species),
                     PredationRhoCovariateCoeff,PredationRhoCovariate(timeMinus1,species));

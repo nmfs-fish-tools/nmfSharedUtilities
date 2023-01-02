@@ -878,6 +878,45 @@ nmfProgressWidget::stopTimer()
     m_timer->stop();
 }
 
+
+void
+nmfProgressWidget::stopAllRuns(bool verbose)
+{
+    emit SetAllRunsComplete();
+    writeToStopRunFile();
+    emit StopTimer();
+
+return;
+
+
+    m_logger->logMsg(nmfConstants::Normal,"nmfProgressWidget::stopAllRuns " + m_RunType + " Progress Chart Timer");
+
+    writeToStopRunFile();
+    m_wasStopped = true;
+
+    emit SetAllRunsComplete();
+    emit StopTimer();
+
+    QApplication::restoreOverrideCursor();
+
+    callback_clearPB();
+    m_wasStopped = false;
+    writeToStopRunFile();
+
+    if (m_RunType == "MSSPM") {
+        updateChartDataLabel(nmfConstantsMSSPM::MSSPMProgressChartLabelFile,
+                             "<b>Status:&nbsp;&nbsp;</b>User halted MSSPM run. Output data incomplete.");
+    } else if (m_RunType == "MSVPA") {
+        updateChartDataLabel(nmfConstantsMSVPA::MSVPAProgressChartLabelFile,
+                             "<b>Status:&nbsp;&nbsp;</b>User halted MSVPA run. Output data incomplete.");
+    } else if (m_RunType == "Forecast") {
+        updateChartDataLabel(nmfConstantsMSVPA::ForecastProgressChartLabelFile,
+                             "<b>Status:&nbsp;&nbsp;</b>User halted Forecast run. Output data incomplete.");
+    }
+
+}
+
+/*
 void
 nmfProgressWidget::stopAllRuns(bool verbose)
 {
@@ -904,12 +943,12 @@ std::cout << "=== === ===> nmfProgressWidget::stopAllRuns emitting StopAllEstima
     m_wasStopped = false;
     writeToStopRunFile();
 
-/*
-    if (! wasStopped()) {
-        emit StopTheRun();
-        writeToStopRunFile();
-        m_wasStopped = true;
-*/
+
+//    if (! wasStopped()) {
+//        emit StopTheRun();
+//        writeToStopRunFile();
+//        m_wasStopped = true;
+
     if (m_RunType == "MSSPM") {
         updateChartDataLabel(nmfConstantsMSSPM::MSSPMProgressChartLabelFile,
                              "<b>Status:&nbsp;&nbsp;</b>User halted MSSPM run. Output data incomplete.");
@@ -920,10 +959,11 @@ std::cout << "=== === ===> nmfProgressWidget::stopAllRuns emitting StopAllEstima
         updateChartDataLabel(nmfConstantsMSVPA::ForecastProgressChartLabelFile,
                              "<b>Status:&nbsp;&nbsp;</b>User halted Forecast run. Output data incomplete.");
     }
-/*
-    }
-*/
+
+//    }
+
 } // end callback_stopPB
+*/
 
 void
 nmfProgressWidget::updateChart()

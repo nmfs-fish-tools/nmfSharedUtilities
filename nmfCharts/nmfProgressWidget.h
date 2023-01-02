@@ -396,9 +396,13 @@ signals:
      */
     void RedrawValidPointsOnly(bool checked, bool clear);
     /**
+     * @brief Signal emitted to notify main program that all runs are complete; used when the user interrupts a run
+     */
+    void SetAllRunsComplete();
+    /**
      * @brief Signal emitted when the user wishes to stop all runs
      */
-    void StopAllRuns();
+    void StopTimer();
     /**
      * @brief Signal emitted to stop the current timer
      */

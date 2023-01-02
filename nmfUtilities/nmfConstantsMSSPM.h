@@ -43,6 +43,7 @@ namespace nmfConstantsMSSPM
      const int    Start_Year            = 1900;
      const int    Num_Columns_Species   = 5;
      const int    Num_Columns_Guilds    = 3;
+     const int    Num_Estimatable_Parameter_Groups = 13;
 
      const int    Column_Guild_Name       =  0;
      const int    Column_Guild_GrowthRate =  1;
@@ -86,7 +87,7 @@ namespace nmfConstantsMSSPM
      const int    Model_Review_Column_AIC          =  3;
      const int    Model_Review_Column_DB_Snapshot  = 13;
      const int    Model_Review_Column_Last_Visible = 14;
-     const int    Model_Review_Column_Estimated_Parameters = 62;
+     const int    Model_Review_Column_Estimated_Parameters = 64;
      const bool   Query_User_For_Filename      = true;
      const bool   Dont_Query_User_For_Filename = false;
 //   const double epsilon              = 0.0; // 0.001;
@@ -94,6 +95,7 @@ namespace nmfConstantsMSSPM
      const double MaxOutOfBounds       = 9999999.0;
      const double MaxValidProgressYValue = 90000.0;
      const double NoData               = -99999.0;
+     const double DefaultTolerance     = 1E-06;
      const bool   RotateLabels         = true;
      const bool   DontRotateLabels     = false;
      const int    MaxNumberLogFiles    =  50;
@@ -106,6 +108,10 @@ namespace nmfConstantsMSSPM
      const int    ToolTipDuration      = 5000; // milliseconds
      const double ValueToStartEE       = 1000000.0;
      const int    DefaultDBTimeoutDays = 5;
+     const int    NotEnabledAndNotChecked =  0;
+     const int    NotEnabledButChecked    =  1;
+     const int    EnabledAndNotChecked    = 10;
+     const int    EnabledAndChecked       = 11;
      const bool   RearrangeTitle       = true;
      const bool   DontRearrangeTitle   = false;
      const bool   Clear                = true;
@@ -178,6 +184,10 @@ namespace nmfConstantsMSSPM
      const bool   DontUseLogData                   = false;
      const bool   ReadHarvestTypeFromTable         = true;
      const bool   DontReadHarvestTypeFromTable     = false;
+     const bool   RunChecks                        = true;
+     const bool   DontRunChecks                    = false;
+     const bool   ResetCheckboxes                  = true;
+     const bool   DontResetCheckboxes              = false;
 
      const std::string  HiddenDir                      = ".MSSPM";
      const std::string  HiddenDataDir                  = ".MSSPM/data";

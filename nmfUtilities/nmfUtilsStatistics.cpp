@@ -618,7 +618,8 @@ bool calculateR(const int& NumSpeciesOrGuilds,
         }
         den = sqrt(sumObs*sumEst);
         if (den == 0) {
-            return false;
+            R.push_back(-99999);
+//            return false;
         }
         R.push_back(num/den);
     }
