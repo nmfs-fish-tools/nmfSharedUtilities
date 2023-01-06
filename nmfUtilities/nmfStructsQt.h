@@ -251,8 +251,12 @@ struct ModelDataStruct {
     bool   isMohnsRho;
     bool   isRelativeBiomass;
     bool   showDiagnosticChart;
-    bool   useFixedSeedNLopt;
-    bool   useFixedSeedBees;
+    bool   useApplicationFixedSeedNLopt;
+    bool   useApplicationFixedSeedBees;
+    bool   useUserFixedSeedNLopt;
+    bool   useUserFixedSeedBees;
+    int    userFixedSeedVal;
+    bool   incrementFixedSeed;
 
     bool   NLoptUseStopVal;
     bool   NLoptUseStopAfterTime;
