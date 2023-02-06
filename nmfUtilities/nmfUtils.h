@@ -212,16 +212,39 @@ namespace nmfUtils {
      */
     std::string convertToScientificNotation(double val);
     /**
-     * @brief Formats a vector of double values into a table format
+     * @brief Formats a templated vector into a table format
      * @param label : label for values
      * @param values : the vector values
      * @param includeTotal : boolean to include the total or not
      * @return returns the formatted string
      */
+    template<typename T>
     std::string convertValues1DToOutputStr(
             const std::string& label,
-            const std::vector<double> &values,
-            const bool& includeTotal);
+            const T &Values,
+            const bool& includeTotal)
+    {
+        double val;
+        double totalVal = 0;
+        std::string bestFitnessStr = "";
+
+        bestFitnessStr += "<br>"+label;
+        bestFitnessStr += "<table>";
+        bestFitnessStr += "<tr>";
+        for (unsigned i=0; i<Values.size(); ++i) {
+            val = Values[i];
+            bestFitnessStr += "<td> "+convertToScientificNotation(val) + "</td>";
+            totalVal += val;
+        }
+        bestFitnessStr += "</tr>";
+        bestFitnessStr += "</table>";
+        if (includeTotal) {
+            bestFitnessStr += "<br>Total " + label + "<br>" +
+                    convertToScientificNotation(totalVal) + "<br>";
+        }
+
+        return bestFitnessStr;
+    }
     /**
      * @brief Formats a matrix of double values into a table format
      * @param label : label for values
@@ -409,6 +432,14 @@ namespace nmfUtils {
                       const std::vector<int>& dimensions,
                       const Boost4DArrayDouble& array);
     /**
+     * @brief Prints out the member values of a ModelDataStruct
+     * @param msg : message to print before the data listing
+     * @param dataStruct : the ModelDataStruct variable to print
+     */
+    void printDataStruct(
+            const std::string& msg,
+            const nmfStructsQt::ModelDataStruct& dataStruct);
+    /**
      * @brief prints out an error message
      * @param msg : message to print
      * @param errorMsg : previously captured error message to print
@@ -477,10 +508,11 @@ namespace nmfUtils {
         std::cout << "\n" << name << ": " << vec.size() << std::endl;
         for (unsigned i = 0; i < vec.size(); ++i) {
             std::cout << "| ";
-            std::cout << std::setw(numCharsPerElement) << vec(i) << " | ";
+            std::cout << std::setw(numCharsPerElement) << vec[i] << " | ";
             std::cout << std::endl;
         }
     }
+
     /**
      * @brief reads a table and creates a map of table names as keys and table descriptions as values
      * @param tableName : name of table
@@ -503,9 +535,11 @@ namespace nmfUtils {
                         boost::numeric::ublas::matrix<double> &matrixOut);
     /**
      * @brief rescales the passed matrix by: log base 10
-     * @param matrix to rescale
+     * @param unscaledMatrix : the matrix to rescale
+     * @param rescaledMatrix : the rescaled matrix
      */
-    void rescaleMatrixLog(boost::numeric::ublas::matrix<double>& matrix);
+    void rescaleMatrixLog10(const boost::numeric::ublas::matrix<double> &unscaledMatrix,
+                                  boost::numeric::ublas::matrix<double> &rescaledMatrix);
     /**
      * @brief rescales the unscaledMatrix by: (X - Xavg) / (Xmax - Xmin) where X is an element of the matrix
      * @param unscaledMatrix : the matrix to rescale

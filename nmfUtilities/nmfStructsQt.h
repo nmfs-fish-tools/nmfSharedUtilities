@@ -257,6 +257,7 @@ struct ModelDataStruct {
     bool   useUserFixedSeedBees;
     int    userFixedSeedVal;
     bool   incrementFixedSeed;
+    bool   allowConvergedOnly;
 
     bool   NLoptUseStopVal;
     bool   NLoptUseStopAfterTime;
@@ -353,9 +354,6 @@ struct ModelDataStruct {
     boost::numeric::ublas::matrix<double> PredationRho;
     boost::numeric::ublas::matrix<double> PredationRhoMin;
     boost::numeric::ublas::matrix<double> PredationRhoMax;
-//    std::vector<std::vector<double> >     PredationRho;
-//    std::vector<std::vector<double> >     PredationRhoMin;
-//    std::vector<std::vector<double> >     PredationRhoMax;
     boost::numeric::ublas::matrix<double> PredationHandling;
     boost::numeric::ublas::matrix<double> PredationHandlingMin;
     boost::numeric::ublas::matrix<double> PredationHandlingMax;
@@ -375,11 +373,7 @@ struct ModelDataStruct {
     std::map<std::string,CovariateStruct>               CarryingCapacityCovariateCoeff;
     std::map<std::string,CovariateStruct>               CatchabilityCovariateCoeff;
     std::map<std::string,CovariateStruct>               SurveyQCovariateCoeff;
-
     std::map<QString,QString> PreviousUnits;
-
-//  boost::numeric::ublas::matrix<double> OutputBiomass;
-
     std::vector<EstimateRunBox> EstimateRunBoxes;
 };
 

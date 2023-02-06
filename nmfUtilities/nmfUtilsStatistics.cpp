@@ -902,11 +902,7 @@ double calculateMean(
 
     for (int time=0; time<numYears; ++time) {
         if (ObsBiomass(time,speciesNum) != nmfConstantsMSSPM::NoData) {
-//            if (useLogData) {
-//                sumObsBiomassPerSpecies += std::log(ObsBiomass(time,speciesNum));
-//            } else {
-                sumObsBiomassPerSpecies += ObsBiomass(time,speciesNum);
-//            }
+            sumObsBiomassPerSpecies += ObsBiomass(time,speciesNum);
             ++numYearsWithData;
         }
     }
@@ -1005,7 +1001,6 @@ double calculateMaximumLikelihoodNoRescale(
     for (int time=0; time<numYears; ++time) {
         if (ObsMatrix(time,species) != nmfConstantsMSSPM::NoData) {
             diff = ObsMatrix(time,species) - muCurrentSpecies;
-//          diff = speciesWeights(species)*(ObsMatrix(time,species) - muCurrentSpecies);
             sumSquares += diff*diff;
             ++numPoints;
         }
@@ -1021,7 +1016,6 @@ double calculateMaximumLikelihoodNoRescale(
     // Calculate MLE
     for (int time=0; time<numYears; ++time) {
         if (ObsMatrix(time,species) != nmfConstantsMSSPM::NoData) {
-//          diff = speciesWeights(species)*(ObsMatrix(time,species) - EstMatrix(time,species));
             diff = ObsMatrix(time,species) - EstMatrix(time,species);
             ObsMinusEstOverSigma = diff / sigma;
             mlePerSpecies += -(nmfConstants::LogRoot2PI + // I could leave this term off, but am including it here for clarity
@@ -1110,7 +1104,8 @@ double calculateLeastSquares(
         }
     }
 
-    return log10(sumSquares+1);
+    return sumSquares;
+//    return log10(sumSquares+1);
 }
 
 } // end namespace nmfStatUtils

@@ -1315,6 +1315,14 @@ removeCommas(QTableView* tableView)
 }
 
 bool
+isEmpty(QTableView* tableview)
+{
+   return ((tableview == nullptr) ||
+           (tableview->model() == nullptr) ||
+           (tableview->model()->rowCount() == 0));
+}
+
+bool
 removeSettingsFile()
 {
     QString fileToRemove;
@@ -2693,37 +2701,34 @@ reloadDataStruct(nmfStructsQt::ModelDataStruct& dataStruct,
     dataStruct.EstimationAlgorithm   = parts[2].toStdString();
     dataStruct.MinimizerAlgorithm    = parts[3].toStdString();
     dataStruct.ScalingAlgorithm      = parts[4].toStdString();
+    dataStruct.userFixedSeedVal      = parts[5].toInt();
+    dataStruct.LogScale              = parts[6].toInt();
 
-    dataStruct.BeesMaxGenerations    = parts[5].toInt();
-    dataStruct.BeesNumTotal          = parts[6].toInt();
-    dataStruct.BeesNumBestSites      = parts[7].toInt();
-    dataStruct.BeesNumEliteSites     = parts[8].toInt();
-    dataStruct.BeesNumElite          = parts[9].toInt();
-    dataStruct.BeesNumOther          = parts[10].toInt();
-    dataStruct.BeesNeighborhoodSize  = parts[11].toFloat();
-    dataStruct.BeesNumRepetitions    = parts[12].toInt();
+    dataStruct.BeesMaxGenerations    = parts[7].toInt();
+    dataStruct.BeesNumTotal          = parts[8].toInt();
+    dataStruct.BeesNumBestSites      = parts[9].toInt();
+    dataStruct.BeesNumEliteSites     = parts[10].toInt();
+    dataStruct.BeesNumElite          = parts[11].toInt();
+    dataStruct.BeesNumOther          = parts[12].toInt();
+    dataStruct.BeesNeighborhoodSize  = parts[13].toFloat();
+    dataStruct.BeesNumRepetitions    = parts[14].toInt();
 
-    dataStruct.NLoptUseStopVal       = parts[14].toInt();
-    dataStruct.NLoptStopVal          = parts[15].toDouble();
-    dataStruct.NLoptUseStopAfterTime = parts[17].toInt();
-    dataStruct.NLoptStopAfterTime    = parts[18].toInt();
-    dataStruct.NLoptUseStopAfterIter = parts[20].toInt();
-    dataStruct.NLoptStopAfterIter    = parts[21].toInt();
+    dataStruct.NLoptUseStopVal       = parts[16].toInt();
+    dataStruct.NLoptStopVal          = parts[17].toDouble();
+    dataStruct.NLoptUseStopAfterTime = parts[19].toInt();
+    dataStruct.NLoptStopAfterTime    = parts[20].toInt();
+    dataStruct.NLoptUseStopAfterIter = parts[22].toInt();
+    dataStruct.NLoptStopAfterIter    = parts[23].toInt();
 
     dataStruct.EstimateRunBoxes.clear();
-    int startIndex = 22;
-    nmfStructsQt::EstimateRunBox runBox;
-    for (int col=22; col<parts.size()-2; col+=3) { // -2 since still need to include the last parameter's name field
-//      if ((parts[col+1].toInt()==1) && (parts[col+2].toInt()==1)) {
-        if (parts[col+2].toInt()==1) {
-            runBox.parameter = nmfConstantsMSSPM::EstimateCheckboxNames[(col-startIndex)/3];
-            runBox.state     = std::make_pair(true,true);
-            dataStruct.EstimateRunBoxes.push_back(runBox);
-        } else {
-            runBox.parameter = "";
-            runBox.state     = std::make_pair(false,false);
-            dataStruct.EstimateRunBoxes.push_back(runBox);
-        }
+    int startIndex = 24;
+    for (int col=24; col<parts.size()-2; col+=3) { // -2 since still need to include the last parameter's name field
+        bool enabled = (parts[col+1].toInt()==1);
+        bool checked = (parts[col+2].toInt()==1);
+        nmfStructsQt::EstimateRunBox runBox;
+        runBox.parameter = nmfConstantsMSSPM::EstimateCheckboxNames[(col-startIndex)/3];
+        runBox.state     = std::make_pair(enabled,checked);
+        dataStruct.EstimateRunBoxes.push_back(runBox);
     }
 }
 
@@ -2858,6 +2863,7 @@ getCovariates(
         for (int species=0; species<numSpecies; ++species) {
             index         = dataStruct.SpeciesNames[species]+","+parameterName;
             covariateName = dataStruct.CovariateAssignment[index];
+            covariateName = QString::fromStdString(covariateName).trimmed().toStdString();
             if (covariateName.empty()) {
                 covariateMatrix(year,species) = 0.0;
             } else {

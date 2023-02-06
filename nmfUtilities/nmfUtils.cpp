@@ -111,32 +111,6 @@ convertToScientificNotation(double val)
     return streamDouble.str();
 }
 
-std::string
-convertValues1DToOutputStr(const std::string& label,
-                           const std::vector<double> &Values,
-                           const bool& includeTotal)
-{
-    double val;
-    double totalVal = 0;
-    std::string bestFitnessStr = "";
-
-    bestFitnessStr += "<br>"+label;
-    bestFitnessStr += "<table>";
-    bestFitnessStr += "<tr>";
-    for (unsigned i=0; i<Values.size(); ++i) {
-        val = Values[i];
-        bestFitnessStr += "<td> "+convertToScientificNotation(val) + "</td>";
-        totalVal += val;
-    }
-    bestFitnessStr += "</tr>";
-    bestFitnessStr += "</table>";
-    if (includeTotal) {
-        bestFitnessStr += "<br>Total " + label + "<br>" +
-                convertToScientificNotation(totalVal) + "<br>";
-    }
-
-    return bestFitnessStr;
-}
 
 std::string convertValues2DToOutputStr(const std::string& label,
                                        const boost::numeric::ublas::matrix<double> &matrix)
@@ -345,7 +319,9 @@ bool isEstimateParameterChecked(
 {
     std::vector<nmfStructsQt::EstimateRunBox> EstimateRunBoxes = dataStruct.EstimateRunBoxes;
     for (nmfStructsQt::EstimateRunBox runBox : EstimateRunBoxes) {
-        if (runBox.parameter == ParameterName) {
+        if ((runBox.parameter == ParameterName) &&
+            (runBox.state.first == true) &&
+            (runBox.state.second == true)) {
             return true;
         }
     }
@@ -394,6 +370,138 @@ bool isWholeNumber(double value)
 {
     return (floor(value) == ceil(value));
 }
+
+void printDataStruct(
+        const std::string& msg,
+        const nmfStructsQt::ModelDataStruct& dataStruct)
+{
+    std::cout << "\n" << msg << std::endl;
+    std::cout << "isMohnsRho: " << dataStruct.isMohnsRho << std::endl;
+    std::cout << "isRelativeBiomass: " << dataStruct.isRelativeBiomass << std::endl;
+    std::cout << "showDiagnosticChart: " << dataStruct.showDiagnosticChart << std::endl;
+    std::cout << "useApplicationFixedSeedNLopt: " << dataStruct.useApplicationFixedSeedNLopt << std::endl;
+    std::cout << "useApplicationFixedSeedBees: " << dataStruct.useApplicationFixedSeedBees << std::endl;
+    std::cout << "useUserFixedSeedNLopt: " << dataStruct.useUserFixedSeedNLopt << std::endl;
+    std::cout << "useUserFixedSeedBees: " << dataStruct.useUserFixedSeedBees << std::endl;
+    std::cout << "userFixedSeedVal: " << dataStruct.userFixedSeedVal << std::endl;
+    std::cout << "incrementFixedSeed: " << dataStruct.incrementFixedSeed << std::endl;
+    std::cout << "NLoptUseStopVal: " << dataStruct.NLoptUseStopVal << std::endl;
+    std::cout << "NLoptUseStopAfterTime: " << dataStruct.NLoptUseStopAfterTime << std::endl;
+    std::cout << "NLoptUseStopAfterIter: " << dataStruct.NLoptUseStopAfterIter << std::endl;
+    std::cout << "NLoptStopVal: " << dataStruct.NLoptStopVal << std::endl;
+    std::cout << "NLoptStopAfterTime: " << dataStruct.NLoptStopAfterTime << std::endl;
+    std::cout << "NLoptStopAfterIter: " << dataStruct.NLoptStopAfterIter << std::endl;
+    std::cout << "NLoptNumberOfRuns: " << dataStruct.NLoptNumberOfRuns << std::endl;
+    std::cout << "NLoptUseInitialPopulationSize: " << dataStruct.NLoptUseInitialPopulationSize << std::endl;
+    std::cout << "NLoptInitialPopulationSize: " << dataStruct.NLoptInitialPopulationSize << std::endl;
+    std::cout << "NumMohnsRhoMultiRuns: " << dataStruct.NumMohnsRhoMultiRuns << std::endl;
+
+    std::cout << "MultiRunSpeciesFilename: " << dataStruct.MultiRunSpeciesFilename << std::endl;
+    std::cout << "MultiRunModelFilename: " << dataStruct.MultiRunModelFilename << std::endl;
+    std::cout << "MultiRunSetupFilename: " << dataStruct.MultiRunSetupFilename << std::endl;
+    std::cout << "RunLength: " << dataStruct.RunLength << std::endl;
+    std::cout << "NumSpecies: " << dataStruct.NumSpecies << std::endl;
+    std::cout << "NumGuilds: " << dataStruct.NumGuilds << std::endl;
+    std::cout << "BeesMaxGenerations: " << dataStruct.BeesMaxGenerations << std::endl;
+    std::cout << "BeesNumTotal: " << dataStruct.BeesNumTotal << std::endl;
+    std::cout << "BeesNumBestSites: " << dataStruct.BeesNumBestSites << std::endl;
+    std::cout << "BeesNumEliteSites: " << dataStruct.BeesNumEliteSites << std::endl;
+    std::cout << "BeesNumElite: " << dataStruct.BeesNumElite << std::endl;
+    std::cout << "BeesNumOther: " << dataStruct.BeesNumOther << std::endl;
+    std::cout << "BeesNeighborhoodSize: " << dataStruct.BeesNeighborhoodSize << std::endl;
+    std::cout << "BeesNumRepetitions: " << dataStruct.BeesNumRepetitions << std::endl;
+    std::cout << "GAGenerations: " << dataStruct.GAGenerations << std::endl;
+    std::cout << "GAConvergence: " << dataStruct.GAConvergence << std::endl;
+
+    std::cout << "TotalNumberParameters: " << dataStruct.TotalNumberParameters << std::endl;
+    std::cout << "Benchmark: " << dataStruct.Benchmark << std::endl;
+    std::cout << "GrowthForm: " << dataStruct.GrowthForm << std::endl;
+    std::cout << "HarvestForm: " << dataStruct.HarvestForm << std::endl;
+    std::cout << "CompetitionForm: " << dataStruct.CompetitionForm << std::endl;
+    std::cout << "PredationForm: " << dataStruct.PredationForm << std::endl;
+    std::cout << "EstimationAlgorithm: " << dataStruct.EstimationAlgorithm << std::endl;
+    std::cout << "MinimizerAlgorithm: " << dataStruct.MinimizerAlgorithm << std::endl;
+    std::cout << "ObjectiveCriterion: " << dataStruct.ObjectiveCriterion << std::endl;
+    std::cout << "ScalingAlgorithm: " << dataStruct.ScalingAlgorithm << std::endl;
+    std::cout << "LogScale: " << dataStruct.LogScale << std::endl;
+    std::cout << "CovariateAlgorithmType: " << dataStruct.CovariateAlgorithmType << std::endl;
+    std::cout << "ForecastHarvestType: " << dataStruct.ForecastHarvestType << std::endl;
+
+    printVector("SpeciesWeights",10,dataStruct.SpeciesWeights);
+
+    printMatrix("ObservedBiomassBySpecies",dataStruct.ObservedBiomassBySpecies,10,4);
+    printMatrix("ObservedBiomassByGuilds",dataStruct.ObservedBiomassByGuilds,10,4);
+    printMatrix("Catch",dataStruct.Catch,10,4);
+    printMatrix("Effort",dataStruct.Effort,10,4);
+    printMatrix("FitWeights",dataStruct.FitWeights,10,4);
+
+    printVector("InitBiomass",10,dataStruct.InitBiomass);
+    printVector("InitBiomassMin",10,dataStruct.InitBiomassMin);
+    printVector("InitBiomassMax",10,dataStruct.InitBiomassMax);
+    printVector("GrowthRate",10,dataStruct.GrowthRate);
+    printVector("GrowthRateMin",10,dataStruct.GrowthRateMin);
+    printVector("GrowthRateMax",10,dataStruct.GrowthRateMax);
+    printVector("GrowthRateShape",10,dataStruct.GrowthRateShape);
+    printVector("GrowthRateShapeMin",10,dataStruct.GrowthRateShapeMin);
+    printVector("GrowthRateShapeMax",10,dataStruct.GrowthRateShapeMax);
+    printVector("CarryingCapacity",10,dataStruct.CarryingCapacity);
+    printVector("CarryingCapacityMin",10,dataStruct.CarryingCapacityMin);
+    printVector("CarryingCapacityMax",10,dataStruct.CarryingCapacityMax);
+    printVector("Catchability",10,dataStruct.Catchability);
+    printVector("CatchabilityMin",10,dataStruct.CatchabilityMin);
+    printVector("CatchabilityMax",10,dataStruct.CatchabilityMax);
+    printVector("SurveyQ",10,dataStruct.SurveyQ);
+    printVector("SurveyQMin",10,dataStruct.SurveyQMin);
+    printVector("SurveyQMax",10,dataStruct.SurveyQMax);
+
+    printMatrix("Competition",dataStruct.Competition,10,4);
+    printMatrix("CompetitionMin",dataStruct.CompetitionMin,10,4);
+    printMatrix("CompetitionMax",dataStruct.CompetitionMax,10,4);
+    printMatrix("CompetitionBetaSpecies",dataStruct.CompetitionBetaSpecies,10,4);
+    printMatrix("CompetitionBetaSpeciesMin",dataStruct.CompetitionBetaSpeciesMin,10,4);
+    printMatrix("CompetitionBetaSpeciesMax",dataStruct.CompetitionBetaSpeciesMax,10,4);
+    printMatrix("CompetitionBetaGuilds",dataStruct.CompetitionBetaGuilds,10,4);
+    printMatrix("CompetitionBetaGuildsMin",dataStruct.CompetitionBetaGuildsMin,10,4);
+    printMatrix("CompetitionBetaGuildsMax",dataStruct.CompetitionBetaGuildsMax,10,4);
+    printMatrix("CompetitionBetaGuildsGuilds",dataStruct.CompetitionBetaGuildsGuilds,10,4);
+    printMatrix("CompetitionBetaGuildsGuildsMin",dataStruct.CompetitionBetaGuildsGuildsMin,10,4);
+    printMatrix("CompetitionBetaGuildsGuildsMax",dataStruct.CompetitionBetaGuildsGuildsMax,10,4);
+    printMatrix("PredationRho",dataStruct.PredationRho,10,12);
+    printMatrix("PredationRhoMin",dataStruct.PredationRhoMin,10,12);
+    printMatrix("PredationRhoMax",dataStruct.PredationRhoMax,10,12);
+    printMatrix("PredationHandling",dataStruct.PredationHandling,10,4);
+    printMatrix("PredationHandlingMin",dataStruct.PredationHandlingMin,10,4);
+    printMatrix("PredationHandlingMax",dataStruct.PredationHandlingMax,10,4);
+
+    printVector("PredationExponent",10,dataStruct.PredationExponent);
+    printVector("PredationExponentMin",10,dataStruct.PredationExponentMin);
+    printVector("PredationExponentMax",10,dataStruct.PredationExponentMax);
+    printVector("Parameters",0,dataStruct.Parameters);
+
+    for (unsigned i=0; i<dataStruct.EstimateRunBoxes.size(); ++i) {
+        std::cout << "EstimateRunBox(" << i << "): "
+                  << dataStruct.EstimateRunBoxes[i].parameter    << ", "
+                  << dataStruct.EstimateRunBoxes[i].state.first  << ", "
+                  << dataStruct.EstimateRunBoxes[i].state.second << std::endl;
+    }
+
+//    std::map<std::string,std::vector<double> >          CovariateMap;
+//    std::map<std::string,std::string>                   CovariateAssignment;
+//    std::map<std::string,CovariateStruct>               GrowthRateCovariateCoeff;
+//    std::map<std::string,CovariateStruct>               CarryingCapacityCovariateCoeff;
+//    std::map<std::string,CovariateStruct>               CatchabilityCovariateCoeff;
+//    std::map<std::string,CovariateStruct>               SurveyQCovariateCoeff;
+//    std::map<QString,QString> PreviousUnits;
+//    boost::numeric::ublas::matrix<double> Exploitation;
+//    boost::numeric::ublas::vector<double> ExploitationRateMin; // RSK - change this to matrix?
+//    boost::numeric::ublas::vector<double> ExploitationRateMax; // RSK - change this to matrix?
+//    std::vector<std::string>              SpeciesNames;
+//    std::map<int,std::vector<int> >       GuildSpecies; // List of species numbers that make up guild num
+//    std::vector<int>                      GuildNum;     // Specifies which species are members of which guilds
+
+
+}
+
 
 void print3DArray(
         const std::string &name,
@@ -573,16 +681,23 @@ removeFirstRow(boost::numeric::ublas::matrix<double> &matrixIn,
  * Rescales matrix Xij by: log base 10 (X)
  */
 void
-rescaleMatrixLog(boost::numeric::ublas::matrix<double> &matrix)
+rescaleMatrixLog10(const boost::numeric::ublas::matrix<double> &unscaledMatrix,
+                         boost::numeric::ublas::matrix<double> &rescaledMatrix)
 {
-    int NumRows = matrix.size1();
-    int NumCols = matrix.size2();
+    int NumRows = rescaledMatrix.size1();
+    int NumCols = rescaledMatrix.size2();
+    double unscaledValue;
 
     // Rescale the matrix using the min and max values found for each species
     for (auto species=0; species<NumCols; ++species) {
         for (auto time=0; time<NumRows; ++time) {
-            if (matrix(time,species) != nmfConstantsMSSPM::NoData) {
-                matrix(time,species) = std::log10(matrix(time,species));
+            unscaledValue = unscaledMatrix(time,species);
+            if (unscaledValue <= 0) {
+                unscaledValue = 0;
+            }
+            unscaledValue += 1.0;
+            if (unscaledValue != nmfConstantsMSSPM::NoData) {
+                rescaledMatrix(time,species) = std::log10(unscaledValue);
             }
         }
     }

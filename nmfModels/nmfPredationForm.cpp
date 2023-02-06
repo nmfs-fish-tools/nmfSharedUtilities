@@ -256,16 +256,21 @@ nmfPredationForm::FunctionMap_TypeI(const std::string& covariateAlgorithmType,
                                     const std::vector<double>& EstPredationExponent,
                                     const boost::numeric::ublas::matrix<double>& PredationExponentCovariate)
 {
-    //  B(i,t)∑ρ(i,j)B(j,t)
+    //  B(i,t)∑[ρ(i,j)B(j,t)]
     double PredationSum = 0;
     double EstPredationRhoTerm;
     double PredationRhoCovariateCoeff = 0.0; // RSK estimate this later
 
-    for (int row=0; row<int(EstPredationRho.size1()); ++row) {
-        EstPredationRhoTerm = nmfUtils::applyCovariate(nullptr,
-                    covariateAlgorithmType,    EstPredationRho(row,species),
-                    PredationRhoCovariateCoeff,PredationRhoCovariate(timeMinus1,species));
-        PredationSum += EstPredationRhoTerm * EstimatedBiomass(timeMinus1,row);
+//    for (int row=0; row<int(EstPredationRho.size1()); ++row) {
+//        EstPredationRhoTerm = nmfUtils::applyCovariate(nullptr,
+//                    covariateAlgorithmType,    EstPredationRho(row,species),
+//                    PredationRhoCovariateCoeff,PredationRhoCovariate(timeMinus1,species));
+//        PredationSum += EstPredationRhoTerm * EstimatedBiomass(timeMinus1,row);
+//    }
+
+    for (int pred=0; pred<int(EstPredationRho.size2()); ++pred) {
+        PredationSum += (EstPredationRho(species,pred) *
+                         EstimatedBiomass(timeMinus1,pred));
     }
 
     return EstimatedBiomassTimeMinus1*PredationSum;

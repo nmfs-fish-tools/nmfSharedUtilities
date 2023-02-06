@@ -62,6 +62,9 @@ private:
     std::vector< std::vector<double> > m_EstCatchabilityCovariateCoeffs;
     std::vector< std::vector<double> > m_EstSurveyQ;
     std::vector< std::vector<double> > m_EstSurveyQCovariateCoeffs;
+    std::vector< std::vector<double> > m_EstBMSY;
+    std::vector< std::vector<double> > m_EstMSY;
+    std::vector< std::vector<double> > m_EstFMSY;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionAlpha;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionBetaSpecies;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionBetaGuilds;
@@ -80,6 +83,9 @@ private:
     std::vector<double> m_AveCatchabilityCovariateCoeffs;
     std::vector<double> m_AveSurveyQ;
     std::vector<double> m_AveSurveyQCovariateCoeffs;
+    std::vector<double> m_AveBMSY;
+    std::vector<double> m_AveMSY;
+    std::vector<double> m_AveFMSY;
     boost::numeric::ublas::matrix<double> m_AveCompetitionAlpha;
     boost::numeric::ublas::matrix<double> m_AveCompetitionBetaSpecies;
     boost::numeric::ublas::matrix<double> m_AveCompetitionBetaGuilds;
@@ -99,6 +105,9 @@ private:
     std::vector< std::vector<double> > m_EstPredationExponent_trimmed;
     std::vector< std::vector<double> > m_EstSurveyQ_trimmed;
     std::vector< std::vector<double> > m_EstSurveyQCovariateCoeffs_trimmed;
+    std::vector< std::vector<double> > m_EstBMSY_trimmed;
+    std::vector< std::vector<double> > m_EstMSY_trimmed;
+    std::vector< std::vector<double> > m_EstFMSY_trimmed;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionAlpha_trimmed;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionBetaSpecies_trimmed;
     std::vector< boost::numeric::ublas::matrix<double> > m_EstCompetitionBetaGuilds_trimmed;
@@ -153,6 +162,9 @@ public:
      * @param AveCatchabilityCovariateCoeffs : average catchability covariate coefficients vector
      * @param AveSurveyQ : average survey q vector
      * @param AveSurveyQCovariateCoeffs : average survey q covariate coefficients vector
+     * @param AveBMSY : average Biomass MSY values for all species
+     * @param AveMSY  : average MSY values for all species
+     * @param AveFMSY : average Fishing MSY values for all species
      * @param AveCompetitionAlpha : average competition alpha matrix
      * @param AveCompetitionBetaSpecies : average competition beta for species matrix
      * @param AveCompetitionBetaGuilds : average competition beta for guilds matrix
@@ -173,6 +185,9 @@ public:
                     std::vector<double>& AveCatchabilityCovariateCoeffs,
                     std::vector<double>& AveSurveyQ,
                     std::vector<double>& AveSurveyQCovariateCoeffs,
+                    std::vector<double>& AveBMSY,
+                    std::vector<double>& AveMSY,
+                    std::vector<double>& AveFMSY,
                     boost::numeric::ublas::matrix<double>& AveCompetitionAlpha,
                     boost::numeric::ublas::matrix<double>& AveCompetitionBetaSpecies,
                     boost::numeric::ublas::matrix<double>& AveCompetitionBetaGuilds,
@@ -195,6 +210,9 @@ public:
      * @param EstCatchabilityCovariateCoeffs : estimated catchability covariate coefficients vector
      * @param EstSurveyQ : estimated survey q vector
      * @param EstSurveyQCovariateCoeffs : estimated survey q covariate coefficient vector
+     * @param EstBMSY : estimated Biomass MSY values
+     * @param EstMSY  : estimated MSY values
+     * @param EstFMSY : estimated Fishing MSY values
      * @param EstCompetitionAlpha : estimated competition alpha matrix
      * @param EstCompetitionBetaSpecies : estimated competition beta species matrix
      * @param EstCompetitionBetaGuilds : estimated competition beta guilds matrix
@@ -216,6 +234,9 @@ public:
                      std::vector<double>& EstCatchabilityCovariateCoeffs,
                      std::vector<double>& EstSurveyQ,
                      std::vector<double>& EstSurveyQCovariateCoeffs,
+                     std::vector<double>& EstBMSY,
+                     std::vector<double>& EstMSY,
+                     std::vector<double>& EstFMSY,
                      boost::numeric::ublas::matrix<double>& EstCompetitionAlpha,
                      boost::numeric::ublas::matrix<double>& EstCompetitionBetaSpecies,
                      boost::numeric::ublas::matrix<double>& EstCompetitionBetaGuilds,

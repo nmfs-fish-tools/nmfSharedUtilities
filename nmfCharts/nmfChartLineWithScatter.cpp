@@ -192,6 +192,8 @@ nmfChartLineWithScatter::callback_hoveredLine(const QPointF& point, bool hovered
     if (hovered) {
 //      tooltip = m_tooltips[qobject_cast<QLineSeries* >(QObject::sender())->name()];
         tooltip = "(" + QString::number(point.x()) + "," + QString::number(point.y()) + ")";
+//        tooltip += ", seed=" + QString::number(m_seed)+", conv="+m_conv;
+        // RSK implement this in a later release (would be nice to see the seed value and convergence info as part of the tooltip
 
         // Workaround code to keep tooltip up for 2 seconds.  See note below.
         m_CustomToolTip->move(pos.x(),pos.y()-20);

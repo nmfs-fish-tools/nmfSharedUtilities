@@ -733,6 +733,11 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
         nmfUtils::rescaleMatrixMean(EstBiomassSpecies, EstBiomassRescaled);
         nmfUtils::rescaleMatrixMean(obsBiomassBySpeciesOrGuilds, ObsBiomassBySpeciesOrGuildsRescaled);
 //      nmfUtils::rescaleMatrixMean(m_ObsBiomassBySpeciesOrGuilds, ObsBiomassBySpeciesOrGuildsRescaled);
+    } else if (m_Scaling == "Log10") {
+        nmfUtils::rescaleMatrixLog10(ObsCatch,                      ObsCatchRescaled);
+        nmfUtils::rescaleMatrixLog10(EstCatch,                      EstCatchRescaled);
+        nmfUtils::rescaleMatrixLog10(EstBiomassSpecies,             EstBiomassRescaled);
+        nmfUtils::rescaleMatrixLog10(obsBiomassBySpeciesOrGuilds,   ObsBiomassBySpeciesOrGuildsRescaled);
     } else if (m_Scaling == "Z-Score") {
         nmfUtils::rescaleMatrixZScore(ObsCatch, ObsCatchRescaled);
         nmfUtils::rescaleMatrixZScore(EstCatch, EstCatchRescaled);
@@ -774,7 +779,7 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
                     ObsCatchRescaled, ObsBiomassBySpeciesOrGuildsRescaled,
                     EstCatchRescaled, EstBiomassRescaled,
                     m_BeeStruct.FitWeights);
-std::cout << "Warning....check this for using rescaled data with Max Likelihood" << std::endl;
+//std::cout << "Warning....check this for using rescaled data with Max Likelihood" << std::endl;
     }
 
 // Debug code to print out the CarryingCapacity covariates

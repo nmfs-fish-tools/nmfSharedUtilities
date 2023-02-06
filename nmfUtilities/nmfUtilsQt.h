@@ -573,6 +573,12 @@ namespace nmfUtilsQt {
      */
     bool isAnError(std::string errorMsg);
     /**
+     * @brief Determines whether the passed tableview is empty
+     * @param tableview : the tableview to test if it's empty or null
+     * @return true if empty or no defined, false otherwise
+     */
+    bool isEmpty(QTableView* tableview);
+    /**
      * @brief Load a time series .csv file into a QTableView
      * @param parentTabWidget : parent tab containing the QTableView object
      * @param tableView : QTableView that will contain the .csv data
