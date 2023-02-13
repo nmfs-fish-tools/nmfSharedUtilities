@@ -204,11 +204,12 @@ nmfUtilsStatisticsAveraging::calculateWeighted(const std::vector<double>& weight
 
 void
 nmfUtilsStatisticsAveraging::calculateAverage(const int& numberOfTopRunsToUse,
+                                              const bool& isUsingAll,
                                               const bool& isPercent,
                                               const QString& averagingAlgorithm)
 {
     // Need to trim vectors and matrices to include only the top n as specified by the following arguments
-    bool ok = createTrimmedStructures(numberOfTopRunsToUse,isPercent);
+    bool ok = createTrimmedStructures(numberOfTopRunsToUse,isUsingAll,isPercent);
 
     if (ok) {
         (this->*m_FunctionMap[averagingAlgorithm])();
@@ -217,11 +218,18 @@ nmfUtilsStatisticsAveraging::calculateAverage(const int& numberOfTopRunsToUse,
 
 bool
 nmfUtilsStatisticsAveraging::createTrimmedStructures(const int& numberOfTopRunsToUse,
+                                                     const bool& isUsingAll,
                                                      const bool& isPercent)
 {
+    int NumRuns_trimmed;
+    int numRuns = m_AIC.size();
+
     clearTrimmedData();
 
-    if ((numberOfTopRunsToUse == 100) && isPercent) {
+//  bool useAllRuns = ((numberOfTopRunsToUse ==     100) &&   isPercent) ||
+//                    ((numberOfTopRunsToUse == numRuns) && ! isPercent);
+
+    if (isUsingAll) {
         m_AIC_trimmed                                = m_AIC;
         m_EstInitBiomass_trimmed                     = m_EstInitBiomass;
         m_EstGrowthRates_trimmed                     = m_EstGrowthRates;
@@ -245,10 +253,11 @@ nmfUtilsStatisticsAveraging::createTrimmedStructures(const int& numberOfTopRunsT
         m_EstFMSY_trimmed                            = m_EstFMSY;
         m_EstBiomass_trimmed                         = m_EstBiomass;
     } else {
-        int NumRuns_trimmed = numberOfTopRunsToUse;
+
         if (isPercent) {
-            int NumRuns = m_AIC.size();
-            NumRuns_trimmed = NumRuns*(numberOfTopRunsToUse/100.0);
+            NumRuns_trimmed = numRuns*(numberOfTopRunsToUse/100.0);
+        } else {
+            NumRuns_trimmed = (numberOfTopRunsToUse > numRuns) ? numRuns : numberOfTopRunsToUse;
         }
 
         // Go through the fitness vector and keep the top NumRuns_trimmed runs

@@ -1644,11 +1644,9 @@ loadTableWidgetData(QTabWidget* parentTabWidget,
         if (file.open(QIODevice::ReadOnly)) {
             allLines = file.readAll().trimmed();
             lineList = allLines.split('\n');
-            if (tableWidget->rowCount() == numRows)
-            {
+            if (tableWidget->rowCount() == numRows) {
                 // Create the header
                 QStringList speciesParts = lineList[0].split(',');
-
                 for (int col=0; col<(int)ColumnsToLoad.size(); ++col) {
                     ColumnHeader << speciesParts[ColumnsToLoad[col]];
                 }
@@ -1670,6 +1668,11 @@ loadTableWidgetData(QTabWidget* parentTabWidget,
                             if (colNum == 0) { // nmfConstantsMSSPM::Column_Species_Guild) {
                                 guildValues << dataParts[0];
                             }
+                        } else {
+                            QTableWidgetItem* item = new QTableWidgetItem();
+                            item->setTextAlignment(Qt::AlignCenter);
+                            item->setText(dataParts[colNum]);
+                            tableWidget->setItem(row-1,col,item);
                         }
                     }
                 }

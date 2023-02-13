@@ -119,6 +119,7 @@ private:
     std::map<QString, void(nmfUtilsStatisticsAveraging::*)()> m_FunctionMap;
     void calculateWeighted(const std::vector<double>& weights);
     bool createTrimmedStructures(const int& numberOfTopRunsToUse,
+                                 const bool& isUsingAll,
                                  const bool& isPercent);
     void clearAveragedData();
     void clearEstData();
@@ -134,10 +135,12 @@ public:
     /**
      * @brief This method calculates the average biomass/parameters of the sub runs
      * @param numberOfTopRunsToUse : determines how many and which sub runs to use
-     * @param isPercent : defines if the numberOfTopRunsToUse is an absolute number or a percentage
+     * @param isUsingAll : defines if the the "using All" item has been selected for the averaging
+     * @param isPercent  : defines if the numberOfTopRunsToUse is an absolute number or a percentage
      * @param averagingAlgorithm : algorithm by which to average the sub runs
      */
     void calculateAverage(const int& numberOfTopRunsToUse,
+                          const bool& isUsingAll,
                           const bool& isPercent,
                           const QString& averagingAlgorithm);
     /**
