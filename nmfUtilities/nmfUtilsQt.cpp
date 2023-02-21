@@ -807,16 +807,15 @@ paste(QApplication* qtApp, QTableView* tableView)
     }
 
     // Get the copied data and strip off any white spaces from either end.
-    copiedText  = qtApp->clipboard()->text();
+    copiedText  = qtApp->clipboard()->text().trimmed()+"\n";
     copiedCells = copiedText.split(QRegExp(QLatin1String("\\n|\\t")));
-
     while (! copiedCells.empty() && copiedCells.back().size() == 0) {
         // Remove last character
         copiedCells.pop_back();
     }
 
     // Paste the copied data into the paste selection.
-    nrows = copiedText.count(QLatin1Char('\n'));
+    nrows = copiedText.count(QLatin1Char('\n')); // get number of rows
     nrows = (nrows == 0) ? 1 : nrows; // Check in case user double clicks in a cell and copies/paste like that (instead of clicking once on a cell)
     ncols = copiedCells.size() / nrows;
 
