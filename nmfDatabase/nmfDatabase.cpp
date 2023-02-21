@@ -2615,8 +2615,8 @@ nmfDatabase::loadMatrix(
         retv = false;
     } else {
         m = 0;
-        for (int speciesB=0; speciesB<NumCols; ++speciesB) {
-            for (int speciesA=0; speciesA<NumRows; ++speciesA) {
+        for (int speciesA=0; speciesA<NumRows; ++speciesA) {
+            for (int speciesB=0; speciesB<NumCols; ++speciesB) {
                 matrix(speciesA,speciesB) = QString::fromStdString(dataMap["Value"][m]).toDouble();
                 ++m;
             }

@@ -817,8 +817,7 @@ paste(QApplication* qtApp, QTableView* tableView)
 
     // Paste the copied data into the paste selection.
     nrows = copiedText.count(QLatin1Char('\n'));
-    if (nrows == 0) // Check in case user double clicks in a cell and copies/paste like that (instead of clicking once on a cell)
-        nrows = 1;
+    nrows = (nrows == 0) ? 1 : nrows; // Check in case user double clicks in a cell and copies/paste like that (instead of clicking once on a cell)
     ncols = copiedCells.size() / nrows;
 
     // If copy selection is same size as paste selection

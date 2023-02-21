@@ -310,11 +310,15 @@ nmfCompetitionForm::FunctionMap_NOK(
     double CompetitionAlphaCovariateCoeff = 0.0; // RSK estimate this later
     double EstCompetitionAlphaTerm;
 
-    for (unsigned row=0; row<EstCompetitionAlpha.size2(); ++row) {
-        EstCompetitionAlphaTerm = nmfUtils::applyCovariate(nullptr,
-                    covariateAlgorithmType,EstCompetitionAlpha(row,species),
-                    CompetitionAlphaCovariateCoeff,CompetitionAlphaCovariate(timeMinus1,species));
-        competitionSum += (double)EstCompetitionAlphaTerm * (double)EstBiomassSpecies(timeMinus1,row);
+    for (unsigned pred=0; pred<EstCompetitionAlpha.size2(); ++pred) {
+        EstCompetitionAlphaTerm = nmfUtils::applyCovariate(
+                    nullptr,
+                    covariateAlgorithmType,
+                    EstCompetitionAlpha(species,pred),
+                    CompetitionAlphaCovariateCoeff,
+                    CompetitionAlphaCovariate(timeMinus1,species));
+        competitionSum += (EstCompetitionAlphaTerm *
+                           EstBiomassSpecies(timeMinus1,pred));
 //qDebug() << "row,term,sum: " << row << EstCompetitionAlphaTerm << competitionSum;
 
     }
@@ -363,16 +367,22 @@ nmfCompetitionForm::FunctionMap_MSPROD(
     }
     double CompetitionBetaSpeciesTerm;
     for (unsigned j=0; j<numSpecies; ++j) {
-        CompetitionBetaSpeciesTerm = nmfUtils::applyCovariate(nullptr,
-                    covariateAlgorithmType,EstCompetitionBetaSpecies(species,j),
-                    CompetitionBetaSpeciesCovariateCoeff,CompetitionBetaSpeciesCovariate(timeMinus1,j));
+        CompetitionBetaSpeciesTerm = nmfUtils::applyCovariate(
+                    nullptr,
+                    covariateAlgorithmType,
+                    EstCompetitionBetaSpecies(species,j),
+                    CompetitionBetaSpeciesCovariateCoeff,
+                    CompetitionBetaSpeciesCovariate(timeMinus1,j));
         sumOverSpecies += CompetitionBetaSpeciesTerm*EstBiomassSpecies(timeMinus1,j);
     }
     double CompetitionBetaGuildTerm;
     for (unsigned j=0; j<numGuilds; ++j) {
-        CompetitionBetaGuildTerm = nmfUtils::applyCovariate(nullptr,
-                    covariateAlgorithmType,EstCompetitionBetaGuild(species,j),
-                    CompetitionBetaGuildCovariateCoeff,CompetitionBetaGuildGuildCovariate(timeMinus1,j));
+        CompetitionBetaGuildTerm = nmfUtils::applyCovariate(
+                    nullptr,
+                    covariateAlgorithmType,
+                    EstCompetitionBetaGuild(species,j),
+                    CompetitionBetaGuildCovariateCoeff,
+                    CompetitionBetaGuildGuildCovariate(timeMinus1,j));
         sumOverGuilds += CompetitionBetaGuildTerm*EstBiomassGuild(timeMinus1,j);
 //if (sumOverGuilds > 1e8) {
 //qDebug() << sumOverGuilds << CompetitionBetaGuildTerm << EstBiomassGuild(timeMinus1,j);
@@ -385,9 +395,12 @@ nmfCompetitionForm::FunctionMap_MSPROD(
     term1 = sumOverSpecies/guildCarryingCapacity;
     term2 = sumOverGuilds/(systemCarryingCapacity - guildCarryingCapacity);
 
-    double growthTerm = nmfUtils::applyCovariate(nullptr,
-                covariateAlgorithmType,growthRate[species],
-                growthRateCovariateCoeff,growthRateCovariate(timeMinus1,species));
+    double growthTerm = nmfUtils::applyCovariate(
+                nullptr,
+                covariateAlgorithmType,
+                growthRate[species],
+                growthRateCovariateCoeff,
+                growthRateCovariate(timeMinus1,species));
 //qDebug() << "gbts: " << growthTerm << biomassAtTime << term1 << term2;
     return growthTerm*biomassAtTime*(term1-term2);
 }

@@ -101,20 +101,6 @@ nmfGrowthForm::loadParameterRanges(
         parameterInitialValues.emplace_back(dataStruct.GrowthRate[species]);
     }
 
-    // Always load growth rate shape parameter values
-    for (int species=0; species<m_NumSpecies; ++species) {
-        if (isCheckedGrowthRate) {
-            aPair = std::make_pair(dataStruct.GrowthRateShapeMin[species],
-                                   dataStruct.GrowthRateShapeMax[species]);
-        } else {
-            aPair = std::make_pair(dataStruct.GrowthRateShape[species],
-                                   dataStruct.GrowthRateShape[species]);
-        }
-        parameterRanges.emplace_back(aPair);
-        m_ParameterRanges.emplace_back(aPair);
-        parameterInitialValues.emplace_back(dataStruct.GrowthRateShape[species]);
-    }
-
     // Always load growth rate covariate values
     for (int species=0; species<m_NumSpecies; ++species) {
         speciesName       = dataStruct.SpeciesNames[species];
@@ -133,6 +119,21 @@ nmfGrowthForm::loadParameterRanges(
     }
 
     if (m_Type == "Logistic") {
+
+        // Load growth rate shape parameter values
+        for (int species=0; species<m_NumSpecies; ++species) {
+            if (isCheckedGrowthRate) {
+                aPair = std::make_pair(dataStruct.GrowthRateShapeMin[species],
+                                       dataStruct.GrowthRateShapeMax[species]);
+            } else {
+                aPair = std::make_pair(dataStruct.GrowthRateShape[species],
+                                       dataStruct.GrowthRateShape[species]);
+            }
+            parameterRanges.emplace_back(aPair);
+            m_ParameterRanges.emplace_back(aPair);
+            parameterInitialValues.emplace_back(dataStruct.GrowthRateShape[species]);
+        }
+
         // Load carrying capacity values
         for (int species=0; species<m_NumSpecies; ++species) {
             if (isCheckedCarryingCapacity) {
@@ -213,11 +214,11 @@ nmfGrowthForm::extractParameters(
         }
         startPos += m_NumSpecies;
         for (int i=startPos; i<startPos+m_NumSpecies; ++i) {
-            growthRateShape.emplace_back(parameters[i]);
+            growthRateCovariateCoeffs.emplace_back(parameters[i]);
         }
         startPos += m_NumSpecies;
         for (int i=startPos; i<startPos+m_NumSpecies; ++i) {
-            growthRateCovariateCoeffs.emplace_back(parameters[i]);
+            growthRateShape.emplace_back(parameters[i]);
         }
         startPos += m_NumSpecies;
         for (int i=startPos; i<startPos+m_NumSpecies; ++i) {
