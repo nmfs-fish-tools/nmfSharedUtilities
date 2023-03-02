@@ -1700,81 +1700,82 @@ loadGuildsSpeciesTableview(QTabWidget* parentTabWidget,
                            QString& filename,
                            const int& nameColumn,
                            QString& errorMsg)
-{    bool retv = false;
-     bool isSpecies = (type == "Species");
-     int offset = (isSpecies) ? 1 : 0;
-     QString allLines;
-     QStringList lineList;
-     QStringList dataParts;
-     QStringList ColumnLabelList  = {};
-     QStandardItem* item;
-     errorMsg.clear();
-     SpeciesGuilds.clear();
-     QLocale locale(QLocale::English);
-     QString valueWithComma;
+{
+    bool retv = false;
+    bool isSpecies = (type == "Species");
+    int offset = (isSpecies) ? 1 : 0;
+    QString allLines;
+    QStringList lineList;
+    QStringList dataParts;
+    QStringList ColumnLabelList  = {};
+    QStandardItem* item;
+    errorMsg.clear();
+    SpeciesGuilds.clear();
+    QLocale locale(QLocale::English);
+    QString valueWithComma;
 
-     if (smodel == nullptr) {
-         errorMsg = "Error: No model found in table. Please save initial table data.";
-         return false;
-     }
+    if (smodel == nullptr) {
+        errorMsg = "Error: No model found in table. Please save initial table data.";
+        return false;
+    }
 
-     if (queryForFilename) {
-         filename = (inputFilename.isEmpty()) ?
-                     QFileDialog::getOpenFileName(parentTabWidget,
-                                                  QObject::tr("Select CSV file"), inputDataPath,
-                                                  QObject::tr("Data Files (species*.csv guilds*.csv)")) :
-                     inputFilename;
-     }
+    if (queryForFilename) {
+        filename = (inputFilename.isEmpty()) ?
+                    QFileDialog::getOpenFileName(parentTabWidget,
+                                                 QObject::tr("Select CSV file"), inputDataPath,
+                                                 QObject::tr("Data Files (species*.csv guilds*.csv)")) :
+                    inputFilename;
+    }
 
-     if (! filename.isEmpty()) {
-         QFile file(filename);
-         if (file.open(QIODevice::ReadOnly)) {
-             allLines = file.readAll().trimmed();
-             lineList = allLines.split('\n');
-             int numLines   = lineList.count()-1; // -1 for the header
-             int numColumns = lineList[0].split(',').count()-offset; // offset needed because we don't want the Guild field from the Species .csv file in the model
-             if ((smodel->rowCount()    == numLines) &&
-                 (smodel->columnCount() == numColumns))
-             {
-                 QStringList columnLabelParts = lineList[0].split(',');
-                 if (isSpecies) {
-                     columnLabelParts.removeAt(nmfConstantsMSSPM::Column_Species_Guild);
-                 }
-                 for (int j=0;j<columnLabelParts.count();++j) {
-                     ColumnLabelList << columnLabelParts[j];
-                 }
-                 for (int i=1; i<lineList.count(); ++i) {
-                     dataParts = lineList[i].split(',');
-                     if (isSpecies) {
-                         SpeciesGuilds.push_back(dataParts[nmfConstantsMSSPM::Column_Species_Guild]);
-                         dataParts.removeAt(nmfConstantsMSSPM::Column_Species_Guild);
-                     }
-                     for (int j=0; j<dataParts.count(); ++j) {
-                         if (j != nameColumn) {
-                             valueWithComma = locale.toString(dataParts[j].toDouble());
-                             item = new QStandardItem(valueWithComma);
-                         } else {
-                             item = new QStandardItem(dataParts[j]);
-                         }
-                         item->setTextAlignment(Qt::AlignCenter);
-                         smodel->setItem(i-1, j, item);
-                     }
-                 }
-                 smodel->setHorizontalHeaderLabels(ColumnLabelList);
-             } else {
-                 errorMsg = "Error: table size from .csv file (" +
-                         QString::number(numLines) + "x" + QString::number(numColumns) +
-                         ") does not equal current size of table (" +
-                         QString::number(smodel->rowCount()) + "x" +
-                         QString::number(smodel->columnCount()) + ")";
-             }
-             file.close();
-         }
-         retv = true;
-     } else {
-         retv = false;
-     }
-     return retv;
+    if (! filename.isEmpty()) {
+        QFile file(filename);
+        if (file.open(QIODevice::ReadOnly)) {
+            allLines = file.readAll().trimmed();
+            lineList = allLines.split('\n');
+            int numLines   = lineList.count()-1; // -1 for the header
+            int numColumns = lineList[0].split(',').count()-offset; // offset needed because we don't want the Guild field from the Species .csv file in the model
+            if ((smodel->rowCount()    == numLines) &&
+                    (smodel->columnCount() == numColumns))
+            {
+                QStringList columnLabelParts = lineList[0].split(',');
+                if (isSpecies) {
+                    columnLabelParts.removeAt(nmfConstantsMSSPM::Column_Species_Guild);
+                }
+                for (int j=0;j<columnLabelParts.count();++j) {
+                    ColumnLabelList << columnLabelParts[j];
+                }
+                for (int i=1; i<lineList.count(); ++i) {
+                    dataParts = lineList[i].split(',');
+                    if (isSpecies) {
+                        SpeciesGuilds.push_back(dataParts[nmfConstantsMSSPM::Column_Species_Guild]);
+                        dataParts.removeAt(nmfConstantsMSSPM::Column_Species_Guild);
+                    }
+                    for (int j=0; j<dataParts.count(); ++j) {
+                        if (j != nameColumn) {
+                            valueWithComma = locale.toString(dataParts[j].toDouble(),'f',6);
+                            item = new QStandardItem(valueWithComma);
+                        } else {
+                            item = new QStandardItem(dataParts[j]);
+                        }
+                        item->setTextAlignment(Qt::AlignCenter);
+                        smodel->setItem(i-1, j, item);
+                    }
+                }
+                smodel->setHorizontalHeaderLabels(ColumnLabelList);
+            } else {
+                errorMsg = "Error: table size from .csv file (" +
+                        QString::number(numLines) + "x" + QString::number(numColumns) +
+                        ") does not equal current size of table (" +
+                        QString::number(smodel->rowCount()) + "x" +
+                        QString::number(smodel->columnCount()) + ")";
+            }
+            file.close();
+        }
+        retv = true;
+    } else {
+        retv = false;
+    }
+    return retv;
 }
 
 bool
@@ -2241,6 +2242,34 @@ saveGuildsTableView(QTabWidget* parentTabWidget,
 
     outputFilename = filename;
     return retv;
+}
+
+void
+savePdf(const QString& imagePath,
+        const QString& fileBasename,
+        const int& resolution,
+        const QImage& image)
+{
+    QString suffix = "." + QFileInfo(fileBasename).suffix();
+    QString fileBasenamePdf = fileBasename;
+    fileBasenamePdf = fileBasenamePdf.replace(suffix,".pdf");
+
+    QString outputFilePdf = QDir(imagePath).filePath(fileBasenamePdf);
+    QPdfWriter pdfWriter(outputFilePdf);
+    pdfWriter.setResolution(resolution);
+    pdfWriter.setPageSize(QPageSize(QPageSize::PageSizeId::Letter));
+    pdfWriter.setPageOrientation(QPageLayout::Landscape);
+    pdfWriter.setTitle(""); //tbd - if needed
+
+    QPainter painter(&pdfWriter);
+    QPixmap pm = QPixmap::fromImage(image);
+
+    int width  = pdfWriter.width();
+    int height = pdfWriter.height();
+    QSize pmSize(width, height);
+    QPixmap pmScaled = pm.scaled(pmSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    painter.drawPixmap(0, 0, pmScaled.width(), pmScaled.height(), pmScaled);
+    painter.end();
 }
 
 bool

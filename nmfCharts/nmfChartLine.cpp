@@ -22,6 +22,7 @@ void
 nmfChartLine::overlayVerticalLine(
         QChart* Chart,
         const std::string& LineStyle,
+        const int&         DataLineWidth,
         const bool&        ShowFirstPoint,
         const bool&        ShowLegend,
         const double&      XOffset,
@@ -34,18 +35,22 @@ nmfChartLine::overlayVerticalLine(
         const QString&     HoverLabel,
         std::string&       XTitle,
         std::string&       YTitle,
+        const int&         FontSizeLabel,
+        const int&         FontSizeNumber,
+        const QString&     FontLabel,
+        const int&         AxisLineWidth,
+        const int&         AxisLineColor,
         const std::string& LineColor,
         const std::vector<bool>& GridLines,
         const double&      XInc)
 {
     QString hoverLabel;
-    int XStartVal = (ShowFirstPoint) ? 0 : 1;
-    XStartVal += XOffset;
+    int XStartVal = (ShowFirstPoint) ? XOffset : XOffset+1;
     QLineSeries *series = new QLineSeries();;
     QPen pen = series->pen();
 
     // Set pen color and style for the vertical line
-    pen.setWidth(2);
+    pen.setWidth(DataLineWidth);
     pen.setColor(QColor(QString::fromStdString(LineColor)));
     if (LineStyle == "DottedLine") {
         pen.setStyle(Qt::DotLine);
@@ -81,7 +86,9 @@ nmfChartLine::overlayVerticalLine(
     // be drawn correctly.
     resetAxes(Chart, ShowLegend, XAxisIsInteger, XStartVal,
               NumXValues, YMinVal, YMaxVal, LeaveGapsWhereNegative,
-              XTitle, YTitle, GridLines, XInc);
+              XTitle, YTitle, FontSizeLabel, FontSizeNumber, FontLabel,
+              AxisLineWidth, AxisLineColor,
+              GridLines, XInc);
 }
 
 void
@@ -89,6 +96,7 @@ nmfChartLine::populateChart(
         QChart*            Chart,
         std::string&       LineType,
         const std::string& LineStyle,
+        const int&         DataLineWidth,
         const bool&        ShowFirstPoint,
         const bool&        ShowLegend,
         const double&      XOffset,
@@ -103,6 +111,11 @@ nmfChartLine::populateChart(
         std::string&       MainTitle,
         std::string&       XTitle,
         std::string&       YTitle,
+        const int&         FontSizeLabel,
+        const int&         FontSizeNumber,
+        const QString&     FontLabel,
+        const int&         AxisLineWidth,
+        const int&         AxisLineColor,
         const std::vector<bool>& GridLines,
         const int&         Theme,
         const QColor&      LineColor,
@@ -138,7 +151,7 @@ nmfChartLine::populateChart(
           pen = series->pen();
           pen.setStyle(Qt::SolidLine);
           pen.setColor(LineColor); //LineColors[0]);
-          pen.setWidth(2);
+          pen.setWidth(DataLineWidth);
           series->setPen(pen);
 
         // Load Data
@@ -177,7 +190,7 @@ nmfChartLine::populateChart(
             } else {
                 pen.setColor(QColor(QString::fromStdString(nmfConstants::LineColors[line%nmfConstants::LineColors.size()])));
             }
-            pen.setWidth(2);
+            pen.setWidth(DataLineWidth);
             if (LineStyle == "DottedLine") {
                 pen.setStyle(Qt::DotLine);
             } else if (LineStyle == "DashedLine") {
@@ -213,7 +226,9 @@ nmfChartLine::populateChart(
     // any series to a chart.
     resetAxes(Chart, ShowLegend, XAxisIsInteger, XStartVal,
               NumXValues, YMinVal, YMaxVal, LeaveGapsWhereNegative,
-              XTitle, YTitle, GridLines, XInc);
+              XTitle, YTitle, FontSizeLabel, FontSizeNumber,
+              FontLabel, AxisLineWidth, AxisLineColor,
+              GridLines, XInc);
 }
 
 
@@ -229,21 +244,31 @@ nmfChartLine::resetAxes(
         const bool&        LeaveGapsWhereNegative,
         std::string&       XTitle,
         std::string&       YTitle,
+        const int&         FontSizeLabel,
+        const int&         FontSizeNumber,
+        const QString&     FontLabel,
+        const int&         AxisLineWidth,
+        const int&         AxisLineColor,
         const std::vector<bool>& GridLines,
         const double&      XInc)
 {
+    double currentYMin;
+
     // Make default axes and set font
     chart->createDefaultAxes();
-    QAbstractAxis *axisX = chart->axes(Qt::Horizontal).back();
-    QFont titleFont = axisX->titleFont();
-    titleFont.setPointSize(12);
+//    QAbstractAxis *axisX = chart->axes(Qt::Horizontal).back();
+    QFont titleFont = QFont(FontLabel); // axisX->titleFont();
+    titleFont.setPointSize(FontSizeLabel);
     titleFont.setWeight(QFont::Bold);
+    QFont  axisFont  = QFont(FontLabel);
+    axisFont.setPointSize(FontSizeNumber);
+    axisFont.setWeight(QFont::Normal);
 
     // Setup Y axis
     QValueAxis *currentAxisY = qobject_cast<QValueAxis*>(chart->axes(Qt::Vertical).back());
     currentAxisY->setTitleFont(titleFont);
     currentAxisY->setTitleText(QString::fromStdString(YTitle));
-    double currentYMin = currentAxisY->min();
+    currentYMin = currentAxisY->min();
     if (YMinVal >= 0) {
         currentAxisY->setMin(currentYMin*YMinVal/100.0);
     }
@@ -251,6 +276,7 @@ nmfChartLine::resetAxes(
         currentAxisY->setMax(YMaxVal);
     }
     currentAxisY->applyNiceNumbers();
+    currentAxisY->setLabelsFont(axisFont);
 
     // Handle any gaps
     if (LeaveGapsWhereNegative) {
@@ -275,20 +301,30 @@ nmfChartLine::resetAxes(
     }
 
     // Assure x axis numbers are integers (I assume they're years)
-    QValueAxis *currentAxisX = qobject_cast<QValueAxis*>(chart->axes(Qt::Horizontal).back());
-    currentAxisX->setTitleFont(titleFont);
-    currentAxisX->setTitleText(QString::fromStdString(XTitle));
+    QValueAxis *currentAxisX = qobject_cast<QValueAxis*>(chart->axes(Qt::Horizontal).back());    
     currentAxisX->applyNiceNumbers();
     if (XAxisIsInteger) {
         currentAxisX->setLabelFormat("%d");
     }
-
-    // Set range so plot completely fills out chart in the x-direction
-    currentAxisX->setRange(XStartVal,XStartVal+(NumXValues-1)*XInc);
+    currentAxisX->setLabelsFont(axisFont);
+    currentAxisX->setTitleFont(titleFont);
+    currentAxisX->setTitleText(QString::fromStdString(XTitle));
 
     // Set grid line visibility
     chart->axes(Qt::Horizontal).back()->setGridLineVisible(GridLines[0]);
     chart->axes(Qt::Vertical).back()->setGridLineVisible(GridLines[1]);
+
+    // Set coordinate line attributes
+    QBrush lineBrush;
+    QPen linePen(lineBrush,(AxisLineWidth < 1) ? 1 : AxisLineWidth);
+    QColor axisColor = QColor(AxisLineColor,AxisLineColor,AxisLineColor);
+    currentAxisX->setLinePen(linePen);
+    currentAxisX->setLinePenColor(axisColor);
+    currentAxisY->setLinePen(linePen);
+    currentAxisY->setLinePenColor(axisColor);
+
+    // Set range so plot completely fills out chart in the x-direction
+//    currentAxisX->setRange(XStartVal,XStartVal+(NumXValues-1)*XInc);
 
     // Set legend visibility
     chart->legend()->setVisible(ShowLegend);

@@ -11,6 +11,8 @@ nmfChartLineWithScatter::populateChart(
         QChart *chart,
         std::string &type,
         const std::string &lineStyle,
+        const int& dataLineWidth,
+        const int& dataPointWidth,
         const bool& isMohnsRho,
         const bool &showFirstPoint,
         const bool &AddScatter,
@@ -26,6 +28,11 @@ nmfChartLineWithScatter::populateChart(
         std::string &mainTitle,
         std::string &xTitle,
         std::string &yTitle,
+        const int& fontSizeLabel,
+        const int& FontSizeNumber,
+        const QString& FontLabel,
+        const int& axisLineWidth,
+        const int& axisLineColor,
         const std::vector<bool> &gridLines,
         const int &theme,
         const QColor &dashedLineColor,
@@ -35,6 +42,7 @@ nmfChartLineWithScatter::populateChart(
         const QList<QString>& multiRunLineLabels,
         const bool& showLegend)
 {
+    int XStartVal = showFirstPoint ? XOffset : XOffset+1;
     int numPointsInLine = 0;
     double currentYMin  = 0;
     QLineSeries    *lineSeries    = nullptr;
@@ -44,8 +52,6 @@ nmfChartLineWithScatter::populateChart(
     QColor  LineColor(QString::fromStdString(lineColorValue));
     QString LineColorName = QString::fromStdString(lineColorName);
 
-    int XStartVal = (showFirstPoint) ? 0 : 1;
-    XStartVal += XOffset;
     m_FirstYear = XStartVal;
 
     // Set chart attributes
@@ -67,13 +73,14 @@ nmfChartLineWithScatter::populateChart(
             pen = lineSeries->pen();
             pen.setStyle(Qt::DashLine);
             pen.setColor(dashedLineColor);
-            pen.setWidth(2);
+            pen.setWidth(dataLineWidth);
             lineSeries->setPen(pen);
         } else {
             pen = lineSeries->pen();
             pen.setStyle(Qt::SolidLine);
             pen.setColor(LineColor);
-            pen.setWidth(2);
+            pen.setWidth(dataLineWidth);
+            pen.setCapStyle(Qt::RoundCap);
             lineSeries->setPen(pen);
             //series->setColor(LineColor);
         }
@@ -98,7 +105,7 @@ nmfChartLineWithScatter::populateChart(
 
     if ((ScatterData.size1() != 0) && AddScatter) {
         scatterSeries = new QScatterSeries();
-        scatterSeries->setMarkerSize(10);
+        scatterSeries->setMarkerSize(dataPointWidth);
         scatterSeries->setColor(scatterColor);
         for (unsigned int j=XStartVal-XOffset; j<ScatterData.size1(); ++j) {
             if (! SkipScatterData(j,0)) {
@@ -119,9 +126,13 @@ nmfChartLineWithScatter::populateChart(
 
     // Setup X and Y axes
     chart->createDefaultAxes();
-    QFont titleFont = chart->axes(Qt::Horizontal).back()->titleFont();
-    titleFont.setPointSize(12);
+    QFont titleFont = QFont(FontLabel); // chart->axes(Qt::Horizontal).back()->titleFont();
+    titleFont.setPointSize(fontSizeLabel);
     titleFont.setWeight(QFont::Bold);
+    QFont axisFont  = QFont(FontLabel);
+    axisFont.setPointSize(FontSizeNumber);
+    axisFont.setWeight(QFont::Normal);
+
     chart->axes(Qt::Horizontal).back()->setTitleFont(titleFont);
     chart->axes(Qt::Horizontal).back()->setTitleText(QString::fromStdString(xTitle));
 
@@ -136,18 +147,29 @@ nmfChartLineWithScatter::populateChart(
         currentAxisY->setMax(YMaxVal);
     }
     currentAxisY->applyNiceNumbers();
+    currentAxisY->setLabelsFont(axisFont);
 
     QValueAxis *currentAxisX = qobject_cast<QValueAxis*>(chart->axes(Qt::Horizontal).back());
     currentAxisX->applyNiceNumbers();
     if (xAxisIsInteger) {
         currentAxisX->setLabelFormat("%d");
     }
+    currentAxisX->setLabelsFont(axisFont);
 
     //   Set grid line visibility
     chart->axes(Qt::Horizontal).back()->setGridLineVisible(gridLines[0]);
     chart->axes(Qt::Vertical).back()->setGridLineVisible(gridLines[1]);
 
-    // Show legend
+    // Set coordinate line attributes
+    QBrush lineBrush;
+    QPen linePen(lineBrush,(axisLineWidth < 1) ? 1 : axisLineWidth);
+    QColor axisColor = QColor(axisLineColor,axisLineColor,axisLineColor);
+    currentAxisX->setLinePen(linePen);
+    currentAxisX->setLinePenColor(axisColor);
+    currentAxisY->setLinePen(linePen);
+    currentAxisY->setLinePenColor(axisColor);
+
+    // Set legend visibility
     chart->legend()->setVisible(showLegend);
     chart->legend()->setAlignment(Qt::AlignRight);
     chart->legend()->setShowToolTips(true);

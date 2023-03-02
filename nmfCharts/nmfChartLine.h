@@ -83,6 +83,11 @@ private:
             const bool&        LeaveGapsWhereNegative,
             std::string&       XTitle,
             std::string&       YTitle,
+            const int&         FontSizeLabel,
+            const int&         FontSizeNumber,
+            const QString&     FontLabel,
+            const int&         AxisLineWidth,
+            const int&         AxisLineColor,
             const std::vector<bool>& GridLines,
             const double&      XInc);
 public:
@@ -96,6 +101,7 @@ public:
      * @brief Overlays a vertical line onto the current chart data
      * @param Chart : pointer to QChart
      * @param LineStyle : style of line (i.e., DottedLine, DashedLine)
+     * @param DataLineWidth : width of vertical line
      * @param ShowFirstPoint : boolean signifying if the first point should be shown
      * @param ShowLegend : legend visibility boolean
      * @param XOffset : start year used as an offset for the x-axis scale
@@ -108,6 +114,11 @@ public:
      * @param HoverLabel : hover label for the overlay line
      * @param XTitle : title of x axis
      * @param YTitle : title of y axis
+     * @param FontSizeLabel : the point size of the label titles
+     * @param FontSizeNumber : the point size of the axes' scale values
+     * @param FontLabel : the font of the label titles and axes values
+     * @param AxisLineWidth : width of the x and y axes
+     * @param AxisLineColor : value to be used for r,g,b values for axes line color
      * @param LineColor : color of the line
      * @param GridLines : gridline visibility booleans
      * @param XInc : increment of x-axis
@@ -115,6 +126,7 @@ public:
     void overlayVerticalLine(
             QChart* Chart,
             const std::string& LineStyle,
+            const int&         DataLineWidth,
             const bool&        ShowFirstPoint,
             const bool&        ShowLegend,
             const double&      XOffset,
@@ -127,6 +139,11 @@ public:
             const QString&     HoverLabel,
             std::string&       XTitle,
             std::string&       YTitle,
+            const int&         FontSizeLabel,
+            const int&         FontSizeNumber,
+            const QString&     FontLabel,
+            const int&         AxisLineWidth,
+            const int&         AxisLineColor,
             const std::string& LineColor,
             const std::vector<bool>& GridLines,
             const double&      XInc);
@@ -135,6 +152,7 @@ public:
      * @param Chart : pointer to QChart
      * @param LineType : type of line chart
      * @param LineStyle : style of line (i.e., DottedLine, DashedLine)
+     * @param DataLineWidth : width of dotted (MSY) line
      * @param ShowFirstPoint : boolean signifying if the first point should be shown
      * @param ShowLegend : boolean to specify the visibility of the legend
      * @param XOffset : the x offset that should be applied to the data series
@@ -149,6 +167,11 @@ public:
      * @param MainTitle : the main title for the chart
      * @param XTitle : the x-axis label
      * @param YTitle : the y-axis label
+     * @param FontSizeLabel : the point size of the label titles
+     * @param FontSizeNumber : the point size of the axes' scale values
+     * @param LabelFont : the font of the label titles and axes values
+     * @param AxisLineWidth : width of the x and y axes
+     * @param AxisLineColor : value to be used for r,g,b values for axes line color
      * @param GridLines : vector of booleans designating if the gridlines should be visible
      * @param Theme : color theme for the chart
      * @param LineColor : the line color designation
@@ -159,6 +182,7 @@ public:
             QChart*            Chart,
             std::string&       LineType,
             const std::string& LineStyle,
+            const int&         DataLineWidth,
             const bool&        ShowFirstPoint,
             const bool&        ShowLegend,
             const double&      XOffset,
@@ -173,6 +197,11 @@ public:
             std::string&       MainTitle,
             std::string&       XTitle,
             std::string&       YTitle,
+            const int&         FontSizeLabel,
+            const int&         FontSizeNumeric,
+            const QString&     LabelFont,
+            const int&         AxisLineWidth,
+            const int&         AxisLineColor,
             const std::vector<bool>& GridLines,
             const int&         Theme,
             const QColor&      LineColor,

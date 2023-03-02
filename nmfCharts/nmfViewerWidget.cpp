@@ -161,7 +161,7 @@ nmfViewerWidget::loadDataTables(QString fullFilename)
     QStandardItemModel* smodel;
     QStringList header;
 
-    nmfUtilsQt::switchFileExtensions(fullFilename,".csv",{".jpg",".png"});
+    nmfUtilsQt::switchFileExtensions(fullFilename,".csv",{".jpg",".png",".tiff"});
 
     // Read all the tabs' data from the data file
     bool readOK = readDataFile(fullFilename,header,data,numRows,numCols);
@@ -297,7 +297,7 @@ void
 nmfViewerWidget::refreshList()
 {
     QDir directory(m_ImagePath);
-    QStringList images = directory.entryList(QStringList() << "*.jpg" << "*.png", QDir::Files);
+    QStringList images = directory.entryList(QStringList() << "*.jpg" << "*.png" << "*.tiff", QDir::Files);
     m_ImageCMB->clear();
     m_ImageCMB->addItems(images);
 }
@@ -701,7 +701,9 @@ nmfViewerWidget::callback_RenamePB()
     QFileInfo newfile(renamedFilenameWithPath);
 
     QString suffix = newfile.completeSuffix();
-    if ((! suffix.endsWith("jpg")) && (! suffix.endsWith("png"))) {
+    if ((! suffix.endsWith("jpg")) &&
+        (! suffix.endsWith("png")) &&
+        (! suffix.endsWith("tiff"))) {
         renamedFilename += ".jpg";
         renamedFilenameWithPath += ".jpg";
     }

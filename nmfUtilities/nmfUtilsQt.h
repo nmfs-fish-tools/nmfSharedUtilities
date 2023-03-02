@@ -61,6 +61,8 @@
 #include <QMimeData>
 #include <QModelIndex>
 #include <QModelIndexList>
+#include <QPainter>
+#include <QPdfWriter>
 #include <QProcess>
 #include <QProgressDialog>
 #include <QPushButton>
@@ -856,6 +858,17 @@ namespace nmfUtilsQt {
                        QList<QString>& GuildName,
                        QList<QString>& GrowthRate,
                        QList<QString>& GuildK);
+    /**
+     * @brief Saves the passed image into the appropriately named pdf file
+     * @param imagePath : directory for pdf file
+     * @param fileBasename : file base name of pdf file (prior to suffix being updated to "pdf")
+     * @param resolution : the resolution of the pdf file in dpi
+     * @param image : the image to be written to the pdf file
+     */
+    void savePdf(const QString& imagePath,
+                 const QString& fileBasename,
+                 const int& resolution,
+                 const QImage& image);
     /**
      * @brief Saves the data in the passed non time series but a table view model to a
      * csv file in the passed directory

@@ -29,6 +29,7 @@
 
 #pragma once
 
+#include <QBrush>
 #include <QChart>
 #include <QGraphicsView>
 #include <QLine>
@@ -40,6 +41,7 @@
 #include <QLabel>
 #include <QLegend>
 #include <QLegendMarker>
+#include <QPen>
 #include <QToolTip>
 
 #include <boost/numeric/ublas/matrix.hpp>
@@ -83,6 +85,8 @@ public:
      * @param chart : pointer to QChart
      * @param type : type of chart (currently unused)
      * @param lineStyle : style of line(s)
+     * @param dataLineWidth : width of the data lines
+     * @param dataPointWidth : width of scatter points
      * @param isMohnsRho : boolean signifying if plot is of a retrospective analysis
      * @param showFirstPoint : boolean signifying if showing the first point should be shown
      * @param addScatter : boolean signifying if the scatter diagram should be visible
@@ -98,6 +102,11 @@ public:
      * @param mainTitle : the main title for the chart
      * @param xTitle : the x-axis label
      * @param yTitle : the y-axis label
+     * @param fontSizeLabel : the point size of the label titles
+     * @param fontSizeNumber : the point size of the axes' numeric scale values
+     * @param labelFont : the font of the label titles and axes values
+     * @param axisLineWidth : width of the x and y axes
+     * @param axisLineColor : value to be used for r,g,b values for axes line color
      * @param gridLines : vector of booleans designating if the gridlines should be visible
      * @param theme : color theme for the chart
      * @param dashedLineColor : color of any dashed lines
@@ -111,6 +120,8 @@ public:
             QChart* chart,
             std::string& type,
             const std::string& lineStyle,
+            const int& dataLineWidth,
+            const int& dataPointWidth,
             const bool& isMohnsRho,
             const bool& showFirstPoint,
             const bool& addScatter,
@@ -126,6 +137,11 @@ public:
             std::string& mainTitle,
             std::string& xTitle,
             std::string& yTitle,
+            const int& fontSizeLabel,
+            const int& fontSizeNumber,
+            const QString& labelFont,
+            const int& axisLineWidth,
+            const int& axisLineColor,
             const std::vector<bool>& gridLines,
             const int& theme,
             const QColor& dashedLineColor,

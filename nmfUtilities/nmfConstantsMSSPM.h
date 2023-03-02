@@ -268,6 +268,13 @@ namespace nmfConstantsMSSPM
      const int          PageEstimationRun                      = 6;
      const int          PageEstimationModelReview              = 7;
 
+     const int          PublishLineWidthAxes                   =  2;
+     const int          PublishLineWidthData                   =  3;
+     const int          PublishLineWidthPoint                  = 11;
+     const int          PublishFontSizeLabel                   = 15;
+     const int          PublishFontSizeNumber                  = 11;
+     const QString      PublishFont                            = "Unicode";
+
      const std::string Linear                                  = "Linear";
      const std::string Exponential                             = "Exponential";
 
