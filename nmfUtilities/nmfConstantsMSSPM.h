@@ -188,6 +188,8 @@ namespace nmfConstantsMSSPM
      const bool   DontRunChecks                    = false;
      const bool   ResetCheckboxes                  = true;
      const bool   DontResetCheckboxes              = false;
+     const bool   LoadProjectData                  = true;
+     const bool   DontLoadProjectData              = false;
 
      const std::string  HiddenDir                      = ".MSSPM";
      const std::string  HiddenDataDir                  = ".MSSPM/data";
