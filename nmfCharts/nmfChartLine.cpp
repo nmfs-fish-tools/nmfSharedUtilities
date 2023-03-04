@@ -52,6 +52,8 @@ nmfChartLine::overlayVerticalLine(
     // Set pen color and style for the vertical line
     pen.setWidth(DataLineWidth);
     pen.setColor(QColor(QString::fromStdString(LineColor)));
+    pen.setCapStyle(Qt::RoundCap);
+    pen.setJoinStyle(Qt::RoundJoin);
     if (LineStyle == "DottedLine") {
         pen.setStyle(Qt::DotLine);
     } else if (LineStyle == "DashedLine") {
@@ -152,6 +154,8 @@ nmfChartLine::populateChart(
           pen.setStyle(Qt::SolidLine);
           pen.setColor(LineColor); //LineColors[0]);
           pen.setWidth(DataLineWidth);
+          pen.setCapStyle(Qt::RoundCap);
+          pen.setJoinStyle(Qt::RoundJoin);
           series->setPen(pen);
 
         // Load Data
@@ -198,6 +202,8 @@ nmfChartLine::populateChart(
             } else {
                 pen.setStyle(Qt::SolidLine);
             }
+            pen.setCapStyle(Qt::RoundCap);
+            pen.setJoinStyle(Qt::RoundJoin);
             series->setPen(pen);
 
             // Add data points to the series

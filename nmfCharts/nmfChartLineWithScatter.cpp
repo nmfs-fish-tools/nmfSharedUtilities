@@ -81,6 +81,7 @@ nmfChartLineWithScatter::populateChart(
             pen.setColor(LineColor);
             pen.setWidth(dataLineWidth);
             pen.setCapStyle(Qt::RoundCap);
+            pen.setJoinStyle(Qt::RoundJoin);
             lineSeries->setPen(pen);
             //series->setColor(LineColor);
         }

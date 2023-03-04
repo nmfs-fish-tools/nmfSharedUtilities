@@ -1750,6 +1750,7 @@ nmfDatabase::getTimeSeriesDataByGuild(
         const std::string& ModelName,
         const std::string& ForecastName,
         const std::string& TableName,
+        const QString& GroupType,
         const int &NumGuilds,
         const int &RunLength,
         const QString& OutputChartType,
@@ -1760,6 +1761,7 @@ nmfDatabase::getTimeSeriesDataByGuild(
     int NumRecords;
     int NumSpecies;
     int NumGuilds2;
+    int NumGuildsActual; // taking into account System (i.e., 1 guild)
     int GuildNum;
     std::vector<std::string> fields;
     std::map<std::string, std::vector<std::string> > dataMap;
@@ -1787,8 +1789,10 @@ nmfDatabase::getTimeSeriesDataByGuild(
 
     boost::numeric::ublas::matrix<double> DenominatorData;
 
-    nmfUtils::initialize(TableData,      RunLength+1,NumGuilds); // +1 because there's a 0 year
-    nmfUtils::initialize(DenominatorData,RunLength+1,NumGuilds); // +1 because there's a 0 year
+    NumGuildsActual = (GroupType == "System") ? 1 : NumGuilds;
+
+    nmfUtils::initialize(TableData,      RunLength+1,NumGuildsActual); // +1 because there's a 0 year
+    nmfUtils::initialize(DenominatorData,RunLength+1,NumGuildsActual); // +1 because there's a 0 year
 
     if (! getGuilds(logger,NumGuilds2,GuildList)) {
         return false;
@@ -1854,6 +1858,7 @@ nmfDatabase::getTimeSeriesDataByGuild(
         SpeciesName = dataMap["SpeName"][m];
         GuildName   = SpeciesToGuildMap[SpeciesName];
         GuildNum    = GuildNameToNumMap[GuildName];
+        GuildNum    = (GroupType == "System") ? 0 : GuildNum;
         for (int time=0; time<=RunLength; ++time) {
             if (isEffort) {
                 if (isChartHarvest) {
@@ -1868,22 +1873,23 @@ nmfDatabase::getTimeSeriesDataByGuild(
                 if (isChartHarvest) {
                     TableData(time,GuildNum)       += std::stod(dataMap["Value"][m++]);
                 } else if (isChartExploitation) {
-                    TableData(time,GuildNum)       += std::stod(dataMap["Value"][m++]); // C
-                    DenominatorData(time,GuildNum) += OutputBiomass(time,i);            //  /B(c)
+                    TableData(time,GuildNum)       += std::stod(dataMap["Value"][m++]); // TableData   = Catch
+                    DenominatorData(time,GuildNum) += OutputBiomass(time,i);            // Denominator = Estimated Biomass
                 } else {
                     val = std::stod(dataMap["Value"][m++]);
                     if (val != nmfConstantsMSSPM::NoData) {
-                        TableData(time,GuildNum)       += val;
+                        TableData(time,GuildNum)   += val;
                     } else {
-                        TableData(time,GuildNum)        = 0; // nmfConstantsMSSPM::NoData;
+                        TableData(time,GuildNum)   = 0; // nmfConstantsMSSPM::NoData;
                     }
                 }
             }
         }
     }
 
+    // Exploitation = Catch / Biomass
     if (isChartExploitation) {
-        for (int guild=0; guild<(int)TableData.size2(); ++guild) {
+        for (int guild=0; guild<NumGuildsActual; ++guild) { // (int)TableData.size2(); ++guild) {
             for (int time=0; time<=RunLength; ++time) {
                 TableData(time,guild) /= DenominatorData(time,guild);
             }
@@ -3196,6 +3202,7 @@ nmfDatabase::getHarvestDataByGuild(
         const std::string& projectName,
         const std::string& modelName,
         const QString& outputChartType,
+        const QString& groupType,
         const int& numSpeciesOrGuilds,
         std::string& chartLabel,
         boost::numeric::ublas::matrix<double>& OutputBiomass,
@@ -3211,14 +3218,14 @@ nmfDatabase::getHarvestDataByGuild(
     if (HarvestForm == nmfConstantsMSSPM::HarvestCatch.toStdString()) {
         if (! getTimeSeriesDataByGuild(logger,projectName,modelName,"",
                                        nmfConstantsMSSPM::TableHarvestCatch,
-                                       numSpeciesOrGuilds,RunLength,
+                                       groupType, numSpeciesOrGuilds,RunLength,
                                        outputChartType,OutputBiomass,harvestData)) {
             return false;
         }
     } else if (HarvestForm == nmfConstantsMSSPM::HarvestEffort.toStdString()) {
         if (! getTimeSeriesDataByGuild(logger,projectName,modelName,"",
                                        nmfConstantsMSSPM::TableHarvestEffort,
-                                       numSpeciesOrGuilds,RunLength,
+                                       groupType, numSpeciesOrGuilds,RunLength,
                                        outputChartType,OutputBiomass,harvestData)) {
             return false;
         }
@@ -3226,7 +3233,7 @@ nmfDatabase::getHarvestDataByGuild(
     } else if (HarvestForm == nmfConstantsMSSPM::HarvestExploitation.toStdString()) {
         if (! getTimeSeriesDataByGuild(logger,projectName,modelName,"",
                                        nmfConstantsMSSPM::TableHarvestExploitation,
-                                       numSpeciesOrGuilds,RunLength,
+                                       groupType, numSpeciesOrGuilds,RunLength,
                                        outputChartType,OutputBiomass,harvestData)) {
             return false;
         }

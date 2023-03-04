@@ -585,6 +585,7 @@ public:
      * @param projectName : name of current project
      * @param modelName : name of current model
      * @param outputChartType : type of harvest output chart desired
+     * @param groupType : group type is either Species, Guild, or System
      * @param numSpeciesOrGuilds : number of species or guilds displayed
      * @param chartLabel : chart label to display
      * @param outputBiomass : the output biomass
@@ -596,6 +597,7 @@ public:
             const std::string& projectName,
             const std::string& modelName,
             const QString& outputChartType,
+            const QString& groupType,
             const int& numSpeciesOrGuilds,
             std::string& chartLabel,
             boost::numeric::ublas::matrix<double>& outputBiomass,
@@ -812,6 +814,7 @@ public:
      * @param ModelName : name of current model
      * @param ForecastName : name of forecast (if it's forecast data)
      * @param TableName : name of table
+     * @param GroupType : group type is Species, Guild, or System
      * @param NumGuilds : number of guilds
      * @param RunLength : length of run in years
      * @param OutputChartType : type of output chart
@@ -825,6 +828,7 @@ public:
             const std::string& ModelName,
             const std::string& ForecastName,
             const std::string& TableName,
+            const QString& GroupType,
             const int &NumGuilds,
             const int &RunLength,
             const QString& OutputChartType,
