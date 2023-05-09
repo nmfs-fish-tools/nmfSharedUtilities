@@ -162,6 +162,10 @@ namespace nmfConstantsMSSPM
      const bool   DontClearModelName   = false;
      const QString ChartType2d         = "2d";
      const QString ChartType3d         = "3d";
+     const bool   ReloadProject                    = true;
+     const bool   DontReloadProject                = false;
+     const bool   ApplyNiceNumbersXAxis            = true;
+     const bool   DontApplyNiceNumbersXAxis        = false;
      const bool   MultiplyTableByCatchability      = true;
      const bool   DontMultiplyTableByCatchability  = false;
      const bool   MultiplyTableByOutputBiomass     = true;
@@ -190,6 +194,8 @@ namespace nmfConstantsMSSPM
      const bool   DontResetCheckboxes              = false;
      const bool   LoadProjectData                  = true;
      const bool   DontLoadProjectData              = false;
+     const bool   DataAreHPC                       = true;
+     const bool   DataAreNotHPC                    = false;
 
      const std::string  HiddenDir                      = ".MSSPM";
      const std::string  HiddenDataDir                  = ".MSSPM/data";
@@ -203,6 +209,9 @@ namespace nmfConstantsMSSPM
      const std::string  LogDir                         = ".MSSPM/logs";
      const std::string  LogFilter                      = ".MSSPM/logs/*.log";
      const std::string  InputDataDir                   = "inputData";
+     const std::string  InputDataHPCDir                = "inputData/hpc";
+     const std::string  LayoutDir                      = "layouts";
+     const std::string  DatabaseDir                    = "databases";
      const std::string  OutputDataDir                  = "outputData";
      const std::string  OutputImagesDir                = "outputImages";
      const std::string  OutputImagesDirMMode           = "Remora/outputImages";
@@ -275,7 +284,7 @@ namespace nmfConstantsMSSPM
      const int          PublishLineWidthPoint                  = 11;
      const int          PublishFontSizeLabel                   = 15;
      const int          PublishFontSizeNumber                  = 11;
-     const QString      PublishFont                            = "Unicode";
+     const QString      PublishFont                            = "Arial";
 
      const std::string Linear                                  = "Linear";
      const std::string Exponential                             = "Exponential";
@@ -426,17 +435,76 @@ namespace nmfConstantsMSSPM
           "GrowthRateShape",
           "CarryingCapacity",
           "Catchability",
-          "Handling",
-          "CompetitionAlpha",
-          "CompetitionBetaSpeciesSpecies",
-          "CompetitionBetaGuildSpecies",
-          "CompetitionBetaGuildGuild",
           "PredationRho",
+          "PredationHandling",
           "PredationExponent",
+          "CompetitionAlpha",
+          "CompetitionBetaSpecies",
+          "CompetitionBetaGuildsSpecies",
+          "CompetitionBetaGuildsGuilds",
           "SurveyQ"};
 
-     const std::vector<std::string> TablesToClean =
-        {TableBiomassAbsolute,
+     const QList<QString> OutputVectorTableHeaders = {
+         "B₀","r","p","K","q","b","Q","BMSY","MSY","FMSY"};
+
+     const std::vector<std::string> OutputVectorTables = {
+         nmfConstantsMSSPM::TableOutputInitBiomass,
+         nmfConstantsMSSPM::TableOutputGrowthRate,
+         nmfConstantsMSSPM::TableOutputGrowthRateShape,
+         nmfConstantsMSSPM::TableOutputCarryingCapacity,
+         nmfConstantsMSSPM::TableOutputCatchability,
+         nmfConstantsMSSPM::TableOutputPredationExponent,
+         nmfConstantsMSSPM::TableOutputSurveyQ,
+         nmfConstantsMSSPM::TableOutputMSYBiomass,
+         nmfConstantsMSSPM::TableOutputMSY,
+         nmfConstantsMSSPM::TableOutputMSYFishing
+     };
+
+     const std::vector<std::string> OutputMatrixTables = {
+         nmfConstantsMSSPM::TableOutputBiomass,
+         nmfConstantsMSSPM::TableOutputPredationRho,
+         nmfConstantsMSSPM::TableOutputPredationHandling,
+         nmfConstantsMSSPM::TableOutputCompetitionAlpha,
+         nmfConstantsMSSPM::TableOutputCompetitionBetaSpecies,
+         nmfConstantsMSSPM::TableOutputCompetitionBetaGuilds
+
+//         nmfConstantsMSSPM::TableOutputBiomassEnsemble,
+//         nmfConstantsMSSPM::TableOutputBiomassMohnsRhoOfEnsembles,
+//         nmfConstantsMSSPM::TableOutputCarryingCapacityCovariateCoeffs,
+//         nmfConstantsMSSPM::TableOutputCatchabilityCovariateCoeffs,
+//         nmfConstantsMSSPM::TableOutputCompetitionBetaGuildsGuilds,
+//         nmfConstantsMSSPM::TableOutputGrowthRateCovariateCoeffs,
+//         nmfConstantsMSSPM::TableOutputSurveyQCovariateCoeffs
+     };
+
+     const std::vector<std::string> OutputTables = {
+         nmfConstantsMSSPM::TableOutputBiomass,
+         nmfConstantsMSSPM::TableOutputBiomassEnsemble,
+         nmfConstantsMSSPM::TableOutputBiomassMohnsRhoOfEnsembles,
+         nmfConstantsMSSPM::TableOutputCarryingCapacity,
+         nmfConstantsMSSPM::TableOutputCarryingCapacityCovariateCoeffs,
+         nmfConstantsMSSPM::TableOutputCatchability,
+         nmfConstantsMSSPM::TableOutputCatchabilityCovariateCoeffs,
+         nmfConstantsMSSPM::TableOutputCompetitionAlpha,
+         nmfConstantsMSSPM::TableOutputCompetitionBetaGuilds,
+         nmfConstantsMSSPM::TableOutputCompetitionBetaGuildsGuilds,
+         nmfConstantsMSSPM::TableOutputCompetitionBetaSpecies,
+         nmfConstantsMSSPM::TableOutputGrowthRate,
+         nmfConstantsMSSPM::TableOutputGrowthRateShape,
+         nmfConstantsMSSPM::TableOutputGrowthRateCovariateCoeffs,
+         nmfConstantsMSSPM::TableOutputInitBiomass,
+         nmfConstantsMSSPM::TableOutputMSY,
+         nmfConstantsMSSPM::TableOutputMSYBiomass,
+         nmfConstantsMSSPM::TableOutputMSYFishing,
+         nmfConstantsMSSPM::TableOutputPredationExponent,
+         nmfConstantsMSSPM::TableOutputPredationHandling,
+         nmfConstantsMSSPM::TableOutputPredationRho,
+         nmfConstantsMSSPM::TableOutputSurveyQ,
+         nmfConstantsMSSPM::TableOutputSurveyQCovariateCoeffs
+     };
+
+     const std::vector<std::string> TablesToClean = {
+         TableBiomassAbsolute,
          TableBiomassRelative,
          TableBiomassRelativeDividedByEstSurveyQ,
          TableBiomassRelativeScalars,

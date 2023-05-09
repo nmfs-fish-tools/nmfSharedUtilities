@@ -26,6 +26,7 @@ nmfChartLine::overlayVerticalLine(
         const bool&        ShowFirstPoint,
         const bool&        ShowLegend,
         const double&      XOffset,
+        const bool&        XAxisApplyNiceNumbers,
         const bool&        XAxisIsInteger,
         const double&      XPos,
         const double&      YMinVal,
@@ -86,7 +87,7 @@ nmfChartLine::overlayVerticalLine(
     // N.B. When adding a series you MUST make sure axes have been
     // explicitly added.  If not, the line from the series will not
     // be drawn correctly.
-    resetAxes(Chart, ShowLegend, XAxisIsInteger, XStartVal,
+    resetAxes(Chart, ShowLegend, XAxisApplyNiceNumbers, XAxisIsInteger, XStartVal,
               NumXValues, YMinVal, YMaxVal, LeaveGapsWhereNegative,
               XTitle, YTitle, FontSizeLabel, FontSizeNumber, FontLabel,
               AxisLineWidth, AxisLineColor,
@@ -102,6 +103,7 @@ nmfChartLine::populateChart(
         const bool&        ShowFirstPoint,
         const bool&        ShowLegend,
         const double&      XOffset,
+        const bool&        XAxisApplyNiceNumbers,
         const bool&        XAxisIsInteger,
         const double&      YMinVal,
         double&            YMaxVal,
@@ -230,7 +232,8 @@ nmfChartLine::populateChart(
 
     // Set the axes' labels and scale. N.B. This must be called after adding
     // any series to a chart.
-    resetAxes(Chart, ShowLegend, XAxisIsInteger, XStartVal,
+    resetAxes(Chart, ShowLegend,
+              XAxisApplyNiceNumbers, XAxisIsInteger, XStartVal,
               NumXValues, YMinVal, YMaxVal, LeaveGapsWhereNegative,
               XTitle, YTitle, FontSizeLabel, FontSizeNumber,
               FontLabel, AxisLineWidth, AxisLineColor,
@@ -242,6 +245,7 @@ void
 nmfChartLine::resetAxes(
         QChart*            chart,
         const bool&        ShowLegend,
+        const bool&        XAxisApplyNiceNumbers,
         const bool&        XAxisIsInteger,
         const int&         XStartVal,
         const int&         NumXValues,
@@ -308,7 +312,9 @@ nmfChartLine::resetAxes(
 
     // Assure x axis numbers are integers (I assume they're years)
     QValueAxis *currentAxisX = qobject_cast<QValueAxis*>(chart->axes(Qt::Horizontal).back());    
-    currentAxisX->applyNiceNumbers();
+    if (XAxisApplyNiceNumbers) {
+        currentAxisX->applyNiceNumbers();
+    }
     if (XAxisIsInteger) {
         currentAxisX->setLabelFormat("%d");
     }

@@ -52,7 +52,7 @@ applyCovariate(nmfLogger *logger,
             }
         }
     }
-//std::cout << "***** covVal: " << covariateValue << ", retv: " << retv << std::endl;
+
     return retv;
 }
 

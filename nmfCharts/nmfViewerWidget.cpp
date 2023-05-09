@@ -297,7 +297,7 @@ void
 nmfViewerWidget::refreshList()
 {
     QDir directory(m_ImagePath);
-    QStringList images = directory.entryList(QStringList() << "*.jpg" << "*.png" << "*.tiff", QDir::Files);
+    QStringList images = directory.entryList(QStringList() << "*.jpg" << "*.png" << "*.tiff" << "*.pdf", QDir::Files);
     m_ImageCMB->clear();
     m_ImageCMB->addItems(images);
 }

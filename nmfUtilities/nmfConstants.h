@@ -124,7 +124,7 @@ namespace nmfConstants
     const double MT_to_KG        = 1000.0;
     const double MT_to_LBS       = 2204.6226218488;
     const int    SecondsPerDay   = 86400;
-    const double LogRoot2PI      = 0.5*log(2*M_PI);
+    const double LogRoot2PI      = 0.5*std::log(2*M_PI);
     const double INCHES_to_METERS     = 39.37;
     const int    ANTIALIASING_SAMPLES = 32;
 

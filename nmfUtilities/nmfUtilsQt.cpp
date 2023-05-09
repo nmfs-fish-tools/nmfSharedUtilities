@@ -1379,6 +1379,25 @@ int calculateMultiColumnWidth(
     return newWidth;
 }
 
+void getHPCFitness(
+        const int& numHPCFiles,
+        const QString& hpcDir,
+        std::vector<double>& fitnessVec)
+{
+    fitnessVec.clear();
+    for (int run=0; run<numHPCFiles; ++run) {
+        QString filename = QDir(hpcDir).filePath("InitBiomass_"+QString::number(run)+".csv");
+        QFile inputFile(filename);
+        if (inputFile.open(QIODevice::ReadOnly)) {
+            QTextStream fin(&inputFile);
+            if (! fin.atEnd()) {
+                fitnessVec.push_back(fin.readLine().toDouble());
+            }
+            inputFile.close();
+        }
+    }
+}
+
 bool loadModelFromCSVFile(nmfLogger* logger,
                           std::string projectDir,
                           std::string fileType,
@@ -1611,6 +1630,89 @@ getNumSpeciesFromImportFile(
         }
         file.close();
     }
+}
+
+int
+getNumHPCFiles(const QString& dirName)
+{
+    QDir dir(dirName);
+    QStringList filters;
+
+    filters << "InitBiomass_*.csv";
+    dir.setNameFilters(filters);
+
+    return dir.count();
+}
+
+void loadFromHPCFile(
+        const QString& filename,
+        std::vector<double>& vec)
+{
+    QString ignoredFirstLine;
+    vec.clear();
+
+    QFile inputFile(filename);
+    if (inputFile.open(QIODevice::ReadOnly)) {
+       QTextStream fin(&inputFile);
+       ignoredFirstLine = fin.readLine(); // it's the fitness value
+       while (! fin.atEnd()) {
+          vec.push_back(fin.readLine().toDouble());
+       }
+       inputFile.close();
+    }
+
+//nmfUtils::printVector(filename.toStdString(),10,vec);
+}
+
+void loadFromHPCFile(
+        const QString& filename,
+        boost::numeric::ublas::matrix<double>& mat)
+{
+    int numRows=0;
+    int numCols=0;
+    QString line;
+    QString ignoredFirstLine;
+    QStringList parts;
+    std::vector<QString> lineVec;
+    std::vector<QString> fileVec;
+
+    // First find dimensions of matrix, store contents in a vector, and initialize the matrix
+    QFile inputFile(filename);
+    if (inputFile.open(QIODevice::ReadOnly)) {
+       QTextStream fin(&inputFile);
+       ignoredFirstLine = fin.readLine(); // it's the fitness value
+       while (! fin.atEnd()) {
+           if (numRows == 0) {
+               ++numRows;
+               line = fin.readLine();
+               continue;
+           }
+           lineVec.push_back(line);
+           parts = line.split(",");
+           if (numRows == 1) {
+               numCols = parts.size();
+           }
+           line = fin.readLine();
+           ++numRows;
+       }
+       inputFile.close();
+    }
+    nmfUtils::initialize(mat,numRows,numCols);
+
+    // Move file contents from vector to matrix now that the matrix has been initialized
+    int row = 0;
+    int col = 0;
+    mat.clear();
+    for (QString line : lineVec) {
+        col = 0;
+        parts = line.split(",");
+        for (QString part : parts) {
+            mat(row,col++) = part.toDouble();
+        }
+        ++row;
+    }
+
+//nmfUtils::printMatrix(filename.toStdString(),mat,10,10);
 }
 
 bool
@@ -2889,7 +2991,7 @@ getCovariates(
 
     nmfUtils::initialize(covariateMatrix, numYears, numSpecies);
 
-    for (int year=0; year<numYears; ++year) {
+    for (int year=1; year<numYears; ++year) {
         for (int species=0; species<numSpecies; ++species) {
             index         = dataStruct.SpeciesNames[species]+","+parameterName;
             covariateName = dataStruct.CovariateAssignment[index];

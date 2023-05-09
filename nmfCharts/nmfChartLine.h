@@ -75,6 +75,7 @@ private:
     void resetAxes(
             QChart*            chart,
             const bool&        ShowLegend,
+            const bool&        XAxisApplyNiceNumbers,
             const bool&        XAxisIsInteger,
             const int&         XStartVal,
             const int&         NumXValues,
@@ -105,6 +106,7 @@ public:
      * @param ShowFirstPoint : boolean signifying if the first point should be shown
      * @param ShowLegend : legend visibility boolean
      * @param XOffset : start year used as an offset for the x-axis scale
+     * @param XAxisApplyNiceNumbers: boolean signifiying if x axis numbers should be scaled "nicely"
      * @param XAxisIsInteger : boolean signifiying if x axis numbers are integers
      * @param XPos : x position of the vertical line
      * @param YMinVal : minimum y value for the line
@@ -130,6 +132,7 @@ public:
             const bool&        ShowFirstPoint,
             const bool&        ShowLegend,
             const double&      XOffset,
+            const bool&        XAxisApplyNiceNumbers,
             const bool&        XAxisIsInteger,
             const double&      XPos,
             const double&      YMinVal,
@@ -156,6 +159,7 @@ public:
      * @param ShowFirstPoint : boolean signifying if the first point should be shown
      * @param ShowLegend : boolean to specify the visibility of the legend
      * @param XOffset : the x offset that should be applied to the data series
+     * @param XAxisApplyNiceNumbers: boolean signifying if the scale of the x-axis should be rounded to the nearest "nicest" numbers
      * @param XAxisIsInteger : boolean signifying if the values along the x-axis should be integers
      * @param YMinVal : minimum y value
      * @param YMaxVal : maximum y value
@@ -186,6 +190,7 @@ public:
             const bool&        ShowFirstPoint,
             const bool&        ShowLegend,
             const double&      XOffset,
+            const bool&        XAxisApplyNiceNumbers,
             const bool&        XAxisIsInteger,
             const double&      YMinVal,
             double&            YMaxVal,

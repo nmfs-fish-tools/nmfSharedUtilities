@@ -121,19 +121,33 @@ namespace nmfUtilsStatistics {
                      std::vector<double>& ae);
 
     /**
-     * @brief Calculates Akaike Info Criterion: n*ln(σ²) + 2*K, where n = number of observations,
+     * @brief Calculates Species Akaike Info Criterion: n*ln(σ²) + 2*K, where n = number of observations,
      * σ² = ssResiduals/n, and K = number of parameters
-     * @param numSpeciesOrGuilds : the number of either species or guilds
-     * @param numParameters : number of parameters
-     * @param runLength : time period in years
-     * @param ssResiduals : sum of square residuals per species or guild
-     * @param aic : Akaika Info Criterion per species or guild
+     * @param NumSpeciesOrGuilds : the number of either species or guilds
+     * @param NumParameters : number of parameters per species
+     * @param RunLength : time period in years
+     * @param SSResiduals : sum of square residuals per species or guild
+     * @param AIC : Akaika Info Criterion per species or guild
      */
-    void calculateAIC(const int& numSpeciesOrGuilds,
-                      const int& numParameters,
-                      const int& runLength,
-                      const std::vector<double>& ssResiduals,
-                      std::vector<double>& aic);
+    void calculateAIC(const int& NumSpeciesOrGuilds,
+                      const std::vector<int>& NumParameters,
+                      const int& RunLength,
+                      const std::vector<double>& SSResiduals,
+                      std::vector<double>& AIC);
+    /**
+     * @brief Calculates the Model Akaike Info Criterion: n*ln(σ²) + 2*K, where n = number of observations,
+     * σ² = ssResiduals/n, and K = number of parameters
+     * @param NumSpeciesOrGuilds : the number of either species or guilds
+     * @param NumParameters : number of parameters per species
+     * @param RunLength : time period in years
+     * @param SSResiduals : sum of square residuals per species or guild
+     * @param AIC : Akaika Info Criterion per model
+     */
+    void calculateAIC(const int& NumSpeciesOrGuilds,
+                      const std::vector<int>& NumParameters,
+                      const int& RunLength,
+                      const std::vector<double>& SSResiduals,
+                      double& AIC);
     /**
      * @brief Calculates the negative log maximum likelihood value
      * @param SpeciesWeights : vector of species fitness (biomass) weights

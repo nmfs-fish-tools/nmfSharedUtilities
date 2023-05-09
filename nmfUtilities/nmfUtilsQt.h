@@ -548,6 +548,22 @@ namespace nmfUtilsQt {
      */
     QDateTime getCurrentTime();
     /**
+     * @brief Returns a vector consisting of the fitness values for each run
+     * @param numHPCFiles : number of estimated parameter files per parameter
+     * @param hpcDir : directory containing the HPC estimated parameter files
+     * @param fitnessVec : vector which will contain all of the fitness values
+     */
+    void getHPCFitness(
+            const int& numHPCFiles,
+            const QString& hpcDir,
+            std::vector<double>& fitnessVec);
+    /**
+     * @brief Gets the number of HPC files (per parameter) on disk
+     * @param dirName : name of the HPC directory
+     * @return the number of csv files per parameter found
+     */
+    int getNumHPCFiles(const QString& dirName);
+    /**
      * @brief Gets the number of rows (i.e., Species) in the Species csv file
      * @param filename : name of Species csv file
      * @param numRows : number of Species
@@ -608,6 +624,22 @@ namespace nmfUtilsQt {
                                const QString& inputDataPath,
                                const QString& inputFilename,
                                QString& errorMsg);
+    /**
+     * @brief Loads the appropriate data file into the passed data structure
+     * @param filename : name of file to read
+     * @param vec : vector structure in which to put the file dta
+     */
+    void loadFromHPCFile(
+            const QString& filename,
+            std::vector<double>& vec);
+    /**
+     * @brief Loads the appropriate data file into the passed data structure
+     * @param filename : name of file to read
+     * @param mat : matrix structure in which to put the file dta
+     */
+    void loadFromHPCFile(
+            const QString& filename,
+            boost::numeric::ublas::matrix<double>& mat);
     /**
      * @brief Load a non time series .csv file into a QTableView
      * @param parentTabWidget : parent tab containing the QTableView object

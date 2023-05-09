@@ -134,7 +134,7 @@ nmfPredationForm::loadParameterRanges(
         nmfStructsQt::ModelDataStruct& dataStruct)
 {
     bool isCheckedRho      = nmfUtils::isEstimateParameterChecked(dataStruct,"PredationRho");
-    bool isCheckedHandling = nmfUtils::isEstimateParameterChecked(dataStruct,"Handling");
+    bool isCheckedHandling = nmfUtils::isEstimateParameterChecked(dataStruct,"PredationHandling");
     bool isCheckedExponent = nmfUtils::isEstimateParameterChecked(dataStruct,"PredationExponent");
     double initialValue;
     std::pair<double,double> aPair;

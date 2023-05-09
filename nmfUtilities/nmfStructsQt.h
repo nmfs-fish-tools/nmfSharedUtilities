@@ -222,7 +222,10 @@ struct ModelDataStruct {
     int    GAGenerations;
     int    GAConvergence;
 
-    int         TotalNumberParameters;
+    int              TotalNumberParameters;
+    int              TotalNumberEstimatedParameters;
+    std::vector<int> TotalNumberEstimatedParametersBySpecies;
+    int              TotalNumberEstimatedParametersNonTrivial; // these are parameters whose min range value != max range value
     std::string Benchmark;
 
     std::string GrowthForm;

@@ -573,17 +573,38 @@ void calculateRSquared(const int& NumSpeciesOrGuilds,
 }
 
 void calculateAIC(const int& NumSpeciesOrGuilds,
-                  const int& NumParameters,
+                  const std::vector<int>& NumParameters,
+                  const int& RunLength,
+                  const std::vector<double>& SSResiduals,
+                  double& AIC)
+{
+    int NumYears = RunLength+1;
+    int sum_K = 0;
+    int sum_N = NumYears * NumSpeciesOrGuilds;
+    double SSR = 0;
+    for (int i=0;i<NumSpeciesOrGuilds;++i) {
+        SSR   += SSResiduals[i];
+        sum_K += NumParameters[i];
+    }
+
+    // AIC (per model) = Σnᵢ ln(ΣSSR/Σnᵢ) + 2ΣKᵢ
+    AIC = (sum_N*std::log(SSR/sum_N) + 2 * sum_K);
+}
+
+void calculateAIC(const int& NumSpeciesOrGuilds,
+                  const std::vector<int>& NumParameters,
                   const int& RunLength,
                   const std::vector<double>& SSResiduals,
                   std::vector<double>& AIC)
 {
+    int NumYears = RunLength+1;
     AIC.clear();
     for (int i=0;i<NumSpeciesOrGuilds;++i) {
         if (SSResiduals[i] == 0) {
             AIC.push_back(0.0);
         } else {
-            AIC.push_back((RunLength+1)*std::log(SSResiduals[i]/(RunLength+1)) + 2 * NumParameters);
+            // AIC (per species i) = nᵢln(SSR/nᵢ) + 2Kᵢ
+            AIC.push_back(NumYears*std::log(SSResiduals[i]/NumYears) + 2 * NumParameters[i]);
         }
     }
 }
@@ -900,7 +921,7 @@ double calculateMean(
     int numYearsWithData = 0; // Not equal to numYears because there may be blanks in observed biomass
     double sumObsBiomassPerSpecies = 0.0;
 
-    for (int time=0; time<numYears; ++time) {
+    for (int time=1; time<numYears; ++time) {
         if (ObsBiomass(time,speciesNum) != nmfConstantsMSSPM::NoData) {
             sumObsBiomassPerSpecies += ObsBiomass(time,speciesNum);
             ++numYearsWithData;
@@ -928,7 +949,7 @@ std::vector<double> calculateSigmasSquared(
         // Calculate the sum of the squares of the observed biomass and its mean
         sumSq = 0;
         NumPoints = 0;
-        for (int time=0; time<numYears; ++time) {
+        for (int time=1; time<numYears; ++time) {
             if (ObsBiomass(time,species) != nmfConstantsMSSPM::NoData) {
 //              diff   = std::log(ObsBiomass(time,species)) - mu;
                 diff   = ObsBiomass(time,species) - mu;
@@ -998,13 +1019,14 @@ double calculateMaximumLikelihoodNoRescale(
     double muCurrentSpecies = calculateMean(nmfConstantsMSSPM::DontUseLogData,ObsMatrix,species);
 
     // Calculate the sum of the squares of the observed biomass and its mean
-    for (int time=0; time<numYears; ++time) {
+    for (int time=1; time<numYears; ++time) {
         if (ObsMatrix(time,species) != nmfConstantsMSSPM::NoData) {
             diff = ObsMatrix(time,species) - muCurrentSpecies;
             sumSquares += diff*diff;
             ++numPoints;
         }
     }
+
 
     // Calculate standard deviation of the sample; sigma = sqrt(1/(N-1) * sum[(x(i)-x(m))^2])
     sigma = sqrt((1.0/(numPoints-1))*sumSquares);
@@ -1013,16 +1035,19 @@ double calculateMaximumLikelihoodNoRescale(
         return 0;
     }
 
+
     // Calculate MLE
-    for (int time=0; time<numYears; ++time) {
+    for (int time=1; time<numYears; ++time) {
         if (ObsMatrix(time,species) != nmfConstantsMSSPM::NoData) {
             diff = ObsMatrix(time,species) - EstMatrix(time,species);
             ObsMinusEstOverSigma = diff / sigma;
             mlePerSpecies += -(nmfConstants::LogRoot2PI + // I could leave this term off, but am including it here for clarity
                                0.5*ObsMinusEstOverSigma*ObsMinusEstOverSigma +
                                log(sigma));
+//std::cout << "time: " << time << ", Obs-Est: " << ObsMatrix(time,species) << "-" << EstMatrix(time,species) << std::endl;
         }
     }
+//std::cout << "mlePerSpecies: " << mlePerSpecies << std::endl;
 
     return mlePerSpecies;
 }
@@ -1047,7 +1072,7 @@ double calculateModelEfficiency(
     double meanObsBiomass = nmfUtils::getMatrixMean(ObsBiomass);
     double meanObsCatch   = nmfUtils::getMatrixMean(ObsCatch);
 
-    for (int time=0; time<nrows; ++time) {
+    for (int time=1; time<nrows; ++time) {
         for (int species=0; species<ncols; ++species) {
             biomassWeight = FitWeights(species,0);
             catchWeight   = FitWeights(species,1);

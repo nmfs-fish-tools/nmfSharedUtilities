@@ -17,6 +17,7 @@ nmfChartLineWithScatter::populateChart(
         const bool &showFirstPoint,
         const bool &AddScatter,
         const int &XOffset,
+        const bool &XAxisApplyNiceNumbers,
         const bool &xAxisIsInteger,
         const double &YMinVal,
         const double &YMaxVal,
@@ -151,7 +152,9 @@ nmfChartLineWithScatter::populateChart(
     currentAxisY->setLabelsFont(axisFont);
 
     QValueAxis *currentAxisX = qobject_cast<QValueAxis*>(chart->axes(Qt::Horizontal).back());
-    currentAxisX->applyNiceNumbers();
+    if (XAxisApplyNiceNumbers) {
+        currentAxisX->applyNiceNumbers();
+    }
     if (xAxisIsInteger) {
         currentAxisX->setLabelFormat("%d");
     }

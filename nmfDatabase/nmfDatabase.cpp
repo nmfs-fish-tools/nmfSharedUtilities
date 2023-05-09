@@ -821,7 +821,183 @@ nmfDatabase::getMortalityData(
 }
 
 
+bool
+nmfDatabase::getNumParameters(nmfLogger* Logger,
+                              const std::string& ProjectName,
+                              const std::string& ModelName,
+                              std::map<std::string,bool>& EstimateCheckboxStates,
+                              const int& NumSpecies,
+                              std::vector<int>& NumParametersPerSpeciesNonTrivial,
+                              int& NumParametersTotalNonTrivial,
+                              int& NumParametersTotal)
+{
+    int NumParametersCommonToAllSpecies = 0;
+    std::string queryStr;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::vector<std::string> fields;
+    boost::numeric::ublas::matrix<double> Rho;
+    boost::numeric::ublas::matrix<double> Handling;
+    std::vector<double> Exponent;
+    std::vector<int> NumParametersPerSpecies;
 
+    fields   = {"GrowthForm","PredationForm","HarvestForm","WithinGuildCompetitionForm","BetweenGuildCompetitionForm"};
+    queryStr = "SELECT GrowthForm,PredationForm,HarvestForm,WithinGuildCompetitionForm,BetweenGuildCompetitionForm FROM " +
+                nmfConstantsMSSPM::TableModels +
+               " WHERE ProjectName = '" + ProjectName +
+               "' AND ModelName = '"    + ModelName   + "'";
+    dataMap = nmfQueryDatabase(queryStr, fields);
+    std::string growthForm      = dataMap["GrowthForm"][0];
+    std::string harvestForm     = dataMap["HarvestForm"][0];
+    std::string predationForm   = dataMap["PredationForm"][0];
+    std::string competitionForm = dataMap["WithinGuildCompetitionForm"][0];
+
+    // Init Biomass
+    if (EstimateCheckboxStates["InitBiomass"]) {
+        NumParametersCommonToAllSpecies += 1; // parameter B(0)
+    }
+
+    // Survey Q
+    if (EstimateCheckboxStates["SurveyQ"]) {
+        NumParametersCommonToAllSpecies += 1; // parameter Q
+    }
+
+    // Find number of parameters common to all species
+    if (growthForm == "Linear") {
+        if (EstimateCheckboxStates["GrowthRate"]) {
+            NumParametersCommonToAllSpecies += 1; // parameter r
+        }
+    } else if (growthForm == "Logistic") {
+        if (EstimateCheckboxStates["GrowthRate"]) {
+            NumParametersCommonToAllSpecies += 1; // parameter r
+        }
+        if (EstimateCheckboxStates["GrowthRateShape"]) {
+            NumParametersCommonToAllSpecies += 1; // parameter p
+        }
+        if (EstimateCheckboxStates["CarryingCapacity"]) {
+            NumParametersCommonToAllSpecies += 1; // parameter K
+        }
+    }
+    if ((harvestForm == nmfConstantsMSSPM::HarvestEffort.toStdString()) ||
+        (harvestForm == nmfConstantsMSSPM::HarvestEffortFitToCatch.toStdString())) {
+        if (EstimateCheckboxStates["Catchability"]) {
+            NumParametersCommonToAllSpecies += 1; // parameter q
+        }
+    }
+
+    // Initialize NumParameters
+    nmfUtils::initialize(NumParametersPerSpeciesNonTrivial,NumSpecies);
+    nmfUtils::initialize(NumParametersPerSpecies,          NumSpecies);
+
+    // Find number of parameters unique to individual species
+    if (! getParametersPredation(Logger, ProjectName, ModelName, predationForm,
+                                 NumSpecies, EstimateCheckboxStates,
+                                 NumParametersPerSpeciesNonTrivial,
+                                 NumParametersPerSpecies)) {
+        return false;
+    }
+
+    if (! getParametersCompetition(Logger, ProjectName, ModelName, competitionForm,
+                                   NumSpecies, EstimateCheckboxStates,
+                                   NumParametersPerSpeciesNonTrivial,
+                                   NumParametersPerSpecies)) {
+        return false;
+    }
+
+    if (! getParametersCovariates(Logger, ProjectName, ModelName,
+                                  EstimateCheckboxStates,
+                                  NumParametersPerSpeciesNonTrivial,
+                                  NumParametersPerSpecies)) {
+        return false;
+    }
+
+    // Total up all the parameters
+    NumParametersPerSpeciesNonTrivial.clear();
+    NumParametersTotalNonTrivial = 0;
+    int NumTotalParametersPerSpecies = 0;
+    int NumTotalParametersPerSpeciesNonTrivial = 0;
+    for (int i=0; i<NumSpecies; ++i) {
+        NumTotalParametersPerSpecies           = NumParametersCommonToAllSpecies +
+                                                 NumParametersPerSpecies[i];
+        NumTotalParametersPerSpeciesNonTrivial = NumParametersCommonToAllSpecies +
+                                                 NumParametersPerSpeciesNonTrivial[i];
+        NumParametersPerSpeciesNonTrivial.push_back(NumTotalParametersPerSpeciesNonTrivial);
+        NumParametersTotalNonTrivial += NumTotalParametersPerSpeciesNonTrivial;
+        NumParametersTotal           += NumTotalParametersPerSpecies;
+    }
+
+return true;
+}
+
+void
+nmfDatabase::getOutputData(nmfLogger* Logger,
+                           const std::string& ProjectName,
+                           const std::string& ModelName,
+                           const std::string& TableName,
+                           const std::string& algorithm,
+                           std::vector<double>& vectorData)
+{
+    std::string queryStr;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::vector<std::string> fields;
+
+    fields   = {"SpeName","Value"};
+    queryStr = "SELECT SpeName,Value FROM " + TableName +
+               " WHERE ProjectName = '" + ProjectName +
+               "' AND ModelName = '"    + ModelName   +
+               "' AND Algorithm = '"    + algorithm +
+               "' AND Minimizer = '"    + algorithm +
+               "' AND ObjectiveCriterion = '" + algorithm +
+               "' AND Scaling = '"      + algorithm + "'";
+    dataMap = nmfQueryDatabase(queryStr, fields);
+    vectorData.clear();
+    for (unsigned i=0; i<dataMap["SpeName"].size(); ++i) {
+       vectorData.push_back(std::stod(dataMap["Value"][i]));
+    }
+}
+
+void
+nmfDatabase::getOutputData(nmfLogger* Logger,
+                           const std::string& ProjectName,
+                           const std::string& ModelName,
+                           const std::string& TableName,
+                           const std::string& Algorithm,
+                           boost::numeric::ublas::matrix<double>& MatrixData)
+{
+    int m=0;
+    std::string queryStr;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::vector<std::string> fields;
+
+    if (TableName == nmfConstantsMSSPM::TableOutputCompetitionBetaGuilds) {
+        fields   = {"SpeName","Guild","Value"};
+        queryStr = "SELECT SpeName,Guild,Value FROM ";
+    } else if (TableName == nmfConstantsMSSPM::TableOutputCompetitionBetaGuildsGuilds) {
+        fields   = {"GuildA","GuildB","Value"};
+        queryStr = "SELECT GuildA,GuildB,Value FROM ";
+    } else {
+        fields   = {"SpeciesA","SpeciesB","Value"};
+        queryStr = "SELECT SpeciesA,SpeciesB,Value FROM ";
+    }
+
+    queryStr += TableName + " WHERE ProjectName = '" + ProjectName +
+                "' AND ModelName = '"    + ModelName   +
+                "' AND Algorithm = '"    + Algorithm +
+                "' AND Minimizer = '"    + Algorithm +
+                "' AND ObjectiveCriterion = '" + Algorithm +
+                "' AND Scaling = '"      + Algorithm + "'";
+
+    dataMap = nmfQueryDatabase(queryStr, fields);
+    int NumRecords = int(dataMap["Value"].size());
+    int NumSpecies = std::sqrt(NumRecords);
+
+    nmfUtils::initialize(MatrixData,NumSpecies,NumSpecies);
+
+    for (int speciesA=0; speciesA<NumSpecies; ++speciesA) {
+        for (int speciesB=0; speciesB<NumSpecies; ++speciesB) {
+            MatrixData(speciesA,speciesB) = std::stod(dataMap["Value"][m++]);
+        }
+    }
+}
 
 void
 nmfDatabase::nmfQueryForecastAgeCatchData(
@@ -2729,6 +2905,244 @@ nmfDatabase::getGuildData(nmfLogger* Logger,
     return true;
 }
 
+void
+nmfDatabase::findParametersUsingMinMax(
+        const int& NumSpecies,
+        const boost::numeric::ublas::matrix<double> Mat[2],
+        std::vector<int>& NumParametersNonTrivial,
+        std::vector<int>& NumParameters)
+{
+    for (int row=0; row<NumSpecies; ++row) {
+        for (int col=0; col<NumSpecies; ++col) {
+            if (Mat[0](row,col) != Mat[1](row,col)) {
+                NumParametersNonTrivial[row] += 1;
+            }
+        }
+        NumParameters[row] += NumSpecies;
+    }
+}
+
+void
+nmfDatabase::findParametersUsingMinMax(
+        const int& NumSpecies,
+        const std::vector<double> Vec[2],
+        std::vector<int>& NumParametersNonTrivial,
+        std::vector<int>& NumParameters)
+{
+    for (int row=0; row<NumSpecies; ++row) {
+        if (Vec[0][row] != Vec[1][row]) {
+            NumParametersNonTrivial[row] += 1;
+        }
+        NumParameters[row] += 1;
+    }
+}
+
+bool
+nmfDatabase::readTablesAndGetNumParameters(
+        nmfLogger* Logger,
+        const std::string& ProjectName,
+        const std::string& ModelName,
+        const int& NumSpecies,
+        const std::vector<std::string>& TableNames,
+        std::vector<int>& NumParametersNonTrivial,
+        std::vector<int>& NumParameters)
+{
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+    std::string tableName;
+    boost::numeric::ublas::matrix<double> matrices[TableNames.size()];
+
+    for (int i=0; i<int(TableNames.size()); ++i) {
+        tableName = TableNames[i];
+        if ((tableName == nmfConstantsMSSPM::TableCompetitionBetaGuildsMin) ||
+            (tableName == nmfConstantsMSSPM::TableCompetitionBetaGuildsMin)) {
+            queryStr = "SELECT SpeName,Guild,Value FROM " + tableName +
+                       " WHERE ProjectName = '" + ProjectName +
+                       "' AND  ModelName = '"   + ModelName   +
+                       "' ORDER BY SpeName,Guild ";
+        } else {
+            queryStr = "SELECT SpeciesA,SpeciesB,Value FROM " + tableName +
+                       " WHERE ProjectName = '" + ProjectName +
+                       "' AND  ModelName = '"   + ModelName   +
+                       "' ORDER BY SpeciesA,SpeciesB ";
+        }
+        dataMap = nmfQueryDatabase(queryStr, fields);
+        bool ok = loadMatrix(Logger,dataMap,NumSpecies,NumSpecies,matrices[i]);
+        if (! ok) {
+            return false;
+        }
+    }
+    findParametersUsingMinMax(NumSpecies,matrices,NumParametersNonTrivial,NumParameters);
+
+    return true;
+}
+
+bool
+nmfDatabase::getParametersCovariates(nmfLogger* Logger,
+                                     const std::string& ProjectName,
+                                     const std::string& ModelName,
+                                     std::map<std::string,bool>& EstimateCheckboxStates,
+                                     std::vector<int>& NumParametersNonTrivial,
+                                     std::vector<int>& NumParameters)
+{
+    int NumRecords = 0;
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+    std::string tableName = nmfConstantsMSSPM::TableCovariateInitialValuesAndRanges;
+    std::vector<std::string> speciesNames;
+    std::map<std::string,int> SpeciesToNumParametersMap;
+
+    // To do, there's currently no checkbox that toggles the covariate parameters. But in case
+    // we add one later the EstimateCheckboxStates is available.
+
+    // Need to get species names as not all species will have covariates associated with them
+    getSpecies(Logger,speciesNames);
+
+    // Find frequency of species that have covariate data where min values is not equal to max value
+    SpeciesToNumParametersMap.clear();
+    fields   = {"SpeName","COUNT(*)"};
+    queryStr = "SELECT SpeName,COUNT(*) FROM " + tableName +
+               " WHERE ProjectName = '" + ProjectName +
+               "' AND  ModelName = '"   + ModelName   +
+               "' AND  CoeffMinValue != CoeffMaxValue GROUP BY SpeName";
+    dataMap  = nmfQueryDatabase(queryStr, fields);
+    NumRecords = dataMap["COUNT(*)"].size();
+
+    // Create map of parameter values for each species
+    for (int i=0; i<NumRecords; ++i) {
+        SpeciesToNumParametersMap[dataMap["SpeName"][i]] = std::stoi(dataMap["COUNT(*)"][i]);
+    }
+
+    // Iterate through all species names and if the species name is in SpeciesToNumParametersMap, add the num of parameters.
+    for (unsigned i=0; i<speciesNames.size(); ++i) {
+        NumParameters[i]           += SpeciesToNumParametersMap[speciesNames[i]];
+        NumParametersNonTrivial[i] += SpeciesToNumParametersMap[speciesNames[i]];
+    }
+
+    return true;
+}
+
+bool
+nmfDatabase::getParametersCompetition(nmfLogger* Logger,
+                                      const std::string& ProjectName,
+                                      const std::string& ModelName,
+                                      const std::string& CompetitionForm,
+                                      const int& NumSpecies,
+                                      std::map<std::string,bool>& EstimateCheckboxStates,
+                                      std::vector<int>& NumParametersNonTrivial,
+                                      std::vector<int>& NumParameters)
+{
+    std::vector<std::string> alphaTableNames            = {nmfConstantsMSSPM::TableCompetitionAlphaMin,
+                                                           nmfConstantsMSSPM::TableCompetitionAlphaMax};
+    std::vector<std::string> betaGuildsTableNames       = {nmfConstantsMSSPM::TableCompetitionBetaGuildsMin,
+                                                           nmfConstantsMSSPM::TableCompetitionBetaGuildsMax};
+    std::vector<std::string> betaGuildsGuildsTableNames = {nmfConstantsMSSPM::TableCompetitionBetaGuildsGuildsMin,
+                                                           nmfConstantsMSSPM::TableCompetitionBetaGuildsGuildsMax};
+    std::vector<std::string> betaSpeciesTableNames      = {nmfConstantsMSSPM::TableCompetitionBetaSpeciesMin,
+                                                           nmfConstantsMSSPM::TableCompetitionBetaSpeciesMax};
+
+    if (CompetitionForm == "Null") {
+        return true;
+    }
+
+    if (CompetitionForm == "NO_K") {
+        if (EstimateCheckboxStates["CompetitionAlpha"]) {
+            readTablesAndGetNumParameters(Logger,ProjectName,ModelName,NumSpecies,alphaTableNames,
+                                          NumParametersNonTrivial,NumParameters);
+        }
+    }
+    else if (CompetitionForm == "MS-PROD") {
+        if (EstimateCheckboxStates["CompetitionBetaSpecies"]) {
+            readTablesAndGetNumParameters(Logger,ProjectName,ModelName,NumSpecies,betaSpeciesTableNames,
+                                          NumParametersNonTrivial,NumParameters);
+        }
+        if (EstimateCheckboxStates["CompetitionBetaGuilds"]) {
+            readTablesAndGetNumParameters(Logger,ProjectName,ModelName,NumSpecies,betaGuildsTableNames,
+                                          NumParametersNonTrivial,NumParameters);
+        }
+    }
+
+    return true;
+}
+
+bool
+nmfDatabase::getParametersPredation(nmfLogger* Logger,
+                                    const std::string& ProjectName,
+                                    const std::string& ModelName,
+                                    const std::string& PredationForm,
+                                    const int& NumSpecies,
+                                    std::map<std::string,bool>& EstimateCheckboxStates,
+                                    std::vector<int>& NumParametersNonTrivial,
+                                    std::vector<int>& NumParameters)
+{
+    bool ok;
+    std::vector<std::string> fields;
+    std::map<std::string, std::vector<std::string> > dataMap;
+    std::string queryStr;
+    std::vector<std::string> rhoTableNames      = {nmfConstantsMSSPM::TablePredationRhoMin,      nmfConstantsMSSPM::TablePredationRhoMax};
+    std::vector<std::string> handlingTableNames = {nmfConstantsMSSPM::TablePredationHandlingMin, nmfConstantsMSSPM::TablePredationHandlingMax};
+    std::vector<std::string> exponentTableNames = {nmfConstantsMSSPM::TablePredationExponentMin, nmfConstantsMSSPM::TablePredationExponentMax};
+    boost::numeric::ublas::matrix<double> Rho[rhoTableNames.size()];
+    boost::numeric::ublas::matrix<double> Handling[handlingTableNames.size()];
+    std::vector<double> Exponent[exponentTableNames.size()];
+
+    if (PredationForm == "Null") {
+        return true;
+    }
+
+    // Calculate num parameters from rho
+    fields = {"ProjectName","ModelName","SpeciesA","SpeciesB","Value"};
+    if (EstimateCheckboxStates["PredationRho"] && (PredationForm == "Type I")) {
+        for (int i=0; i<int(rhoTableNames.size()); ++i) {
+            queryStr = "SELECT ProjectName,ModelName,SpeciesA,SpeciesB,Value FROM " +
+                        rhoTableNames[i]  +
+                       " WHERE ProjectName = '" + ProjectName +
+                       "' AND  ModelName = '"   + ModelName   +
+                       "' ORDER BY SpeciesA,SpeciesB ";
+            dataMap = nmfQueryDatabase(queryStr, fields);
+            ok = loadMatrix(Logger,dataMap,NumSpecies,NumSpecies,Rho[i]);
+            if (! ok) {
+                return false;
+            }
+        }
+        findParametersUsingMinMax(NumSpecies,Rho,NumParametersNonTrivial,NumParameters);
+    } else if (EstimateCheckboxStates["PredationHandling"] &&
+            ((PredationForm == "Type II") || (PredationForm == "Type III"))) {
+        for (int i=0; i<int(handlingTableNames.size()); ++i) {
+            queryStr = "SELECT ModelName,SpeciesA,SpeciesB,Value FROM " +
+                        handlingTableNames[i]  +
+                       " WHERE ProjectName = '" + ProjectName +
+                       "' AND ModelName = '"    + ModelName +
+                       "' ORDER BY SpeciesA,SpeciesB ";
+            dataMap = nmfQueryDatabase(queryStr, fields);
+            ok = loadMatrix(Logger,dataMap,NumSpecies,NumSpecies,Handling[i]);
+            if (! ok) {
+                return false;
+            }
+        }
+        findParametersUsingMinMax(NumSpecies,Handling,NumParametersNonTrivial,NumParameters);
+    } else if (EstimateCheckboxStates["PredationExponent"] &&
+            (PredationForm == "Type III")) {
+        fields   = {"ModelName","SpeName","Value"};
+        for (int i=0; i<int(exponentTableNames.size()); ++i) {
+            queryStr = "SELECT ModelName,SpeName,Value FROM " +
+                        exponentTableNames[i]  +
+                       " WHERE ProjectName = '" + ProjectName +
+                       "' AND ModelName = '"    + ModelName +
+                       "' ORDER BY SpeName ";
+            dataMap = nmfQueryDatabase(queryStr, fields);
+            ok = loadVector(Logger,dataMap,NumSpecies,Exponent[i]);
+            if (! ok) {
+                return false;
+            }
+        }
+        findParametersUsingMinMax(NumSpecies,Exponent,NumParametersNonTrivial,NumParameters);
+    }
+
+    return true;
+}
 
 bool
 nmfDatabase::getPredationData(const std::string& PredationForm,
@@ -2748,9 +3162,9 @@ nmfDatabase::getPredationData(const std::string& PredationForm,
     std::map<std::string, std::vector<std::string> > dataMapMax;
     std::string queryStr;
     std::vector<std::map<std::string, std::vector<std::string> > > dataMaps = {dataMapMin,dataMapMax};
-    std::vector<std::string> rhoFilenames      = {nmfConstantsMSSPM::TablePredationRho};      // {nmfConstantsMSSPM::TablePredationRhoMin,      nmfConstantsMSSPM::TablePredationRhoMax};
-    std::vector<std::string> handlingFilenames = {nmfConstantsMSSPM::TablePredationHandling}; // {nmfConstantsMSSPM::TablePredationHandlingMin, nmfConstantsMSSPM::TablePredationHandlingMax};
-    std::vector<std::string> exponentFilenames = {nmfConstantsMSSPM::TablePredationExponent}; // {nmfConstantsMSSPM::TablePredationExponentMin, nmfConstantsMSSPM::TablePredationExponentMax};
+    std::vector<std::string> rhoTableNames      = {nmfConstantsMSSPM::TablePredationRho};
+    std::vector<std::string> handlingTableNames = {nmfConstantsMSSPM::TablePredationHandling};
+    std::vector<std::string> exponentTableNames = {nmfConstantsMSSPM::TablePredationExponent};
 
     if (PredationForm == "Null") {
         return true;
@@ -2759,9 +3173,9 @@ nmfDatabase::getPredationData(const std::string& PredationForm,
     fields   = {"ProjectName","ModelName","SpeciesA","SpeciesB","Value"};
 
     // Calculate the Rho regardless of the Predation type
-    for (int i=0; i<int(rhoFilenames.size()); ++i) {
+    for (int i=0; i<int(rhoTableNames.size()); ++i) {
         queryStr = "SELECT ProjectName,ModelName,SpeciesA,SpeciesB,Value FROM " +
-                    rhoFilenames[i]  +
+                    rhoTableNames[i]  +
                    " WHERE ProjectName = '" + ProjectName +
                    "' AND  ModelName = '"   + ModelName   +
                    "' ORDER BY SpeciesA,SpeciesB ";
@@ -2774,9 +3188,9 @@ nmfDatabase::getPredationData(const std::string& PredationForm,
 
     // Calculate Handling if need be
     if ((PredationForm == "Type II") || (PredationForm == "Type III")) {
-        for (int i=0; i<int(handlingFilenames.size()); ++i) {
+        for (int i=0; i<int(handlingTableNames.size()); ++i) {
             queryStr = "SELECT ModelName,SpeciesA,SpeciesB,Value FROM " +
-                        handlingFilenames[i]  +
+                        handlingTableNames[i]  +
                        " WHERE ProjectName = '" + ProjectName +
                        "' AND ModelName = '"    + ModelName +
                        "' ORDER BY SpeciesA,SpeciesB ";
@@ -2790,10 +3204,10 @@ nmfDatabase::getPredationData(const std::string& PredationForm,
 
     // Calculate the Exponent if need be
     if (PredationForm == "Type III") {
-        for (int i=0; i<int(exponentFilenames.size()); ++i) {
+        for (int i=0; i<int(exponentTableNames.size()); ++i) {
             fields   = {"ModelName","SpeName","Value"};
             queryStr = "SELECT ModelName,SpeName,Value FROM " +
-                        exponentFilenames[i]  +
+                        exponentTableNames[i]  +
                        " WHERE ProjectName = '" + ProjectName +
                        "' AND ModelName = '"    + ModelName +
                        "' ORDER BY SpeName ";
@@ -2828,76 +3242,59 @@ nmfDatabase::getCompetitionData(const std::string& CompetitionType,
     std::map<std::string, std::vector<std::string> > dataMapMax;
     std::string queryStr;
     std::vector<std::map<std::string, std::vector<std::string> > > dataMaps = {dataMapMin,dataMapMax};
-    std::vector<std::string> AlphaFilenames            = {nmfConstantsMSSPM::TableCompetitionAlpha};            // {nmfConstantsMSSPM::TableCompetitionAlphaMin,           nmfConstantsMSSPM::TableCompetitionAlphaMax};
-    std::vector<std::string> BetaSpeciesFilenames      = {nmfConstantsMSSPM::TableCompetitionBetaSpecies};      // {nmfConstantsMSSPM::TableCompetitionBetaSpeciesMin,     nmfConstantsMSSPM::TableCompetitionBetaSpeciesMax};
-    std::vector<std::string> BetaGuildsFilenames       = {nmfConstantsMSSPM::TableCompetitionBetaGuilds};       // {nmfConstantsMSSPM::TableCompetitionBetaGuildsMin,      nmfConstantsMSSPM::TableCompetitionBetaGuildsMin};
-    std::vector<std::string> BetaGuildsGuildsFilenames = {nmfConstantsMSSPM::TableCompetitionBetaGuildsGuilds}; // {nmfConstantsMSSPM::TableCompetitionBetaGuildsGuildsMin,nmfConstantsMSSPM::TableCompetitionBetaGuildsGuildsMax};
+    std::string AlphaTableName            = {nmfConstantsMSSPM::TableCompetitionAlpha};
+    std::string BetaSpeciesTableName      = {nmfConstantsMSSPM::TableCompetitionBetaSpecies};
+    std::string BetaGuildsTableName       = {nmfConstantsMSSPM::TableCompetitionBetaGuilds};
+    std::string BetaGuildsGuildsTableName = {nmfConstantsMSSPM::TableCompetitionBetaGuildsGuilds};
 
     if (CompetitionType == "Null") {
         return true;
     }
 
     if (CompetitionType == "NO_K") {
-
-        // AlphaFilenames
         fields   = {"ProjectName","ModelName","SpeciesA","SpeciesB","Value"};
-        for (int i=0; i<int(AlphaFilenames.size()); ++i) {
-            queryStr = "SELECT ProjectName,ModelName,SpeciesA,SpeciesB,Value FROM " +
-                        AlphaFilenames[i]  +
-                       " WHERE ProjectName = '" + ProjectName +
-                       "' AND ModelName = '"    + ModelName +
-                       "' ORDER BY SpeciesA,SpeciesB ";
-            dataMap = nmfQueryDatabase(queryStr, fields);
-        }
+        queryStr = "SELECT ProjectName,ModelName,SpeciesA,SpeciesB,Value FROM " +
+                    AlphaTableName  +
+                   " WHERE ProjectName = '" + ProjectName +
+                   "' AND ModelName = '"    + ModelName   +
+                   "' ORDER BY SpeciesA,SpeciesB ";
+        dataMap = nmfQueryDatabase(queryStr, fields);
         ok = loadMatrix(Logger,dataMap,NumSpecies,NumSpecies,CompetitionAlpha);
         if (! ok) {
             retv = false;
         }
-
     } else if (CompetitionType == "MS-PROD") {
-
-        // BetaSpeciesFilenames
         fields   = {"ProjectName","ModelName","SpeciesA","SpeciesB","Value"};
-        for (int i=0; i<int(BetaSpeciesFilenames.size()); ++i) {
-            queryStr = "SELECT ProjectName,ModelName,SpeciesA,SpeciesB,Value FROM " +
-                        BetaSpeciesFilenames[i]  +
-                       " WHERE ProjectName = '" + ProjectName +
-                       "' AND ModelName = '"    + ModelName +
-                       "' ORDER BY SpeciesA,SpeciesB ";
-            dataMap = nmfQueryDatabase(queryStr, fields);
-        }
+        queryStr = "SELECT ProjectName,ModelName,SpeciesA,SpeciesB,Value FROM " +
+                    BetaSpeciesTableName  +
+                   " WHERE ProjectName = '" + ProjectName +
+                   "' AND ModelName = '"    + ModelName   +
+                   "' ORDER BY SpeciesA,SpeciesB ";
+        dataMap = nmfQueryDatabase(queryStr, fields);
         ok = loadMatrix(Logger,dataMap,NumSpecies,NumSpecies,CompetitionBetaSpecies);
         if (! ok) {
             retv = false;
         }
 
-        // BetaGuildsFilenames
         fields   = {"ProjectName","ModelName","Guild","SpeName","Value"};
-        for (int i=0; i<int(BetaGuildsFilenames.size()); ++i) {
-            queryStr = "SELECT ProjectName,ModelName,Guild,SpeName,Value FROM " +
-                        BetaGuildsFilenames[i]  +
-                       " WHERE ProjectName = '" + ProjectName +
-                       "' AND ModelName = '"    + ModelName +
-                       "' ORDER BY Guild,SpeName ";
-            dataMap = nmfQueryDatabase(queryStr, fields);
-        }
+        queryStr = "SELECT ProjectName,ModelName,Guild,SpeName,Value FROM " +
+                    BetaGuildsTableName +
+                   " WHERE ProjectName = '" + ProjectName +
+                   "' AND ModelName = '"    + ModelName   +
+                   "' ORDER BY Guild,SpeName ";
+        dataMap = nmfQueryDatabase(queryStr, fields);
         ok = loadMatrix(Logger,dataMap,NumSpecies,NumGuilds,CompetitionBetaGuild);
         if (! ok) {
             retv = false;
         }
-
     } else if (CompetitionType == "AGG-PROD") {
-
-        // BetaGuildsGuildsFilenames
         fields   = {"ProjectName","ModelName","GuildA","GuildB","Value"};
-        for (int i=0; i<int(BetaGuildsGuildsFilenames.size()); ++i) {
-            queryStr = "SELECT ProjectName,ModelName,GuildA,GuildB,Value FROM " +
-                        BetaGuildsGuildsFilenames[i]  +
-                       " WHERE ProjectName = '" + ProjectName +
-                       "' AND ModelName = '"    + ModelName +
-                       "' ORDER BY GuildA,GuildB ";
-            dataMap = nmfQueryDatabase(queryStr, fields);
-        }
+        queryStr = "SELECT ProjectName,ModelName,GuildA,GuildB,Value FROM " +
+                    BetaGuildsGuildsTableName +
+                   " WHERE ProjectName = '" + ProjectName +
+                   "' AND ModelName = '"    + ModelName +
+                   "' ORDER BY GuildA,GuildB ";
+        dataMap = nmfQueryDatabase(queryStr, fields);
         ok = loadMatrix(Logger,dataMap,NumGuilds,NumGuilds,CompetitionBetaGuildGuild);
         if (! ok) {
             retv = false;

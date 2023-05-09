@@ -91,6 +91,7 @@ public:
      * @param showFirstPoint : boolean signifying if showing the first point should be shown
      * @param addScatter : boolean signifying if the scatter diagram should be visible
      * @param xOffset : the x offset that should be applied to the data series
+     * @param xAxisApplyNiceNumbers : boolean if the x-axis should be "nicely" scaled
      * @param xAxisIsInteger : boolean signifying if the values along the x-axis should be integers
      * @param yMin : minimum y value
      * @param yMax : maximum y value
@@ -126,6 +127,7 @@ public:
             const bool& showFirstPoint,
             const bool& addScatter,
             const int& xOffset,
+            const bool &xAxisApplyNiceNumbers,
             const bool& xAxisIsInteger,
             const double& yMin,
             const double& yMax,

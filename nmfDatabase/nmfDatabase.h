@@ -186,6 +186,30 @@ public:
                         std::string&   ProjectDatabase,
                         const QString& DefaultOutputFileName);
     /**
+     * @brief updates the number of parameters per species vector using the passed in min/max matrices
+     * @param NumSpecies : number of species
+     * @param Mat : min/max matrices containing parameter data
+     * @param NumParametersNonTrivial : number of non-trivial parameters vector returned to calling method (a non-trivial parameter is a parameter whose min range value != max range value)
+     * @param NumParameters : number of parameters vector returned to calling method
+     */
+    void findParametersUsingMinMax(
+            const int& NumSpecies,
+            const boost::numeric::ublas::matrix<double> Mat[2],
+            std::vector<int>& NumParametersNonTrivial,
+            std::vector<int>& NumParameters);
+    /**
+     * @brief updates the number of parameters per species vector using the passed in min/max vectors
+     * @param NumSpecies : number of species
+     * @param Vec : min/max vectors containing parameter data
+     * @param NumParametersNonTrivial : number of non-trivial parameters vector returned to calling method (a non-trivial parameter is a parameter whose min range value != max range value)
+     * @param NumParameters : number of parameters vector returned to calling method
+     */
+    void findParametersUsingMinMax(
+            const int& NumSpecies,
+            const std::vector<double> Vec[2],
+            std::vector<int>& NumParametersNonTrivial,
+            std::vector<int>& NumParameters);
+    /**
      * @brief Gets the identifying information for the current estimation algorithm selected
      * @param widget : widget over which to show any popups
      * @param logger : logger pointer used to log any errors
@@ -666,6 +690,112 @@ public:
             const int &NumAges,
             const std::string TableName,
             boost::numeric::ublas::matrix<double> &TableData);
+    /**
+     * @brief getNumParameters
+     * @param Logger : logger pointer used to log any errors
+     * @param ProjectName : name of current project
+     * @param ModelName : name of current model
+     * @param EstimateCheckboxStates : boolean states of all of the Estimate checkboxes on Estimation Tab7
+     * @param NumSpecies : number of species
+     * @param NumParametersPerSpeciesNonTrivial : vector containing number of parameters per species
+     * @param NumParametersTotalNonTrivial : total number of non-trivial parameters over all species (non-trivial parameter is a parameter where min range value != max range value)
+     * @param NumParametersTotal : total number of parameters over all species
+     * @return true if no error found, false otherwise
+     */
+    bool getNumParameters(nmfLogger* Logger,
+                          const std::string& ProjectName,
+                          const std::string& ModelName,
+                          std::map<std::string,bool>& EstimateCheckboxStates,
+                          const int& NumSpecies,
+                          std::vector<int>& NumParametersPerSpeciesNonTrivial,
+                          int& NumParametersTotalNonTrivial,
+                          int& NumParametersTotal);
+    /**
+     * @brief Gets output (i.e., estimated) vector data
+     * @param Logger : logger pointer used to log any errors
+     * @param ProjectName : name of current project
+     * @param ModelName : name of current model
+     * @param TableName : name of output data table
+     * @param algorithm : algorithm to use if HPC data
+     * @param vectorData : vector holding data read in from passed table name
+     */
+    void getOutputData(nmfLogger* Logger,
+                         const std::string& ProjectName,
+                         const std::string& ModelName,
+                         const std::string& TableName,
+                         const std::string& algorithm,
+                         std::vector<double>& vectorData);
+    /**
+     * @brief Gets output (i.e., estimated) matrix data
+     * @param Logger : logger pointer used to log any errors
+     * @param ProjectName : name of current project
+     * @param ModelName : name of current model
+     * @param TableName : name of output data table
+     * @param Algorithm : algorithm to use if HPC data
+     * @param MatrixData : matrix holding data read in from passed table name
+     */
+    void getOutputData(nmfLogger* Logger,
+                       const std::string& ProjectName,
+                       const std::string& ModelName,
+                       const std::string& TableName,
+                       const std::string& Algorithm,
+                       boost::numeric::ublas::matrix<double>& MatrixData);
+    /**
+     * @brief Sends back the number of competition parameters per species in a vector
+     * @param Logger : logger pointer used to log any errors
+     * @param ProjectName : name of current project
+     * @param ModelName : name of current model
+     * @param CompetitionForm : the competition form (i.e., NO_K, MS-PROD)
+     * @param NumSpecies : number of species
+     * @param EstimateCheckboxStates : boolean states of all of the Estimate checkboxes on Estimation Tab7
+     * @param NumParametersTotalNonTrivial : total number of non-trivial parameters over all species (non-trivial parameter is a parameter where min range value != max range value)
+     * @param NumParameters : vector containing the number of parameters/species (a parameter is counted if cell min != cell max for the associated predation matrix or vector)
+     * @return true if no errors reading table data, false otherwise
+     */
+    bool getParametersCompetition(nmfLogger* Logger,
+                                  const std::string& ProjectName,
+                                  const std::string& ModelName,
+                                  const std::string& CompetitionForm,
+                                  const int& NumSpecies,
+                                  std::map<std::string,bool>& EstimateCheckboxStates,
+                                  std::vector<int>& NumParametersNonTrivial,
+                                  std::vector<int>& NumParameters);
+    /**
+     * @brief Sends back the number of covariate parameters per species in a vector
+     * @param Logger : logger pointer used to log any errors
+     * @param ProjectName : name of current project
+     * @param ModelName : name of current model
+     * @param EstimateCheckboxStates : boolean states of all of the Estimate checkboxes on Estimation Tab7 (currently unused, here in case a checkbox is added in the future)
+     * @param NumParametersTotalNonTrivial : total number of non-trivial parameters over all species (non-trivial parameter is a parameter where min range value != max range value)
+     * @param NumParameters : vector containing the number of parameters/species (a parameter is counted if cell min != cell max for the associated predation matrix or vector)
+     * @return true if no errors reading table data, false otherwise
+     */
+    bool getParametersCovariates(nmfLogger* Logger,
+                                 const std::string& ProjectName,
+                                 const std::string& ModelName,
+                                 std::map<std::string,bool>& EstimateCheckboxStates,
+                                 std::vector<int>& NumParametersNonTrivial,
+                                 std::vector<int>& NumParameters);
+    /**
+     * @brief Sends back the number of predation parameters per species in a vector
+     * @param Logger : logger pointer used to log any errors
+     * @param ProjectName : name of current project
+     * @param ModelName : name of current model
+     * @param PredationForm : the predation form (i.e., Type I, Type II, Type III)
+     * @param NumSpecies : number of species
+     * @param EstimateCheckboxStates : states of the Estimate checkbox on Estimation Tab 7
+     * @param NumParametersTotalNonTrivial : total number of non-trivial parameters over all species (non-trivial parameter is a parameter where min range value != max range value)
+     * @param NumParameters : vector containing the number of parameters/species (a parameter is counted if cell min != cell max for the associated predation matrix or vector)
+     * @return true if no errors reading table data, false otherwise
+     */
+    bool getParametersPredation(nmfLogger* Logger,
+                                const std::string& ProjectName,
+                                const std::string& ModelName,
+                                const std::string& PredationForm,
+                                const int& NumSpecies,
+                                std::map<std::string,bool>& EstimateCheckboxStates,
+                                std::vector<int>& NumParametersNonTrivial,
+                                std::vector<int>& NumParameters);
     /**
      * @brief Sends back predation data depending upon the predation type passed in
      * @param PredationType : type of predation
@@ -1276,6 +1406,26 @@ public:
      * @return std::string error msg (if any)
      */
     std::string nmfUpdateDatabase(std::string qry);
+    /**
+     * @brief Reads the appropriate min/max tables and calculates the number of parameters per species.
+     * A parameter is counted for every min cell whose value is not equal to its corresponding max cell value.
+     * @param Logger : logger pointer to log any error messages
+     * @param ProjectName : name of current project
+     * @param ModelName : name of current model
+     * @param NumSpecies : number of species
+     * @param TableNames : names of min/max tables to read
+     * @param NumParametersNonTrivial : vector containing non-trivial parameter counts per species (a non-trivial parameter is one where its min range value != max range value)
+     * @param NumParameters : vector containing parameter counts per species
+     * @return true if no error, false otherwise
+     */
+    bool readTablesAndGetNumParameters(
+            nmfLogger* Logger,
+            const std::string& ProjectName,
+            const std::string& ModelName,
+            const int& NumSpecies,
+            const std::vector<std::string>& TableNames,
+            std::vector<int>& NumParametersNonTrivial,
+            std::vector<int>& NumParameters);
     /**
      * @brief Restores the appropriate CSV from from the given table
      * @param TableName : the MySQL table whose CSV file is to be restored
