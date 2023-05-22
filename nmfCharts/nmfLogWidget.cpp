@@ -10,6 +10,8 @@ QT_CHARTS_USE_NAMESPACE
 nmfLogWidget::nmfLogWidget(nmfLogger *theLogger,
                            std::string theLogDir)
 {
+    QString msg;
+
     m_logger = theLogger;
     m_logDir = theLogDir;
 
@@ -27,6 +29,19 @@ nmfLogWidget::nmfLogWidget(nmfLogger *theLogger,
     browsePB->setStatusTip("Find and load a log file.");
     refreshPB->setToolTip("Load most recent log file.");
     refreshPB->setStatusTip("Load most recent log file.");
+    msg += "<pre>";
+    msg += "<strong><center>Log Window</center></strong>";
+    msg += "<br>Timestamped application messages will appear in this window once the user \
+refreshes the log window (using the Refresh button) or browses and loads a previous log file \
+(using the Browse button). Messages are color coded with:";
+    msg += "<ul>";
+    msg += "<li>black: normal</li>";
+    msg += "<li><font color=red>red: warning</li>";
+    msg += "<li><strong><font color=red>bold red: error</strong></li>";
+    msg += "</ul><font color=black>";
+    msg += "The name of the currently viewed log file can be seen at the top of the log window.";
+    msg += "</pre>";
+    logTE->setWhatsThis(msg);
 
     // Add widgets to layouts
     vMainLayt->addWidget(filenameLBL);

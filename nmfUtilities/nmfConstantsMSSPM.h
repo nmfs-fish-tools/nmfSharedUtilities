@@ -196,6 +196,8 @@ namespace nmfConstantsMSSPM
      const bool   DontLoadProjectData              = false;
      const bool   DataAreHPC                       = true;
      const bool   DataAreNotHPC                    = false;
+     const bool   NotationScientific               = true;
+     const bool   NotationFixed                    = false;
 
      const std::string  HiddenDir                      = ".MSSPM";
      const std::string  HiddenDataDir                  = ".MSSPM/data";
