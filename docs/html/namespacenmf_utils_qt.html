@@ -113,6 +113,12 @@ Functions</h2></td></tr>
 <tr class="memitem:af8b8b45e828e6159eeb90fabbce26a44"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#af8b8b45e828e6159eeb90fabbce26a44">areAllInitialCellsWithinRange</a> (QStandardItemModel *smodel, QStandardItemModel *smodelMin, QStandardItemModel *smodelMax, QString &amp;badCell)</td></tr>
 <tr class="memdesc:af8b8b45e828e6159eeb90fabbce26a44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks to see if all of the initial values are within their respective range values.  <a href="namespacenmf_utils_qt.html#af8b8b45e828e6159eeb90fabbce26a44">More...</a><br /></td></tr>
 <tr class="separator:af8b8b45e828e6159eeb90fabbce26a44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27017901d873b2e5297444c712134dae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a27017901d873b2e5297444c712134dae">buildColumnMap</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, QStandardItemModel *smodel, std::map&lt; QString, int &gt; &amp;columnMap)</td></tr>
+<tr class="memdesc:a27017901d873b2e5297444c712134dae"><td class="mdescLeft">&#160;</td><td class="mdescRight">buildColumnMap - builds a species column name to number map  <a href="namespacenmf_utils_qt.html#a27017901d873b2e5297444c712134dae">More...</a><br /></td></tr>
+<tr class="separator:a27017901d873b2e5297444c712134dae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa74d3e5ffb4742b27313ac4671e8ada8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#aa74d3e5ffb4742b27313ac4671e8ada8">buildColumnMap</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, QTableWidget *tableW, std::map&lt; QString, int &gt; &amp;columnMap)</td></tr>
+<tr class="memdesc:aa74d3e5ffb4742b27313ac4671e8ada8"><td class="mdescLeft">&#160;</td><td class="mdescRight">buildColumnMap - builds a species column name to number map  <a href="namespacenmf_utils_qt.html#aa74d3e5ffb4742b27313ac4671e8ada8">More...</a><br /></td></tr>
+<tr class="separator:aa74d3e5ffb4742b27313ac4671e8ada8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4326678543b25866ed2fdfe6fe87a051"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a4326678543b25866ed2fdfe6fe87a051">rename</a> (QString fileIn, QString fileOut)</td></tr>
 <tr class="memdesc:a4326678543b25866ed2fdfe6fe87a051"><td class="mdescLeft">&#160;</td><td class="mdescRight">Effectively does a file rename...but not quite. It copies the first to the second and then removes the first. I did this as the std:rename function didn't work on Windows...and a system() mv command caused a shell to pop up briefly over the UI.  <a href="namespacenmf_utils_qt.html#a4326678543b25866ed2fdfe6fe87a051">More...</a><br /></td></tr>
 <tr class="separator:a4326678543b25866ed2fdfe6fe87a051"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -188,12 +194,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a4cee76f187fa10c5d283b64bf5c55545"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a4cee76f187fa10c5d283b64bf5c55545">removeCommas</a> (QTableView *tableView)</td></tr>
 <tr class="memdesc:a4cee76f187fa10c5d283b64bf5c55545"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes commas from any numeric fields in table.  <a href="namespacenmf_utils_qt.html#a4cee76f187fa10c5d283b64bf5c55545">More...</a><br /></td></tr>
 <tr class="separator:a4cee76f187fa10c5d283b64bf5c55545"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93b05e8df567a1400a46951856f15570"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a93b05e8df567a1400a46951856f15570">isEmpty</a> (QTableView *tableview)</td></tr>
+<tr class="memdesc:a93b05e8df567a1400a46951856f15570"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines whether the passed tableview is empty.  <a href="namespacenmf_utils_qt.html#a93b05e8df567a1400a46951856f15570">More...</a><br /></td></tr>
+<tr class="separator:a93b05e8df567a1400a46951856f15570"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a741f31eeae5a15f711cb728beafb509b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a741f31eeae5a15f711cb728beafb509b">removeSettingsFile</a> ()</td></tr>
 <tr class="memdesc:a741f31eeae5a15f711cb728beafb509b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the Qt settings file from the file system. Useful for resetting the application GUI in case it disappears (i.e., in case some bad GUI settings are saved)  <a href="namespacenmf_utils_qt.html#a741f31eeae5a15f711cb728beafb509b">More...</a><br /></td></tr>
 <tr class="separator:a741f31eeae5a15f711cb728beafb509b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10ca273199708a36838a7d6f17331e2d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a10ca273199708a36838a7d6f17331e2d">calculateMultiColumnWidth</a> (QTableView *tableview, const int &amp;firstCol, const int &amp;lastCol)</td></tr>
 <tr class="memdesc:a10ca273199708a36838a7d6f17331e2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the sum of the widths of the column range.  <a href="namespacenmf_utils_qt.html#a10ca273199708a36838a7d6f17331e2d">More...</a><br /></td></tr>
 <tr class="separator:a10ca273199708a36838a7d6f17331e2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa297d94cebb52f6bb060983bba7b64be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#aa297d94cebb52f6bb060983bba7b64be">getHPCFitness</a> (const int &amp;numHPCFiles, const QString &amp;hpcDir, std::vector&lt; double &gt; &amp;fitnessVec)</td></tr>
+<tr class="memdesc:aa297d94cebb52f6bb060983bba7b64be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a vector consisting of the fitness values for each run.  <a href="namespacenmf_utils_qt.html#aa297d94cebb52f6bb060983bba7b64be">More...</a><br /></td></tr>
+<tr class="separator:aa297d94cebb52f6bb060983bba7b64be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae52b342207664ccc5136b64665c5f0ca"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#ae52b342207664ccc5136b64665c5f0ca">loadModelFromCSVFile</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, std::string projectDir, std::string fileType, QTableView *table, QString filename, int &amp;numRows, int &amp;numSignificantDigits)</td></tr>
 <tr class="memdesc:ae52b342207664ccc5136b64665c5f0ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the CSV file into the passed tableview's model.  <a href="namespacenmf_utils_qt.html#ae52b342207664ccc5136b64665c5f0ca">More...</a><br /></td></tr>
 <tr class="separator:ae52b342207664ccc5136b64665c5f0ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -203,12 +215,21 @@ Functions</h2></td></tr>
 <tr class="memitem:a96d1fb290410261d5ac97a7263ece6d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a96d1fb290410261d5ac97a7263ece6d4">getNumSpeciesFromImportFile</a> (const QString &amp;filename, int &amp;numRows)</td></tr>
 <tr class="memdesc:a96d1fb290410261d5ac97a7263ece6d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of rows (i.e., Species) in the Species csv file.  <a href="namespacenmf_utils_qt.html#a96d1fb290410261d5ac97a7263ece6d4">More...</a><br /></td></tr>
 <tr class="separator:a96d1fb290410261d5ac97a7263ece6d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ba146f966f64e8d2cd4dbd1ae4fe2c3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a8ba146f966f64e8d2cd4dbd1ae4fe2c3">getNumHPCFiles</a> (const QString &amp;dirName)</td></tr>
+<tr class="memdesc:a8ba146f966f64e8d2cd4dbd1ae4fe2c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of HPC files (per parameter) on disk.  <a href="namespacenmf_utils_qt.html#a8ba146f966f64e8d2cd4dbd1ae4fe2c3">More...</a><br /></td></tr>
+<tr class="separator:a8ba146f966f64e8d2cd4dbd1ae4fe2c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeece4e448274fb0c93b789a357214f2b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#aeece4e448274fb0c93b789a357214f2b">loadFromHPCFile</a> (const QString &amp;filename, std::vector&lt; double &gt; &amp;vec)</td></tr>
+<tr class="memdesc:aeece4e448274fb0c93b789a357214f2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the appropriate data file into the passed data structure.  <a href="namespacenmf_utils_qt.html#aeece4e448274fb0c93b789a357214f2b">More...</a><br /></td></tr>
+<tr class="separator:aeece4e448274fb0c93b789a357214f2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c1fb316065768676efb39e23f179ec0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a5c1fb316065768676efb39e23f179ec0">loadFromHPCFile</a> (const QString &amp;filename, boost::numeric::ublas::matrix&lt; double &gt; &amp;mat)</td></tr>
+<tr class="memdesc:a5c1fb316065768676efb39e23f179ec0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the appropriate data file into the passed data structure.  <a href="namespacenmf_utils_qt.html#a5c1fb316065768676efb39e23f179ec0">More...</a><br /></td></tr>
+<tr class="separator:a5c1fb316065768676efb39e23f179ec0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48c73d29293cba311de8d98ebe00396c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a48c73d29293cba311de8d98ebe00396c">loadTableWidgetData</a> (QTabWidget *parentTabWidget, QTableWidget *tableWidget, const QString &amp;filename, const int &amp;numRows, const int &amp;numCols, QStringList &amp;guildValues, const std::vector&lt; int &gt; &amp;columnsToLoad, QString &amp;errorMsg)</td></tr>
 <tr class="memdesc:a48c73d29293cba311de8d98ebe00396c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load data from a .csv file into a QTableWidget.  <a href="namespacenmf_utils_qt.html#a48c73d29293cba311de8d98ebe00396c">More...</a><br /></td></tr>
 <tr class="separator:a48c73d29293cba311de8d98ebe00396c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ebf19a26b49651ddf686961de24b1e4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a9ebf19a26b49651ddf686961de24b1e4">loadGuildsSpeciesTableview</a> (QTabWidget *parentTabWidget, QTableView *tableView, const QString &amp;type, const QString &amp;inputDataPath, const QString &amp;inputFilename, QList&lt; QString &gt; &amp;SpeciesGuilds, const bool &amp;queryForFilename, QString &amp;guildsFilename, QString &amp;errorMsg)</td></tr>
-<tr class="memdesc:a9ebf19a26b49651ddf686961de24b1e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a non time series .csv file into a QTableView.  <a href="namespacenmf_utils_qt.html#a9ebf19a26b49651ddf686961de24b1e4">More...</a><br /></td></tr>
-<tr class="separator:a9ebf19a26b49651ddf686961de24b1e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b9d5218122a7ed6d82f0620f2ba4eb3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a6b9d5218122a7ed6d82f0620f2ba4eb3">loadGuildsSpeciesTableview</a> (QTabWidget *parentTabWidget, QStandardItemModel *smodel, const QString &amp;type, const QString &amp;inputDataPath, const QString &amp;inputFilename, QList&lt; QString &gt; &amp;SpeciesGuilds, const bool &amp;queryForFilename, QString &amp;guildsFilename, const int &amp;nameColumn, QString &amp;errorMsg)</td></tr>
+<tr class="memdesc:a6b9d5218122a7ed6d82f0620f2ba4eb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a non time series .csv file into a QTableView.  <a href="namespacenmf_utils_qt.html#a6b9d5218122a7ed6d82f0620f2ba4eb3">More...</a><br /></td></tr>
+<tr class="separator:a6b9d5218122a7ed6d82f0620f2ba4eb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb998e4c70e4e80be4c42074c7fcf440"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#abb998e4c70e4e80be4c42074c7fcf440">loadCSVFileComboBoxes</a> (QTabWidget *parentTabWidget, QTableView *tableView, const QString &amp;inputDataPath, const QString &amp;inputFilename, QString &amp;errorMsg)</td></tr>
 <tr class="memdesc:abb998e4c70e4e80be4c42074c7fcf440"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the CSV File into a table of combo boxes.  <a href="namespacenmf_utils_qt.html#abb998e4c70e4e80be4c42074c7fcf440">More...</a><br /></td></tr>
 <tr class="separator:abb998e4c70e4e80be4c42074c7fcf440"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -221,12 +242,15 @@ Functions</h2></td></tr>
 <tr class="memitem:a88a7290840c8f1ed4c13682b280c319c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a88a7290840c8f1ed4c13682b280c319c">saveTableWidgetData</a> (QTabWidget *parentTabWidget, QTableWidget *tableWidget, QString &amp;inputDataPath, const QString &amp;outputFilename)</td></tr>
 <tr class="memdesc:a88a7290840c8f1ed4c13682b280c319c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save the passed QTableWidget data to a .csv file.  <a href="namespacenmf_utils_qt.html#a88a7290840c8f1ed4c13682b280c319c">More...</a><br /></td></tr>
 <tr class="separator:a88a7290840c8f1ed4c13682b280c319c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2e0a2068ca514d444bb93fe857c295e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#aa2e0a2068ca514d444bb93fe857c295e">saveSpeciesTableView</a> (QTabWidget *parentTabWidget, QStandardItemModel *smodel, QString &amp;inputDataPath, QString &amp;outputFilename, QList&lt; QString &gt; &amp;SpeciesName, QList&lt; QString &gt; &amp;SpeciesGuild, QList&lt; QString &gt; &amp;SpeciesInitialBiomass, QList&lt; QString &gt; &amp;SpeciesGrowthRate, QList&lt; QString &gt; &amp;SpeciesK)</td></tr>
-<tr class="memdesc:aa2e0a2068ca514d444bb93fe857c295e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the data in the passed non time series but a table view model to a csv file in the passed directory.  <a href="namespacenmf_utils_qt.html#aa2e0a2068ca514d444bb93fe857c295e">More...</a><br /></td></tr>
-<tr class="separator:aa2e0a2068ca514d444bb93fe857c295e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3a1f6f41ed46568e7ca9dbc9c10b2a9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#aa3a1f6f41ed46568e7ca9dbc9c10b2a9">saveSpeciesTableView</a> (QTabWidget *parentTabWidget, QStandardItemModel *smodel, std::map&lt; QString, int &gt; &amp;columnMap, QString &amp;inputDataPath, QString &amp;outputFilename, QList&lt; QString &gt; &amp;SpeciesName, QList&lt; QString &gt; &amp;SpeciesGuild, QList&lt; QString &gt; &amp;SpeciesInitialBiomass, QList&lt; QString &gt; &amp;SpeciesGrowthRate, QList&lt; QString &gt; &amp;SpeciesK)</td></tr>
+<tr class="memdesc:aa3a1f6f41ed46568e7ca9dbc9c10b2a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the data in the passed non time series but a table view model to a csv file in the passed directory.  <a href="namespacenmf_utils_qt.html#aa3a1f6f41ed46568e7ca9dbc9c10b2a9">More...</a><br /></td></tr>
+<tr class="separator:aa3a1f6f41ed46568e7ca9dbc9c10b2a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fdd30fa0738fd0d4702de4a7efb07c3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a1fdd30fa0738fd0d4702de4a7efb07c3">saveGuildsTableView</a> (QTabWidget *parentTabWidget, QStandardItemModel *smodel, QString &amp;inputDataPath, QString &amp;outputFilename, QList&lt; QString &gt; &amp;GuildName, QList&lt; QString &gt; &amp;GrowthRate, QList&lt; QString &gt; &amp;GuildK)</td></tr>
 <tr class="memdesc:a1fdd30fa0738fd0d4702de4a7efb07c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the data in the passed non time series but a table view model to a csv file in the passed directory.  <a href="namespacenmf_utils_qt.html#a1fdd30fa0738fd0d4702de4a7efb07c3">More...</a><br /></td></tr>
 <tr class="separator:a1fdd30fa0738fd0d4702de4a7efb07c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa004602188aa2e9d29bf9ee0aeb98e39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#aa004602188aa2e9d29bf9ee0aeb98e39">savePdf</a> (const QString &amp;imagePath, const QString &amp;fileBasename, const int &amp;resolution, const QImage &amp;image)</td></tr>
+<tr class="memdesc:aa004602188aa2e9d29bf9ee0aeb98e39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the passed image into the appropriately named pdf file.  <a href="namespacenmf_utils_qt.html#aa004602188aa2e9d29bf9ee0aeb98e39">More...</a><br /></td></tr>
+<tr class="separator:aa004602188aa2e9d29bf9ee0aeb98e39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac77d78798ca92ce65de8afccfa212db3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#ac77d78798ca92ce65de8afccfa212db3">saveTimeSeries</a> (QTabWidget *parentTabWidget, QStandardItemModel *smodel, QString &amp;inputDataPath, QString &amp;outputFilename)</td></tr>
 <tr class="memdesc:ac77d78798ca92ce65de8afccfa212db3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the data in the passed model to a csv file in the passed directory.  <a href="namespacenmf_utils_qt.html#ac77d78798ca92ce65de8afccfa212db3">More...</a><br /></td></tr>
 <tr class="separator:ac77d78798ca92ce65de8afccfa212db3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -317,9 +341,15 @@ Functions</h2></td></tr>
 <tr class="memitem:a60383b9f64e385e8ddaa7afd4aca817b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a60383b9f64e385e8ddaa7afd4aca817b">getCovariates</a> (<a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;NLoptDataStruct, const int &amp;numYears, const std::string &amp;parameterName, boost::numeric::ublas::matrix&lt; double &gt; &amp;covariateMatrix)</td></tr>
 <tr class="memdesc:a60383b9f64e385e8ddaa7afd4aca817b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back the Covariate Values for all species for the given year and parameter.  <a href="namespacenmf_utils_qt.html#a60383b9f64e385e8ddaa7afd4aca817b">More...</a><br /></td></tr>
 <tr class="separator:a60383b9f64e385e8ddaa7afd4aca817b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a637ad99c2cededcc3fadf9f546bfb9ce"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#a637ad99c2cededcc3fadf9f546bfb9ce">getCSVFileName</a> (QWidget *parent, QString &amp;tableName)</td></tr>
+<tr class="memdesc:a637ad99c2cededcc3fadf9f546bfb9ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prompts the user for a valid export filename.  <a href="namespacenmf_utils_qt.html#a637ad99c2cededcc3fadf9f546bfb9ce">More...</a><br /></td></tr>
+<tr class="separator:a637ad99c2cededcc3fadf9f546bfb9ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe56c19cb8cd59dbf3d6278bf816fb16"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#abe56c19cb8cd59dbf3d6278bf816fb16">reselectTableViewCells</a> (QTableView *tv, QModelIndexList indexes)</td></tr>
 <tr class="memdesc:abe56c19cb8cd59dbf3d6278bf816fb16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reselects the passed indexes from within the passed tableview.  <a href="namespacenmf_utils_qt.html#abe56c19cb8cd59dbf3d6278bf816fb16">More...</a><br /></td></tr>
 <tr class="separator:abe56c19cb8cd59dbf3d6278bf816fb16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc5d55a8ba2ad130a52311d0ea13b7d3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#acc5d55a8ba2ad130a52311d0ea13b7d3">runAllTableChecks</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, QWidget *parent, QTableView *tableview, QTableView *minTableview, QTableView *maxTableview)</td></tr>
+<tr class="memdesc:acc5d55a8ba2ad130a52311d0ea13b7d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks tables for blanks and min&lt;max.  <a href="namespacenmf_utils_qt.html#acc5d55a8ba2ad130a52311d0ea13b7d3">More...</a><br /></td></tr>
+<tr class="separator:acc5d55a8ba2ad130a52311d0ea13b7d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae78b0b5f996b1ace6822a9363a535cf5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils_qt.html#ae78b0b5f996b1ace6822a9363a535cf5">runAllTableChecks</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, QWidget *parent, QTableView *tableview, QTableView *minTableview, QTableView *maxTableview, QTableView *tableviewCompare, QTableView *minTableviewCompare, QTableView *maxTableviewCompare)</td></tr>
 <tr class="memdesc:ae78b0b5f996b1ace6822a9363a535cf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks tables for blanks and min&lt;max.  <a href="namespacenmf_utils_qt.html#ae78b0b5f996b1ace6822a9363a535cf5">More...</a><br /></td></tr>
 <tr class="separator:ae78b0b5f996b1ace6822a9363a535cf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -706,6 +736,94 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if all the max model cells are greater than or equal to the min model cells, else False </dd></dl>
+
+</div>
+</div>
+<a id="a27017901d873b2e5297444c712134dae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27017901d873b2e5297444c712134dae">&#9670;&nbsp;</a></span>buildColumnMap() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::buildColumnMap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classnmf_logger.html">nmfLogger</a> *&#160;</td>
+          <td class="paramname"><em>logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QStandardItemModel *&#160;</td>
+          <td class="paramname"><em>smodel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::map&lt; QString, int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>columnMap</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>buildColumnMap - builds a species column name to number map </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">logger</td><td>: logger pointer to log any errors </td></tr>
+    <tr><td class="paramname">smodel</td><td>: the tableview's model from which to extract the column names </td></tr>
+    <tr><td class="paramname">columnMap</td><td>: column map to return the name-number map information </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa74d3e5ffb4742b27313ac4671e8ada8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa74d3e5ffb4742b27313ac4671e8ada8">&#9670;&nbsp;</a></span>buildColumnMap() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::buildColumnMap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classnmf_logger.html">nmfLogger</a> *&#160;</td>
+          <td class="paramname"><em>logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableWidget *&#160;</td>
+          <td class="paramname"><em>tableW</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::map&lt; QString, int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>columnMap</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>buildColumnMap - builds a species column name to number map </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">logger</td><td>: logger pointer to log any errors </td></tr>
+    <tr><td class="paramname">tableW</td><td>: table widget from which to extract column names </td></tr>
+    <tr><td class="paramname">columnMap</td><td>: column map to return the name-number map information </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1724,6 +1842,44 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
 
 </div>
 </div>
+<a id="a637ad99c2cededcc3fadf9f546bfb9ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a637ad99c2cededcc3fadf9f546bfb9ce">&#9670;&nbsp;</a></span>getCSVFileName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfUtilsQt::getCSVFileName </td>
+          <td>(</td>
+          <td class="paramtype">QWidget *&#160;</td>
+          <td class="paramname"><em>parent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString &amp;&#160;</td>
+          <td class="paramname"><em>tableName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Prompts the user for a valid export filename. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parent</td><td>: parent widget over which to show popups </td></tr>
+    <tr><td class="paramname">tableName</td><td>: name of table from which to export csv file </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if not errors, false otherwise </dd></dl>
+
+</div>
+</div>
 <a id="aea1c506cd62ccf21a0d8dc3c8e5e1cf6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aea1c506cd62ccf21a0d8dc3c8e5e1cf6">&#9670;&nbsp;</a></span>getCurrentTabName()</h2>
 
@@ -1768,6 +1924,77 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
 
 <p>Returns the current time. </p>
 <dl class="section return"><dt>Returns</dt><dd>the current time </dd></dl>
+
+</div>
+</div>
+<a id="aa297d94cebb52f6bb060983bba7b64be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa297d94cebb52f6bb060983bba7b64be">&#9670;&nbsp;</a></span>getHPCFitness()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::getHPCFitness </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numHPCFiles</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>hpcDir</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>fitnessVec</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a vector consisting of the fitness values for each run. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">numHPCFiles</td><td>: number of estimated parameter files per parameter </td></tr>
+    <tr><td class="paramname">hpcDir</td><td>: directory containing the HPC estimated parameter files </td></tr>
+    <tr><td class="paramname">fitnessVec</td><td>: vector which will contain all of the fitness values </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8ba146f966f64e8d2cd4dbd1ae4fe2c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ba146f966f64e8d2cd4dbd1ae4fe2c3">&#9670;&nbsp;</a></span>getNumHPCFiles()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int nmfUtilsQt::getNumHPCFiles </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>dirName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the number of HPC files (per parameter) on disk. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dirName</td><td>: name of the HPC directory </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the number of csv files per parameter found </dd></dl>
 
 </div>
 </div>
@@ -1900,6 +2127,33 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
 
 </div>
 </div>
+<a id="a93b05e8df567a1400a46951856f15570"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93b05e8df567a1400a46951856f15570">&#9670;&nbsp;</a></span>isEmpty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfUtilsQt::isEmpty </td>
+          <td>(</td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tableview</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Determines whether the passed tableview is empty. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tableview</td><td>: the tableview to test if it's empty or null </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if empty or no defined, false otherwise </dd></dl>
+
+</div>
+</div>
 <a id="abb998e4c70e4e80be4c42074c7fcf440"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abb998e4c70e4e80be4c42074c7fcf440">&#9670;&nbsp;</a></span>loadCSVFileComboBoxes()</h2>
 
@@ -2018,8 +2272,82 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
 
 </div>
 </div>
-<a id="a9ebf19a26b49651ddf686961de24b1e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9ebf19a26b49651ddf686961de24b1e4">&#9670;&nbsp;</a></span>loadGuildsSpeciesTableview()</h2>
+<a id="a5c1fb316065768676efb39e23f179ec0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c1fb316065768676efb39e23f179ec0">&#9670;&nbsp;</a></span>loadFromHPCFile() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::loadFromHPCFile </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>mat</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Loads the appropriate data file into the passed data structure. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>: name of file to read </td></tr>
+    <tr><td class="paramname">mat</td><td>: matrix structure in which to put the file dta </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aeece4e448274fb0c93b789a357214f2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeece4e448274fb0c93b789a357214f2b">&#9670;&nbsp;</a></span>loadFromHPCFile() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::loadFromHPCFile </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>vec</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Loads the appropriate data file into the passed data structure. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>: name of file to read </td></tr>
+    <tr><td class="paramname">vec</td><td>: vector structure in which to put the file dta </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6b9d5218122a7ed6d82f0620f2ba4eb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b9d5218122a7ed6d82f0620f2ba4eb3">&#9670;&nbsp;</a></span>loadGuildsSpeciesTableview()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2033,8 +2361,8 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">QTableView *&#160;</td>
-          <td class="paramname"><em>tableView</em>, </td>
+          <td class="paramtype">QStandardItemModel *&#160;</td>
+          <td class="paramname"><em>smodel</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -2075,6 +2403,12 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>nameColumn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">QString &amp;&#160;</td>
           <td class="paramname"><em>errorMsg</em>&#160;</td>
         </tr>
@@ -2090,12 +2424,14 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">parentTabWidget</td><td>: parent tab containing the QTableView object </td></tr>
+    <tr><td class="paramname">smodel</td><td>the QTableView model that will contains the .csv data </td></tr>
     <tr><td class="paramname">tableView</td><td>: QTableView that will contain the .csv data </td></tr>
     <tr><td class="paramname">type</td><td>: type of tableview (i.e., "Guild" or "Species") </td></tr>
     <tr><td class="paramname">inputDataPath</td><td>: default path for the input .csv file </td></tr>
     <tr><td class="paramname">inputFilename</td><td>: CSV filename if default is not desired </td></tr>
     <tr><td class="paramname">queryForFilename</td><td>: boolean if true code will query user for the csv filename; if false, it won't </td></tr>
     <tr><td class="paramname">guildsFilename</td><td>: filename for the guilds csv file </td></tr>
+    <tr><td class="paramname">nameColumn</td><td>: column of table that holds the name of the guild or species (depending upon the table) </td></tr>
     <tr><td class="paramname">errorMsg</td><td>: error message produced during the load </td></tr>
   </table>
   </dd>
@@ -2698,8 +3034,67 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
 
 </div>
 </div>
+<a id="acc5d55a8ba2ad130a52311d0ea13b7d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc5d55a8ba2ad130a52311d0ea13b7d3">&#9670;&nbsp;</a></span>runAllTableChecks() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfUtilsQt::runAllTableChecks </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classnmf_logger.html">nmfLogger</a> *&#160;</td>
+          <td class="paramname"><em>logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QWidget *&#160;</td>
+          <td class="paramname"><em>parent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>tableview</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>minTableview</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTableView *&#160;</td>
+          <td class="paramname"><em>maxTableview</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks tables for blanks and min&lt;max. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">logger</td><td>: application logger pointer </td></tr>
+    <tr><td class="paramname">parent</td><td>: parent widget over which to display error messages </td></tr>
+    <tr><td class="paramname">tableview</td><td>: main table </td></tr>
+    <tr><td class="paramname">minTableview</td><td>: table of minimum values </td></tr>
+    <tr><td class="paramname">maxTableview</td><td>: table of maximum values </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if passed all tests, false if any tests failed </dd></dl>
+
+</div>
+</div>
 <a id="ae78b0b5f996b1ace6822a9363a535cf5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae78b0b5f996b1ace6822a9363a535cf5">&#9670;&nbsp;</a></span>runAllTableChecks()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae78b0b5f996b1ace6822a9363a535cf5">&#9670;&nbsp;</a></span>runAllTableChecks() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2989,8 +3384,59 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
 
 </div>
 </div>
-<a id="aa2e0a2068ca514d444bb93fe857c295e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa2e0a2068ca514d444bb93fe857c295e">&#9670;&nbsp;</a></span>saveSpeciesTableView()</h2>
+<a id="aa004602188aa2e9d29bf9ee0aeb98e39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa004602188aa2e9d29bf9ee0aeb98e39">&#9670;&nbsp;</a></span>savePdf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtilsQt::savePdf </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>imagePath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>fileBasename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>resolution</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QImage &amp;&#160;</td>
+          <td class="paramname"><em>image</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Saves the passed image into the appropriately named pdf file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">imagePath</td><td>: directory for pdf file </td></tr>
+    <tr><td class="paramname">fileBasename</td><td>: file base name of pdf file (prior to suffix being updated to "pdf") </td></tr>
+    <tr><td class="paramname">resolution</td><td>: the resolution of the pdf file in dpi </td></tr>
+    <tr><td class="paramname">image</td><td>: the image to be written to the pdf file </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa3a1f6f41ed46568e7ca9dbc9c10b2a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3a1f6f41ed46568e7ca9dbc9c10b2a9">&#9670;&nbsp;</a></span>saveSpeciesTableView()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3006,6 +3452,12 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
           <td></td>
           <td class="paramtype">QStandardItemModel *&#160;</td>
           <td class="paramname"><em>smodel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::map&lt; QString, int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>columnMap</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -3062,6 +3514,7 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ReadOnlyLine
   <table class="params">
     <tr><td class="paramname">parentTabWidget</td><td>: parent table widget of table to be saved </td></tr>
     <tr><td class="paramname">smodel</td><td>: table model containing data to be saved </td></tr>
+    <tr><td class="paramname">columnMap</td><td>: maps column name to column number </td></tr>
     <tr><td class="paramname">inputDataPath</td><td>: default path where .csv file is to be saved </td></tr>
     <tr><td class="paramname">outputFilename</td><td>: name of the output filename with path </td></tr>
     <tr><td class="paramname">SpeciesName</td><td>: list of Species names </td></tr>

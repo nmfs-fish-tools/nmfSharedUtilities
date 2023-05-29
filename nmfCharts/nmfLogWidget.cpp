@@ -118,9 +118,8 @@ nmfLogWidget::loadLogFile(QString filename)
 
         text += line;
         text += "<br>";
-        //logTE->append(line);
     }
-    logTE->setHtml(text);
+    logTE->setHtml("<tt>"+text+"</tt>");
     fin.close();
 
     // Scroll to bottom of text edit

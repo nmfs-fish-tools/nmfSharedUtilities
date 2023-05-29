@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>nmfSharedUtilities: nmfCharts/nmfProgressWidget.h Source File</title>
+<title>nmfSharedUtilities: nmfCharts/nmfProgressWidget_old.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,10 +66,10 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">nmfProgressWidget.h</div>  </div>
+<div class="title">nmfProgressWidget_old.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="nmf_progress_widget_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#ifndef NMFPROGRESSWIDGET_H</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#define NMFPROGRESSWIDGET_H</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
@@ -101,7 +101,7 @@ $(function() {
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;QT_CHARTS_USE_NAMESPACE</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="classnmf_progress_widget.html">   65</a></span>&#160;<span class="keyword">class </span><a class="code" href="classnmf_progress_widget.html">nmfProgressWidget</a> : <span class="keyword">public</span> QObject</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">class </span><a class="code" href="classnmf_progress_widget.html">nmfProgressWidget</a> : <span class="keyword">public</span> QObject</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;{</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    Q_OBJECT</div>
@@ -128,137 +128,140 @@ $(function() {
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    QHBoxLayout *pointsLayt;</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    QLabel      *statusLBL;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    QLabel      *timeLBL;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    QLabel      *pointLBL;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    QLabel      *rangeLBL;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    QLabel      *minLBL;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    QLabel      *maxLBL;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    QLabel      *yAxisLBL;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    QLabel      *runStatusLBL;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    QCheckBox   *markersCB;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    QCheckBox   *labelsCB;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    QCheckBox   *validPointsCB;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    QDoubleSpinBox *yMinSB;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    QDoubleSpinBox *yMaxSB;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    QSpinBox    *minSB;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    QSpinBox    *maxSB;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    QPushButton *clearPB;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    QPushButton *stopPB;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    QPushButton *rangeSetPB;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    QLineEdit   *timeLE;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    QLineEdit   *runLE;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    QLineEdit   *subRunLE;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordtype">bool</span>        m_wasStopped;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">bool</span>        m_yAxisAdjusted;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">int</span>         m_maxNumGenerations;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordtype">int</span>         m_lastX;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordtype">double</span>      m_xMin;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordtype">double</span>      m_xMax;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordtype">double</span>      m_yMin;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordtype">double</span>      m_yMax;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordtype">double</span>      m_xInc;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordtype">double</span>      m_yInc;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    std::string m_RunType;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    std::string m_elapsedTime;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    QTimer*     m_timer;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    QDateTime   m_startTime;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    QString     m_mainTitle;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    QString     m_xTitle;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    QString     m_yTitle;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <a class="code" href="classnmf_progress_widget.html#ab70c8b143b35ef4b5054239c01166a05">nmfProgressWidget</a>(QTimer* timer,</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                      <a class="code" href="classnmf_logger.html">nmfLogger</a>* logger,</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                      std::string runType,</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                      QString title,</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                      QString XAxisLabel,</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                      QString YAxisLabel,</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                      <span class="keywordtype">double</span> xMin,</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                      <span class="keywordtype">double</span> xMax,</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                      <span class="keywordtype">double</span> xInc,</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                      <span class="keywordtype">double</span> yMin,</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                      <span class="keywordtype">double</span> yMax,</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                      <span class="keywordtype">double</span> yInc);</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;   ~<a class="code" href="classnmf_progress_widget.html">nmfProgressWidget</a>();</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a30461ed7b496abcafb2a1d467fbc7dfc">clearChart</a>();</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a78035d0bb62c53d9d97653cc3d952abb">clearChartData</a>(std::string filename);</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a52e432e760aff498ab5f7760a1114449">clearChartOnly</a>();</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a085ff48924d13da44b26388451579ca0">clearRunBoxes</a>();</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#aea6acba14449c66e1b0f3c7dfa64a5e5">clearTime</a>();</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    std::string <a class="code" href="classnmf_progress_widget.html#ab1c1ce28d43856074259e8bddcb21eda">getElapsedTime</a>();</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    QString <a class="code" href="classnmf_progress_widget.html#a8b60eef273b6bfa6f70d2dbd30874591">getMainTitle</a>();</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classnmf_progress_widget.html#a9c1cd1d650c67ab0eac4685f24161034">getNumXTicks</a>();</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classnmf_progress_widget.html#ae58a95308b5380d4fe5ebfba7abecbad">getNumYTicks</a>();</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classnmf_progress_widget.html#a3857ac59b40932e79fc4a201cd31d134">getXInc</a>();</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    std::pair&lt;double,double&gt; <a class="code" href="classnmf_progress_widget.html#a44b3827857dbf9eb3f65e01b0711818f">getXRange</a>();</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    QString <a class="code" href="classnmf_progress_widget.html#a4b343406d7dd6e0a7ee19c8456ba7f83">getXTitle</a>();</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classnmf_progress_widget.html#ad8a460bd6d1053025bb8562d3b2b2567">getYInc</a>();</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    std::pair&lt;double,double&gt; <a class="code" href="classnmf_progress_widget.html#a3e5d970ba2be40b21f6be93a9a114d5c">getYRange</a>();</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    QString <a class="code" href="classnmf_progress_widget.html#a603130594bbd5c299d90cf142c4aa587">getYTitle</a>();</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a016dd3f22750ae62329fdf0d076aeedd">hideLegend</a>();</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classnmf_progress_widget.html#a903cfb3ddb7beb57087ecb95868b64b7">isStopped</a>();</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a69daf3f8c7a0b6da2fda378b85d30b83">readChartDataFile</a>(std::string type,</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;                           std::string inputFileName,</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;                           std::string inputLabelFileName,</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                           <span class="keywordtype">bool</span> validPointsOnly);</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classnmf_progress_widget.html#ab960f0f64fe9d15eb17c4e08ae9e8228">readValidPointsOnly</a>();</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a9442b5b312025c0b4d9a9a432ea5e68c">setMainTitle</a>(QString mainTitle);</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#ab203971413d3e92fb9294f320b5a60b1">setMaxNumGenerations</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; newMaxNumGenerations);</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#ab59ec6d729cbf3a28447e58554a0ec58">setRunBoxes</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; run,</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;                     <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; subRun,</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                     <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSubRuns);</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a7d62a242779705d77e552699069427c4">setupConnections</a>();</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a9634e7e2c403e7a41fadf6469236a19d">setWhatsThis</a>(QString whatsThis);</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#ae5443d2b652f4ce4447a8307588b1714">setXAxisTitleScale</a>(<span class="keyword">const</span> QString&amp; title,</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp;  xMin,</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp;  xMax,</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp;  xInc);</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#aa01f0455b12ddba5deda9754097d2741">setXInc</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; xInc);</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a20f116fd6f4cd4dc1f8cbe7efb544e4d">setXRange</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; xMin,<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; xMax);</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a6f998b08f203ae62cda1bda2267bf20b">setXTitle</a>(<span class="keyword">const</span> QString title);</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a52387ee2b33b4f46bd9bee81cb65020a">setYAxisTitleScale</a>(<span class="keyword">const</span> QString title,</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;                            <span class="keyword">const</span> <span class="keywordtype">double</span>  yMin,</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;                            <span class="keyword">const</span> <span class="keywordtype">double</span>  yMax,</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;                            <span class="keyword">const</span> <span class="keywordtype">double</span>  yInc);</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#aee3a1549f176a08d111f1445ba8088cc">setYInc</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; yInc);</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a47ba2cb903fd0f80948222bac4a36452">setYRange</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; yMin,<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; yMax);</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a3b42f6954c1c3c44a8c7bfe557f3b389">setYTitle</a>(<span class="keyword">const</span> QString title);</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a1db78eb2b5dd56e81e53e023b35f8370">shouldYRangeEditsStick</a>(<span class="keywordtype">bool</span> state);</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#acbd00361c359392fe078ef92fb27d063">showLegend</a>();</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a328d5459648491b7c87b7787d138f0af">startRun</a>();</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#ae03ef11ae548974d514ea9def4519cdd">startTimer</a>(<span class="keywordtype">int</span> delayMillisec);</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a0b89e51a27891f2626a59ce8f1613b15">stopAllRuns</a>(<span class="keywordtype">bool</span> verbose);</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#ab83854c3279b497f752f577f9690bc02">stopTimer</a>();</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#ac458ed6fd42682dc5553e750b73676c2">updateChart</a>();</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#abc4340e49ffb0cae8fd622558b7401f1">updateChartDataLabel</a>(std::string inputLabelFileName,</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;                              std::string overrideMsg);</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a605ceed7f8ed0ce1b9aa1c8e6ebd04a6">updateTime</a>();</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classnmf_progress_widget.html#aeb761f355d575a4e56eceecf37ab817a">wasStopped</a>();</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a546a351097647a99717f3a47dd11e88d">writeToStopRunFile</a>();</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160; </div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;signals:</div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a4a6b1411bc330a32695af6aff23fa21a">RedrawValidPointsOnly</a>(<span class="keywordtype">bool</span> checked, <span class="keywordtype">bool</span> clear);</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#acabe044500a0e863bceae958c1646832">SetAllRunsComplete</a>();</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a1869245bd793def4db70c1dc3f387388">StopTimer</a>();</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#ab66fed9342e6da3e1e55952212418bad">StopTheTimer</a>();</div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160; </div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="keyword">public</span> Q_SLOTS:</div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#af16520926ad36b48b1b6eec579b16bf4">callback_clearPB</a>();</div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a8324277c118fe949eebae871cbdce288">callback_labelsCB</a>(<span class="keywordtype">int</span> state);</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="comment">//  void callback_lineHovered(QPointF point, bool state);</span></div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="comment"></span>    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#af115794f340f6419aa51390e416a5287">callback_markersCB</a>(<span class="keywordtype">int</span> state);</div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#ab5a61daf30922db7c466a1a02c25f786">callback_rangeSetPB</a>();</div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="comment">//  void callback_scatterSeriesHovered(QPointF point, bool state);</span></div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="comment"></span>    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#acfb8c457ef08bd1a4e1b9e2ed8103aac">callback_stopPB</a>();</div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a9dd4e5ab1e16543d17f445e4ecd3cb42">callback_validPointsCB</a>(<span class="keywordtype">bool</span> checked);</div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a33cbaed47b58d6355ba438d774d29feb">callback_xMaxSB</a>(<span class="keywordtype">int</span> value);</div>
-<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a73bb13cb52b125fce098c35cc9249c02">callback_xMinSB</a>(<span class="keywordtype">int</span> value);</div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a5d225a34679fa1de80fd3fc24f99c40b">callback_yMaxSB</a>(<span class="keywordtype">double</span> value);</div>
-<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a5a00cd875734256b43b438d627921046">callback_yMinSB</a>(<span class="keywordtype">double</span> value);</div>
-<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;};</div>
-<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160; </div>
-<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160; </div>
-<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;<span class="preprocessor">#endif // NMFPROGRESSWIDGET_H</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    QLabel      *tolLBL;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    QLabel      *pointLBL;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    QLabel      *rangeLBL;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    QLabel      *minLBL;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    QLabel      *maxLBL;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    QLabel      *yAxisLBL;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    QLabel      *runStatusLBL;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    QCheckBox   *markersCB;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    QCheckBox   *labelsCB;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    QCheckBox   *validPointsCB;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    QDoubleSpinBox *yMinSB;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    QDoubleSpinBox *yMaxSB;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    QSpinBox    *minSB;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    QSpinBox    *maxSB;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    QPushButton *clearPB;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    QPushButton *stopPB;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    QPushButton *rangeSetPB;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    QLineEdit   *timeLE;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    QLineEdit   *tolLE;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    QLineEdit   *runLE;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    QLineEdit   *subRunLE;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">bool</span>        m_wasStopped;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordtype">bool</span>        m_yAxisAdjusted;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordtype">int</span>         m_maxNumGenerations;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordtype">int</span>         m_lastX;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordtype">double</span>      m_xMin;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordtype">double</span>      m_xMax;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordtype">double</span>      m_yMin;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordtype">double</span>      m_yMax;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordtype">double</span>      m_xInc;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordtype">double</span>      m_yInc;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    std::string m_RunType;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    std::string m_elapsedTime;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    QTimer*     m_timer;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    QDateTime   m_startTime;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    QString     m_mainTitle;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    QString     m_xTitle;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    QString     m_yTitle;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <a class="code" href="classnmf_progress_widget.html#ab70c8b143b35ef4b5054239c01166a05">nmfProgressWidget</a>(QTimer* timer,</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                      <a class="code" href="classnmf_logger.html">nmfLogger</a>* logger,</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                      std::string runType,</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                      QString title,</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                      QString XAxisLabel,</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                      QString YAxisLabel,</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                      <span class="keywordtype">double</span> xMin,</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                      <span class="keywordtype">double</span> xMax,</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                      <span class="keywordtype">double</span> xInc,</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                      <span class="keywordtype">double</span> yMin,</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                      <span class="keywordtype">double</span> yMax,</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                      <span class="keywordtype">double</span> yInc);</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;   ~<a class="code" href="classnmf_progress_widget.html">nmfProgressWidget</a>();</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a30461ed7b496abcafb2a1d467fbc7dfc">clearChart</a>();</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a78035d0bb62c53d9d97653cc3d952abb">clearChartData</a>(std::string filename);</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a52e432e760aff498ab5f7760a1114449">clearChartOnly</a>();</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a085ff48924d13da44b26388451579ca0">clearRunBoxes</a>();</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#aea6acba14449c66e1b0f3c7dfa64a5e5">clearTime</a>();</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a42e6dbb0f8dabf7335bfb533edd13597">clearTolerance</a>();</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    std::string <a class="code" href="classnmf_progress_widget.html#ab1c1ce28d43856074259e8bddcb21eda">getElapsedTime</a>();</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    QString <a class="code" href="classnmf_progress_widget.html#a8b60eef273b6bfa6f70d2dbd30874591">getMainTitle</a>();</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classnmf_progress_widget.html#a9c1cd1d650c67ab0eac4685f24161034">getNumXTicks</a>();</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classnmf_progress_widget.html#ae58a95308b5380d4fe5ebfba7abecbad">getNumYTicks</a>();</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classnmf_progress_widget.html#a3857ac59b40932e79fc4a201cd31d134">getXInc</a>();</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    std::pair&lt;double,double&gt; <a class="code" href="classnmf_progress_widget.html#a44b3827857dbf9eb3f65e01b0711818f">getXRange</a>();</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    QString <a class="code" href="classnmf_progress_widget.html#a4b343406d7dd6e0a7ee19c8456ba7f83">getXTitle</a>();</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classnmf_progress_widget.html#ad8a460bd6d1053025bb8562d3b2b2567">getYInc</a>();</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    std::pair&lt;double,double&gt; <a class="code" href="classnmf_progress_widget.html#a3e5d970ba2be40b21f6be93a9a114d5c">getYRange</a>();</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    QString <a class="code" href="classnmf_progress_widget.html#a603130594bbd5c299d90cf142c4aa587">getYTitle</a>();</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a016dd3f22750ae62329fdf0d076aeedd">hideLegend</a>();</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classnmf_progress_widget.html#a903cfb3ddb7beb57087ecb95868b64b7">isStopped</a>();</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a69daf3f8c7a0b6da2fda378b85d30b83">readChartDataFile</a>(std::string type,</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;                           std::string inputFileName,</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                           std::string inputLabelFileName,</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;                           <span class="keywordtype">bool</span> validPointsOnly);</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classnmf_progress_widget.html#ab960f0f64fe9d15eb17c4e08ae9e8228">readValidPointsOnly</a>();</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a9442b5b312025c0b4d9a9a432ea5e68c">setMainTitle</a>(QString mainTitle);</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#ab203971413d3e92fb9294f320b5a60b1">setMaxNumGenerations</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; newMaxNumGenerations);</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#ab59ec6d729cbf3a28447e58554a0ec58">setRunBoxes</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; run,</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;                     <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; subRun,</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;                     <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numSubRuns);</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a73762d2c35a6f65c8d07f4c5284221ca">setTolerance</a>(<span class="keywordtype">double</span> tol);</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a7d62a242779705d77e552699069427c4">setupConnections</a>();</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a9634e7e2c403e7a41fadf6469236a19d">setWhatsThis</a>(QString whatsThis);</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#ae5443d2b652f4ce4447a8307588b1714">setXAxisTitleScale</a>(<span class="keyword">const</span> QString&amp; title,</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;                            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp;  xMin,</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp;  xMax,</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;                            <span class="keyword">const</span> <span class="keywordtype">double</span>&amp;  xInc);</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#aa01f0455b12ddba5deda9754097d2741">setXInc</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; xInc);</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a20f116fd6f4cd4dc1f8cbe7efb544e4d">setXRange</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; xMin,<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; xMax);</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a6f998b08f203ae62cda1bda2267bf20b">setXTitle</a>(<span class="keyword">const</span> QString title);</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a52387ee2b33b4f46bd9bee81cb65020a">setYAxisTitleScale</a>(<span class="keyword">const</span> QString title,</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;                            <span class="keyword">const</span> <span class="keywordtype">double</span>  yMin,</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;                            <span class="keyword">const</span> <span class="keywordtype">double</span>  yMax,</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                            <span class="keyword">const</span> <span class="keywordtype">double</span>  yInc);</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#aee3a1549f176a08d111f1445ba8088cc">setYInc</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; yInc);</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a47ba2cb903fd0f80948222bac4a36452">setYRange</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; yMin,<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; yMax);</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a3b42f6954c1c3c44a8c7bfe557f3b389">setYTitle</a>(<span class="keyword">const</span> QString title);</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a1db78eb2b5dd56e81e53e023b35f8370">shouldYRangeEditsStick</a>(<span class="keywordtype">bool</span> state);</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#acbd00361c359392fe078ef92fb27d063">showLegend</a>();</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a328d5459648491b7c87b7787d138f0af">startRun</a>();</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#ae03ef11ae548974d514ea9def4519cdd">startTimer</a>(<span class="keywordtype">int</span> delayMillisec);</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a0b89e51a27891f2626a59ce8f1613b15">stopAllRuns</a>();</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#ab83854c3279b497f752f577f9690bc02">stopTimer</a>();</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#ac458ed6fd42682dc5553e750b73676c2">updateChart</a>();</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#abc4340e49ffb0cae8fd622558b7401f1">updateChartDataLabel</a>(std::string inputLabelFileName,</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;                              std::string overrideMsg);</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a605ceed7f8ed0ce1b9aa1c8e6ebd04a6">updateTime</a>();</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classnmf_progress_widget.html#aeb761f355d575a4e56eceecf37ab817a">wasStopped</a>();</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a546a351097647a99717f3a47dd11e88d">writeToStopRunFile</a>();</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160; </div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;signals:</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a4a6b1411bc330a32695af6aff23fa21a">RedrawValidPointsOnly</a>(<span class="keywordtype">bool</span> checked, <span class="keywordtype">bool</span> clear);</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#ae5657045bb11b88412eacf880f9262ed">StopAllRuns</a>();</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#ab66fed9342e6da3e1e55952212418bad">StopTheTimer</a>();</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160; </div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="keyword">public</span> Q_SLOTS:</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#af16520926ad36b48b1b6eec579b16bf4">callback_clearPB</a>();</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a8324277c118fe949eebae871cbdce288">callback_labelsCB</a>(<span class="keywordtype">int</span> state);</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="comment">//  void callback_lineHovered(QPointF point, bool state);</span></div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="comment"></span>    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#af115794f340f6419aa51390e416a5287">callback_markersCB</a>(<span class="keywordtype">int</span> state);</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#ab5a61daf30922db7c466a1a02c25f786">callback_rangeSetPB</a>();</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;<span class="comment">//  void callback_scatterSeriesHovered(QPointF point, bool state);</span></div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="comment"></span>    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#acfb8c457ef08bd1a4e1b9e2ed8103aac">callback_stopPB</a>();</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a9dd4e5ab1e16543d17f445e4ecd3cb42">callback_validPointsCB</a>(<span class="keywordtype">bool</span> checked);</div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a33cbaed47b58d6355ba438d774d29feb">callback_xMaxSB</a>(<span class="keywordtype">int</span> value);</div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a73bb13cb52b125fce098c35cc9249c02">callback_xMinSB</a>(<span class="keywordtype">int</span> value);</div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a5d225a34679fa1de80fd3fc24f99c40b">callback_yMaxSB</a>(<span class="keywordtype">double</span> value);</div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_progress_widget.html#a5a00cd875734256b43b438d627921046">callback_yMinSB</a>(<span class="keywordtype">double</span> value);</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;};</div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160; </div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160; </div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;<span class="preprocessor">#endif // NMFPROGRESSWIDGET_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassnmf_progress_widget_html_aee3a1549f176a08d111f1445ba8088cc"><div class="ttname"><a href="classnmf_progress_widget.html#aee3a1549f176a08d111f1445ba8088cc">nmfProgressWidget::setYInc</a></div><div class="ttdeci">void setYInc(const double &amp;yInc)</div><div class="ttdoc">Sets the increment of the y-axis.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:799</div></div>
 <div class="ttc" id="aclassnmf_progress_widget_html_ae5443d2b652f4ce4447a8307588b1714"><div class="ttname"><a href="classnmf_progress_widget.html#ae5443d2b652f4ce4447a8307588b1714">nmfProgressWidget::setXAxisTitleScale</a></div><div class="ttdeci">void setXAxisTitleScale(const QString &amp;title, const double &amp;xMin, const double &amp;xMax, const double &amp;xInc)</div><div class="ttdoc">Sets the scale of the x-axis.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:747</div></div>
@@ -266,11 +269,11 @@ $(function() {
 <div class="ttc" id="aclassnmf_progress_widget_html_a8324277c118fe949eebae871cbdce288"><div class="ttname"><a href="classnmf_progress_widget.html#a8324277c118fe949eebae871cbdce288">nmfProgressWidget::callback_labelsCB</a></div><div class="ttdeci">void callback_labelsCB(int state)</div><div class="ttdoc">Callback invoked when the user checks the Labels checkbox.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:1075</div></div>
 <div class="ttc" id="aclassnmf_progress_widget_html_a20f116fd6f4cd4dc1f8cbe7efb544e4d"><div class="ttname"><a href="classnmf_progress_widget.html#a20f116fd6f4cd4dc1f8cbe7efb544e4d">nmfProgressWidget::setXRange</a></div><div class="ttdeci">void setXRange(const double &amp;xMin, const double &amp;xMax)</div><div class="ttdoc">Sets the range of the x-axis.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:766</div></div>
 <div class="ttc" id="aclassnmf_progress_widget_html_a4a6b1411bc330a32695af6aff23fa21a"><div class="ttname"><a href="classnmf_progress_widget.html#a4a6b1411bc330a32695af6aff23fa21a">nmfProgressWidget::RedrawValidPointsOnly</a></div><div class="ttdeci">void RedrawValidPointsOnly(bool checked, bool clear)</div><div class="ttdoc">Signal emitted when the user checks the &quot;use valid points only&quot; checkbox.</div></div>
-<div class="ttc" id="aclassnmf_progress_widget_html_a1869245bd793def4db70c1dc3f387388"><div class="ttname"><a href="classnmf_progress_widget.html#a1869245bd793def4db70c1dc3f387388">nmfProgressWidget::StopTimer</a></div><div class="ttdeci">void StopTimer()</div><div class="ttdoc">Signal emitted when the user wishes to stop all runs.</div></div>
 <div class="ttc" id="aclassnmf_progress_widget_html_a73bb13cb52b125fce098c35cc9249c02"><div class="ttname"><a href="classnmf_progress_widget.html#a73bb13cb52b125fce098c35cc9249c02">nmfProgressWidget::callback_xMinSB</a></div><div class="ttdeci">void callback_xMinSB(int value)</div><div class="ttdoc">Callback invoked when the user wants to set the minimum scale value.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:1118</div></div>
 <div class="ttc" id="aclassnmf_progress_widget_html_a47ba2cb903fd0f80948222bac4a36452"><div class="ttname"><a href="classnmf_progress_widget.html#a47ba2cb903fd0f80948222bac4a36452">nmfProgressWidget::setYRange</a></div><div class="ttdeci">void setYRange(const double &amp;yMin, const double &amp;yMax)</div><div class="ttdoc">Sets the range of the y-axis.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:809</div></div>
 <div class="ttc" id="aclassnmf_progress_widget_html_a016dd3f22750ae62329fdf0d076aeedd"><div class="ttname"><a href="classnmf_progress_widget.html#a016dd3f22750ae62329fdf0d076aeedd">nmfProgressWidget::hideLegend</a></div><div class="ttdeci">void hideLegend()</div><div class="ttdoc">Hides the progress chart legend.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:350</div></div>
 <div class="ttc" id="aclassnmf_progress_widget_html_ab83854c3279b497f752f577f9690bc02"><div class="ttname"><a href="classnmf_progress_widget.html#ab83854c3279b497f752f577f9690bc02">nmfProgressWidget::stopTimer</a></div><div class="ttdeci">void stopTimer()</div><div class="ttdoc">Stops the current active timer.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:874</div></div>
+<div class="ttc" id="aclassnmf_progress_widget_html_a42e6dbb0f8dabf7335bfb533edd13597"><div class="ttname"><a href="classnmf_progress_widget.html#a42e6dbb0f8dabf7335bfb533edd13597">nmfProgressWidget::clearTolerance</a></div><div class="ttdeci">void clearTolerance()</div><div class="ttdoc">Clears the tolerance line edit box.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget_old.cpp:312</div></div>
 <div class="ttc" id="aclassnmf_progress_widget_html_a33cbaed47b58d6355ba438d774d29feb"><div class="ttname"><a href="classnmf_progress_widget.html#a33cbaed47b58d6355ba438d774d29feb">nmfProgressWidget::callback_xMaxSB</a></div><div class="ttdeci">void callback_xMaxSB(int value)</div><div class="ttdoc">Callback invoked when the user wants to set the maximum x scale value.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:1128</div></div>
 <div class="ttc" id="aclassnmf_progress_widget_html_a3b42f6954c1c3c44a8c7bfe557f3b389"><div class="ttname"><a href="classnmf_progress_widget.html#a3b42f6954c1c3c44a8c7bfe557f3b389">nmfProgressWidget::setYTitle</a></div><div class="ttdeci">void setYTitle(const QString title)</div><div class="ttdoc">Sets the title of the y-axis.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:820</div></div>
 <div class="ttc" id="aclassnmf_progress_widget_html_ae58a95308b5380d4fe5ebfba7abecbad"><div class="ttname"><a href="classnmf_progress_widget.html#ae58a95308b5380d4fe5ebfba7abecbad">nmfProgressWidget::getNumYTicks</a></div><div class="ttdeci">int getNumYTicks()</div><div class="ttdoc">Gets the number of y-axis divisions.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:308</div></div>
@@ -300,11 +303,11 @@ $(function() {
 <div class="ttc" id="aclassnmf_progress_widget_html_ab59ec6d729cbf3a28447e58554a0ec58"><div class="ttname"><a href="classnmf_progress_widget.html#ab59ec6d729cbf3a28447e58554a0ec58">nmfProgressWidget::setRunBoxes</a></div><div class="ttdeci">void setRunBoxes(const int &amp;run, const int &amp;subRun, const int &amp;numSubRuns)</div><div class="ttdoc">Sets the text of the run boxes with run information.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:705</div></div>
 <div class="ttc" id="aclassnmf_progress_widget_html_a3e5d970ba2be40b21f6be93a9a114d5c"><div class="ttname"><a href="classnmf_progress_widget.html#a3e5d970ba2be40b21f6be93a9a114d5c">nmfProgressWidget::getYRange</a></div><div class="ttdeci">std::pair&lt; double, double &gt; getYRange()</div><div class="ttdoc">Gets the range of the y-axis values.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:338</div></div>
 <div class="ttc" id="aclassnmf_progress_widget_html_aea6acba14449c66e1b0f3c7dfa64a5e5"><div class="ttname"><a href="classnmf_progress_widget.html#aea6acba14449c66e1b0f3c7dfa64a5e5">nmfProgressWidget::clearTime</a></div><div class="ttdeci">void clearTime()</div><div class="ttdoc">Clears the time line edit box.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:284</div></div>
-<div class="ttc" id="aclassnmf_progress_widget_html_acabe044500a0e863bceae958c1646832"><div class="ttname"><a href="classnmf_progress_widget.html#acabe044500a0e863bceae958c1646832">nmfProgressWidget::SetAllRunsComplete</a></div><div class="ttdeci">void SetAllRunsComplete()</div><div class="ttdoc">Signal emitted to notify main program that all runs are complete; used when the user interrupts a run...</div></div>
 <div class="ttc" id="aclassnmf_progress_widget_html_a30461ed7b496abcafb2a1d467fbc7dfc"><div class="ttname"><a href="classnmf_progress_widget.html#a30461ed7b496abcafb2a1d467fbc7dfc">nmfProgressWidget::clearChart</a></div><div class="ttdeci">void clearChart()</div><div class="ttdoc">Clear all series and all associated data from the current Progress chart.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:258</div></div>
 <div class="ttc" id="aclassnmf_progress_widget_html_ab203971413d3e92fb9294f320b5a60b1"><div class="ttname"><a href="classnmf_progress_widget.html#ab203971413d3e92fb9294f320b5a60b1">nmfProgressWidget::setMaxNumGenerations</a></div><div class="ttdeci">void setMaxNumGenerations(const int &amp;newMaxNumGenerations)</div><div class="ttdoc">Sets the maximum number of generations for the Bees algorithm.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:698</div></div>
 <div class="ttc" id="aclassnmf_progress_widget_html_aeb761f355d575a4e56eceecf37ab817a"><div class="ttname"><a href="classnmf_progress_widget.html#aeb761f355d575a4e56eceecf37ab817a">nmfProgressWidget::wasStopped</a></div><div class="ttdeci">bool wasStopped()</div><div class="ttdoc">Boolean signifying if the run was stopped by the user.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:1021</div></div>
 <div class="ttc" id="aclassnmf_progress_widget_html_a6f998b08f203ae62cda1bda2267bf20b"><div class="ttname"><a href="classnmf_progress_widget.html#a6f998b08f203ae62cda1bda2267bf20b">nmfProgressWidget::setXTitle</a></div><div class="ttdeci">void setXTitle(const QString title)</div><div class="ttdoc">Sets the title of the x-axis.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:774</div></div>
+<div class="ttc" id="aclassnmf_progress_widget_html_a73762d2c35a6f65c8d07f4c5284221ca"><div class="ttname"><a href="classnmf_progress_widget.html#a73762d2c35a6f65c8d07f4c5284221ca">nmfProgressWidget::setTolerance</a></div><div class="ttdeci">void setTolerance(double tol)</div><div class="ttdoc">sets the tolerance qlineedit widget</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget_old.cpp:415</div></div>
 <div class="ttc" id="aclassnmf_progress_widget_html_ae03ef11ae548974d514ea9def4519cdd"><div class="ttname"><a href="classnmf_progress_widget.html#ae03ef11ae548974d514ea9def4519cdd">nmfProgressWidget::startTimer</a></div><div class="ttdeci">void startTimer(int delayMillisec)</div><div class="ttdoc">Start the timer in accordance with the passed delay.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:862</div></div>
 <div class="ttc" id="aclassnmf_progress_widget_html_a8b60eef273b6bfa6f70d2dbd30874591"><div class="ttname"><a href="classnmf_progress_widget.html#a8b60eef273b6bfa6f70d2dbd30874591">nmfProgressWidget::getMainTitle</a></div><div class="ttdeci">QString getMainTitle()</div><div class="ttdoc">Gets the main title.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:296</div></div>
 <div class="ttc" id="aclassnmf_progress_widget_html_af16520926ad36b48b1b6eec579b16bf4"><div class="ttname"><a href="classnmf_progress_widget.html#af16520926ad36b48b1b6eec579b16bf4">nmfProgressWidget::callback_clearPB</a></div><div class="ttdeci">void callback_clearPB()</div><div class="ttdoc">Callback invoked when the user clicks the clear button.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:1055</div></div>
@@ -319,6 +322,7 @@ $(function() {
 <div class="ttc" id="aclassnmf_progress_widget_html_ac458ed6fd42682dc5553e750b73676c2"><div class="ttname"><a href="classnmf_progress_widget.html#ac458ed6fd42682dc5553e750b73676c2">nmfProgressWidget::updateChart</a></div><div class="ttdeci">void updateChart()</div><div class="ttdoc">Updates the chart with the current class settings.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:969</div></div>
 <div class="ttc" id="aclassnmf_progress_widget_html_ab1c1ce28d43856074259e8bddcb21eda"><div class="ttname"><a href="classnmf_progress_widget.html#ab1c1ce28d43856074259e8bddcb21eda">nmfProgressWidget::getElapsedTime</a></div><div class="ttdeci">std::string getElapsedTime()</div><div class="ttdoc">Gets the elapsed run time.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:290</div></div>
 <div class="ttc" id="aclassnmf_progress_widget_html_a69daf3f8c7a0b6da2fda378b85d30b83"><div class="ttname"><a href="classnmf_progress_widget.html#a69daf3f8c7a0b6da2fda378b85d30b83">nmfProgressWidget::readChartDataFile</a></div><div class="ttdeci">void readChartDataFile(std::string type, std::string inputFileName, std::string inputLabelFileName, bool validPointsOnly)</div><div class="ttdoc">Reads the data file containing the points for the progress chart's data series.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:387</div></div>
+<div class="ttc" id="aclassnmf_progress_widget_html_ae5657045bb11b88412eacf880f9262ed"><div class="ttname"><a href="classnmf_progress_widget.html#ae5657045bb11b88412eacf880f9262ed">nmfProgressWidget::StopAllRuns</a></div><div class="ttdeci">void StopAllRuns()</div><div class="ttdoc">Signal emitted when the user wishes to stop all runs.</div></div>
 <div class="ttc" id="aclassnmf_progress_widget_html_ab70c8b143b35ef4b5054239c01166a05"><div class="ttname"><a href="classnmf_progress_widget.html#ab70c8b143b35ef4b5054239c01166a05">nmfProgressWidget::nmfProgressWidget</a></div><div class="ttdeci">nmfProgressWidget(QTimer *timer, nmfLogger *logger, std::string runType, QString title, QString XAxisLabel, QString YAxisLabel, double xMin, double xMax, double xInc, double yMin, double yMax, double yInc)</div><div class="ttdoc">nmfProgressWidget class constructor</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:19</div></div>
 <div class="ttc" id="aclassnmf_progress_widget_html_a5d225a34679fa1de80fd3fc24f99c40b"><div class="ttname"><a href="classnmf_progress_widget.html#a5d225a34679fa1de80fd3fc24f99c40b">nmfProgressWidget::callback_yMaxSB</a></div><div class="ttdeci">void callback_yMaxSB(double value)</div><div class="ttdoc">Callback invoked when the user modifies the max y-value range spin box.</div><div class="ttdef"><b>Definition:</b> nmfProgressWidget.cpp:1200</div></div>
 <div class="ttc" id="anmf_utils_8h_html"><div class="ttname"><a href="nmf_utils_8h.html">nmfUtils.h</a></div><div class="ttdoc">Definition for common typedefs and structs (i.e., non-graphical)</div></div>

@@ -82,6 +82,9 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>Num_Columns_Spec
 <tr class="memitem:ad01bd7117121eba71c5ab6299a882f1b"><td class="memItemLeft" align="right" valign="top"><a id="ad01bd7117121eba71c5ab6299a882f1b"></a>
 const int&#160;</td><td class="memItemRight" valign="bottom"><b>Num_Columns_Guilds</b> = 3</td></tr>
 <tr class="separator:ad01bd7117121eba71c5ab6299a882f1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5831753cd703dbfcd1f234d0df948775"><td class="memItemLeft" align="right" valign="top"><a id="a5831753cd703dbfcd1f234d0df948775"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>Num_Estimatable_Parameter_Groups</b> = 13</td></tr>
+<tr class="separator:a5831753cd703dbfcd1f234d0df948775"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99eb0a69169849db04d266ea980cbf14"><td class="memItemLeft" align="right" valign="top"><a id="a99eb0a69169849db04d266ea980cbf14"></a>
 const int&#160;</td><td class="memItemRight" valign="bottom"><b>Column_Guild_Name</b> = 0</td></tr>
 <tr class="separator:a99eb0a69169849db04d266ea980cbf14"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -91,21 +94,9 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>Column_Guild_Gro
 <tr class="memitem:ab73c3f2d4e3c4162e06cd5a13dc90ab4"><td class="memItemLeft" align="right" valign="top"><a id="ab73c3f2d4e3c4162e06cd5a13dc90ab4"></a>
 const int&#160;</td><td class="memItemRight" valign="bottom"><b>Column_Guild_GuildK</b> = 2</td></tr>
 <tr class="separator:ab73c3f2d4e3c4162e06cd5a13dc90ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8721f9c69106ab70eae69f3c112b9d82"><td class="memItemLeft" align="right" valign="top"><a id="a8721f9c69106ab70eae69f3c112b9d82"></a>
-const int&#160;</td><td class="memItemRight" valign="bottom"><b>Column_Species_SpeName</b> = 0</td></tr>
-<tr class="separator:a8721f9c69106ab70eae69f3c112b9d82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea187254d124b2b0aa3066f9dca081d7"><td class="memItemLeft" align="right" valign="top"><a id="aea187254d124b2b0aa3066f9dca081d7"></a>
-const int&#160;</td><td class="memItemRight" valign="bottom"><b>Column_Species_Guild</b> = 1</td></tr>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>Column_Species_Guild</b> = 2</td></tr>
 <tr class="separator:aea187254d124b2b0aa3066f9dca081d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea7db88d29d2055a335f3fd0a1eadfd0"><td class="memItemLeft" align="right" valign="top"><a id="aea7db88d29d2055a335f3fd0a1eadfd0"></a>
-const int&#160;</td><td class="memItemRight" valign="bottom"><b>Column_Species_InitBiomass</b> = 2</td></tr>
-<tr class="separator:aea7db88d29d2055a335f3fd0a1eadfd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d68e203d4d70eb6cd7a6aca11f6a35f"><td class="memItemLeft" align="right" valign="top"><a id="a4d68e203d4d70eb6cd7a6aca11f6a35f"></a>
-const int&#160;</td><td class="memItemRight" valign="bottom"><b>Column_Species_GrowthRate</b> = 3</td></tr>
-<tr class="separator:a4d68e203d4d70eb6cd7a6aca11f6a35f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad191c004c3de0bae85cf1a08666075be"><td class="memItemLeft" align="right" valign="top"><a id="ad191c004c3de0bae85cf1a08666075be"></a>
-const int&#160;</td><td class="memItemRight" valign="bottom"><b>Column_Species_SpeciesK</b> = 4</td></tr>
-<tr class="separator:ad191c004c3de0bae85cf1a08666075be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a214de02483cf74ff998285b4d12fc543"><td class="memItemLeft" align="right" valign="top"><a id="a214de02483cf74ff998285b4d12fc543"></a>
 const int&#160;</td><td class="memItemRight" valign="bottom"><b>Column_Supp_Guild_Name</b> = 0</td></tr>
 <tr class="separator:a214de02483cf74ff998285b4d12fc543"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -127,6 +118,18 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>Column_Supp_Spec
 <tr class="memitem:aedc83480e8fab6e035b15d54563d3328"><td class="memItemLeft" align="right" valign="top"><a id="aedc83480e8fab6e035b15d54563d3328"></a>
 const int&#160;</td><td class="memItemRight" valign="bottom"><b>Column_Supp_Species_CarryingCapacity</b> = 8</td></tr>
 <tr class="separator:aedc83480e8fab6e035b15d54563d3328"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac25d6457a849b5cceb0f2eb4a546c4cb"><td class="memItemLeft" align="right" valign="top"><a id="ac25d6457a849b5cceb0f2eb4a546c4cb"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>Column_Supp_Species_CarryingCapacityMin</b> = 9</td></tr>
+<tr class="separator:ac25d6457a849b5cceb0f2eb4a546c4cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab233a9900be1612a2ea7eb1a069fb132"><td class="memItemLeft" align="right" valign="top"><a id="ab233a9900be1612a2ea7eb1a069fb132"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>Column_Supp_Species_SurveyQ</b> = 12</td></tr>
+<tr class="separator:ab233a9900be1612a2ea7eb1a069fb132"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96caa86ddfae26ed9b38597005829dc2"><td class="memItemLeft" align="right" valign="top"><a id="a96caa86ddfae26ed9b38597005829dc2"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>Column_Supp_Species_SurveyQMin</b> = 13</td></tr>
+<tr class="separator:a96caa86ddfae26ed9b38597005829dc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fde944210b48cba9d75ce5998d35278"><td class="memItemLeft" align="right" valign="top"><a id="a7fde944210b48cba9d75ce5998d35278"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>Column_Supp_Species_SurveyQMax</b> = 14</td></tr>
+<tr class="separator:a7fde944210b48cba9d75ce5998d35278"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd32f316081aec2f7a2f28748577b463"><td class="memItemLeft" align="right" valign="top"><a id="acd32f316081aec2f7a2f28748577b463"></a>
 const int&#160;</td><td class="memItemRight" valign="bottom"><b>Column_SpeId</b> = 0</td></tr>
 <tr class="separator:acd32f316081aec2f7a2f28748577b463"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -190,9 +193,15 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>Model_Review_Col
 <tr class="memitem:ac1cd83ed521a60cccf1c885b5679ba37"><td class="memItemLeft" align="right" valign="top"><a id="ac1cd83ed521a60cccf1c885b5679ba37"></a>
 const int&#160;</td><td class="memItemRight" valign="bottom"><b>Model_Review_Column_AIC</b> = 3</td></tr>
 <tr class="separator:ac1cd83ed521a60cccf1c885b5679ba37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e6cb890f616caf5c9b679fbb8ee37c9"><td class="memItemLeft" align="right" valign="top"><a id="a8e6cb890f616caf5c9b679fbb8ee37c9"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>Model_Review_Column_DB_Snapshot</b> = 13</td></tr>
+<tr class="separator:a8e6cb890f616caf5c9b679fbb8ee37c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01d89576a1048cbd73bab641ce48f8ad"><td class="memItemLeft" align="right" valign="top"><a id="a01d89576a1048cbd73bab641ce48f8ad"></a>
 const int&#160;</td><td class="memItemRight" valign="bottom"><b>Model_Review_Column_Last_Visible</b> = 14</td></tr>
 <tr class="separator:a01d89576a1048cbd73bab641ce48f8ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af78d92ccbcb8e8a578da655cd278977f"><td class="memItemLeft" align="right" valign="top"><a id="af78d92ccbcb8e8a578da655cd278977f"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>Model_Review_Column_Estimated_Parameters</b> = 64</td></tr>
+<tr class="separator:af78d92ccbcb8e8a578da655cd278977f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2dfd28e355c5f0ec21e059203baa1ec"><td class="memItemLeft" align="right" valign="top"><a id="ac2dfd28e355c5f0ec21e059203baa1ec"></a>
 const bool&#160;</td><td class="memItemRight" valign="bottom"><b>Query_User_For_Filename</b> = true</td></tr>
 <tr class="separator:ac2dfd28e355c5f0ec21e059203baa1ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -211,6 +220,9 @@ const double&#160;</td><td class="memItemRight" valign="bottom"><b>MaxValidProgr
 <tr class="memitem:ab6c2ae2e596a21310ccb999aa5a0075f"><td class="memItemLeft" align="right" valign="top"><a id="ab6c2ae2e596a21310ccb999aa5a0075f"></a>
 const double&#160;</td><td class="memItemRight" valign="bottom"><b>NoData</b> = -99999.0</td></tr>
 <tr class="separator:ab6c2ae2e596a21310ccb999aa5a0075f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e93e4216d03260469e9c4e75857436b"><td class="memItemLeft" align="right" valign="top"><a id="a0e93e4216d03260469e9c4e75857436b"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>DefaultTolerance</b> = 1E-06</td></tr>
+<tr class="separator:a0e93e4216d03260469e9c4e75857436b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3e05b069ac811a887ca7828ae204e1c"><td class="memItemLeft" align="right" valign="top"><a id="ad3e05b069ac811a887ca7828ae204e1c"></a>
 const bool&#160;</td><td class="memItemRight" valign="bottom"><b>RotateLabels</b> = true</td></tr>
 <tr class="separator:ad3e05b069ac811a887ca7828ae204e1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -239,7 +251,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>MaxNumberSpecies
 const int&#160;</td><td class="memItemRight" valign="bottom"><b>MaxTotalSpecies</b> = 50</td></tr>
 <tr class="separator:a5263971a7eb2ab7c237f7262326ca1b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d35f1fd8f9f837b885f0fb9d2c1258d"><td class="memItemLeft" align="right" valign="top"><a id="a8d35f1fd8f9f837b885f0fb9d2c1258d"></a>
-const int&#160;</td><td class="memItemRight" valign="bottom"><b>ToolTipDuration</b> = 2000</td></tr>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>ToolTipDuration</b> = 5000</td></tr>
 <tr class="separator:a8d35f1fd8f9f837b885f0fb9d2c1258d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a176f02867ec298cffae9a14c825a0b71"><td class="memItemLeft" align="right" valign="top"><a id="a176f02867ec298cffae9a14c825a0b71"></a>
 const double&#160;</td><td class="memItemRight" valign="bottom"><b>ValueToStartEE</b> = 1000000.0</td></tr>
@@ -247,6 +259,18 @@ const double&#160;</td><td class="memItemRight" valign="bottom"><b>ValueToStartE
 <tr class="memitem:a219311a5936d5eb5478212d4b8355ac5"><td class="memItemLeft" align="right" valign="top"><a id="a219311a5936d5eb5478212d4b8355ac5"></a>
 const int&#160;</td><td class="memItemRight" valign="bottom"><b>DefaultDBTimeoutDays</b> = 5</td></tr>
 <tr class="separator:a219311a5936d5eb5478212d4b8355ac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55924a1898722fc2b26a03556e356113"><td class="memItemLeft" align="right" valign="top"><a id="a55924a1898722fc2b26a03556e356113"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>NotEnabledAndNotChecked</b> = 0</td></tr>
+<tr class="separator:a55924a1898722fc2b26a03556e356113"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2638b930f949d00a33871d756dda2104"><td class="memItemLeft" align="right" valign="top"><a id="a2638b930f949d00a33871d756dda2104"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>NotEnabledButChecked</b> = 1</td></tr>
+<tr class="separator:a2638b930f949d00a33871d756dda2104"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace6d7442ab33d58c98616f6981e4777d"><td class="memItemLeft" align="right" valign="top"><a id="ace6d7442ab33d58c98616f6981e4777d"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>EnabledAndNotChecked</b> = 10</td></tr>
+<tr class="separator:ace6d7442ab33d58c98616f6981e4777d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a461641b0a3e02e7e627c3ae8225ecc9c"><td class="memItemLeft" align="right" valign="top"><a id="a461641b0a3e02e7e627c3ae8225ecc9c"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>EnabledAndChecked</b> = 11</td></tr>
+<tr class="separator:a461641b0a3e02e7e627c3ae8225ecc9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a477f8e6573c5519ccbab656b44117c55"><td class="memItemLeft" align="right" valign="top"><a id="a477f8e6573c5519ccbab656b44117c55"></a>
 const bool&#160;</td><td class="memItemRight" valign="bottom"><b>RearrangeTitle</b> = true</td></tr>
 <tr class="separator:a477f8e6573c5519ccbab656b44117c55"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -397,6 +421,18 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ChartType2d<
 <tr class="memitem:af7dda5f2a7858bc209462712e186a3ef"><td class="memItemLeft" align="right" valign="top"><a id="af7dda5f2a7858bc209462712e186a3ef"></a>
 const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ChartType3d</b> = &quot;3d&quot;</td></tr>
 <tr class="separator:af7dda5f2a7858bc209462712e186a3ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a144731a9315553361ef6c06a7a5351cf"><td class="memItemLeft" align="right" valign="top"><a id="a144731a9315553361ef6c06a7a5351cf"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>ReloadProject</b> = true</td></tr>
+<tr class="separator:a144731a9315553361ef6c06a7a5351cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5252457ecca1c34f1e800a6d66ca26b"><td class="memItemLeft" align="right" valign="top"><a id="aa5252457ecca1c34f1e800a6d66ca26b"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>DontReloadProject</b> = false</td></tr>
+<tr class="separator:aa5252457ecca1c34f1e800a6d66ca26b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acaecd1a692e3ad37da6829dca0542078"><td class="memItemLeft" align="right" valign="top"><a id="acaecd1a692e3ad37da6829dca0542078"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>ApplyNiceNumbersXAxis</b> = true</td></tr>
+<tr class="separator:acaecd1a692e3ad37da6829dca0542078"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a23ee0424c5bc1249b9c3b986e58810"><td class="memItemLeft" align="right" valign="top"><a id="a0a23ee0424c5bc1249b9c3b986e58810"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>DontApplyNiceNumbersXAxis</b> = false</td></tr>
+<tr class="separator:a0a23ee0424c5bc1249b9c3b986e58810"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53d32620c5b856f3f880c18e8d942d24"><td class="memItemLeft" align="right" valign="top"><a id="a53d32620c5b856f3f880c18e8d942d24"></a>
 const bool&#160;</td><td class="memItemRight" valign="bottom"><b>MultiplyTableByCatchability</b> = true</td></tr>
 <tr class="separator:a53d32620c5b856f3f880c18e8d942d24"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -463,6 +499,36 @@ const bool&#160;</td><td class="memItemRight" valign="bottom"><b>ReadHarvestType
 <tr class="memitem:a61f1756a5dc3e42cc8a9faca7cb7a5c3"><td class="memItemLeft" align="right" valign="top"><a id="a61f1756a5dc3e42cc8a9faca7cb7a5c3"></a>
 const bool&#160;</td><td class="memItemRight" valign="bottom"><b>DontReadHarvestTypeFromTable</b> = false</td></tr>
 <tr class="separator:a61f1756a5dc3e42cc8a9faca7cb7a5c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27ec4c8a3c26a9f397100ad35bf80844"><td class="memItemLeft" align="right" valign="top"><a id="a27ec4c8a3c26a9f397100ad35bf80844"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>RunChecks</b> = true</td></tr>
+<tr class="separator:a27ec4c8a3c26a9f397100ad35bf80844"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ccc7e40b76c3733e80ae255c39d369a"><td class="memItemLeft" align="right" valign="top"><a id="a2ccc7e40b76c3733e80ae255c39d369a"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>DontRunChecks</b> = false</td></tr>
+<tr class="separator:a2ccc7e40b76c3733e80ae255c39d369a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8cb7c973e57c28cbe4d2ff28b766899"><td class="memItemLeft" align="right" valign="top"><a id="ae8cb7c973e57c28cbe4d2ff28b766899"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>ResetCheckboxes</b> = true</td></tr>
+<tr class="separator:ae8cb7c973e57c28cbe4d2ff28b766899"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab178a558424cc527af017066294b31d6"><td class="memItemLeft" align="right" valign="top"><a id="ab178a558424cc527af017066294b31d6"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>DontResetCheckboxes</b> = false</td></tr>
+<tr class="separator:ab178a558424cc527af017066294b31d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a251555f0abd53c3abafa3aa3e5263129"><td class="memItemLeft" align="right" valign="top"><a id="a251555f0abd53c3abafa3aa3e5263129"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>LoadProjectData</b> = true</td></tr>
+<tr class="separator:a251555f0abd53c3abafa3aa3e5263129"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6035ecc0b416b15fb991179a8822caaf"><td class="memItemLeft" align="right" valign="top"><a id="a6035ecc0b416b15fb991179a8822caaf"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>DontLoadProjectData</b> = false</td></tr>
+<tr class="separator:a6035ecc0b416b15fb991179a8822caaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab87e976edc97aa77c071f1609f8d6244"><td class="memItemLeft" align="right" valign="top"><a id="ab87e976edc97aa77c071f1609f8d6244"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>DataAreHPC</b> = true</td></tr>
+<tr class="separator:ab87e976edc97aa77c071f1609f8d6244"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe6f16f5ebaa67809bf29e12256eff95"><td class="memItemLeft" align="right" valign="top"><a id="abe6f16f5ebaa67809bf29e12256eff95"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>DataAreNotHPC</b> = false</td></tr>
+<tr class="separator:abe6f16f5ebaa67809bf29e12256eff95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c1deaff2910db3db5577c2708c0fa42"><td class="memItemLeft" align="right" valign="top"><a id="a8c1deaff2910db3db5577c2708c0fa42"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>NotationScientific</b> = true</td></tr>
+<tr class="separator:a8c1deaff2910db3db5577c2708c0fa42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cd9d31fa36caeed9b99f7e05dd3499e"><td class="memItemLeft" align="right" valign="top"><a id="a6cd9d31fa36caeed9b99f7e05dd3499e"></a>
+const bool&#160;</td><td class="memItemRight" valign="bottom"><b>NotationFixed</b> = false</td></tr>
+<tr class="separator:a6cd9d31fa36caeed9b99f7e05dd3499e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a285f6e37e936263a76881f766862ffc6"><td class="memItemLeft" align="right" valign="top"><a id="a285f6e37e936263a76881f766862ffc6"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>HiddenDir</b> = &quot;.MSSPM&quot;</td></tr>
 <tr class="separator:a285f6e37e936263a76881f766862ffc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -499,6 +565,18 @@ const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>LogFilte
 <tr class="memitem:a86f2f1374875c24879f347081b81be64"><td class="memItemLeft" align="right" valign="top"><a id="a86f2f1374875c24879f347081b81be64"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>InputDataDir</b> = &quot;inputData&quot;</td></tr>
 <tr class="separator:a86f2f1374875c24879f347081b81be64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad03f78097e81f16c673bb5cbc145420b"><td class="memItemLeft" align="right" valign="top"><a id="ad03f78097e81f16c673bb5cbc145420b"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>InputDataHPCDir</b> = &quot;inputData/hpc&quot;</td></tr>
+<tr class="separator:ad03f78097e81f16c673bb5cbc145420b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a516b7bc18a4f20469c3016705d3a5870"><td class="memItemLeft" align="right" valign="top"><a id="a516b7bc18a4f20469c3016705d3a5870"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>OutputDataHPCDir</b> = &quot;outputData/hpc&quot;</td></tr>
+<tr class="separator:a516b7bc18a4f20469c3016705d3a5870"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a446c4b57cfa7a108024a205036c650f0"><td class="memItemLeft" align="right" valign="top"><a id="a446c4b57cfa7a108024a205036c650f0"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>LayoutDir</b> = &quot;layouts&quot;</td></tr>
+<tr class="separator:a446c4b57cfa7a108024a205036c650f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada0eed199bd7d5bd299f06254502b942"><td class="memItemLeft" align="right" valign="top"><a id="ada0eed199bd7d5bd299f06254502b942"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>DatabaseDir</b> = &quot;databases&quot;</td></tr>
+<tr class="separator:ada0eed199bd7d5bd299f06254502b942"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44ef8000ccc7b1ff71ef9ee94c1110a5"><td class="memItemLeft" align="right" valign="top"><a id="a44ef8000ccc7b1ff71ef9ee94c1110a5"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>OutputDataDir</b> = &quot;outputData&quot;</td></tr>
 <tr class="separator:a44ef8000ccc7b1ff71ef9ee94c1110a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -514,6 +592,9 @@ const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>OutputDa
 <tr class="memitem:ad49f01212097e74096fb0e0665150e9e"><td class="memItemLeft" align="right" valign="top"><a id="ad49f01212097e74096fb0e0665150e9e"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>OutputScenariosDirMMode</b> = &quot;Remora/scenarios&quot;</td></tr>
 <tr class="separator:ad49f01212097e74096fb0e0665150e9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7478aef73efc477f5e54d3c01683faf3"><td class="memItemLeft" align="right" valign="top"><a id="a7478aef73efc477f5e54d3c01683faf3"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>FilenameHPCMetaData</b> = &quot;HPCMetaData.csv&quot;</td></tr>
+<tr class="separator:a7478aef73efc477f5e54d3c01683faf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdef73be77ae7f2ff5e1df2fbc8c2dd2"><td class="memItemLeft" align="right" valign="top"><a id="acdef73be77ae7f2ff5e1df2fbc8c2dd2"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>FilenameMultiRun</b> = &quot;MultiRunParameter.csv&quot;</td></tr>
 <tr class="separator:acdef73be77ae7f2ff5e1df2fbc8c2dd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -532,9 +613,18 @@ const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>Filename
 <tr class="memitem:ad81c6592383887fd6c37e7c9343aa793"><td class="memItemLeft" align="right" valign="top"><a id="ad81c6592383887fd6c37e7c9343aa793"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>FilenameEstimatedParameters</b> = &quot;EstimatedParameters.csv&quot;</td></tr>
 <tr class="separator:ad81c6592383887fd6c37e7c9343aa793"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad18823de94e937331d91042362f88db6"><td class="memItemLeft" align="right" valign="top"><a id="ad18823de94e937331d91042362f88db6"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>TitleChartBiomass</b> = &quot;B(calc) with B(obs) points&quot;</td></tr>
+<tr class="separator:ad18823de94e937331d91042362f88db6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49c9e0acd0130bc98791196da51747e8"><td class="memItemLeft" align="right" valign="top"><a id="a49c9e0acd0130bc98791196da51747e8"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>TitleChartBiomassAndCatch</b> = &quot;Catch with B(obs) points&quot;</td></tr>
+<tr class="separator:a49c9e0acd0130bc98791196da51747e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e65478c489f88e70ae4ff5afb81e867"><td class="memItemLeft" align="right" valign="top"><a id="a5e65478c489f88e70ae4ff5afb81e867"></a>
 const QString&#160;</td><td class="memItemRight" valign="bottom"><b>OutputChartBiomass</b> = &quot;Biomass vs Time&quot;</td></tr>
 <tr class="separator:a5e65478c489f88e70ae4ff5afb81e867"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af72ef832e0c6c246068e6881af6c36b1"><td class="memItemLeft" align="right" valign="top"><a id="af72ef832e0c6c246068e6881af6c36b1"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>OutputChartBiomassAndCatch</b> = &quot;Biomass &amp; Catch vs Time&quot;</td></tr>
+<tr class="separator:af72ef832e0c6c246068e6881af6c36b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74c49f414e77541a9775c7c1b8025528"><td class="memItemLeft" align="right" valign="top"><a id="a74c49f414e77541a9775c7c1b8025528"></a>
 const QString&#160;</td><td class="memItemRight" valign="bottom"><b>OutputChartHarvest</b> = &quot;Harvest vs Time&quot;</td></tr>
 <tr class="separator:a74c49f414e77541a9775c7c1b8025528"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -571,6 +661,30 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ForecastHarv
 <tr class="memitem:a475958e395fe34f72caf3a10b2edc836"><td class="memItemLeft" align="right" valign="top"><a id="a475958e395fe34f72caf3a10b2edc836"></a>
 const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ForecastHarvestTypeEffort</b> = &quot;Effort&quot;</td></tr>
 <tr class="separator:a475958e395fe34f72caf3a10b2edc836"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3834a3e586e60a0389bb8f985ab121ed"><td class="memItemLeft" align="right" valign="top"><a id="a3834a3e586e60a0389bb8f985ab121ed"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>CompetitionNOK</b> = &quot;NO_K&quot;</td></tr>
+<tr class="separator:a3834a3e586e60a0389bb8f985ab121ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17f684cd774c6c684ac56add18d07218"><td class="memItemLeft" align="right" valign="top"><a id="a17f684cd774c6c684ac56add18d07218"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>CompetitionMSPROD</b> = &quot;MS-PROD&quot;</td></tr>
+<tr class="separator:a17f684cd774c6c684ac56add18d07218"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac95269a4c0bd9825f747581b6d0e59c7"><td class="memItemLeft" align="right" valign="top"><a id="ac95269a4c0bd9825f747581b6d0e59c7"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>PredationTypeI</b> = &quot;Type I&quot;</td></tr>
+<tr class="separator:ac95269a4c0bd9825f747581b6d0e59c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7079961e5584a90e1462c5dd63408733"><td class="memItemLeft" align="right" valign="top"><a id="a7079961e5584a90e1462c5dd63408733"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>PredationTypeII</b> = &quot;Type II&quot;</td></tr>
+<tr class="separator:a7079961e5584a90e1462c5dd63408733"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c2e6aea15d650baffe2b02ecfac5e7f"><td class="memItemLeft" align="right" valign="top"><a id="a9c2e6aea15d650baffe2b02ecfac5e7f"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>PredationTypeIII</b> = &quot;Type III&quot;</td></tr>
+<tr class="separator:a9c2e6aea15d650baffe2b02ecfac5e7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a54a1904487e48292d53e4118cab73a"><td class="memItemLeft" align="right" valign="top"><a id="a3a54a1904487e48292d53e4118cab73a"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>DistributionNone</b> = &quot;None&quot;</td></tr>
+<tr class="separator:a3a54a1904487e48292d53e4118cab73a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea39a5c4709c9a5592e991bbd2580507"><td class="memItemLeft" align="right" valign="top"><a id="aea39a5c4709c9a5592e991bbd2580507"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>DistributionLognormal</b> = &quot;Lognormal&quot;</td></tr>
+<tr class="separator:aea39a5c4709c9a5592e991bbd2580507"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f4633e310c863dcd7d0a6adc674dbec"><td class="memItemLeft" align="right" valign="top"><a id="a7f4633e310c863dcd7d0a6adc674dbec"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>DistributionUniform</b> = &quot;Uniform&quot;</td></tr>
+<tr class="separator:a7f4633e310c863dcd7d0a6adc674dbec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d296d629aa93c3fdfbaae10159ad1d5"><td class="memItemLeft" align="right" valign="top"><a id="a2d296d629aa93c3fdfbaae10159ad1d5"></a>
 const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ParameterNameInitialBiomass</b> = &quot;Initial Absolute Biomass&quot;</td></tr>
 <tr class="separator:a2d296d629aa93c3fdfbaae10159ad1d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -580,6 +694,9 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ParameterNam
 <tr class="memitem:a1f6391abf575ce8bdc50b26ff37a4a41"><td class="memItemLeft" align="right" valign="top"><a id="a1f6391abf575ce8bdc50b26ff37a4a41"></a>
 const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ParameterNameGrowthRate</b> = &quot;Growth Rate&quot;</td></tr>
 <tr class="separator:a1f6391abf575ce8bdc50b26ff37a4a41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54779f6af5860b1690b748e7ff01a860"><td class="memItemLeft" align="right" valign="top"><a id="a54779f6af5860b1690b748e7ff01a860"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ParameterNameGrowthRateShape</b> = &quot;Growth Rate Shape&quot;</td></tr>
+<tr class="separator:a54779f6af5860b1690b748e7ff01a860"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3976cbc193b11915321b154e8a07f95e"><td class="memItemLeft" align="right" valign="top"><a id="a3976cbc193b11915321b154e8a07f95e"></a>
 const QString&#160;</td><td class="memItemRight" valign="bottom"><b>ParameterNameCarryingCapacity</b> = &quot;Carrying Capacity&quot;</td></tr>
 <tr class="separator:a3976cbc193b11915321b154e8a07f95e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -631,6 +748,12 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>SectionDiagn
 <tr class="memitem:a3f9e8f5fcad5e4acab5e76eda5361aa1"><td class="memItemLeft" align="right" valign="top"><a id="a3f9e8f5fcad5e4acab5e76eda5361aa1"></a>
 const QString&#160;</td><td class="memItemRight" valign="bottom"><b>SectionForecast</b> = &quot;Forecast&quot;</td></tr>
 <tr class="separator:a3f9e8f5fcad5e4acab5e76eda5361aa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63c82c193484baa007a4c3040c4d6712"><td class="memItemLeft" align="right" valign="top"><a id="a63c82c193484baa007a4c3040c4d6712"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>Deterministic</b> = 1</td></tr>
+<tr class="separator:a63c82c193484baa007a4c3040c4d6712"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb3a5cbdb25d39e49076ac5bcebeac27"><td class="memItemLeft" align="right" valign="top"><a id="afb3a5cbdb25d39e49076ac5bcebeac27"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>Stochastic</b> = -1</td></tr>
+<tr class="separator:afb3a5cbdb25d39e49076ac5bcebeac27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a193a24e24115624f090a38a59bfe55"><td class="memItemLeft" align="right" valign="top"><a id="a3a193a24e24115624f090a38a59bfe55"></a>
 const int&#160;</td><td class="memItemRight" valign="bottom"><b>PageSetupProject</b> = 1</td></tr>
 <tr class="separator:a3a193a24e24115624f090a38a59bfe55"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -664,6 +787,24 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>PageEstimationRu
 <tr class="memitem:a382529c1141a22602639301784162db4"><td class="memItemLeft" align="right" valign="top"><a id="a382529c1141a22602639301784162db4"></a>
 const int&#160;</td><td class="memItemRight" valign="bottom"><b>PageEstimationModelReview</b> = 7</td></tr>
 <tr class="separator:a382529c1141a22602639301784162db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31390219f0995dd08452af413785f2df"><td class="memItemLeft" align="right" valign="top"><a id="a31390219f0995dd08452af413785f2df"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>PublishLineWidthAxes</b> = 2</td></tr>
+<tr class="separator:a31390219f0995dd08452af413785f2df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad27fb83e05fa455aaa577332f1823b83"><td class="memItemLeft" align="right" valign="top"><a id="ad27fb83e05fa455aaa577332f1823b83"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>PublishLineWidthData</b> = 3</td></tr>
+<tr class="separator:ad27fb83e05fa455aaa577332f1823b83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad55753585db694c109cad2501c05a4d8"><td class="memItemLeft" align="right" valign="top"><a id="ad55753585db694c109cad2501c05a4d8"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>PublishLineWidthPoint</b> = 11</td></tr>
+<tr class="separator:ad55753585db694c109cad2501c05a4d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a394c151f77b2ebfaa31eaae8b7c19cde"><td class="memItemLeft" align="right" valign="top"><a id="a394c151f77b2ebfaa31eaae8b7c19cde"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>PublishFontSizeLabel</b> = 15</td></tr>
+<tr class="separator:a394c151f77b2ebfaa31eaae8b7c19cde"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a762a773afc7142786eb5ff41c682438d"><td class="memItemLeft" align="right" valign="top"><a id="a762a773afc7142786eb5ff41c682438d"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>PublishFontSizeNumber</b> = 11</td></tr>
+<tr class="separator:a762a773afc7142786eb5ff41c682438d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a185a27a7c8e14654b5800d8257595686"><td class="memItemLeft" align="right" valign="top"><a id="a185a27a7c8e14654b5800d8257595686"></a>
+const QString&#160;</td><td class="memItemRight" valign="bottom"><b>PublishFont</b> = &quot;Arial&quot;</td></tr>
+<tr class="separator:a185a27a7c8e14654b5800d8257595686"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2972b812c3ecf83d8e1fe84355b4b921"><td class="memItemLeft" align="right" valign="top"><a id="a2972b812c3ecf83d8e1fe84355b4b921"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>Linear</b> = &quot;Linear&quot;</td></tr>
 <tr class="separator:a2972b812c3ecf83d8e1fe84355b4b921"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -742,6 +883,9 @@ const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>TableDia
 <tr class="memitem:aece2d455bffd9664a769eb29ad9f64fd"><td class="memItemLeft" align="right" valign="top"><a id="aece2d455bffd9664a769eb29ad9f64fd"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>TableDiagnosticGrowthRate</b> = QString::fromStdString(&quot;DiagnosticGrowthRate&quot;).toLower().toStdString()</td></tr>
 <tr class="separator:aece2d455bffd9664a769eb29ad9f64fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6c26daeb7363e73de60f9edfed0985c"><td class="memItemLeft" align="right" valign="top"><a id="aa6c26daeb7363e73de60f9edfed0985c"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>TableDiagnosticGrowthRateShape</b> = QString::fromStdString(&quot;DiagnosticGrowthRateShape&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:aa6c26daeb7363e73de60f9edfed0985c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af10c44c67d5cc18ad754e128c53f6951"><td class="memItemLeft" align="right" valign="top"><a id="af10c44c67d5cc18ad754e128c53f6951"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>TableDiagnosticInitBiomass</b> = QString::fromStdString(&quot;DiagnosticInitBiomass&quot;).toLower().toStdString()</td></tr>
 <tr class="separator:af10c44c67d5cc18ad754e128c53f6951"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -853,6 +997,9 @@ const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>TableOut
 <tr class="memitem:a52d37140568369101eb9c8ded49531fb"><td class="memItemLeft" align="right" valign="top"><a id="a52d37140568369101eb9c8ded49531fb"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>TableOutputGrowthRate</b> = QString::fromStdString(&quot;OutputGrowthRate&quot;).toLower().toStdString()</td></tr>
 <tr class="separator:a52d37140568369101eb9c8ded49531fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb8b330ec99d9a825ffde093ca64c5ef"><td class="memItemLeft" align="right" valign="top"><a id="afb8b330ec99d9a825ffde093ca64c5ef"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>TableOutputGrowthRateShape</b> = QString::fromStdString(&quot;OutputGrowthRateShape&quot;).toLower().toStdString()</td></tr>
+<tr class="separator:afb8b330ec99d9a825ffde093ca64c5ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac905842f9342cf8bec8b98c1edc0dd91"><td class="memItemLeft" align="right" valign="top"><a id="ac905842f9342cf8bec8b98c1edc0dd91"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>TableOutputGrowthRateCovariateCoeffs</b> = QString::fromStdString(&quot;OutputGrowthRateCovariateCoeffs&quot;).toLower().toStdString()</td></tr>
 <tr class="separator:ac905842f9342cf8bec8b98c1edc0dd91"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -935,7 +1082,16 @@ const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>TableUni
 <tr class="separator:aeafde3d1facf259088bcdcb58932275f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70db8d9580612c68e80cf75664ad9d5c"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>EstimateCheckboxNames</b></td></tr>
 <tr class="separator:a70db8d9580612c68e80cf75664ad9d5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab89757be410752ae21ab94bc95def85d"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>TablesToClean</b></td></tr>
+<tr class="memitem:aafb03dfe11cec7af8591b21dcd890fdd"><td class="memItemLeft" align="right" valign="top">const QList&lt; QString &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>OutputVectorTableHeaders</b></td></tr>
+<tr class="separator:aafb03dfe11cec7af8591b21dcd890fdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1877c6c6e2292505ece9a6f8b3d3861"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>OutputVectorTables</b></td></tr>
+<tr class="separator:ab1877c6c6e2292505ece9a6f8b3d3861"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4448f365c8b865a5727294775d69d31"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>OutputMatrixTables</b></td></tr>
+<tr class="separator:ab4448f365c8b865a5727294775d69d31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a554804491bcf535223d838f61e3cfc4e"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>OutputTables</b></td></tr>
+<tr class="separator:a554804491bcf535223d838f61e3cfc4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab89757be410752ae21ab94bc95def85d"><td class="memItemLeft" align="right" valign="top"><a id="ab89757be410752ae21ab94bc95def85d"></a>
+const std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>TablesToClean</b></td></tr>
 <tr class="separator:ab89757be410752ae21ab94bc95def85d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -955,16 +1111,128 @@ const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>TableUni
 <b>Initial value:</b><div class="fragment"><div class="line">=</div>
 <div class="line">         {<span class="stringliteral">&quot;InitBiomass&quot;</span>,</div>
 <div class="line">          <span class="stringliteral">&quot;GrowthRate&quot;</span>,</div>
+<div class="line">          <span class="stringliteral">&quot;GrowthRateShape&quot;</span>,</div>
 <div class="line">          <span class="stringliteral">&quot;CarryingCapacity&quot;</span>,</div>
 <div class="line">          <span class="stringliteral">&quot;Catchability&quot;</span>,</div>
-<div class="line">          <span class="stringliteral">&quot;Handling&quot;</span>,</div>
-<div class="line">          <span class="stringliteral">&quot;CompetitionAlpha&quot;</span>,</div>
-<div class="line">          <span class="stringliteral">&quot;CompetitionBetaSpeciesSpecies&quot;</span>,</div>
-<div class="line">          <span class="stringliteral">&quot;CompetitionBetaGuildSpecies&quot;</span>,</div>
-<div class="line">          <span class="stringliteral">&quot;CompetitionBetaGuildGuild&quot;</span>,</div>
 <div class="line">          <span class="stringliteral">&quot;PredationRho&quot;</span>,</div>
+<div class="line">          <span class="stringliteral">&quot;PredationHandling&quot;</span>,</div>
 <div class="line">          <span class="stringliteral">&quot;PredationExponent&quot;</span>,</div>
+<div class="line">          <span class="stringliteral">&quot;CompetitionAlpha&quot;</span>,</div>
+<div class="line">          <span class="stringliteral">&quot;CompetitionBetaSpecies&quot;</span>,</div>
+<div class="line">          <span class="stringliteral">&quot;CompetitionBetaGuildsSpecies&quot;</span>,</div>
+<div class="line">          <span class="stringliteral">&quot;CompetitionBetaGuildsGuilds&quot;</span>,</div>
 <div class="line">          <span class="stringliteral">&quot;SurveyQ&quot;</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab4448f365c8b865a5727294775d69d31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4448f365c8b865a5727294775d69d31">&#9670;&nbsp;</a></span>OutputMatrixTables</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt;std::string&gt; nmfConstantsMSSPM::OutputMatrixTables</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputBiomass,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputPredationRho,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputPredationHandling,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputCompetitionAlpha,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputCompetitionBetaSpecies,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputCompetitionBetaGuilds</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">     }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a554804491bcf535223d838f61e3cfc4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a554804491bcf535223d838f61e3cfc4e">&#9670;&nbsp;</a></span>OutputTables</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt;std::string&gt; nmfConstantsMSSPM::OutputTables</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputBiomass,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputBiomassEnsemble,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputBiomassMohnsRhoOfEnsembles,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputCarryingCapacity,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputCarryingCapacityCovariateCoeffs,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputCatchability,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputCatchabilityCovariateCoeffs,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputCompetitionAlpha,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputCompetitionBetaGuilds,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputCompetitionBetaGuildsGuilds,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputCompetitionBetaSpecies,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputGrowthRate,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputGrowthRateShape,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputGrowthRateCovariateCoeffs,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputInitBiomass,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputMSY,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputMSYBiomass,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputMSYFishing,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputPredationExponent,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputPredationHandling,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputPredationRho,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputSurveyQ,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputSurveyQCovariateCoeffs</div>
+<div class="line">     }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aafb03dfe11cec7af8591b21dcd890fdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafb03dfe11cec7af8591b21dcd890fdd">&#9670;&nbsp;</a></span>OutputVectorTableHeaders</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const QList&lt;QString&gt; nmfConstantsMSSPM::OutputVectorTableHeaders</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">         <span class="stringliteral">&quot;B₀&quot;</span>,<span class="stringliteral">&quot;r&quot;</span>,<span class="stringliteral">&quot;p&quot;</span>,<span class="stringliteral">&quot;K&quot;</span>,<span class="stringliteral">&quot;q&quot;</span>,<span class="stringliteral">&quot;b&quot;</span>,<span class="stringliteral">&quot;Q&quot;</span>,<span class="stringliteral">&quot;BMSY&quot;</span>,<span class="stringliteral">&quot;MSY&quot;</span>,<span class="stringliteral">&quot;FMSY&quot;</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab1877c6c6e2292505ece9a6f8b3d3861"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1877c6c6e2292505ece9a6f8b3d3861">&#9670;&nbsp;</a></span>OutputVectorTables</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt;std::string&gt; nmfConstantsMSSPM::OutputVectorTables</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputInitBiomass,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputGrowthRate,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputGrowthRateShape,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputCarryingCapacity,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputCatchability,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputPredationExponent,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputSurveyQ,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputMSYBiomass,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputMSY,</div>
+<div class="line">         nmfConstantsMSSPM::TableOutputMSYFishing</div>
+<div class="line">     }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -982,6 +1250,7 @@ const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>TableUni
 <b>Initial value:</b><div class="fragment"><div class="line">=</div>
 <div class="line">         {<span class="stringliteral">&quot;Mohn&#39;s Rho (Initial Absolute Biomass)&quot;</span>,</div>
 <div class="line">          <span class="stringliteral">&quot;Mohn&#39;s Rho (Growth Rate)&quot;</span>,</div>
+<div class="line">          <span class="stringliteral">&quot;Mohn&#39;s Rho (Growth Rate Shape)&quot;</span>,</div>
 <div class="line">          <span class="stringliteral">&quot;Mohn&#39;s Rho (Carrying Capacity)&quot;</span>,</div>
 <div class="line">          <span class="stringliteral">&quot;Mohn&#39;s Rho (Competition Alpha)&quot;</span>,</div>
 <div class="line">          <span class="stringliteral">&quot;Mohn&#39;s Rho (Competition Beta Species)&quot;</span>,</div>
@@ -1047,50 +1316,6 @@ const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>TableUni
 </div><!-- fragment -->
 </div>
 </div>
-<a id="ab89757be410752ae21ab94bc95def85d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab89757be410752ae21ab94bc95def85d">&#9670;&nbsp;</a></span>TablesToClean</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const std::vector&lt;std::string&gt; nmfConstantsMSSPM::TablesToClean</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">=</div>
-<div class="line">        {TableBiomassAbsolute,</div>
-<div class="line">         TableBiomassAbsolute,</div>
-<div class="line">         TableBiomassRelativeDividedByEstSurveyQ,</div>
-<div class="line">         TableBiomassRelativeScalars,</div>
-<div class="line">         TableCompetitionAlpha,</div>
-<div class="line">         TableCompetitionAlphaMax,</div>
-<div class="line">         TableCompetitionAlphaMin,</div>
-<div class="line">         TableCompetitionBetaGuilds,</div>
-<div class="line">         TableCompetitionBetaGuildsGuilds,</div>
-<div class="line">         TableCompetitionBetaGuildsGuildsMax,</div>
-<div class="line">         TableCompetitionBetaGuildsGuildsMin,</div>
-<div class="line">         TableCompetitionBetaGuildsMax,</div>
-<div class="line">         TableCompetitionBetaGuildsMin,</div>
-<div class="line">         TableCompetitionBetaSpecies,</div>
-<div class="line">         TableCompetitionBetaSpeciesMax,</div>
-<div class="line">         TableCompetitionBetaSpeciesMin,</div>
-<div class="line">         TableHarvestCatch,</div>
-<div class="line">         TableHarvestEffort,</div>
-<div class="line">         TableHarvestExploitation,</div>
-<div class="line">         TableModels,</div>
-<div class="line">         TablePredationExponent,</div>
-<div class="line">         TablePredationExponentMax,</div>
-<div class="line">         TablePredationExponentMin,</div>
-<div class="line">         TablePredationHandling,</div>
-<div class="line">         TablePredationHandlingMax,</div>
-<div class="line">         TablePredationHandlingMin,</div>
-<div class="line">         TablePredationRho,</div>
-<div class="line">         TablePredationRhoMax,</div>
-<div class="line">         TablePredationRhoMin}</div>
-</div><!-- fragment -->
-</div>
-</div>
 <a id="aeafde3d1facf259088bcdcb58932275f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeafde3d1facf259088bcdcb58932275f">&#9670;&nbsp;</a></span>VectorParameterNames</h2>
 
@@ -1105,6 +1330,7 @@ const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>TableUni
 <b>Initial value:</b><div class="fragment"><div class="line">=</div>
 <div class="line">         {<span class="stringliteral">&quot;Initial Biomass (B₀)&quot;</span>,</div>
 <div class="line">          <span class="stringliteral">&quot;Growth Rate (r)&quot;</span>,</div>
+<div class="line">          <span class="stringliteral">&quot;Growth Rate Shape (p)&quot;</span>,</div>
 <div class="line">          <span class="stringliteral">&quot;Carrying Capacity (K)&quot;</span>,</div>
 <div class="line">          <span class="stringliteral">&quot;Catchability (q)&quot;</span>,</div>
 <div class="line">          <span class="stringliteral">&quot;SurveyQ&quot;</span>}</div>

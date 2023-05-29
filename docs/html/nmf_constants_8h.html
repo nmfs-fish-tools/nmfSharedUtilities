@@ -324,7 +324,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Pr
 const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::MaxBiomass</b> = 1e12</td></tr>
 <tr class="separator:a1d067fbb40284acfd425760e1e7468bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8bbf4b53bb82d5321d3888c6e5f6a741"><td class="memItemLeft" align="right" valign="top"><a id="a8bbf4b53bb82d5321d3888c6e5f6a741"></a>
-const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::NearlyZero</b> = 0.000001</td></tr>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::NearlyZero</b> = 1e-20</td></tr>
 <tr class="separator:a8bbf4b53bb82d5321d3888c6e5f6a741"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8efe1f4a95f909cbf6a59c90cc90fcba"><td class="memItemLeft" align="right" valign="top"><a id="a8efe1f4a95f909cbf6a59c90cc90fcba"></a>
 const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::RAD_to_DEG</b> = (180.0/M_PI)</td></tr>
@@ -351,8 +351,14 @@ const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants:
 const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::SecondsPerDay</b> = 86400</td></tr>
 <tr class="separator:a0e1e868c95ac2bbf675cd32e1653da08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a582d9c991963a3a081a3b36dfb7c6979"><td class="memItemLeft" align="right" valign="top"><a id="a582d9c991963a3a081a3b36dfb7c6979"></a>
-const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::LogRoot2PI</b> = 0.5*log(2*M_PI)</td></tr>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::LogRoot2PI</b> = 0.5*std::log(2*M_PI)</td></tr>
 <tr class="separator:a582d9c991963a3a081a3b36dfb7c6979"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53d14e8ed4ab5b950a7fb9bc2acf14a0"><td class="memItemLeft" align="right" valign="top"><a id="a53d14e8ed4ab5b950a7fb9bc2acf14a0"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::INCHES_to_METERS</b> = 39.37</td></tr>
+<tr class="separator:a53d14e8ed4ab5b950a7fb9bc2acf14a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a735c005132a69cbac228da54db36f522"><td class="memItemLeft" align="right" valign="top"><a id="a735c005132a69cbac228da54db36f522"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::ANTIALIASING_SAMPLES</b> = 32</td></tr>
+<tr class="separator:a735c005132a69cbac228da54db36f522"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3189f4d4860411b4e360abafe62940a4"><td class="memItemLeft" align="right" valign="top"><a id="a3189f4d4860411b4e360abafe62940a4"></a>
 const int&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::Normal</b> = 0</td></tr>
 <tr class="separator:a3189f4d4860411b4e360abafe62940a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -404,6 +410,9 @@ const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConst
 <tr class="memitem:aceb52a787194d4d7e37978ffe538c46d"><td class="memItemLeft" align="right" valign="top"><a id="aceb52a787194d4d7e37978ffe538c46d"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::BlankLine</b> = &quot; &quot;</td></tr>
 <tr class="separator:aceb52a787194d4d7e37978ffe538c46d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c140c9a1fed656df7536ca7d3968f7e"><td class="memItemLeft" align="right" valign="top"><a id="a1c140c9a1fed656df7536ca7d3968f7e"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::NoData</b> = &quot;na&quot;</td></tr>
+<tr class="separator:a1c140c9a1fed656df7536ca7d3968f7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c0d9d943a183b29b774745ae723497d"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>nmfConstants::SurfaceThemes</b></td></tr>
 <tr class="separator:a1c0d9d943a183b29b774745ae723497d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>

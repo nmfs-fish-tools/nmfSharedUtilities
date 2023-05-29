@@ -112,9 +112,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a50a595554ae2eff2b02b63358c7ad383"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_predation_form.html#a50a595554ae2eff2b02b63358c7ad383">FunctionMap_TypeIII</a> (const std::string &amp;covariateAlgorithmType, const int &amp;TimeMinus1, const int &amp;Species, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstimatedBiomass, const double &amp;EstimatedBiomassAtTimeMinus1, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredationRho, const boost::numeric::ublas::matrix&lt; double &gt; &amp;PredationRhoCovariate, const boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredationHandling, const boost::numeric::ublas::matrix&lt; double &gt; &amp;PredationHandlingCovariate, const std::vector&lt; double &gt; &amp;EstPredationExponent, const boost::numeric::ublas::matrix&lt; double &gt; &amp;PredationExponentCovariate)</td></tr>
 <tr class="memdesc:a50a595554ae2eff2b02b63358c7ad383"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method implements the Predation Type III algorithm.  <a href="classnmf_predation_form.html#a50a595554ae2eff2b02b63358c7ad383">More...</a><br /></td></tr>
 <tr class="separator:a50a595554ae2eff2b02b63358c7ad383"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff20e340480ece7c4fb949bd7bcffc48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_predation_form.html#aff20e340480ece7c4fb949bd7bcffc48">loadParameterRanges</a> (std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;ParameterRanges, <a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;DataStruct)</td></tr>
-<tr class="memdesc:aff20e340480ece7c4fb949bd7bcffc48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the parameter ranges structure with data from the model data structure.  <a href="classnmf_predation_form.html#aff20e340480ece7c4fb949bd7bcffc48">More...</a><br /></td></tr>
-<tr class="separator:aff20e340480ece7c4fb949bd7bcffc48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a91018a23e0ef6fbe8f952a4b8a8da9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_predation_form.html#a7a91018a23e0ef6fbe8f952a4b8a8da9">loadParameterRanges</a> (std::vector&lt; double &gt; &amp;ParameterInitialValues, std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;ParameterRanges, <a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;DataStruct)</td></tr>
+<tr class="memdesc:a7a91018a23e0ef6fbe8f952a4b8a8da9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the parameter ranges structure with data from the model data structure.  <a href="classnmf_predation_form.html#a7a91018a23e0ef6fbe8f952a4b8a8da9">More...</a><br /></td></tr>
+<tr class="separator:a7a91018a23e0ef6fbe8f952a4b8a8da9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a349203052f5d4996921b04d11cf2dd8b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_predation_form.html#a349203052f5d4996921b04d11cf2dd8b">setAggProd</a> (bool isAggProd)</td></tr>
 <tr class="memdesc:a349203052f5d4996921b04d11cf2dd8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the AggProd variable.  <a href="classnmf_predation_form.html#a349203052f5d4996921b04d11cf2dd8b">More...</a><br /></td></tr>
 <tr class="separator:a349203052f5d4996921b04d11cf2dd8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -849,8 +849,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aff20e340480ece7c4fb949bd7bcffc48"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff20e340480ece7c4fb949bd7bcffc48">&#9670;&nbsp;</a></span>loadParameterRanges()</h2>
+<a id="a7a91018a23e0ef6fbe8f952a4b8a8da9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a91018a23e0ef6fbe8f952a4b8a8da9">&#9670;&nbsp;</a></span>loadParameterRanges()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -858,6 +858,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void nmfPredationForm::loadParameterRanges </td>
           <td>(</td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ParameterInitialValues</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;&#160;</td>
           <td class="paramname"><em>ParameterRanges</em>, </td>
         </tr>
@@ -878,6 +884,7 @@ Public Member Functions</h2></td></tr>
 <p>Loads the parameter ranges structure with data from the model data structure. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">ParameterInitialValues</td><td>: parameter initial values (not necessarily the mid-range point) </td></tr>
     <tr><td class="paramname">ParameterRanges</td><td>: parameter ranges </td></tr>
     <tr><td class="paramname">DataStruct</td><td>: model data structure </td></tr>
   </table>

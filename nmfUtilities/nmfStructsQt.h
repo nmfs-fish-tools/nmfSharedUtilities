@@ -190,6 +190,9 @@ struct ModelDataStruct {
     int    userFixedSeedVal;
     bool   incrementFixedSeed;
     bool   allowConvergedOnly;
+    bool   useRandomInitialParameters;
+    double rangeJitter;
+    bool   isRangeJitterRepeatable;
 
     bool   NLoptUseStopVal;
     bool   NLoptUseStopAfterTime;

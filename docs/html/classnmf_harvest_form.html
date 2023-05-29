@@ -103,9 +103,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a971d74e9a44cc0cc48e500f7e789fd78"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_harvest_form.html#a971d74e9a44cc0cc48e500f7e789fd78">getKey</a> ()</td></tr>
 <tr class="memdesc:a971d74e9a44cc0cc48e500f7e789fd78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the key (i.e., legend) for the selected Harvest Form algorithm variables.  <a href="classnmf_harvest_form.html#a971d74e9a44cc0cc48e500f7e789fd78">More...</a><br /></td></tr>
 <tr class="separator:a971d74e9a44cc0cc48e500f7e789fd78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a38fd09d1810dece7ed06a63a49523cd7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_harvest_form.html#a38fd09d1810dece7ed06a63a49523cd7">loadParameterRanges</a> (std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;ParameterRanges, <a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;DataStruct)</td></tr>
-<tr class="memdesc:a38fd09d1810dece7ed06a63a49523cd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the parameter ranges structure with data from the model data structure.  <a href="classnmf_harvest_form.html#a38fd09d1810dece7ed06a63a49523cd7">More...</a><br /></td></tr>
-<tr class="separator:a38fd09d1810dece7ed06a63a49523cd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acffa111540f222c5198aeb0198dbe166"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_harvest_form.html#acffa111540f222c5198aeb0198dbe166">loadParameterRanges</a> (std::vector&lt; double &gt; &amp;ParameterInitialValues, std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;ParameterRanges, <a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;DataStruct)</td></tr>
+<tr class="memdesc:acffa111540f222c5198aeb0198dbe166"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the parameter ranges structure with data from the model data structure.  <a href="classnmf_harvest_form.html#acffa111540f222c5198aeb0198dbe166">More...</a><br /></td></tr>
+<tr class="separator:acffa111540f222c5198aeb0198dbe166"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80eb6d87a1f876c91eb7a39b204594a2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_harvest_form.html#a80eb6d87a1f876c91eb7a39b204594a2">modifyHarvestTypeDueToFitToCatch</a> (std::string forecastHarvestTypeLabel)</td></tr>
 <tr class="memdesc:a80eb6d87a1f876c91eb7a39b204594a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the default harvest type to be used for forecasts to whatever the current Forecast Harvest Type Button is set to.  <a href="classnmf_harvest_form.html#a80eb6d87a1f876c91eb7a39b204594a2">More...</a><br /></td></tr>
 <tr class="separator:a80eb6d87a1f876c91eb7a39b204594a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -707,8 +707,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a38fd09d1810dece7ed06a63a49523cd7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a38fd09d1810dece7ed06a63a49523cd7">&#9670;&nbsp;</a></span>loadParameterRanges()</h2>
+<a id="acffa111540f222c5198aeb0198dbe166"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acffa111540f222c5198aeb0198dbe166">&#9670;&nbsp;</a></span>loadParameterRanges()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -716,6 +716,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void nmfHarvestForm::loadParameterRanges </td>
           <td>(</td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ParameterInitialValues</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;&#160;</td>
           <td class="paramname"><em>ParameterRanges</em>, </td>
         </tr>
@@ -736,6 +742,7 @@ Public Member Functions</h2></td></tr>
 <p>Loads the parameter ranges structure with data from the model data structure. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">ParameterInitialValues</td><td>: parameter initial values (not necessarily mid-range point) </td></tr>
     <tr><td class="paramname">ParameterRanges</td><td>: parameter ranges </td></tr>
     <tr><td class="paramname">DataStruct</td><td>: model data structure </td></tr>
   </table>

@@ -91,9 +91,6 @@ Functions</h2></td></tr>
 <tr class="memitem:ae92f32582c01b3df8c20a20e4fc9f15b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils.html#ae92f32582c01b3df8c20a20e4fc9f15b">convertToScientificNotation</a> (double val)</td></tr>
 <tr class="memdesc:ae92f32582c01b3df8c20a20e4fc9f15b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the passed value to a scientific notation formatted string.  <a href="namespacenmf_utils.html#ae92f32582c01b3df8c20a20e4fc9f15b">More...</a><br /></td></tr>
 <tr class="separator:ae92f32582c01b3df8c20a20e4fc9f15b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab88977361fbe3d9dff8b1879d36fbc9a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils.html#ab88977361fbe3d9dff8b1879d36fbc9a">convertValues1DToOutputStr</a> (const std::string &amp;label, const std::vector&lt; double &gt; &amp;values, const bool &amp;includeTotal)</td></tr>
-<tr class="memdesc:ab88977361fbe3d9dff8b1879d36fbc9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a vector of double values into a table format.  <a href="namespacenmf_utils.html#ab88977361fbe3d9dff8b1879d36fbc9a">More...</a><br /></td></tr>
-<tr class="separator:ab88977361fbe3d9dff8b1879d36fbc9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa92647879b97ed36284dec8d41aeaace"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils.html#aa92647879b97ed36284dec8d41aeaace">convertValues2DToOutputStr</a> (const std::string &amp;label, const boost::numeric::ublas::matrix&lt; double &gt; &amp;matrix)</td></tr>
 <tr class="memdesc:aa92647879b97ed36284dec8d41aeaace"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a matrix of double values into a table format.  <a href="namespacenmf_utils.html#aa92647879b97ed36284dec8d41aeaace">More...</a><br /></td></tr>
 <tr class="separator:aa92647879b97ed36284dec8d41aeaace"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -145,6 +142,9 @@ Functions</h2></td></tr>
 <tr class="memitem:abdc0f0125ae7a0a8cc338ca4c828b1a0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils.html#abdc0f0125ae7a0a8cc338ca4c828b1a0">isWholeNumber</a> (double value)</td></tr>
 <tr class="memdesc:abdc0f0125ae7a0a8cc338ca4c828b1a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests the passed value if there's no decimal part and returns true, else returns false.  <a href="namespacenmf_utils.html#abdc0f0125ae7a0a8cc338ca4c828b1a0">More...</a><br /></td></tr>
 <tr class="separator:abdc0f0125ae7a0a8cc338ca4c828b1a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae11e9d7b480fbfc9953b0bf7ed5d3a27"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils.html#ae11e9d7b480fbfc9953b0bf7ed5d3a27">printDataStruct</a> (const std::string &amp;msg, const <a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;dataStruct)</td></tr>
+<tr class="memdesc:ae11e9d7b480fbfc9953b0bf7ed5d3a27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints out the member values of a ModelDataStruct.  <a href="namespacenmf_utils.html#ae11e9d7b480fbfc9953b0bf7ed5d3a27">More...</a><br /></td></tr>
+<tr class="separator:ae11e9d7b480fbfc9953b0bf7ed5d3a27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0377cada3cc1526dd76c8dd64d900806"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils.html#a0377cada3cc1526dd76c8dd64d900806">print3DArray</a> (const std::string &amp;name, const std::vector&lt; int &gt; &amp;dimensions, const Boost3DArrayDouble &amp;array, const int &amp;width, const int &amp;precision)</td></tr>
 <tr class="memdesc:a0377cada3cc1526dd76c8dd64d900806"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints out a 3d double array  <a href="namespacenmf_utils.html#a0377cada3cc1526dd76c8dd64d900806">More...</a><br /></td></tr>
 <tr class="separator:a0377cada3cc1526dd76c8dd64d900806"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -172,9 +172,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a8b4f2178a64223e22c388580c1ab3cba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils.html#a8b4f2178a64223e22c388580c1ab3cba">readTableNames</a> (std::map&lt; std::string, std::vector&lt; std::string &gt; &gt; *TableNames)</td></tr>
 <tr class="memdesc:a8b4f2178a64223e22c388580c1ab3cba"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads table names into a map where the key is SSVPA or MSVPA and the value is a vector of associated tables  <a href="namespacenmf_utils.html#a8b4f2178a64223e22c388580c1ab3cba">More...</a><br /></td></tr>
 <tr class="separator:a8b4f2178a64223e22c388580c1ab3cba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa44085a376beecea52be421f049ab5d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils.html#aaa44085a376beecea52be421f049ab5d">rescaleMatrixLog</a> (boost::numeric::ublas::matrix&lt; double &gt; &amp;matrix)</td></tr>
-<tr class="memdesc:aaa44085a376beecea52be421f049ab5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">rescales the passed matrix by: log base 10  <a href="namespacenmf_utils.html#aaa44085a376beecea52be421f049ab5d">More...</a><br /></td></tr>
-<tr class="separator:aaa44085a376beecea52be421f049ab5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a171193f9cffd1e47ef02189de6b80e49"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils.html#a171193f9cffd1e47ef02189de6b80e49">removeFirstRow</a> (boost::numeric::ublas::matrix&lt; double &gt; &amp;matrixIn, boost::numeric::ublas::matrix&lt; double &gt; &amp;matrixOut)</td></tr>
+<tr class="memdesc:a171193f9cffd1e47ef02189de6b80e49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the first row of the matrix and resets matrix size accordingly.  <a href="namespacenmf_utils.html#a171193f9cffd1e47ef02189de6b80e49">More...</a><br /></td></tr>
+<tr class="separator:a171193f9cffd1e47ef02189de6b80e49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a717f576be3ce6b841b0f24ef8d1d38f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils.html#a717f576be3ce6b841b0f24ef8d1d38f0">rescaleMatrixLog10</a> (const boost::numeric::ublas::matrix&lt; double &gt; &amp;unscaledMatrix, boost::numeric::ublas::matrix&lt; double &gt; &amp;rescaledMatrix)</td></tr>
+<tr class="memdesc:a717f576be3ce6b841b0f24ef8d1d38f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">rescales the passed matrix by: log base 10  <a href="namespacenmf_utils.html#a717f576be3ce6b841b0f24ef8d1d38f0">More...</a><br /></td></tr>
+<tr class="separator:a717f576be3ce6b841b0f24ef8d1d38f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc57569f663adc8204c80e1f8c1fdd56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_utils.html#afc57569f663adc8204c80e1f8c1fdd56">rescaleMatrixMean</a> (const boost::numeric::ublas::matrix&lt; double &gt; &amp;unscaledMatrix, boost::numeric::ublas::matrix&lt; double &gt; &amp;rescaledMatrix)</td></tr>
 <tr class="memdesc:afc57569f663adc8204c80e1f8c1fdd56"><td class="mdescLeft">&#160;</td><td class="mdescRight">rescales the unscaledMatrix by: (X - Xavg) / (Xmax - Xmin) where X is an element of the matrix  <a href="namespacenmf_utils.html#afc57569f663adc8204c80e1f8c1fdd56">More...</a><br /></td></tr>
 <tr class="separator:afc57569f663adc8204c80e1f8c1fdd56"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -197,6 +200,10 @@ Functions</h2></td></tr>
 <tr class="memitem:a4fe66d37295e08788f2abfcbc23e6ace"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacenmf_utils.html#a4fe66d37295e08788f2abfcbc23e6ace">clamp</a> (T &amp;value, double lower, double upper)</td></tr>
 <tr class="memdesc:a4fe66d37295e08788f2abfcbc23e6ace"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template function used to clamp a value to a high and low value.  <a href="namespacenmf_utils.html#a4fe66d37295e08788f2abfcbc23e6ace">More...</a><br /></td></tr>
 <tr class="separator:a4fe66d37295e08788f2abfcbc23e6ace"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d286c975482a72bcfb4c527b076406e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a2d286c975482a72bcfb4c527b076406e"><td class="memTemplItemLeft" align="right" valign="top">std::string&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacenmf_utils.html#a2d286c975482a72bcfb4c527b076406e">convertValues1DToOutputStr</a> (const std::string &amp;label, const T &amp;Values, const bool &amp;includeTotal)</td></tr>
+<tr class="memdesc:a2d286c975482a72bcfb4c527b076406e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a templated vector into a table format.  <a href="namespacenmf_utils.html#a2d286c975482a72bcfb4c527b076406e">More...</a><br /></td></tr>
+<tr class="separator:a2d286c975482a72bcfb4c527b076406e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75302c31afddcd4fe8167857a3e0e62d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a75302c31afddcd4fe8167857a3e0e62d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacenmf_utils.html#a75302c31afddcd4fe8167857a3e0e62d">initialize</a> (T &amp;multi_array)</td></tr>
 <tr class="memdesc:a75302c31afddcd4fe8167857a3e0e62d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template function to initialize a multi_array of any size.  <a href="namespacenmf_utils.html#a75302c31afddcd4fe8167857a3e0e62d">More...</a><br /></td></tr>
@@ -503,11 +510,13 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ab88977361fbe3d9dff8b1879d36fbc9a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab88977361fbe3d9dff8b1879d36fbc9a">&#9670;&nbsp;</a></span>convertValues1DToOutputStr()</h2>
+<a id="a2d286c975482a72bcfb4c527b076406e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d286c975482a72bcfb4c527b076406e">&#9670;&nbsp;</a></span>convertValues1DToOutputStr()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">std::string nmfUtils::convertValues1DToOutputStr </td>
@@ -518,8 +527,8 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
-          <td class="paramname"><em>values</em>, </td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>Values</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -535,7 +544,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Formats a vector of double values into a table format. </p>
+<p>Formats a templated vector into a table format. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">label</td><td>: label for values </td></tr>
@@ -1329,6 +1338,43 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="ae11e9d7b480fbfc9953b0bf7ed5d3a27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae11e9d7b480fbfc9953b0bf7ed5d3a27">&#9670;&nbsp;</a></span>printDataStruct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtils::printDataStruct </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>msg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structnmf_structs_qt_1_1_model_data_struct.html">nmfStructsQt::ModelDataStruct</a> &amp;&#160;</td>
+          <td class="paramname"><em>dataStruct</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Prints out the member values of a ModelDataStruct. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>: message to print before the data listing </td></tr>
+    <tr><td class="paramname">dataStruct</td><td>: the ModelDataStruct variable to print </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a51dbf0412781029530be16ff7b3a4616"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a51dbf0412781029530be16ff7b3a4616">&#9670;&nbsp;</a></span>printError()</h2>
 
@@ -1668,18 +1714,65 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="aaa44085a376beecea52be421f049ab5d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa44085a376beecea52be421f049ab5d">&#9670;&nbsp;</a></span>rescaleMatrixLog()</h2>
+<a id="a171193f9cffd1e47ef02189de6b80e49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a171193f9cffd1e47ef02189de6b80e49">&#9670;&nbsp;</a></span>removeFirstRow()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void nmfUtils::rescaleMatrixLog </td>
+          <td class="memname">void nmfUtils::removeFirstRow </td>
           <td>(</td>
           <td class="paramtype">boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
-          <td class="paramname"><em>matrix</em></td><td>)</td>
+          <td class="paramname"><em>matrixIn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>matrixOut</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Removes the first row of the matrix and resets matrix size accordingly. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">matrixIn</td><td>: input matrix whose first row is to be removed </td></tr>
+    <tr><td class="paramname">matrixOut</td><td>: output matrix whose first row was removed </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a717f576be3ce6b841b0f24ef8d1d38f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a717f576be3ce6b841b0f24ef8d1d38f0">&#9670;&nbsp;</a></span>rescaleMatrixLog10()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfUtils::rescaleMatrixLog10 </td>
+          <td>(</td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>unscaledMatrix</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rescaledMatrix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1687,7 +1780,8 @@ template&lt;typename T &gt; </div>
 <p>rescales the passed matrix by: log base 10 </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">matrix</td><td>to rescale </td></tr>
+    <tr><td class="paramname">unscaledMatrix</td><td>: the matrix to rescale </td></tr>
+    <tr><td class="paramname">rescaledMatrix</td><td>: the rescaled matrix </td></tr>
   </table>
   </dd>
 </dl>

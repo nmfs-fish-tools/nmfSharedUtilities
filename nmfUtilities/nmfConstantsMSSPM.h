@@ -212,6 +212,7 @@ namespace nmfConstantsMSSPM
      const std::string  LogFilter                      = ".MSSPM/logs/*.log";
      const std::string  InputDataDir                   = "inputData";
      const std::string  InputDataHPCDir                = "inputData/hpc";
+     const std::string  OutputDataHPCDir               = "outputData/hpc";
      const std::string  LayoutDir                      = "layouts";
      const std::string  DatabaseDir                    = "databases";
      const std::string  OutputDataDir                  = "outputData";
@@ -219,6 +220,7 @@ namespace nmfConstantsMSSPM
      const std::string  OutputImagesDirMMode           = "Remora/outputImages";
      const std::string  OutputDataDirMMode             = "Remora/outputData";
      const std::string  OutputScenariosDirMMode        = "Remora/scenarios";
+     const std::string  FilenameHPCMetaData            = "HPCMetaData.csv";
      const std::string  FilenameMultiRun               = "MultiRunParameter.csv";
      const std::string  FilenameMohnsRhoRun            = "MohnsRhoMultiRunParameter.csv";
      const std::string  FilenameModelReview            = "ModelReview.csv";
@@ -241,6 +243,11 @@ namespace nmfConstantsMSSPM
      const QString      HarvestExploitation            = "Exploitation Rate (Harvest/Bc)";
      const QString      ForecastHarvestTypeCatch       = "Catch";
      const QString      ForecastHarvestTypeEffort      = "Effort";
+     const QString      CompetitionNOK                 = "NO_K";
+     const QString      CompetitionMSPROD              = "MS-PROD";
+     const QString      PredationTypeI                 = "Type I";
+     const QString      PredationTypeII                = "Type II";
+     const QString      PredationTypeIII               = "Type III";
      const QString      DistributionNone               = "None";
      const QString      DistributionLognormal          = "Lognormal";
      const QString      DistributionUniform            = "Uniform";
@@ -267,6 +274,9 @@ namespace nmfConstantsMSSPM
      const QString      SectionEstimation                      = "Estimation Data Input";
      const QString      SectionDiagnostic                      = "Diagnostic Data Input";
      const QString      SectionForecast                        = "Forecast";
+
+     const int          Deterministic                          =  1;
+     const int          Stochastic                             = -1;
 
      const int          PageSetupProject                       = 1;
      const int          PageSetupSpecies                       = 2;

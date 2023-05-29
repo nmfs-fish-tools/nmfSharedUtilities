@@ -111,6 +111,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a005b3dba029d281bbedbf50a7ec4f81d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a005b3dba029d281bbedbf50a7ec4f81d">exportDatabase</a> (QWidget *widget, std::string &amp;ProjectDir, std::string &amp;Username, std::string &amp;Password, std::string &amp;ProjectDatabase, const QString &amp;DefaultOutputFileName)</td></tr>
 <tr class="memdesc:a005b3dba029d281bbedbf50a7ec4f81d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports the passed database to a .sql output file.  <a href="classnmf_database.html#a005b3dba029d281bbedbf50a7ec4f81d">More...</a><br /></td></tr>
 <tr class="separator:a005b3dba029d281bbedbf50a7ec4f81d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b679465e55a6910d342e4279f3d359e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a9b679465e55a6910d342e4279f3d359e">findParametersUsingMinMax</a> (const int &amp;NumSpecies, const boost::numeric::ublas::matrix&lt; double &gt; Mat[2], std::vector&lt; int &gt; &amp;NumParametersNonTrivial, std::vector&lt; int &gt; &amp;NumParameters)</td></tr>
+<tr class="memdesc:a9b679465e55a6910d342e4279f3d359e"><td class="mdescLeft">&#160;</td><td class="mdescRight">updates the number of parameters per species vector using the passed in min/max matrices  <a href="classnmf_database.html#a9b679465e55a6910d342e4279f3d359e">More...</a><br /></td></tr>
+<tr class="separator:a9b679465e55a6910d342e4279f3d359e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bd419ef7bc5e557605447e5b554a3b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a8bd419ef7bc5e557605447e5b554a3b1">findParametersUsingMinMax</a> (const int &amp;NumSpecies, const std::vector&lt; double &gt; Vec[2], std::vector&lt; int &gt; &amp;NumParametersNonTrivial, std::vector&lt; int &gt; &amp;NumParameters)</td></tr>
+<tr class="memdesc:a8bd419ef7bc5e557605447e5b554a3b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">updates the number of parameters per species vector using the passed in min/max vectors  <a href="classnmf_database.html#a8bd419ef7bc5e557605447e5b554a3b1">More...</a><br /></td></tr>
+<tr class="separator:a8bd419ef7bc5e557605447e5b554a3b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a454b5b43c3ac708aa1a712e17b645674"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a454b5b43c3ac708aa1a712e17b645674">getAlgorithmIdentifiers</a> (QWidget *widget, <a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, std::string &amp;Algorithm, std::string &amp;Minimizer, std::string &amp;ObjectiveCriterion, std::string &amp;Scaling, std::string &amp;CompetitionForm, const bool &amp;showPopupError)</td></tr>
 <tr class="memdesc:a454b5b43c3ac708aa1a712e17b645674"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the identifying information for the current estimation algorithm selected.  <a href="classnmf_database.html#a454b5b43c3ac708aa1a712e17b645674">More...</a><br /></td></tr>
 <tr class="separator:a454b5b43c3ac708aa1a712e17b645674"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -168,9 +174,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9d4ad9914df311a54bf7f308afe88b3a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a9d4ad9914df311a54bf7f308afe88b3a">getHarvestData</a> (QWidget *parent, <a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;projectName, const std::string &amp;modelName, const int &amp;numSpeciesOrGuilds, const bool &amp;divideByOutputBiomass, const bool &amp;multiplyByOutputBiomass, const bool &amp;multiplyByCatchability, const std::vector&lt; double &gt; &amp;EstCatchability, const std::vector&lt; boost::numeric::ublas::matrix&lt; double &gt; &gt; &amp;OutputBiomass, boost::numeric::ublas::matrix&lt; double &gt; &amp;harvestData)</td></tr>
 <tr class="memdesc:a9d4ad9914df311a54bf7f308afe88b3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back harvest data associated with the passed in harvest type; harvest data may be a combination of other terms (i.e., catchability, effort)  <a href="classnmf_database.html#a9d4ad9914df311a54bf7f308afe88b3a">More...</a><br /></td></tr>
 <tr class="separator:a9d4ad9914df311a54bf7f308afe88b3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a90510a63e7112bbd71e731df41ceabf3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a90510a63e7112bbd71e731df41ceabf3">getHarvestDataByGuild</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;projectName, const std::string &amp;modelName, const QString &amp;outputChartType, const int &amp;numSpeciesOrGuilds, std::string &amp;chartLabel, boost::numeric::ublas::matrix&lt; double &gt; &amp;outputBiomass, boost::numeric::ublas::matrix&lt; double &gt; &amp;harvestData)</td></tr>
-<tr class="memdesc:a90510a63e7112bbd71e731df41ceabf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back harvest data by guild.  <a href="classnmf_database.html#a90510a63e7112bbd71e731df41ceabf3">More...</a><br /></td></tr>
-<tr class="separator:a90510a63e7112bbd71e731df41ceabf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8f5b30acd1a963862fb81c3bf3da333"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#af8f5b30acd1a963862fb81c3bf3da333">getHarvestDataByGuild</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;projectName, const std::string &amp;modelName, const QString &amp;outputChartType, const QString &amp;groupType, const int &amp;numSpeciesOrGuilds, std::string &amp;chartLabel, boost::numeric::ublas::matrix&lt; double &gt; &amp;outputBiomass, boost::numeric::ublas::matrix&lt; double &gt; &amp;harvestData)</td></tr>
+<tr class="memdesc:af8f5b30acd1a963862fb81c3bf3da333"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back harvest data by guild.  <a href="classnmf_database.html#af8f5b30acd1a963862fb81c3bf3da333">More...</a><br /></td></tr>
+<tr class="separator:af8f5b30acd1a963862fb81c3bf3da333"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe22417f66b0111d360d2ae6f438e7be"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#abe22417f66b0111d360d2ae6f438e7be">getHarvestFormData</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;projectName, const std::string &amp;modelName, int &amp;runLength, std::string &amp;harvestForm)</td></tr>
 <tr class="memdesc:abe22417f66b0111d360d2ae6f438e7be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back the harvest form data associated with the passed in parameters.  <a href="classnmf_database.html#abe22417f66b0111d360d2ae6f438e7be">More...</a><br /></td></tr>
 <tr class="separator:abe22417f66b0111d360d2ae6f438e7be"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -183,6 +189,24 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6bf1fc03bff85e0892830d45b59a5d25"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a6bf1fc03bff85e0892830d45b59a5d25">getMortalityData</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;ModelName, const std::string &amp;Species, const int &amp;NumYears, const int &amp;NumAges, const std::string TableName, boost::numeric::ublas::matrix&lt; double &gt; &amp;TableData)</td></tr>
 <tr class="memdesc:a6bf1fc03bff85e0892830d45b59a5d25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back mortality data (for MSCAA)  <a href="classnmf_database.html#a6bf1fc03bff85e0892830d45b59a5d25">More...</a><br /></td></tr>
 <tr class="separator:a6bf1fc03bff85e0892830d45b59a5d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fde97ade70880a60e9869b7ddd24bae"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a1fde97ade70880a60e9869b7ddd24bae">getNumParameters</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *Logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, std::map&lt; std::string, bool &gt; &amp;EstimateCheckboxStates, const int &amp;NumSpecies, std::vector&lt; int &gt; &amp;NumParametersPerSpeciesNonTrivial, int &amp;NumParametersTotalNonTrivial, int &amp;NumParametersTotal)</td></tr>
+<tr class="memdesc:a1fde97ade70880a60e9869b7ddd24bae"><td class="mdescLeft">&#160;</td><td class="mdescRight">getNumParameters  <a href="classnmf_database.html#a1fde97ade70880a60e9869b7ddd24bae">More...</a><br /></td></tr>
+<tr class="separator:a1fde97ade70880a60e9869b7ddd24bae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6215c3f0ee5553093fb7fd58ebda39b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a6215c3f0ee5553093fb7fd58ebda39b0">getOutputData</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *Logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, const std::string &amp;TableName, const std::string &amp;algorithm, std::vector&lt; double &gt; &amp;vectorData)</td></tr>
+<tr class="memdesc:a6215c3f0ee5553093fb7fd58ebda39b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets output (i.e., estimated) vector data.  <a href="classnmf_database.html#a6215c3f0ee5553093fb7fd58ebda39b0">More...</a><br /></td></tr>
+<tr class="separator:a6215c3f0ee5553093fb7fd58ebda39b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e66ae22ffbda2834d9989aaaafeb81a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a1e66ae22ffbda2834d9989aaaafeb81a">getOutputData</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *Logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, const std::string &amp;TableName, const std::string &amp;Algorithm, boost::numeric::ublas::matrix&lt; double &gt; &amp;MatrixData)</td></tr>
+<tr class="memdesc:a1e66ae22ffbda2834d9989aaaafeb81a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets output (i.e., estimated) matrix data.  <a href="classnmf_database.html#a1e66ae22ffbda2834d9989aaaafeb81a">More...</a><br /></td></tr>
+<tr class="separator:a1e66ae22ffbda2834d9989aaaafeb81a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a606a9b341c01434488705d27093e74"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a0a606a9b341c01434488705d27093e74">getParametersCompetition</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *Logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, const std::string &amp;CompetitionForm, const int &amp;NumSpecies, std::map&lt; std::string, bool &gt; &amp;EstimateCheckboxStates, std::vector&lt; int &gt; &amp;NumParametersNonTrivial, std::vector&lt; int &gt; &amp;NumParameters)</td></tr>
+<tr class="memdesc:a0a606a9b341c01434488705d27093e74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back the number of competition parameters per species in a vector.  <a href="classnmf_database.html#a0a606a9b341c01434488705d27093e74">More...</a><br /></td></tr>
+<tr class="separator:a0a606a9b341c01434488705d27093e74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18656af6c8c0d270fae0e3508d47e612"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a18656af6c8c0d270fae0e3508d47e612">getParametersCovariates</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *Logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, std::map&lt; std::string, bool &gt; &amp;EstimateCheckboxStates, std::vector&lt; int &gt; &amp;NumParametersNonTrivial, std::vector&lt; int &gt; &amp;NumParameters)</td></tr>
+<tr class="memdesc:a18656af6c8c0d270fae0e3508d47e612"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back the number of covariate parameters per species in a vector.  <a href="classnmf_database.html#a18656af6c8c0d270fae0e3508d47e612">More...</a><br /></td></tr>
+<tr class="separator:a18656af6c8c0d270fae0e3508d47e612"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe9217aed40190da990fffbf0c838cdd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#afe9217aed40190da990fffbf0c838cdd">getParametersPredation</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *Logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, const std::string &amp;PredationForm, const int &amp;NumSpecies, std::map&lt; std::string, bool &gt; &amp;EstimateCheckboxStates, std::vector&lt; int &gt; &amp;NumParametersNonTrivial, std::vector&lt; int &gt; &amp;NumParameters)</td></tr>
+<tr class="memdesc:afe9217aed40190da990fffbf0c838cdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back the number of predation parameters per species in a vector.  <a href="classnmf_database.html#afe9217aed40190da990fffbf0c838cdd">More...</a><br /></td></tr>
+<tr class="separator:afe9217aed40190da990fffbf0c838cdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a899150ed7478779552b0062f3a2ee1a3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a899150ed7478779552b0062f3a2ee1a3">getPredationData</a> (const std::string &amp;PredationType, <a class="el" href="classnmf_logger.html">nmfLogger</a> *Logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, const int &amp;NumSpecies, boost::numeric::ublas::matrix&lt; double &gt; &amp;Rho, boost::numeric::ublas::matrix&lt; double &gt; &amp;Handling, std::vector&lt; double &gt; &amp;Exponent)</td></tr>
 <tr class="memdesc:a899150ed7478779552b0062f3a2ee1a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back predation data depending upon the predation type passed in.  <a href="classnmf_database.html#a899150ed7478779552b0062f3a2ee1a3">More...</a><br /></td></tr>
 <tr class="separator:a899150ed7478779552b0062f3a2ee1a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -195,9 +219,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a66300673f61f0acb8b4850e9afad2a56"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a66300673f61f0acb8b4850e9afad2a56">getSpeciesInitialCovariateData</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *Logger, std::string &amp;ProjectName, std::string &amp;ModelName, std::vector&lt; double &gt; &amp;GrowthRateCovariateCoeffs, std::vector&lt; double &gt; &amp;CarryingCapacityCovariateCoeffs, std::vector&lt; double &gt; &amp;CatchabilityCovariateCoeffs, std::vector&lt; double &gt; &amp;SurveyQCovariateCoeffs)</td></tr>
 <tr class="memdesc:a66300673f61f0acb8b4850e9afad2a56"><td class="mdescLeft">&#160;</td><td class="mdescRight">getSpeciesInitialCovariateData  <a href="classnmf_database.html#a66300673f61f0acb8b4850e9afad2a56">More...</a><br /></td></tr>
 <tr class="separator:a66300673f61f0acb8b4850e9afad2a56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b388017b28887c35040e5f27c4236a3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a3b388017b28887c35040e5f27c4236a3">getSpeciesInitialData</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *Logger, int &amp;NumSpecies, QStringList &amp;SpeciesList, std::vector&lt; double &gt; &amp;InitBiomass, std::vector&lt; double &gt; &amp;GrowthRate, std::vector&lt; double &gt; &amp;SpeciesK)</td></tr>
-<tr class="memdesc:a3b388017b28887c35040e5f27c4236a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back initial data for all species.  <a href="classnmf_database.html#a3b388017b28887c35040e5f27c4236a3">More...</a><br /></td></tr>
-<tr class="separator:a3b388017b28887c35040e5f27c4236a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63169be5a6303e08bcc26de6690647ef"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a63169be5a6303e08bcc26de6690647ef">getSpeciesInitialData</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *Logger, int &amp;NumSpecies, QStringList &amp;SpeciesList, std::vector&lt; double &gt; &amp;InitBiomass, std::vector&lt; double &gt; &amp;GrowthRate, std::vector&lt; double &gt; &amp;GrowthRateShape, std::vector&lt; double &gt; &amp;SpeciesK)</td></tr>
+<tr class="memdesc:a63169be5a6303e08bcc26de6690647ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back initial data for all species.  <a href="classnmf_database.html#a63169be5a6303e08bcc26de6690647ef">More...</a><br /></td></tr>
+<tr class="separator:a63169be5a6303e08bcc26de6690647ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a907bb7e79fde1734d733168e43668469"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a907bb7e79fde1734d733168e43668469">getSpeciesGuildMap</a> (std::map&lt; std::string, std::string &gt; &amp;SpeciesGuildMap)</td></tr>
 <tr class="memdesc:a907bb7e79fde1734d733168e43668469"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates and returns a species guild map, that is, a map of what species are in what guild.  <a href="classnmf_database.html#a907bb7e79fde1734d733168e43668469">More...</a><br /></td></tr>
 <tr class="separator:a907bb7e79fde1734d733168e43668469"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -213,9 +237,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af1562cc1bf25efaf404b52e6256af7a3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#af1562cc1bf25efaf404b52e6256af7a3">getTimeSeriesData</a> (QWidget *Widget, <a class="el" href="classnmf_logger.html">nmfLogger</a> *Logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, const std::string ForecastName, const std::string &amp;TableName, const int &amp;NumSpecies, const int &amp;RunLength, boost::numeric::ublas::matrix&lt; double &gt; &amp;TableData)</td></tr>
 <tr class="memdesc:af1562cc1bf25efaf404b52e6256af7a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back the time series (by species) associated with the passed table information.  <a href="classnmf_database.html#af1562cc1bf25efaf404b52e6256af7a3">More...</a><br /></td></tr>
 <tr class="separator:af1562cc1bf25efaf404b52e6256af7a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf857ecb24772db09bb2268fbb3cc530"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#abf857ecb24772db09bb2268fbb3cc530">getTimeSeriesDataByGuild</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, const std::string &amp;ForecastName, const std::string &amp;TableName, const int &amp;NumGuilds, const int &amp;RunLength, const QString &amp;OutputChartType, boost::numeric::ublas::matrix&lt; double &gt; &amp;Biomass, boost::numeric::ublas::matrix&lt; double &gt; &amp;TableData)</td></tr>
-<tr class="memdesc:abf857ecb24772db09bb2268fbb3cc530"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back the time series (by guild) associated with the passed table information.  <a href="classnmf_database.html#abf857ecb24772db09bb2268fbb3cc530">More...</a><br /></td></tr>
-<tr class="separator:abf857ecb24772db09bb2268fbb3cc530"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a046ba3e4cc3de0f20b7b8c502c0480b8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a046ba3e4cc3de0f20b7b8c502c0480b8">getTimeSeriesDataByGuild</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, const std::string &amp;ForecastName, const std::string &amp;TableName, const QString &amp;GroupType, const int &amp;NumGuilds, const int &amp;RunLength, const QString &amp;OutputChartType, boost::numeric::ublas::matrix&lt; double &gt; &amp;Biomass, boost::numeric::ublas::matrix&lt; double &gt; &amp;TableData)</td></tr>
+<tr class="memdesc:a046ba3e4cc3de0f20b7b8c502c0480b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends back the time series (by guild) associated with the passed table information.  <a href="classnmf_database.html#a046ba3e4cc3de0f20b7b8c502c0480b8">More...</a><br /></td></tr>
+<tr class="separator:a046ba3e4cc3de0f20b7b8c502c0480b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6ee39b669023cc534c9265d2be7c3be"><td class="memItemLeft" align="right" valign="top">QStringList&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#ab6ee39b669023cc534c9265d2be7c3be">getVectorParameterNames</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;ProjectName, const std::string &amp;ModelName)</td></tr>
 <tr class="memdesc:ab6ee39b669023cc534c9265d2be7c3be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns list of current estimated parameter names.  <a href="classnmf_database.html#ab6ee39b669023cc534c9265d2be7c3be">More...</a><br /></td></tr>
 <tr class="separator:ab6ee39b669023cc534c9265d2be7c3be"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -228,12 +252,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8e0e3a7c220e03c4463baab684ef4369"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a8e0e3a7c220e03c4463baab684ef4369">loadEstimatedVectorParameters</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, QComboBox *cmbox)</td></tr>
 <tr class="memdesc:a8e0e3a7c220e03c4463baab684ef4369"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the estimated parameter names into the passed combo box widget.  <a href="classnmf_database.html#a8e0e3a7c220e03c4463baab684ef4369">More...</a><br /></td></tr>
 <tr class="separator:a8e0e3a7c220e03c4463baab684ef4369"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79437204721d5483a1b7d84296d845ee"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a79437204721d5483a1b7d84296d845ee">loadMatrix</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::vector&lt; std::map&lt; std::string, std::vector&lt; std::string &gt; &gt; &gt; &amp;dataMaps, const int &amp;numRows, const int &amp;numCols, boost::numeric::ublas::matrix&lt; double &gt; &amp;matrix)</td></tr>
-<tr class="memdesc:a79437204721d5483a1b7d84296d845ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience routine to load a matrix from a passed in vector of table data maps.  <a href="classnmf_database.html#a79437204721d5483a1b7d84296d845ee">More...</a><br /></td></tr>
-<tr class="separator:a79437204721d5483a1b7d84296d845ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51d7102e597ea4527c3798ada71d1d15"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a51d7102e597ea4527c3798ada71d1d15">loadVector</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::vector&lt; std::map&lt; std::string, std::vector&lt; std::string &gt; &gt; &gt; &amp;dataMaps, const int &amp;numRows, std::vector&lt; double &gt; &amp;vector)</td></tr>
-<tr class="memdesc:a51d7102e597ea4527c3798ada71d1d15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience routine to load a vector from a passed in vector of table data maps.  <a href="classnmf_database.html#a51d7102e597ea4527c3798ada71d1d15">More...</a><br /></td></tr>
-<tr class="separator:a51d7102e597ea4527c3798ada71d1d15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f43554ac47e42a09a7406c06679395a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a7f43554ac47e42a09a7406c06679395a">loadMatrix</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, std::map&lt; std::string, std::vector&lt; std::string &gt; &gt; &amp;dataMap, const int &amp;NumRows, const int &amp;NumCols, boost::numeric::ublas::matrix&lt; double &gt; &amp;matrix)</td></tr>
+<tr class="memdesc:a7f43554ac47e42a09a7406c06679395a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience routine to load a matrix from a passed in table data map.  <a href="classnmf_database.html#a7f43554ac47e42a09a7406c06679395a">More...</a><br /></td></tr>
+<tr class="separator:a7f43554ac47e42a09a7406c06679395a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa037ab874920b23709eafe6552dfd5b8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#aa037ab874920b23709eafe6552dfd5b8">loadVector</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, std::map&lt; std::string, std::vector&lt; std::string &gt; &gt; &amp;dataMap, const int &amp;numRows, std::vector&lt; double &gt; &amp;vector)</td></tr>
+<tr class="memdesc:aa037ab874920b23709eafe6552dfd5b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience routine to load a vector from a passed in table data map.  <a href="classnmf_database.html#aa037ab874920b23709eafe6552dfd5b8">More...</a><br /></td></tr>
+<tr class="separator:aa037ab874920b23709eafe6552dfd5b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ce2984b0ef9ca78567febe737494e91"><td class="memItemLeft" align="right" valign="top"><a id="a7ce2984b0ef9ca78567febe737494e91"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a7ce2984b0ef9ca78567febe737494e91">nmfCloseDatabase</a> ()</td></tr>
 <tr class="memdesc:a7ce2984b0ef9ca78567febe737494e91"><td class="mdescLeft">&#160;</td><td class="mdescRight">nmfCloseDatabase <br /></td></tr>
@@ -319,6 +343,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:adab48921018d7d196745f1d3b57f94c2"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#adab48921018d7d196745f1d3b57f94c2">nmfUpdateDatabase</a> (std::string qry)</td></tr>
 <tr class="memdesc:adab48921018d7d196745f1d3b57f94c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a non-query database command (i.e. delete).  <a href="classnmf_database.html#adab48921018d7d196745f1d3b57f94c2">More...</a><br /></td></tr>
 <tr class="separator:adab48921018d7d196745f1d3b57f94c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a735cd9287a10793e6fa09d95611bcb42"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a735cd9287a10793e6fa09d95611bcb42">readTablesAndGetNumParameters</a> (<a class="el" href="classnmf_logger.html">nmfLogger</a> *Logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, const int &amp;NumSpecies, const std::vector&lt; std::string &gt; &amp;TableNames, std::vector&lt; int &gt; &amp;NumParametersNonTrivial, std::vector&lt; int &gt; &amp;NumParameters)</td></tr>
+<tr class="memdesc:a735cd9287a10793e6fa09d95611bcb42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the appropriate min/max tables and calculates the number of parameters per species. A parameter is counted for every min cell whose value is not equal to its corresponding max cell value.  <a href="classnmf_database.html#a735cd9287a10793e6fa09d95611bcb42">More...</a><br /></td></tr>
+<tr class="separator:a735cd9287a10793e6fa09d95611bcb42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac15b526660ab3cf231e1860c02bfbbfa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#ac15b526660ab3cf231e1860c02bfbbfa">RestoreCSVFile</a> (QString &amp;TableName, std::string &amp;ProjectDir, std::vector&lt; std::string &gt; &amp;fields)</td></tr>
 <tr class="memdesc:ac15b526660ab3cf231e1860c02bfbbfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restores the appropriate CSV from from the given table.  <a href="classnmf_database.html#ac15b526660ab3cf231e1860c02bfbbfa">More...</a><br /></td></tr>
 <tr class="separator:ac15b526660ab3cf231e1860c02bfbbfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -331,9 +358,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a6b29296b4d8b2609e89943101e951abd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a6b29296b4d8b2609e89943101e951abd">updateAllModelsInProject</a> (QWidget *parent, const std::string &amp;type, const std::string &amp;projectName, const std::string &amp;currentModel, std::vector&lt; std::string &gt; &amp;modelsInProject)</td></tr>
 <tr class="memdesc:a6b29296b4d8b2609e89943101e951abd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates all of the models in the current project (necessary when observed biomass changes for one model)  <a href="classnmf_database.html#a6b29296b4d8b2609e89943101e951abd">More...</a><br /></td></tr>
 <tr class="separator:a6b29296b4d8b2609e89943101e951abd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f0aaa525a086846ddedb10a8b0f0280"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a5f0aaa525a086846ddedb10a8b0f0280">updateForecastMonteCarloParameters</a> (QWidget *widget, <a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, const std::string &amp;ForecastName, const std::string &amp;Algorithm, const std::string &amp;Minimizer, const std::string &amp;ObjectiveCriterion, const std::string &amp;Scaling, const QStringList &amp;Species, const int &amp;RunNumber, const std::vector&lt; double &gt; &amp;GrowthRandomValues, const std::vector&lt; double &gt; &amp;CarryingCapacityRandomValues, const std::vector&lt; double &gt; &amp;CatchabilityRandomValues, const std::vector&lt; double &gt; &amp;ExponentRandomValues, const std::vector&lt; double &gt; &amp;CompetitionAlphaRandomValues, const std::vector&lt; double &gt; &amp;CompetitionBetaSpeciesRandomValues, const std::vector&lt; double &gt; &amp;CompetitionBetaGuildsRandomValues, const std::vector&lt; double &gt; &amp;CompetitionBetaGuildsGuildsRandomValues, const std::vector&lt; double &gt; &amp;PredationRandomValues, const std::vector&lt; double &gt; &amp;HandlingRandomValues, const std::vector&lt; double &gt; &amp;HarvestRandomValues, const std::vector&lt; double &gt; &amp;GrowthRateCovCoeffRandomValues, const std::vector&lt; double &gt; &amp;CarryingCapacityCovCoeffRandomValues, const std::vector&lt; double &gt; &amp;CatchabilityCovCoeffRandomValues, const std::vector&lt; double &gt; &amp;SurveyQCovCoeffRandomValues)</td></tr>
-<tr class="memdesc:a5f0aaa525a086846ddedb10a8b0f0280"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the appropriate table with the Monte Carlo Forecast runs.  <a href="classnmf_database.html#a5f0aaa525a086846ddedb10a8b0f0280">More...</a><br /></td></tr>
-<tr class="separator:a5f0aaa525a086846ddedb10a8b0f0280"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab64e38e932ff136decf7cf53c6535a43"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#ab64e38e932ff136decf7cf53c6535a43">updateForecastMonteCarloParameters</a> (QWidget *widget, <a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;ProjectName, const std::string &amp;ModelName, const std::string &amp;ForecastName, const std::string &amp;Algorithm, const std::string &amp;Minimizer, const std::string &amp;ObjectiveCriterion, const std::string &amp;Scaling, const QStringList &amp;Species, const int &amp;RunNumber, const std::vector&lt; double &gt; &amp;GrowthRandomValues, const std::vector&lt; double &gt; &amp;GrowthRateShapeRandomValues, const std::vector&lt; double &gt; &amp;CarryingCapacityRandomValues, const std::vector&lt; double &gt; &amp;CatchabilityRandomValues, const std::vector&lt; double &gt; &amp;ExponentRandomValues, const std::vector&lt; double &gt; &amp;CompetitionAlphaRandomValues, const std::vector&lt; double &gt; &amp;CompetitionBetaSpeciesRandomValues, const std::vector&lt; double &gt; &amp;CompetitionBetaGuildsRandomValues, const std::vector&lt; double &gt; &amp;CompetitionBetaGuildsGuildsRandomValues, const std::vector&lt; double &gt; &amp;PredationRandomValues, const std::vector&lt; double &gt; &amp;HandlingRandomValues, const std::vector&lt; double &gt; &amp;HarvestRandomValues, const std::vector&lt; double &gt; &amp;GrowthRateCovCoeffRandomValues, const std::vector&lt; double &gt; &amp;CarryingCapacityCovCoeffRandomValues, const std::vector&lt; double &gt; &amp;CatchabilityCovCoeffRandomValues, const std::vector&lt; double &gt; &amp;SurveyQCovCoeffRandomValues)</td></tr>
+<tr class="memdesc:ab64e38e932ff136decf7cf53c6535a43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the appropriate table with the Monte Carlo Forecast runs.  <a href="classnmf_database.html#ab64e38e932ff136decf7cf53c6535a43">More...</a><br /></td></tr>
+<tr class="separator:ab64e38e932ff136decf7cf53c6535a43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7dd3b9daea340827b8714ab4aaad3e20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_database.html#a7dd3b9daea340827b8714ab4aaad3e20">updateUnitsTable</a> (QWidget *parent, <a class="el" href="classnmf_logger.html">nmfLogger</a> *logger, const std::string &amp;projectName, const std::string &amp;modelName, const std::string &amp;tableName, const std::string &amp;units)</td></tr>
 <tr class="memdesc:a7dd3b9daea340827b8714ab4aaad3e20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the units database table with the units corresponding to the table shown in the GUI.  <a href="classnmf_database.html#a7dd3b9daea340827b8714ab4aaad3e20">More...</a><br /></td></tr>
 <tr class="separator:a7dd3b9daea340827b8714ab4aaad3e20"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -865,6 +892,108 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
     <tr><td class="paramname">Password</td><td>: current password </td></tr>
     <tr><td class="paramname">ProjectDatabase</td><td>: name of the database to export </td></tr>
     <tr><td class="paramname">DefaultOutputFileName</td><td>: name of the default file to use to save exported database </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9b679465e55a6910d342e4279f3d359e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b679465e55a6910d342e4279f3d359e">&#9670;&nbsp;</a></span>findParametersUsingMinMax() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfDatabase::findParametersUsingMinMax </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>NumSpecies</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const boost::numeric::ublas::matrix&lt; double &gt;&#160;</td>
+          <td class="paramname"><em>Mat</em>[2], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>NumParametersNonTrivial</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>NumParameters</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>updates the number of parameters per species vector using the passed in min/max matrices </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">NumSpecies</td><td>: number of species </td></tr>
+    <tr><td class="paramname">Mat</td><td>: min/max matrices containing parameter data </td></tr>
+    <tr><td class="paramname">NumParametersNonTrivial</td><td>: number of non-trivial parameters vector returned to calling method (a non-trivial parameter is a parameter whose min range value != max range value) </td></tr>
+    <tr><td class="paramname">NumParameters</td><td>: number of parameters vector returned to calling method </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8bd419ef7bc5e557605447e5b554a3b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bd419ef7bc5e557605447e5b554a3b1">&#9670;&nbsp;</a></span>findParametersUsingMinMax() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfDatabase::findParametersUsingMinMax </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>NumSpecies</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; double &gt;&#160;</td>
+          <td class="paramname"><em>Vec</em>[2], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>NumParametersNonTrivial</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>NumParameters</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>updates the number of parameters per species vector using the passed in min/max vectors </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">NumSpecies</td><td>: number of species </td></tr>
+    <tr><td class="paramname">Vec</td><td>: min/max vectors containing parameter data </td></tr>
+    <tr><td class="paramname">NumParametersNonTrivial</td><td>: number of non-trivial parameters vector returned to calling method (a non-trivial parameter is a parameter whose min range value != max range value) </td></tr>
+    <tr><td class="paramname">NumParameters</td><td>: number of parameters vector returned to calling method </td></tr>
   </table>
   </dd>
 </dl>
@@ -2304,8 +2433,8 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
 
 </div>
 </div>
-<a id="a90510a63e7112bbd71e731df41ceabf3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a90510a63e7112bbd71e731df41ceabf3">&#9670;&nbsp;</a></span>getHarvestDataByGuild()</h2>
+<a id="af8f5b30acd1a963862fb81c3bf3da333"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8f5b30acd1a963862fb81c3bf3da333">&#9670;&nbsp;</a></span>getHarvestDataByGuild()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2333,6 +2462,12 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
           <td></td>
           <td class="paramtype">const QString &amp;&#160;</td>
           <td class="paramname"><em>outputChartType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>groupType</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -2373,6 +2508,7 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
     <tr><td class="paramname">projectName</td><td>: name of current project </td></tr>
     <tr><td class="paramname">modelName</td><td>: name of current model </td></tr>
     <tr><td class="paramname">outputChartType</td><td>: type of harvest output chart desired </td></tr>
+    <tr><td class="paramname">groupType</td><td>: group type is either Species, Guild, or System </td></tr>
     <tr><td class="paramname">numSpeciesOrGuilds</td><td>: number of species or guilds displayed </td></tr>
     <tr><td class="paramname">chartLabel</td><td>: chart label to display </td></tr>
     <tr><td class="paramname">outputBiomass</td><td>: the output biomass </td></tr>
@@ -2629,6 +2765,442 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
     <tr><td class="paramname">NumAges</td><td>: number of age groups in data (y-dimension) </td></tr>
     <tr><td class="paramname">TableName</td><td>: name of database table </td></tr>
     <tr><td class="paramname">TableData</td><td>: matrix sent back with the mortality data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if no errors reading table data, false otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a1fde97ade70880a60e9869b7ddd24bae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fde97ade70880a60e9869b7ddd24bae">&#9670;&nbsp;</a></span>getNumParameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfDatabase::getNumParameters </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classnmf_logger.html">nmfLogger</a> *&#160;</td>
+          <td class="paramname"><em>Logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>ProjectName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>ModelName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::map&lt; std::string, bool &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstimateCheckboxStates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>NumSpecies</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>NumParametersPerSpeciesNonTrivial</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>NumParametersTotalNonTrivial</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>NumParametersTotal</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>getNumParameters </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Logger</td><td>: logger pointer used to log any errors </td></tr>
+    <tr><td class="paramname">ProjectName</td><td>: name of current project </td></tr>
+    <tr><td class="paramname">ModelName</td><td>: name of current model </td></tr>
+    <tr><td class="paramname">EstimateCheckboxStates</td><td>: boolean states of all of the Estimate checkboxes on Estimation Tab7 </td></tr>
+    <tr><td class="paramname">NumSpecies</td><td>: number of species </td></tr>
+    <tr><td class="paramname">NumParametersPerSpeciesNonTrivial</td><td>: vector containing number of parameters per species </td></tr>
+    <tr><td class="paramname">NumParametersTotalNonTrivial</td><td>: total number of non-trivial parameters over all species (non-trivial parameter is a parameter where min range value != max range value) </td></tr>
+    <tr><td class="paramname">NumParametersTotal</td><td>: total number of parameters over all species </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if no error found, false otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a1e66ae22ffbda2834d9989aaaafeb81a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e66ae22ffbda2834d9989aaaafeb81a">&#9670;&nbsp;</a></span>getOutputData() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfDatabase::getOutputData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classnmf_logger.html">nmfLogger</a> *&#160;</td>
+          <td class="paramname"><em>Logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>ProjectName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>ModelName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>TableName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>Algorithm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boost::numeric::ublas::matrix&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>MatrixData</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets output (i.e., estimated) matrix data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Logger</td><td>: logger pointer used to log any errors </td></tr>
+    <tr><td class="paramname">ProjectName</td><td>: name of current project </td></tr>
+    <tr><td class="paramname">ModelName</td><td>: name of current model </td></tr>
+    <tr><td class="paramname">TableName</td><td>: name of output data table </td></tr>
+    <tr><td class="paramname">Algorithm</td><td>: algorithm to use if HPC data </td></tr>
+    <tr><td class="paramname">MatrixData</td><td>: matrix holding data read in from passed table name </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6215c3f0ee5553093fb7fd58ebda39b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6215c3f0ee5553093fb7fd58ebda39b0">&#9670;&nbsp;</a></span>getOutputData() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfDatabase::getOutputData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classnmf_logger.html">nmfLogger</a> *&#160;</td>
+          <td class="paramname"><em>Logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>ProjectName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>ModelName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>TableName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>algorithm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>vectorData</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets output (i.e., estimated) vector data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Logger</td><td>: logger pointer used to log any errors </td></tr>
+    <tr><td class="paramname">ProjectName</td><td>: name of current project </td></tr>
+    <tr><td class="paramname">ModelName</td><td>: name of current model </td></tr>
+    <tr><td class="paramname">TableName</td><td>: name of output data table </td></tr>
+    <tr><td class="paramname">algorithm</td><td>: algorithm to use if HPC data </td></tr>
+    <tr><td class="paramname">vectorData</td><td>: vector holding data read in from passed table name </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0a606a9b341c01434488705d27093e74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a606a9b341c01434488705d27093e74">&#9670;&nbsp;</a></span>getParametersCompetition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfDatabase::getParametersCompetition </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classnmf_logger.html">nmfLogger</a> *&#160;</td>
+          <td class="paramname"><em>Logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>ProjectName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>ModelName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>CompetitionForm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>NumSpecies</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::map&lt; std::string, bool &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstimateCheckboxStates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>NumParametersNonTrivial</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>NumParameters</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sends back the number of competition parameters per species in a vector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Logger</td><td>: logger pointer used to log any errors </td></tr>
+    <tr><td class="paramname">ProjectName</td><td>: name of current project </td></tr>
+    <tr><td class="paramname">ModelName</td><td>: name of current model </td></tr>
+    <tr><td class="paramname">CompetitionForm</td><td>: the competition form (i.e., NO_K, MS-PROD) </td></tr>
+    <tr><td class="paramname">NumSpecies</td><td>: number of species </td></tr>
+    <tr><td class="paramname">EstimateCheckboxStates</td><td>: boolean states of all of the Estimate checkboxes on Estimation Tab7 </td></tr>
+    <tr><td class="paramname">NumParametersTotalNonTrivial</td><td>: total number of non-trivial parameters over all species (non-trivial parameter is a parameter where min range value != max range value) </td></tr>
+    <tr><td class="paramname">NumParameters</td><td>: vector containing the number of parameters/species (a parameter is counted if cell min != cell max for the associated predation matrix or vector) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if no errors reading table data, false otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a18656af6c8c0d270fae0e3508d47e612"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18656af6c8c0d270fae0e3508d47e612">&#9670;&nbsp;</a></span>getParametersCovariates()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfDatabase::getParametersCovariates </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classnmf_logger.html">nmfLogger</a> *&#160;</td>
+          <td class="paramname"><em>Logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>ProjectName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>ModelName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::map&lt; std::string, bool &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstimateCheckboxStates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>NumParametersNonTrivial</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>NumParameters</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sends back the number of covariate parameters per species in a vector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Logger</td><td>: logger pointer used to log any errors </td></tr>
+    <tr><td class="paramname">ProjectName</td><td>: name of current project </td></tr>
+    <tr><td class="paramname">ModelName</td><td>: name of current model </td></tr>
+    <tr><td class="paramname">EstimateCheckboxStates</td><td>: boolean states of all of the Estimate checkboxes on Estimation Tab7 (currently unused, here in case a checkbox is added in the future) </td></tr>
+    <tr><td class="paramname">NumParametersTotalNonTrivial</td><td>: total number of non-trivial parameters over all species (non-trivial parameter is a parameter where min range value != max range value) </td></tr>
+    <tr><td class="paramname">NumParameters</td><td>: vector containing the number of parameters/species (a parameter is counted if cell min != cell max for the associated predation matrix or vector) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if no errors reading table data, false otherwise </dd></dl>
+
+</div>
+</div>
+<a id="afe9217aed40190da990fffbf0c838cdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe9217aed40190da990fffbf0c838cdd">&#9670;&nbsp;</a></span>getParametersPredation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfDatabase::getParametersPredation </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classnmf_logger.html">nmfLogger</a> *&#160;</td>
+          <td class="paramname"><em>Logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>ProjectName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>ModelName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>PredationForm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>NumSpecies</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::map&lt; std::string, bool &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstimateCheckboxStates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>NumParametersNonTrivial</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>NumParameters</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sends back the number of predation parameters per species in a vector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Logger</td><td>: logger pointer used to log any errors </td></tr>
+    <tr><td class="paramname">ProjectName</td><td>: name of current project </td></tr>
+    <tr><td class="paramname">ModelName</td><td>: name of current model </td></tr>
+    <tr><td class="paramname">PredationForm</td><td>: the predation form (i.e., Type I, Type II, Type III) </td></tr>
+    <tr><td class="paramname">NumSpecies</td><td>: number of species </td></tr>
+    <tr><td class="paramname">EstimateCheckboxStates</td><td>: states of the Estimate checkbox on Estimation Tab 7 </td></tr>
+    <tr><td class="paramname">NumParametersTotalNonTrivial</td><td>: total number of non-trivial parameters over all species (non-trivial parameter is a parameter where min range value != max range value) </td></tr>
+    <tr><td class="paramname">NumParameters</td><td>: vector containing the number of parameters/species (a parameter is counted if cell min != cell max for the associated predation matrix or vector) </td></tr>
   </table>
   </dd>
 </dl>
@@ -3071,8 +3643,8 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
 
 </div>
 </div>
-<a id="a3b388017b28887c35040e5f27c4236a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b388017b28887c35040e5f27c4236a3">&#9670;&nbsp;</a></span>getSpeciesInitialData()</h2>
+<a id="a63169be5a6303e08bcc26de6690647ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63169be5a6303e08bcc26de6690647ef">&#9670;&nbsp;</a></span>getSpeciesInitialData()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3111,6 +3683,12 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>GrowthRateShape</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
           <td class="paramname"><em>SpeciesK</em>&#160;</td>
         </tr>
         <tr>
@@ -3129,6 +3707,7 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
     <tr><td class="paramname">SpeciesList</td><td>: list of species names found </td></tr>
     <tr><td class="paramname">InitBiomass</td><td>: initial biomass for all species </td></tr>
     <tr><td class="paramname">GrowthRate</td><td>: growth rate for all species </td></tr>
+    <tr><td class="paramname">GrowthRateShape</td><td>: growth rate shape parameter for all species </td></tr>
     <tr><td class="paramname">SpeciesK</td><td>: carrying capacity for all species </td></tr>
   </table>
   </dd>
@@ -3288,8 +3867,8 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
 
 </div>
 </div>
-<a id="abf857ecb24772db09bb2268fbb3cc530"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abf857ecb24772db09bb2268fbb3cc530">&#9670;&nbsp;</a></span>getTimeSeriesDataByGuild()</h2>
+<a id="a046ba3e4cc3de0f20b7b8c502c0480b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a046ba3e4cc3de0f20b7b8c502c0480b8">&#9670;&nbsp;</a></span>getTimeSeriesDataByGuild()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3323,6 +3902,12 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
           <td></td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>TableName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>GroupType</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -3370,6 +3955,7 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
     <tr><td class="paramname">ModelName</td><td>: name of current model </td></tr>
     <tr><td class="paramname">ForecastName</td><td>: name of forecast (if it's forecast data) </td></tr>
     <tr><td class="paramname">TableName</td><td>: name of table </td></tr>
+    <tr><td class="paramname">GroupType</td><td>: group type is Species, Guild, or System </td></tr>
     <tr><td class="paramname">NumGuilds</td><td>: number of guilds </td></tr>
     <tr><td class="paramname">RunLength</td><td>: length of run in years </td></tr>
     <tr><td class="paramname">OutputChartType</td><td>: type of output chart </td></tr>
@@ -3582,8 +4168,8 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
 
 </div>
 </div>
-<a id="a79437204721d5483a1b7d84296d845ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a79437204721d5483a1b7d84296d845ee">&#9670;&nbsp;</a></span>loadMatrix()</h2>
+<a id="a7f43554ac47e42a09a7406c06679395a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f43554ac47e42a09a7406c06679395a">&#9670;&nbsp;</a></span>loadMatrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3597,20 +4183,20 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::vector&lt; std::map&lt; std::string, std::vector&lt; std::string &gt; &gt; &gt; &amp;&#160;</td>
-          <td class="paramname"><em>dataMaps</em>, </td>
+          <td class="paramtype">std::map&lt; std::string, std::vector&lt; std::string &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dataMap</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numRows</em>, </td>
+          <td class="paramname"><em>NumRows</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numCols</em>, </td>
+          <td class="paramname"><em>NumCols</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -3626,11 +4212,11 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
       </table>
 </div><div class="memdoc">
 
-<p>Convenience routine to load a matrix from a passed in vector of table data maps. </p>
+<p>Convenience routine to load a matrix from a passed in table data map. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">logger</td><td>; logger pointer used to log any error messages </td></tr>
-    <tr><td class="paramname">dataMaps</td><td>: table data maps to extract data from </td></tr>
+    <tr><td class="paramname">dataMap</td><td>: table data map to extract data from </td></tr>
     <tr><td class="paramname">numRows</td><td>: number of rows in table </td></tr>
     <tr><td class="paramname">numCols</td><td>: number of columns in table </td></tr>
     <tr><td class="paramname">matrix</td><td>: matrix containing the table data </td></tr>
@@ -3641,8 +4227,8 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
 
 </div>
 </div>
-<a id="a51d7102e597ea4527c3798ada71d1d15"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51d7102e597ea4527c3798ada71d1d15">&#9670;&nbsp;</a></span>loadVector()</h2>
+<a id="aa037ab874920b23709eafe6552dfd5b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa037ab874920b23709eafe6552dfd5b8">&#9670;&nbsp;</a></span>loadVector()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3656,8 +4242,8 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::vector&lt; std::map&lt; std::string, std::vector&lt; std::string &gt; &gt; &gt; &amp;&#160;</td>
-          <td class="paramname"><em>dataMaps</em>, </td>
+          <td class="paramtype">std::map&lt; std::string, std::vector&lt; std::string &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>dataMap</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -3679,11 +4265,11 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
       </table>
 </div><div class="memdoc">
 
-<p>Convenience routine to load a vector from a passed in vector of table data maps. </p>
+<p>Convenience routine to load a vector from a passed in table data map. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">logger</td><td>; logger pointer used to log any error messages </td></tr>
-    <tr><td class="paramname">dataMaps</td><td>: table data maps to extract data from </td></tr>
+    <tr><td class="paramname">dataMap</td><td>: table data map to extract data from </td></tr>
     <tr><td class="paramname">numRows</td><td>: number of elements in table </td></tr>
     <tr><td class="paramname">vector</td><td>: vector containing the table data </td></tr>
   </table>
@@ -5143,6 +5729,79 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
 
 </div>
 </div>
+<a id="a735cd9287a10793e6fa09d95611bcb42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a735cd9287a10793e6fa09d95611bcb42">&#9670;&nbsp;</a></span>readTablesAndGetNumParameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfDatabase::readTablesAndGetNumParameters </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classnmf_logger.html">nmfLogger</a> *&#160;</td>
+          <td class="paramname"><em>Logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>ProjectName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>ModelName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>NumSpecies</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>TableNames</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>NumParametersNonTrivial</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>NumParameters</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reads the appropriate min/max tables and calculates the number of parameters per species. A parameter is counted for every min cell whose value is not equal to its corresponding max cell value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Logger</td><td>: logger pointer to log any error messages </td></tr>
+    <tr><td class="paramname">ProjectName</td><td>: name of current project </td></tr>
+    <tr><td class="paramname">ModelName</td><td>: name of current model </td></tr>
+    <tr><td class="paramname">NumSpecies</td><td>: number of species </td></tr>
+    <tr><td class="paramname">TableNames</td><td>: names of min/max tables to read </td></tr>
+    <tr><td class="paramname">NumParametersNonTrivial</td><td>: vector containing non-trivial parameter counts per species (a non-trivial parameter is one where its min range value != max range value) </td></tr>
+    <tr><td class="paramname">NumParameters</td><td>: vector containing parameter counts per species </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if no error, false otherwise </dd></dl>
+
+</div>
+</div>
 <a id="ac15b526660ab3cf231e1860c02bfbbfa"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac15b526660ab3cf231e1860c02bfbbfa">&#9670;&nbsp;</a></span>RestoreCSVFile()</h2>
 
@@ -5327,8 +5986,8 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
 
 </div>
 </div>
-<a id="a5f0aaa525a086846ddedb10a8b0f0280"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f0aaa525a086846ddedb10a8b0f0280">&#9670;&nbsp;</a></span>updateForecastMonteCarloParameters()</h2>
+<a id="ab64e38e932ff136decf7cf53c6535a43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab64e38e932ff136decf7cf53c6535a43">&#9670;&nbsp;</a></span>updateForecastMonteCarloParameters()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -5404,6 +6063,12 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
           <td></td>
           <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
           <td class="paramname"><em>GrowthRandomValues</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>GrowthRateShapeRandomValues</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -5512,6 +6177,7 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>createSpecies<
     <tr><td class="paramname">Species</td><td>: current species </td></tr>
     <tr><td class="paramname">RunNumber</td><td>: the current monte carlo run number </td></tr>
     <tr><td class="paramname">GrowthRandomValues</td><td>: random values from user inputted uncertainty error </td></tr>
+    <tr><td class="paramname">GrowthRateShapeRandomValues</td><td>: random values from user inputted uncertainty error around the shape parameter </td></tr>
     <tr><td class="paramname">CarryingCapacityRandomValues</td><td>: random values from user inputted uncertainty error </td></tr>
     <tr><td class="paramname">CatchabilityRandomValues</td><td>: random values from user inputted uncertainty error </td></tr>
     <tr><td class="paramname">ExponentRandomValues</td><td>: random values from user inputted uncertainty error </td></tr>

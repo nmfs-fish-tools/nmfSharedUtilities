@@ -115,9 +115,9 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_chart_line_with_scatter.html#aa6891340029528d8fa2cb7284f68b580">nmfChartLineWithScatter</a> ()</td></tr>
 <tr class="memdesc:aa6891340029528d8fa2cb7284f68b580"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classnmf_chart_line_with_scatter.html" title="The class creates a line chart with an overlayed scatter diagram. The user can specify multiple lines...">nmfChartLineWithScatter</a> constructor for multi-line chart with overlayed scatter diagram <br /></td></tr>
 <tr class="separator:aa6891340029528d8fa2cb7284f68b580"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a515fcb9d4a118bb070837516cb33a3f5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_chart_line_with_scatter.html#a515fcb9d4a118bb070837516cb33a3f5">populateChart</a> (QChart *chart, std::string &amp;type, const std::string &amp;lineStyle, const bool &amp;isMohnsRho, const bool &amp;showFirstPoint, const bool &amp;addScatter, const int &amp;xOffset, const bool &amp;xAxisIsInteger, const double &amp;yMin, const double &amp;yMax, const boost::numeric::ublas::matrix&lt; double &gt; &amp;lineData, const boost::numeric::ublas::matrix&lt; double &gt; &amp;scatterData, const boost::numeric::ublas::matrix&lt; double &gt; &amp;skipScatterData, const QStringList &amp;rowLabels, const QStringList &amp;columnLabels, std::string &amp;mainTitle, std::string &amp;xTitle, std::string &amp;yTitle, const std::vector&lt; bool &gt; &amp;gridLines, const int &amp;theme, const QColor &amp;dashedLineColor, const QColor &amp;scatterColor, const std::string &amp;lineColor, const std::string &amp;lineColorName, const QList&lt; QString &gt; &amp;multiRunLineLabels, const bool &amp;showLegend)</td></tr>
-<tr class="memdesc:a515fcb9d4a118bb070837516cb33a3f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">populates (and draws) the chart with all of the data necessary  <a href="classnmf_chart_line_with_scatter.html#a515fcb9d4a118bb070837516cb33a3f5">More...</a><br /></td></tr>
-<tr class="separator:a515fcb9d4a118bb070837516cb33a3f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a307932c7a15028542cbc2769e2372dba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_chart_line_with_scatter.html#a307932c7a15028542cbc2769e2372dba">populateChart</a> (QChart *chart, std::string &amp;type, const std::string &amp;lineStyle, const int &amp;dataLineWidth, const int &amp;dataPointWidth, const bool &amp;isMohnsRho, const bool &amp;showFirstPoint, const bool &amp;addScatter, const int &amp;xOffset, const bool &amp;xAxisApplyNiceNumbers, const bool &amp;xAxisIsInteger, const double &amp;yMin, const double &amp;yMax, const boost::numeric::ublas::matrix&lt; double &gt; &amp;lineData, const boost::numeric::ublas::matrix&lt; double &gt; &amp;scatterData, const boost::numeric::ublas::matrix&lt; double &gt; &amp;skipScatterData, const QStringList &amp;rowLabels, const QStringList &amp;columnLabels, std::string &amp;mainTitle, std::string &amp;xTitle, std::string &amp;yTitle, const int &amp;fontSizeLabel, const int &amp;fontSizeNumber, const QString &amp;labelFont, const int &amp;axisLineWidth, const int &amp;axisLineColor, const std::vector&lt; bool &gt; &amp;gridLines, const int &amp;theme, const QColor &amp;dashedLineColor, const QColor &amp;scatterColor, const std::string &amp;lineColor, const std::string &amp;lineColorName, const QList&lt; QString &gt; &amp;multiRunLineLabels, const bool &amp;showLegend)</td></tr>
+<tr class="memdesc:a307932c7a15028542cbc2769e2372dba"><td class="mdescLeft">&#160;</td><td class="mdescRight">populates (and draws) the chart with all of the data necessary  <a href="classnmf_chart_line_with_scatter.html#a307932c7a15028542cbc2769e2372dba">More...</a><br /></td></tr>
+<tr class="separator:a307932c7a15028542cbc2769e2372dba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The class creates a line chart with an overlayed scatter diagram. The user can specify multiple lines worth of data for display. </p>
@@ -246,8 +246,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a515fcb9d4a118bb070837516cb33a3f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a515fcb9d4a118bb070837516cb33a3f5">&#9670;&nbsp;</a></span>populateChart()</h2>
+<a id="a307932c7a15028542cbc2769e2372dba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a307932c7a15028542cbc2769e2372dba">&#9670;&nbsp;</a></span>populateChart()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -273,6 +273,18 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>dataLineWidth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>dataPointWidth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const bool &amp;&#160;</td>
           <td class="paramname"><em>isMohnsRho</em>, </td>
         </tr>
@@ -293,6 +305,12 @@ Public Member Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>xOffset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>xAxisApplyNiceNumbers</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -363,6 +381,36 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>fontSizeLabel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>fontSizeNumber</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>labelFont</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>axisLineWidth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>axisLineColor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const std::vector&lt; bool &gt; &amp;&#160;</td>
           <td class="paramname"><em>gridLines</em>, </td>
         </tr>
@@ -422,10 +470,13 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramname">chart</td><td>: pointer to QChart </td></tr>
     <tr><td class="paramname">type</td><td>: type of chart (currently unused) </td></tr>
     <tr><td class="paramname">lineStyle</td><td>: style of line(s) </td></tr>
+    <tr><td class="paramname">dataLineWidth</td><td>: width of the data lines </td></tr>
+    <tr><td class="paramname">dataPointWidth</td><td>: width of scatter points </td></tr>
     <tr><td class="paramname">isMohnsRho</td><td>: boolean signifying if plot is of a retrospective analysis </td></tr>
     <tr><td class="paramname">showFirstPoint</td><td>: boolean signifying if showing the first point should be shown </td></tr>
     <tr><td class="paramname">addScatter</td><td>: boolean signifying if the scatter diagram should be visible </td></tr>
     <tr><td class="paramname">xOffset</td><td>: the x offset that should be applied to the data series </td></tr>
+    <tr><td class="paramname">xAxisApplyNiceNumbers</td><td>: boolean if the x-axis should be "nicely" scaled </td></tr>
     <tr><td class="paramname">xAxisIsInteger</td><td>: boolean signifying if the values along the x-axis should be integers </td></tr>
     <tr><td class="paramname">yMin</td><td>: minimum y value </td></tr>
     <tr><td class="paramname">yMax</td><td>: maximum y value </td></tr>
@@ -437,6 +488,11 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramname">mainTitle</td><td>: the main title for the chart </td></tr>
     <tr><td class="paramname">xTitle</td><td>: the x-axis label </td></tr>
     <tr><td class="paramname">yTitle</td><td>: the y-axis label </td></tr>
+    <tr><td class="paramname">fontSizeLabel</td><td>: the point size of the label titles </td></tr>
+    <tr><td class="paramname">fontSizeNumber</td><td>: the point size of the axes' numeric scale values </td></tr>
+    <tr><td class="paramname">labelFont</td><td>: the font of the label titles and axes values </td></tr>
+    <tr><td class="paramname">axisLineWidth</td><td>: width of the x and y axes </td></tr>
+    <tr><td class="paramname">axisLineColor</td><td>: value to be used for r,g,b values for axes line color </td></tr>
     <tr><td class="paramname">gridLines</td><td>: vector of booleans designating if the gridlines should be visible </td></tr>
     <tr><td class="paramname">theme</td><td>: color theme for the chart </td></tr>
     <tr><td class="paramname">dashedLineColor</td><td>: color of any dashed lines </td></tr>

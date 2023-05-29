@@ -92,56 +92,58 @@ $(function() {
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    std::vector&lt;int&gt; m_Peel;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstInitBiomass;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstGrowthRates;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstCarryingCapacities;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstCatchability;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstSurveyQ;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstCompetitionAlpha;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstCompetitionBetaSpecies;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstCompetitionBetaGuilds;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstCompetitionBetaGuildsGuilds;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstPredationRho;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstPredationHandling;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstPredationExponent;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstBiomass;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    std::map&lt;QString,std::vector&lt;boost::numeric::ublas::matrix&lt;double&gt; &gt; &gt; m_ParameterMap;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">void</span> clearAveragedData();</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">void</span> clearEstData();</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="classnmf_utils_statistics_mohns_rho.html#a84a173cb9984b78d5a8dd8fd2532616c">nmfUtilsStatisticsMohnsRho</a>();</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;   ~<a class="code" href="classnmf_utils_statistics_mohns_rho.html">nmfUtilsStatisticsMohnsRho</a>() {}</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classnmf_utils_statistics_mohns_rho.html#a4c0ad9632084d66babd5e6afe87f8b2d">calculateMohnsRhoVectors</a>(</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            <span class="keyword">const</span> QStringList&amp; EstParamNames,</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            std::vector&lt;std::vector&lt;double&gt; &gt;&amp; MohnsRhoVectors);</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classnmf_utils_statistics_mohns_rho.html#afae77cf5e23ab789360ac9ca713cb077">getNumPeels</a>();</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_utils_statistics_mohns_rho.html#aa29f08ace3efe19f26508ced2396b8ea">loadEstData</a>(<span class="keywordtype">int</span>&amp; Peel,</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                     std::vector&lt;double&gt;&amp; EstInitBiomass,</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                     std::vector&lt;double&gt;&amp; EstGrowthRates,</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                     std::vector&lt;double&gt;&amp; EstCarryingCapacities,</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                     std::vector&lt;double&gt;&amp; EstPredationExponent,</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                     std::vector&lt;double&gt;&amp; EstCatchability,</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                     std::vector&lt;double&gt;&amp; EstSurveyQ,</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                     boost::numeric::ublas::matrix&lt;double&gt;&amp; EstCompetitionAlpha,</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                     boost::numeric::ublas::matrix&lt;double&gt;&amp; EstCompetitionBetaSpecies,</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                     boost::numeric::ublas::matrix&lt;double&gt;&amp; EstCompetitionBetaGuilds,</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                     boost::numeric::ublas::matrix&lt;double&gt;&amp; EstCompetitionBetaGuildsGuilds,</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                     boost::numeric::ublas::matrix&lt;double&gt;&amp; EstPredationRho,</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                     boost::numeric::ublas::matrix&lt;double&gt;&amp; EstPredationHandling,</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                     boost::numeric::ublas::matrix&lt;double&gt;&amp; EstBiomass);</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;};</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstGrowthRateShape;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstCarryingCapacities;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstCatchability;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstSurveyQ;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstCompetitionAlpha;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstCompetitionBetaSpecies;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstCompetitionBetaGuilds;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstCompetitionBetaGuildsGuilds;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstPredationRho;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstPredationHandling;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstPredationExponent;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    std::vector&lt; boost::numeric::ublas::matrix&lt;double&gt; &gt; m_EstBiomass;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    std::map&lt;QString,std::vector&lt;boost::numeric::ublas::matrix&lt;double&gt; &gt; &gt; m_ParameterMap;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">void</span> clearAveragedData();</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">void</span> clearEstData();</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="classnmf_utils_statistics_mohns_rho.html#a84a173cb9984b78d5a8dd8fd2532616c">nmfUtilsStatisticsMohnsRho</a>();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;   ~<a class="code" href="classnmf_utils_statistics_mohns_rho.html">nmfUtilsStatisticsMohnsRho</a>() {}</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classnmf_utils_statistics_mohns_rho.html#a4c0ad9632084d66babd5e6afe87f8b2d">calculateMohnsRhoVectors</a>(</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            <span class="keyword">const</span> QStringList&amp; EstParamNames,</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            std::vector&lt;std::vector&lt;double&gt; &gt;&amp; MohnsRhoVectors);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classnmf_utils_statistics_mohns_rho.html#afae77cf5e23ab789360ac9ca713cb077">getNumPeels</a>();</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classnmf_utils_statistics_mohns_rho.html#a586cfdb9f1a9dd80ec20a114eae5e584">loadEstData</a>(<span class="keywordtype">int</span>&amp; Peel,</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                     std::vector&lt;double&gt;&amp; EstInitBiomass,</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                     std::vector&lt;double&gt;&amp; EstGrowthRates,</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                     std::vector&lt;double&gt;&amp; EstGrowthRateShapes,</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                     std::vector&lt;double&gt;&amp; EstCarryingCapacities,</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                     std::vector&lt;double&gt;&amp; EstPredationExponent,</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                     std::vector&lt;double&gt;&amp; EstCatchability,</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                     std::vector&lt;double&gt;&amp; EstSurveyQ,</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                     boost::numeric::ublas::matrix&lt;double&gt;&amp; EstCompetitionAlpha,</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                     boost::numeric::ublas::matrix&lt;double&gt;&amp; EstCompetitionBetaSpecies,</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                     boost::numeric::ublas::matrix&lt;double&gt;&amp; EstCompetitionBetaGuilds,</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                     boost::numeric::ublas::matrix&lt;double&gt;&amp; EstCompetitionBetaGuildsGuilds,</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                     boost::numeric::ublas::matrix&lt;double&gt;&amp; EstPredationRho,</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                     boost::numeric::ublas::matrix&lt;double&gt;&amp; EstPredationHandling,</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                     boost::numeric::ublas::matrix&lt;double&gt;&amp; EstBiomass);</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;};</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclassnmf_utils_statistics_mohns_rho_html_a586cfdb9f1a9dd80ec20a114eae5e584"><div class="ttname"><a href="classnmf_utils_statistics_mohns_rho.html#a586cfdb9f1a9dd80ec20a114eae5e584">nmfUtilsStatisticsMohnsRho::loadEstData</a></div><div class="ttdeci">void loadEstData(int &amp;Peel, std::vector&lt; double &gt; &amp;EstInitBiomass, std::vector&lt; double &gt; &amp;EstGrowthRates, std::vector&lt; double &gt; &amp;EstGrowthRateShapes, std::vector&lt; double &gt; &amp;EstCarryingCapacities, std::vector&lt; double &gt; &amp;EstPredationExponent, std::vector&lt; double &gt; &amp;EstCatchability, std::vector&lt; double &gt; &amp;EstSurveyQ, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionAlpha, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaSpecies, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuilds, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuildsGuilds, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredationRho, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredationHandling, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomass)</div><div class="ttdoc">Loads the passed in estimated values into their respective class structures.</div><div class="ttdef"><b>Definition:</b> nmfUtilsStatisticsMohnsRho.cpp:66</div></div>
 <div class="ttc" id="aclassnmf_utils_statistics_mohns_rho_html_a4c0ad9632084d66babd5e6afe87f8b2d"><div class="ttname"><a href="classnmf_utils_statistics_mohns_rho.html#a4c0ad9632084d66babd5e6afe87f8b2d">nmfUtilsStatisticsMohnsRho::calculateMohnsRhoVectors</a></div><div class="ttdeci">bool calculateMohnsRhoVectors(const QStringList &amp;EstParamNames, std::vector&lt; std::vector&lt; double &gt; &gt; &amp;MohnsRhoVectors)</div><div class="ttdoc">Calculates the Mohn's Rho values for the passed in parameters.</div><div class="ttdef"><b>Definition:</b> nmfUtilsStatisticsMohnsRho.cpp:11</div></div>
 <div class="ttc" id="anmf_utils_statistics_8h_html"><div class="ttname"><a href="nmf_utils_statistics_8h.html">nmfUtilsStatistics.h</a></div><div class="ttdoc">This header file defines multi-species statistical utility functions.</div></div>
-<div class="ttc" id="aclassnmf_utils_statistics_mohns_rho_html_afae77cf5e23ab789360ac9ca713cb077"><div class="ttname"><a href="classnmf_utils_statistics_mohns_rho.html#afae77cf5e23ab789360ac9ca713cb077">nmfUtilsStatisticsMohnsRho::getNumPeels</a></div><div class="ttdeci">int getNumPeels()</div><div class="ttdoc">Gets the number of peels for the Mohn's Rho run.</div><div class="ttdef"><b>Definition:</b> nmfUtilsStatisticsMohnsRho.cpp:59</div></div>
+<div class="ttc" id="aclassnmf_utils_statistics_mohns_rho_html_afae77cf5e23ab789360ac9ca713cb077"><div class="ttname"><a href="classnmf_utils_statistics_mohns_rho.html#afae77cf5e23ab789360ac9ca713cb077">nmfUtilsStatisticsMohnsRho::getNumPeels</a></div><div class="ttdeci">int getNumPeels()</div><div class="ttdoc">Gets the number of peels for the Mohn's Rho run.</div><div class="ttdef"><b>Definition:</b> nmfUtilsStatisticsMohnsRho.cpp:60</div></div>
 <div class="ttc" id="aclassnmf_utils_statistics_mohns_rho_html"><div class="ttname"><a href="classnmf_utils_statistics_mohns_rho.html">nmfUtilsStatisticsMohnsRho</a></div><div class="ttdoc">Class containing data and methods for Mohn's Rho Summary Statistics calculations.</div><div class="ttdef"><b>Definition:</b> nmfUtilsStatisticsMohnsRho.h:50</div></div>
-<div class="ttc" id="aclassnmf_utils_statistics_mohns_rho_html_aa29f08ace3efe19f26508ced2396b8ea"><div class="ttname"><a href="classnmf_utils_statistics_mohns_rho.html#aa29f08ace3efe19f26508ced2396b8ea">nmfUtilsStatisticsMohnsRho::loadEstData</a></div><div class="ttdeci">void loadEstData(int &amp;Peel, std::vector&lt; double &gt; &amp;EstInitBiomass, std::vector&lt; double &gt; &amp;EstGrowthRates, std::vector&lt; double &gt; &amp;EstCarryingCapacities, std::vector&lt; double &gt; &amp;EstPredationExponent, std::vector&lt; double &gt; &amp;EstCatchability, std::vector&lt; double &gt; &amp;EstSurveyQ, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionAlpha, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaSpecies, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuilds, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuildsGuilds, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredationRho, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredationHandling, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomass)</div><div class="ttdoc">Loads the passed in estimated values into their respective class structures.</div><div class="ttdef"><b>Definition:</b> nmfUtilsStatisticsMohnsRho.cpp:65</div></div>
 <div class="ttc" id="aclassnmf_utils_statistics_mohns_rho_html_a84a173cb9984b78d5a8dd8fd2532616c"><div class="ttname"><a href="classnmf_utils_statistics_mohns_rho.html#a84a173cb9984b78d5a8dd8fd2532616c">nmfUtilsStatisticsMohnsRho::nmfUtilsStatisticsMohnsRho</a></div><div class="ttdeci">nmfUtilsStatisticsMohnsRho()</div><div class="ttdoc">Class constructor.</div><div class="ttdef"><b>Definition:</b> nmfUtilsStatisticsMohnsRho.cpp:5</div></div>
 <div class="ttc" id="anmf_utils_8h_html"><div class="ttname"><a href="nmf_utils_8h.html">nmfUtils.h</a></div><div class="ttdoc">Definition for common typedefs and structs (i.e., non-graphical)</div></div>
 <!-- start footer part -->

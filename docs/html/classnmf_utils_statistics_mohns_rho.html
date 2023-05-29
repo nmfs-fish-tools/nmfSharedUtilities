@@ -86,9 +86,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afae77cf5e23ab789360ac9ca713cb077"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_utils_statistics_mohns_rho.html#afae77cf5e23ab789360ac9ca713cb077">getNumPeels</a> ()</td></tr>
 <tr class="memdesc:afae77cf5e23ab789360ac9ca713cb077"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of peels for the Mohn's Rho run.  <a href="classnmf_utils_statistics_mohns_rho.html#afae77cf5e23ab789360ac9ca713cb077">More...</a><br /></td></tr>
 <tr class="separator:afae77cf5e23ab789360ac9ca713cb077"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa29f08ace3efe19f26508ced2396b8ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_utils_statistics_mohns_rho.html#aa29f08ace3efe19f26508ced2396b8ea">loadEstData</a> (int &amp;Peel, std::vector&lt; double &gt; &amp;EstInitBiomass, std::vector&lt; double &gt; &amp;EstGrowthRates, std::vector&lt; double &gt; &amp;EstCarryingCapacities, std::vector&lt; double &gt; &amp;EstPredationExponent, std::vector&lt; double &gt; &amp;EstCatchability, std::vector&lt; double &gt; &amp;EstSurveyQ, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionAlpha, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaSpecies, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuilds, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuildsGuilds, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredationRho, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredationHandling, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomass)</td></tr>
-<tr class="memdesc:aa29f08ace3efe19f26508ced2396b8ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the passed in estimated values into their respective class structures.  <a href="classnmf_utils_statistics_mohns_rho.html#aa29f08ace3efe19f26508ced2396b8ea">More...</a><br /></td></tr>
-<tr class="separator:aa29f08ace3efe19f26508ced2396b8ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a586cfdb9f1a9dd80ec20a114eae5e584"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_utils_statistics_mohns_rho.html#a586cfdb9f1a9dd80ec20a114eae5e584">loadEstData</a> (int &amp;Peel, std::vector&lt; double &gt; &amp;EstInitBiomass, std::vector&lt; double &gt; &amp;EstGrowthRates, std::vector&lt; double &gt; &amp;EstGrowthRateShapes, std::vector&lt; double &gt; &amp;EstCarryingCapacities, std::vector&lt; double &gt; &amp;EstPredationExponent, std::vector&lt; double &gt; &amp;EstCatchability, std::vector&lt; double &gt; &amp;EstSurveyQ, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionAlpha, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaSpecies, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuilds, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstCompetitionBetaGuildsGuilds, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredationRho, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstPredationHandling, boost::numeric::ublas::matrix&lt; double &gt; &amp;EstBiomass)</td></tr>
+<tr class="memdesc:a586cfdb9f1a9dd80ec20a114eae5e584"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the passed in estimated values into their respective class structures.  <a href="classnmf_utils_statistics_mohns_rho.html#a586cfdb9f1a9dd80ec20a114eae5e584">More...</a><br /></td></tr>
+<tr class="separator:a586cfdb9f1a9dd80ec20a114eae5e584"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class containing data and methods for Mohn's Rho Summary Statistics calculations. </p>
@@ -151,8 +151,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa29f08ace3efe19f26508ced2396b8ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa29f08ace3efe19f26508ced2396b8ea">&#9670;&nbsp;</a></span>loadEstData()</h2>
+<a id="a586cfdb9f1a9dd80ec20a114eae5e584"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a586cfdb9f1a9dd80ec20a114eae5e584">&#9670;&nbsp;</a></span>loadEstData()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -174,6 +174,12 @@ Public Member Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
           <td class="paramname"><em>EstGrowthRates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>EstGrowthRateShapes</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -255,6 +261,7 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramname">Peel</td><td>: current peel number </td></tr>
     <tr><td class="paramname">EstInitBiomass</td><td>: estimated initial biomass vector </td></tr>
     <tr><td class="paramname">EstGrowthRates</td><td>: estimated growth rate vector </td></tr>
+    <tr><td class="paramname">EstGrowthRateShapes</td><td>: estimated growth rate shapes parameter vector </td></tr>
     <tr><td class="paramname">EstCarryingCapacities</td><td>: estimated carrying capacities vector </td></tr>
     <tr><td class="paramname">EstPredationExponent</td><td>: estimated predation exponent vector </td></tr>
     <tr><td class="paramname">EstCatchability</td><td>: estimated catchability vector </td></tr>
