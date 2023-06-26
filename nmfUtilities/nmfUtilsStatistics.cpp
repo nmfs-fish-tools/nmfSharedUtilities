@@ -507,46 +507,58 @@ void calculateSSResiduals(const int& NumSpeciesOrGuilds,
                           const std::vector<double>& Estimated,
                           std::vector<double>& SSResiduals)
 {
-    int m = 0;
+    int m = 1;
+    int numObservations=0;
     double sum = 0;
     double diff = 0;
 
     SSResiduals.clear();
     for (int i=0;i<NumSpeciesOrGuilds;++i) {
         sum = 0;
-        for (int j=0; j<=RunLength;++j) {
+        for (int j=1; j<=RunLength;++j) {
             if (Observed[m] != nmfConstantsMSSPM::NoData) {
                 diff = Observed[m] - Estimated[m];
                 sum += diff*diff;
+                ++numObservations;
             }
             ++m;
         }
         SSResiduals.push_back(sum);
     }
+//std::cout << "*** SSResiduals: Num Observations (non-blank): "<< numObservations << ", RunLength: " << RunLength << std::endl;
 }
 
 bool calculateSSDeviations(const int& NumSpeciesOrGuilds,
                            const int& RunLength,
+                           const std::vector<double>& Observed,
                            const std::vector<double>& Estimated,
                            const std::vector<double>& Means,
                            std::vector<double>& SSDeviations)
 {
-    int m = 0;
+    int m = 1;
+    int numObservations=0;
     double sum = 0;
     double diff = 0;
 
     SSDeviations.clear();
     for (int i=0;i<NumSpeciesOrGuilds;++i) {
         sum = 0;
-        for (int j=0; j<=RunLength;++j) {
-            diff = Estimated[m++] - Means[i];
-            sum += diff*diff;
+        for (int j=1; j<=RunLength;++j) {
+            if (Observed[m] != nmfConstantsMSSPM::NoData) {
+                diff = Estimated[m] - Means[i];
+                sum += diff*diff;
+                ++numObservations;
+            }
+            ++m;
         }
+//std::cout << "*** SSDeviations: i: " << i << ", sum: " << sum << std::endl;
         if (sum == 0) {
             return false;
         }
         SSDeviations.push_back(sum);
     }
+//std::cout << "*** SSDeviations: Num Observations (non-blank): "<< numObservations << ", RunLength: " << RunLength << std::endl;
+
     return true;
 }
 
@@ -557,6 +569,7 @@ void calculateSSTotals(const int& NumSpeciesOrGuilds,
 {
     SSTotal.clear();
     for (int i=0;i<NumSpeciesOrGuilds;++i) {
+//std::cout << "** calculateSSTotals[" << i << "]: " << SSDeviations[i] << ", " << SSResiduals[i] << std::endl;
         SSTotal.push_back(SSDeviations[i]+SSResiduals[i]);
     }
 }
@@ -578,7 +591,7 @@ void calculateAIC(const int& NumSpeciesOrGuilds,
                   const std::vector<double>& SSResiduals,
                   double& AIC)
 {
-    int NumYears = RunLength+1;
+    int NumYears = RunLength; // +1; // don't include the first year
     int sum_K = 0;
     int sum_N = NumYears * NumSpeciesOrGuilds;
     double SSR = 0;
@@ -587,8 +600,9 @@ void calculateAIC(const int& NumSpeciesOrGuilds,
         sum_K += NumParameters[i];
     }
 
-    // AIC (per model) = Σnᵢ ln(ΣSSR/Σnᵢ) + 2ΣKᵢ
+    // AIC (per model) = Σnᵢ * ln(ΣSSR/Σnᵢ) + 2ΣKᵢ
     AIC = (sum_N*std::log(SSR/sum_N) + 2 * sum_K);
+//std::cout << "*** AIC(0) Num Sum Parameters: "<< sum_K << ", NumYears: " << NumYears << std::endl;
 }
 
 void calculateAIC(const int& NumSpeciesOrGuilds,
@@ -597,7 +611,7 @@ void calculateAIC(const int& NumSpeciesOrGuilds,
                   const std::vector<double>& SSResiduals,
                   std::vector<double>& AIC)
 {
-    int NumYears = RunLength+1;
+    int NumYears = RunLength; // +1; // don't include the first year
     AIC.clear();
     for (int i=0;i<NumSpeciesOrGuilds;++i) {
         if (SSResiduals[i] == 0) {
@@ -606,6 +620,7 @@ void calculateAIC(const int& NumSpeciesOrGuilds,
             // AIC (per species i) = nᵢln(SSR/nᵢ) + 2Kᵢ
             AIC.push_back(NumYears*std::log(SSResiduals[i]/NumYears) + 2 * NumParameters[i]);
         }
+//std::cout << "*** AIC(1) Num Parameters for species[" << i << "]: " << NumParameters[i] << std::endl;
     }
 }
 
@@ -617,7 +632,7 @@ bool calculateR(const int& NumSpeciesOrGuilds,
                 const std::vector<double>& Estimated,
                 std::vector<double>& R)
 {
-    int m = 0;
+    int m = 1;
     double num,den;
     double diffObs,diffEst;
     double sumObs,sumEst;
@@ -627,7 +642,7 @@ bool calculateR(const int& NumSpeciesOrGuilds,
         num = 0;
         sumObs = 0;
         sumEst = 0;
-        for (int j=0; j<=RunLength; ++j) {
+        for (int j=1; j<=RunLength; ++j) {
             if (Observed[m] != nmfConstantsMSSPM::NoData) {
                 diffObs = (Observed[m]  - MeanObserved[i]);
                 diffEst = (Estimated[m] - MeanEstimated[i]);
@@ -654,7 +669,7 @@ bool calculateRMSE(const int& NumSpeciesOrGuilds,
                    const std::vector<double>& Estimated,
                    std::vector<double>& RMSE)
 {
-    int m = 0;
+    int m = 1;
     double sum;
     double diff;
     int numYearsWithoutBlanks = 0;
@@ -665,7 +680,7 @@ bool calculateRMSE(const int& NumSpeciesOrGuilds,
     for (int i=0; i<NumSpeciesOrGuilds; ++i) {
         sum = 0;
         numYearsWithoutBlanks = 0;
-        for (int j=0; j<=RunLength; ++j) {
+        for (int j=1; j<=RunLength; ++j) {
             if (Observed[m] != nmfConstantsMSSPM::NoData) {
                 diff = Estimated[m] - Observed[m];
                 sum += diff*diff;
@@ -685,7 +700,7 @@ bool calculateRI(const int& NumSpeciesOrGuilds,
                    const std::vector<double>& Estimated,
                    std::vector<double>& RI)
 {
-    int m = 0;
+    int m = 1;
     int numYearsWithoutBlanks = 0;
     double sum;
     double val;
@@ -697,7 +712,7 @@ bool calculateRI(const int& NumSpeciesOrGuilds,
     for (int i=0; i<NumSpeciesOrGuilds; ++i) {
         sum = 0;
         numYearsWithoutBlanks = 0;
-        for (int j=0; j<=RunLength; ++j) {
+        for (int j=1; j<=RunLength; ++j) {
             if (Observed[m] != nmfConstantsMSSPM::NoData) {
                 val = log(Observed[m]/Estimated[m]);
                 sum += val*val;
@@ -728,7 +743,7 @@ bool calculateAAE(const int& NumSpeciesOrGuilds,
                   const std::vector<double>& Estimated,
                   std::vector<double>& AAE)
 {
-    int m = 0;
+    int m = 1;
     int numYearsWithoutBlanks = 0;
     double sum;
 
@@ -739,7 +754,7 @@ bool calculateAAE(const int& NumSpeciesOrGuilds,
     for (int i=0; i<NumSpeciesOrGuilds; ++i) {
         sum = 0;
         numYearsWithoutBlanks = 0;
-        for (int j=0; j<=RunLength; ++j) {
+        for (int j=1; j<=RunLength; ++j) {
             if (Observed[m] != nmfConstantsMSSPM::NoData) {
                 sum += fabs(Estimated[m] - Observed[m]);
                 ++numYearsWithoutBlanks;
@@ -759,7 +774,7 @@ bool calculateMEF(const int& NumSpeciesOrGuilds,
                   const std::vector<double>& Estimated,
                   std::vector<double>& MEF)
 {
-    int m = 0;
+    int m = 1;
     bool retv = true;
     double sum1,sum2;
     double diff1,diff2;
@@ -770,7 +785,7 @@ bool calculateMEF(const int& NumSpeciesOrGuilds,
     MEF.clear();
     for (int i=0; i<NumSpeciesOrGuilds; ++i) {
         sum1 = sum2 = 0;
-        for (int j=0; j<=RunLength; ++j) {
+        for (int j=1; j<=RunLength; ++j) {
             if (Observed[m] != nmfConstantsMSSPM::NoData) {
                 diff1 = Observed[m]  - MeanObserved[i];
                 sum1 += diff1*diff1;
@@ -1027,14 +1042,12 @@ double calculateMaximumLikelihoodNoRescale(
         }
     }
 
-
     // Calculate standard deviation of the sample; sigma = sqrt(1/(N-1) * sum[(x(i)-x(m))^2])
     sigma = sqrt((1.0/(numPoints-1))*sumSquares);
     if (sigma == 0) {
         std::cout << "Error: Found sigma=0 in nmfUtilsStatistics::calculateMaximumLikelihoodNoRescale" << std::endl;
         return 0;
     }
-
 
     // Calculate MLE
     for (int time=1; time<numYears; ++time) {

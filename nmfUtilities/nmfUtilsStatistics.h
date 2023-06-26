@@ -345,6 +345,7 @@ namespace nmfUtilsStatistics {
      * @brief Calculates the sum of the square deviations: Σ(Eₜ-Ō)² over all t years
      * @param numSpeciesOrGuilds : the number of either species or guilds
      * @param runLength : time period in years
+     * @param observed : observed biomass, only needed to check for missing data
      * @param estimated : estimated biomass
      * @param meanObserved : mean values of observed biomass per species
      * @param ssDeviations : the sum of the square deviation values
@@ -352,6 +353,7 @@ namespace nmfUtilsStatistics {
      */
     bool calculateSSDeviations(const int& numSpeciesOrGuilds,
                                const int& runLength,
+                               const std::vector<double>& observed,
                                const std::vector<double>& estimated,
                                const std::vector<double>& meanObserved,
                                std::vector<double>& ssDeviations);
