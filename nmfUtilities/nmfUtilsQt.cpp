@@ -1049,10 +1049,9 @@ showAboutWidget(
 {
     QString msg = "<strong><br>"+version+" (" + operatingSystem + ")</strong>";
     msg += "<strong><br>"+name+"</strong>";
-    QString date = QDate::currentDate().toString();
 
     msg += QString("<br><br>Application runtime: ") + formatTimeSeconds(upTimeSeconds);
-    msg += QString("<br><br>Built on: ") + date; //QDate::fromString(date,"dddYYYYMMdd").toString();
+    msg += QString("<br><br>Built on: ") + __DATE__ + ", " + __TIME__;
 
     msg += QString("<br><br>Produced by the NOAA National Marine Fisheries Service.");
     msg += specialAcknowledgement;
