@@ -44,6 +44,7 @@ namespace nmfConstantsMSSPM
      const int    Num_Columns_Species   = 5;
      const int    Num_Columns_Guilds    = 3;
      const int    Num_Estimatable_Parameter_Groups = 13;
+     const int    Output_Precision      = 10;
 
      const int    Column_Guild_Name       =  0;
      const int    Column_Guild_GrowthRate =  1;

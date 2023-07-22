@@ -534,7 +534,14 @@ namespace nmfUtils {
     void removeFirstRow(boost::numeric::ublas::matrix<double> &matrixIn,
                         boost::numeric::ublas::matrix<double> &matrixOut);
     /**
-     * @brief rescales the passed matrix by: log base 10
+     * @brief rescales the passed matrix using natural log
+     * @param unscaledMatrix : the matrix to rescale
+     * @param rescaledMatrix : the rescaled matrix
+     */
+    void rescaleMatrixLog(const boost::numeric::ublas::matrix<double> &unscaledMatrix,
+                                boost::numeric::ublas::matrix<double> &rescaledMatrix);
+    /**
+     * @brief rescales the passed matrix using log base 10
      * @param unscaledMatrix : the matrix to rescale
      * @param rescaledMatrix : the rescaled matrix
      */

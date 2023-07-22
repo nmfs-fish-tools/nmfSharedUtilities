@@ -68,6 +68,7 @@ nmfGrowthForm::loadParameterRanges(
         const nmfStructsQt::ModelDataStruct& dataStruct)
 {
     bool isCheckedGrowthRate       = nmfUtils::isEstimateParameterChecked(dataStruct,"GrowthRate");
+    bool isCheckedGrowthRateShape  = nmfUtils::isEstimateParameterChecked(dataStruct,"GrowthRateShape");
     bool isCheckedCarryingCapacity = nmfUtils::isEstimateParameterChecked(dataStruct,"CarryingCapacity");
     std::string speciesName;
     std::map<std::string,nmfStructsQt::CovariateStruct> covariateCoeffMap;
@@ -103,7 +104,7 @@ nmfGrowthForm::loadParameterRanges(
     if (m_Type == "Logistic") {
         // Load growth rate shape parameter values
         for (int species=0; species<m_NumSpecies; ++species) {
-            if (isCheckedGrowthRate) {
+            if (isCheckedGrowthRateShape) {
                 aPair = std::make_pair(dataStruct.GrowthRateShapeMin[species],
                                        dataStruct.GrowthRateShapeMax[species]);
             } else {

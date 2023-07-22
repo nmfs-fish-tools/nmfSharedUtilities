@@ -240,7 +240,7 @@ struct ModelDataStruct {
     std::string MinimizerAlgorithm;
     std::string ObjectiveCriterion;
     std::string ScalingAlgorithm;
-    bool        LogScale;
+    bool        ParameterLogScale;
 
     std::string CovariateAlgorithmType;
     std::string ForecastHarvestType;

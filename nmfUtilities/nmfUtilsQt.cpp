@@ -2833,7 +2833,7 @@ reloadDataStruct(nmfStructsQt::ModelDataStruct& dataStruct,
     dataStruct.MinimizerAlgorithm    = parts[3].toStdString();
     dataStruct.ScalingAlgorithm      = parts[4].toStdString();
     dataStruct.userFixedSeedVal      = parts[5].toInt();
-    dataStruct.LogScale              = parts[6].toInt();
+    dataStruct.ParameterLogScale              = parts[6].toInt();
 
     dataStruct.BeesMaxGenerations    = parts[7].toInt();
     dataStruct.BeesNumTotal          = parts[8].toInt();

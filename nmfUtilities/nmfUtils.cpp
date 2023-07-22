@@ -423,7 +423,7 @@ void printDataStruct(
     std::cout << "MinimizerAlgorithm: " << dataStruct.MinimizerAlgorithm << std::endl;
     std::cout << "ObjectiveCriterion: " << dataStruct.ObjectiveCriterion << std::endl;
     std::cout << "ScalingAlgorithm: " << dataStruct.ScalingAlgorithm << std::endl;
-    std::cout << "LogScale: " << dataStruct.LogScale << std::endl;
+    std::cout << "LogScale: " << dataStruct.ParameterLogScale << std::endl;
     std::cout << "CovariateAlgorithmType: " << dataStruct.CovariateAlgorithmType << std::endl;
     std::cout << "ForecastHarvestType: " << dataStruct.ForecastHarvestType << std::endl;
 
@@ -676,9 +676,34 @@ removeFirstRow(boost::numeric::ublas::matrix<double> &matrixIn,
     matrixOut = matrixTrimmed;
 }
 
+/*
+ * Rescales matrix X(i,j) using natural log
+ */
+void
+rescaleMatrixLog(const boost::numeric::ublas::matrix<double> &unscaledMatrix,
+                       boost::numeric::ublas::matrix<double> &rescaledMatrix)
+{
+    int NumRows = rescaledMatrix.size1();
+    int NumCols = rescaledMatrix.size2();
+    double unscaledValue;
+
+    // Rescale the matrix using the min and max values found for each species
+    for (auto species=0; species<NumCols; ++species) {
+        for (auto time=0; time<NumRows; ++time) {
+            unscaledValue = unscaledMatrix(time,species);
+            if (unscaledValue <= 0) {
+                unscaledValue = 0;
+            }
+            unscaledValue += 1.0;
+            if (unscaledValue != nmfConstantsMSSPM::NoData) {
+                rescaledMatrix(time,species) = std::log(unscaledValue);
+            }
+        }
+    }
+}
 
 /*
- * Rescales matrix Xij by: log base 10 (X)
+ * Rescales matrix X(i,j) using log base 10 (X)
  */
 void
 rescaleMatrixLog10(const boost::numeric::ublas::matrix<double> &unscaledMatrix,
@@ -876,11 +901,12 @@ reset(boost::numeric::ublas::matrix<double>& mat,
 
 double round(double number, int decimalPlaces)
 {
+/*
     if (decimalPlaces < 0) {
         std::cout << "Error: decimalPlaces argument in nmfUtils::round() function must be >= 0." << std::endl;
         decimalPlaces = 0;
     }
-
+*/
     double factor = std::pow(10,decimalPlaces);
     return  std::floor(number*factor+0.5)/factor;
 }
