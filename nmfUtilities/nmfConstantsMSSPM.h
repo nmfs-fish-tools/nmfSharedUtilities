@@ -144,6 +144,8 @@ namespace nmfConstantsMSSPM
      const bool   DontLeaveGapsWhereNegative = false;
      const bool   FirstLineReadOnly    = true;
      const bool   FirstLineNotReadOnly = false;
+     const bool   SkipFirstYear        = true;
+     const bool   DontSkipFirstYear    = false;
      const bool   IsATimeSeries        = true;
      const bool   IsNotATimeSeries     = false;
      const bool   UpdateSetup          = true;

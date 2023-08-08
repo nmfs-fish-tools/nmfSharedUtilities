@@ -500,7 +500,7 @@ double ProbT(double T, int DF) {
     return BetaI(0.5 * DF, 0.5, DF / (DF + T * T));
 } // end ProbT
 
-
+/*
 void calculateSSResiduals(const int& NumSpeciesOrGuilds,
                           const int& RunLength,
                           const std::vector<double>& Observed,
@@ -513,9 +513,9 @@ void calculateSSResiduals(const int& NumSpeciesOrGuilds,
     double diff = 0;
 
     SSResiduals.clear();
-    for (int i=0;i<NumSpeciesOrGuilds;++i) {
+    for (int species=0;species<NumSpeciesOrGuilds;++species) {
         sum = 0;
-        for (int j=1; j<=RunLength;++j) {
+        for (int time=1; time<=RunLength;++time) {
             if (Observed[m] != nmfConstantsMSSPM::NoData) {
                 diff = Observed[m] - Estimated[m];
                 sum += diff*diff;
@@ -525,132 +525,193 @@ void calculateSSResiduals(const int& NumSpeciesOrGuilds,
         }
         SSResiduals.push_back(sum);
     }
-//std::cout << "*** SSResiduals: Num Observations (non-blank): "<< numObservations << ", RunLength: " << RunLength << std::endl;
 }
-
-bool calculateSSDeviations(const int& NumSpeciesOrGuilds,
-                           const int& RunLength,
-                           const std::vector<double>& Observed,
-                           const std::vector<double>& Estimated,
-                           const std::vector<double>& Means,
-                           std::vector<double>& SSDeviations)
+*/
+void calculateSSResiduals(const boost::numeric::ublas::matrix<double> & Observed,
+                          const boost::numeric::ublas::matrix<double> & Estimated,
+                          const bool& SkipFirstYear,
+                          std::vector<double>& SSResiduals,
+                          std::string& errorMsg)
 {
-    int m = 1;
-    int numObservations=0;
+    int StartRow = (SkipFirstYear) ? 1 : 0;
+    int NumRowsObs = Observed.size1();
+    int NumColsObs = Observed.size2();
+    int NumRowsEst = Estimated.size1();
+    int NumColsEst = Estimated.size2();
     double sum = 0;
     double diff = 0;
 
-    SSDeviations.clear();
-    for (int i=0;i<NumSpeciesOrGuilds;++i) {
+    errorMsg.clear();
+    if ((NumRowsObs != NumRowsEst) || (NumColsObs != NumColsEst)) {
+        errorMsg = "Error calculateSSResiduals: Matrix mismatch";
+        return;
+    }
+
+    SSResiduals.clear();
+    for (int col=0;col<NumColsObs;++col) {
         sum = 0;
-        for (int j=1; j<=RunLength;++j) {
-            if (Observed[m] != nmfConstantsMSSPM::NoData) {
-                diff = Estimated[m] - Means[i];
+        for (int row=StartRow; row<NumRowsObs; ++row) {
+            if (Observed(row,col) != nmfConstantsMSSPM::NoData) {
+                diff = Observed(row,col) - Estimated(row,col);
                 sum += diff*diff;
-                ++numObservations;
             }
-            ++m;
         }
-//std::cout << "*** SSDeviations: i: " << i << ", sum: " << sum << std::endl;
+        SSResiduals.push_back(sum);
+    }
+}
+
+bool calculateSSDeviations(const boost::numeric::ublas::matrix<double>& Observed,
+                           const boost::numeric::ublas::matrix<double>& Estimated,
+                           const std::vector<double>& Means,
+                           const bool& SkipFirstYear,
+                           std::vector<double>& SSDeviations,
+                           std::string& errorMsg)
+{
+    int StartRow = (SkipFirstYear) ? 1 : 0;
+    int NumRowsObs = Observed.size1();
+    int NumColsObs = Observed.size2();
+    int NumRowsEst = Estimated.size1();
+    int NumColsEst = Estimated.size2();
+    double sum = 0;
+    double diff = 0;
+
+    errorMsg.clear();
+    if ((NumRowsObs != NumRowsEst) || (NumColsObs != NumColsEst)) {
+        errorMsg = "Error calculateSSDeviations: Matrix mismatch";
+        return false;
+    }
+
+    SSDeviations.clear();
+    for (int col=0;col<NumColsObs;++col) {
+        sum = 0;
+        for (int row=StartRow; row<NumRowsObs; ++row) {
+            if (Observed(row,col) != nmfConstantsMSSPM::NoData) {
+                diff = Estimated(row,col) - Means[col];
+                sum += diff*diff;
+            }
+        }
         if (sum == 0) {
+            errorMsg = "Error calculateSSDeviations: Found SSdeviation sum of 0";
             return false;
         }
         SSDeviations.push_back(sum);
     }
-//std::cout << "*** SSDeviations: Num Observations (non-blank): "<< numObservations << ", RunLength: " << RunLength << std::endl;
 
     return true;
 }
 
-void calculateSSTotals(const int& NumSpeciesOrGuilds,
-                       const std::vector<double>& SSDeviations,
+void calculateSSTotals(const std::vector<double>& SSDeviations,
                        const std::vector<double>& SSResiduals,
-                       std::vector<double>& SSTotal)
+                       std::vector<double>& SSTotal,
+                       std::string& errorMsg)
 {
+    int NumDeviations = SSDeviations.size();
+    int NumResiduals  = SSResiduals.size();
+
+    errorMsg.clear();
+    if (NumDeviations != NumResiduals) {
+        errorMsg = "Error calculateSSTotals: Vector mismatch";
+        return;
+    }
+
     SSTotal.clear();
-    for (int i=0;i<NumSpeciesOrGuilds;++i) {
-//std::cout << "** calculateSSTotals[" << i << "]: " << SSDeviations[i] << ", " << SSResiduals[i] << std::endl;
-        SSTotal.push_back(SSDeviations[i]+SSResiduals[i]);
+    for (int row=0;row<NumDeviations;++row) {
+        SSTotal.push_back(SSDeviations[row]+SSResiduals[row]);
     }
 }
 
-void calculateRSquared(const int& NumSpeciesOrGuilds,
-                       const std::vector<double>& SSDeviations,
+void calculateRSquared(const std::vector<double>& SSDeviations,
                        const std::vector<double>& SSTotals,
-                       std::vector<double>& RSquared)
+                       std::vector<double>& RSquared,
+                       std::string& errorMsg)
 {
+    int NumDeviations = SSDeviations.size();
+    int NumTotals     = SSTotals.size();
+
+    errorMsg.clear();
+    if (NumDeviations != NumTotals) {
+        errorMsg = "Error calculateRSquared: Vector mismatch";
+        return;
+    }
+
     RSquared.clear();
-    for (int i=0;i<NumSpeciesOrGuilds;++i) {
-        RSquared.push_back(SSDeviations[i]/SSTotals[i]);
+    for (int row=0; row<NumDeviations; ++row) {
+        if (SSTotals[row] == 0) {
+            errorMsg = "Error calculateRSquared: Found an SSTotal of 0 for species: " + std::to_string(row);
+            return;
+        }
+        RSquared.push_back(SSDeviations[row]/SSTotals[row]);
     }
 }
 
-void calculateAIC(const int& NumSpeciesOrGuilds,
-                  const std::vector<int>& NumParameters,
-                  const int& RunLength,
+void calculateAIC(const std::vector<int>& NumParameters,
+                  const int& NumYears,
+                  const std::vector<double>& SSResiduals,
+                  std::vector<double>& AIC)
+{
+    int NumSpecies     =  SSResiduals.size();
+
+    AIC.clear();
+    for (int species=0;species<NumSpecies;++species) {
+        if (SSResiduals[species] == 0) {
+            AIC.push_back(0.0);
+        } else {
+            // AIC (per species i) = nᵢln(SSR/nᵢ) + 2Kᵢ
+            AIC.push_back(NumYears*std::log(SSResiduals[species]/NumYears) + 2 * NumParameters[species]);
+        }
+    }
+}
+
+void calculateAIC(const std::vector<int>& NumParameters,
+                  const int& NumYears,
                   const std::vector<double>& SSResiduals,
                   double& AIC)
 {
-    int NumYears = RunLength; // +1; // don't include the first year
+    int NumSpecies = SSResiduals.size();
     int sum_K = 0;
-    int sum_N = NumYears * NumSpeciesOrGuilds;
+    int sum_N = 0;
     double SSR = 0;
-    for (int i=0;i<NumSpeciesOrGuilds;++i) {
-        SSR   += SSResiduals[i];
-        sum_K += NumParameters[i];
+
+    sum_N = NumYears * NumSpecies;
+
+    for (int species=0;species<NumSpecies;++species) {
+        SSR   += SSResiduals[species];
+        sum_K += NumParameters[species];
     }
 
     // AIC (per model) = Σnᵢ * ln(ΣSSR/Σnᵢ) + 2ΣKᵢ
     AIC = (sum_N*std::log(SSR/sum_N) + 2 * sum_K);
-//std::cout << "*** AIC(0) Num Sum Parameters: "<< sum_K << ", NumYears: " << NumYears << std::endl;
 }
 
-void calculateAIC(const int& NumSpeciesOrGuilds,
-                  const std::vector<int>& NumParameters,
-                  const int& RunLength,
-                  const std::vector<double>& SSResiduals,
-                  std::vector<double>& AIC)
-{
-    int NumYears = RunLength; // +1; // don't include the first year
-    AIC.clear();
-    for (int i=0;i<NumSpeciesOrGuilds;++i) {
-        if (SSResiduals[i] == 0) {
-            AIC.push_back(0.0);
-        } else {
-            // AIC (per species i) = nᵢln(SSR/nᵢ) + 2Kᵢ
-            AIC.push_back(NumYears*std::log(SSResiduals[i]/NumYears) + 2 * NumParameters[i]);
-        }
-//std::cout << "*** AIC(1) Num Parameters for species[" << i << "]: " << NumParameters[i] << std::endl;
-    }
-}
 
-bool calculateR(const int& NumSpeciesOrGuilds,
-                const int& RunLength,
-                const std::vector<double>& MeanObserved,
-                const std::vector<double>& MeanEstimated,
-                const std::vector<double>& Observed,
-                const std::vector<double>& Estimated,
-                std::vector<double>& R)
+bool calculateR(
+        const bool& SkipFirstYear,
+        const int& NumSpeciesOrGuilds,
+        const std::vector<double>& MeanObserved,
+        const std::vector<double>& MeanEstimated,
+        const boost::numeric::ublas::matrix<double>& Observed,
+        const boost::numeric::ublas::matrix<double>& Estimated,
+        std::vector<double>& R)
 {
-    int m = 1;
+    int NumYears  = Observed.size1();
+    int FirstYear = (SkipFirstYear) ? 1 : 0;
     double num,den;
     double diffObs,diffEst;
     double sumObs,sumEst;
 
     R.clear();
-    for (int i=0;i<NumSpeciesOrGuilds;++i) {
+    for (int species=0;species<NumSpeciesOrGuilds;++species) {
         num = 0;
         sumObs = 0;
         sumEst = 0;
-        for (int j=1; j<=RunLength; ++j) {
-            if (Observed[m] != nmfConstantsMSSPM::NoData) {
-                diffObs = (Observed[m]  - MeanObserved[i]);
-                diffEst = (Estimated[m] - MeanEstimated[i]);
+        for (int time=FirstYear; time<NumYears; ++time) {
+            if (Observed(time,species) != nmfConstantsMSSPM::NoData) {
+                diffObs = (Observed(time,species)  - MeanObserved[species]);
+                diffEst = (Estimated(time,species) - MeanEstimated[species]);
                 num    += diffObs*diffEst;
                 sumObs += diffObs*diffObs;
                 sumEst += diffEst*diffEst;
             }
-            ++m;
         }
         den = sqrt(sumObs*sumEst);
         if (den == 0) {
@@ -663,64 +724,66 @@ bool calculateR(const int& NumSpeciesOrGuilds,
     return true;
 }
 
-bool calculateRMSE(const int& NumSpeciesOrGuilds,
-                   const int& RunLength,
-                   const std::vector<double>& Observed,
-                   const std::vector<double>& Estimated,
-                   std::vector<double>& RMSE)
+bool calculateRMSE(
+        const bool& SkipFirstYear,
+        const int& NumSpeciesOrGuilds,
+        const boost::numeric::ublas::matrix<double>& Observed,
+        const boost::numeric::ublas::matrix<double>& Estimated,
+        std::vector<double>& RMSE)
 {
-    int m = 1;
+    int FirstYear = (SkipFirstYear) ? 1 : 0;
     double sum;
     double diff;
     int numYearsWithoutBlanks = 0;
 
-    if (RunLength == 0) {
-        return false;
-    }
-    for (int i=0; i<NumSpeciesOrGuilds; ++i) {
+    for (int species=0; species<NumSpeciesOrGuilds; ++species) {
         sum = 0;
         numYearsWithoutBlanks = 0;
-        for (int j=1; j<=RunLength; ++j) {
-            if (Observed[m] != nmfConstantsMSSPM::NoData) {
-                diff = Estimated[m] - Observed[m];
+        for (unsigned time=FirstYear; time<Observed.size1(); ++time) {
+            if (Observed(time,species) != nmfConstantsMSSPM::NoData) {
+                diff = Estimated(time,species) - Observed(time,species);
                 sum += diff*diff;
                 ++numYearsWithoutBlanks;
             }
-            ++m;
         }
-        RMSE.push_back(sqrt(sum/numYearsWithoutBlanks));
+        if (numYearsWithoutBlanks > 0) {
+            RMSE.push_back(sqrt(sum/numYearsWithoutBlanks));
+        } else {
+            RMSE.push_back(-99999);
+        }
     }
 
     return true;
 }
 
-bool calculateRI(const int& NumSpeciesOrGuilds,
-                   const int& RunLength,
-                   const std::vector<double>& Observed,
-                   const std::vector<double>& Estimated,
-                   std::vector<double>& RI)
+bool calculateRI(
+        const bool& SkipFirstYear,
+        const int& NumSpeciesOrGuilds,
+        const boost::numeric::ublas::matrix<double>& Observed,
+        const boost::numeric::ublas::matrix<double>& Estimated,
+        std::vector<double>& RI)
 {
-    int m = 1;
+    int FirstYear = (SkipFirstYear) ? 1 : 0;
     int numYearsWithoutBlanks = 0;
     double sum;
     double val;
 
-    if (RunLength == 0) {
-        return false;
-    }
     RI.clear();
-    for (int i=0; i<NumSpeciesOrGuilds; ++i) {
+    for (int species=0; species<NumSpeciesOrGuilds; ++species) {
         sum = 0;
         numYearsWithoutBlanks = 0;
-        for (int j=1; j<=RunLength; ++j) {
-            if (Observed[m] != nmfConstantsMSSPM::NoData) {
-                val = log(Observed[m]/Estimated[m]);
+        for (unsigned time=FirstYear; time<Observed.size1(); ++time) {
+            if (Observed(time,species) != nmfConstantsMSSPM::NoData) {
+                val  = log(Observed(time,species)/Estimated(time,species));
                 sum += val*val;
                 ++numYearsWithoutBlanks;
             }
-            ++m;
         }
-        RI.push_back(exp(sqrt((1.0/numYearsWithoutBlanks)*sum)));
+        if (numYearsWithoutBlanks > 0) {
+            RI.push_back(exp(sqrt((1.0/numYearsWithoutBlanks)*sum)));
+        } else {
+            RI.push_back(-99999);
+        }
     }
 
     return true;
@@ -737,62 +800,60 @@ void calculateAE(const int& NumSpeciesOrGuilds,
     }
 }
 
-bool calculateAAE(const int& NumSpeciesOrGuilds,
-                  const int& RunLength,
-                  const std::vector<double>& Observed,
-                  const std::vector<double>& Estimated,
-                  std::vector<double>& AAE)
+bool calculateAAE(
+        const bool& SkipFirstYear,
+        const int& NumSpeciesOrGuilds,
+        const boost::numeric::ublas::matrix<double>& Observed,
+        const boost::numeric::ublas::matrix<double>& Estimated,
+        std::vector<double>& AAE)
 {
-    int m = 1;
     int numYearsWithoutBlanks = 0;
+    int FirstYear = (SkipFirstYear) ? 1 : 0;
     double sum;
 
-    if (RunLength == 0) {
-        return false;
-    }
     AAE.clear();
-    for (int i=0; i<NumSpeciesOrGuilds; ++i) {
+    for (int species=0; species<NumSpeciesOrGuilds; ++species) {
         sum = 0;
         numYearsWithoutBlanks = 0;
-        for (int j=1; j<=RunLength; ++j) {
-            if (Observed[m] != nmfConstantsMSSPM::NoData) {
-                sum += fabs(Estimated[m] - Observed[m]);
+        for (unsigned time=FirstYear; time<Observed.size1(); ++time) {
+            if (Observed(time,species) != nmfConstantsMSSPM::NoData) {
+                sum += fabs(Estimated(time,species) - Observed(time,species));
                 ++numYearsWithoutBlanks;
             }
-            ++m;
         }
-        AAE.push_back(sum/numYearsWithoutBlanks);
+        if (numYearsWithoutBlanks > 0) {
+            AAE.push_back(sum/numYearsWithoutBlanks);
+        } else {
+            AAE.push_back(-99999);
+        }
     }
 
     return true;
 }
 
-bool calculateMEF(const int& NumSpeciesOrGuilds,
-                  const int& RunLength,
-                  const std::vector<double>& MeanObserved,
-                  const std::vector<double>& Observed,
-                  const std::vector<double>& Estimated,
-                  std::vector<double>& MEF)
+bool calculateMEF(
+        const bool& SkipFirstYear,
+        const int& NumSpeciesOrGuilds,
+        const std::vector<double>& MeanObserved,
+        const boost::numeric::ublas::matrix<double>& Observed,
+        const boost::numeric::ublas::matrix<double>& Estimated,
+        std::vector<double>& MEF)
 {
-    int m = 1;
+    int FirstYear = (SkipFirstYear) ? 1 : 0;
     bool retv = true;
     double sum1,sum2;
     double diff1,diff2;
 
-    if (RunLength == 0) {
-        return false;
-    }
     MEF.clear();
-    for (int i=0; i<NumSpeciesOrGuilds; ++i) {
+    for (int species=0; species<NumSpeciesOrGuilds; ++species) {
         sum1 = sum2 = 0;
-        for (int j=1; j<=RunLength; ++j) {
-            if (Observed[m] != nmfConstantsMSSPM::NoData) {
-                diff1 = Observed[m]  - MeanObserved[i];
+        for (unsigned time=FirstYear; time<Observed.size1(); ++time) {
+            if (Observed(time,species) != nmfConstantsMSSPM::NoData) {
+                diff1 = Observed(time,species)  - MeanObserved[species];
                 sum1 += diff1*diff1;
-                diff2 = Estimated[m] - Observed[m];
+                diff2 = Estimated(time,species) - Observed(time,species);
                 sum2 += diff2*diff2;
             }
-            ++m;
         }
         if (nmfUtils::isNearlyZero(sum1)) {
             MEF.push_back(-999999);
@@ -928,15 +989,17 @@ bool calculateMohnsRhoForTimeSeries(
 
 
 double calculateMean(
-        const bool useLogData,
+        const bool& skipFirstYear,
+        const bool& useLogData,
         const boost::numeric::ublas::matrix<double>& ObsBiomass,
         const int speciesNum)
 {
+    int FirstYear = (skipFirstYear) ? 1 : 0;
     int numYears = ObsBiomass.size1();
     int numYearsWithData = 0; // Not equal to numYears because there may be blanks in observed biomass
     double sumObsBiomassPerSpecies = 0.0;
 
-    for (int time=1; time<numYears; ++time) {
+    for (int time=FirstYear; time<numYears; ++time) {
         if (ObsBiomass(time,speciesNum) != nmfConstantsMSSPM::NoData) {
             sumObsBiomassPerSpecies += ObsBiomass(time,speciesNum);
             ++numYearsWithData;
@@ -947,8 +1010,10 @@ double calculateMean(
 }
 
 std::vector<double> calculateSigmasSquared(
+        const bool& skipFirstYear,
         const boost::numeric::ublas::matrix<double>& ObsBiomass)
 {
+    int FirstYear = (skipFirstYear) ? 1 : 0;
     int numYears = (int)ObsBiomass.size1();
     int NumPoints = 0;
     double mu;
@@ -959,12 +1024,12 @@ std::vector<double> calculateSigmasSquared(
 
     for (int species=0; species<(int)ObsBiomass.size2(); ++species) {
 
-        mu = calculateMean(nmfConstantsMSSPM::DontUseLogData,ObsBiomass,species);
+        mu = calculateMean(skipFirstYear,nmfConstantsMSSPM::DontUseLogData,ObsBiomass,species);
 
         // Calculate the sum of the squares of the observed biomass and its mean
         sumSq = 0;
         NumPoints = 0;
-        for (int time=1; time<numYears; ++time) {
+        for (int time=FirstYear; time<numYears; ++time) {
             if (ObsBiomass(time,species) != nmfConstantsMSSPM::NoData) {
 //              diff   = std::log(ObsBiomass(time,species)) - mu;
                 diff   = ObsBiomass(time,species) - mu;
@@ -987,6 +1052,7 @@ std::vector<double> calculateSigmasSquared(
 }
 
 double calculateMaximumLikelihoodNoRescale(
+        const bool& skipFirstYear,
         const boost::numeric::ublas::vector<double>& speciesWeights,
         const bool& isEffortFitToCatch,
         const boost::numeric::ublas::matrix<double>& ObsCatch,
@@ -1010,8 +1076,8 @@ double calculateMaximumLikelihoodNoRescale(
             catchWeight   = FitWeights(species,1);
         }
 
-        mleBiomass = calculateMaximumLikelihoodNoRescale(speciesWeights,species,ObsBiomass,EstBiomass);
-        mleCatch   = (isEffortFitToCatch) ? calculateMaximumLikelihoodNoRescale(speciesWeights,species,ObsCatch,EstCatch) : 0;
+        mleBiomass = calculateMaximumLikelihoodNoRescale(skipFirstYear,speciesWeights,species,ObsBiomass,EstBiomass);
+        mleCatch   = (isEffortFitToCatch) ? calculateMaximumLikelihoodNoRescale(skipFirstYear,speciesWeights,species,ObsCatch,EstCatch) : 0;
         totalMLEForAllSpecies += speciesWeights(species) * ( biomassWeight*mleBiomass + catchWeight*mleCatch );
     }
 
@@ -1019,11 +1085,13 @@ double calculateMaximumLikelihoodNoRescale(
 }
 
 double calculateMaximumLikelihoodNoRescale(
+        const bool& skipFirstYear,
         const boost::numeric::ublas::vector<double>& speciesWeights,
         const int& species,
         const boost::numeric::ublas::matrix<double>& ObsMatrix,
         const boost::numeric::ublas::matrix<double>& EstMatrix)
 {
+    int FirstYear = (skipFirstYear) ? 1 : 0;
     int numYears = EstMatrix.size1();
     double diff;
     double sigma;
@@ -1031,10 +1099,10 @@ double calculateMaximumLikelihoodNoRescale(
     double sumSquares = 0;
     double numPoints  = 0; // Not equal to numYears if there are blanks in observed biomass
     double ObsMinusEstOverSigma;
-    double muCurrentSpecies = calculateMean(nmfConstantsMSSPM::DontUseLogData,ObsMatrix,species);
+    double muCurrentSpecies = calculateMean(skipFirstYear,nmfConstantsMSSPM::DontUseLogData,ObsMatrix,species);
 
     // Calculate the sum of the squares of the observed biomass and its mean
-    for (int time=1; time<numYears; ++time) {
+    for (int time=FirstYear; time<numYears; ++time) {
         if (ObsMatrix(time,species) != nmfConstantsMSSPM::NoData) {
             diff = ObsMatrix(time,species) - muCurrentSpecies;
             sumSquares += diff*diff;
@@ -1050,7 +1118,7 @@ double calculateMaximumLikelihoodNoRescale(
     }
 
     // Calculate MLE
-    for (int time=1; time<numYears; ++time) {
+    for (int time=FirstYear; time<numYears; ++time) {
         if (ObsMatrix(time,species) != nmfConstantsMSSPM::NoData) {
             diff = ObsMatrix(time,species) - EstMatrix(time,species);
             ObsMinusEstOverSigma = diff / sigma;

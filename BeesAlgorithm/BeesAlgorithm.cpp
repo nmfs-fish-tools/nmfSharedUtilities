@@ -467,7 +467,9 @@ BeesAlgorithm::extractSurveyQParameters(const std::vector<double>& parameters,
 }
 
 double
-BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
+BeesAlgorithm::evaluateObjectiveFunction(
+        const bool& SkipFirstYear,
+        const std::vector<double> &parameters)
 {
     bool   isAggProd = (m_BeeStruct.CompetitionForm == "AGG-PROD");
     double EstBiomassTMinus1;
@@ -488,6 +490,7 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     int NumSpecies = m_BeeStruct.NumSpecies;
     int NumGuilds  = m_BeeStruct.NumGuilds;
     int guildNum;
+    int FirstYear = (SkipFirstYear) ? 1 : 0;
     int NumSpeciesOrGuilds = (isAggProd) ? NumGuilds : NumSpecies;
     bool isEffortFitToCatch = (m_BeeStruct.HarvestForm == "Effort Fit to Catch");
     std::string covariateAlgorithmType = m_BeeStruct.CovariateAlgorithmType;
@@ -589,7 +592,7 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
     // Since we may be estimating SurveyQ, need to divide the Observed Biomass by the SurveyQ
     for (int species=0; species<int(obsBiomassBySpeciesOrGuilds.size2()); ++species) {
         surveyQVal = surveyQ[species];
-        for (int time=0; time<int(obsBiomassBySpeciesOrGuilds.size1()); ++time) {
+        for (int time=FirstYear; time<int(obsBiomassBySpeciesOrGuilds.size1()); ++time) {
             surveyQTerm = nmfUtils::applyCovariate(nullptr,
                         covariateAlgorithmType,surveyQVal,
                         surveyQCovariateCoeffs[species],surveyQCovariate(time,species));
@@ -629,11 +632,12 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
 
 
     double initBiomassCoeff = 0.0; // RSK will be estimated eventually
-    sigmasSquared = nmfUtilsStatistics::calculateSigmasSquared(obsBiomassBySpeciesOrGuilds); // m_ObsBiomassBySpeciesOrGuilds);
+    sigmasSquared = nmfUtilsStatistics::calculateSigmasSquared(
+                SkipFirstYear,obsBiomassBySpeciesOrGuilds); // m_ObsBiomassBySpeciesOrGuilds);
     if (sigmasSquared.size() == 0) {
         return m_DefaultFitness;
     }
-    for (int time=1; time<NumYears; ++time) {
+    for (int time=FirstYear; time<NumYears; ++time) {
         timeMinus1 = time - 1;
         for (int species=0; species<NumSpeciesOrGuilds; ++species) {
             // Find guild that speciesNum is in
@@ -774,6 +778,7 @@ BeesAlgorithm::evaluateObjectiveFunction(const std::vector<double> &parameters)
         // The maximum likelihood calculations must use the unscaled data or else the
         // results will be incorrect.
         fitness =  nmfUtilsStatistics::calculateMaximumLikelihoodNoRescale(
+                    nmfConstantsMSSPM::SkipFirstYear,
                     m_BeeStruct.SpeciesWeights,
                     isEffortFitToCatch,
                     ObsCatchRescaled, ObsBiomassBySpeciesOrGuildsRescaled,
@@ -825,7 +830,7 @@ BeesAlgorithm::createRandomBee(bool doWhileLoop, std::string& errorMsg)
 //std::cout << "--> range: " << i << "  [" << minVal << "," << maxVal <<
 //             "], parameter:  " << parameters[i] << std::endl;
         }
-        fitness = evaluateObjectiveFunction(parameters);
+        fitness = evaluateObjectiveFunction(nmfConstantsMSSPM::SkipFirstYear,parameters);
 //std::cout << "--> fitness: " << fitness << std::endl;
         endTime   = nmfUtilsQt::getCurrentTime();
         timeDiff = int(startTime.msecsTo(endTime))*1000.0; // microseconds
@@ -871,7 +876,7 @@ BeesAlgorithm::createNeighborhoodBee(std::vector<double> &bestSiteParameters)
         parameters.emplace_back(val);
     }
 
-    fitness = evaluateObjectiveFunction(parameters);
+    fitness = evaluateObjectiveFunction(nmfConstantsMSSPM::SkipFirstYear,parameters);
 
     return std::move(std::make_unique<Bee>(fitness,parameters));
 }

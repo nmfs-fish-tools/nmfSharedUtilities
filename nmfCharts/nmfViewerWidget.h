@@ -88,6 +88,7 @@ private:
     QPushButton* m_DeletePB;
     QPushButton* m_RefreshPB;
     QPushButton* m_RenamePB;
+    QPushButton* m_CopyPB;
     QPushButton* m_PlayForwardPB;
     QPushButton* m_PlayReversePB;
     QPushButton* m_PlayBouncePB;
@@ -196,6 +197,10 @@ public Q_SLOTS:
      * Bounce Play button
      */
     void callback_BounceSetupPlayPB();
+    /**
+     * @brief Callback invoked when the user wants to copy the current image name into the application's buffer.
+     */
+    void callback_CopyPB();
     /**
      * @brief Callback invoked when the user clicks the Delete Image button
      */

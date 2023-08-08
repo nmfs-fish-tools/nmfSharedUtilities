@@ -263,6 +263,16 @@ std::string getOS()
     #endif
 }
 
+// A simpler random number generator than the one below. This is implemented as the one
+// below uses Qt and that's not available on the HPC.
+double getRandomNumber(double lowerLimit, double upperLimit)
+{
+   double span = upperLimit - lowerLimit;
+   double rval = (unsigned)rand();
+   double randVal = (rval / RAND_MAX);
+   return randVal*span + lowerLimit;
+}
+
 /*
  * Returns a random number between the passed limits: [lowerLimit,upperLimit)
  * If seed < 0, no seed is used and the algorithm is stochastic.

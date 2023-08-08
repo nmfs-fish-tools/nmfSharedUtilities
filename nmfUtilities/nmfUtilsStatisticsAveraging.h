@@ -152,6 +152,10 @@ public:
      */
     void calculateAICWeighted();
     /**
+     * @brief Clears all class data structures
+     */
+    void clearAll();
+    /**
      * @brief Returns (by reference) the averaged parameters and biomass
      * @param Fitness : average fitness values vector
      * @param AveInitBiomass : average initial biomass vector

@@ -308,6 +308,14 @@ namespace nmfUtils {
      */
     std::string getOS();
     /**
+     * @brief Returns a random number using the rand() function.
+     * @param lowerLimit : lower limit of random number range
+     * @param upperLimit : upper limit of random number range
+     * @return The random number generated using the passed parameters
+     */
+    double getRandomNumber(double lowerLimit,
+                           double upperLimit);
+    /**
      * @brief Returns a random number between the passed limits: [lowerLimit,upperLimit). The
      * random number is generated using the Mersene Twister 19937 generator (64 bit) algorithm.
      * @param seed : If seed < 0, no seed is used and the algorithm is stochastic, else

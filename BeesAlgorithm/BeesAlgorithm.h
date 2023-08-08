@@ -195,6 +195,7 @@ public:
             std::vector<double>&       surveyQ,
             std::vector<double>&       surveyQCovariateCoeffs);
     double evaluateObjectiveFunction(
+            const bool& SkipFirstYear,
             const std::vector<double> &parameters);
     void initializeParameterRangesAndPatchSizes(
             nmfStructsQt::ModelDataStruct& theBeeStruct);

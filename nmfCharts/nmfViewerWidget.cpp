@@ -334,18 +334,22 @@ nmfViewerWidget::setupOutputScreenShotViewerWidgets()
     m_DeletePB        = new QPushButton("del");
     m_RenamePB        = new QPushButton("ren");
     m_RefreshPB       = new QPushButton("ref");
+    m_CopyPB          = new QPushButton("cp");
     m_PlayForwardPB   = new QPushButton("▶❙");
     m_PlayReversePB   = new QPushButton("❙◀");
     m_PlayBouncePB    = new QPushButton("◀ ▶");
     m_SetFirstImagePB = new QPushButton("┣");
     m_SetLastImagePB  = new QPushButton("┫");
     m_SetSpeedSL      = new QSlider(Qt::Horizontal);
-    m_ImageCMB->setFixedWidth(300);
+//  m_ImageCMB->setFixedWidth(300);
+    m_ImageCMB->setMinimumWidth(200);
+    m_ImageCMB->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
     filenameLayt->addWidget(filenameLBL);
     filenameLayt->addWidget(m_ImageCMB);
     filenameLayt->addWidget(m_DeletePB);
     filenameLayt->addWidget(m_RenamePB);
     filenameLayt->addWidget(m_RefreshPB);
+    filenameLayt->addWidget(m_CopyPB);
     filenameLayt->addSpacerItem(new QSpacerItem(10,0,QSizePolicy::Expanding,QSizePolicy::Fixed));
     filenameLayt->addWidget(m_SetFirstImagePB);
     filenameLayt->addWidget(m_PlayReversePB);
@@ -353,12 +357,13 @@ nmfViewerWidget::setupOutputScreenShotViewerWidgets()
     filenameLayt->addWidget(m_PlayForwardPB);
     filenameLayt->addWidget(m_SetLastImagePB);
     filenameLayt->addWidget(m_SetSpeedSL);
-    m_MainViewerLayt->addLayout(filenameLayt);
+    m_MainViewerLayt->addLayout(filenameLayt,100);
     m_MainViewerLayt->addWidget(m_PixmapLBL);
     m_PixmapLBL->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
     m_DeletePB->setToolTip("Delete the current output image");
     m_RefreshPB->setToolTip("Refreshes the output image list");
     m_RenamePB->setToolTip("Rename the current output image");
+    m_CopyPB->setToolTip("Copies the image name into the application buffer");
     m_PlayForwardPB->setToolTip("Displays the images from first to last");
     m_PlayReversePB->setToolTip("Displays the images from last to first");
     m_PlayBouncePB->setToolTip("Displays the first to last images back and forth until user clicks Stop");
@@ -410,6 +415,11 @@ nmfViewerWidget::setupOutputScreenShotViewerWidgets()
     msg += "<br>This button will allow the user to rename the currently displayed image.";
     msg += "</p>";
     m_RenamePB->setWhatsThis(msg);
+    msg  = "<strong><center>Copy</center></strong>";
+    msg += "<br>This button will allow the user to copy the currently displayed image name ";
+    msg += "into the application's buffer. This is useful if the user wants to paste the name ";
+    msg += "into a new screen grab's popup dialog when asked for an image name for a new screen grab.</p>";
+    m_CopyPB->setWhatsThis(msg);
     m_ImageCMB->setToolTip("List of output REMORA images");
     msg  = "<strong><center>Output REMORA Images</center></strong>";
     msg += "<br>This is the list of all previously saved REMORA output images. These images are saved ";
@@ -427,9 +437,10 @@ nmfViewerWidget::setupOutputScreenShotViewerWidgets()
     m_ViewerImageTab->setLayout(m_MainViewerLayt);
 
     // Set default sizes
-    m_DeletePB->setFixedWidth(40);
-    m_RefreshPB->setFixedWidth(40);
-    m_RenamePB->setFixedWidth(40);
+    m_DeletePB->setFixedWidth(30);
+    m_RefreshPB->setFixedWidth(30);
+    m_RenamePB->setFixedWidth(30);
+    m_CopyPB->setFixedWidth(25);
     m_SetFirstImagePB->setCheckable(true);
     m_SetLastImagePB->setCheckable(true);
     m_PlayReversePB->setFixedWidth(40);
@@ -448,6 +459,8 @@ nmfViewerWidget::setupOutputScreenShotViewerWidgets()
             this,              SLOT(callback_RefreshPB()));
     connect(m_RenamePB,        SIGNAL(clicked()),
             this,              SLOT(callback_RenamePB()));
+    connect(m_CopyPB,          SIGNAL(clicked()),
+            this,              SLOT(callback_CopyPB()));
     connect(m_PlayReversePB,   SIGNAL(clicked()),
             this,              SLOT(callback_PlayReversePB()));
     connect(m_PlayForwardPB,   SIGNAL(clicked()),
@@ -675,6 +688,13 @@ nmfViewerWidget::callback_RefreshPB()
 {
     initializeFirstAndLastImages();
     updateScreenShotViewer(m_ImageCMB->currentText());
+}
+
+void
+nmfViewerWidget::callback_CopyPB()
+{
+    QClipboard *clipboard = QGuiApplication::clipboard();
+    clipboard->setText(m_ImageCMB->currentText());
 }
 
 void

@@ -14,6 +14,14 @@ nmfUtilsStatisticsAveraging::nmfUtilsStatisticsAveraging()
 }
 
 void
+nmfUtilsStatisticsAveraging::clearAll()
+{
+    clearAveragedData();
+    clearEstData();
+    clearTrimmedData();
+}
+
+void
 nmfUtilsStatisticsAveraging::clearAveragedData()
 {
     m_AveInitBiomass.clear();
@@ -228,7 +236,7 @@ nmfUtilsStatisticsAveraging::createTrimmedStructures(const int& numberOfTopRunsT
 
 //  bool useAllRuns = ((numberOfTopRunsToUse ==     100) &&   isPercent) ||
 //                    ((numberOfTopRunsToUse == numRuns) && ! isPercent);
-
+//std::cout << "*** isUsingAll: " << isUsingAll << std::endl;
     if (isUsingAll) {
         m_AIC_trimmed                                = m_AIC;
         m_EstInitBiomass_trimmed                     = m_EstInitBiomass;
@@ -256,8 +264,10 @@ nmfUtilsStatisticsAveraging::createTrimmedStructures(const int& numberOfTopRunsT
 
         if (isPercent) {
             NumRuns_trimmed = numRuns*(numberOfTopRunsToUse/100.0);
+//std::cout << "*** NumRuns_trimmed: 1" << NumRuns_trimmed << std::endl;
         } else {
             NumRuns_trimmed = (numberOfTopRunsToUse > numRuns) ? numRuns : numberOfTopRunsToUse;
+//std::cout << "*** NumRuns_trimmed 2: " << NumRuns_trimmed << std::endl;
         }
 
         // Go through the fitness vector and keep the top NumRuns_trimmed runs

@@ -96,18 +96,19 @@ namespace nmfUtilsStatistics {
 
     /**
      * @brief Calculates the average absolute error: Σ|Eₜ-Oₜ| / n
+     * @param skipFirstYear : boolean denoting to skip the first year in all calculations
      * @param numSpeciesOrGuilds : the number of either species or guilds
-     * @param runLength : time period in years
      * @param observed : observed biomass
      * @param estimated : estimated biomass
      * @param aae : average error per species or guild
      * @return True if no error, else False
      */
-    bool calculateAAE(const int& numSpeciesOrGuilds,
-                      const int& runLength,
-                      const std::vector<double>& observed,
-                      const std::vector<double>& estimated,
-                      std::vector<double>& aae);
+    bool calculateAAE(
+            const bool& skipFirstYear,
+            const int& numSpeciesOrGuilds,
+            const boost::numeric::ublas::matrix<double>& observed,
+            const boost::numeric::ublas::matrix<double>& estimated,
+            std::vector<double>& aae);
     /**
      * @brief Calculates the average error (or bias): Σ(Eₜ-Oₜ) / n
      * @param numSpeciesOrGuilds : the number of either species or guilds
@@ -123,15 +124,13 @@ namespace nmfUtilsStatistics {
     /**
      * @brief Calculates Species Akaike Info Criterion: n*ln(σ²) + 2*K, where n = number of observations,
      * σ² = ssResiduals/n, and K = number of parameters
-     * @param NumSpeciesOrGuilds : the number of either species or guilds
      * @param NumParameters : number of parameters per species
-     * @param RunLength : time period in years
+     * @param NumYears : time period in years
      * @param SSResiduals : sum of square residuals per species or guild
      * @param AIC : Akaika Info Criterion per species or guild
      */
-    void calculateAIC(const int& NumSpeciesOrGuilds,
-                      const std::vector<int>& NumParameters,
-                      const int& RunLength,
+    void calculateAIC(const std::vector<int>& NumParameters,
+                      const int& NumYears,
                       const std::vector<double>& SSResiduals,
                       std::vector<double>& AIC);
     /**
@@ -139,17 +138,17 @@ namespace nmfUtilsStatistics {
      * σ² = ssResiduals/n, and K = number of parameters
      * @param NumSpeciesOrGuilds : the number of either species or guilds
      * @param NumParameters : number of parameters per species
-     * @param RunLength : time period in years
+     * @param NumYears : time period in years
      * @param SSResiduals : sum of square residuals per species or guild
      * @param AIC : Akaika Info Criterion per model
      */
-    void calculateAIC(const int& NumSpeciesOrGuilds,
-                      const std::vector<int>& NumParameters,
-                      const int& RunLength,
+    void calculateAIC(const std::vector<int>& NumParameters,
+                      const int& NumYears,
                       const std::vector<double>& SSResiduals,
                       double& AIC);
     /**
      * @brief Calculates the negative log maximum likelihood value
+     * @param SkipFirstYear : flag denoting if first year should be skipped in calculations
      * @param SpeciesWeights : vector of species fitness (biomass) weights
      * @param Species : the particular species whose mle value you're finding
      * @param ObsBiomass : Observed Biomass matrix
@@ -157,12 +156,14 @@ namespace nmfUtilsStatistics {
      * @return Returns the per species -log maximum likelihood value
      */
     double calculateMaximumLikelihoodNoRescale(
+            const bool& SkipFirstYear,
             const boost::numeric::ublas::vector<double>& SpeciesWeights,
             const int& Species,
             const boost::numeric::ublas::matrix<double>& ObsBiomass,
             const boost::numeric::ublas::matrix<double>& EstBiomass);
     /**
       * @brief calculateMaximumLikelihoodNoRescale
+      * @param SkipFirstYear : flag denoting if first year should be skipped in calculations
       * @param SpeciesWeights : vector of species fitness (biomass) weights
       * @param isEffortFitToCatch : true if the harvest type is EffortFitToCatch; false otherwise
       * @param ObsCatch : Observed Catch matrix
@@ -173,6 +174,7 @@ namespace nmfUtilsStatistics {
       * @return Returns the total -log maximum likelihood value
       */
     double calculateMaximumLikelihoodNoRescale(
+            const bool& SkipFirstYear,
             const boost::numeric::ublas::vector<double>& SpeciesWeights,
             const bool& isEffortFitToCatch,
             const boost::numeric::ublas::matrix<double>& ObsCatch,
@@ -182,31 +184,34 @@ namespace nmfUtilsStatistics {
             const boost::numeric::ublas::matrix<double>& FitWeights);
     /**
      * @brief Calculates the mean of the passed matrix for the particular species
+     * @param skipFirstYear : flag denoting if first year should be skipped in calculations
      * @param useLogData : boolean signifying if log of data should be taken prior to calculations
      * @param obsBiomass : 2-dimensional (observed biomass) matrix
      * @param speciesNum : Species number to use to find the mean
      * @return Returns the mean of the matrix for the particular Species number
      */
     double calculateMean(
-            const bool useLogData,
+            const bool& skipFirstYear,
+            const bool& useLogData,
             const boost::numeric::ublas::matrix<double>& obsBiomass,
             const int speciesNum);
     /**
      * @brief Calculates the modeling efficiency statistic: [Σ(Oₜ-Ō)²-Σ(Eₜ-Oₜ)²] / Σ(Oₜ-Ō)²
+     * @param skipFirstYear : flag denoting if first year should be skipped in calculations
      * @param numSpeciesOrGuilds : the number of either species or guilds
-     * @param runLength : time period in years
      * @param meanObserved : mean values of observed biomass per species
      * @param observed : observed biomass
      * @param estimated : estimated biomass
      * @param mef : model efficiency values by species or guilds
      * @return True if no error found, else False
      */
-    bool calculateMEF(const int& numSpeciesOrGuilds,
-                      const int& runLength,
-                      const std::vector<double>& meanObserved,
-                      const std::vector<double>& observed,
-                      const std::vector<double>& estimated,
-                      std::vector<double>& mef);
+    bool calculateMEF(
+            const bool& skipFirstYear,
+            const int& numSpeciesOrGuilds,
+            const std::vector<double>& meanObserved,
+            const boost::numeric::ublas::matrix<double>& observed,
+            const boost::numeric::ublas::matrix<double>& estimated,
+            std::vector<double>& mef);
     /**
      * @brief Calculates the model efficiency fitness of 1 - ⵉ(Be - Bo)² / ⵉ(Bo - Bm)²
      * where (e)stimated, (o)bserved, and (m)ean (B)iomass or Catch
@@ -280,108 +285,113 @@ namespace nmfUtilsStatistics {
             const boost::numeric::ublas::matrix<double>& FitWeights);
     /**
      * @brief Calculate the correlation coefficient: Σ[(Oₜ-Ō)(Eₜ-Ē)] / sqrt{Σ(Oₜ-Ō)²Σ(Eₜ-Ē)²}
+     * @param skipFirstYear : boolean denoting if the first year should be skipped in calculations
      * @param numSpeciesOrGuilds : the number of either species or guilds
-     * @param runLength : time period in years
      * @param meanObserved : mean values of observed biomass per species
      * @param meanEstimated : mean values of estimated biomass per species
-     * @param observed : observed biomass
-     * @param estimated : estimated biomass
+     * @param observed : observed biomass matrix
+     * @param estimated : estimated biomass matrix
      * @param correlationCoefficient : the coefficient of correlation (aka. R)
      * @return True if no error found, else False
      */
-    bool calculateR(const int& numSpeciesOrGuilds,
-                    const int& runLength,
+    bool calculateR(const bool& SkipFirstYear,
+                    const int& NumSpeciesOrGuilds,
                     const std::vector<double>& meanObserved,
                     const std::vector<double>& meanEstimated,
-                    const std::vector<double>& observed,
-                    const std::vector<double>& estimated,
-                    std::vector<double>& correlationCoefficient);
+                    const boost::numeric::ublas::matrix<double>& Observed,
+                    const boost::numeric::ublas::matrix<double>& Estimated,
+                    std::vector<double>& correlationCoefficient);    
     /**
      * @brief Calculates the Reliability Index: exp[sqrt{(1/n)Σ([log(Oₜ/Eₜ)]²)}]
+     * @param skipFirstYear : skips the first year of data in all calculations
      * @param numSpeciesOrGuilds : the number of either species or guilds
-     * @param runLength : time period in years
      * @param observed : observed biomass
      * @param estimated : estimated biomass
      * @param reliabilityIndex : the reliability index of the passed time series
      * @return True if no error found, else False
      */
-    bool calculateRI(const int& numSpeciesOrGuilds,
-                     const int& runLength,
-                     const std::vector<double>& observed,
-                     const std::vector<double>& estimated,
-                     std::vector<double>& reliabilityIndex);
+    bool calculateRI(
+            const bool& SkipFirstYear,
+            const int& NumSpeciesOrGuilds,
+            const boost::numeric::ublas::matrix<double>& observed,
+            const boost::numeric::ublas::matrix<double>& estimated,
+            std::vector<double>& reliabilityIndex);
     /**
      * @brief Calculates the root mean square error: sqrt{(Σ(Eₜ-Oₜ)²)/n}
+     * @param skipFirstYear : skips the first year of data in all calculations
      * @param numSpeciesOrGuilds : the number of either species or guilds
-     * @param runLength : time period in years
      * @param observed : observed biomass
      * @param estimated : estimated biomass
      * @param rmse : root mean square error
      * @return True if no error found, else False
      */
-    bool calculateRMSE(const int& numSpeciesOrGuilds,
-                       const int& runLength,
-                       const std::vector<double>& observed,
-                       const std::vector<double>& estimated,
-                       std::vector<double>& rmse);
+    bool calculateRMSE(
+            const bool& skipFirstYear,
+            const int& numSpeciesOrGuilds,
+            const boost::numeric::ublas::matrix<double>& observed,
+            const boost::numeric::ublas::matrix<double>& estimated,
+            std::vector<double>& rmse);
     /**
      * @brief Calculate coefficient of determination: SSdeviations/SStotals
-     * @param numSpeciesOrGuilds : the number of either species or guilds
      * @param ssDeviations : sum of the square deviations
      * @param ssTotals : sum of the square totals
+     * @param errorMsg : error msg (blank if no error)
      * @param rSquared : determination coefficients per species or guild
      */
-    void calculateRSquared(const int& numSpeciesOrGuilds,
-                           const std::vector<double>& ssDeviations,
+    void calculateRSquared(const std::vector<double>& ssDeviations,
                            const std::vector<double>& ssTotals,
-                           std::vector<double>& rSquared);
+                           std::vector<double>& rSquared,
+                           std::string& errorMsg);
     /**
      * @brief Calculates a sigma per species from the passed observed biomass matrix
+     * @param SkipFirstYear : skips the first year of data in all calculations
      * @param ObsBiomass : observed biomass with arguments (time,species)
      * @return Vector of doubles where each double is the standard deviation of the particular species
      */
-    std::vector<double> calculateSigmasSquared(const boost::numeric::ublas::matrix<double>& ObsBiomass);
+    std::vector<double> calculateSigmasSquared(
+            const bool& SkipFirstYear,
+            const boost::numeric::ublas::matrix<double>& ObsBiomass);
     /**
      * @brief Calculates the sum of the square deviations: Σ(Eₜ-Ō)² over all t years
-     * @param numSpeciesOrGuilds : the number of either species or guilds
-     * @param runLength : time period in years
      * @param observed : observed biomass, only needed to check for missing data
      * @param estimated : estimated biomass
-     * @param meanObserved : mean values of observed biomass per species
+     * @param means : mean values of observed biomass per species
+     * @param SkipFirstYear : flag denoting whether first row of data files should be skipped
      * @param ssDeviations : the sum of the square deviation values
+     * @param errorMsg : error msg (blank if no error)
      * @return True if no error found, else False
      */
-    bool calculateSSDeviations(const int& numSpeciesOrGuilds,
-                               const int& runLength,
-                               const std::vector<double>& observed,
-                               const std::vector<double>& estimated,
-                               const std::vector<double>& meanObserved,
-                               std::vector<double>& ssDeviations);
+    bool calculateSSDeviations(const boost::numeric::ublas::matrix<double>& observed,
+                               const boost::numeric::ublas::matrix<double>& estimated,
+                               const std::vector<double>& means,
+                               const bool& SkipFirstYear,
+                               std::vector<double>& ssDeviations,
+                               std::string& errorMsg);
     /**
      * @brief Calculates the sum of the square residual values: Σ(Oₜ-Eₜ)² over all t years
-     * @param numSpeciesOrGuilds : the number of either species or guilds
-     * @param runLength : time period in years
      * @param observed : observed biomass
      * @param estimated : estimated biomass
+     * @param SkipFirstYear : flag denoting whether first row of data files should be skipped
+     * @param errorMsg : error msg (blank if no error)
      * @param ssResiduals : sum of square residual values per species or guild
      */
-    void calculateSSResiduals(const int& numSpeciesOrGuilds,
-                              const int& runLength,
-                              const std::vector<double>& observed,
-                              const std::vector<double>& estimated,
-                              std::vector<double>& ssResiduals);
+    void calculateSSResiduals(const boost::numeric::ublas::matrix<double> & observed,
+                              const boost::numeric::ublas::matrix<double> & estimated,
+                              const bool& SkipFirstYear,
+                              std::vector<double>& ssResiduals,
+                              std::string& errorMsg);
 
     /**
      * @brief Calculate sum of the square totals: ssresiduals + ssdeviations
-     * @param numSpeciesOrGuilds : the number of either species or guilds
      * @param ssDeviations : the sum of the square deviation values
      * @param ssResiduals : sum of square residual values per species or guild
+     * @param errorMsg : error msg (blank if no error)
      * @param ssTotal : sum of square total values per species or guild
      */
-    void calculateSSTotals(const int& numSpeciesOrGuilds,
-                           const std::vector<double>& ssDeviations,
+    void calculateSSTotals(const std::vector<double>& ssDeviations,
                            const std::vector<double>& ssResiduals,
-                           std::vector<double>& ssTotal);
+                           std::vector<double>& ssTotal,
+                           std::string& errorMsg);
 
     /**
      * @brief Returns the log factorial so that you can do really big numbers, for
