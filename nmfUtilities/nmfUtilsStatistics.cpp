@@ -585,10 +585,8 @@ bool calculateSSDeviations(const boost::numeric::ublas::matrix<double>& Observed
     for (int col=0;col<NumColsObs;++col) {
         sum = 0;
         for (int row=StartRow; row<NumRowsObs; ++row) {
-            if (Observed(row,col) != nmfConstantsMSSPM::NoData) {
-                diff = Estimated(row,col) - Means[col];
-                sum += diff*diff;
-            }
+            diff = Estimated(row,col) - Means[col];
+            sum += diff*diff;
         }
         if (sum == 0) {
             errorMsg = "Error calculateSSDeviations: Found SSdeviation sum of 0";
@@ -645,14 +643,16 @@ void calculateRSquared(const std::vector<double>& SSDeviations,
 }
 
 void calculateAIC(const std::vector<int>& NumParameters,
-                  const int& NumYears,
+                  const std::vector<int>& NumYearsWithBlanks,
                   const std::vector<double>& SSResiduals,
                   std::vector<double>& AIC)
 {
-    int NumSpecies     =  SSResiduals.size();
+    int NumYears;
+    int NumSpecies =  SSResiduals.size();
 
     AIC.clear();
     for (int species=0;species<NumSpecies;++species) {
+        NumYears = NumYearsWithBlanks[species];
         if (SSResiduals[species] == 0) {
             AIC.push_back(0.0);
         } else {
@@ -663,7 +663,7 @@ void calculateAIC(const std::vector<int>& NumParameters,
 }
 
 void calculateAIC(const std::vector<int>& NumParameters,
-                  const int& NumYears,
+                  const int& TotalNumYearsWithBlanks,
                   const std::vector<double>& SSResiduals,
                   double& AIC)
 {
@@ -672,7 +672,8 @@ void calculateAIC(const std::vector<int>& NumParameters,
     int sum_N = 0;
     double SSR = 0;
 
-    sum_N = NumYears * NumSpecies;
+//    sum_N = NumYears * NumSpecies;
+    sum_N = TotalNumYearsWithBlanks;
 
     for (int species=0;species<NumSpecies;++species) {
         SSR   += SSResiduals[species];
@@ -773,7 +774,8 @@ bool calculateRI(
         sum = 0;
         numYearsWithoutBlanks = 0;
         for (unsigned time=FirstYear; time<Observed.size1(); ++time) {
-            if (Observed(time,species) != nmfConstantsMSSPM::NoData) {
+            if ((Observed(time,species) != nmfConstantsMSSPM::NoData) &&
+                (Observed(time,species) != 0)){
                 val  = log(Observed(time,species)/Estimated(time,species));
                 sum += val*val;
                 ++numYearsWithoutBlanks;

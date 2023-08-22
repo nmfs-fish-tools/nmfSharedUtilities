@@ -125,12 +125,12 @@ namespace nmfUtilsStatistics {
      * @brief Calculates Species Akaike Info Criterion: n*ln(σ²) + 2*K, where n = number of observations,
      * σ² = ssResiduals/n, and K = number of parameters
      * @param NumParameters : number of parameters per species
-     * @param NumYears : time period in years
+     * @param NumYearsWithBlanks : time period in years (vector because some time series have blanks)
      * @param SSResiduals : sum of square residuals per species or guild
      * @param AIC : Akaika Info Criterion per species or guild
      */
     void calculateAIC(const std::vector<int>& NumParameters,
-                      const int& NumYears,
+                      const std::vector<int>& NumYearsWithBlanks,
                       const std::vector<double>& SSResiduals,
                       std::vector<double>& AIC);
     /**
@@ -138,12 +138,12 @@ namespace nmfUtilsStatistics {
      * σ² = ssResiduals/n, and K = number of parameters
      * @param NumSpeciesOrGuilds : the number of either species or guilds
      * @param NumParameters : number of parameters per species
-     * @param NumYears : time period in years
+     * @param TotalNumYearsWithBlanks : time period in years for all species and including blanks
      * @param SSResiduals : sum of square residuals per species or guild
      * @param AIC : Akaika Info Criterion per model
      */
     void calculateAIC(const std::vector<int>& NumParameters,
-                      const int& NumYears,
+                      const int& TotalNumYearsWithBlanks,
                       const std::vector<double>& SSResiduals,
                       double& AIC);
     /**
