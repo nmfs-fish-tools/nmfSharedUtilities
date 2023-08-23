@@ -989,6 +989,69 @@ bool calculateMohnsRhoForTimeSeries(
     return true;
 }
 
+bool calculateMeanOmittingBlanks(
+            const int& FirstRow,
+            const boost::numeric::ublas::matrix<double>& matrix,
+            std::vector<int>& NumYearsWithoutBlanksPerCol,
+            int& TotalNumYearsWithoutBlanks,
+            std::vector<double>& mean)
+{
+    int count;
+    double meanVal;
+    double value;
+    int NumRows = matrix.size1();
+    int NumCols = matrix.size2();
+
+    NumYearsWithoutBlanksPerCol.clear();
+    TotalNumYearsWithoutBlanks = 0;
+    mean.clear();
+
+    for (int col=0; col<NumCols; ++col) {
+        meanVal = 0;
+        count = 0;
+        for (int row=FirstRow; row<NumRows; ++row) {
+            value = matrix(row,col);
+            if (value != nmfConstantsMSSPM::NoData) {
+                meanVal += value;
+                ++count;
+            }
+        }
+        if (count == 0) {
+            return false;
+        }
+        NumYearsWithoutBlanksPerCol.push_back(count);
+        TotalNumYearsWithoutBlanks += count;
+        mean.push_back(meanVal/count);
+    }
+
+    return true;
+}
+
+
+bool calculateMean(
+            const int& FirstRow,
+            const boost::numeric::ublas::matrix<double>& matrix,
+            std::vector<double>& mean)
+{
+    double meanVal;
+    int NumRows = matrix.size1();
+    int NumCols = matrix.size2();
+
+    if (NumRows == 0) {
+        return false;
+    }
+    mean.clear();
+
+    for (int col=0; col<NumCols; ++col) {
+        meanVal = 0;
+        for (int row=FirstRow; row<NumRows; ++row) {
+            meanVal += matrix(row,col);
+        }
+        mean.push_back(meanVal/NumRows);
+    }
+
+    return true;
+}
 
 double calculateMean(
         const bool& skipFirstYear,

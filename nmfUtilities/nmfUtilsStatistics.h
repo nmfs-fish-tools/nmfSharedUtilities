@@ -183,6 +183,32 @@ namespace nmfUtilsStatistics {
             const boost::numeric::ublas::matrix<double>& EstBiomass,
             const boost::numeric::ublas::matrix<double>& FitWeights);
     /**
+     * @brief Calculates the column means of the passed matrix accounting for blank cells
+     * @param firstRow : first row to start calculations on
+     * @param matrix : 2-dimensional matrix
+     * @param numYearsWithoutBlanksPerCol : vector containing the number of non-blank cells per column
+     * @param totalNumYearsWithoutBlanks : the total number of non-blank cells in entire matrix
+     * @param mean : vector containing the mean of each column
+     * @return boolean with true if no error, false if error found
+     */
+    bool calculateMeanOmittingBlanks(
+                const int& firstRow,
+                const boost::numeric::ublas::matrix<double>& matrix,
+                std::vector<int>& numYearsWithoutBlanksPerCol,
+                int& totalNumYearsWithoutBlanks,
+                std::vector<double>& mean);
+    /**
+     * @brief Calculates the column means of the passed matrix
+     * @param firstRow : first row to start calculations on
+     * @param matrix : 2-dimensional matrix
+     * @param mean : vector containing the mean of each column
+     * @return boolean with true if no error, false if error found
+     */
+    bool calculateMean(
+                const int& firstRow,
+                const boost::numeric::ublas::matrix<double>& matrix,
+                std::vector<double>& mean);
+    /**
      * @brief Calculates the mean of the passed matrix for the particular species
      * @param skipFirstYear : flag denoting if first year should be skipped in calculations
      * @param useLogData : boolean signifying if log of data should be taken prior to calculations
