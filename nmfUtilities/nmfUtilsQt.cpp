@@ -1319,6 +1319,20 @@ isEmpty(QTableView* tableview)
            (tableview->model()->rowCount() == 0));
 }
 
+QStandardItem*
+itemFixedOrScientific(double value)
+{
+    QStandardItem* item;
+
+    if (value < nmfConstantsMSSPM::FixedScientificLimit) {
+        item = new QStandardItem(QString::number(value,'e',3));
+    } else {
+        item = new QStandardItem(QString::number(value));
+    }
+
+    return item;
+}
+
 bool
 removeSettingsFile()
 {
@@ -2197,6 +2211,7 @@ saveSpeciesTableView(
         QString& outputFilename,
         QList<QString>& SpeciesName,
         QList<QString>& SpeciesGuild,
+        QList<QString>& SpeciesMinimumBiomass,
         QList<QString>& SpeciesInitialBiomass,
         QList<QString>& SpeciesGrowthRate,
         QList<QString>& SpeciesK)
@@ -2242,6 +2257,8 @@ saveSpeciesTableView(
                             value = SpeciesName[row];
                             stream << value << ",";
                             value = SpeciesGuild[row];
+                        } else if (col == columnNumberMap["MinimumBiomass"]) {
+                            value = SpeciesMinimumBiomass[row];
                         } else if (col == columnNumberMap["InitBiomass"]) {
                             value = SpeciesInitialBiomass[row];
                         } else if (col == columnNumberMap["GrowthRate"]) {

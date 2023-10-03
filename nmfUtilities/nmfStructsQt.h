@@ -255,6 +255,7 @@ struct ModelDataStruct {
     boost::numeric::ublas::matrix<double> Effort;
     boost::numeric::ublas::matrix<double> FitWeights;
 
+    boost::numeric::ublas::vector<double> MinimumBiomass;
     boost::numeric::ublas::vector<double> InitBiomass;
     boost::numeric::ublas::vector<double> InitBiomassMin;
     boost::numeric::ublas::vector<double> InitBiomassMax;

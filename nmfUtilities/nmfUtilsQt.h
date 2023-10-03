@@ -597,6 +597,12 @@ namespace nmfUtilsQt {
      */
     bool isEmpty(QTableView* tableview);
     /**
+     * @brief Creates a QStandardItem in either fixed or scientific notation
+     * @param value : value as a double
+     * @return Returns the QStandardItem in the appropriate format
+     */
+    QStandardItem* itemFixedOrScientific(double value);
+    /**
      * @brief Load a time series .csv file into a QTableView
      * @param parentTabWidget : parent tab containing the QTableView object
      * @param tableView : QTableView that will contain the .csv data
@@ -911,6 +917,7 @@ namespace nmfUtilsQt {
      * @param outputFilename : name of the output filename with path
      * @param SpeciesName : list of Species names
      * @param SpeciesGuild : list of guilds each species is a member of
+     * @param SpeciesMinimumBiomass : list of species minimum biomasses
      * @param SpeciesInitialBiomass : list of species initial biomasses
      * @param SpeciesGrowthRate : list of species growth rates
      * @param SpeciesK : list of species carrying capacities
@@ -924,6 +931,7 @@ namespace nmfUtilsQt {
             QString& outputFilename,
             QList<QString>& SpeciesName,
             QList<QString>& SpeciesGuild,
+            QList<QString>& SpeciesMinimumBiomass,
             QList<QString>& SpeciesInitialBiomass,
             QList<QString>& SpeciesGrowthRate,
             QList<QString>& SpeciesK);

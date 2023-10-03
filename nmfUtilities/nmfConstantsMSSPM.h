@@ -110,6 +110,7 @@ namespace nmfConstantsMSSPM
      const double ValueToStartEE       = 1000000.0;
      const int    DefaultDBTimeoutDays = 5;
      const int    NotEnabledAndNotChecked =  0;
+     const double FixedScientificLimit    = 0.01;
      const int    NotEnabledButChecked    =  1;
      const int    EnabledAndNotChecked    = 10;
      const int    EnabledAndChecked       = 11;
@@ -458,6 +459,28 @@ namespace nmfConstantsMSSPM
           "CompetitionBetaGuildsSpecies",
           "CompetitionBetaGuildsGuilds",
           "SurveyQ"};
+
+     const std::vector<std::string> HPCFilePrefixes =
+         {"InitBiomass",
+          "GrowthRate",
+          "GrowthRateShape",
+          "GrowthRateCovariateCoeffs",
+          "CarryingCapacity",
+          "CarryingCapacityCovariateCoeffs",
+          "Catchability",
+          "CatchabilityCovariateCoeffs",
+          "PredationRho",
+          "PredationHandling",
+          "PredationExponent",
+          "CompetitionAlpha",
+          "CompetitionBetaSpecies",
+          "CompetitionBetaGuilds",
+          "CompetitionBetaGuildsGuilds",
+          "SurveyQ",
+          "SurveyQCovariateCoeffs",
+          "BMSY",
+          "MSY",
+          "FMSY"};
 
      const QList<QString> OutputVectorTableHeaders = {
          "B₀","r","p","K","q","b","Q","BMSY","MSY","FMSY"};

@@ -320,6 +320,15 @@ nmfGrowthForm::FunctionMap_Logistic(const std::string& covariateAlgorithmType,
                 covariateAlgorithmType,carryingCapacity,
                 carryingCapacityCovariateCoeff,carryingCapacityCovariate);
 
+//std::cout << // std::setprecision(OUTPUT_PRECISION) << std::fixed <<
+//                 "growth term: " << growthRateTerm <<
+//                 ", covType: "   << covariateAlgorithmType <<
+//                 ", r: "         << growthRate <<
+//                 ", coeff: "     << growthRateCovariateCoeff <<
+//                 ", cov: "       << growthRateCovariate << std::endl;
+
+
+
 //  return (growthRateTerm * biomassAtTime * (1.0 - biomassAtTime/carryingCapacityTerm));
     return (growthRateTerm * biomassAtTime * (1.0 - std::pow((biomassAtTime/carryingCapacityTerm),growthRateShape)));
 
